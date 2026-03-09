@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geo Draw the World</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- MENU -->
+  <div id="screen-menu" class="screen active">
+    <canvas id="menu-globe-canvas" class="menu-globe-canvas"></canvas>
+    <div class="menu-bg"></div>
+    <div class="menu-content">
+      <h1 class="title-glow">Geo Draw<br><span>the World</span></h1>
+      <p class="subtitle">Draw shapes from memory. Resize, rotate, and place them on the map.</p>
+
+      <div class="menu-toggles">
+        <button id="btn-puzzle-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">📌</span> Placement Only
+        </button>
+        <span id="puzzle-badge" class="mode-badge" style="display:none">ON</span>
+        <button id="btn-tweak-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">🔧</span> Tweak Mode
+        </button>
+        <span id="tweak-badge" class="mode-badge" style="display:none">ON</span>
+        <button id="btn-blind-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">🙈</span> Blind Mode
+        </button>
+        <span id="blind-badge" class="mode-badge" style="display:none">ON</span>
+        <button id="btn-explorer-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">👀</span> Explorer
+        </button>
+        <span id="explorer-badge" class="mode-badge" style="display:none">ON</span>
+        <button id="btn-hard-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">💀</span> Hard
+        </button>
+        <span id="hard-badge" class="mode-badge" style="display:none">ON</span>
+      </div>
+
+      <div class="menu-modes">
+        <button id="btn-daily" class="btn btn-mode btn-daily-mode">
+          <span class="mode-icon">📅</span>
+          <div><span class="mode-label">Daily Challenge</span><span class="mode-desc">1 random country — same for everyone today</span></div>
+        </button>
+        <div class="menu-section-label">Special Modes</div>
+        <div class="menu-grid menu-grid-special">
+          <button id="btn-quick10" class="btn btn-mode btn-special-mode">
+            <span class="mode-icon">🎯</span>
+            <span class="mode-label">Quick 10</span>
+            <span class="mode-desc">10 random countries</span>
+          </button>
+          <button id="btn-famous5" class="btn btn-mode btn-special-mode">
+            <span class="mode-icon">🏆</span>
+            <span class="mode-label">Famous 5</span>
+            <span class="mode-desc">5 biggest countries</span>
+          </button>
+          <button id="btn-speed" class="btn btn-mode btn-special-mode">
+            <span class="mode-icon">⏱️</span>
+            <span class="mode-label">Speed Round</span>
+            <span class="mode-desc">3 min on the clock</span>
+          </button>
+          <button id="btn-streak" class="btn btn-mode btn-special-mode">
+            <span class="mode-icon">🔥</span>
+            <span class="mode-label">Streak</span>
+            <span class="mode-desc">Score 25+ or out</span>
+          </button>
+        </div>
+        <div class="menu-section-label">Classic Modes</div>
+        <div class="menu-row">
+          <button id="btn-continents" class="btn btn-mode btn-continent-mode">
+            <span class="mode-icon">🌍</span>
+            <span class="mode-label">Continents</span>
+            <span class="mode-desc">7 continents</span>
+          </button>
+          <button id="btn-world" class="btn btn-mode btn-continent-mode">
+            <span class="mode-icon">🗺️</span>
+            <span class="mode-label">World</span>
+            <span class="mode-desc">All countries</span>
+          </button>
+        </div>
+        <div class="menu-section-label">Countries by Region</div>
+        <div class="menu-grid">
+          <button id="btn-africa" class="btn btn-mode"><span class="mode-icon">🌍</span><span class="mode-label">Africa</span><span class="mode-desc">50 countries</span></button>
+          <button id="btn-europe" class="btn btn-mode"><span class="mode-icon">🌍</span><span class="mode-label">Europe</span><span class="mode-desc">37 countries</span></button>
+          <button id="btn-asia" class="btn btn-mode"><span class="mode-icon">🌏</span><span class="mode-label">Asia</span><span class="mode-desc">44 countries</span></button>
+          <button id="btn-north-america" class="btn btn-mode"><span class="mode-icon">🌎</span><span class="mode-label">N. America</span><span class="mode-desc">15 countries</span></button>
+          <button id="btn-south-america" class="btn btn-mode"><span class="mode-icon">🌎</span><span class="mode-label">S. America</span><span class="mode-desc">13 countries</span></button>
+          <button id="btn-oceania" class="btn btn-mode"><span class="mode-icon">🌏</span><span class="mode-label">Oceania</span><span class="mode-desc">5 countries</span></button>
+        </div>
+      </div>
+
+      <div class="shortcuts-hint">
+        <span>Enter</span> confirm &nbsp; <span>Esc</span> skip &nbsp; <span>Space</span> place &nbsp; <span>Ctrl+Z</span> undo
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT -->
+  <div id="screen-prompt" class="screen">
+    <div class="prompt-card">
+      <div id="prompt-color" class="prompt-dot"></div>
+      <div id="prompt-name" class="prompt-name">Africa</div>
+      <div id="prompt-number" class="prompt-number">1 of 7</div>
+    </div>
+  </div>
+
+  <!-- PEEK (explorer mode) -->
+  <div id="screen-peek" class="screen">
+    <div class="canvas-header">
+      <h2 id="peek-label">Memorize this shape!</h2>
+      <div class="canvas-toolbar">
+        <span id="peek-timer" class="peek-timer">4</span>
+      </div>
+    </div>
+    <canvas id="canvas-peek"></canvas>
+  </div>
+
+  <!-- DRAWING -->
+  <div id="screen-drawing" class="screen">
+    <div class="canvas-header">
+      <h2 id="drawing-label">Draw: Africa</h2>
+      <div class="canvas-toolbar">
+        <button id="btn-undo" class="btn btn-tool">Undo</button>
+        <button id="btn-clear" class="btn btn-tool">Clear</button>
+        <button id="btn-skip" class="btn btn-tool btn-skip" style="display:none">Skip</button>
+        <button id="btn-done-drawing" class="btn btn-accent" disabled>Done</button>
+      </div>
+    </div>
+    <canvas id="canvas-drawing"></canvas>
+  </div>
+
+  <!-- TRANSFORM -->
+  <div id="screen-transform" class="screen">
+    <div class="canvas-header">
+      <h2 id="transform-label">Resize & Rotate</h2>
+      <div class="canvas-toolbar">
+        <button id="btn-done-transform" class="btn btn-accent">Confirm</button>
+      </div>
+    </div>
+    <canvas id="canvas-transform"></canvas>
+  </div>
+
+  <!-- PLACING -->
+  <div id="screen-placing" class="screen">
+    <div class="canvas-header">
+      <h2 id="placing-label">Place: Africa</h2>
+      <div class="canvas-toolbar">
+        <div id="tweak-controls" style="display:none" class="tweak-controls">
+          <button id="btn-tweak-prev" class="btn btn-tool">&larr; Prev</button>
+          <span id="tweak-label" class="tweak-label"></span>
+          <button id="btn-tweak-next" class="btn btn-tool">Next &rarr;</button>
+          <button id="btn-tweak-done" class="btn btn-accent">Finish</button>
+        </div>
+        <span id="live-score" class="live-score" style="display:none"></span>
+        <button id="btn-place" class="btn btn-accent">Place Here</button>
+      </div>
+    </div>
+    <canvas id="canvas-world"></canvas>
+    <div id="score-flash" class="score-flash"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="screen-results" class="screen">
+    <div class="results-layout">
+      <div class="results-map-area">
+        <canvas id="canvas-results"></canvas>
+      </div>
+      <div class="score-panel">
+        <h2>Results <span id="results-mode" class="results-mode-label"></span></h2>
+        <div class="score-summary">
+          <div id="total-score" class="big-score">0/100</div>
+          <div id="score-grade" class="score-grade">Keep practicing!</div>
+          <div id="score-counted" class="score-counted"></div>
+          <div id="results-extra" class="results-extra" style="display:none"></div>
+          <div id="high-score-note" class="high-score-note" style="display:none"></div>
+        </div>
+        <div class="score-table-wrap">
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Shape</th>
+                <th>Size</th>
+                <th>Place</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="score-body"></tbody>
+          </table>
+        </div>
+        <p class="legend-note">Dashed outlines = real shapes</p>
+        <div class="results-actions">
+          <button id="btn-play-again" class="btn btn-accent">Play Again</button>
+          <button id="btn-share-text" class="btn btn-tool">Share Text</button>
+          <button id="btn-share" class="btn btn-tool">Share Image</button>
+          <button id="btn-menu" class="btn btn-tool">Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timer overlay (speed round) -->
+  <div id="game-timer" class="game-timer" style="display:none">
+    <span id="timer-display">3:00</span>
+  </div>
+
+  <!-- Streak counter overlay -->
+  <div id="streak-counter" class="streak-counter" style="display:none">
+    <span class="streak-fire">🔥</span>
+    <span id="streak-display">0</span>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Dev toggle -->
+  <div id="dev-controls">
+    <button id="btn-dev-toggle" class="dev-btn">DEV</button>
+    <span id="dev-badge" class="dev-badge">ghosts on</span>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
