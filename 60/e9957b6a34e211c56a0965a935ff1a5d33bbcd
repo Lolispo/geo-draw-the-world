@@ -1,0 +1,35 @@
+TODOS.md
+  s_0205e5761238ba::t_35f65889fd9275 95-98
+js/flag-picker-game.js
+  s_0205e5761238ba::t_5eda3fd152e526 1-377
+js/main.js
+  s_0205e5761238ba::t_c025e5fcc10d7f 101-104
+  s_0205e5761238ba::t_60086ac5fd1235 576
+  s_0205e5761238ba::t_58c8c2f5cbb275 78
+  s_0205e5761238ba::t_a4cb32200c3131 20
+  s_0205e5761238ba::t_78976871acaad0 32
+  s_0205e5761238ba::t_2da6af0f9a73d3 205
+  s_0205e5761238ba::t_6f536063b1db34 386
+  s_0205e5761238ba::t_7515eaaa360c53 537-544
+index.html
+  s_0205e5761238ba::t_e86dd38c9f7593 44-48
+  s_0205e5761238ba::t_7191f7c7ba7853 257-260
+css/style.css
+  s_0205e5761238ba::t_0a6d4f018a0bb6 839-840,845-890
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "60e9957b6a34e211c56a0965a935ff1a5d33bbcd",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
