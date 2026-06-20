@@ -1,0 +1,24 @@
+js/flag-picker-game.js
+  s_0205e5761238ba::t_6e2d6533b1b83b 327,336-346
+  s_0205e5761238ba::t_fa0f6820dafce6 150
+  s_0205e5761238ba::t_9968188f73f698 137
+css/style.css
+  s_0205e5761238ba::t_afaddfe50d3eba 854,859
+  s_0205e5761238ba::t_0d01bf8a558481 848,850-853,855-858,861-862
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "00a2a425745a8aedae739ff073f26c39d0be9aff",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
