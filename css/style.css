@@ -836,10 +836,58 @@ canvas {
   box-shadow: 0 0 20px #3fb95022;
 }
 
-#screen-flag-quiz {
+#screen-flag-quiz,
+#screen-flag-picker {
   padding: 12px;
   overflow-y: auto;
 }
+
+/* Flag Color Picker — HSV picker */
+.picker-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.picker-row { display: flex; gap: 10px; }
+.picker-sv, .picker-hue {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  cursor: crosshair;
+  touch-action: none;
+}
+.picker-swatch-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+.picker-swatch {
+  width: 64px;
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+}
+.picker-submit { padding: 10px 22px; }
+.picker-reveal { min-height: 28px; }
+.picker-reveal-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+.picker-cmp { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-dim); }
+.picker-cmp-sw {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+.picker-points { font-weight: 700; color: var(--green); }
+.hub-wide { grid-column: 1 / -1; }
 
 .flag-game-container {
   width: 100%;

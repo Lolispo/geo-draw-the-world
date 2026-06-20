@@ -17,6 +17,7 @@ import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
 import { RankLineGame } from './rank-line-game.js';
 import { DataExplorer } from './data-explorer.js';
+import { FlagPickerGame } from './flag-picker-game.js';
 
 const STATES = {
   MENU: 'menu',
@@ -28,6 +29,7 @@ const STATES = {
   PLACING: 'placing',
   RESULTS: 'results',
   FLAG_QUIZ: 'flag-quiz',
+  FLAG_PICKER: 'flag-picker',
   RANK_LINE: 'rank-line',
   EXPLORE: 'explore'
 };
@@ -73,6 +75,7 @@ class Game {
       placing: document.getElementById('screen-placing'),
       results: document.getElementById('screen-results'),
       'flag-quiz': document.getElementById('screen-flag-quiz'),
+      'flag-picker': document.getElementById('screen-flag-picker'),
       'rank-line': document.getElementById('screen-rank-line'),
       'explore': document.getElementById('screen-explore')
     };
@@ -94,6 +97,10 @@ class Game {
       document.getElementById('explore-container'),
       () => this.showScreen(STATES.MENU),
       (datasetId) => this.startRankLine(datasetId)
+    );
+    this.flagPickerGame = new FlagPickerGame(
+      document.getElementById('flag-picker-container'),
+      () => this.showScreen(STATES.MENU)
     );
 
     this._bindEvents();
@@ -195,6 +202,7 @@ class Game {
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
+    document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
     document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
 
@@ -375,7 +383,7 @@ class Game {
       el.classList.toggle('active', name === state);
     }
     // Globe background on menu-like screens; off during gameplay
-    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.EXPLORE, STATES.FLAG_QUIZ];
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER];
     const bg = document.getElementById('app-bg');
     if (globeStates.includes(state)) {
       if (bg) bg.classList.remove('hidden');
@@ -526,6 +534,14 @@ class Game {
     this.flagGame.start(10);
   }
 
+  async startFlagPicker() {
+    this.gameMode = 'flag-picker';
+    this._currentRegion = 'flag-picker';
+    await this.flagPickerGame.loadData();
+    this.showScreen(STATES.FLAG_PICKER);
+    this.flagPickerGame.start(10);
+  }
+
   async startRankLine(datasetId = null) {
     this.gameMode = 'rank-line';
     this._currentRegion = 'rank-line';
@@ -557,6 +573,7 @@ class Game {
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
     else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
+    else if (this.gameMode === 'flag-picker') this.startFlagPicker();
     else if (this.gameMode === 'rank-line') this.startRankLine();
     else this.startCountries(this._currentRegion);
   }

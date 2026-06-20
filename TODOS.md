@@ -92,6 +92,10 @@ clearly-not-the-color but still plausible; spot-check a few rounds by eye.
 
 ## 4. New mode: Flag Color Picker (guess the missing color precisely)
 
+**✅ DONE 2026-06-20** — `js/flag-picker-game.js`: flag with a removed color + custom HSV
+picker (SV square + hue strip), scored 0–100 by CIEDE2000 closeness, 10 rounds, own high
+score (`flag-picker-10`). Hub card added. Reuses `js/color.js`.
+
 **What:** A sibling to the Flag Color Quiz. Same setup — a flag is shown with one
 color removed — but instead of choosing another flag, the player uses a **color
 picker** to reproduce the missing color as precisely as possible, scored by how
