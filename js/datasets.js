@@ -2,12 +2,32 @@
 // Single source consumed by both the Data Explorer and the Rank line game.
 
 let _data = null;
+let _entities = null;
 
 export async function loadDatasets() {
   if (_data) return _data;
   const resp = await fetch('data/datasets.json');
   _data = await resp.json();
   return _data;
+}
+
+export async function loadEntities() {
+  if (_entities) return _entities;
+  const resp = await fetch('data/entities.json');
+  _entities = (await resp.json()).entities;
+  return _entities;
+}
+
+// Canonical registry as a sorted array: [{ code, name, type, continent, hasGeometry, hasFlag, metrics }]
+export function getEntitiesList() {
+  if (!_entities) return [];
+  return Object.entries(_entities)
+    .map(([code, e]) => ({ code, ...e }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export function getMetricMeta() {
+  return (_data ? _data.datasets : []).map((d) => ({ id: d.id, name: d.name }));
 }
 
 export function getDatasetList() {

@@ -1748,6 +1748,44 @@ canvas {
   color: var(--accent);
 }
 
+/* Coverage / audit table */
+.coverage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.coverage-table th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  color: var(--text-dim);
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.coverage-table th:nth-child(2) { text-align: left; }
+.coverage-table td {
+  padding: 5px 4px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.coverage-table .cov-name { text-align: left; white-space: nowrap; }
+.coverage-table .cov-type {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cov-cell.ok { color: var(--green); }
+.cov-cell.no { color: var(--red); opacity: 0.8; }
+.coverage-table tr.incomplete { background: #d2992212; }
+.coverage-table tr.is-aggregate { background: #f8514920; }
+.coverage-table tr.is-aggregate .cov-type { color: var(--red); }
+.coverage-table .rank-flag { width: 24px; }
+.explore-view-toggle { margin-left: auto; }
+
 @media (max-width: 768px) {
   .explore-header h2 { font-size: 1.05rem; }
   .explore-name { font-size: 0.88rem; }

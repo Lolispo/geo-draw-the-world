@@ -1,7 +1,7 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, getDatasetList, getDataset, getContinents, getEntries, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, getMetricMeta, formatValue } from './datasets.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 
@@ -15,11 +15,13 @@ export class DataExplorer {
     this.datasetId = 'gdp-nominal';
     this.continent = null;   // null = All
     this.higherFirst = true;
+    this.view = 'rank';      // 'rank' | 'coverage'
   }
 
   async loadData() {
     if (this._loaded) return;
     await loadDatasets();
+    await loadEntities();
     this._loaded = true;
   }
 
@@ -27,6 +29,7 @@ export class DataExplorer {
     this.datasetId = getDataset(datasetId) ? datasetId : getDatasetList()[0].id;
     this.continent = null;
     this.higherFirst = getDataset(this.datasetId).higherFirst;
+    this.view = 'rank';
     this._render();
   }
 
@@ -38,7 +41,8 @@ export class DataExplorer {
     this._listEl = document.createElement('div');
     this._listEl.className = 'explore-list';
     c.appendChild(this._listEl);
-    this._renderList();
+    if (this.view === 'coverage') this._renderCoverage();
+    else this._renderList();
   }
 
   _renderHeader() {
@@ -60,24 +64,28 @@ export class DataExplorer {
   _renderControls() {
     const bar = document.createElement('div');
     bar.className = 'explore-controls';
+    const rankView = this.view === 'rank';
 
-    // Dataset
-    const dsSelect = document.createElement('select');
-    dsSelect.className = 'explore-select';
-    for (const d of getDatasetList()) {
-      const opt = document.createElement('option');
-      opt.value = d.id;
-      opt.textContent = d.name;
-      if (d.id === this.datasetId) opt.selected = true;
-      dsSelect.appendChild(opt);
+    // Dataset (rank view only)
+    if (rankView) {
+      const dsSelect = document.createElement('select');
+      dsSelect.className = 'explore-select';
+      for (const d of getDatasetList()) {
+        const opt = document.createElement('option');
+        opt.value = d.id;
+        opt.textContent = d.name;
+        if (d.id === this.datasetId) opt.selected = true;
+        dsSelect.appendChild(opt);
+      }
+      dsSelect.addEventListener('change', () => {
+        this.datasetId = dsSelect.value;
+        this.higherFirst = getDataset(this.datasetId).higherFirst; // reset to natural order
+        this._render();
+      });
+      bar.appendChild(dsSelect);
     }
-    dsSelect.addEventListener('change', () => {
-      this.datasetId = dsSelect.value;
-      this.higherFirst = getDataset(this.datasetId).higherFirst; // reset to natural order
-      this._render();
-    });
 
-    // Continent
+    // Continent (both views)
     const contSelect = document.createElement('select');
     contSelect.className = 'explore-select';
     const allOpt = document.createElement('option');
@@ -93,30 +101,46 @@ export class DataExplorer {
     }
     contSelect.addEventListener('change', () => {
       this.continent = contSelect.value || null;
-      this._renderList();
+      if (this.view === 'coverage') this._renderCoverage();
+      else this._renderList();
     });
+    bar.appendChild(contSelect);
 
-    // Sort toggle
-    const sortBtn = document.createElement('button');
-    sortBtn.className = 'btn btn-tool';
-    this._sortBtn = sortBtn;
-    this._updateSortLabel();
-    sortBtn.addEventListener('click', () => {
-      this.higherFirst = !this.higherFirst;
+    // Sort toggle (rank view only)
+    if (rankView) {
+      const sortBtn = document.createElement('button');
+      sortBtn.className = 'btn btn-tool';
+      this._sortBtn = sortBtn;
       this._updateSortLabel();
-      this._renderList();
-    });
+      sortBtn.addEventListener('click', () => {
+        this.higherFirst = !this.higherFirst;
+        this._updateSortLabel();
+        this._renderList();
+      });
+      bar.appendChild(sortBtn);
+    }
 
-    // Rank this → (jump into the line game for the current dataset)
-    const playBtn = document.createElement('button');
-    playBtn.className = 'btn btn-accent explore-play';
-    playBtn.textContent = 'Rank this →';
-    playBtn.title = 'Play the line game with this dataset';
-    playBtn.addEventListener('click', () => {
-      this.onPlayDataset(this.datasetId);
+    // View toggle (both)
+    const viewBtn = document.createElement('button');
+    viewBtn.className = 'btn btn-tool explore-view-toggle';
+    viewBtn.textContent = rankView ? '📋 Coverage' : '↩ Rankings';
+    viewBtn.title = rankView ? 'Show data coverage across all entities' : 'Back to rankings';
+    viewBtn.addEventListener('click', () => {
+      this.view = rankView ? 'coverage' : 'rank';
+      this._render();
     });
+    bar.appendChild(viewBtn);
 
-    bar.append(dsSelect, contSelect, sortBtn, playBtn);
+    // Rank this → (rank view only)
+    if (rankView) {
+      const playBtn = document.createElement('button');
+      playBtn.className = 'btn btn-accent explore-play';
+      playBtn.textContent = 'Rank this →';
+      playBtn.title = 'Play the line game with this dataset';
+      playBtn.addEventListener('click', () => this.onPlayDataset(this.datasetId));
+      bar.appendChild(playBtn);
+    }
+
     return bar;
   }
 
@@ -164,5 +188,74 @@ export class DataExplorer {
       row.append(rank, img, name, val);
       list.appendChild(row);
     }
+  }
+
+  _renderCoverage() {
+    const list = this._listEl;
+    if (!list) return;
+    list.innerHTML = '';
+
+    const metrics = getMetricMeta();
+    const shortLabel = {
+      'gdp-nominal': 'GDP', 'population': 'Pop', 'gdp-per-capita': 'GDP/cap',
+      'land-area': 'Area', 'life-expectancy': 'Life',
+    };
+    let ents = getEntitiesList();
+    if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
+
+    const isComplete = (e) => e.hasGeometry && e.hasFlag && metrics.every((m) => e.metrics[m.id]);
+    const complete = ents.filter(isComplete).length;
+    const aggregates = ents.filter((e) => e.type === 'aggregate').length;
+
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb';
+    blurb.textContent = `Coverage${this.continent ? ` · ${this.continent}` : ''} · ${ents.length} entities · ${complete} complete · ${ents.length - complete} incomplete · ${aggregates} aggregate`;
+    list.appendChild(blurb);
+
+    const table = document.createElement('table');
+    table.className = 'coverage-table';
+
+    const headCols = ['', 'Entity', 'Type', 'Geo', 'Flag', ...metrics.map((m) => shortLabel[m.id] || m.name)];
+    const thead = document.createElement('thead');
+    const htr = document.createElement('tr');
+    for (const h of headCols) { const th = document.createElement('th'); th.textContent = h; htr.appendChild(th); }
+    thead.appendChild(htr);
+    table.appendChild(thead);
+
+    const cell = (ok) => {
+      const td = document.createElement('td');
+      td.className = 'cov-cell ' + (ok ? 'ok' : 'no');
+      td.textContent = ok ? '✓' : '✗';
+      return td;
+    };
+
+    const tbody = document.createElement('tbody');
+    for (const e of ents) {
+      const tr = document.createElement('tr');
+      if (!isComplete(e)) tr.classList.add('incomplete');
+      if (e.type === 'aggregate') tr.classList.add('is-aggregate');
+
+      const flagTd = document.createElement('td');
+      const img = document.createElement('img');
+      img.className = 'rank-flag';
+      img.src = `${FLAG_CDN}${e.code}.png`;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.addEventListener('error', () => { img.style.visibility = 'hidden'; });
+      flagTd.appendChild(img);
+
+      const nameTd = document.createElement('td');
+      nameTd.className = 'cov-name';
+      nameTd.textContent = e.name;
+
+      const typeTd = document.createElement('td');
+      typeTd.className = 'cov-type';
+      typeTd.textContent = e.type;
+
+      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlag), ...metrics.map((m) => cell(e.metrics[m.id])));
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    list.appendChild(table);
   }
 }

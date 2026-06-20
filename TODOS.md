@@ -214,6 +214,10 @@ undocumented reason.
 
 ## 7. In-app data coverage / audit report (Data Explorer)
 
+**✅ DONE 2026-06-20** — Data Explorer has a "Coverage" toggle rendering a per-entity
+matrix (geometry / flag / 5 metrics + type), highlighting incomplete and aggregate rows.
+Reads `data/entities.json`. See `js/data-explorer.js` `_renderCoverage`.
+
 **What:** Surface the cross-system coverage matrix inside the app (likely a
 Data Explorer panel) so future data gaps are visible instead of discovered by
 playing.
