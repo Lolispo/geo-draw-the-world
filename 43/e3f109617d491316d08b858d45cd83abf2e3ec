@@ -1,0 +1,32 @@
+docs/superpowers/specs/2026-06-20-rank-line-mode-design.md
+  s_0205e5761238ba::t_4f03e92b57fade 1-194
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "43e3f109617d491316d08b858d45cd83abf2e3ec",
+  "prompts": {
+    "05fb7ac2235dbd37": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "be7770c2-9ed2-483c-b012-a5ab21f314c2",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>",
+      "total_additions": 1169,
+      "total_deletions": 72,
+      "accepted_lines": 1099,
+      "overriden_lines": 0
+    }
+  },
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
