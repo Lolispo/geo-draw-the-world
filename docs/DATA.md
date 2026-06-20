@@ -25,6 +25,15 @@ previously had names only; `code` was added to all 164 entries.
 
 `flags.json` is hand-curated (not generated).
 
+**Geometry** (`data/countries-{region}.json`) is regenerated separately by
+`node scripts/build-geometry.mjs --write` from Natural Earth (1:50m base, 1:10m for
+small countries), projected into the original Mercator 1600×900 space (coefficients
+reverse-engineered from the legacy data, RMSE ~5px). Shapes are clipped to the main
+landmass (antimeridian + distant overseas territories dropped), Douglas-Peucker
+simplified, and colored by code (existing colors preserved). Requires `entities.json`
+first (it drives the country set + continent→region mapping). `data/continents.json`
+(the coarse continent outlines for Continents mode) is left as-is.
+
 ## Entity types (`entities.json` → `type`)
 
 Informational only — **all entities are playable** in every mode; the type just

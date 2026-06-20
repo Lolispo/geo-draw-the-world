@@ -8,6 +8,12 @@ under **Decided**.
 
 ## 1. Improve reference-shape dataset precision
 
+**✅ DONE 2026-06-20** — `scripts/build-geometry.mjs` regenerates all geometry from Natural
+Earth (1:50m base, 1:10m for small countries) into the original Mercator 1600×900 projection
+(reverse-engineered, RMSE ~5px). 220 countries (all entities except the `jg` aggregate),
+clipped to the main landmass (antimeridian + distant overseas dropped), Douglas-Peucker
+simplified, colors preserved by code. World map verified crisp with ocean labels aligned.
+
 **What:** The country/continent outline polygons used as the drawing references
 are not precise enough — shapes look rough/inaccurate, which hurts both the
 reference display and IoU scoring.
