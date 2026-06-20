@@ -120,6 +120,10 @@ high score.
 
 ## 5. Foundational: unify the data layer with one canonical entity registry + ISO-code join key
 
+**✅ DONE 2026-06-20** — `code` added to all geometry, `data/entities.json` registry built,
+names reconciled. See `docs/DATA.md`, `scripts/build-entities.mjs`. Policy chosen: include
+every ISO-coded entity (all playable), tag `type` (sovereign/territory/aggregate).
+
 **What:** The app has **three independent country datasets that share no join key**,
 which causes every downstream data inconsistency. Establish a single source of
 truth for "what entities exist", give every entity a stable ISO-code key, and
@@ -174,6 +178,10 @@ a documented rule classifies every entity as sovereign/territory/aggregate.
 ---
 
 ## 6. Fill the data gaps surfaced by the audit
+
+**✅ DONE 2026-06-20** — flags added (gl, nc, xk, eh, fk); stats backfilled with cited
+provenance (tw full; xk land-area; er & kp GDP; eh/fk/xs land-area+population). Remaining
+gaps documented in `docs/DATA.md` (disputed-territory GDP/life-exp left; Somaliland flagless).
 
 **What:** Once item 5 gives a shared key, close the specific coverage holes the
 audit found (2026-06-20).

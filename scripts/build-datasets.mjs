@@ -14,7 +14,7 @@ const INDICATORS = [
 
 // Static ISO2 -> continent (transcontinental countries use their common/REST-Countries primary).
 const CONTINENTS = {
-  Africa: 'dz ao bj bw bf bi cv cm cf td km cg cd ci dj eg gq er sz et ga gm gh gn gw ke ls lr ly mg mw ml mr mu yt ma mz na ne ng re rw st sn sc sl so za ss sd tz tg tn ug zm zw',
+  Africa: 'dz ao bj bw bf bi cv cm cf td km cg cd ci dj eg gq er sz et ga gm gh gn gw ke ls lr ly mg mw ml mr mu yt ma mz na ne ng re rw st sn sc sl so za ss sd tz tg tn ug zm zw eh xs',
   Asia: 'af am az bh bd bt bn kh cn ge hk in id ir iq il jp jo kz kw kg la lb mo my mv mn mm np kp om pk ps ph qa sa sg kr lk sy tw tj th tl tr tm ae uz vn ye',
   Europe: 'al ad at by be ba bg hr cy cz dk ee fo fi fr de gi gr hu is ie im it je jg gg xk lv li lt lu mt md mc me nl mk no pl pt ro ru sm rs sk si es se ch ua gb va',
   'North America': 'ai ag aw bs bb bz bm ca ky cr cu cw dm do sv gd gl gt ht hn jm mx mf ni pa pr kn lc sx vc tt tc us vg vi',
@@ -66,6 +66,27 @@ async function fetchIndicator(code) {
   return best;
 }
 
+// Manual backfill for entities missing or absent in World Bank data (TODOS #6).
+// Fills gaps only — never overrides a World Bank value. Sources in PROVENANCE.
+const MANUAL_VALUES = {
+  tw: { 'gdp-nominal': 790000000000, 'population': 23400000, 'gdp-per-capita': 33760, 'land-area': 36197, 'life-expectancy': 80.5 },
+  xk: { 'land-area': 10887 },
+  er: { 'gdp-nominal': 2100000000, 'gdp-per-capita': 565 },
+  kp: { 'gdp-nominal': 28000000000, 'gdp-per-capita': 1070 },
+  eh: { 'land-area': 266000, 'population': 580000 },
+  fk: { 'land-area': 12173, 'population': 3800 },
+  xs: { 'land-area': 176120, 'population': 5700000 },
+};
+const PROVENANCE = {
+  tw: 'IMF WEO 2024 / Taiwan DGBAS (2023)',
+  xk: 'Kosovo Agency of Statistics (2023)',
+  er: 'IMF / World Bank estimates (2023)',
+  kp: 'Bank of Korea GDP estimate (2022, nominal)',
+  eh: 'CIA World Factbook / UN estimates',
+  fk: 'Falkland Islands Government 2021 census',
+  xs: 'Somaliland government estimates (de-facto state)',
+};
+
 const datasets = [];
 const usedCodes = new Set();
 for (const ind of INDICATORS) {
@@ -79,6 +100,14 @@ for (const ind of INDICATORS) {
   console.log(`${ind.name}: ${Object.keys(values).length} countries`);
 }
 
+// Merge manual backfill (gap-fill only; never overrides World Bank)
+for (const [code, metrics] of Object.entries(MANUAL_VALUES)) {
+  for (const [metricId, value] of Object.entries(metrics)) {
+    const ds = datasets.find((d) => d.id === metricId);
+    if (ds && ds.values[code] == null) { ds.values[code] = value; usedCodes.add(code); }
+  }
+}
+
 // Country registry for every code used by any dataset
 const countries = {};
 let missingCont = 0;
@@ -90,7 +119,7 @@ for (const code of [...usedCodes].sort()) {
 }
 
 const continents = Object.keys(CONTINENTS);
-const out = { continents, countries, datasets };
+const out = { continents, countries, datasets, provenance: PROVENANCE };
 await writeFile(OUT, JSON.stringify(out, null, 2) + '\n');
 
 console.log(`\nWrote ${Object.keys(countries).length} countries, ${datasets.length} datasets to ${OUT}`);

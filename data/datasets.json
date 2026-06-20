@@ -232,6 +232,10 @@
       "name": "Egypt",
       "continent": "Africa"
     },
+    "eh": {
+      "name": "Western Sahara",
+      "continent": "Africa"
+    },
     "er": {
       "name": "Eritrea",
       "continent": "Africa"
@@ -251,6 +255,10 @@
     "fj": {
       "name": "Fiji",
       "continent": "Oceania"
+    },
+    "fk": {
+      "name": "Falkland Islands",
+      "continent": "South America"
     },
     "fm": {
       "name": "Micronesia",
@@ -804,6 +812,10 @@
       "name": "Tuvalu",
       "continent": "Oceania"
     },
+    "tw": {
+      "name": "Taiwan",
+      "continent": "Asia"
+    },
     "tz": {
       "name": "Tanzania",
       "continent": "Africa"
@@ -859,6 +871,10 @@
     "xk": {
       "name": "Kosovo",
       "continent": "Europe"
+    },
+    "xs": {
+      "name": "Somaliland",
+      "continent": "Africa"
     },
     "ye": {
       "name": "Yemen",
@@ -1097,7 +1113,10 @@
         "ps": 17847900000,
         "ye": 21606160663,
         "zm": 27577956471,
-        "zw": 35871779681
+        "zw": 35871779681,
+        "tw": 790000000000,
+        "er": 2100000000,
+        "kp": 28000000000
       }
     },
     {
@@ -1323,7 +1342,11 @@
         "ps": 5165775,
         "ye": 39390799,
         "zm": 20723965,
-        "zw": 16340822
+        "zw": 16340822,
+        "tw": 23400000,
+        "eh": 580000,
+        "fk": 3800,
+        "xs": 5700000
       }
     },
     {
@@ -1545,7 +1568,10 @@
         "ps": 3455,
         "ye": 634,
         "zm": 1331,
-        "zw": 2195
+        "zw": 2195,
+        "tw": 33760,
+        "er": 565,
+        "kp": 1070
       }
     },
     {
@@ -1770,7 +1796,12 @@
         "ps": 6025,
         "ye": 527970,
         "zm": 743390,
-        "zw": 386850
+        "zw": 386850,
+        "tw": 36197,
+        "xk": 10887,
+        "eh": 266000,
+        "fk": 12173,
+        "xs": 176120
       }
     },
     {
@@ -1996,8 +2027,18 @@
         "ps": 65.2,
         "ye": 69.3,
         "zm": 66.3,
-        "zw": 62.8
+        "zw": 62.8,
+        "tw": 80.5
       }
     }
-  ]
+  ],
+  "provenance": {
+    "tw": "IMF WEO 2024 / Taiwan DGBAS (2023)",
+    "xk": "Kosovo Agency of Statistics (2023)",
+    "er": "IMF / World Bank estimates (2023)",
+    "kp": "Bank of Korea GDP estimate (2022, nominal)",
+    "eh": "CIA World Factbook / UN estimates",
+    "fk": "Falkland Islands Government 2021 census",
+    "xs": "Somaliland government estimates (de-facto state)"
+  }
 }

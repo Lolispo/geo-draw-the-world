@@ -845,13 +845,13 @@
       "type": "territory",
       "continent": "Africa",
       "hasGeometry": true,
-      "hasFlag": false,
+      "hasFlag": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false
       }
     },
@@ -863,9 +863,9 @@
       "hasFlag": true,
       "region": "africa",
       "metrics": {
-        "gdp-nominal": false,
+        "gdp-nominal": true,
         "population": true,
-        "gdp-per-capita": false,
+        "gdp-per-capita": true,
         "land-area": true,
         "life-expectancy": true
       }
@@ -935,13 +935,13 @@
       "type": "territory",
       "continent": "South America",
       "hasGeometry": true,
-      "hasFlag": false,
+      "hasFlag": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false
       }
     },
@@ -1085,7 +1085,7 @@
       "type": "territory",
       "continent": "North America",
       "hasGeometry": true,
-      "hasFlag": false,
+      "hasFlag": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1583,9 +1583,9 @@
       "hasFlag": true,
       "region": "asia",
       "metrics": {
-        "gdp-nominal": false,
+        "gdp-nominal": true,
         "population": true,
-        "gdp-per-capita": false,
+        "gdp-per-capita": true,
         "land-area": true,
         "life-expectancy": true
       }
@@ -2150,7 +2150,7 @@
       "type": "territory",
       "continent": "Oceania",
       "hasGeometry": true,
-      "hasFlag": false,
+      "hasFlag": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -3023,11 +3023,11 @@
       "hasFlag": true,
       "region": "asia",
       "metrics": {
-        "gdp-nominal": false,
-        "population": false,
-        "gdp-per-capita": false,
-        "land-area": false,
-        "life-expectancy": false
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
       }
     },
     "tz": {
@@ -3230,13 +3230,13 @@
       "type": "sovereign",
       "continent": "Europe",
       "hasGeometry": true,
-      "hasFlag": false,
+      "hasFlag": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
         "population": true,
         "gdp-per-capita": true,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": true
       }
     },
@@ -3249,9 +3249,9 @@
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false
       }
     },
