@@ -14,6 +14,7 @@
   "countries": [
     {
       "name": "Afghanistan",
+      "code": "af",
       "color": "#E57373",
       "polygons": [
         [
@@ -182,6 +183,7 @@
     },
     {
       "name": "Armenia",
+      "code": "am",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -230,6 +232,7 @@
     },
     {
       "name": "Azerbaijan",
+      "code": "az",
       "color": "#81C784",
       "polygons": [
         [
@@ -314,6 +317,7 @@
     },
     {
       "name": "Bangladesh",
+      "code": "bd",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -450,6 +454,7 @@
     },
     {
       "name": "Bhutan",
+      "code": "bt",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -486,6 +491,7 @@
     },
     {
       "name": "Cambodia",
+      "code": "kh",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -550,6 +556,7 @@
     },
     {
       "name": "China",
+      "code": "cn",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -1332,6 +1339,7 @@
     },
     {
       "name": "Georgia",
+      "code": "ge",
       "color": "#F06292",
       "polygons": [
         [
@@ -1400,6 +1408,7 @@
     },
     {
       "name": "India",
+      "code": "in",
       "color": "#AED581",
       "polygons": [
         [
@@ -1884,6 +1893,7 @@
     },
     {
       "name": "Indonesia",
+      "code": "id",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -2630,6 +2640,7 @@
     },
     {
       "name": "Iran",
+      "code": "ir",
       "color": "#7986CB",
       "polygons": [
         [
@@ -2846,6 +2857,7 @@
     },
     {
       "name": "Iraq",
+      "code": "iq",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -2942,6 +2954,7 @@
     },
     {
       "name": "Israel",
+      "code": "il",
       "color": "#DCE775",
       "polygons": [
         [
@@ -2990,6 +3003,7 @@
     },
     {
       "name": "Japan",
+      "code": "jp",
       "color": "#FF8A80",
       "polygons": [
         [
@@ -3388,6 +3402,7 @@
     },
     {
       "name": "Jordan",
+      "code": "jo",
       "color": "#82B1FF",
       "polygons": [
         [
@@ -3440,6 +3455,7 @@
     },
     {
       "name": "Kazakhstan",
+      "code": "kz",
       "color": "#B388FF",
       "polygons": [
         [
@@ -3896,6 +3912,7 @@
     },
     {
       "name": "Kuwait",
+      "code": "kw",
       "color": "#84FFFF",
       "polygons": [
         [
@@ -3936,6 +3953,7 @@
     },
     {
       "name": "Kyrgyzstan",
+      "code": "kg",
       "color": "#CCFF90",
       "polygons": [
         [
@@ -4060,6 +4078,7 @@
     },
     {
       "name": "Laos",
+      "code": "la",
       "color": "#FFD180",
       "polygons": [
         [
@@ -4208,6 +4227,7 @@
     },
     {
       "name": "Lebanon",
+      "code": "lb",
       "color": "#A1887F",
       "polygons": [
         [
@@ -4236,6 +4256,7 @@
     },
     {
       "name": "Malaysia",
+      "code": "my",
       "color": "#EF5350",
       "polygons": [
         [
@@ -4394,6 +4415,7 @@
     },
     {
       "name": "Mongolia",
+      "code": "mn",
       "color": "#42A5F5",
       "polygons": [
         [
@@ -4590,6 +4612,7 @@
     },
     {
       "name": "Myanmar",
+      "code": "mm",
       "color": "#66BB6A",
       "polygons": [
         [
@@ -4846,6 +4869,7 @@
     },
     {
       "name": "Nepal",
+      "code": "np",
       "color": "#FFA726",
       "polygons": [
         [
@@ -4898,6 +4922,7 @@
     },
     {
       "name": "North Korea",
+      "code": "kp",
       "color": "#AB47BC",
       "polygons": [
         [
@@ -5002,6 +5027,7 @@
     },
     {
       "name": "Oman",
+      "code": "om",
       "color": "#E57373",
       "polygons": [
         [
@@ -5086,6 +5112,7 @@
     },
     {
       "name": "Pakistan",
+      "code": "pk",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -5286,6 +5313,7 @@
     },
     {
       "name": "Philippines",
+      "code": "ph",
       "color": "#81C784",
       "polygons": [
         [
@@ -5592,6 +5620,7 @@
     },
     {
       "name": "Qatar",
+      "code": "qa",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -5628,6 +5657,7 @@
     },
     {
       "name": "Russia",
+      "code": "ru",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -10130,6 +10160,7 @@
     },
     {
       "name": "Saudi Arabia",
+      "code": "sa",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -10258,6 +10289,7 @@
     },
     {
       "name": "South Korea",
+      "code": "kr",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -10318,6 +10350,7 @@
     },
     {
       "name": "Sri Lanka",
+      "code": "lk",
       "color": "#F06292",
       "polygons": [
         [
@@ -10362,6 +10395,7 @@
     },
     {
       "name": "Syria",
+      "code": "sy",
       "color": "#AED581",
       "polygons": [
         [
@@ -10430,6 +10464,7 @@
     },
     {
       "name": "Taiwan",
+      "code": "tw",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -10466,6 +10501,7 @@
     },
     {
       "name": "Tajikistan",
+      "code": "tj",
       "color": "#7986CB",
       "polygons": [
         [
@@ -10598,6 +10634,7 @@
     },
     {
       "name": "Thailand",
+      "code": "th",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -10774,6 +10811,7 @@
     },
     {
       "name": "Timor-Leste",
+      "code": "tl",
       "color": "#DCE775",
       "polygons": [
         [
@@ -10802,6 +10840,7 @@
     },
     {
       "name": "Turkey",
+      "code": "tr",
       "color": "#FF8A80",
       "polygons": [
         [
@@ -11052,6 +11091,7 @@
     },
     {
       "name": "Turkmenistan",
+      "code": "tm",
       "color": "#82B1FF",
       "polygons": [
         [
@@ -11228,6 +11268,7 @@
     },
     {
       "name": "United Arab Emirates",
+      "code": "ae",
       "color": "#B388FF",
       "polygons": [
         [
@@ -11284,6 +11325,7 @@
     },
     {
       "name": "Uzbekistan",
+      "code": "uz",
       "color": "#84FFFF",
       "polygons": [
         [
@@ -11488,6 +11530,7 @@
     },
     {
       "name": "Vietnam",
+      "code": "vn",
       "color": "#CCFF90",
       "polygons": [
         [
@@ -11672,6 +11715,7 @@
     },
     {
       "name": "Yemen",
+      "code": "ye",
       "color": "#FFD180",
       "polygons": [
         [

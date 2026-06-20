@@ -14,6 +14,7 @@
   "countries": [
     {
       "name": "Algeria",
+      "code": "dz",
       "color": "#E57373",
       "polygons": [
         [
@@ -158,6 +159,7 @@
     },
     {
       "name": "Angola",
+      "code": "ao",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -266,6 +268,7 @@
     },
     {
       "name": "Benin",
+      "code": "bj",
       "color": "#81C784",
       "polygons": [
         [
@@ -310,6 +313,7 @@
     },
     {
       "name": "Botswana",
+      "code": "bw",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -398,6 +402,7 @@
     },
     {
       "name": "Burkina Faso",
+      "code": "bf",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -482,6 +487,7 @@
     },
     {
       "name": "Burundi",
+      "code": "bi",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -514,6 +520,7 @@
     },
     {
       "name": "Cameroon",
+      "code": "cm",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -626,6 +633,7 @@
     },
     {
       "name": "Central African Republic",
+      "code": "cf",
       "color": "#F06292",
       "polygons": [
         [
@@ -726,6 +734,7 @@
     },
     {
       "name": "Chad",
+      "code": "td",
       "color": "#AED581",
       "polygons": [
         [
@@ -846,6 +855,7 @@
     },
     {
       "name": "Democratic Republic of the Congo",
+      "code": "cd",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -1054,6 +1064,7 @@
     },
     {
       "name": "Djibouti",
+      "code": "dj",
       "color": "#7986CB",
       "polygons": [
         [
@@ -1098,6 +1109,7 @@
     },
     {
       "name": "Egypt",
+      "code": "eg",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -1190,6 +1202,7 @@
     },
     {
       "name": "Equatorial Guinea",
+      "code": "gq",
       "color": "#DCE775",
       "polygons": [
         [
@@ -1218,6 +1231,7 @@
     },
     {
       "name": "Eritrea",
+      "code": "er",
       "color": "#FF8A80",
       "polygons": [
         [
@@ -1282,6 +1296,7 @@
     },
     {
       "name": "Ethiopia",
+      "code": "et",
       "color": "#82B1FF",
       "polygons": [
         [
@@ -1414,6 +1429,7 @@
     },
     {
       "name": "Gabon",
+      "code": "ga",
       "color": "#B388FF",
       "polygons": [
         [
@@ -1530,6 +1546,7 @@
     },
     {
       "name": "Ghana",
+      "code": "gh",
       "color": "#84FFFF",
       "polygons": [
         [
@@ -1602,6 +1619,7 @@
     },
     {
       "name": "Guinea",
+      "code": "gn",
       "color": "#CCFF90",
       "polygons": [
         [
@@ -1726,6 +1744,7 @@
     },
     {
       "name": "Guinea-Bissau",
+      "code": "gw",
       "color": "#FFD180",
       "polygons": [
         [
@@ -1782,6 +1801,7 @@
     },
     {
       "name": "Ivory Coast",
+      "code": "ci",
       "color": "#A1887F",
       "polygons": [
         [
@@ -1882,6 +1902,7 @@
     },
     {
       "name": "Kenya",
+      "code": "ke",
       "color": "#EF5350",
       "polygons": [
         [
@@ -1970,6 +1991,7 @@
     },
     {
       "name": "Lesotho",
+      "code": "ls",
       "color": "#42A5F5",
       "polygons": [
         [
@@ -2002,6 +2024,7 @@
     },
     {
       "name": "Liberia",
+      "code": "lr",
       "color": "#66BB6A",
       "polygons": [
         [
@@ -2054,6 +2077,7 @@
     },
     {
       "name": "Libya",
+      "code": "ly",
       "color": "#FFA726",
       "polygons": [
         [
@@ -2186,6 +2210,7 @@
     },
     {
       "name": "Madagascar",
+      "code": "mg",
       "color": "#AB47BC",
       "polygons": [
         [
@@ -2278,6 +2303,7 @@
     },
     {
       "name": "Malawi",
+      "code": "mw",
       "color": "#E57373",
       "polygons": [
         [
@@ -2370,6 +2396,7 @@
     },
     {
       "name": "Mali",
+      "code": "ml",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -2522,6 +2549,7 @@
     },
     {
       "name": "Mauritania",
+      "code": "mr",
       "color": "#81C784",
       "polygons": [
         [
@@ -2634,6 +2662,7 @@
     },
     {
       "name": "Morocco",
+      "code": "ma",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -2766,6 +2795,7 @@
     },
     {
       "name": "Mozambique",
+      "code": "mz",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -2938,6 +2968,7 @@
     },
     {
       "name": "Namibia",
+      "code": "na",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -3034,6 +3065,7 @@
     },
     {
       "name": "Niger",
+      "code": "ne",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -3150,6 +3182,7 @@
     },
     {
       "name": "Nigeria",
+      "code": "ng",
       "color": "#F06292",
       "polygons": [
         [
@@ -3286,6 +3319,7 @@
     },
     {
       "name": "Republic of the Congo",
+      "code": "cg",
       "color": "#AED581",
       "polygons": [
         [
@@ -3402,6 +3436,7 @@
     },
     {
       "name": "Rwanda",
+      "code": "rw",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -3430,6 +3465,7 @@
     },
     {
       "name": "Senegal",
+      "code": "sn",
       "color": "#7986CB",
       "polygons": [
         [
@@ -3510,6 +3546,7 @@
     },
     {
       "name": "Sierra Leone",
+      "code": "sl",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -3574,6 +3611,7 @@
     },
     {
       "name": "Somalia",
+      "code": "so",
       "color": "#DCE775",
       "polygons": [
         [
@@ -3650,6 +3688,7 @@
     },
     {
       "name": "Somaliland",
+      "code": "xs",
       "color": "#FF8A80",
       "polygons": [
         [
@@ -3690,6 +3729,7 @@
     },
     {
       "name": "South Africa",
+      "code": "za",
       "color": "#82B1FF",
       "polygons": [
         [
@@ -3846,6 +3886,7 @@
     },
     {
       "name": "South Sudan",
+      "code": "ss",
       "color": "#B388FF",
       "polygons": [
         [
@@ -3950,6 +3991,7 @@
     },
     {
       "name": "Sudan",
+      "code": "sd",
       "color": "#84FFFF",
       "polygons": [
         [
@@ -4106,6 +4148,7 @@
     },
     {
       "name": "Tanzania",
+      "code": "tz",
       "color": "#CCFF90",
       "polygons": [
         [
@@ -4202,6 +4245,7 @@
     },
     {
       "name": "Togo",
+      "code": "tg",
       "color": "#FFD180",
       "polygons": [
         [
@@ -4274,6 +4318,7 @@
     },
     {
       "name": "Tunisia",
+      "code": "tn",
       "color": "#A1887F",
       "polygons": [
         [
@@ -4354,6 +4399,7 @@
     },
     {
       "name": "Uganda",
+      "code": "ug",
       "color": "#EF5350",
       "polygons": [
         [
@@ -4418,6 +4464,7 @@
     },
     {
       "name": "Western Sahara",
+      "code": "eh",
       "color": "#42A5F5",
       "polygons": [
         [
@@ -4486,6 +4533,7 @@
     },
     {
       "name": "Zambia",
+      "code": "zm",
       "color": "#66BB6A",
       "polygons": [
         [
@@ -4626,6 +4674,7 @@
     },
     {
       "name": "Zimbabwe",
+      "code": "zw",
       "color": "#FFA726",
       "polygons": [
         [
@@ -4698,6 +4747,7 @@
     },
     {
       "name": "eSwatini",
+      "code": "sz",
       "color": "#AB47BC",
       "polygons": [
         [

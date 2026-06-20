@@ -1,0 +1,3319 @@
+{
+  "entities": {
+    "ad": {
+      "name": "Andorra",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ae": {
+      "name": "United Arab Emirates",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "af": {
+      "name": "Afghanistan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ag": {
+      "name": "Antigua and Barbuda",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "al": {
+      "name": "Albania",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "am": {
+      "name": "Armenia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ao": {
+      "name": "Angola",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ar": {
+      "name": "Argentina",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "as": {
+      "name": "American Samoa",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "at": {
+      "name": "Austria",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "au": {
+      "name": "Australia",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "aw": {
+      "name": "Aruba",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "az": {
+      "name": "Azerbaijan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ba": {
+      "name": "Bosnia and Herzegovina",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bb": {
+      "name": "Barbados",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bd": {
+      "name": "Bangladesh",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "be": {
+      "name": "Belgium",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bf": {
+      "name": "Burkina Faso",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bg": {
+      "name": "Bulgaria",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bh": {
+      "name": "Bahrain",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bi": {
+      "name": "Burundi",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bj": {
+      "name": "Benin",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bm": {
+      "name": "Bermuda",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bn": {
+      "name": "Brunei",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bo": {
+      "name": "Bolivia",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "br": {
+      "name": "Brazil",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bs": {
+      "name": "Bahamas",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bt": {
+      "name": "Bhutan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bw": {
+      "name": "Botswana",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "by": {
+      "name": "Belarus",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "bz": {
+      "name": "Belize",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ca": {
+      "name": "Canada",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cd": {
+      "name": "DR Congo",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cf": {
+      "name": "Central African Republic",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cg": {
+      "name": "Congo",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ch": {
+      "name": "Switzerland",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ci": {
+      "name": "Ivory Coast",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cl": {
+      "name": "Chile",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cm": {
+      "name": "Cameroon",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cn": {
+      "name": "China",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "co": {
+      "name": "Colombia",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cr": {
+      "name": "Costa Rica",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cu": {
+      "name": "Cuba",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cv": {
+      "name": "Cabo Verde",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cw": {
+      "name": "Curacao",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cy": {
+      "name": "Cyprus",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "cz": {
+      "name": "Czech Republic",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "de": {
+      "name": "Germany",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "dj": {
+      "name": "Djibouti",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "dk": {
+      "name": "Denmark",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "dm": {
+      "name": "Dominica",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "do": {
+      "name": "Dominican Republic",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "dz": {
+      "name": "Algeria",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ec": {
+      "name": "Ecuador",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ee": {
+      "name": "Estonia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "eg": {
+      "name": "Egypt",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "eh": {
+      "name": "Western Sahara",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false
+      }
+    },
+    "er": {
+      "name": "Eritrea",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "es": {
+      "name": "Spain",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "et": {
+      "name": "Ethiopia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "fi": {
+      "name": "Finland",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "fj": {
+      "name": "Fiji",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "fk": {
+      "name": "Falkland Islands",
+      "type": "territory",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false
+      }
+    },
+    "fm": {
+      "name": "Micronesia",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "fo": {
+      "name": "Faroe Islands",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "fr": {
+      "name": "France",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ga": {
+      "name": "Gabon",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gb": {
+      "name": "United Kingdom",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gd": {
+      "name": "Grenada",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ge": {
+      "name": "Georgia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gh": {
+      "name": "Ghana",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gi": {
+      "name": "Gibraltar",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gl": {
+      "name": "Greenland",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gm": {
+      "name": "Gambia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gn": {
+      "name": "Guinea",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gq": {
+      "name": "Equatorial Guinea",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gr": {
+      "name": "Greece",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gt": {
+      "name": "Guatemala",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gu": {
+      "name": "Guam",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gw": {
+      "name": "Guinea-Bissau",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "gy": {
+      "name": "Guyana",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "hk": {
+      "name": "Hong Kong SAR, China",
+      "type": "territory",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "hn": {
+      "name": "Honduras",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "hr": {
+      "name": "Croatia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ht": {
+      "name": "Haiti",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "hu": {
+      "name": "Hungary",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "id": {
+      "name": "Indonesia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ie": {
+      "name": "Ireland",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "il": {
+      "name": "Israel",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "im": {
+      "name": "Isle of Man",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "in": {
+      "name": "India",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "iq": {
+      "name": "Iraq",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ir": {
+      "name": "Iran",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "is": {
+      "name": "Iceland",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "it": {
+      "name": "Italy",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "jg": {
+      "name": "Channel Islands",
+      "type": "aggregate",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "jm": {
+      "name": "Jamaica",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "jo": {
+      "name": "Jordan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "jp": {
+      "name": "Japan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ke": {
+      "name": "Kenya",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kg": {
+      "name": "Kyrgyzstan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kh": {
+      "name": "Cambodia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ki": {
+      "name": "Kiribati",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "km": {
+      "name": "Comoros",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kn": {
+      "name": "Saint Kitts and Nevis",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kp": {
+      "name": "North Korea",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kr": {
+      "name": "South Korea",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kw": {
+      "name": "Kuwait",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ky": {
+      "name": "Cayman Islands",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "kz": {
+      "name": "Kazakhstan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "la": {
+      "name": "Laos",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lb": {
+      "name": "Lebanon",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lc": {
+      "name": "Saint Lucia",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "li": {
+      "name": "Liechtenstein",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lk": {
+      "name": "Sri Lanka",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lr": {
+      "name": "Liberia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ls": {
+      "name": "Lesotho",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lt": {
+      "name": "Lithuania",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lu": {
+      "name": "Luxembourg",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "lv": {
+      "name": "Latvia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ly": {
+      "name": "Libya",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ma": {
+      "name": "Morocco",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mc": {
+      "name": "Monaco",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "md": {
+      "name": "Moldova",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "me": {
+      "name": "Montenegro",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mf": {
+      "name": "St. Martin (French part)",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mg": {
+      "name": "Madagascar",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mh": {
+      "name": "Marshall Islands",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mk": {
+      "name": "North Macedonia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ml": {
+      "name": "Mali",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mm": {
+      "name": "Myanmar",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mn": {
+      "name": "Mongolia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mo": {
+      "name": "Macao SAR, China",
+      "type": "territory",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mp": {
+      "name": "Northern Mariana Islands",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mr": {
+      "name": "Mauritania",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mt": {
+      "name": "Malta",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mu": {
+      "name": "Mauritius",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mv": {
+      "name": "Maldives",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mw": {
+      "name": "Malawi",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mx": {
+      "name": "Mexico",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "my": {
+      "name": "Malaysia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "mz": {
+      "name": "Mozambique",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "na": {
+      "name": "Namibia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "nc": {
+      "name": "New Caledonia",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ne": {
+      "name": "Niger",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ng": {
+      "name": "Nigeria",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ni": {
+      "name": "Nicaragua",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "nl": {
+      "name": "Netherlands",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "no": {
+      "name": "Norway",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "np": {
+      "name": "Nepal",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "nr": {
+      "name": "Nauru",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "nz": {
+      "name": "New Zealand",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "om": {
+      "name": "Oman",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pa": {
+      "name": "Panama",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pe": {
+      "name": "Peru",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pf": {
+      "name": "French Polynesia",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pg": {
+      "name": "Papua New Guinea",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ph": {
+      "name": "Philippines",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pk": {
+      "name": "Pakistan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pl": {
+      "name": "Poland",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pr": {
+      "name": "Puerto Rico (US)",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ps": {
+      "name": "West Bank and Gaza",
+      "type": "territory",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pt": {
+      "name": "Portugal",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "pw": {
+      "name": "Palau",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "py": {
+      "name": "Paraguay",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "qa": {
+      "name": "Qatar",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ro": {
+      "name": "Romania",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "rs": {
+      "name": "Serbia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ru": {
+      "name": "Russia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "rw": {
+      "name": "Rwanda",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sa": {
+      "name": "Saudi Arabia",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sb": {
+      "name": "Solomon Islands",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sc": {
+      "name": "Seychelles",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sd": {
+      "name": "Sudan",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "se": {
+      "name": "Sweden",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sg": {
+      "name": "Singapore",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "si": {
+      "name": "Slovenia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sk": {
+      "name": "Slovakia",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sl": {
+      "name": "Sierra Leone",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sm": {
+      "name": "San Marino",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sn": {
+      "name": "Senegal",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "so": {
+      "name": "Somalia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sr": {
+      "name": "Suriname",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ss": {
+      "name": "South Sudan",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "st": {
+      "name": "Sao Tome and Principe",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sv": {
+      "name": "El Salvador",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sx": {
+      "name": "Sint Maarten (Dutch part)",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sy": {
+      "name": "Syria",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "sz": {
+      "name": "Eswatini",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tc": {
+      "name": "Turks and Caicos Islands",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "td": {
+      "name": "Chad",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tg": {
+      "name": "Togo",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "th": {
+      "name": "Thailand",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tj": {
+      "name": "Tajikistan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tl": {
+      "name": "Timor-Leste",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tm": {
+      "name": "Turkmenistan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tn": {
+      "name": "Tunisia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "to": {
+      "name": "Tonga",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tr": {
+      "name": "Turkey",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tt": {
+      "name": "Trinidad and Tobago",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tv": {
+      "name": "Tuvalu",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "tw": {
+      "name": "Taiwan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false
+      }
+    },
+    "tz": {
+      "name": "Tanzania",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ua": {
+      "name": "Ukraine",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ug": {
+      "name": "Uganda",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "us": {
+      "name": "United States",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "uy": {
+      "name": "Uruguay",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "uz": {
+      "name": "Uzbekistan",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "vc": {
+      "name": "Saint Vincent",
+      "type": "sovereign",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ve": {
+      "name": "Venezuela",
+      "type": "sovereign",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "vg": {
+      "name": "British Virgin Islands",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "vi": {
+      "name": "Virgin Islands (U.S.)",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "vn": {
+      "name": "Vietnam",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "vu": {
+      "name": "Vanuatu",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "ws": {
+      "name": "Samoa",
+      "type": "sovereign",
+      "continent": "Oceania",
+      "hasGeometry": false,
+      "hasFlag": true,
+      "region": null,
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "xk": {
+      "name": "Kosovo",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": false,
+        "life-expectancy": true
+      }
+    },
+    "xs": {
+      "name": "Somaliland",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false
+      }
+    },
+    "ye": {
+      "name": "Yemen",
+      "type": "sovereign",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "za": {
+      "name": "South Africa",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "zm": {
+      "name": "Zambia",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    },
+    "zw": {
+      "name": "Zimbabwe",
+      "type": "sovereign",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": true,
+        "population": true,
+        "gdp-per-capita": true,
+        "land-area": true,
+        "life-expectancy": true
+      }
+    }
+  }
+}

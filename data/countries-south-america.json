@@ -14,6 +14,7 @@
   "countries": [
     {
       "name": "Argentina",
+      "code": "ar",
       "color": "#E57373",
       "polygons": [
         [
@@ -444,6 +445,7 @@
     },
     {
       "name": "Bolivia",
+      "code": "bo",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -612,6 +614,7 @@
     },
     {
       "name": "Brazil",
+      "code": "br",
       "color": "#81C784",
       "polygons": [
         [
@@ -1142,6 +1145,7 @@
     },
     {
       "name": "Chile",
+      "code": "cl",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -1940,6 +1944,7 @@
     },
     {
       "name": "Colombia",
+      "code": "co",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -2164,6 +2169,7 @@
     },
     {
       "name": "Ecuador",
+      "code": "ec",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -2264,6 +2270,7 @@
     },
     {
       "name": "Falkland Islands",
+      "code": "fk",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -2330,6 +2337,7 @@
     },
     {
       "name": "Guyana",
+      "code": "gy",
       "color": "#F06292",
       "polygons": [
         [
@@ -2430,6 +2438,7 @@
     },
     {
       "name": "Paraguay",
+      "code": "py",
       "color": "#AED581",
       "polygons": [
         [
@@ -2502,6 +2511,7 @@
     },
     {
       "name": "Peru",
+      "code": "pe",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -2702,6 +2712,7 @@
     },
     {
       "name": "Suriname",
+      "code": "sr",
       "color": "#7986CB",
       "polygons": [
         [
@@ -2766,6 +2777,7 @@
     },
     {
       "name": "Uruguay",
+      "code": "uy",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -2830,6 +2842,7 @@
     },
     {
       "name": "Venezuela",
+      "code": "ve",
       "color": "#DCE775",
       "polygons": [
         [

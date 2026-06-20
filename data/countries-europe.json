@@ -14,6 +14,7 @@
   "countries": [
     {
       "name": "Albania",
+      "code": "al",
       "color": "#E57373",
       "polygons": [
         [
@@ -62,6 +63,7 @@
     },
     {
       "name": "Austria",
+      "code": "at",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -154,6 +156,7 @@
     },
     {
       "name": "Belarus",
+      "code": "by",
       "color": "#81C784",
       "polygons": [
         [
@@ -270,6 +273,7 @@
     },
     {
       "name": "Belgium",
+      "code": "be",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -330,6 +334,7 @@
     },
     {
       "name": "Bosnia and Herzegovina",
+      "code": "ba",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -394,6 +399,7 @@
     },
     {
       "name": "Bulgaria",
+      "code": "bg",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -470,6 +476,7 @@
     },
     {
       "name": "Croatia",
+      "code": "hr",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -550,6 +557,7 @@
     },
     {
       "name": "Czech Republic",
+      "code": "cz",
       "color": "#F06292",
       "polygons": [
         [
@@ -626,6 +634,7 @@
     },
     {
       "name": "Denmark",
+      "code": "dk",
       "color": "#AED581",
       "polygons": [
         [
@@ -728,6 +737,7 @@
     },
     {
       "name": "Estonia",
+      "code": "ee",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -788,6 +798,7 @@
     },
     {
       "name": "Finland",
+      "code": "fi",
       "color": "#7986CB",
       "polygons": [
         [
@@ -1036,6 +1047,7 @@
     },
     {
       "name": "France",
+      "code": "fr",
       "color": "#4DB6AC",
       "polygons": [
         [
@@ -1328,6 +1340,7 @@
     },
     {
       "name": "Germany",
+      "code": "de",
       "color": "#DCE775",
       "polygons": [
         [
@@ -1488,6 +1501,7 @@
     },
     {
       "name": "Greece",
+      "code": "gr",
       "color": "#FF8A80",
       "polygons": [
         [
@@ -1674,6 +1688,7 @@
     },
     {
       "name": "Hungary",
+      "code": "hu",
       "color": "#82B1FF",
       "polygons": [
         [
@@ -1742,6 +1757,7 @@
     },
     {
       "name": "Iceland",
+      "code": "is",
       "color": "#B388FF",
       "polygons": [
         [
@@ -1990,6 +2006,7 @@
     },
     {
       "name": "Ireland",
+      "code": "ie",
       "color": "#84FFFF",
       "polygons": [
         [
@@ -2122,6 +2139,7 @@
     },
     {
       "name": "Italy",
+      "code": "it",
       "color": "#CCFF90",
       "polygons": [
         [
@@ -2366,6 +2384,7 @@
     },
     {
       "name": "Kosovo",
+      "code": "xk",
       "color": "#FFD180",
       "polygons": [
         [
@@ -2398,6 +2417,7 @@
     },
     {
       "name": "Latvia",
+      "code": "lv",
       "color": "#A1887F",
       "polygons": [
         [
@@ -2474,6 +2494,7 @@
     },
     {
       "name": "Lithuania",
+      "code": "lt",
       "color": "#EF5350",
       "polygons": [
         [
@@ -2538,6 +2559,7 @@
     },
     {
       "name": "Moldova",
+      "code": "md",
       "color": "#42A5F5",
       "polygons": [
         [
@@ -2586,6 +2608,7 @@
     },
     {
       "name": "Montenegro",
+      "code": "me",
       "color": "#66BB6A",
       "polygons": [
         [
@@ -2622,6 +2645,7 @@
     },
     {
       "name": "Netherlands",
+      "code": "nl",
       "color": "#FFA726",
       "polygons": [
         [
@@ -2702,6 +2726,7 @@
     },
     {
       "name": "North Macedonia",
+      "code": "mk",
       "color": "#AB47BC",
       "polygons": [
         [
@@ -2738,6 +2763,7 @@
     },
     {
       "name": "Norway",
+      "code": "no",
       "color": "#E57373",
       "polygons": [
         [
@@ -4036,6 +4062,7 @@
     },
     {
       "name": "Poland",
+      "code": "pl",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -4188,6 +4215,7 @@
     },
     {
       "name": "Portugal",
+      "code": "pt",
       "color": "#81C784",
       "polygons": [
         [
@@ -4272,6 +4300,7 @@
     },
     {
       "name": "Romania",
+      "code": "ro",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -4364,6 +4393,7 @@
     },
     {
       "name": "Serbia",
+      "code": "rs",
       "color": "#FF8A65",
       "polygons": [
         [
@@ -4460,6 +4490,7 @@
     },
     {
       "name": "Slovakia",
+      "code": "sk",
       "color": "#BA68C8",
       "polygons": [
         [
@@ -4512,6 +4543,7 @@
     },
     {
       "name": "Slovenia",
+      "code": "si",
       "color": "#4DD0E1",
       "polygons": [
         [
@@ -4552,6 +4584,7 @@
     },
     {
       "name": "Spain",
+      "code": "es",
       "color": "#F06292",
       "polygons": [
         [
@@ -4696,6 +4729,7 @@
     },
     {
       "name": "Sweden",
+      "code": "se",
       "color": "#AED581",
       "polygons": [
         [
@@ -4988,6 +5022,7 @@
     },
     {
       "name": "Switzerland",
+      "code": "ch",
       "color": "#FFB74D",
       "polygons": [
         [
@@ -5060,6 +5095,7 @@
     },
     {
       "name": "Ukraine",
+      "code": "ua",
       "color": "#7986CB",
       "polygons": [
         [
@@ -5300,6 +5336,7 @@
     },
     {
       "name": "United Kingdom",
+      "code": "gb",
       "color": "#4DB6AC",
       "polygons": [
         [

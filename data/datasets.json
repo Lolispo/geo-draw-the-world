@@ -101,7 +101,7 @@
       "continent": "North America"
     },
     "bn": {
-      "name": "Brunei Darussalam",
+      "name": "Brunei",
       "continent": "Asia"
     },
     "bo": {
@@ -113,7 +113,7 @@
       "continent": "South America"
     },
     "bs": {
-      "name": "Bahamas, The",
+      "name": "Bahamas",
       "continent": "North America"
     },
     "bt": {
@@ -137,7 +137,7 @@
       "continent": "North America"
     },
     "cd": {
-      "name": "Congo, Dem. Rep.",
+      "name": "DR Congo",
       "continent": "Africa"
     },
     "cf": {
@@ -145,7 +145,7 @@
       "continent": "Africa"
     },
     "cg": {
-      "name": "Congo, Rep.",
+      "name": "Congo",
       "continent": "Africa"
     },
     "ch": {
@@ -153,7 +153,7 @@
       "continent": "Europe"
     },
     "ci": {
-      "name": "Cote d'Ivoire",
+      "name": "Ivory Coast",
       "continent": "Africa"
     },
     "cl": {
@@ -193,7 +193,7 @@
       "continent": "Europe"
     },
     "cz": {
-      "name": "Czechia",
+      "name": "Czech Republic",
       "continent": "Europe"
     },
     "de": {
@@ -229,7 +229,7 @@
       "continent": "Europe"
     },
     "eg": {
-      "name": "Egypt, Arab Rep.",
+      "name": "Egypt",
       "continent": "Africa"
     },
     "er": {
@@ -253,7 +253,7 @@
       "continent": "Oceania"
     },
     "fm": {
-      "name": "Micronesia, Fed. Sts.",
+      "name": "Micronesia",
       "continent": "Oceania"
     },
     "fo": {
@@ -293,7 +293,7 @@
       "continent": "North America"
     },
     "gm": {
-      "name": "Gambia, The",
+      "name": "Gambia",
       "continent": "Africa"
     },
     "gn": {
@@ -369,7 +369,7 @@
       "continent": "Asia"
     },
     "ir": {
-      "name": "Iran, Islamic Rep.",
+      "name": "Iran",
       "continent": "Asia"
     },
     "is": {
@@ -401,7 +401,7 @@
       "continent": "Africa"
     },
     "kg": {
-      "name": "Kyrgyz Republic",
+      "name": "Kyrgyzstan",
       "continent": "Asia"
     },
     "kh": {
@@ -417,15 +417,15 @@
       "continent": "Africa"
     },
     "kn": {
-      "name": "St. Kitts and Nevis",
+      "name": "Saint Kitts and Nevis",
       "continent": "North America"
     },
     "kp": {
-      "name": "Korea, Dem. People's Rep.",
+      "name": "North Korea",
       "continent": "Asia"
     },
     "kr": {
-      "name": "Korea, Rep.",
+      "name": "South Korea",
       "continent": "Asia"
     },
     "kw": {
@@ -441,7 +441,7 @@
       "continent": "Asia"
     },
     "la": {
-      "name": "Lao PDR",
+      "name": "Laos",
       "continent": "Asia"
     },
     "lb": {
@@ -449,7 +449,7 @@
       "continent": "Asia"
     },
     "lc": {
-      "name": "St. Lucia",
+      "name": "Saint Lucia",
       "continent": "North America"
     },
     "li": {
@@ -673,7 +673,7 @@
       "continent": "Europe"
     },
     "ru": {
-      "name": "Russian Federation",
+      "name": "Russia",
       "continent": "Europe"
     },
     "rw": {
@@ -709,7 +709,7 @@
       "continent": "Europe"
     },
     "sk": {
-      "name": "Slovak Republic",
+      "name": "Slovakia",
       "continent": "Europe"
     },
     "sl": {
@@ -725,7 +725,7 @@
       "continent": "Africa"
     },
     "so": {
-      "name": "Somalia, Fed. Rep.",
+      "name": "Somalia",
       "continent": "Africa"
     },
     "sr": {
@@ -749,7 +749,7 @@
       "continent": "North America"
     },
     "sy": {
-      "name": "Syrian Arab Republic",
+      "name": "Syria",
       "continent": "Asia"
     },
     "sz": {
@@ -793,7 +793,7 @@
       "continent": "Oceania"
     },
     "tr": {
-      "name": "Turkiye",
+      "name": "Turkey",
       "continent": "Asia"
     },
     "tt": {
@@ -829,11 +829,11 @@
       "continent": "Asia"
     },
     "vc": {
-      "name": "St. Vincent and the Grenadines",
+      "name": "Saint Vincent",
       "continent": "North America"
     },
     "ve": {
-      "name": "Venezuela, RB",
+      "name": "Venezuela",
       "continent": "South America"
     },
     "vg": {
@@ -845,7 +845,7 @@
       "continent": "North America"
     },
     "vn": {
-      "name": "Viet Nam",
+      "name": "Vietnam",
       "continent": "Asia"
     },
     "vu": {
@@ -861,7 +861,7 @@
       "continent": "Europe"
     },
     "ye": {
-      "name": "Yemen, Rep.",
+      "name": "Yemen",
       "continent": "Asia"
     },
     "za": {

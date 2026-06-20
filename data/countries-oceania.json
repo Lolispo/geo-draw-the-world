@@ -14,6 +14,7 @@
   "countries": [
     {
       "name": "Australia",
+      "code": "au",
       "color": "#E57373",
       "polygons": [
         [
@@ -576,6 +577,7 @@
     },
     {
       "name": "Fiji",
+      "code": "fj",
       "color": "#64B5F6",
       "polygons": [
         [
@@ -600,6 +602,7 @@
     },
     {
       "name": "New Caledonia",
+      "code": "nc",
       "color": "#81C784",
       "polygons": [
         [
@@ -624,6 +627,7 @@
     },
     {
       "name": "New Zealand",
+      "code": "nz",
       "color": "#FFD54F",
       "polygons": [
         [
@@ -862,6 +866,7 @@
     },
     {
       "name": "Papua New Guinea",
+      "code": "pg",
       "color": "#FF8A65",
       "polygons": [
         [
