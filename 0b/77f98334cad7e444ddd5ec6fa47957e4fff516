@@ -1,0 +1,27 @@
+js/color.js
+  s_0205e5761238ba::t_6bb35214b76157 1-101
+js/flag-game.js
+  s_0205e5761238ba::t_639bed643159f4 143
+  s_0205e5761238ba::t_02bf66d0e7723b 134-135
+  s_0205e5761238ba::t_e9c8ebfa3607a2 6
+  s_0205e5761238ba::t_bfef9a7261e534 152,160
+  s_0205e5761238ba::t_641358e4ffe86f 176-177
+TODOS.md
+  s_0205e5761238ba::t_20874f59fc61cb 69-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "0b77f98334cad7e444ddd5ec6fa47957e4fff516",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
