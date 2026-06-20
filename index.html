@@ -69,6 +69,10 @@
           <span class="toggle-icon">📌</span> Placement Only
         </button>
         <span id="puzzle-badge" class="mode-badge" style="display:none">ON</span>
+        <button id="btn-shapeonly-toggle" class="btn btn-toggle">
+          <span class="toggle-icon">✒️</span> Shape Only
+        </button>
+        <span id="shapeonly-badge" class="mode-badge" style="display:none">ON</span>
         <button id="btn-tweak-toggle" class="btn btn-toggle">
           <span class="toggle-icon">🔧</span> Tweak Mode
         </button>
@@ -159,6 +163,17 @@
       </div>
     </div>
     <canvas id="canvas-peek"></canvas>
+  </div>
+
+  <div id="screen-compare" class="screen">
+    <div class="canvas-header">
+      <h2 id="compare-label">Your shape vs the real one</h2>
+      <div class="canvas-toolbar">
+        <span id="compare-score" class="compare-score"></span>
+        <button id="btn-compare-next" class="btn btn-accent">Next</button>
+      </div>
+    </div>
+    <canvas id="canvas-compare"></canvas>
   </div>
 
   <!-- DRAWING -->

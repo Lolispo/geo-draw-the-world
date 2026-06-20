@@ -35,6 +35,11 @@ in load time.
 
 ## 2. New "Shape Only" draw mode (draw + compare, skip placement & sizing)
 
+**✅ DONE 2026-06-20** — added as a combinable **modifier toggle** (mutually exclusive with
+Placement Only). After drawing it skips transform/placing and shows an overlay-compare
+screen (your outline vs the reference, each normalized centroid+scale) scoring the shape
+(IoU) alone. `_enterCompare`/`_renderCompare` in main.js; new `screen-compare`.
+
 **What:** A drawing mode where you only draw the shape from memory, then it's
 compared to the reference and scored on shape alone — no resize, no map placement.
 

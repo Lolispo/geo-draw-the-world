@@ -365,6 +365,13 @@ canvas {
   touch-action: none;
 }
 
+.compare-score {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  margin-right: 8px;
+}
+
 /* ========== RESULTS ========== */
 .results-layout {
   display: flex;

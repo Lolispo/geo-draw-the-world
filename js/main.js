@@ -10,6 +10,7 @@ import { DrawingCanvas } from './drawing-canvas.js';
 import { TransformControls } from './transform-controls.js';
 import { WorldCanvas } from './world-canvas.js';
 import { Shape } from './shape.js';
+import { multiPolygonCentroid, multiPolygonBoundingBox } from './utils.js';
 import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
@@ -28,6 +29,7 @@ const STATES = {
   TRANSFORM: 'transform',
   PLACING: 'placing',
   RESULTS: 'results',
+  COMPARE: 'compare',
   FLAG_QUIZ: 'flag-quiz',
   FLAG_PICKER: 'flag-picker',
   RANK_LINE: 'rank-line',
@@ -43,6 +45,7 @@ class Game {
     this.blindMode = false;
     this.explorerMode = false;
     this.hardMode = false;
+    this.shapeOnlyMode = false;
     this.itemOrder = [];
     this.itemData = [];
     this.currentIndex = 0;
@@ -74,6 +77,7 @@ class Game {
       transform: document.getElementById('screen-transform'),
       placing: document.getElementById('screen-placing'),
       results: document.getElementById('screen-results'),
+      compare: document.getElementById('screen-compare'),
       'flag-quiz': document.getElementById('screen-flag-quiz'),
       'flag-picker': document.getElementById('screen-flag-picker'),
       'rank-line': document.getElementById('screen-rank-line'),
@@ -124,7 +128,7 @@ class Game {
 
     const drawW = Math.min(vw - pad, 1200);
     const drawH = Math.min(vh - headerH - pad, 700);
-    for (const id of ['canvas-drawing', 'canvas-transform', 'canvas-peek']) {
+    for (const id of ['canvas-drawing', 'canvas-transform', 'canvas-peek', 'canvas-compare']) {
       const c = document.getElementById(id);
       c.width = drawW;
       c.height = drawH;
@@ -215,7 +219,15 @@ class Game {
     // Puzzle mode toggle
     document.getElementById('btn-puzzle-toggle').addEventListener('click', () => {
       this.puzzleMode = !this.puzzleMode;
+      if (this.puzzleMode) { this.shapeOnlyMode = false; this._updateShapeOnlyBadge(); }
       this._updatePuzzleBadge();
+    });
+
+    // Shape-only mode toggle (skip sizing & placement; score shape alone)
+    document.getElementById('btn-shapeonly-toggle').addEventListener('click', () => {
+      this.shapeOnlyMode = !this.shapeOnlyMode;
+      if (this.shapeOnlyMode) { this.puzzleMode = false; this._updatePuzzleBadge(); }
+      this._updateShapeOnlyBadge();
     });
 
     // Tweak mode toggle
@@ -264,6 +276,9 @@ class Game {
 
     // Placing
     document.getElementById('btn-place').addEventListener('click', () => this.onPlace());
+
+    // Shape-only compare → next
+    document.getElementById('btn-compare-next').addEventListener('click', () => this._onCompareNext());
 
     // Tweak buttons
     document.getElementById('btn-tweak-prev').addEventListener('click', () => this._tweakSelect(-1));
@@ -321,6 +336,8 @@ class Game {
           this.onTransformDone();
         } else if (this.state === STATES.PLACING) {
           this.onPlace();
+        } else if (this.state === STATES.COMPARE) {
+          this._onCompareNext();
         } else if (this.state === STATES.RESULTS) {
           this._replay();
         }
@@ -334,6 +351,9 @@ class Game {
         if (this.state === STATES.PLACING) {
           e.preventDefault();
           this.onPlace();
+        } else if (this.state === STATES.COMPARE) {
+          e.preventDefault();
+          this._onCompareNext();
         } else if (this.state === STATES.RESULTS) {
           e.preventDefault();
           this._replay();
@@ -347,6 +367,13 @@ class Game {
     badge.style.display = this.puzzleMode ? 'inline-block' : 'none';
     const btn = document.getElementById('btn-puzzle-toggle');
     btn.classList.toggle('active', this.puzzleMode);
+  }
+
+  _updateShapeOnlyBadge() {
+    const badge = document.getElementById('shapeonly-badge');
+    badge.style.display = this.shapeOnlyMode ? 'inline-block' : 'none';
+    const btn = document.getElementById('btn-shapeonly-toggle');
+    btn.classList.toggle('active', this.shapeOnlyMode);
   }
 
   _updateTweakBadge() {
@@ -601,7 +628,7 @@ class Game {
 
     // In classic modes with >15 items, auto-place the first one as a freebie
     // (skip for speed/streak — those are endless-ish)
-    if (this.itemData.length > 15 && !this._speedActive && !this._streakActive) {
+    if (this.itemData.length > 15 && !this._speedActive && !this._streakActive && !this.shapeOnlyMode) {
       this._autoPlaceFirst();
     }
 
@@ -792,6 +819,12 @@ class Game {
     const entry = this.itemData[this.currentIndex];
     this.currentShape = new Shape(polygons, entry.name, entry.color);
 
+    // Shape-only mode: skip sizing & placement, go straight to the shape comparison
+    if (this.shapeOnlyMode) {
+      this._enterCompare();
+      return;
+    }
+
     // Reveal name in transform/place stages even in blind mode
     document.getElementById('transform-label').textContent = `Resize & Rotate: ${entry.name}`;
     this.showScreen(STATES.TRANSFORM);
@@ -803,6 +836,71 @@ class Game {
       this.transformControls.setReferenceShapes(this._allRefShapes, entry.name);
     }
     this.transformControls.activate(this.currentShape);
+  }
+
+  // --- Shape-only mode: overlay compare + shape score ---
+  _enterCompare() {
+    const entry = this.itemData[this.currentIndex];
+    const refShape = createReferenceShape(entry);
+    const full = scoreShape(this.currentShape, refShape);
+    const shapeScore = full.shape;
+    this._pendingScore = {
+      name: entry.name, shape: shapeScore, size: null, placement: null,
+      total: shapeScore, shapeOnly: true,
+    };
+
+    document.getElementById('compare-label').textContent = `Your shape vs ${entry.name}`;
+    const scoreEl = document.getElementById('compare-score');
+    scoreEl.textContent = `Shape: ${shapeScore}`;
+    scoreEl.style.color = shapeScore >= 60 ? '#3fb950' : shapeScore >= 30 ? '#d29922' : '#f85149';
+
+    this.showScreen(STATES.COMPARE);
+    this._renderCompare(this.currentShape, refShape);
+    playPlace();
+  }
+
+  _renderCompare(playerShape, refShape) {
+    const canvas = document.getElementById('canvas-compare');
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#161b22';
+    ctx.fillRect(0, 0, w, h);
+
+    const target = Math.min(w, h) * 0.55;
+    const cx = w / 2, cy = h / 2;
+    const drawNorm = (polys, { fill, stroke, lw }) => {
+      const c = multiPolygonCentroid(polys);
+      const bb = multiPolygonBoundingBox(polys);
+      const scale = target / Math.max(bb.width || 1, bb.height || 1);
+      ctx.beginPath();
+      for (const poly of polys) {
+        for (let i = 0; i < poly.length; i++) {
+          const x = cx + (poly[i][0] - c[0]) * scale;
+          const y = cy + (poly[i][1] - c[1]) * scale;
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+      }
+      if (fill) { ctx.fillStyle = fill; ctx.fill('evenodd'); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 2; ctx.stroke(); }
+    };
+
+    drawNorm(refShape.getTransformedPolygons(), { fill: '#3fb95033', stroke: '#3fb950', lw: 2 });
+    drawNorm(playerShape.getTransformedPolygons(), { stroke: '#58a6ff', lw: 2.5 });
+
+    ctx.font = "13px 'Space Grotesk', system-ui, sans-serif";
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#3fb950'; ctx.fillText('■ Real shape', 16, h - 32);
+    ctx.fillStyle = '#58a6ff'; ctx.fillText('■ Your drawing', 16, h - 14);
+  }
+
+  _onCompareNext() {
+    if (this.state !== STATES.COMPARE) return;
+    this.scores.push(this._pendingScore);
+    this._pendingScore = null;
+    this.currentIndex++;
+    this.promptNext();
   }
 
   onTransformDone() {
@@ -1164,6 +1262,7 @@ class Game {
     // Modifiers
     const mods = [];
     if (this.puzzleMode) mods.push('Placement Only');
+    if (this.shapeOnlyMode) mods.push('Shape Only');
     if (this.blindMode) mods.push('Blind');
     if (this.hardMode) mods.push('Hard');
     if (this.explorerMode) mods.push('Explorer');
@@ -1227,8 +1326,8 @@ class Game {
       tr.innerHTML = `
         <td><span class="score-color" style="background:${this.itemData[si]?.color || '#ccc'}"></span>${s.name}</td>
         <td>${s.skipped ? '—' : s.shape}</td>
-        <td>${s.skipped ? '—' : s.size}</td>
-        <td>${s.skipped ? '—' : s.placement}</td>
+        <td>${s.skipped || s.size == null ? '—' : s.size}</td>
+        <td>${s.skipped || s.placement == null ? '—' : s.placement}</td>
         <td class="${totalClass}"><strong>${label}</strong></td>
       `;
       tbody.appendChild(tr);
@@ -1308,7 +1407,7 @@ class Game {
 
     const modeLabel = document.getElementById('results-mode');
     if (modeLabel) {
-      const suffix = this.puzzleMode ? ' (Placement Only)' : '';
+      const suffix = this.puzzleMode ? ' (Placement Only)' : this.shapeOnlyMode ? ' (Shape Only)' : '';
       const blindSuffix = this.blindMode ? ' (Blind)' : '';
       const hardSuffix = this.hardMode ? ' (Hard)' : '';
       const explorerSuffix = this.explorerMode ? ' (Explorer)' : '';
