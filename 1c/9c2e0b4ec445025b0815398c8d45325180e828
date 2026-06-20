@@ -1,0 +1,30 @@
+css/style.css
+  s_0205e5761238ba::t_0b9fc897848e79 1751-1788
+js/data-explorer.js
+  s_0205e5761238ba::t_ca84bc85b0d86f 18,24
+  s_0205e5761238ba::t_493d8576cea624 4
+  s_0205e5761238ba::t_a9b12f3a9befbf 44-45
+  s_0205e5761238ba::t_0697f41fb6b04c 192-260
+  s_0205e5761238ba::t_1ef9840805d9b7 67,69-85,88,104-105,107,109-113,115-121,123-130,132-142
+  s_0205e5761238ba::t_269cabd455882e 32
+TODOS.md
+  s_0205e5761238ba::t_5bec1ad4c8c722 217-220
+js/datasets.js
+  s_0205e5761238ba::t_12ef76a4951df3 5,14-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "1c9c2e0b4ec445025b0815398c8d45325180e828",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
