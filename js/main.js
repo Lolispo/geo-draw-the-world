@@ -14,6 +14,8 @@ import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
+import { FlagGame } from './flag-game.js';
+import { RankLineGame } from './rank-line-game.js';
 
 const STATES = {
   MENU: 'menu',
@@ -22,7 +24,9 @@ const STATES = {
   DRAWING: 'drawing',
   TRANSFORM: 'transform',
   PLACING: 'placing',
-  RESULTS: 'results'
+  RESULTS: 'results',
+  FLAG_QUIZ: 'flag-quiz',
+  RANK_LINE: 'rank-line'
 };
 
 class Game {
@@ -63,7 +67,9 @@ class Game {
       drawing: document.getElementById('screen-drawing'),
       transform: document.getElementById('screen-transform'),
       placing: document.getElementById('screen-placing'),
-      results: document.getElementById('screen-results')
+      results: document.getElementById('screen-results'),
+      'flag-quiz': document.getElementById('screen-flag-quiz'),
+      'rank-line': document.getElementById('screen-rank-line')
     };
 
     this.drawingCanvas = new DrawingCanvas(document.getElementById('canvas-drawing'));
@@ -71,6 +77,14 @@ class Game {
     this.worldCanvas = new WorldCanvas(document.getElementById('canvas-world'));
     this.resultsWorldCanvas = new WorldCanvas(document.getElementById('canvas-results'));
     this.menuGlobe = new MenuGlobe(document.getElementById('menu-globe-canvas'));
+    this.flagGame = new FlagGame(
+      document.getElementById('flag-game-container'),
+      () => this.showScreen(STATES.MENU)
+    );
+    this.rankLineGame = new RankLineGame(
+      document.getElementById('rank-line-container'),
+      () => this.showScreen(STATES.MENU)
+    );
 
     this._bindEvents();
   }
@@ -139,6 +153,8 @@ class Game {
       { id: 'btn-famous5', key: 'famous5' },
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
+      { id: 'btn-flag-quiz', key: 'flag-quiz-10' },
+      { id: 'btn-rank-line', key: 'rank-line-gdp-nominal' },
     ];
     for (const { id, key, label } of specialModes) {
       const btn = document.getElementById(id);
@@ -166,6 +182,8 @@ class Game {
     document.getElementById('btn-speed').addEventListener('click', () => this.startSpeedRound());
     document.getElementById('btn-streak').addEventListener('click', () => this.startStreak());
     document.getElementById('btn-famous5').addEventListener('click', () => this.startFamous5());
+    document.getElementById('btn-flag-quiz').addEventListener('click', () => this.startFlagQuiz());
+    document.getElementById('btn-rank-line').addEventListener('click', () => this.startRankLine());
 
     // Country region buttons
     for (const region of getCountryRegions()) {
@@ -479,6 +497,22 @@ class Game {
     this._startGame();
   }
 
+  async startFlagQuiz() {
+    this.gameMode = 'flag-quiz';
+    this._currentRegion = 'flag-quiz';
+    await this.flagGame.loadData();
+    this.showScreen(STATES.FLAG_QUIZ);
+    this.flagGame.start(10);
+  }
+
+  async startRankLine() {
+    this.gameMode = 'rank-line';
+    this._currentRegion = 'rank-line';
+    await this.rankLineGame.loadData();
+    this.showScreen(STATES.RANK_LINE);
+    this.rankLineGame.start('gdp-nominal');
+  }
+
   _replay() {
     this.resultsWorldCanvas.deactivate();
     if (this.gameMode === 'continents') this.startContinents();
@@ -488,6 +522,8 @@ class Game {
     else if (this.gameMode === 'famous5') this.startFamous5();
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
+    else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
+    else if (this.gameMode === 'rank-line') this.startRankLine();
     else this.startCountries(this._currentRegion);
   }
 

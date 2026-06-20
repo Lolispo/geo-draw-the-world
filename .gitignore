@@ -1,0 +1,6 @@
+# Tooling / agent state
+.gstack/
+.omc/
+
+# OS / editor
+.DS_Store
