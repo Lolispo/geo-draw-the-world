@@ -1,0 +1,64 @@
+.gitignore
+  s_0205e5761238ba::t_478f1ddf7a801e 1-6
+js/flag-game.js
+  05fb7ac2235dbd37 1-561
+data/economy.json
+  s_0205e5761238ba::t_5d1e4c37f08d89 1-1085
+data/flags.json
+  05fb7ac2235dbd37 1-198
+index.html
+  s_0205e5761238ba::t_9a62e88fc79c28 219-222,225
+  05fb7ac2235dbd37 94-100,106-107,218,223-224
+  s_0205e5761238ba::t_ed837672f2780e 101-105
+js/main.js
+  s_0205e5761238ba::t_869a5633f9e363 526
+  s_0205e5761238ba::t_1bdffebc6613db 508-515
+  s_0205e5761238ba::t_3d980433aa60e7 28-29
+  s_0205e5761238ba::t_63c5945372fb46 186
+  05fb7ac2235dbd37 17,27,70,80-83,156,185,500-507,525
+  s_0205e5761238ba::t_aefd7aef9f0ce3 71-72
+  s_0205e5761238ba::t_63b07a60334368 84-87
+  s_0205e5761238ba::t_10b8d8d5190805 18
+  s_0205e5761238ba::t_caefde8c15513c 157
+css/style.css
+  05fb7ac2235dbd37 818-1100,1221-1242
+  s_0205e5761238ba::t_7fcc9bf812d19a 1292-1384,1392-1437,1444-1543
+  s_0205e5761238ba::t_54874f92e3fe23 1438-1443
+  s_0205e5761238ba::t_14473aed14b4ec 1385-1391
+js/rank-line-game.js
+  s_0205e5761238ba::t_c4187163255740 1-52,57-106,108,110-161,171-172,174-332,369-470
+  s_0205e5761238ba::t_9d55d5f20fd7b1 162-170
+  s_0205e5761238ba::t_97fd81026feaf9 333-368
+  s_0205e5761238ba::t_72121741930e56 107,109
+  s_0205e5761238ba::t_b6923e7f148adf 173
+  s_0205e5761238ba::t_19d0cfca17114f 53-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "bb23385eb6f9290b4d27bbb247ad591281491209",
+  "prompts": {
+    "05fb7ac2235dbd37": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "be7770c2-9ed2-483c-b012-a5ab21f314c2",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>",
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 1093,
+      "overriden_lines": 0
+    }
+  },
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
