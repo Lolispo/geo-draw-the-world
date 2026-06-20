@@ -66,6 +66,9 @@ with no resize/placement steps.
 
 ## 3. Flag Color Quiz: perceptual color accuracy (Lab / CIEDE2000)
 
+**✅ DONE 2026-06-20** — new `js/color.js` (sRGB→Lab + CIEDE2000, verified against Sharma
+test data); flag quiz `_colorDistance` now perceptual, thresholds retuned to ΔE scale.
+
 **What:** Make the flag quiz judge color similarity the way the human eye does, so
 "the correct flag contains this color" and decoy selection are actually accurate.
 

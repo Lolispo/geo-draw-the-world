@@ -3,6 +3,7 @@
 
 import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
+import { deltaE } from './color.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w640/';
 
@@ -130,14 +131,8 @@ export class FlagGame {
   }
 
   _colorDistance(hex1, hex2) {
-    const a = this._hexToRgb(hex1);
-    const b = this._hexToRgb(hex2);
-    // Weighted euclidean — human eyes are more sensitive to green differences
-    return Math.sqrt(
-      2 * (a.r - b.r) ** 2 +
-      4 * (a.g - b.g) ** 2 +
-      3 * (a.b - b.b) ** 2
-    );
+    // Perceptual ΔE (CIEDE2000): ~0 identical, <10 similar, >30 clearly different
+    return deltaE(hex1, hex2);
   }
 
   _closestColorDist(flag, targetColor) {
@@ -145,7 +140,7 @@ export class FlagGame {
     return Math.min(...flag.colors.map(c => this._colorDistance(c, targetColor)));
   }
 
-  _flagHasColor(flag, targetColor, threshold = 100) {
+  _flagHasColor(flag, targetColor, threshold = 12) {
     return flag.colors.some(c => this._colorDistance(c, targetColor) < threshold);
   }
 
@@ -154,7 +149,7 @@ export class FlagGame {
     const scored = this.flags
       .filter(f => f.code !== excludeCode)
       .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
-      .filter(s => s.dist < 60) // tight threshold for correct answer
+      .filter(s => s.dist < 10) // tight ΔE threshold for correct answer
       .sort((a, b) => a.dist - b.dist);
 
     if (scored.length === 0) {
@@ -162,7 +157,7 @@ export class FlagGame {
       const relaxed = this.flags
         .filter(f => f.code !== excludeCode)
         .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
-        .filter(s => s.dist < 100)
+        .filter(s => s.dist < 20)
         .sort((a, b) => a.dist - b.dist);
       if (relaxed.length === 0) return null;
       // Pick from top 5 for variety
@@ -178,8 +173,8 @@ export class FlagGame {
     // 1. NOT contain the removed color (wide threshold — clearly no match)
     // 2. Ideally SHARE at least one color with the remaining visible colors
     //    (so they look plausible / you can't eliminate them by color alone)
-    const REMOVED_THRESHOLD = 150; // must be far from removed color
-    const SHARED_THRESHOLD = 100;  // close enough to count as shared
+    const REMOVED_THRESHOLD = 25; // ΔE — decoy must be clearly far from the removed color
+    const SHARED_THRESHOLD = 12;  // ΔE — close enough to count as a shared visible color
 
     const candidates = this.flags.filter(f => {
       if (excludeCodes.includes(f.code)) return false;
