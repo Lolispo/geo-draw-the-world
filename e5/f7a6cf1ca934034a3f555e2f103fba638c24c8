@@ -1,0 +1,41 @@
+index.html
+  s_0205e5761238ba::t_b3859848aef8ed 72-75
+  s_0205e5761238ba::t_ac9fac2a61daef 168-178
+TODOS.md
+  s_0205e5761238ba::t_fb11c83f582d60 38-42
+css/style.css
+  s_0205e5761238ba::t_0dd8a429fb3007 368-374
+js/main.js
+  s_0205e5761238ba::t_7780223eaf667d 48
+  s_0205e5761238ba::t_8f50b7e7e25806 80
+  s_0205e5761238ba::t_be0d0720c70385 354-356
+  s_0205e5761238ba::t_eeb950926db280 822-827
+  s_0205e5761238ba::t_0f843b38d08017 222,226-230
+  s_0205e5761238ba::t_3b88ddc1883d17 1329-1330
+  s_0205e5761238ba::t_770768cba3968f 372-378
+  s_0205e5761238ba::t_d47fb6f13399e3 631
+  s_0205e5761238ba::t_7500d06d99fb16 1265
+  s_0205e5761238ba::t_1fcb96cba23614 339-340
+  s_0205e5761238ba::t_ddb08f7d97c05c 1410
+  s_0205e5761238ba::t_229817a03354a6 13
+  s_0205e5761238ba::t_62f7f31f082825 131
+  s_0205e5761238ba::t_0e73c0b796fec9 841-905
+  s_0205e5761238ba::t_146928693a09c1 32
+  s_0205e5761238ba::t_07c0b3a94098f3 280-282
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "e5f7a6cf1ca934034a3f555e2f103fba638c24c8",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
