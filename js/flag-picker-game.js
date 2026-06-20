@@ -134,7 +134,7 @@ export class FlagPickerGame {
     c.appendChild(header);
 
     const area = document.createElement('div');
-    area.className = 'flag-question-area';
+    area.className = 'flag-question-area flag-picker-area';
 
     // Flag with the missing color
     const flagWrap = document.createElement('div');
@@ -147,6 +147,7 @@ export class FlagPickerGame {
     const canvas = document.createElement('canvas');
     canvas.className = 'flag-main-canvas';
     flagDisplay.appendChild(canvas);
+    this._flagCanvas = canvas;
     const nameEl = document.createElement('div');
     nameEl.className = 'flag-name flag-main-name';
     nameEl.textContent = flag.name;
@@ -323,6 +324,7 @@ export class FlagPickerGame {
     if (scoreEl) scoreEl.textContent = `Score: ${this.score}`;
 
     submitBtn.disabled = true;
+    this._showFullFlag(flag); // reveal the complete flag
     revealEl.innerHTML = `
       <div class="picker-reveal-row">
         <span class="picker-cmp"><span class="picker-cmp-sw" style="background:${picked}"></span>Your pick</span>
@@ -331,7 +333,17 @@ export class FlagPickerGame {
       </div>`;
 
     this.results.push({ flag: flag.name, removed, picked, points, deltaE: d });
-    setTimeout(() => this._nextRound(), 1800);
+    setTimeout(() => this._nextRound(), 2200);
+  }
+
+  _showFullFlag(flag) {
+    const canvas = this._flagCanvas;
+    if (!canvas) return;
+    this._loadImage(`${FLAG_CDN}${flag.code}.png`).then((img) => {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+    }).catch(() => {});
   }
 
   _showResults() {

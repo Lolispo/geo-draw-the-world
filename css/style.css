@@ -845,9 +845,21 @@ canvas {
 
 #screen-flag-quiz,
 #screen-flag-picker {
-  padding: 12px;
+  padding: 16px 12px;
   overflow-y: auto;
+  justify-content: flex-start;
 }
+
+/* Flag Color Picker: flag beside the picker (shorter than stacked) */
+.flag-question-area.flag-picker-area {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+.flag-picker-area .flag-main-wrap { flex: 0 1 auto; }
+.flag-picker-area .flag-main-canvas { max-height: 220px; }
 
 /* Flag Color Picker — HSV picker */
 .picker-wrap {
