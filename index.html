@@ -8,14 +8,57 @@
 </head>
 <body>
 
-  <!-- MENU -->
-  <div id="screen-menu" class="screen active">
+  <!-- Shared animated background (globe) behind menu-like screens -->
+  <div id="app-bg">
     <canvas id="menu-globe-canvas" class="menu-globe-canvas"></canvas>
     <div class="menu-bg"></div>
+  </div>
+
+  <!-- MENU -->
+  <div id="screen-menu" class="screen active">
     <div class="menu-content">
       <h1 class="title-glow">Geo Draw<br><span>the World</span></h1>
+      <p class="subtitle">Learn world geography — draw it, rank it, explore it.</p>
+
+      <div class="menu-hub">
+        <button id="btn-activity-draw" class="btn hub-card hub-draw">
+          <span class="hub-icon">✏️</span>
+          <span class="hub-label">Draw the World</span>
+          <span class="hub-desc">Draw shapes from memory & place them on the map</span>
+        </button>
+        <button id="btn-activity-rank" class="btn hub-card hub-rank">
+          <span class="hub-icon">🏦</span>
+          <span class="hub-label">Rank the World</span>
+          <span class="hub-desc">Place countries on a line by the numbers</span>
+        </button>
+        <button id="btn-activity-flags" class="btn hub-card hub-flags">
+          <span class="hub-icon">🏳️</span>
+          <span class="hub-label">Flag Color Quiz</span>
+          <span class="hub-desc">Guess the missing flag color</span>
+        </button>
+        <button id="btn-activity-explore" class="btn hub-card hub-explore">
+          <span class="hub-icon">📊</span>
+          <span class="hub-label">Data Explorer</span>
+          <span class="hub-desc">Browse countries ranked by any dataset</span>
+        </button>
+      </div>
+
+      <div class="shortcuts-hint">
+        <span>Enter</span> confirm &nbsp; <span>Esc</span> skip &nbsp; <span>Space</span> place &nbsp; <span>Ctrl+Z</span> undo
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAW MENU (drawing game modes + toggles) -->
+  <div id="screen-draw-menu" class="screen">
+    <div class="menu-content draw-menu-content">
+      <div class="draw-menu-head">
+        <button id="btn-draw-back" class="btn btn-tool">← Back</button>
+        <h2 class="draw-menu-title">✏️ Draw the World</h2>
+      </div>
       <p class="subtitle">Draw shapes from memory. Resize, rotate, and place them on the map.</p>
 
+      <div class="menu-section-label">Modifiers (combine any)</div>
       <div class="menu-toggles">
         <button id="btn-puzzle-toggle" class="btn btn-toggle">
           <span class="toggle-icon">📌</span> Placement Only
@@ -89,33 +132,6 @@
           <button id="btn-south-america" class="btn btn-mode"><span class="mode-icon">🌎</span><span class="mode-label">S. America</span><span class="mode-desc">13 countries</span></button>
           <button id="btn-oceania" class="btn btn-mode"><span class="mode-icon">🌏</span><span class="mode-label">Oceania</span><span class="mode-desc">5 countries</span></button>
         </div>
-      </div>
-
-      <div class="menu-section-label">Mini Games</div>
-      <div class="menu-row">
-        <button id="btn-flag-quiz" class="btn btn-mode btn-continent-mode btn-flag-mode">
-          <span class="mode-icon">🏳️</span>
-          <span class="mode-label">Flag Color Quiz</span>
-          <span class="mode-desc">Guess the missing color</span>
-        </button>
-        <button id="btn-rank-line" class="btn btn-mode btn-continent-mode btn-rank-mode">
-          <span class="mode-icon">🏦</span>
-          <span class="mode-label">Rank the World</span>
-          <span class="mode-desc">Place countries on the line — GDP, population & more</span>
-        </button>
-      </div>
-
-      <div class="menu-section-label">Learn &amp; Explore</div>
-      <div class="menu-row">
-        <button id="btn-explore" class="btn btn-mode btn-continent-mode btn-explore-mode">
-          <span class="mode-icon">📊</span>
-          <span class="mode-label">Data Explorer</span>
-          <span class="mode-desc">Browse countries ranked by any dataset</span>
-        </button>
-      </div>
-
-      <div class="shortcuts-hint">
-        <span>Enter</span> confirm &nbsp; <span>Esc</span> skip &nbsp; <span>Space</span> place &nbsp; <span>Ctrl+Z</span> undo
       </div>
     </div>
   </div>

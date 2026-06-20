@@ -1,7 +1,6 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { playClick } from './sounds.js';
 import { loadDatasets, getDatasetList, getDataset, getContinents, getEntries, formatValue } from './datasets.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
@@ -46,15 +45,15 @@ export class DataExplorer {
     const header = document.createElement('div');
     header.className = 'explore-header';
 
+    const backBtn = document.createElement('button');
+    backBtn.className = 'btn btn-tool';
+    backBtn.textContent = '← Back';
+    backBtn.addEventListener('click', () => this.onFinish(null));
+
     const title = document.createElement('h2');
     title.textContent = 'Data Explorer';
 
-    const menuBtn = document.createElement('button');
-    menuBtn.className = 'btn btn-tool';
-    menuBtn.textContent = 'Menu';
-    menuBtn.addEventListener('click', () => this.onFinish(null));
-
-    header.append(title, menuBtn);
+    header.append(backBtn, title);
     return header;
   }
 
@@ -75,7 +74,6 @@ export class DataExplorer {
     dsSelect.addEventListener('change', () => {
       this.datasetId = dsSelect.value;
       this.higherFirst = getDataset(this.datasetId).higherFirst; // reset to natural order
-      playClick();
       this._render();
     });
 
@@ -95,7 +93,6 @@ export class DataExplorer {
     }
     contSelect.addEventListener('change', () => {
       this.continent = contSelect.value || null;
-      playClick();
       this._renderList();
     });
 
@@ -107,7 +104,6 @@ export class DataExplorer {
     sortBtn.addEventListener('click', () => {
       this.higherFirst = !this.higherFirst;
       this._updateSortLabel();
-      playClick();
       this._renderList();
     });
 
@@ -117,7 +113,6 @@ export class DataExplorer {
     playBtn.textContent = 'Rank this →';
     playBtn.title = 'Play the line game with this dataset';
     playBtn.addEventListener('click', () => {
-      playClick();
       this.onPlayDataset(this.datasetId);
     });
 

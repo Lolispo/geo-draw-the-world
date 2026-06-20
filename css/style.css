@@ -38,11 +38,21 @@ body {
   display: none;
   position: absolute;
   inset: 0;
+  z-index: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow-y: auto;
 }
+
+/* Shared animated background layer (globe) behind menu-like screens */
+#app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+#app-bg.hidden { display: none; }
 .screen.active {
   display: flex;
   animation: fadeIn 0.3s ease-out;
@@ -1542,6 +1552,63 @@ canvas {
   .rank-flag { width: 26px; }
 }
 
+/* ========== MAIN MENU: ACTIVITY HUB ========== */
+.menu-hub {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 620px;
+  margin: 8px auto 0;
+}
+.hub-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 22px 20px;
+  text-align: left;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--surface2), var(--surface));
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.hub-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+.hub-icon { font-size: 2.4rem; line-height: 1; }
+.hub-label { font-size: 1.25rem; font-weight: 600; }
+.hub-desc { font-size: 0.82rem; color: var(--text-dim); }
+
+/* Unified accent: all activity cards share one identity; icons differentiate. */
+
+/* Draw sub-menu */
+.draw-menu-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.draw-menu-title { font-size: 1.4rem; font-weight: 600; }
+
+#screen-draw-menu {
+  justify-content: flex-start;
+  padding: 20px 12px 48px;
+}
+.draw-menu-content { animation: none; }
+
+@media (max-width: 600px) {
+  .menu-hub { grid-template-columns: 1fr; gap: 10px; }
+  .hub-card { padding: 16px; flex-direction: row; align-items: center; gap: 12px; }
+  .hub-icon { font-size: 1.8rem; }
+  .hub-card > .hub-label { font-size: 1.1rem; }
+  .hub-desc { display: none; }
+}
+
 /* ========== RANK LINE: DATASET PICKER ========== */
 .rank-picker {
   width: 100%;
@@ -1552,6 +1619,7 @@ canvas {
   gap: 12px;
   align-items: stretch;
 }
+.rank-picker-head { display: flex; align-items: center; }
 .rank-picker h2 { text-align: center; font-size: 1.4rem; }
 .rank-picker-sub {
   text-align: center;
@@ -1571,6 +1639,14 @@ canvas {
   padding: 12px 16px;
   text-align: left;
   position: relative;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.rank-picker-item:hover {
+  background: var(--surface2);
+  border-color: var(--purple);
 }
 .rank-picker-name { font-size: 1.05rem; font-weight: 600; }
 .rank-picker-blurb { font-size: 0.78rem; color: var(--text-dim); }

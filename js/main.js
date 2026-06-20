@@ -20,6 +20,7 @@ import { DataExplorer } from './data-explorer.js';
 
 const STATES = {
   MENU: 'menu',
+  DRAW_MENU: 'draw-menu',
   PROMPT: 'prompt',
   PEEK: 'peek',
   DRAWING: 'drawing',
@@ -64,6 +65,7 @@ class Game {
 
     this.screens = {
       menu: document.getElementById('screen-menu'),
+      'draw-menu': document.getElementById('screen-draw-menu'),
       prompt: document.getElementById('screen-prompt'),
       peek: document.getElementById('screen-peek'),
       drawing: document.getElementById('screen-drawing'),
@@ -189,9 +191,12 @@ class Game {
     document.getElementById('btn-speed').addEventListener('click', () => this.startSpeedRound());
     document.getElementById('btn-streak').addEventListener('click', () => this.startStreak());
     document.getElementById('btn-famous5').addEventListener('click', () => this.startFamous5());
-    document.getElementById('btn-flag-quiz').addEventListener('click', () => this.startFlagQuiz());
-    document.getElementById('btn-rank-line').addEventListener('click', () => this.startRankLine());
-    document.getElementById('btn-explore').addEventListener('click', () => this.startExplore());
+    // Hub activity cards
+    document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
+    document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
+    document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
+    document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
+    document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
 
     // Country region buttons
     for (const region of getCountryRegions()) {
@@ -203,35 +208,30 @@ class Game {
     document.getElementById('btn-puzzle-toggle').addEventListener('click', () => {
       this.puzzleMode = !this.puzzleMode;
       this._updatePuzzleBadge();
-      playClick();
     });
 
     // Tweak mode toggle
     document.getElementById('btn-tweak-toggle').addEventListener('click', () => {
       this.tweakMode = !this.tweakMode;
       this._updateTweakBadge();
-      playClick();
     });
 
     // Blind mode toggle
     document.getElementById('btn-blind-toggle').addEventListener('click', () => {
       this.blindMode = !this.blindMode;
       this._updateBlindBadge();
-      playClick();
     });
 
     // Explorer mode toggle
     document.getElementById('btn-explorer-toggle').addEventListener('click', () => {
       this.explorerMode = !this.explorerMode;
       this._updateExplorerBadge();
-      playClick();
     });
 
     // Hard mode toggle
     document.getElementById('btn-hard-toggle').addEventListener('click', () => {
       this.hardMode = !this.hardMode;
       this._updateHardBadge();
-      playClick();
     });
 
     // Drawing
@@ -374,15 +374,23 @@ class Game {
     for (const [name, el] of Object.entries(this.screens)) {
       el.classList.toggle('active', name === state);
     }
-    // Manage globe animation
-    if (state === STATES.MENU) {
+    // Globe background on menu-like screens; off during gameplay
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.EXPLORE, STATES.FLAG_QUIZ];
+    const bg = document.getElementById('app-bg');
+    if (globeStates.includes(state)) {
+      if (bg) bg.classList.remove('hidden');
       this.menuGlobe.start();
+    } else {
+      if (bg) bg.classList.add('hidden');
+      this.menuGlobe.stop();
+    }
+
+    // Reset transient mode state when returning to the hub
+    if (state === STATES.MENU) {
       this._stopTimer();
       this._hideStreakCounter();
       this._speedActive = false;
       this._streakActive = false;
-    } else {
-      this.menuGlobe.stop();
     }
   }
 
@@ -525,6 +533,10 @@ class Game {
     this.showScreen(STATES.RANK_LINE);
     if (datasetId) this.rankLineGame.start(datasetId);
     else this.rankLineGame.showPicker();
+  }
+
+  openDrawMenu() {
+    this.showScreen(STATES.DRAW_MENU);
   }
 
   async startExplore(datasetId = 'gdp-nominal') {

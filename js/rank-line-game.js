@@ -50,6 +50,15 @@ export class RankLineGame {
     const panel = document.createElement('div');
     panel.className = 'rank-picker';
 
+    const head = document.createElement('div');
+    head.className = 'rank-picker-head';
+    const backBtn = document.createElement('button');
+    backBtn.className = 'btn btn-tool';
+    backBtn.textContent = '← Back';
+    backBtn.addEventListener('click', () => this.onFinish(null));
+    head.appendChild(backBtn);
+    panel.appendChild(head);
+
     const h = document.createElement('h2');
     h.textContent = 'Rank the World';
     const sub = document.createElement('p');
@@ -67,16 +76,10 @@ export class RankLineGame {
         `<span class="rank-picker-name">${d.name}</span>` +
         `<span class="rank-picker-blurb">${d.blurb}</span>` +
         (hs ? `<span class="hs-badge">Best: ${hs.score}</span>` : '');
-      btn.addEventListener('click', () => { playClick(); this.start(d.id); });
+      btn.addEventListener('click', () => this.start(d.id));
       listWrap.appendChild(btn);
     }
     panel.appendChild(listWrap);
-
-    const menuBtn = document.createElement('button');
-    menuBtn.className = 'btn btn-tool';
-    menuBtn.textContent = 'Menu';
-    menuBtn.addEventListener('click', () => this.onFinish(null));
-    panel.appendChild(menuBtn);
 
     c.appendChild(panel);
   }
@@ -172,12 +175,12 @@ export class RankLineGame {
       `<span class="heart ${i < this.lives ? '' : 'lost'}">❤</span>`
     ).join('');
 
-    const menuBtn = document.createElement('button');
-    menuBtn.className = 'btn btn-tool';
-    menuBtn.textContent = 'Menu';
-    menuBtn.addEventListener('click', () => { this._cleanupDrag(); this.onFinish(null); });
+    const backBtn = document.createElement('button');
+    backBtn.className = 'btn btn-tool';
+    backBtn.textContent = '← Back';
+    backBtn.addEventListener('click', () => { this._cleanupDrag(); this.onFinish(null); });
 
-    header.append(title, blurb, run, lives, menuBtn);
+    header.append(backBtn, title, blurb, run, lives);
     return header;
   }
 
@@ -369,7 +372,6 @@ export class RankLineGame {
     if (this.gameOver) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        playClick();
         this.start(this.dataset.id);
       }
       return;
@@ -496,11 +498,9 @@ export class RankLineGame {
     c.appendChild(panel);
 
     document.getElementById('rank-play-again').addEventListener('click', () => {
-      playClick();
       this.start(this.dataset.id);
     });
     document.getElementById('rank-menu').addEventListener('click', () => {
-      playClick();
       this.onFinish(null);
     });
   }

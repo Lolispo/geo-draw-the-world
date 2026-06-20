@@ -1,7 +1,7 @@
 // Flag Color Quiz game module
 // Shows a flag with one color removed, player picks which of 3 flags has the missing color
 
-import { playClick, playPlace, playSkip, playScoreReveal } from './sounds.js';
+import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w640/';
@@ -258,14 +258,14 @@ export class FlagGame {
       });
     });
 
-    const menuBtn = document.createElement('button');
-    menuBtn.className = 'btn btn-tool';
-    menuBtn.textContent = 'Menu';
-    menuBtn.addEventListener('click', () => {
+    const backBtn = document.createElement('button');
+    backBtn.className = 'btn btn-tool';
+    backBtn.textContent = '← Back';
+    backBtn.addEventListener('click', () => {
       this.onFinish(null); // signal abort
     });
 
-    header.append(title, progress, scoreEl, toggleBtn, menuBtn);
+    header.append(backBtn, title, progress, scoreEl, toggleBtn);
     c.appendChild(header);
 
     // Question area
@@ -550,11 +550,9 @@ export class FlagGame {
     c.appendChild(panel);
 
     document.getElementById('flag-play-again').addEventListener('click', () => {
-      playClick();
       this.start(this.totalRounds);
     });
     document.getElementById('flag-menu').addEventListener('click', () => {
-      playClick();
       this.onFinish(null);
     });
   }
