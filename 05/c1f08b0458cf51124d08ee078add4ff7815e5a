@@ -1,0 +1,33 @@
+TODOS.md
+  s_0205e5761238ba::t_4afe6f6a2ac255 182-185
+  s_0205e5761238ba::t_eb15a1822eb592 123-126
+docs/DATA.md
+  s_0205e5761238ba::t_59e9396bc0ee0d 1-52
+scripts/build-datasets.mjs
+  s_0205e5761238ba::t_ed00e31ba943cc 103-110
+  s_0205e5761238ba::t_a6f0a60e550506 69-89
+  s_0205e5761238ba::t_b7cd679b8a1667 17
+  s_0205e5761238ba::t_574c4dc6d38a9f 122
+data/entities.json
+  s_0205e5761238ba::t_0232c29eb0e01e 848,852,854,866,868,938,942,944,1088,1586,1588,2153,3026-3030,3233,3239,3252,3254
+data/datasets.json
+  s_0205e5761238ba::t_0232c29eb0e01e 235-238,259-262,815-818,875-878,1116-1119,1345-1349,1571-1574,1799-1804,2030-2031,2034-2043
+data/flags.json
+  s_0205e5761238ba::t_5baf626874eef4 51,60,70,87,94,128,133,167,198
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "05c1f08b0458cf51124d08ee078add4ff7815e5a",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
