@@ -1,0 +1,56 @@
+js/rank-line-game.js
+  s_0205e5761238ba::t_730a9b20bdf275 367-378
+  s_0205e5761238ba::t_261ee2ec0bad57 99
+  s_0205e5761238ba::t_db509a2106ea1e 86
+  s_0205e5761238ba::t_76f82093d66567 261
+  s_0205e5761238ba::t_acb05afcfe4a42 366
+  s_0205e5761238ba::t_104455d4d491d1 19
+  s_0205e5761238ba::t_6983d2345e83b2 100-103
+  s_0205e5761238ba::t_aa968afc11c927 7
+  s_0205e5761238ba::t_e7c17a448b38bc 37,41-81
+  s_0205e5761238ba::t_3cec6ee37fdec6 454
+  s_0205e5761238ba::t_7f21b5eecb45f9 474
+docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md
+  s_0205e5761238ba::t_2a06c19da99540 1-96
+js/data-explorer.js
+  s_0205e5761238ba::t_e982053a10033b 1-173
+data/datasets.json
+  s_0205e5761238ba::t_0e6505d6a25a04 1-343,346-503,506-535,538-2003
+  s_0205e5761238ba::t_e100f05e0c8d00 344-345,504-505,536-537
+js/datasets.js
+  s_0205e5761238ba::t_a5e89ad2236328 1-76
+scripts/build-datasets.mjs
+  s_0205e5761238ba::t_4ff0ac9aa9a8e6 2-7,13-14,42-43,45-52,54,56-77,79-81,83-87,89-91,94,96
+  s_0205e5761238ba::t_49c0c7d6a2cca3 19-20,22
+  s_0205e5761238ba::t_28d3ac102736dc 1,8-12,15-18,21,23-41,44,53,55,78,82,88,92-93,95,97-100
+index.html
+  s_0205e5761238ba::t_1d8768d85b41a5 103-113
+  s_0205e5761238ba::t_6c14f5cf68c1b6 232-235
+css/style.css
+  s_0205e5761238ba::t_6b04935b940bc4 1544-1680
+js/main.js
+  s_0205e5761238ba::t_4564908e17fd9e 329-331
+  s_0205e5761238ba::t_ad147caa6a4355 316-317
+  s_0205e5761238ba::t_1628d09b3f4b7b 19
+  s_0205e5761238ba::t_9630b97ea44195 521,526-535
+  s_0205e5761238ba::t_3dc1bef1851a56 74-75
+  s_0205e5761238ba::t_b9e262e0f9d91a 30-31
+  s_0205e5761238ba::t_4766ab2b7eb2f2 194
+  s_0205e5761238ba::t_92a92a8a441cc0 91-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "caafa8f7e00145c4cabd0f7a2feea54f63a71ad7",
+  "prompts": {},
+  "sessions": {
+    "s_0205e5761238ba": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c474a836-6e60-48fe-b228-a9de200b6e5b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <petter.andersson@tendium.com>"
+    }
+  }
+}
