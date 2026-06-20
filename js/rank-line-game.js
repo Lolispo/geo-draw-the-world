@@ -4,38 +4,19 @@
 
 import { playPlace, playSkip, playScoreReveal, playClick } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
+import { loadDatasets, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 const START_LIVES = 3;
-
-// --- Value formatters (selected per-dataset via dataset.format) ---
-const FORMATTERS = {
-  'currency-short': (v) => {
-    const sign = v < 0 ? '-' : '';
-    const a = Math.abs(v);
-    if (a >= 1e12) return `${sign}$${(a / 1e12).toFixed(2)}T`;
-    if (a >= 1e9) return `${sign}$${(a / 1e9).toFixed(a / 1e9 >= 100 ? 0 : 1)}B`;
-    if (a >= 1e6) return `${sign}$${(a / 1e6).toFixed(0)}M`;
-    return `${sign}$${a.toLocaleString()}`;
-  },
-  'year': (v) => String(v),
-  'number': (v) => v.toLocaleString(),
-  'percent': (v) => `${v}%`,
-};
-
-function formatValue(dataset, v) {
-  const fn = FORMATTERS[dataset.format] || FORMATTERS['number'];
-  return fn(v);
-}
 
 export class RankLineGame {
   constructor(containerEl, onFinish) {
     this.container = containerEl;
     this.onFinish = onFinish; // callback when returning to menu
-    this.datasets = [];
     this._loaded = false;
 
     this.dataset = null;       // active dataset config
+    this._poolSize = 0;        // number of countries in the active dataset
     this.deck = [];            // shuffled remaining countries to draw
     this.placed = [];          // countries on the line, sorted desc by value
     this.lives = START_LIVES;
@@ -53,14 +34,56 @@ export class RankLineGame {
 
     // keyboard state
     this._kbGapIndex = -1;
+    this._picking = false;
     window.addEventListener('keydown', (e) => this._handleKey(e));
+  }
+
+  // Dataset picker — shown before a run when no dataset is preselected.
+  showPicker() {
+    this._picking = true;
+    this.gameOver = false;
+    this.current = null;
+    this.dataset = null;
+
+    const c = this.container;
+    c.innerHTML = '';
+    const panel = document.createElement('div');
+    panel.className = 'rank-picker';
+
+    const h = document.createElement('h2');
+    h.textContent = 'Rank the World';
+    const sub = document.createElement('p');
+    sub.className = 'rank-picker-sub';
+    sub.textContent = 'Pick a dataset, then place each country on the line by its value. 3 lives.';
+    panel.append(h, sub);
+
+    const listWrap = document.createElement('div');
+    listWrap.className = 'rank-picker-list';
+    for (const d of getDatasetList()) {
+      const hs = getHighScore(`rank-line-${d.id}`);
+      const btn = document.createElement('button');
+      btn.className = 'btn rank-picker-item';
+      btn.innerHTML =
+        `<span class="rank-picker-name">${d.name}</span>` +
+        `<span class="rank-picker-blurb">${d.blurb}</span>` +
+        (hs ? `<span class="hs-badge">Best: ${hs.score}</span>` : '');
+      btn.addEventListener('click', () => { playClick(); this.start(d.id); });
+      listWrap.appendChild(btn);
+    }
+    panel.appendChild(listWrap);
+
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'btn btn-tool';
+    menuBtn.textContent = 'Menu';
+    menuBtn.addEventListener('click', () => this.onFinish(null));
+    panel.appendChild(menuBtn);
+
+    c.appendChild(panel);
   }
 
   async loadData() {
     if (this._loaded) return;
-    const resp = await fetch('data/economy.json');
-    const data = await resp.json();
-    this.datasets = data.datasets;
+    await loadDatasets();
     this._loaded = true;
   }
 
@@ -73,8 +96,11 @@ export class RankLineGame {
   }
 
   start(datasetId = 'gdp-nominal') {
-    this.dataset = this.datasets.find(d => d.id === datasetId) || this.datasets[0];
-    this.deck = this._shuffle([...this.dataset.entries]);
+    this._picking = false;
+    this.dataset = getDataset(datasetId);
+    // Fresh entry objects each run (we mutate `.revealed` on them)
+    this.deck = this._shuffle(getEntries(datasetId));
+    this._poolSize = this.deck.length;
     this.placed = [];
     this.lives = START_LIVES;
     this.runLength = 0;
@@ -232,7 +258,7 @@ export class RankLineGame {
     name.textContent = entry.name;
     const val = document.createElement('span');
     val.className = 'rank-row-value';
-    val.textContent = formatValue(this.dataset, entry.value);
+    val.textContent = formatValue(this.dataset.format, entry.value);
     row.append(name, val);
     return row;
   }
@@ -337,8 +363,19 @@ export class RankLineGame {
   }
 
   _handleKey(e) {
-    if (this.gameOver || !this.current || this._dragging) return;
-    if (!this._isScreenActive()) return;
+    if (!this._isScreenActive() || this._picking) return;
+
+    // Results screen: Space / Enter replays
+    if (this.gameOver) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playClick();
+        this.start(this.dataset.id);
+      }
+      return;
+    }
+
+    if (!this.current || this._dragging) return;
 
     const maxGap = this.placed.length; // gaps are 0..placed.length inclusive
 
@@ -414,7 +451,7 @@ export class RankLineGame {
     this._cleanupDrag();
     playScoreReveal();
 
-    const isNew = saveScore(this._mode, this.runLength, this.runLength, this.dataset.entries.length);
+    const isNew = saveScore(this._mode, this.runLength, this.runLength, this._poolSize);
     const prev = getHighScore(this._mode);
 
     let grade = 'Keep practicing!';
@@ -434,7 +471,7 @@ export class RankLineGame {
         <span class="rank-result-rank">${i + 1}</span>
         <img class="rank-flag" src="${FLAG_CDN}${e.code}.png" alt="" onerror="this.style.visibility='hidden'">
         <span class="rank-result-name">${e.name}</span>
-        <span class="rank-result-value">${formatValue(this.dataset, e.value)}</span>
+        <span class="rank-result-value">${formatValue(this.dataset.format, e.value)}</span>
       </div>
     `).join('');
 

@@ -16,6 +16,7 @@ import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUn
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
 import { RankLineGame } from './rank-line-game.js';
+import { DataExplorer } from './data-explorer.js';
 
 const STATES = {
   MENU: 'menu',
@@ -26,7 +27,8 @@ const STATES = {
   PLACING: 'placing',
   RESULTS: 'results',
   FLAG_QUIZ: 'flag-quiz',
-  RANK_LINE: 'rank-line'
+  RANK_LINE: 'rank-line',
+  EXPLORE: 'explore'
 };
 
 class Game {
@@ -69,7 +71,8 @@ class Game {
       placing: document.getElementById('screen-placing'),
       results: document.getElementById('screen-results'),
       'flag-quiz': document.getElementById('screen-flag-quiz'),
-      'rank-line': document.getElementById('screen-rank-line')
+      'rank-line': document.getElementById('screen-rank-line'),
+      'explore': document.getElementById('screen-explore')
     };
 
     this.drawingCanvas = new DrawingCanvas(document.getElementById('canvas-drawing'));
@@ -84,6 +87,11 @@ class Game {
     this.rankLineGame = new RankLineGame(
       document.getElementById('rank-line-container'),
       () => this.showScreen(STATES.MENU)
+    );
+    this.dataExplorer = new DataExplorer(
+      document.getElementById('explore-container'),
+      () => this.showScreen(STATES.MENU),
+      (datasetId) => this.startRankLine(datasetId)
     );
 
     this._bindEvents();
@@ -154,7 +162,6 @@ class Game {
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
       { id: 'btn-flag-quiz', key: 'flag-quiz-10' },
-      { id: 'btn-rank-line', key: 'rank-line-gdp-nominal' },
     ];
     for (const { id, key, label } of specialModes) {
       const btn = document.getElementById(id);
@@ -184,6 +191,7 @@ class Game {
     document.getElementById('btn-famous5').addEventListener('click', () => this.startFamous5());
     document.getElementById('btn-flag-quiz').addEventListener('click', () => this.startFlagQuiz());
     document.getElementById('btn-rank-line').addEventListener('click', () => this.startRankLine());
+    document.getElementById('btn-explore').addEventListener('click', () => this.startExplore());
 
     // Country region buttons
     for (const region of getCountryRegions()) {
@@ -305,6 +313,8 @@ class Game {
           this.onTransformDone();
         } else if (this.state === STATES.PLACING) {
           this.onPlace();
+        } else if (this.state === STATES.RESULTS) {
+          this._replay();
         }
         break;
       case 'Escape':
@@ -316,6 +326,9 @@ class Game {
         if (this.state === STATES.PLACING) {
           e.preventDefault();
           this.onPlace();
+        } else if (this.state === STATES.RESULTS) {
+          e.preventDefault();
+          this._replay();
         }
         break;
     }
@@ -505,12 +518,21 @@ class Game {
     this.flagGame.start(10);
   }
 
-  async startRankLine() {
+  async startRankLine(datasetId = null) {
     this.gameMode = 'rank-line';
     this._currentRegion = 'rank-line';
     await this.rankLineGame.loadData();
     this.showScreen(STATES.RANK_LINE);
-    this.rankLineGame.start('gdp-nominal');
+    if (datasetId) this.rankLineGame.start(datasetId);
+    else this.rankLineGame.showPicker();
+  }
+
+  async startExplore(datasetId = 'gdp-nominal') {
+    this.gameMode = 'explore';
+    this._currentRegion = 'explore';
+    await this.dataExplorer.loadData();
+    this.showScreen(STATES.EXPLORE);
+    this.dataExplorer.start(datasetId);
   }
 
   _replay() {

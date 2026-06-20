@@ -1,0 +1,2003 @@
+{
+  "continents": [
+    "Africa",
+    "Asia",
+    "Europe",
+    "North America",
+    "South America",
+    "Oceania"
+  ],
+  "countries": {
+    "ad": {
+      "name": "Andorra",
+      "continent": "Europe"
+    },
+    "ae": {
+      "name": "United Arab Emirates",
+      "continent": "Asia"
+    },
+    "af": {
+      "name": "Afghanistan",
+      "continent": "Asia"
+    },
+    "ag": {
+      "name": "Antigua and Barbuda",
+      "continent": "North America"
+    },
+    "al": {
+      "name": "Albania",
+      "continent": "Europe"
+    },
+    "am": {
+      "name": "Armenia",
+      "continent": "Asia"
+    },
+    "ao": {
+      "name": "Angola",
+      "continent": "Africa"
+    },
+    "ar": {
+      "name": "Argentina",
+      "continent": "South America"
+    },
+    "as": {
+      "name": "American Samoa",
+      "continent": "Oceania"
+    },
+    "at": {
+      "name": "Austria",
+      "continent": "Europe"
+    },
+    "au": {
+      "name": "Australia",
+      "continent": "Oceania"
+    },
+    "aw": {
+      "name": "Aruba",
+      "continent": "North America"
+    },
+    "az": {
+      "name": "Azerbaijan",
+      "continent": "Asia"
+    },
+    "ba": {
+      "name": "Bosnia and Herzegovina",
+      "continent": "Europe"
+    },
+    "bb": {
+      "name": "Barbados",
+      "continent": "North America"
+    },
+    "bd": {
+      "name": "Bangladesh",
+      "continent": "Asia"
+    },
+    "be": {
+      "name": "Belgium",
+      "continent": "Europe"
+    },
+    "bf": {
+      "name": "Burkina Faso",
+      "continent": "Africa"
+    },
+    "bg": {
+      "name": "Bulgaria",
+      "continent": "Europe"
+    },
+    "bh": {
+      "name": "Bahrain",
+      "continent": "Asia"
+    },
+    "bi": {
+      "name": "Burundi",
+      "continent": "Africa"
+    },
+    "bj": {
+      "name": "Benin",
+      "continent": "Africa"
+    },
+    "bm": {
+      "name": "Bermuda",
+      "continent": "North America"
+    },
+    "bn": {
+      "name": "Brunei Darussalam",
+      "continent": "Asia"
+    },
+    "bo": {
+      "name": "Bolivia",
+      "continent": "South America"
+    },
+    "br": {
+      "name": "Brazil",
+      "continent": "South America"
+    },
+    "bs": {
+      "name": "Bahamas, The",
+      "continent": "North America"
+    },
+    "bt": {
+      "name": "Bhutan",
+      "continent": "Asia"
+    },
+    "bw": {
+      "name": "Botswana",
+      "continent": "Africa"
+    },
+    "by": {
+      "name": "Belarus",
+      "continent": "Europe"
+    },
+    "bz": {
+      "name": "Belize",
+      "continent": "North America"
+    },
+    "ca": {
+      "name": "Canada",
+      "continent": "North America"
+    },
+    "cd": {
+      "name": "Congo, Dem. Rep.",
+      "continent": "Africa"
+    },
+    "cf": {
+      "name": "Central African Republic",
+      "continent": "Africa"
+    },
+    "cg": {
+      "name": "Congo, Rep.",
+      "continent": "Africa"
+    },
+    "ch": {
+      "name": "Switzerland",
+      "continent": "Europe"
+    },
+    "ci": {
+      "name": "Cote d'Ivoire",
+      "continent": "Africa"
+    },
+    "cl": {
+      "name": "Chile",
+      "continent": "South America"
+    },
+    "cm": {
+      "name": "Cameroon",
+      "continent": "Africa"
+    },
+    "cn": {
+      "name": "China",
+      "continent": "Asia"
+    },
+    "co": {
+      "name": "Colombia",
+      "continent": "South America"
+    },
+    "cr": {
+      "name": "Costa Rica",
+      "continent": "North America"
+    },
+    "cu": {
+      "name": "Cuba",
+      "continent": "North America"
+    },
+    "cv": {
+      "name": "Cabo Verde",
+      "continent": "Africa"
+    },
+    "cw": {
+      "name": "Curacao",
+      "continent": "North America"
+    },
+    "cy": {
+      "name": "Cyprus",
+      "continent": "Europe"
+    },
+    "cz": {
+      "name": "Czechia",
+      "continent": "Europe"
+    },
+    "de": {
+      "name": "Germany",
+      "continent": "Europe"
+    },
+    "dj": {
+      "name": "Djibouti",
+      "continent": "Africa"
+    },
+    "dk": {
+      "name": "Denmark",
+      "continent": "Europe"
+    },
+    "dm": {
+      "name": "Dominica",
+      "continent": "North America"
+    },
+    "do": {
+      "name": "Dominican Republic",
+      "continent": "North America"
+    },
+    "dz": {
+      "name": "Algeria",
+      "continent": "Africa"
+    },
+    "ec": {
+      "name": "Ecuador",
+      "continent": "South America"
+    },
+    "ee": {
+      "name": "Estonia",
+      "continent": "Europe"
+    },
+    "eg": {
+      "name": "Egypt, Arab Rep.",
+      "continent": "Africa"
+    },
+    "er": {
+      "name": "Eritrea",
+      "continent": "Africa"
+    },
+    "es": {
+      "name": "Spain",
+      "continent": "Europe"
+    },
+    "et": {
+      "name": "Ethiopia",
+      "continent": "Africa"
+    },
+    "fi": {
+      "name": "Finland",
+      "continent": "Europe"
+    },
+    "fj": {
+      "name": "Fiji",
+      "continent": "Oceania"
+    },
+    "fm": {
+      "name": "Micronesia, Fed. Sts.",
+      "continent": "Oceania"
+    },
+    "fo": {
+      "name": "Faroe Islands",
+      "continent": "Europe"
+    },
+    "fr": {
+      "name": "France",
+      "continent": "Europe"
+    },
+    "ga": {
+      "name": "Gabon",
+      "continent": "Africa"
+    },
+    "gb": {
+      "name": "United Kingdom",
+      "continent": "Europe"
+    },
+    "gd": {
+      "name": "Grenada",
+      "continent": "North America"
+    },
+    "ge": {
+      "name": "Georgia",
+      "continent": "Asia"
+    },
+    "gh": {
+      "name": "Ghana",
+      "continent": "Africa"
+    },
+    "gi": {
+      "name": "Gibraltar",
+      "continent": "Europe"
+    },
+    "gl": {
+      "name": "Greenland",
+      "continent": "North America"
+    },
+    "gm": {
+      "name": "Gambia, The",
+      "continent": "Africa"
+    },
+    "gn": {
+      "name": "Guinea",
+      "continent": "Africa"
+    },
+    "gq": {
+      "name": "Equatorial Guinea",
+      "continent": "Africa"
+    },
+    "gr": {
+      "name": "Greece",
+      "continent": "Europe"
+    },
+    "gt": {
+      "name": "Guatemala",
+      "continent": "North America"
+    },
+    "gu": {
+      "name": "Guam",
+      "continent": "Oceania"
+    },
+    "gw": {
+      "name": "Guinea-Bissau",
+      "continent": "Africa"
+    },
+    "gy": {
+      "name": "Guyana",
+      "continent": "South America"
+    },
+    "hk": {
+      "name": "Hong Kong SAR, China",
+      "continent": "Asia"
+    },
+    "hn": {
+      "name": "Honduras",
+      "continent": "North America"
+    },
+    "hr": {
+      "name": "Croatia",
+      "continent": "Europe"
+    },
+    "ht": {
+      "name": "Haiti",
+      "continent": "North America"
+    },
+    "hu": {
+      "name": "Hungary",
+      "continent": "Europe"
+    },
+    "id": {
+      "name": "Indonesia",
+      "continent": "Asia"
+    },
+    "ie": {
+      "name": "Ireland",
+      "continent": "Europe"
+    },
+    "il": {
+      "name": "Israel",
+      "continent": "Asia"
+    },
+    "im": {
+      "name": "Isle of Man",
+      "continent": "Europe"
+    },
+    "in": {
+      "name": "India",
+      "continent": "Asia"
+    },
+    "iq": {
+      "name": "Iraq",
+      "continent": "Asia"
+    },
+    "ir": {
+      "name": "Iran, Islamic Rep.",
+      "continent": "Asia"
+    },
+    "is": {
+      "name": "Iceland",
+      "continent": "Europe"
+    },
+    "it": {
+      "name": "Italy",
+      "continent": "Europe"
+    },
+    "jg": {
+      "name": "Channel Islands",
+      "continent": "Europe"
+    },
+    "jm": {
+      "name": "Jamaica",
+      "continent": "North America"
+    },
+    "jo": {
+      "name": "Jordan",
+      "continent": "Asia"
+    },
+    "jp": {
+      "name": "Japan",
+      "continent": "Asia"
+    },
+    "ke": {
+      "name": "Kenya",
+      "continent": "Africa"
+    },
+    "kg": {
+      "name": "Kyrgyz Republic",
+      "continent": "Asia"
+    },
+    "kh": {
+      "name": "Cambodia",
+      "continent": "Asia"
+    },
+    "ki": {
+      "name": "Kiribati",
+      "continent": "Oceania"
+    },
+    "km": {
+      "name": "Comoros",
+      "continent": "Africa"
+    },
+    "kn": {
+      "name": "St. Kitts and Nevis",
+      "continent": "North America"
+    },
+    "kp": {
+      "name": "Korea, Dem. People's Rep.",
+      "continent": "Asia"
+    },
+    "kr": {
+      "name": "Korea, Rep.",
+      "continent": "Asia"
+    },
+    "kw": {
+      "name": "Kuwait",
+      "continent": "Asia"
+    },
+    "ky": {
+      "name": "Cayman Islands",
+      "continent": "North America"
+    },
+    "kz": {
+      "name": "Kazakhstan",
+      "continent": "Asia"
+    },
+    "la": {
+      "name": "Lao PDR",
+      "continent": "Asia"
+    },
+    "lb": {
+      "name": "Lebanon",
+      "continent": "Asia"
+    },
+    "lc": {
+      "name": "St. Lucia",
+      "continent": "North America"
+    },
+    "li": {
+      "name": "Liechtenstein",
+      "continent": "Europe"
+    },
+    "lk": {
+      "name": "Sri Lanka",
+      "continent": "Asia"
+    },
+    "lr": {
+      "name": "Liberia",
+      "continent": "Africa"
+    },
+    "ls": {
+      "name": "Lesotho",
+      "continent": "Africa"
+    },
+    "lt": {
+      "name": "Lithuania",
+      "continent": "Europe"
+    },
+    "lu": {
+      "name": "Luxembourg",
+      "continent": "Europe"
+    },
+    "lv": {
+      "name": "Latvia",
+      "continent": "Europe"
+    },
+    "ly": {
+      "name": "Libya",
+      "continent": "Africa"
+    },
+    "ma": {
+      "name": "Morocco",
+      "continent": "Africa"
+    },
+    "mc": {
+      "name": "Monaco",
+      "continent": "Europe"
+    },
+    "md": {
+      "name": "Moldova",
+      "continent": "Europe"
+    },
+    "me": {
+      "name": "Montenegro",
+      "continent": "Europe"
+    },
+    "mf": {
+      "name": "St. Martin (French part)",
+      "continent": "North America"
+    },
+    "mg": {
+      "name": "Madagascar",
+      "continent": "Africa"
+    },
+    "mh": {
+      "name": "Marshall Islands",
+      "continent": "Oceania"
+    },
+    "mk": {
+      "name": "North Macedonia",
+      "continent": "Europe"
+    },
+    "ml": {
+      "name": "Mali",
+      "continent": "Africa"
+    },
+    "mm": {
+      "name": "Myanmar",
+      "continent": "Asia"
+    },
+    "mn": {
+      "name": "Mongolia",
+      "continent": "Asia"
+    },
+    "mo": {
+      "name": "Macao SAR, China",
+      "continent": "Asia"
+    },
+    "mp": {
+      "name": "Northern Mariana Islands",
+      "continent": "Oceania"
+    },
+    "mr": {
+      "name": "Mauritania",
+      "continent": "Africa"
+    },
+    "mt": {
+      "name": "Malta",
+      "continent": "Europe"
+    },
+    "mu": {
+      "name": "Mauritius",
+      "continent": "Africa"
+    },
+    "mv": {
+      "name": "Maldives",
+      "continent": "Asia"
+    },
+    "mw": {
+      "name": "Malawi",
+      "continent": "Africa"
+    },
+    "mx": {
+      "name": "Mexico",
+      "continent": "North America"
+    },
+    "my": {
+      "name": "Malaysia",
+      "continent": "Asia"
+    },
+    "mz": {
+      "name": "Mozambique",
+      "continent": "Africa"
+    },
+    "na": {
+      "name": "Namibia",
+      "continent": "Africa"
+    },
+    "nc": {
+      "name": "New Caledonia",
+      "continent": "Oceania"
+    },
+    "ne": {
+      "name": "Niger",
+      "continent": "Africa"
+    },
+    "ng": {
+      "name": "Nigeria",
+      "continent": "Africa"
+    },
+    "ni": {
+      "name": "Nicaragua",
+      "continent": "North America"
+    },
+    "nl": {
+      "name": "Netherlands",
+      "continent": "Europe"
+    },
+    "no": {
+      "name": "Norway",
+      "continent": "Europe"
+    },
+    "np": {
+      "name": "Nepal",
+      "continent": "Asia"
+    },
+    "nr": {
+      "name": "Nauru",
+      "continent": "Oceania"
+    },
+    "nz": {
+      "name": "New Zealand",
+      "continent": "Oceania"
+    },
+    "om": {
+      "name": "Oman",
+      "continent": "Asia"
+    },
+    "pa": {
+      "name": "Panama",
+      "continent": "North America"
+    },
+    "pe": {
+      "name": "Peru",
+      "continent": "South America"
+    },
+    "pf": {
+      "name": "French Polynesia",
+      "continent": "Oceania"
+    },
+    "pg": {
+      "name": "Papua New Guinea",
+      "continent": "Oceania"
+    },
+    "ph": {
+      "name": "Philippines",
+      "continent": "Asia"
+    },
+    "pk": {
+      "name": "Pakistan",
+      "continent": "Asia"
+    },
+    "pl": {
+      "name": "Poland",
+      "continent": "Europe"
+    },
+    "pr": {
+      "name": "Puerto Rico (US)",
+      "continent": "North America"
+    },
+    "ps": {
+      "name": "West Bank and Gaza",
+      "continent": "Asia"
+    },
+    "pt": {
+      "name": "Portugal",
+      "continent": "Europe"
+    },
+    "pw": {
+      "name": "Palau",
+      "continent": "Oceania"
+    },
+    "py": {
+      "name": "Paraguay",
+      "continent": "South America"
+    },
+    "qa": {
+      "name": "Qatar",
+      "continent": "Asia"
+    },
+    "ro": {
+      "name": "Romania",
+      "continent": "Europe"
+    },
+    "rs": {
+      "name": "Serbia",
+      "continent": "Europe"
+    },
+    "ru": {
+      "name": "Russian Federation",
+      "continent": "Europe"
+    },
+    "rw": {
+      "name": "Rwanda",
+      "continent": "Africa"
+    },
+    "sa": {
+      "name": "Saudi Arabia",
+      "continent": "Asia"
+    },
+    "sb": {
+      "name": "Solomon Islands",
+      "continent": "Oceania"
+    },
+    "sc": {
+      "name": "Seychelles",
+      "continent": "Africa"
+    },
+    "sd": {
+      "name": "Sudan",
+      "continent": "Africa"
+    },
+    "se": {
+      "name": "Sweden",
+      "continent": "Europe"
+    },
+    "sg": {
+      "name": "Singapore",
+      "continent": "Asia"
+    },
+    "si": {
+      "name": "Slovenia",
+      "continent": "Europe"
+    },
+    "sk": {
+      "name": "Slovak Republic",
+      "continent": "Europe"
+    },
+    "sl": {
+      "name": "Sierra Leone",
+      "continent": "Africa"
+    },
+    "sm": {
+      "name": "San Marino",
+      "continent": "Europe"
+    },
+    "sn": {
+      "name": "Senegal",
+      "continent": "Africa"
+    },
+    "so": {
+      "name": "Somalia, Fed. Rep.",
+      "continent": "Africa"
+    },
+    "sr": {
+      "name": "Suriname",
+      "continent": "South America"
+    },
+    "ss": {
+      "name": "South Sudan",
+      "continent": "Africa"
+    },
+    "st": {
+      "name": "Sao Tome and Principe",
+      "continent": "Africa"
+    },
+    "sv": {
+      "name": "El Salvador",
+      "continent": "North America"
+    },
+    "sx": {
+      "name": "Sint Maarten (Dutch part)",
+      "continent": "North America"
+    },
+    "sy": {
+      "name": "Syrian Arab Republic",
+      "continent": "Asia"
+    },
+    "sz": {
+      "name": "Eswatini",
+      "continent": "Africa"
+    },
+    "tc": {
+      "name": "Turks and Caicos Islands",
+      "continent": "North America"
+    },
+    "td": {
+      "name": "Chad",
+      "continent": "Africa"
+    },
+    "tg": {
+      "name": "Togo",
+      "continent": "Africa"
+    },
+    "th": {
+      "name": "Thailand",
+      "continent": "Asia"
+    },
+    "tj": {
+      "name": "Tajikistan",
+      "continent": "Asia"
+    },
+    "tl": {
+      "name": "Timor-Leste",
+      "continent": "Asia"
+    },
+    "tm": {
+      "name": "Turkmenistan",
+      "continent": "Asia"
+    },
+    "tn": {
+      "name": "Tunisia",
+      "continent": "Africa"
+    },
+    "to": {
+      "name": "Tonga",
+      "continent": "Oceania"
+    },
+    "tr": {
+      "name": "Turkiye",
+      "continent": "Asia"
+    },
+    "tt": {
+      "name": "Trinidad and Tobago",
+      "continent": "North America"
+    },
+    "tv": {
+      "name": "Tuvalu",
+      "continent": "Oceania"
+    },
+    "tz": {
+      "name": "Tanzania",
+      "continent": "Africa"
+    },
+    "ua": {
+      "name": "Ukraine",
+      "continent": "Europe"
+    },
+    "ug": {
+      "name": "Uganda",
+      "continent": "Africa"
+    },
+    "us": {
+      "name": "United States",
+      "continent": "North America"
+    },
+    "uy": {
+      "name": "Uruguay",
+      "continent": "South America"
+    },
+    "uz": {
+      "name": "Uzbekistan",
+      "continent": "Asia"
+    },
+    "vc": {
+      "name": "St. Vincent and the Grenadines",
+      "continent": "North America"
+    },
+    "ve": {
+      "name": "Venezuela, RB",
+      "continent": "South America"
+    },
+    "vg": {
+      "name": "British Virgin Islands",
+      "continent": "North America"
+    },
+    "vi": {
+      "name": "Virgin Islands (U.S.)",
+      "continent": "North America"
+    },
+    "vn": {
+      "name": "Viet Nam",
+      "continent": "Asia"
+    },
+    "vu": {
+      "name": "Vanuatu",
+      "continent": "Oceania"
+    },
+    "ws": {
+      "name": "Samoa",
+      "continent": "Oceania"
+    },
+    "xk": {
+      "name": "Kosovo",
+      "continent": "Europe"
+    },
+    "ye": {
+      "name": "Yemen, Rep.",
+      "continent": "Asia"
+    },
+    "za": {
+      "name": "South Africa",
+      "continent": "Africa"
+    },
+    "zm": {
+      "name": "Zambia",
+      "continent": "Africa"
+    },
+    "zw": {
+      "name": "Zimbabwe",
+      "continent": "Africa"
+    }
+  },
+  "datasets": [
+    {
+      "id": "gdp-nominal",
+      "name": "Total GDP",
+      "blurb": "Nominal GDP, latest year (World Bank)",
+      "format": "currency-short",
+      "higherFirst": true,
+      "values": {
+        "af": 17152234637,
+        "al": 23491242727,
+        "dz": 247923887215,
+        "as": 871000000,
+        "ad": 3785065525,
+        "ao": 107167747140,
+        "ag": 2005785185,
+        "ar": 649461687959,
+        "am": 24185982216,
+        "aw": 3834729616,
+        "au": 1734451264656,
+        "at": 516670509629,
+        "az": 72428470588,
+        "bs": 15271300000,
+        "bh": 46192260638,
+        "bd": 437415333018,
+        "bb": 7223250000,
+        "by": 72478760370,
+        "be": 651330595110,
+        "bz": 3052362650,
+        "bj": 19673291004,
+        "bm": 8579242000,
+        "bt": 3012896789,
+        "bo": 52340206946,
+        "ba": 27592361498,
+        "bw": 19411266967,
+        "br": 2191131869706,
+        "bn": 15095084656,
+        "bg": 102199231385,
+        "bf": 20112614449,
+        "bi": 3430949250,
+        "cv": 2504525549,
+        "kh": 42335646896,
+        "cm": 48814501547,
+        "ca": 2173339670064,
+        "ky": 7241244269,
+        "cf": 2555492086,
+        "td": 18340233749,
+        "jg": 12507320838,
+        "cl": 335518054098,
+        "cn": 18270356654533,
+        "co": 366291836138,
+        "km": 1326836543,
+        "cd": 69843655425,
+        "cg": 15321055823,
+        "cr": 86497941439,
+        "ci": 80780312569,
+        "hr": 85624153964,
+        "cu": 107352000000,
+        "cw": 3281419347,
+        "cy": 35075423857,
+        "cz": 345059295660,
+        "dk": 404651706118,
+        "dj": 3898447007,
+        "dm": 659311111,
+        "do": 120456239154,
+        "ec": 121147057000,
+        "eg": 395926075163,
+        "sv": 33853940000,
+        "gq": 12337550584,
+        "ee": 41470344395,
+        "sz": 4621191262,
+        "et": 135874093202,
+        "fo": 3943131022,
+        "fj": 5476673518,
+        "fi": 295021982463,
+        "fr": 3056250648138,
+        "pf": 6137447783,
+        "ga": 19388372071,
+        "gm": 2382262185,
+        "ge": 30777833601,
+        "de": 4562207532490,
+        "gh": 80547146878,
+        "gr": 242946187738,
+        "gl": 3326543974,
+        "gd": 1336418519,
+        "gu": 6910000000,
+        "gt": 104368755055,
+        "gn": 22407615556,
+        "gw": 2127688181,
+        "gy": 16918503597,
+        "ht": 19850585722,
+        "hn": 34355805528,
+        "hk": 381043026174,
+        "hu": 213240316635,
+        "is": 31677891897,
+        "in": 3638489096034,
+        "id": 1371169301564,
+        "ir": 457510482317,
+        "iq": 268881051644,
+        "ie": 567372737459,
+        "im": 7431257411,
+        "il": 512184638999,
+        "it": 2316727999333,
+        "jm": 21418804320,
+        "jp": 4213167237906,
+        "jo": 51088476338,
+        "kz": 261840101060,
+        "ke": 107500884685,
+        "ki": 288610748,
+        "kr": 1844800934392,
+        "xk": 10468224575,
+        "kw": 165384407116,
+        "kg": 15180842369,
+        "la": 15843155731,
+        "lv": 42779550937,
+        "lb": 20078620357,
+        "ls": 2117962445,
+        "lr": 4390000000,
+        "ly": 44027664915,
+        "li": 8239379403,
+        "lt": 79789877416,
+        "lu": 88788881539,
+        "mo": 45626467280,
+        "mg": 15869945478,
+        "mw": 13363669673,
+        "my": 399949418753,
+        "mv": 6621008704,
+        "ml": 24813860599,
+        "mt": 22610561526,
+        "mh": 263761322,
+        "mr": 10726838461,
+        "mu": 14072212290,
+        "mx": 1798317581487,
+        "fm": 441469400,
+        "md": 16711906746,
+        "mc": 10003892565,
+        "mn": 20325121394,
+        "me": 7644389160,
+        "ma": 146036093667,
+        "mz": 20921079533,
+        "mm": 66757619000,
+        "na": 12408271449,
+        "nr": 151435610,
+        "np": 41047772331,
+        "nl": 1135475867551,
+        "nc": 9769167530,
+        "nz": 255194972673,
+        "ni": 17805842284,
+        "ne": 16698786978,
+        "ng": 487387801881,
+        "mk": 15855131189,
+        "mp": 1096000000,
+        "no": 482949731777,
+        "om": 106174708037,
+        "pk": 336686348609,
+        "pw": 276733063,
+        "pa": 83812155244,
+        "pg": 30816367067,
+        "py": 43118053175,
+        "pe": 266958720838,
+        "ph": 437055627244,
+        "pl": 812451193396,
+        "pt": 292323800949,
+        "pr": 118478754281,
+        "qa": 217308516484,
+        "ro": 347757995759,
+        "ru": 2071505725031,
+        "rw": 14331722703,
+        "ws": 1044909500,
+        "sm": 2027527228,
+        "st": 690456807,
+        "sa": 1218584533333,
+        "sn": 30696331296,
+        "rs": 81343999280,
+        "sc": 2187379755,
+        "sl": 6415852767,
+        "sg": 505439514078,
+        "sx": 1686525953,
+        "sk": 133578518424,
+        "si": 69255264238,
+        "sb": 1506124566,
+        "so": 10958000000,
+        "za": 381440724491,
+        "ss": 11997800760,
+        "es": 1619481980720,
+        "lk": 83716142582,
+        "kn": 1055651852,
+        "lc": 2430166667,
+        "mf": 649206263,
+        "vc": 1072237037,
+        "sd": 39898289821,
+        "sr": 3472693412,
+        "se": 578990915246,
+        "ch": 894424821645,
+        "sy": 23622827080,
+        "tj": 12244169293,
+        "tz": 79030935627,
+        "th": 515906283941,
+        "tl": 2079767170,
+        "tg": 9816236303,
+        "to": 591139749,
+        "tt": 25036993423,
+        "tn": 48205328303,
+        "tr": 1141242864657,
+        "tm": 45894538666,
+        "tc": 1638653000,
+        "tv": 62280312,
+        "ug": 48768955863,
+        "ua": 181221517869,
+        "ae": 522622191967,
+        "gb": 3420796653789,
+        "us": 27292170793214,
+        "uy": 77991666838,
+        "uz": 102641879249,
+        "vu": 1115861056,
+        "ve": 102376526556,
+        "vn": 433857681378,
+        "vi": 4672000000,
+        "ps": 17847900000,
+        "ye": 21606160663,
+        "zm": 27577956471,
+        "zw": 35871779681
+      }
+    },
+    {
+      "id": "population",
+      "name": "Population",
+      "blurb": "Total population, latest year (World Bank)",
+      "format": "number-short",
+      "higherFirst": true,
+      "values": {
+        "af": 41454761,
+        "al": 2414095,
+        "dz": 46164219,
+        "as": 47521,
+        "ad": 80856,
+        "ao": 36749906,
+        "ag": 93316,
+        "ar": 45538401,
+        "am": 2964300,
+        "aw": 107359,
+        "au": 26659922,
+        "at": 9131761,
+        "az": 10153958,
+        "bs": 399440,
+        "bh": 1577059,
+        "bd": 171466990,
+        "bb": 282336,
+        "by": 9178298,
+        "be": 11779946,
+        "bz": 411106,
+        "bj": 14111034,
+        "bm": 64698,
+        "bt": 786385,
+        "bo": 12244159,
+        "ba": 3185073,
+        "bw": 2480244,
+        "br": 211140729,
+        "vg": 38985,
+        "bn": 458949,
+        "bg": 6446596,
+        "bf": 23025776,
+        "bi": 13689450,
+        "cv": 522331,
+        "kh": 17423880,
+        "cm": 28372687,
+        "ca": 40083484,
+        "ky": 73038,
+        "cf": 5152421,
+        "td": 19319064,
+        "jg": 167691,
+        "cl": 19658835,
+        "cn": 1410710000,
+        "co": 52321152,
+        "km": 850387,
+        "cd": 105789731,
+        "cg": 6182885,
+        "cr": 5105525,
+        "ci": 31165654,
+        "hr": 3859686,
+        "cu": 11019931,
+        "cw": 154654,
+        "cy": 1344976,
+        "cz": 10864042,
+        "dk": 5946952,
+        "dj": 1152944,
+        "dm": 66510,
+        "do": 11331265,
+        "ec": 17980083,
+        "eg": 114535772,
+        "sv": 6309624,
+        "gq": 1847549,
+        "er": 3470390,
+        "ee": 1370286,
+        "sz": 1230506,
+        "et": 128691692,
+        "fo": 54414,
+        "fj": 924145,
+        "fi": 5583911,
+        "fr": 68372286,
+        "pf": 281118,
+        "ga": 2484789,
+        "gm": 2697845,
+        "ge": 3715483,
+        "de": 83287273,
+        "gh": 33787914,
+        "gi": 38471,
+        "gr": 10407351,
+        "gl": 56865,
+        "gd": 117081,
+        "gu": 166506,
+        "gt": 18124838,
+        "gn": 14405468,
+        "gw": 2153339,
+        "gy": 826353,
+        "ht": 11637398,
+        "hn": 10644851,
+        "hk": 7536100,
+        "hu": 9592186,
+        "is": 385663,
+        "in": 1438069596,
+        "id": 281190067,
+        "ir": 90608707,
+        "iq": 45074049,
+        "ie": 5311538,
+        "im": 84165,
+        "il": 9849000,
+        "it": 58984216,
+        "jm": 2839786,
+        "jp": 124516650,
+        "jo": 11439213,
+        "kz": 20330104,
+        "ke": 55339003,
+        "ki": 132530,
+        "kp": 26418204,
+        "kr": 51712619,
+        "xk": 1682668,
+        "kw": 4853420,
+        "kg": 7099750,
+        "la": 7664993,
+        "lv": 1883710,
+        "lb": 5773493,
+        "ls": 2311472,
+        "lr": 5493031,
+        "ly": 7305659,
+        "li": 39846,
+        "lt": 2871585,
+        "lu": 666430,
+        "mo": 678800,
+        "mg": 31195932,
+        "mw": 21104482,
+        "my": 35126298,
+        "mv": 525994,
+        "ml": 23769127,
+        "mt": 552747,
+        "mh": 38827,
+        "mr": 5022441,
+        "mu": 1248647,
+        "mx": 129739759,
+        "fm": 112630,
+        "md": 2457783,
+        "mc": 38956,
+        "mn": 3481145,
+        "me": 623529,
+        "ma": 37712505,
+        "mz": 33635160,
+        "mm": 54133798,
+        "na": 2963095,
+        "nr": 11875,
+        "np": 29694614,
+        "nl": 17877117,
+        "nc": 289870,
+        "nz": 5200000,
+        "ni": 6823613,
+        "ne": 26159867,
+        "ng": 227882945,
+        "mk": 1827816,
+        "mp": 45143,
+        "no": 5519601,
+        "om": 5049269,
+        "pk": 247504495,
+        "pw": 17727,
+        "pa": 4458759,
+        "pg": 10389635,
+        "py": 6844146,
+        "pe": 33845617,
+        "ph": 114891199,
+        "pl": 36687353,
+        "pt": 10578174,
+        "pr": 3203792,
+        "qa": 2656032,
+        "ro": 19061062,
+        "ru": 143826130,
+        "rw": 13954471,
+        "ws": 216663,
+        "sm": 33860,
+        "st": 230871,
+        "sa": 33702731,
+        "sn": 18077573,
+        "rs": 6623183,
+        "sc": 119773,
+        "sl": 8460512,
+        "sg": 5917648,
+        "sx": 42749,
+        "sk": 5426740,
+        "si": 2120461,
+        "sb": 800005,
+        "so": 18358615,
+        "za": 63212384,
+        "ss": 11483374,
+        "es": 48352528,
+        "lk": 22037000,
+        "kn": 46758,
+        "lc": 179285,
+        "mf": 27515,
+        "vc": 101323,
+        "sd": 50042791,
+        "sr": 628886,
+        "se": 10536632,
+        "ch": 8888822,
+        "sy": 23594623,
+        "tj": 10389799,
+        "tz": 66617606,
+        "th": 71702435,
+        "tl": 1384286,
+        "tg": 9304337,
+        "to": 104597,
+        "tt": 1367510,
+        "tn": 12200431,
+        "tr": 85325965,
+        "tm": 7364438,
+        "tc": 46198,
+        "tv": 9816,
+        "ug": 48656601,
+        "ua": 37732836,
+        "ae": 10483751,
+        "gb": 68492000,
+        "us": 336806231,
+        "uy": 3388081,
+        "uz": 35652307,
+        "vu": 320409,
+        "ve": 28300854,
+        "vn": 100352192,
+        "vi": 104917,
+        "ps": 5165775,
+        "ye": 39390799,
+        "zm": 20723965,
+        "zw": 16340822
+      }
+    },
+    {
+      "id": "gdp-per-capita",
+      "name": "GDP per capita",
+      "blurb": "GDP per person, latest year (World Bank)",
+      "format": "currency-short",
+      "higherFirst": true,
+      "values": {
+        "af": 414,
+        "al": 9731,
+        "dz": 5370,
+        "as": 18017,
+        "ad": 46812,
+        "ao": 2916,
+        "ag": 21495,
+        "ar": 14262,
+        "am": 8159,
+        "aw": 35719,
+        "au": 65058,
+        "at": 56580,
+        "az": 7133,
+        "bs": 38232,
+        "bh": 29290,
+        "bd": 2551,
+        "bb": 25584,
+        "by": 7897,
+        "be": 55291,
+        "bz": 7425,
+        "bj": 1394,
+        "bm": 132604,
+        "bt": 3831,
+        "bo": 4275,
+        "ba": 8663,
+        "bw": 7826,
+        "br": 10378,
+        "bn": 32891,
+        "bg": 15853,
+        "bf": 873,
+        "bi": 251,
+        "cv": 4795,
+        "kh": 2430,
+        "cm": 1720,
+        "ca": 54220,
+        "ky": 99144,
+        "cf": 496,
+        "td": 949,
+        "jg": 74586,
+        "cl": 17067,
+        "cn": 12951,
+        "co": 7001,
+        "km": 1560,
+        "cd": 660,
+        "cg": 2478,
+        "cr": 16942,
+        "ci": 2592,
+        "hr": 22184,
+        "cu": 9605,
+        "cw": 21218,
+        "cy": 36624,
+        "cz": 31762,
+        "dk": 68044,
+        "dj": 3381,
+        "dm": 9913,
+        "do": 10630,
+        "ec": 6738,
+        "eg": 3457,
+        "sv": 5365,
+        "gq": 6678,
+        "ee": 30264,
+        "sz": 3756,
+        "et": 1056,
+        "fo": 72465,
+        "fj": 5926,
+        "fi": 52834,
+        "fr": 44700,
+        "pf": 21832,
+        "ga": 7803,
+        "gm": 883,
+        "ge": 8284,
+        "de": 54777,
+        "gh": 2384,
+        "gr": 23344,
+        "gl": 58499,
+        "gd": 11414,
+        "gu": 41833,
+        "gt": 5758,
+        "gn": 1555,
+        "gw": 988,
+        "gy": 20474,
+        "ht": 1706,
+        "hn": 3227,
+        "hk": 50562,
+        "hu": 22231,
+        "is": 82139,
+        "in": 2530,
+        "id": 4876,
+        "ir": 5049,
+        "iq": 5965,
+        "ie": 106819,
+        "im": 88329,
+        "il": 52004,
+        "it": 39277,
+        "jm": 7542,
+        "jp": 33836,
+        "jo": 4466,
+        "kz": 12879,
+        "ke": 1943,
+        "ki": 2178,
+        "kr": 35674,
+        "xk": 6221,
+        "kw": 34076,
+        "kg": 2138,
+        "la": 2067,
+        "lv": 22710,
+        "lb": 3478,
+        "ls": 916,
+        "lr": 799,
+        "ly": 6027,
+        "li": 206781,
+        "lt": 27786,
+        "lu": 133231,
+        "mo": 67216,
+        "mg": 509,
+        "mw": 633,
+        "my": 11386,
+        "mv": 12588,
+        "ml": 1044,
+        "mt": 40906,
+        "mh": 6793,
+        "mr": 2136,
+        "mu": 11270,
+        "mx": 13861,
+        "fm": 3920,
+        "md": 6800,
+        "mc": 256800,
+        "mn": 5839,
+        "me": 12260,
+        "ma": 3814,
+        "mz": 622,
+        "mm": 1233,
+        "na": 4188,
+        "nr": 12752,
+        "np": 1382,
+        "nl": 63516,
+        "nc": 33702,
+        "nz": 49076,
+        "ni": 2609,
+        "ne": 638,
+        "ng": 2139,
+        "mk": 8674,
+        "mp": 23786,
+        "no": 87497,
+        "om": 21028,
+        "pk": 1360,
+        "pw": 15611,
+        "pa": 18797,
+        "pg": 2966,
+        "py": 6300,
+        "pe": 7888,
+        "ph": 3804,
+        "pl": 22145,
+        "pt": 27635,
+        "pr": 36981,
+        "qa": 81817,
+        "ro": 18244,
+        "ru": 14159,
+        "rw": 1027,
+        "ws": 4823,
+        "sm": 59880,
+        "st": 2991,
+        "sa": 36157,
+        "sn": 1698,
+        "rs": 12282,
+        "sc": 18263,
+        "sl": 758,
+        "sg": 85412,
+        "sx": 39452,
+        "sk": 24615,
+        "si": 32660,
+        "sb": 1883,
+        "so": 597,
+        "za": 6034,
+        "ss": 1080,
+        "es": 33493,
+        "lk": 3799,
+        "kn": 22577,
+        "lc": 13555,
+        "mf": 21668,
+        "vc": 10582,
+        "sd": 797,
+        "sr": 5522,
+        "se": 54950,
+        "ch": 100624,
+        "sy": 1052,
+        "tj": 1178,
+        "tz": 1224,
+        "th": 7195,
+        "tl": 1502,
+        "tg": 1055,
+        "to": 5652,
+        "tt": 18308,
+        "tn": 3951,
+        "tr": 13375,
+        "tm": 6232,
+        "tc": 35470,
+        "tv": 6345,
+        "ug": 1002,
+        "ua": 5140,
+        "ae": 49851,
+        "gb": 49944,
+        "us": 81032,
+        "uy": 23019,
+        "uz": 2879,
+        "vu": 3483,
+        "ve": 3617,
+        "vn": 4323,
+        "vi": 44321,
+        "ps": 3455,
+        "ye": 634,
+        "zm": 1331,
+        "zw": 2195
+      }
+    },
+    {
+      "id": "land-area",
+      "name": "Land area",
+      "blurb": "Land area in km², latest year (World Bank)",
+      "format": "area-km2",
+      "higherFirst": true,
+      "values": {
+        "af": 652230,
+        "al": 27400,
+        "dz": 2381740,
+        "as": 200,
+        "ad": 470,
+        "ao": 1246700,
+        "ag": 440,
+        "ar": 2736690,
+        "am": 28199,
+        "aw": 180,
+        "au": 7692020,
+        "at": 82520,
+        "az": 82650,
+        "bs": 10010,
+        "bh": 800,
+        "bd": 129980,
+        "bb": 430,
+        "by": 202983,
+        "be": 30494,
+        "bz": 22810,
+        "bj": 112760,
+        "bm": 54,
+        "bt": 38140,
+        "bo": 1083300,
+        "ba": 51200,
+        "bw": 566730,
+        "br": 8358140,
+        "vg": 150,
+        "bn": 5270,
+        "bg": 108560,
+        "bf": 273600,
+        "bi": 25680,
+        "cv": 4030,
+        "kh": 176520,
+        "cm": 472710,
+        "ca": 8788700,
+        "ky": 240,
+        "cf": 622980,
+        "td": 1259200,
+        "jg": 198,
+        "cl": 742832,
+        "cn": 9388210,
+        "co": 1109500,
+        "km": 1861,
+        "cd": 2267050,
+        "cg": 341500,
+        "cr": 51060,
+        "ci": 318000,
+        "hr": 55960,
+        "cu": 103800,
+        "cw": 444,
+        "cy": 9240,
+        "cz": 77167,
+        "dk": 40000,
+        "dj": 23180,
+        "dm": 750,
+        "do": 48198,
+        "ec": 248360,
+        "eg": 995450,
+        "sv": 20720,
+        "gq": 28050,
+        "er": 121178,
+        "ee": 42730,
+        "sz": 17200,
+        "et": 1128499,
+        "fo": 1370,
+        "fj": 18270,
+        "fi": 303960,
+        "fr": 538950,
+        "pf": 3471,
+        "ga": 257670,
+        "gm": 10120,
+        "ge": 69490,
+        "de": 349430,
+        "gh": 227533,
+        "gi": 10,
+        "gr": 128900,
+        "gl": 410450,
+        "gd": 340,
+        "gu": 540,
+        "gt": 107160,
+        "gn": 245720,
+        "gw": 28120,
+        "gy": 211140,
+        "ht": 27560,
+        "hn": 111890,
+        "hk": 1050,
+        "hu": 91260,
+        "is": 100830,
+        "in": 2973190,
+        "id": 1892555,
+        "ir": 1622500,
+        "iq": 434130,
+        "ie": 68890,
+        "im": 570,
+        "il": 21640,
+        "it": 295720,
+        "jm": 10830,
+        "jp": 364569,
+        "jo": 88794,
+        "kz": 2699700,
+        "ke": 580876,
+        "ki": 810,
+        "kp": 120410,
+        "kr": 97600,
+        "kw": 17820,
+        "kg": 191800,
+        "la": 230800,
+        "lv": 62230,
+        "lb": 10230,
+        "ls": 30360,
+        "lr": 96320,
+        "ly": 1759540,
+        "li": 160,
+        "lt": 62600,
+        "lu": 2574,
+        "mo": 33,
+        "mg": 581800,
+        "mw": 94280,
+        "my": 328550,
+        "mv": 298,
+        "ml": 1220190,
+        "mt": 320,
+        "mh": 180,
+        "mr": 1030700,
+        "mu": 1997,
+        "mx": 1943950,
+        "fm": 700,
+        "md": 32930,
+        "mc": 2,
+        "mn": 1558500,
+        "me": 13450,
+        "ma": 446300,
+        "mz": 786380,
+        "mm": 652670,
+        "na": 823290,
+        "nr": 20,
+        "np": 143350,
+        "nl": 33670,
+        "nc": 18280,
+        "nz": 263310,
+        "ni": 120340,
+        "ne": 1266700,
+        "ng": 910770,
+        "mk": 25220,
+        "mp": 460,
+        "no": 364270,
+        "om": 309500,
+        "pk": 770880,
+        "pw": 460,
+        "pa": 74180,
+        "pg": 452860,
+        "py": 396012,
+        "pe": 1280000,
+        "ph": 298170,
+        "pl": 306270,
+        "pt": 91606,
+        "pr": 8870,
+        "qa": 11490,
+        "ro": 230080,
+        "ru": 16376870,
+        "rw": 24670,
+        "ws": 2780,
+        "sm": 60,
+        "st": 960,
+        "sa": 2149690,
+        "sn": 192530,
+        "rs": 84090,
+        "sc": 460,
+        "sl": 72180,
+        "sg": 718,
+        "sx": 34,
+        "sk": 48080,
+        "si": 20135,
+        "sb": 27990,
+        "so": 627340,
+        "za": 1213090,
+        "ss": 631930,
+        "es": 499697,
+        "lk": 61860,
+        "kn": 260,
+        "lc": 610,
+        "mf": 50,
+        "vc": 390,
+        "sd": 1868000,
+        "sr": 160508,
+        "se": 407270,
+        "ch": 39510,
+        "sy": 183630,
+        "tj": 138790,
+        "tz": 885800,
+        "th": 510890,
+        "tl": 14870,
+        "tg": 54390,
+        "to": 720,
+        "tt": 5130,
+        "tn": 155360,
+        "tr": 769630,
+        "tm": 469930,
+        "tc": 950,
+        "tv": 30,
+        "ug": 200520,
+        "ua": 579400,
+        "ae": 71020,
+        "gb": 241930,
+        "us": 9147420,
+        "uy": 175020,
+        "uz": 440650,
+        "vu": 12190,
+        "ve": 882050,
+        "vn": 313429,
+        "vi": 350,
+        "ps": 6025,
+        "ye": 527970,
+        "zm": 743390,
+        "zw": 386850
+      }
+    },
+    {
+      "id": "life-expectancy",
+      "name": "Life expectancy",
+      "blurb": "Life expectancy at birth, latest (World Bank)",
+      "format": "years",
+      "higherFirst": true,
+      "values": {
+        "af": 66,
+        "al": 79.6,
+        "dz": 76.3,
+        "as": 72.9,
+        "ad": 84,
+        "ao": 64.6,
+        "ag": 77.6,
+        "ar": 77.4,
+        "am": 77.5,
+        "aw": 76.4,
+        "au": 83.1,
+        "at": 81.8,
+        "az": 74.4,
+        "bs": 74.6,
+        "bh": 81.3,
+        "bd": 74.7,
+        "bb": 76.2,
+        "by": 74.2,
+        "be": 82.4,
+        "bz": 73.6,
+        "bj": 60.8,
+        "bm": 82.3,
+        "bt": 73,
+        "bo": 68.6,
+        "ba": 77.9,
+        "bw": 69.2,
+        "br": 75.8,
+        "vg": 77.3,
+        "bn": 75.3,
+        "bg": 75.8,
+        "bf": 61.1,
+        "bi": 63.7,
+        "cv": 76.1,
+        "kh": 70.7,
+        "cm": 63.7,
+        "ca": 81.6,
+        "ky": 80.4,
+        "cf": 57.4,
+        "td": 55.1,
+        "jg": 81.1,
+        "cl": 81.2,
+        "cn": 78,
+        "co": 77.7,
+        "km": 66.8,
+        "cd": 61.9,
+        "cg": 65.8,
+        "cr": 80.8,
+        "ci": 61.9,
+        "hr": 78.5,
+        "cu": 78.1,
+        "cw": 76.8,
+        "cy": 81.6,
+        "cz": 79.8,
+        "dk": 81.8,
+        "dj": 66,
+        "dm": 71.1,
+        "do": 73.7,
+        "ec": 77.4,
+        "eg": 71.6,
+        "sv": 72.1,
+        "gq": 63.7,
+        "er": 68.6,
+        "ee": 78.8,
+        "sz": 64.1,
+        "et": 67.3,
+        "fo": 83,
+        "fj": 67.3,
+        "fi": 81.6,
+        "fr": 82.8,
+        "pf": 84.1,
+        "ga": 68.3,
+        "gm": 65.9,
+        "ge": 74.5,
+        "de": 81,
+        "gh": 65.5,
+        "gi": 83.6,
+        "gr": 81.7,
+        "gl": 71,
+        "gd": 75.2,
+        "gu": 77.2,
+        "gt": 72.6,
+        "gn": 60.7,
+        "gw": 64.1,
+        "gy": 70.2,
+        "ht": 64.9,
+        "hn": 72.9,
+        "hk": 85.2,
+        "hu": 76.6,
+        "is": 82.5,
+        "in": 72,
+        "id": 71.1,
+        "ir": 77.7,
+        "iq": 72.3,
+        "ie": 82.8,
+        "im": 81,
+        "il": 83.2,
+        "it": 83.4,
+        "jm": 71.5,
+        "jp": 84,
+        "jo": 77.8,
+        "kz": 74.4,
+        "ke": 63.6,
+        "ki": 66.5,
+        "kp": 73.6,
+        "kr": 83.4,
+        "xk": 78,
+        "kw": 83.2,
+        "kg": 72.2,
+        "la": 69,
+        "lv": 75.4,
+        "lb": 77.8,
+        "ls": 57.4,
+        "lr": 62.2,
+        "ly": 69.3,
+        "li": 84.6,
+        "lt": 77.3,
+        "lu": 83.3,
+        "mo": 83.2,
+        "mg": 63.6,
+        "mw": 67.4,
+        "my": 76.7,
+        "mv": 81,
+        "ml": 60.4,
+        "mt": 83.4,
+        "mh": 66.9,
+        "mr": 68.5,
+        "mu": 73.4,
+        "mx": 75.1,
+        "fm": 67.2,
+        "md": 71.2,
+        "mc": 86.4,
+        "mn": 72.1,
+        "me": 77.6,
+        "ma": 75.3,
+        "mz": 63.6,
+        "mm": 66.9,
+        "na": 67.4,
+        "nr": 62.1,
+        "np": 70.4,
+        "nl": 81.9,
+        "nc": 78.8,
+        "nz": 81.8,
+        "ni": 74.9,
+        "ne": 61.2,
+        "ng": 54.5,
+        "mk": 75.3,
+        "mp": 78.8,
+        "no": 83,
+        "om": 80,
+        "pk": 67.6,
+        "pw": 69.3,
+        "pa": 79.6,
+        "pg": 66.1,
+        "py": 73.8,
+        "pe": 77.7,
+        "ph": 69.8,
+        "pl": 78.3,
+        "pt": 82.3,
+        "pr": 81.7,
+        "qa": 82.4,
+        "ro": 76.4,
+        "ru": 73.3,
+        "rw": 67.8,
+        "ws": 71.7,
+        "sm": 85.7,
+        "st": 69.7,
+        "sa": 78.7,
+        "sn": 68.7,
+        "rs": 76.1,
+        "sc": 75.4,
+        "sl": 61.8,
+        "sg": 83.1,
+        "sx": 76.4,
+        "sk": 78.1,
+        "si": 81.9,
+        "sb": 70.5,
+        "so": 58.8,
+        "za": 66.1,
+        "ss": 57.6,
+        "es": 83.9,
+        "lk": 77.5,
+        "kn": 72.1,
+        "lc": 72.7,
+        "mf": 80.2,
+        "vc": 71.2,
+        "sd": 66.3,
+        "sr": 73.6,
+        "se": 83.3,
+        "ch": 84.2,
+        "sy": 72.1,
+        "tj": 71.8,
+        "tz": 67,
+        "th": 76.4,
+        "tl": 67.7,
+        "tg": 62.7,
+        "to": 72.9,
+        "tt": 73.5,
+        "tn": 76.5,
+        "tr": 77.2,
+        "tm": 70.1,
+        "tc": 78,
+        "tv": 67.1,
+        "ug": 68.3,
+        "ua": 73.4,
+        "ae": 82.9,
+        "gb": 81.2,
+        "us": 78.4,
+        "uy": 78.1,
+        "uz": 72.4,
+        "vu": 71.5,
+        "ve": 72.5,
+        "vn": 74.6,
+        "vi": 80.5,
+        "ps": 65.2,
+        "ye": 69.3,
+        "zm": 66.3,
+        "zw": 62.8
+      }
+    }
+  ]
+}
