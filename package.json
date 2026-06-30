@@ -1,0 +1,28 @@
+{
+  "name": "geo-draw-the-world",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser geography game: draw countries freehand, place them on a world map, and get scored on accuracy. Plus flag quizzes, a rank-the-economies mode, and a data explorer.",
+  "homepage": "https://lolispo.github.io/geo-draw-the-world/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lolispo/geo-draw-the-world.git"
+  },
+  "license": "MIT",
+  "author": "Petter Andersson",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "serve": "python3 -m http.server 8080",
+    "build:geometry": "node scripts/build-geometry.mjs",
+    "build:datasets": "node scripts/build-datasets.mjs",
+    "build:entities": "node scripts/build-entities.mjs"
+  },
+  "keywords": [
+    "geography",
+    "game",
+    "canvas",
+    "vanilla-js",
+    "quiz",
+    "natural-earth"
+  ]
+}

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/globe.svg" width="120" height="120" alt="Geo Draw the World logo">
+</p>
+
 # Geo Draw the World
 
 A browser geography game: draw countries freehand, place them on a world map, and
