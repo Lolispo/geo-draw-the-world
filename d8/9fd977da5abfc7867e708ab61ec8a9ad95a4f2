@@ -1,0 +1,19 @@
+LICENSE
+  s_de87e889a13b72::t_2b98ef09a8abe4 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "d89fd977da5abfc7867e708ab61ec8a9ad95a4f2",
+  "prompts": {},
+  "sessions": {
+    "s_de87e889a13b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8d1fcb3-2e1c-4c68-8abe-d62ddcff41a5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
