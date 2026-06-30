@@ -1,6 +1,7 @@
 # Tooling / agent state
 .gstack/
 .omc/
+.claude/
 
 # OS / editor
 .DS_Store
