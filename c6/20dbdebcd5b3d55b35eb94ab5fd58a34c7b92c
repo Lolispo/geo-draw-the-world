@@ -1,0 +1,19 @@
+package.json
+  s_de87e889a13b72::t_818e3a24516494 1-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "c620dbdebcd5b3d55b35eb94ab5fd58a34c7b92c",
+  "prompts": {},
+  "sessions": {
+    "s_de87e889a13b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8d1fcb3-2e1c-4c68-8abe-d62ddcff41a5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
