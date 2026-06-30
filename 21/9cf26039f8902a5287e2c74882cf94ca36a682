@@ -1,0 +1,26 @@
+assets/globe.svg
+  s_de87e889a13b72::t_97b5d2a4cab1a5 1-13,15-18
+  s_de87e889a13b72::t_948e9945bfd648 14
+README.md
+  s_de87e889a13b72::t_8e9f3b62d600a1 1-4
+index.html
+  s_de87e889a13b72::t_180a770be6c5ad 7,9,12-23
+  s_de87e889a13b72::t_7247b9049e485b 10-11
+  s_de87e889a13b72::t_7c9b1825e2643a 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "219cf26039f8902a5287e2c74882cf94ca36a682",
+  "prompts": {},
+  "sessions": {
+    "s_de87e889a13b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8d1fcb3-2e1c-4c68-8abe-d62ddcff41a5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
