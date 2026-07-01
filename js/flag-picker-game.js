@@ -136,29 +136,59 @@ export class FlagPickerGame {
     const area = document.createElement('div');
     area.className = 'flag-question-area flag-picker-area';
 
-    // Flag with the missing color
+    // Flag with the missing color, shown side by side with a live preview of
+    // how the flag looks filled with the color the player is currently picking.
+    this._holeCanvas = null;
     const flagWrap = document.createElement('div');
     flagWrap.className = 'flag-main-wrap';
     const label = document.createElement('div');
     label.className = 'flag-question-label';
     label.textContent = 'Pick the missing color as precisely as you can';
+
+    const compare = document.createElement('div');
+    compare.className = 'flag-picker-compare';
+
+    // "Shown" — the flag with the color removed
+    const shownPanel = document.createElement('div');
+    shownPanel.className = 'flag-cmp-panel';
+    const shownCap = document.createElement('div');
+    shownCap.className = 'flag-cmp-cap';
+    shownCap.textContent = 'Shown';
     const flagDisplay = document.createElement('div');
     flagDisplay.className = 'flag-main-display';
     const canvas = document.createElement('canvas');
-    canvas.className = 'flag-main-canvas';
+    canvas.className = 'flag-main-canvas flag-cmp-canvas';
     flagDisplay.appendChild(canvas);
     this._flagCanvas = canvas;
+    shownPanel.append(shownCap, flagDisplay);
+
+    // "With your color" — live preview of the flag using the picked color
+    const previewPanel = document.createElement('div');
+    previewPanel.className = 'flag-cmp-panel';
+    const previewCap = document.createElement('div');
+    previewCap.className = 'flag-cmp-cap';
+    previewCap.textContent = 'With your color';
+    const previewDisplay = document.createElement('div');
+    previewDisplay.className = 'flag-main-display';
+    const preview = document.createElement('canvas');
+    preview.className = 'flag-main-canvas flag-cmp-canvas';
+    previewDisplay.appendChild(preview);
+    this._previewCanvas = preview;
+    previewPanel.append(previewCap, previewDisplay);
+
+    compare.append(shownPanel, previewPanel);
+
     const nameEl = document.createElement('div');
     nameEl.className = 'flag-name flag-main-name';
     nameEl.textContent = flag.name;
-    flagWrap.append(label, flagDisplay, nameEl);
+    flagWrap.append(label, compare, nameEl);
     area.appendChild(flagWrap);
 
     // Picker
     area.appendChild(this._buildPicker(flag, removed));
     c.appendChild(area);
 
-    // Render flag with the color removed
+    // Render flag with the color removed (also builds the preview's hole canvas)
     this._renderFlag(canvas, flag, removed);
   }
 
@@ -276,6 +306,22 @@ export class FlagPickerGame {
     const y = (this.hue / 360) * this._hueCanvas.height;
     ctx.beginPath(); ctx.rect(0, y - 2, this._hueCanvas.width, 4);
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    this._updatePreview();
+  }
+
+  // Live preview: fill the background with the picked color, then draw the flag
+  // with its removed region punched out so the color shows through the hole.
+  _updatePreview() {
+    const pc = this._previewCanvas, hole = this._holeCanvas;
+    if (!pc || !hole) return;
+    if (pc.width !== hole.width || pc.height !== hole.height) {
+      pc.width = hole.width; pc.height = hole.height;
+    }
+    const ctx = pc.getContext('2d');
+    ctx.clearRect(0, 0, pc.width, pc.height);
+    ctx.fillStyle = this._currentHex;
+    ctx.fillRect(0, 0, pc.width, pc.height);
+    ctx.drawImage(hole, 0, 0);
   }
 
   _renderFlag(canvas, flag, removed) {
@@ -289,11 +335,24 @@ export class FlagPickerGame {
       const t = hexToRgb(removed);
       const threshold = 80;
       const d = data.data;
+      // Parallel copy of the original pixels; the removed region is made
+      // transparent so a background fill of any color shows through (live preview).
+      const holeData = ctx.createImageData(canvas.width, canvas.height);
+      holeData.data.set(d);
+      const hole = holeData.data;
       for (let p = 0; p < d.length; p += 4) {
         const dist = Math.sqrt((d[p] - t.r) ** 2 + (d[p + 1] - t.g) ** 2 + (d[p + 2] - t.b) ** 2);
-        if (dist < threshold) { d[p] = 200; d[p + 1] = 200; d[p + 2] = 200; d[p + 3] = 255; }
+        if (dist < threshold) {
+          d[p] = 200; d[p + 1] = 200; d[p + 2] = 200; d[p + 3] = 255;
+          hole[p + 3] = 0;
+        }
       }
       ctx.putImageData(data, 0, 0);
+      const holeCanvas = document.createElement('canvas');
+      holeCanvas.width = canvas.width; holeCanvas.height = canvas.height;
+      holeCanvas.getContext('2d').putImageData(holeData, 0, 0);
+      this._holeCanvas = holeCanvas;
+      this._updatePreview();
       // hatch the removed regions
       ctx.save(); ctx.strokeStyle = '#bbb'; ctx.lineWidth = 2;
       ctx.beginPath();
