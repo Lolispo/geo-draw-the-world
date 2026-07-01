@@ -255,6 +255,196 @@ metrics and flags incomplete or non-country rows.
 
 ---
 
+## 8. Rename the "Geo Draw" mode
+
+**What:** Change the name of the draw game currently labelled "Geo Draw".
+
+**Why:** Owner wants a clearer/better name for the mode.
+
+**Decided:**
+- **Scope: rename the whole app** (owner, 2026-07-01) — `<title>`, README header/logo alt,
+  `package.json` name + description, and any in-app title/menu strings. **New name still TBD** — ask owner.
+
+**Approach / notes:**
+- Grep the current label in `index.html` (menu/hub cards) and `js/main.js` (screen
+  titles, mode names); update copy in one place. If the whole app is renamed, also
+  touch `<title>`, README header, and `package.json` name/description.
+- Pick the new name with the owner first; low-risk copy change.
+
+**Acceptance:** New name shown consistently on the menu/hub and in-mode; no stray
+old-name strings.
+
+---
+
+## 9. Draw the World: better default modes, disable the weak ones
+
+**What:** Revisit which modes "Draw the World" offers and which is the default.
+Disable/hide the ones that play badly; make the default put the best foot forward.
+
+**Why:** Some draw modes are weak right now (placement especially — item 11), and
+the current default doesn't showcase the game well.
+
+**Decided:**
+- Disable the "bad" modes (candidate: anything gated on weak placement, e.g.
+  **Placement Only**) at least until items 10–11 land.
+- Change the default mode to a stronger one (e.g. the **Shape-Only** compare from
+  item 2, or a shape-focused Quick 10).
+
+**Approach / notes:**
+- Mode list + default live in `js/main.js` (mode toggles / `STATES`) and the hub in
+  `index.html`. Prefer a feature flag / commented-out entry over deletion so weak
+  modes are easy to re-enable once placement is fixed. Keep it reversible — it's a
+  stopgap tied to the placement/shape work.
+
+**Acceptance:** Draw the World opens on a good default; weak modes aren't selectable
+(or are clearly de-emphasized); nothing dead-ends.
+
+---
+
+## 10. Push draw shape fidelity to Sporcle level
+
+**What:** Drawn/reference shapes still look rough compared to Sporcle and similar
+apps. Improve outline quality further (item 1 regenerated geometry from Natural
+Earth; this is the next quality pass).
+
+**Why:** Shape quality is still the game's weakest visual; owner benchmarks against
+Sporcle.
+
+**Approach / notes:**
+- Re-audit reference-shape creation in `js/geo-data.js` and the simplification in
+  `scripts/build-geometry.mjs` (DP epsilon, small-country handling). Consider a
+  higher vertex budget for the sizes actually rendered, or smoother display-time
+  rendering (curve interpolation) rather than more raw points.
+- Compare side-by-side against a Sporcle map screenshot at the same on-screen size.
+- Interim lever: since placement is also weak, **start by disabling placement**
+  (item 9) so shapes are judged on their own via Shape-Only (item 2).
+
+**Acceptance:** Outlines read as crisp/recognizable at peek/transform/compare sizes,
+comparable to reference apps; no load-time regression.
+
+---
+
+## 11. Placement & results-map overhaul
+
+**What:** The globe/map placement step plays badly and the results-screen map is too
+big. Rework placement to be more forgiving and legible.
+
+**Why:** Placement is the weakest mechanic; owner wants it focused and clearer.
+
+**Decided (owner):**
+- **Focus one continent at a time** for placement instead of the whole world.
+- **Mark the North and South poles clearly.**
+- Option to use **all continent borders but no islands** as the placement backdrop.
+- **More zoomed-in by default.**
+- **Shrink the map in the results screen** (currently too large).
+
+**Approach / notes:**
+- Placement + results map render in `js/world-canvas.js` (+ results layout in
+  `js/main.js` / `css/style.css`). Add a continent-scoped view using per-continent
+  bounds (`data/continents.json` / `regionBounds`) and a default zoom level.
+- Island-free backdrop: render continent outlines only, skipping island polygons
+  (filter by ring area or an island flag) to cut clutter.
+- Pole markers: fixed world-space markers/labels like the existing ocean labels.
+- Results map: reduce canvas size/scale in the results layout, especially on mobile.
+
+**Acceptance:** Placement defaults to a zoomed, single-continent view with visible
+poles and an optional island-free backdrop; the results map is noticeably smaller.
+
+---
+
+## 12. Flag Color Picker: live-preview the chosen color on the flag
+
+**✅ DONE 2026-07-01** — `js/flag-picker-game.js` shows two flags side by side ("Shown" with the
+color removed, "With your color" a live preview). A transparent-hole canvas is built once per
+round (removed pixels → alpha 0); each picker change fills the background with the picked color
+behind it, so no per-pixel work per move. Verified live (Japan → red disc). The terse "show
+wrong color" note was confirmed as this same preview — no separate mode. CSS: `.flag-picker-compare`.
+
+**What:** In the color-guessing game, render the flag with the color the player is
+currently choosing, shown **in parallel** with the reference (true/"current" color)
+version — so they see the effect of their pick in real time.
+
+**Why:** Immediate visual feedback makes the precision challenge clearer and more fun.
+
+**Decided:**
+- Show two flag renders side by side: the flag filled with the **player's chosen
+  color** vs. the reference render.
+
+**Approach / notes:**
+- Enhance `js/flag-picker-game.js` (the HSV-picker mode from item 4): on every picker
+  change, re-render the flag with the missing region filled by the picked color, next
+  to the reference render. Reuse the existing color-removal/fill rendering.
+- May also apply to the Flag Color Quiz (`js/flag-game.js`).
+- **Clarify with owner:** the terse "show wrong color game" note — is this the same
+  live preview, or a separate "spot the wrong-colored flag" mode idea?
+
+**Acceptance:** Adjusting the picker updates a live flag preview shown beside the
+reference; the comparison is obvious.
+
+---
+
+## 13. New mode: Paint / Create-a-Flag
+
+**What:** A creative mode where the player builds their own flag: choose a **base
+layout/template** (stripes, cross, canton, etc.), then **fill in the colors**.
+
+**Why:** A relaxed, creative counterpart to the flag quizzes; high shareability.
+
+**Approach / notes:**
+- Needs vector flag **templates** (fillable regions). Current `data/flags.json` is
+  likely raster/image-based, so this needs a small set of layout templates with
+  fillable regions (SVG or canvas paths). Start with a handful of common layouts.
+- Color fill via the existing HSV picker (share the component from
+  `js/flag-picker-game.js`). Optional: name/save/export the created flag as PNG.
+- New module + hub card + `STATES`/screen wiring in `js/main.js`.
+
+**Acceptance:** Pick a base layout → fill each region with a color → see the finished
+flag; optionally save/share it.
+
+---
+
+## 14. New mode: Guess the Language
+
+**What:** A "guess the language" mode — show a sample (a text snippet to start;
+script/audio possible later) and the player guesses the language.
+
+**Why:** Extends the app beyond geography/flags into a related knowledge game.
+
+**Approach / notes:**
+- **Needs a data source the repo lacks:** language samples + answers, ideally with a
+  language↔country link via the entity registry (`data/entities.json`). Scope to
+  start: text-only, short phrase per language, multiple-choice answers.
+- Use permissively-licensed sample text (e.g. UDHR translations) to avoid licensing
+  issues.
+- New module + hub card + high-score key, mirroring the flag-quiz structure.
+
+**Acceptance:** Pick mode → shown a language sample → choose from options → scored
+over N rounds → results + high score.
+
+---
+
+## 15. Toggle: show country names in Chinese
+
+**What:** A toggle (bottom of the screen / settings) to display country names in
+**Chinese** instead of English across the app.
+
+**Why:** Owner wants Chinese country names available (matches the Chinese/Swedish
+theme already in the menu globe).
+
+**Approach / notes:**
+- **Needs a `zh` name field** per entity. Add Chinese names to `data/entities.json`
+  (the canonical registry from item 5), keyed by ISO code, then have name-rendering
+  read the active language.
+- Add a global language toggle (persist in `localStorage`, like high scores);
+  default English. Wire it everywhere names are shown (prompts, results, Data
+  Explorer, rank line).
+- Could generalize into a full i18n switch later; start with EN / 中文.
+
+**Acceptance:** Flipping the toggle swaps country names to Chinese everywhere they
+appear; the choice persists across reloads.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`
