@@ -861,6 +861,29 @@ canvas {
 .flag-picker-area .flag-main-wrap { flex: 0 1 auto; }
 .flag-picker-area .flag-main-canvas { max-height: 220px; }
 
+/* Shown vs. live "with your color" preview, side by side */
+.flag-picker-compare {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flag-cmp-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.flag-cmp-cap {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+.flag-picker-area .flag-cmp-canvas { max-height: 160px; max-width: 260px; }
+
 /* Flag Color Picker — HSV picker */
 .picker-wrap {
   display: flex;
