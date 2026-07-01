@@ -1,0 +1,23 @@
+css/style.css
+  s_de87e889a13b72::t_e874f05cbb40cd 864-886
+js/flag-picker-game.js
+  s_de87e889a13b72::t_02b23df877d0b9 338-342,345-348,351-355
+  s_de87e889a13b72::t_4105002267a040 139-141,147-156,160,163-180,184,191
+  s_de87e889a13b72::t_4ad8519791280c 309-324
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "5532b3e045a5244987d3442ed0523467f3ef15cf",
+  "prompts": {},
+  "sessions": {
+    "s_de87e889a13b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c8d1fcb3-2e1c-4c68-8abe-d62ddcff41a5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
