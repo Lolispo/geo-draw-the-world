@@ -1238,7 +1238,7 @@ class Game {
       'streak': 'Streak',
     }[this.gameMode] || this.gameMode.replace('countries-', '').replace(/-/g, ' ');
 
-    let lines = [`Geo Draw the World — ${modeName}`];
+    let lines = [`Know the World — ${modeName}`];
 
     if (this.gameMode === 'streak') {
       lines.push(`Streak: ${this._streakCount}`);

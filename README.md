@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/globe.svg" width="120" height="120" alt="Geo Draw the World logo">
+  <img src="assets/globe.svg" width="120" height="120" alt="Know the World logo">
 </p>
 
-# Geo Draw the World
+# Know the World
 
 A browser geography game: draw countries freehand, place them on a world map, and
 get scored on how close your shape and position are to the real thing. Plus flag
