@@ -2,7 +2,7 @@
 // Timeline-style mini-game: drag a country onto a sorted line where it ranks
 // by a numeric metric. Dataset-agnostic — driven by a dataset config.
 
-import { playPlace, playSkip, playScoreReveal, playClick } from './sounds.js';
+import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { loadDatasets, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
 
@@ -387,7 +387,7 @@ export class RankLineGame {
       else this._kbGapIndex += (e.key === 'ArrowUp' ? -1 : 1);
       this._kbGapIndex = Math.max(0, Math.min(maxGap, this._kbGapIndex));
       this._highlightKbGap();
-      playClick();
+      playNav();
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (this._kbGapIndex < 0) return;
       e.preventDefault();

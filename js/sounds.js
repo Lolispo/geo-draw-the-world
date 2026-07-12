@@ -51,3 +51,8 @@ export function playClick() {
 export function playUndo() {
   playTone(350, 0.1, 'sine', 0.08);
 }
+
+// Soft, mellow blip for up/down navigation — sine wave, gentle on the ears
+export function playNav() {
+  playTone(330, 0.06, 'sine', 0.05);
+}
