@@ -1,0 +1,22 @@
+js/sounds.js
+  s_00fbe75a78af2b::t_497377b0581779 54-58
+js/rank-line-game.js
+  s_00fbe75a78af2b::t_037bb9d6f21a3e 5
+  s_00fbe75a78af2b::t_cdbfde21972021 390
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "3e4569cbd29c6c6f18259ecefbd4d5a908b89355",
+  "prompts": {},
+  "sessions": {
+    "s_00fbe75a78af2b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "027ab113-7b61-430b-acd8-c49afd1b055e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
