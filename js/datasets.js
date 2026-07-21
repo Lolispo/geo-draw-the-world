@@ -3,6 +3,7 @@
 
 let _data = null;
 let _entities = null;
+let _attributes = null;
 
 export async function loadDatasets() {
   if (_data) return _data;
@@ -16,6 +17,28 @@ export async function loadEntities() {
   const resp = await fetch('data/entities.json');
   _entities = (await resp.json()).entities;
   return _entities;
+}
+
+export async function loadAttributes() {
+  if (_attributes) return _attributes;
+  const resp = await fetch('data/attributes.json');
+  _attributes = (await resp.json()).attributes;
+  return _attributes;
+}
+
+export function getEntity(code) {
+  return _entities ? _entities[code] || null : null;
+}
+
+export function getAttributes(code) {
+  return _attributes ? _attributes[code] || null : null;
+}
+
+// A code's rank within a metric: { rank, total } (1-based), or null if absent.
+export function getRank(id, code) {
+  const entries = getEntries(id);
+  const idx = entries.findIndex((e) => e.code === code);
+  return idx < 0 ? null : { rank: idx + 1, total: entries.length };
 }
 
 // Canonical registry as a sorted array: [{ code, name, type, continent, hasGeometry, hasFlag, metrics }]

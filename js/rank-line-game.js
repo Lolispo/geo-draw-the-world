@@ -5,6 +5,7 @@
 import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { loadDatasets, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
+import { openCountryPanel } from './country-panel.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 const START_LIVES = 3;
@@ -263,6 +264,9 @@ export class RankLineGame {
     val.className = 'rank-row-value';
     val.textContent = formatValue(this.dataset.format, entry.value);
     row.append(name, val);
+    row.classList.add('is-clickable');
+    row.title = `View ${entry.name}`;
+    row.addEventListener('click', () => openCountryPanel(entry.code));
     return row;
   }
 
@@ -469,7 +473,7 @@ export class RankLineGame {
     panel.className = 'rank-results-panel';
 
     const finalList = this.placed.map((e, i) => `
-      <div class="rank-result-row" style="animation-delay:${Math.min(i, 30) * 0.03}s">
+      <div class="rank-result-row is-clickable" data-code="${e.code}" title="View ${e.name}" style="animation-delay:${Math.min(i, 30) * 0.03}s">
         <span class="rank-result-rank">${i + 1}</span>
         <img class="rank-flag" src="${FLAG_CDN}${e.code}.png" alt="" onerror="this.style.visibility='hidden'">
         <span class="rank-result-name">${e.name}</span>
@@ -496,6 +500,11 @@ export class RankLineGame {
     `;
 
     c.appendChild(panel);
+
+    panel.querySelector('.rank-results-list').addEventListener('click', (ev) => {
+      const row = ev.target.closest('.rank-result-row[data-code]');
+      if (row) openCountryPanel(row.dataset.code);
+    });
 
     document.getElementById('rank-play-again').addEventListener('click', () => {
       this.start(this.dataset.id);

@@ -2,6 +2,7 @@
 // filterable by continent and sortable. Read-only learning view.
 
 import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, getMetricMeta, formatValue } from './datasets.js';
+import { openCountryPanel } from './country-panel.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 
@@ -186,6 +187,9 @@ export class DataExplorer {
       val.textContent = formatValue(ds.format, e.value);
 
       row.append(rank, img, name, val);
+      row.classList.add('is-clickable');
+      row.title = `View ${e.name}`;
+      row.addEventListener('click', () => openCountryPanel(e.code));
       list.appendChild(row);
     }
   }

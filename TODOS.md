@@ -519,6 +519,15 @@ coverage matrix reflects both; nothing in the numeric rank modes breaks.
 
 ## 18. Country Showcase panel (flag + shape + all data) — FLAGSHIP, build first
 
+**✅ DONE 2026-07-21** — new `js/country-panel.js` (`openCountryPanel(code)`): a reusable
+modal showing flag (flagcdn), a shape **silhouette rendered from existing Natural Earth
+geometry** (`getCountryByCode` in `geo-data.js`, bbox-normalized canvas), capital, every
+available metric with its formatted value + **live rank** (`getRank` in `datasets.js`), and
+a religion bar breakdown. New loaders `loadAttributes`/`getAttributes`/`getEntity`/`getRank`.
+Wired to **Data Explorer rows** and **rank-the-world** (placed rows + results list). Closes
+on ✕ / backdrop / Esc. CSS in `style.css` (`.country-panel*`), mobile-stacked. Verified live
+(US, Japan). Flag games / draw results intentionally left out of v1 (same component can wire in).
+
 **What:** Press a country anywhere it's listed to open a **profile/showcase panel**
 that displays everything the app knows about it: flag image, the country's **shape
 silhouette**, and all metrics + attributes (GDP, population, exports, urbanization,

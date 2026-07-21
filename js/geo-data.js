@@ -49,6 +49,16 @@ export async function loadAllCountries() {
   };
 }
 
+// Find a single country's geometry entry by ISO code (loads + caches all regions).
+let _byCode = null;
+export async function getCountryByCode(code) {
+  if (!_byCode) {
+    const all = await loadAllCountries();
+    _byCode = new Map(all.countries.filter((c) => c.code).map((c) => [c.code, c]));
+  }
+  return _byCode.get(code) || null;
+}
+
 // Get a daily country (deterministic for today)
 export async function getDailyCountry() {
   const allData = await loadAllCountries();
