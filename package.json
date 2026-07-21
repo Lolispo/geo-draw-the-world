@@ -15,6 +15,7 @@
     "serve": "python3 -m http.server 8080",
     "build:geometry": "node scripts/build-geometry.mjs",
     "build:datasets": "node scripts/build-datasets.mjs",
+    "build:attributes": "node scripts/build-attributes.mjs",
     "build:entities": "node scripts/build-entities.mjs"
   },
   "keywords": [
