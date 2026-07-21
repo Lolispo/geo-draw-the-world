@@ -683,6 +683,8 @@ before implementation.
 **Open questions to resolve when scoping (do NOT build yet):**
 - Question formats: multiple-choice? "which is bigger/smaller?" (reuse rank-line
   logic)? "what's the capital of X?" "which religion is majority in X?" flag→country?
+  Category/attribute question types (grouping, attribute-filtered superlatives) are
+  explored in **item 23** — decide here whether they fold in as question types.
 - What does "drill down" mean concretely — a branching quiz that narrows by
   continent → country, or increasing difficulty, or follow-ups on the same country?
 - Rounds/scoring/high-score structure (mirror the flag/rank games?).
@@ -695,6 +697,38 @@ before implementation.
 
 **Acceptance (placeholder):** Deferred — first output is a fleshed-out design from a
 dedicated brainstorming session, not code.
+
+---
+
+## 23. Explore: category / attribute-based game modes (religion first)
+
+**What:** A game family built on **categorical / compositional** data (religion to
+start) rather than ranking a single number like the rank-line game. Candidate
+formats to explore:
+- **"Pick all countries with the same primary religion"** (grouping / odd-one-out).
+- **"Which country has the highest % of religion X?"** (max within a filtered
+  attribute — e.g. highest Christian %, highest Muslim %).
+- Possibly generalize the shape to **other datasets** (e.g. "pick all countries on
+  continent X", "which has the highest urbanization") — unclear how many datasets
+  suit this; part of the exploration is deciding which do.
+
+**Why:** Religion is a `[{name, pct}]` breakdown (item 17), not a single rankable
+number, so it doesn't fit the rank-line model. This opens a different game shape:
+grouping/matching and attribute-filtered superlatives. Owner idea (2026-07-21).
+
+**Decided (owner, 2026-07-21):** Concept only — **write it down to explore later.**
+No format locked in yet.
+
+**Open questions / notes:**
+- Standalone mode, or a **set of question types inside the Random Geography Quiz
+  (item 22)**? Owner flagged it's likely related — decide during #22's design.
+- Data is ready: primary religion + full breakdown live in `data/attributes.json`;
+  primary = first entry of the `religion` array (already ordered by %).
+- Which categorical/attribute axes are "gameable" (religion, continent, majority-
+  something) vs too sparse/ambiguous?
+
+**Acceptance (placeholder):** Deferred — output is a design exploration deciding the
+format(s) and whether this is standalone or folded into item 22.
 
 ---
 
