@@ -1,0 +1,21 @@
+docs/geometry-spike.md
+  s_fdc6d2f11ee255::t_b24e27be6a46ec 1-75
+TODOS.md
+  s_fdc6d2f11ee255::t_293cbfda1b3e7b 655-663
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "00e304bf84e8c3da0c0f5ec3d908353f5101c28d",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
