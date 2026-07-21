@@ -613,6 +613,16 @@ renders; the two flag concepts are clearly distinguished.
 
 ## 20. Autonomous / dependent territories: broad sweep + a play-with-them toggle
 
+**🔬 CANDIDATE LIST DONE 2026-07-22 — see `docs/territories-candidates.md`.** Surveyed
+everything we're missing: 26 ISO-coded territories (all have flagcdn + capital) split into
+Tier 1 (16 with NE geometry — drop-in) and Tier 2 (10 without, e.g. French overseas dépts
+folded into France in NE), plus Tier 3 non-ISO de-facto states (Northern Cyprus has NE
+geometry; Abkhazia/S.Ossetia/Transnistria need sourced geometry + flag assets). **Key find:
+Vatican City (`va`) is a sovereign UN-observer state we're missing — belongs in the main
+pool, not behind a toggle.** Recommended order: (1) add `va` to main set; (2) toggle infra
++ Tier 1; (3) Tier 2 geometry-less; (4) Tier 3 case by case. **Awaiting owner cutoff.**
+
+
 **What:** Add smaller autonomous regions & dependent territories (Bonaire, Sint
 Eustatius, Saba, Abkhazia, South Ossetia, Transnistria, Artsakh, Northern Cyprus,
 etc.) as first-class entities with flag + capital + whatever data exists, and a
