@@ -1,0 +1,36 @@
+js/geo-data.js
+  s_fdc6d2f11ee255::t_96beb64991c092 52-61
+js/rank-line-game.js
+  s_fdc6d2f11ee255::t_4e2495616e06c9 8
+  s_fdc6d2f11ee255::t_21bcfdf929fc7e 476
+  s_fdc6d2f11ee255::t_518c7646ef522e 504-508
+  s_fdc6d2f11ee255::t_969cb6ca158edd 267-269
+TODOS.md
+  s_fdc6d2f11ee255::t_d5f085ef3c55ea 522-530
+js/datasets.js
+  s_fdc6d2f11ee255::t_487db61917c29a 6,22-42
+  s_fdc6d2f11ee255::t_2b2500da007368 43
+js/country-panel.js
+  s_fdc6d2f11ee255::t_700ca6731f96d5 1-220
+js/data-explorer.js
+  s_fdc6d2f11ee255::t_973f174f986841 190-192
+  s_fdc6d2f11ee255::t_a97478bc84c14c 5
+css/style.css
+  s_fdc6d2f11ee255::t_3bb6a524018a17 1885-2002
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "b83333fce49ebf424800a46341095c1e949f74f0",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
