@@ -1,0 +1,6968 @@
+{
+  "attributes": {
+    "ad": {
+      "capital": "Andorra la Vella",
+      "religion": [
+        {
+          "name": "other",
+          "pct": 8.8
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 1.7
+        }
+      ],
+      "religionRaw": "Christian (predominantly Roman Catholic) 89.5, other 8.8%, unaffiliated 1.7% (2020 est.)"
+    },
+    "ae": {
+      "capital": "Abu Dhabi",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 74.5
+        },
+        {
+          "name": "Sunni",
+          "pct": 63.3
+        },
+        {
+          "name": "Shia",
+          "pct": 6.7
+        },
+        {
+          "name": "other",
+          "pct": 4.4
+        },
+        {
+          "name": "Christian",
+          "pct": 12.9
+        },
+        {
+          "name": "Hindu",
+          "pct": 6.2
+        },
+        {
+          "name": "Buddhist",
+          "pct": 3.2
+        },
+        {
+          "name": "agnostic",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 1.9
+        }
+      ],
+      "religionRaw": "Muslim 74.5% (official) (Sunni 63.3%, Shia 6.7%, other 4.4%), Christian 12.9%, Hindu 6.2%, Buddhist 3.2%, agnostic 1.3%, other 1.9% (2020 est.)"
+    },
+    "af": {
+      "capital": "Kabul",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99.7
+        }
+      ],
+      "religionRaw": "Muslim 99.7% (Sunni 84.7 - 89.7%, Shia 10 - 15%), other &lt;0.3% (2009 est.)"
+    },
+    "ag": {
+      "capital": "Saint John's",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 68.3
+        },
+        {
+          "name": "Anglican",
+          "pct": 17.6
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 12.4
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 12.2
+        },
+        {
+          "name": "Moravian",
+          "pct": 8.3
+        },
+        {
+          "name": "Methodist",
+          "pct": 5.6
+        },
+        {
+          "name": "Wesleyan Holiness",
+          "pct": 4.5
+        },
+        {
+          "name": "Church of God",
+          "pct": 4.1
+        },
+        {
+          "name": "Baptist",
+          "pct": 3.6
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 8.2
+        },
+        {
+          "name": "other",
+          "pct": 12.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 5.5
+        },
+        {
+          "name": "none",
+          "pct": 5.9
+        }
+      ],
+      "religionRaw": "Protestant 68.3% (Anglican 17.6%, Seventh Day Adventist 12.4%, Pentecostal 12.2%, Moravian 8.3%, Methodist 5.6%, Wesleyan Holiness 4.5%, Church of God 4.1%, Baptist 3.6%), Roman Catholic 8.2%, other 12.2%, unspecified 5.5%, none 5.9% (2011 est.)"
+    },
+    "al": {
+      "capital": "Tirana",
+      "capitalNote": "Tirana (Tirane)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 56.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 10
+        },
+        {
+          "name": "Orthodox",
+          "pct": 6.8
+        },
+        {
+          "name": "atheist",
+          "pct": 2.5
+        },
+        {
+          "name": "other",
+          "pct": 5.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 16.2
+        }
+      ],
+      "religionRaw": "Muslim 56.7%, Roman Catholic 10%, Orthodox 6.8%, atheist 2.5%, Bektashi (a Sufi order) 2.1%, other 5.7%, unspecified 16.2% (2011 est.)"
+    },
+    "am": {
+      "capital": "Yerevan",
+      "religion": [
+        {
+          "name": "Armenian Apostolic",
+          "pct": 95.2
+        },
+        {
+          "name": "not stated",
+          "pct": 1.7
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Armenian Apostolic 95.2%, not stated 1.7%; less than 1%: Catholic, no religion, Evangelical, Shar-fadinian, other, Armenian Orthodox, Jehovah's Witness, Pagan, Molokan (2022 est.)"
+    },
+    "ao": {
+      "capital": "Luanda",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 41.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 38.1
+        },
+        {
+          "name": "other",
+          "pct": 8.6
+        },
+        {
+          "name": "none",
+          "pct": 12.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 41.1%, Protestant 38.1%, other 8.6%, none 12.3% (2014 est.)"
+    },
+    "ar": {
+      "capital": "Buenos Aires",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 62.9
+        },
+        {
+          "name": "Evangelical",
+          "pct": 15.3
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 13
+        },
+        {
+          "name": "other Evangelical",
+          "pct": 2.3
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "none",
+          "pct": 18.9
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 62.9%, Evangelical 15.3% (Pentecostal 13%, other Evangelical 2.3%), Jehovah's Witness and Church of Jesus Christ 1.4%, other 1.2% (includes Muslim, Jewish), none 18.9% (includes agnostic and atheist), unspecified 0.3% (2019 est.)"
+    },
+    "as": {
+      "capital": "Pago Pago",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 98.3
+        }
+      ],
+      "religionRaw": "Christian 98.3%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+    },
+    "at": {
+      "capital": "Vienna",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 55.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 8.3
+        },
+        {
+          "name": "Orthodox",
+          "pct": 4.9
+        },
+        {
+          "name": "Evangelical Christian",
+          "pct": 3.8
+        },
+        {
+          "name": "Jewish",
+          "pct": 0.1
+        },
+        {
+          "name": "other",
+          "pct": 5.4
+        },
+        {
+          "name": "none",
+          "pct": 22.4
+        }
+      ],
+      "religionRaw": "Roman Catholic 55.2%, Muslim 8.3%, Orthodox 4.9%, Evangelical Christian 3.8%, Jewish 0.1%, other 5.4%, none 22.4% (2021 est.)"
+    },
+    "au": {
+      "capital": "Canberra",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 20
+        },
+        {
+          "name": "Protestant",
+          "pct": 18.1
+        },
+        {
+          "name": "Anglican",
+          "pct": 9.8
+        },
+        {
+          "name": "Uniting Church",
+          "pct": 2.6
+        },
+        {
+          "name": "Presbyterian and Reformed",
+          "pct": 1.6
+        },
+        {
+          "name": "Baptist",
+          "pct": 1.4
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 1
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.5
+        },
+        {
+          "name": "Muslim",
+          "pct": 3.2
+        },
+        {
+          "name": "Hindu",
+          "pct": 2.7
+        },
+        {
+          "name": "Buddhist",
+          "pct": 2.4
+        },
+        {
+          "name": "Orthodox",
+          "pct": 2.3
+        },
+        {
+          "name": "Eastern Orthodox",
+          "pct": 2.1
+        },
+        {
+          "name": "Oriental Orthodox",
+          "pct": 0.2
+        },
+        {
+          "name": "other",
+          "pct": 2.1
+        },
+        {
+          "name": "none",
+          "pct": 38.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 7.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 20%, Protestant 18.1% (Anglican 9.8%, Uniting Church 2.6%, Presbyterian and Reformed 1.6%, Baptist 1.4%, Pentecostal 1%, other Protestant 1.7%), other Christian 3.5%, Muslim 3.2%, Hindu 2.7%, Buddhist 2.4%, Orthodox 2.3% (Eastern Orthodox 2.1%, Oriental Orthodox 0.2%), other 2.1%, none 38.4%, unspecified 7.3% (2021 est.)"
+    },
+    "aw": {
+      "capital": "Oranjestad",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 75.3
+        },
+        {
+          "name": "Protestant",
+          "pct": 4.9
+        },
+        {
+          "name": "includes Methodist",
+          "pct": 0.9
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.9
+        },
+        {
+          "name": "Anglican",
+          "pct": 0.4
+        },
+        {
+          "name": "other Protestant",
+          "pct": 2.7
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.7
+        },
+        {
+          "name": "other",
+          "pct": 12
+        },
+        {
+          "name": "none",
+          "pct": 5.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.5
+        }
+      ],
+      "religionRaw": "Roman Catholic 75.3%, Protestant 4.9% (includes Methodist 0.9%, Adventist 0.9%, Anglican 0.4%, other Protestant 2.7%), Jehovah's Witness 1.7%, other 12%, none 5.5%, unspecified 0.5% (2010 est.)"
+    },
+    "az": {
+      "capital": "Baku",
+      "capitalNote": "Baku (Baki, Baky)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 97.3
+        },
+        {
+          "name": "Christian",
+          "pct": 2.6
+        }
+      ],
+      "religionRaw": "Muslim 97.3% (predominantly Shia), Christian 2.6%, other &lt;0.1, unaffiliated &lt;0.1 (2020 est.)"
+    },
+    "ba": {
+      "capital": "Sarajevo",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 50.7
+        },
+        {
+          "name": "Orthodox",
+          "pct": 30.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 15.2
+        },
+        {
+          "name": "atheist",
+          "pct": 0.8
+        },
+        {
+          "name": "agnostic",
+          "pct": 0.3
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "undeclared/no answer",
+          "pct": 1.1
+        }
+      ],
+      "religionRaw": "Muslim 50.7%, Orthodox 30.7%, Roman Catholic 15.2%, atheist 0.8%, agnostic 0.3%, other 1.2%, undeclared/no answer 1.1% (2013 est.)"
+    },
+    "bb": {
+      "capital": "Bridgetown",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 66.4
+        },
+        {
+          "name": "includes Anglican",
+          "pct": 23.9
+        },
+        {
+          "name": "other Pentecostal",
+          "pct": 19.5
+        },
+        {
+          "name": "Adventist",
+          "pct": 5.9
+        },
+        {
+          "name": "Methodist",
+          "pct": 4.2
+        },
+        {
+          "name": "Wesleyan",
+          "pct": 3.4
+        },
+        {
+          "name": "Nazarene",
+          "pct": 3.2
+        },
+        {
+          "name": "Church of God",
+          "pct": 2.4
+        },
+        {
+          "name": "Baptist",
+          "pct": 1.8
+        },
+        {
+          "name": "Moravian",
+          "pct": 1.2
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.9
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 3.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 5.4
+        },
+        {
+          "name": "includes Jehovah's Witness",
+          "pct": 2
+        },
+        {
+          "name": "other",
+          "pct": 3.4
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "none",
+          "pct": 20.6
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Protestant 66.4% (includes Anglican 23.9%, other Pentecostal 19.5%, Adventist 5.9%, Methodist 4.2%, Wesleyan 3.4%, Nazarene 3.2%, Church of God 2.4%, Baptist 1.8%, Moravian 1.2%, other Protestant 0.9%), Roman Catholic 3.8%, other Christian 5.4% (includes Jehovah's Witness 2.0%, other 3.4%), Rastafarian 1%, other 1.5%, none 20.6%, unspecified 1.2% (2010 est.)"
+    },
+    "bd": {
+      "capital": "Dhaka",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 91
+        },
+        {
+          "name": "Hindu",
+          "pct": 8
+        },
+        {
+          "name": "other",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Muslim 91%, Hindu 8%, other 1% (2022 est.)"
+    },
+    "be": {
+      "capital": "Brussels",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 57.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 2.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 6.8
+        },
+        {
+          "name": "other",
+          "pct": 1.7
+        },
+        {
+          "name": "atheist",
+          "pct": 9.1
+        },
+        {
+          "name": "nonbeliever/agnostic",
+          "pct": 20.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 57.1%, Protestant 2.3%, other Christian, 2.8%, Muslim 6.8%, other 1.7%, atheist 9.1%, nonbeliever/agnostic 20.2% (2018 est.)"
+    },
+    "bf": {
+      "capital": "Ouagadougou",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 63.8
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 20.1
+        },
+        {
+          "name": "Animiste",
+          "pct": 9
+        },
+        {
+          "name": "Protestant",
+          "pct": 6.2
+        },
+        {
+          "name": "other",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 0.7
+        }
+      ],
+      "religionRaw": "Muslim 63.8%, Roman Catholic 20.1%, Animiste 9%, Protestant 6.2%, other 0.2%, none 0.7% (2019 est.)"
+    },
+    "bg": {
+      "capital": "Sofia",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 64.7
+        },
+        {
+          "name": "Muslim",
+          "pct": 9.8
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 4.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 20.7
+        }
+      ],
+      "religionRaw": "Christian 64.7%, Muslim 9.8%, other 0.1%, none 4.7%, unspecified 20.7% (2021 est.)"
+    },
+    "bh": {
+      "capital": "Manama",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 74.2
+        },
+        {
+          "name": "other",
+          "pct": 25.9
+        }
+      ],
+      "religionRaw": "Muslim 74.2%, other 25.9% (2020 est)"
+    },
+    "bi": {
+      "capital": "Gitega , Bujumbura",
+      "capitalNote": "Gitega (political capital), Bujumbura (commercial capital)",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 93.9
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 58.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 35.3
+        },
+        {
+          "name": "includes Adventist",
+          "pct": 2.7
+        },
+        {
+          "name": "and other Protestant religions",
+          "pct": 32.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 3.4
+        },
+        {
+          "name": "other",
+          "pct": 1.3
+        },
+        {
+          "name": "none",
+          "pct": 1.3
+        }
+      ],
+      "religionRaw": "Christian 93.9% (Roman Catholic 58.6%, Protestant 35.3% [includes Adventist 2.7% and other Protestant religions 32.6%]), Muslim 3.4%, other 1.3%, none 1.3% (2016-17 est.)"
+    },
+    "bj": {
+      "capital": "Porto-Novo",
+      "capitalNote": "Porto-Novo (constitutional capital); Cotonou (seat of government)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 27.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 25.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 13.5
+        },
+        {
+          "name": "Celestial",
+          "pct": 6.7
+        },
+        {
+          "name": "Methodist",
+          "pct": 3.4
+        },
+        {
+          "name": "other Protestant",
+          "pct": 3.4
+        },
+        {
+          "name": "Vodoun",
+          "pct": 11.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 9.5
+        },
+        {
+          "name": "other traditional religions",
+          "pct": 2.6
+        },
+        {
+          "name": "other",
+          "pct": 2.6
+        },
+        {
+          "name": "none",
+          "pct": 5.8
+        }
+      ],
+      "religionRaw": "Muslim 27.7%, Roman Catholic 25.5%, Protestant 13.5% (Celestial 6.7%, Methodist 3.4%, other Protestant 3.4%), Vodoun 11.6%, other Christian 9.5%, other traditional religions 2.6%, other 2.6%, none 5.8% (2013 est.)"
+    },
+    "bm": {
+      "capital": "Hamilton",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 46.2
+        },
+        {
+          "name": "includes Anglican",
+          "pct": 15.8
+        },
+        {
+          "name": "African Methodist Episcopal",
+          "pct": 8.6
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 6.7
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 3.5
+        },
+        {
+          "name": "Methodist",
+          "pct": 2.7
+        },
+        {
+          "name": "Presbyterian",
+          "pct": 2
+        },
+        {
+          "name": "Church of God",
+          "pct": 1.6
+        },
+        {
+          "name": "Baptist",
+          "pct": 1.2
+        },
+        {
+          "name": "Salvation Army",
+          "pct": 1.1
+        },
+        {
+          "name": "Brethren",
+          "pct": 1
+        },
+        {
+          "name": "other Protestant",
+          "pct": 2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 14.5
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 9.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 3.9
+        },
+        {
+          "name": "none",
+          "pct": 17.8
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.2
+        }
+      ],
+      "religionRaw": "Protestant 46.2% (includes Anglican 15.8%, African Methodist Episcopal 8.6%, Seventh Day Adventist 6.7%, Pentecostal 3.5%, Methodist 2.7%, Presbyterian 2.0%, Church of God 1.6%, Baptist 1.2%, Salvation Army 1.1%, Brethren 1.0%, other Protestant 2.0%), Roman Catholic 14.5%, Jehovah's Witness 1.3%, other Christian 9.1%, Muslim 1%, other 3.9%, none 17.8%, unspecified 6.2% (2010 est.)"
+    },
+    "bn": {
+      "capital": "Bandar Seri Begawan",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 6.7
+        },
+        {
+          "name": "Buddhist",
+          "pct": 6.3
+        },
+        {
+          "name": "other",
+          "pct": 4.9
+        }
+      ],
+      "religionRaw": "Muslim (official) 82.1%, Christian 6.7%, Buddhist 6.3%, other 4.9% (2021 est.)"
+    },
+    "bo": {
+      "capital": "La Paz",
+      "capitalNote": "La Paz (administrative capital); Sucre (constitutional [legislative and judicial] capital)",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 65
+        },
+        {
+          "name": "Protestant",
+          "pct": 19.6
+        },
+        {
+          "name": "Evangelical Baptist",
+          "pct": 2.1
+        },
+        {
+          "name": "Evangelical Pentecostal",
+          "pct": 1.8
+        },
+        {
+          "name": "Evangelical Methodist",
+          "pct": 0.7
+        },
+        {
+          "name": "Adventist",
+          "pct": 2.8
+        },
+        {
+          "name": "other",
+          "pct": 4.8
+        },
+        {
+          "name": "atheist",
+          "pct": 1.7
+        },
+        {
+          "name": "agnostic",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 6.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 65%, Protestant 19.6% (Evangelical (non-specific) 11.9%, Evangelical Baptist 2.1%, Evangelical Pentecostal 1.8%, Evangelical Methodist 0.7%, Adventist 2.8%, Protestant (non-specific) 0.3%), Believer (not belonging to the church) 0.9%, other 4.8%, atheist 1.7%, agnostic 0.6%, none 6.1%, unspecified 1.3% (2023 est.)"
+    },
+    "br": {
+      "capital": "Brasilia",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 56.8
+        },
+        {
+          "name": "Evangelical",
+          "pct": 26.9
+        },
+        {
+          "name": "none",
+          "pct": 9.3
+        },
+        {
+          "name": "other",
+          "pct": 4
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.4
+        },
+        {
+          "name": "Umbanda and Candomble",
+          "pct": 1.1
+        },
+        {
+          "name": "Indigenous religions .",
+          "pct": 6
+        },
+        {
+          "name": "undeclared",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 56.8%, Evangelical 26.9%, none 9.3%, other 4%, Spirtism (Espirita) 1.8%, unspecified 1.4%, Umbanda and Candomble 1.1%, Indigenous religions .06%, undeclared 0.2% (2022)"
+    },
+    "bs": {
+      "capital": "Nassau",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 69.9
+        },
+        {
+          "name": "includes Baptist",
+          "pct": 34.9
+        },
+        {
+          "name": "Anglican",
+          "pct": 13.7
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 8.9
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 4.4
+        },
+        {
+          "name": "Methodist",
+          "pct": 3.6
+        },
+        {
+          "name": "Church of God",
+          "pct": 1.9
+        },
+        {
+          "name": "Plymouth Brethren",
+          "pct": 1.6
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.9
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 12
+        },
+        {
+          "name": "other Christian",
+          "pct": 13
+        },
+        {
+          "name": "includes Jehovah's Witness",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 1.9
+        },
+        {
+          "name": "unspecified",
+          "pct": 2.6
+        }
+      ],
+      "religionRaw": "Protestant 69.9% (includes Baptist 34.9%, Anglican 13.7%, Pentecostal 8.9% Seventh Day Adventist 4.4%, Methodist 3.6%, Church of God 1.9%, Plymouth Brethren 1.6%, other Protestant 0.9%), Roman Catholic 12%, other Christian 13% (includes Jehovah's Witness 1.1%), other 0.6%, none 1.9%, unspecified 2.6% (2010 est.)"
+    },
+    "bt": {
+      "capital": "Thimphu",
+      "religion": [
+        {
+          "name": "Lamaistic Buddhist",
+          "pct": 75.3
+        },
+        {
+          "name": "Indian- and Nepali-influenced Hinduism",
+          "pct": 22.1
+        },
+        {
+          "name": "other",
+          "pct": 2.6
+        }
+      ],
+      "religionRaw": "Lamaistic Buddhist 75.3%, Indian- and Nepali-influenced Hinduism 22.1%, other 2.6% (2005 est.)"
+    },
+    "bw": {
+      "capital": "Gaborone",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 79.1
+        },
+        {
+          "name": "Badimo",
+          "pct": 4.1
+        },
+        {
+          "name": "other",
+          "pct": 1.4
+        },
+        {
+          "name": "none",
+          "pct": 15.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.3
+        }
+      ],
+      "religionRaw": "Christian 79.1%, Badimo 4.1%, other 1.4% (includes Baha'i, Hindu, Muslim, Rastafarian), none 15.2%, unspecified 0.3% (2011 est.)"
+    },
+    "by": {
+      "capital": "Minsk",
+      "religion": [
+        {
+          "name": "Orthodox",
+          "pct": 48.3
+        },
+        {
+          "name": "Catholic",
+          "pct": 7.1
+        },
+        {
+          "name": "other",
+          "pct": 3.5
+        },
+        {
+          "name": "non-believers",
+          "pct": 41.1
+        }
+      ],
+      "religionRaw": "Orthodox 48.3%, Catholic 7.1%, other 3.5%, non-believers 41.1% (2011 est.)"
+    },
+    "bz": {
+      "capital": "Belmopan",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 40.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 31.5
+        },
+        {
+          "name": "includes Pentecostal",
+          "pct": 8.4
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 5.4
+        },
+        {
+          "name": "Anglican",
+          "pct": 4.7
+        },
+        {
+          "name": "Mennonite",
+          "pct": 3.7
+        },
+        {
+          "name": "Baptist",
+          "pct": 3.6
+        },
+        {
+          "name": "Methodist",
+          "pct": 2.9
+        },
+        {
+          "name": "Nazarene",
+          "pct": 2.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.7
+        },
+        {
+          "name": "other",
+          "pct": 10.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 15.5
+        }
+      ],
+      "religionRaw": "Roman Catholic 40.1%, Protestant 31.5% (includes Pentecostal 8.4%, Seventh Day Adventist 5.4%, Anglican 4.7%, Mennonite 3.7%, Baptist 3.6%, Methodist 2.9%, Nazarene 2.8%), Jehovah's Witness 1.7%, other 10.5% (includes Baha'i, Buddhist, Hindu, Church of Jesus Christ, Muslim, Rastafarian, Salvation Army), unspecified 0.6%, none 15.5% (2010 est.)"
+    },
+    "ca": {
+      "capital": "Ottawa",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 53.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 4.9
+        },
+        {
+          "name": "Hindu",
+          "pct": 2.3
+        },
+        {
+          "name": "Sikh",
+          "pct": 2.1
+        },
+        {
+          "name": "Buddhist",
+          "pct": 1
+        },
+        {
+          "name": "Jewish",
+          "pct": 0.9
+        },
+        {
+          "name": "none",
+          "pct": 34.6
+        }
+      ],
+      "religionRaw": "Christian 53.3%, Muslim 4.9%, Hindu 2.3%, Sikh 2.1%, Buddhist 1%, Jewish 0.9%, Traditional (North American Indigenous) 0.2%, other religions and traditional spirituality 0.6%, none 34.6% (2021 est.)"
+    },
+    "cd": {
+      "capital": "Kinshasa",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 29.9
+        },
+        {
+          "name": "Protestant",
+          "pct": 26.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 36.5
+        },
+        {
+          "name": "Kimbanguist",
+          "pct": 2.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.3
+        },
+        {
+          "name": "none",
+          "pct": 1.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Christian 93/1% (Roman Catholic 29.9%, Protestant 26.7%, other Christian 36.5%), Kimbanguist 2.8%, Muslim 1.3%, other (includes syncretic sects and indigenous beliefs) 1.2%, none 1.3%, unspecified 0.2% (2014 est.)"
+    },
+    "cf": {
+      "capital": "Bangui",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 34.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 15.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 22.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 13.8
+        },
+        {
+          "name": "ethnic religionist",
+          "pct": 12
+        },
+        {
+          "name": "Baha'i",
+          "pct": 0.2
+        },
+        {
+          "name": "agnostic/atheist",
+          "pct": 0.7
+        }
+      ],
+      "religionRaw": "Roman Catholic 34.6%, Protestant 15.7%, other Christian 22.9%, Muslim 13.8%, ethnic religionist 12%, Baha'i 0.2%, agnostic/atheist 0.7% (2020 est.)"
+    },
+    "cg": {
+      "capital": "Brazzaville",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 33.1
+        },
+        {
+          "name": "Awakening Churches/Christian Revival",
+          "pct": 22.3
+        },
+        {
+          "name": "Protestant",
+          "pct": 19.9
+        },
+        {
+          "name": "Salutiste",
+          "pct": 2.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.6
+        },
+        {
+          "name": "Kimbanguist",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 8.1
+        },
+        {
+          "name": "none",
+          "pct": 11.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 33.1%, Awakening Churches/Christian Revival 22.3%, Protestant 19.9%, Salutiste 2.2%, Muslim 1.6%, Kimbanguist 1.5%, other 8.1%, none 11.3% (2007 est.)"
+    },
+    "ch": {
+      "capital": "Bern",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 34.4
+        },
+        {
+          "name": "Protestant",
+          "pct": 22.5
+        },
+        {
+          "name": "other Christian",
+          "pct": 5.7
+        },
+        {
+          "name": "Muslim",
+          "pct": 5.4
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "none",
+          "pct": 29.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.1
+        }
+      ],
+      "religionRaw": "Roman Catholic 34.4%, Protestant 22.5%, other Christian 5.7%, Muslim 5.4%, other 1.5%, none 29.4%, unspecified 1.1% (2020 est.)"
+    },
+    "ci": {
+      "capital": "Yamoussoukro , Abidjan",
+      "capitalNote": "Yamoussoukro (legislative capital), Abidjan (administrative and economic capital); note - the US Embassy is in Abidjan",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 42.9
+        },
+        {
+          "name": "Catholic",
+          "pct": 17.2
+        },
+        {
+          "name": "Evangelical",
+          "pct": 11.8
+        },
+        {
+          "name": "Methodist",
+          "pct": 1.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.2
+        },
+        {
+          "name": "animist",
+          "pct": 3.6
+        },
+        {
+          "name": "other religion",
+          "pct": 0.5
+        },
+        {
+          "name": "none",
+          "pct": 19.1
+        }
+      ],
+      "religionRaw": "Muslim 42.9%, Catholic 17.2%, Evangelical 11.8%, Methodist 1.7%, other Christian 3.2%, animist 3.6%, other religion 0.5%, none 19.1% (2014 est.)"
+    },
+    "cl": {
+      "capital": "Santiago",
+      "capitalNote": "Santiago; note - Valparaiso is the seat of the national legislature",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 57
+        },
+        {
+          "name": "none",
+          "pct": 25.7
+        },
+        {
+          "name": "Evangelical or Protestant",
+          "pct": 16.2
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Catholic 57%, none 25.7%, Evangelical or Protestant 16.2%, other Christians and traditions related to Christ 1.3%; less than 1%: Buddhist, Catholic Orthodox, Church of Jesus Christ of Latter-Day Saints, Islam, Judaism, other religions, no religion (2024)"
+    },
+    "cm": {
+      "capital": "Yaounde",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 33.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 30.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 27.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 6.1
+        },
+        {
+          "name": "animist",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 0.7
+        },
+        {
+          "name": "none",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 33.1%, Muslim 30.6%, Protestant 27.1% other Christian 6.1%, animist 1.3%, other 0.7%, none 1.2% (2022 est.)"
+    },
+    "cn": {
+      "capital": "Beijing",
+      "religion": [
+        {
+          "name": "folk religion",
+          "pct": 21.9
+        },
+        {
+          "name": "Buddhist",
+          "pct": 18.2
+        },
+        {
+          "name": "Christian",
+          "pct": 5.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.8
+        },
+        {
+          "name": "other",
+          "pct": 0.7
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 52.1
+        }
+      ],
+      "religionRaw": "folk religion 21.9%, Buddhist 18.2%, Christian 5.1%, Muslim 1.8%, Hindu &lt; 0.1%, Jewish &lt; 0.1%, other 0.7% (includes Daoist (Taoist)), unaffiliated 52.1% (2021 est.)"
+    },
+    "co": {
+      "capital": "Bogota",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 63.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 17.2
+        },
+        {
+          "name": "Evangelical",
+          "pct": 16.7
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.3
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 0.6
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 0.1
+        },
+        {
+          "name": "other",
+          "pct": 0.3
+        },
+        {
+          "name": "agnostic",
+          "pct": 1
+        },
+        {
+          "name": "atheist",
+          "pct": 1
+        },
+        {
+          "name": "none",
+          "pct": 14.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.8
+        }
+      ],
+      "religionRaw": "Roman Catholic 63.6%, Protestant 17.2% (Evangelical 16.7%, Adventist 0.3%, other Protestant 0.2%), Jehovah's Witness 0.6%, Church of Jesus Christ 0.1%, other 0.3%, believer, 0.2%. agnostic 1%, atheist 1%, none 14.2%, unspecified 1.8% (2023 est.)"
+    },
+    "cr": {
+      "capital": "San Jose",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 47.5
+        },
+        {
+          "name": "Evangelical and Pentecostal",
+          "pct": 19.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.4
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 3.1
+        },
+        {
+          "name": "none",
+          "pct": 27
+        }
+      ],
+      "religionRaw": "Roman Catholic 47.5%, Evangelical and Pentecostal 19.8%, Jehovah's Witness 1.4%, other Protestant 1.2%, other 3.1%, none 27% (2021 est.)"
+    },
+    "cu": {
+      "capital": "Havana",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 58.9
+        },
+        {
+          "name": "folk religion",
+          "pct": 17.6
+        },
+        {
+          "name": "none",
+          "pct": 23.2
+        }
+      ],
+      "religionRaw": "Christian 58.9%, folk religion 17.6%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, Muslim &lt;1%, other &lt;1%, none 23.2% (2020 est.)"
+    },
+    "cv": {
+      "capital": "Praia",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 72.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 4
+        },
+        {
+          "name": "includes Adventist",
+          "pct": 1.9
+        },
+        {
+          "name": "Nazarene",
+          "pct": 1.8
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 0.2
+        },
+        {
+          "name": "God is Love",
+          "pct": 0.1
+        },
+        {
+          "name": "Christian Rationalism",
+          "pct": 1.7
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.3
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.2
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 1
+        },
+        {
+          "name": "other Christian",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "none",
+          "pct": 15.6
+        },
+        {
+          "name": "no response",
+          "pct": 0.4
+        }
+      ],
+      "religionRaw": "Roman Catholic 72.5%, Protestant 4% (includes Adventist 1.9%, Nazarene 1.8%, Assembly of God 0.2%, God is Love 0.1%), Christian Rationalism 1.7%, Muslim 1.3%, Jehovah's Witness 1.2%, Church of Jesus Christ 1%, other Christian 1.3%, other 1.2%, none 15.6%, no response 0.4% (2021 est.)"
+    },
+    "cw": {
+      "capital": "Willemstad",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 72.8
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 6.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 3.2
+        },
+        {
+          "name": "Adventist",
+          "pct": 3
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 2
+        },
+        {
+          "name": "Evangelical",
+          "pct": 1.9
+        },
+        {
+          "name": "other",
+          "pct": 3.8
+        },
+        {
+          "name": "none",
+          "pct": 6
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Roman Catholic 72.8%, Pentecostal 6.6%, Protestant 3.2%, Adventist 3%, Jehovah's Witness 2%, Evangelical 1.9%, other 3.8%, none 6%, unspecified 0.6% (2011 est.)"
+    },
+    "cy": {
+      "capital": "Nicosia",
+      "capitalNote": "Nicosia (Lefkosia/Lefkosa)",
+      "religion": [
+        {
+          "name": "Eastern Orthodox Christian",
+          "pct": 89.1
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 2.9
+        },
+        {
+          "name": "Protestant/Anglican",
+          "pct": 2
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.8
+        },
+        {
+          "name": "Buddhist",
+          "pct": 1
+        },
+        {
+          "name": "unknown",
+          "pct": 1.1
+        },
+        {
+          "name": "none/atheist",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Eastern Orthodox Christian 89.1%, Roman Catholic 2.9%, Protestant/Anglican 2%, Muslim 1.8%, Buddhist 1%, other (includes Maronite Catholic, Armenian Apostolic, Hindu) 1.4%, unknown 1.1%, none/atheist 0.6% (2011 est.)"
+    },
+    "cz": {
+      "capital": "Prague",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 7
+        },
+        {
+          "name": "none",
+          "pct": 47.8
+        },
+        {
+          "name": "unspecified",
+          "pct": 30.1
+        }
+      ],
+      "religionRaw": "Roman Catholic 7%, other believers belonging to a church or religious society 6% (includes Evangelical United Brethren Church and Czechoslovak Hussite Church), believers unaffiliated with a religious society 9.1%, none 47.8%, unspecified 30.1% (2021 est.)"
+    },
+    "de": {
+      "capital": "Berlin",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 24.8
+        },
+        {
+          "name": "Protestant",
+          "pct": 22.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 3.7
+        },
+        {
+          "name": "other",
+          "pct": 5.1
+        },
+        {
+          "name": "none",
+          "pct": 43.8
+        }
+      ],
+      "religionRaw": "Roman Catholic 24.8%, Protestant 22.6%, Muslim 3.7%, other 5.1%, none 43.8% (2022 est.)"
+    },
+    "dj": {
+      "capital": "Djibouti",
+      "religion": [
+        {
+          "name": "Sunni Muslim",
+          "pct": 94
+        },
+        {
+          "name": "other",
+          "pct": 6
+        }
+      ],
+      "religionRaw": "Sunni Muslim 94% (nearly all Djiboutians), other 6% (mainly foreign-born residents - Shia Muslim, Christian, Hindu, Jewish, Baha'i, and atheist)"
+    },
+    "dk": {
+      "capital": "Copenhagen",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 4.3
+        }
+      ],
+      "religionRaw": "Evangelical Lutheran (official) 71.4%, Muslim 4.3%, other/none/unspecified (denominations include Roman Catholic, Jehovah's Witness, Serbian Orthodox Christian, Jewish, Baptist, Buddhist, Church of Jesus Christ, Pentecostal, and nondenominational Christian) 24.3% (2024 est.)"
+    },
+    "dm": {
+      "capital": "Roseau",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 52.7
+        },
+        {
+          "name": "Protestant",
+          "pct": 29.7
+        },
+        {
+          "name": "includes Seventh Day Adventist",
+          "pct": 6.7
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 6.1
+        },
+        {
+          "name": "Baptist",
+          "pct": 5.2
+        },
+        {
+          "name": "Christian Union Church",
+          "pct": 3.9
+        },
+        {
+          "name": "Methodist",
+          "pct": 2.6
+        },
+        {
+          "name": "Gospel Mission",
+          "pct": 2.1
+        },
+        {
+          "name": "other Protestant",
+          "pct": 3.1
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.3
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 4.3
+        },
+        {
+          "name": "none",
+          "pct": 9.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.4
+        }
+      ],
+      "religionRaw": "Roman Catholic 52.7%, Protestant 29.7% (includes Seventh Day Adventist 6.7%, Pentecostal 6.1%, Baptist 5.2%, Christian Union Church 3.9%, Methodist 2.6%, Gospel Mission 2.1%, other Protestant 3.1%), Jehovah's Witness 1.3%, Rastafarian 1.1%, other 4.3%, none 9.4%, unspecified 1.4% (2011 est.)"
+    },
+    "do": {
+      "capital": "Santo Domingo",
+      "religion": [
+        {
+          "name": "Evangelical",
+          "pct": 50.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 30.1
+        },
+        {
+          "name": "none",
+          "pct": 18.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Evangelical 50.2%, Roman Catholic 30.1%, none 18.5%, unspecified 1.2% (2023 est.)"
+    },
+    "dz": {
+      "capital": "Algiers"
+    },
+    "ec": {
+      "capital": "Quito",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 68.2
+        },
+        {
+          "name": "Protestant",
+          "pct": 19
+        },
+        {
+          "name": "Evangelical",
+          "pct": 18.3
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.6
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.4
+        },
+        {
+          "name": "other",
+          "pct": 2.3
+        },
+        {
+          "name": "none",
+          "pct": 8.2
+        },
+        {
+          "name": "don't know/no response",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Roman Catholic 68.2%, Protestant 19% (Evangelical 18.3%, Adventist 0.6%, other Protestant 0.2%), Jehovah's Witness 1.4%, other 2.3%, none 8.2% don't know/no response 1% (2023 est.)"
+    },
+    "ee": {
+      "capital": "Tallinn",
+      "religion": [
+        {
+          "name": "Orthodox",
+          "pct": 16.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 9.2
+        },
+        {
+          "name": "Lutheran",
+          "pct": 7.7
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 3
+        },
+        {
+          "name": "none",
+          "pct": 58.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 12.9
+        }
+      ],
+      "religionRaw": "Orthodox 16.5%, Protestant 9.2% (Lutheran 7.7%, other Protestant 1.5%), other 3% (includes Roman Catholic, Muslim, Jehovah's Witness, Pentecostal, Buddhist, and Taara Believer), none 58.4%, unspecified 12.9% (2021 est.)"
+    },
+    "eg": {
+      "capital": "Cairo"
+    },
+    "eh": {
+      "capital": "El Aaiún",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 100
+        }
+      ]
+    },
+    "er": {
+      "capital": "Asmara"
+    },
+    "es": {
+      "capital": "Madrid",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 58.2
+        },
+        {
+          "name": "atheist",
+          "pct": 16.2
+        },
+        {
+          "name": "agnostic",
+          "pct": 10.8
+        },
+        {
+          "name": "other",
+          "pct": 2.7
+        },
+        {
+          "name": "non-believer",
+          "pct": 10.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.7
+        }
+      ],
+      "religionRaw": "Roman Catholic 58.2%, atheist 16.2%, agnostic 10.8%, other 2.7%, non-believer 10.5%, unspecified 1.7% (2021 est.)"
+    },
+    "et": {
+      "capital": "Addis Ababa",
+      "religion": [
+        {
+          "name": "Ethiopian Orthodox",
+          "pct": 43.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 31.3
+        },
+        {
+          "name": "Protestant",
+          "pct": 22.8
+        },
+        {
+          "name": "Catholic",
+          "pct": 0.7
+        },
+        {
+          "name": "traditional",
+          "pct": 0.6
+        },
+        {
+          "name": "other",
+          "pct": 0.8
+        }
+      ],
+      "religionRaw": "Ethiopian Orthodox 43.8%, Muslim 31.3%, Protestant 22.8%, Catholic 0.7%, traditional 0.6%, other 0.8% (2016 est.)"
+    },
+    "fi": {
+      "capital": "Helsinki",
+      "religion": [
+        {
+          "name": "Lutheran",
+          "pct": 66.6
+        },
+        {
+          "name": "Greek Orthodox",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 1.7
+        },
+        {
+          "name": "none",
+          "pct": 30.6
+        }
+      ],
+      "religionRaw": "Lutheran 66.6%, Greek Orthodox 1.1%, other 1.7%, none 30.6% (2022 est.)"
+    },
+    "fj": {
+      "capital": "Suva",
+      "capitalNote": "Suva (on Viti Levu)",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 45
+        },
+        {
+          "name": "Methodist",
+          "pct": 34.6
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 5.7
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 3.9
+        },
+        {
+          "name": "and Anglican",
+          "pct": 0.8
+        },
+        {
+          "name": "Hindu",
+          "pct": 27.9
+        },
+        {
+          "name": "other Christian",
+          "pct": 10.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 9.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 6.3
+        },
+        {
+          "name": "Sikh",
+          "pct": 0.3
+        },
+        {
+          "name": "other",
+          "pct": 0.3
+        },
+        {
+          "name": "none",
+          "pct": 0.8
+        }
+      ],
+      "religionRaw": "Protestant 45% (Methodist 34.6%, Assembly of God 5.7%, Seventh Day Adventist 3.9%, and Anglican 0.8%), Hindu 27.9%, other Christian 10.4%, Roman Catholic 9.1%, Muslim 6.3%, Sikh 0.3%, other 0.3%, none 0.8% (2007 est.)"
+    },
+    "fk": {
+      "capital": "Stanley",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 57.1
+        },
+        {
+          "name": "other",
+          "pct": 1.6
+        },
+        {
+          "name": "none",
+          "pct": 35.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 6
+        }
+      ],
+      "religionRaw": "Christian 57.1%, other 1.6%, none 35.4%, unspecified 6% (2016 est.)"
+    },
+    "fm": {
+      "capital": "Palikir",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 54.7
+        },
+        {
+          "name": "Protestant",
+          "pct": 41.1
+        },
+        {
+          "name": "includes Congregational",
+          "pct": 38.5
+        },
+        {
+          "name": "Baptist",
+          "pct": 1.1
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 0.8
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 0.7
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 1.9
+        },
+        {
+          "name": "none",
+          "pct": 0.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Roman Catholic 54.7%, Protestant 41.1% (includes Congregational 38.5%, Baptist 1.1%, Seventh Day Adventist 0.8%, Assembly of God 0.7%), Church of Jesus Christ 1.5%, other 1.9%, none 0.7%, unspecified 0.1% (2010 est.)"
+    },
+    "fo": {
+      "capital": "Torshavn",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 87
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        },
+        {
+          "name": "none",
+          "pct": 3.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 8.9
+        }
+      ],
+      "religionRaw": "Christian 87% (predominantly Evangelical Lutheran), other 0.9%, none 3.7%, unspecified 8.9% (2011 est.)"
+    },
+    "fr": {
+      "capital": "Paris",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 47
+        },
+        {
+          "name": "Muslim",
+          "pct": 4
+        },
+        {
+          "name": "Protestant",
+          "pct": 2
+        },
+        {
+          "name": "Buddhist",
+          "pct": 2
+        },
+        {
+          "name": "Orthodox",
+          "pct": 1
+        },
+        {
+          "name": "Jewish",
+          "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 1
+        },
+        {
+          "name": "none",
+          "pct": 33
+        },
+        {
+          "name": "unspecified",
+          "pct": 9
+        }
+      ],
+      "religionRaw": "Roman Catholic 47%, Muslim 4%, Protestant 2%, Buddhist 2%, Orthodox 1%, Jewish 1%, other 1%, none 33%, unspecified 9% (2021 est.)"
+    },
+    "ga": {
+      "capital": "Libreville",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 46.4
+        },
+        {
+          "name": "Revival Church",
+          "pct": 37
+        },
+        {
+          "name": "other Protestant",
+          "pct": 9.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 29.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 4
+        },
+        {
+          "name": "Muslim",
+          "pct": 10.8
+        },
+        {
+          "name": "traditional/animist",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        },
+        {
+          "name": "none",
+          "pct": 7
+        }
+      ],
+      "religionRaw": "Protestant 46.4% (Revival Church 37%, other Protestant 9.4%), Roman Catholic 29.8%, other Christian 4%, Muslim 10.8%, traditional/animist 1.1%, other 0.9%, none 7% (2019-21 est.)"
+    },
+    "gb": {
+      "capital": "London",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 4.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 2
+        },
+        {
+          "name": "unspecified",
+          "pct": 7.2
+        },
+        {
+          "name": "none",
+          "pct": 25.7
+        }
+      ],
+      "religionRaw": "Christian (includes Anglican, Roman Catholic, Presbyterian, Methodist) 59.5%, Muslim 4.4%, Hindu 1.3%, other 2%, unspecified 7.2%, none 25.7% (2011 est.)"
+    },
+    "gd": {
+      "capital": "Saint George's",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 49.2
+        },
+        {
+          "name": "includes Pentecostal",
+          "pct": 17.2
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 13.2
+        },
+        {
+          "name": "Anglican",
+          "pct": 8.5
+        },
+        {
+          "name": "Baptist",
+          "pct": 3.2
+        },
+        {
+          "name": "Church of God",
+          "pct": 2.4
+        },
+        {
+          "name": "Evangelical",
+          "pct": 1.9
+        },
+        {
+          "name": "Methodist",
+          "pct": 1.6
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 36
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.2
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 5.5
+        },
+        {
+          "name": "none",
+          "pct": 5.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.3
+        }
+      ],
+      "religionRaw": "Protestant 49.2% (includes Pentecostal 17.2%, Seventh Day Adventist 13.2%, Anglican 8.5%, Baptist 3.2%, Church of God 2.4%, Evangelical 1.9%, Methodist 1.6%, other 1.2%), Roman Catholic 36%, Jehovah's Witness 1.2%, Rastafarian 1.2%, other 5.5%, none 5.7%, unspecified 1.3% (2011 est.)"
+    },
+    "ge": {
+      "capital": "Tbilisi",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 10.7
+        },
+        {
+          "name": "Armenian Apostolic Christian",
+          "pct": 2.9
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "none",
+          "pct": 0.5
+        },
+        {
+          "name": "unspecified/no answer",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Eastern Orthodox Christian (official) 83.4%, Muslim 10.7%, Armenian Apostolic Christian 2.9%, other 1.2% (includes Roman Catholic Christian, Jehovah's Witness, Yazidi, Protestant Christian, Jewish), none 0.5%, unspecified/no answer 1.2% (2014 est.)"
+    },
+    "gh": {
+      "capital": "Accra",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 71.3
+        },
+        {
+          "name": "Pentecostal/Charismatic",
+          "pct": 31.6
+        },
+        {
+          "name": "Protestant",
+          "pct": 17.4
+        },
+        {
+          "name": "Catholic",
+          "pct": 10
+        },
+        {
+          "name": "other",
+          "pct": 12.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 19.9
+        },
+        {
+          "name": "traditionalist",
+          "pct": 3.2
+        },
+        {
+          "name": "other",
+          "pct": 4.5
+        },
+        {
+          "name": "none",
+          "pct": 1.1
+        }
+      ],
+      "religionRaw": "Christian 71.3% (Pentecostal/Charismatic 31.6%, Protestant 17.4%, Catholic 10%, other 12.3%), Muslim 19.9%, traditionalist 3.2%, other 4.5%, none 1.1% (2021 est.)"
+    },
+    "gi": {
+      "capital": "Gibraltar",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 72.1
+        },
+        {
+          "name": "Church of England",
+          "pct": 7.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 3.6
+        },
+        {
+          "name": "Jewish",
+          "pct": 2.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 2
+        },
+        {
+          "name": "other",
+          "pct": 1.1
+        },
+        {
+          "name": "none",
+          "pct": 7.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Roman Catholic 72.1%, Church of England 7.7%, other Christian 3.8%, Muslim 3.6%, Jewish 2.4%, Hindu 2%, other 1.1%, none 7.1%, unspecified 0.1% (2012 est.)"
+    },
+    "gl": {
+      "capital": "Nuuk"
+    },
+    "gm": {
+      "capital": "Banjul",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 96.4
+        },
+        {
+          "name": "Christian",
+          "pct": 3.5
+        },
+        {
+          "name": "other or none",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Muslim 96.4%, Christian 3.5%, other or none 0.1% (2019-20 est.)"
+    },
+    "gn": {
+      "capital": "Conakry",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 85.2
+        },
+        {
+          "name": "Christian",
+          "pct": 13.4
+        },
+        {
+          "name": "animist",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Muslim 85.2%, Christian 13.4%, animist 0.2%, none 1.2% (2018 est.)"
+    },
+    "gq": {
+      "capital": "Malabo",
+      "capitalNote": "Malabo; note - Malabo is on the island of Bioko; some months of the year, the government operates out of Bata on the mainland region.",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 88
+        },
+        {
+          "name": "Protestant",
+          "pct": 5
+        },
+        {
+          "name": "Muslim",
+          "pct": 2
+        },
+        {
+          "name": "other",
+          "pct": 5
+        }
+      ],
+      "religionRaw": "Roman Catholic 88%, Protestant 5%, Muslim 2%, other 5% (animist, Baha'i, Jewish) (2015 est.)"
+    },
+    "gr": {
+      "capital": "Athens",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 2
+        },
+        {
+          "name": "other",
+          "pct": 3
+        },
+        {
+          "name": "unspecified",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Greek Orthodox 81-90%, Muslim 2%, other 3%, none 4-15%, unspecified 1% (2015 est.)"
+    },
+    "gt": {
+      "capital": "Guatemala City",
+      "religion": [
+        {
+          "name": "Evangelical",
+          "pct": 45.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 42.4
+        },
+        {
+          "name": "none",
+          "pct": 11
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.9
+        }
+      ],
+      "religionRaw": "Evangelical 45.7%, Roman Catholic 42.4%, none 11%, unspecified 0.9% (2023 est.)"
+    },
+    "gu": {
+      "capital": "Hagatna",
+      "capitalNote": "Hagatna (Agana)",
+      "religion": [
+        {
+          "name": "folk religions",
+          "pct": 1.5
+        },
+        {
+          "name": "Buddhist",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 1.6
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 1.7
+        }
+      ],
+      "religionRaw": "Christian (predominantly Roman Catholic) 94.2%, folk religions 1.5%, Buddhist 1.1%, other 1.6%, unaffiliated 1.7% (2020 est.)"
+    },
+    "gw": {
+      "capital": "Bissau",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 46.1
+        },
+        {
+          "name": "folk religions",
+          "pct": 30.6
+        },
+        {
+          "name": "Christian",
+          "pct": 18.9
+        },
+        {
+          "name": "other or unaffiliated",
+          "pct": 4.4
+        }
+      ],
+      "religionRaw": "Muslim 46.1%, folk religions 30.6%, Christian 18.9%, other or unaffiliated 4.4% (2020 est.)"
+    },
+    "gy": {
+      "capital": "Georgetown",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 34.8
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 22.8
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 5.4
+        },
+        {
+          "name": "Anglican",
+          "pct": 5.2
+        },
+        {
+          "name": "Methodist",
+          "pct": 1.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 24.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 20.8
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 7.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 6.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.3
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 0.5
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        },
+        {
+          "name": "none",
+          "pct": 3.1
+        }
+      ],
+      "religionRaw": "Protestant 34.8% (Pentecostal 22.8%, Seventh Day Adventist 5.4%, Anglican 5.2%, Methodist 1.4%), Hindu 24.8%, other Christian 20.8%, Roman Catholic 7.1%, Muslim 6.8%, Jehovah's Witness 1.3%, Rastafarian 0.5%, other 0.9%, none 3.1% (2012 est.)"
+    },
+    "hk": {
+      "religion": [
+        {
+          "name": "Buddhist or Taoist",
+          "pct": 27.9
+        },
+        {
+          "name": "Protestant",
+          "pct": 6.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 5.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 4.2
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.4
+        },
+        {
+          "name": "Sikh",
+          "pct": 0.2
+        },
+        {
+          "name": "other or none",
+          "pct": 54.3
+        }
+      ],
+      "religionRaw": "Buddhist or Taoist 27.9%, Protestant 6.7%, Roman Catholic 5.3%, Muslim 4.2%, Hindu 1.4%, Sikh 0.2%, other or none 54.3% (2016 est.)"
+    },
+    "hn": {
+      "capital": "Tegucigalpa",
+      "religion": [
+        {
+          "name": "Evangelical",
+          "pct": 55
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 33.4
+        },
+        {
+          "name": "none",
+          "pct": 10.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.5
+        }
+      ],
+      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)"
+    },
+    "hr": {
+      "capital": "Zagreb",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 79
+        },
+        {
+          "name": "Orthodox",
+          "pct": 3.3
+        },
+        {
+          "name": "Protestant",
+          "pct": 0.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 4.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 1.1
+        },
+        {
+          "name": "agnostic",
+          "pct": 1.7
+        },
+        {
+          "name": "none or atheist",
+          "pct": 4.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 3.9
+        }
+      ],
+      "religionRaw": "Roman Catholic 79%, Orthodox 3.3%, Protestant 0.3%, other Christian 4.8%, Muslim 1.3%, other 1.1%, agnostic 1.7%, none or atheist 4.7%, unspecified 3.9% (2021 est.)"
+    },
+    "ht": {
+      "capital": "Port-au-Prince",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 55
+        },
+        {
+          "name": "Protestant",
+          "pct": 29
+        },
+        {
+          "name": "Vodou",
+          "pct": 2.1
+        },
+        {
+          "name": "other",
+          "pct": 4.6
+        },
+        {
+          "name": "none",
+          "pct": 10
+        }
+      ],
+      "religionRaw": "Catholic 55%, Protestant 29%, Vodou 2.1%, other 4.6%, none 10% (2018 est.)"
+    },
+    "hu": {
+      "capital": "Budapest",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 30.1
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 27.5
+        },
+        {
+          "name": "Greek Catholic",
+          "pct": 1.7
+        },
+        {
+          "name": "other Catholic",
+          "pct": 0.9
+        },
+        {
+          "name": "Calvinist",
+          "pct": 9.8
+        },
+        {
+          "name": "Lutheran",
+          "pct": 1.8
+        },
+        {
+          "name": "other",
+          "pct": 0.4
+        },
+        {
+          "name": "none",
+          "pct": 16.1
+        },
+        {
+          "name": "no answer",
+          "pct": 40.1
+        }
+      ],
+      "religionRaw": "Catholic 30.1% (Roman Catholic 27.5%, Greek Catholic 1.7%, other Catholic 0.9%), Calvinist 9.8%, Lutheran 1.8%, other Christian (includes Orthodox) 1.6%, other 0.4%, none 16.1%, no answer 40.1% (2022 est.)"
+    },
+    "id": {
+      "capital": "Jakarta",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 87.4
+        },
+        {
+          "name": "Protestant",
+          "pct": 7.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 3.1
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.7
+        },
+        {
+          "name": "other",
+          "pct": 0.8
+        }
+      ],
+      "religionRaw": "Muslim 87.4%, Protestant 7.5%, Roman Catholic 3.1%, Hindu 1.7%, other 0.8% (includes Buddhist and Confucian) (2022 est.)"
+    },
+    "ie": {
+      "capital": "Dublin",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 69.2
+        },
+        {
+          "name": "Protestant",
+          "pct": 3.7
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.2
+        },
+        {
+          "name": "Orthodox",
+          "pct": 2
+        },
+        {
+          "name": "other Christian",
+          "pct": 0.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.6
+        },
+        {
+          "name": "other",
+          "pct": 1.4
+        },
+        {
+          "name": "agnostic/atheist",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 14.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.7
+        }
+      ],
+      "religionRaw": "Roman Catholic 69.2% (includes lapsed), Protestant 3.7% (Church of Ireland/England/Anglican/Episcopalian 2.5%, other Protestant 1.2%), Orthodox 2%, other Christian 0.9%, Muslim 1.6%, other 1.4%, agnostic/atheist 0.1%, none 14.5%, unspecified 6.7% (2022 est.)"
+    },
+    "il": {
+      "capital": "Jerusalem",
+      "religion": [
+        {
+          "name": "Jewish",
+          "pct": 73.5
+        },
+        {
+          "name": "Muslim",
+          "pct": 18.1
+        },
+        {
+          "name": "Christian",
+          "pct": 1.9
+        },
+        {
+          "name": "Druze",
+          "pct": 1.6
+        },
+        {
+          "name": "other",
+          "pct": 4.9
+        }
+      ],
+      "religionRaw": "Jewish 73.5%, Muslim 18.1%, Christian 1.9%, Druze 1.6%, other 4.9% (2022 est.)"
+    },
+    "im": {
+      "capital": "Douglas",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 54.7
+        },
+        {
+          "name": "Muslim",
+          "pct": 0.5
+        },
+        {
+          "name": "Buddhist",
+          "pct": 0.5
+        },
+        {
+          "name": "Hindu",
+          "pct": 0.4
+        },
+        {
+          "name": "Jewish",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 43.8
+        }
+      ],
+      "religionRaw": "Christian 54.7%, Muslim 0.5%, Buddhist 0.5%, Hindu 0.4%, Jewish 0.2%, none 43.8% (2021 est.)"
+    },
+    "in": {
+      "capital": "New Delhi",
+      "religion": [
+        {
+          "name": "Hindu",
+          "pct": 79.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 14.2
+        },
+        {
+          "name": "Christian",
+          "pct": 2.3
+        },
+        {
+          "name": "Sikh",
+          "pct": 1.7
+        },
+        {
+          "name": "other and unspecified",
+          "pct": 2
+        }
+      ],
+      "religionRaw": "Hindu 79.8%, Muslim 14.2%, Christian 2.3%, Sikh 1.7%, other and unspecified 2% (2011 est.)"
+    },
+    "iq": {
+      "capital": "Baghdad",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Muslim (official) 95-98% (Shia 61-64%, Sunni 29-34%), Christian 1% (includes Catholic, Orthodox, Protestant, Assyrian Church of the East), other 1-4% (2015 est.)"
+    },
+    "ir": {
+      "capital": "Tehran",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 0.7
+        },
+        {
+          "name": "Baha'i",
+          "pct": 0.3
+        },
+        {
+          "name": "agnostic",
+          "pct": 0.3
+        }
+      ],
+      "religionRaw": "Muslim (official) 98.5%, Christian 0.7%, Baha'i 0.3%, agnostic 0.3%, other (includes Zoroastrian, Jewish, Hindu) 0.2% (2020 est.)"
+    },
+    "is": {
+      "capital": "Reykjavik",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 3.8
+        },
+        {
+          "name": "Independent Congregation of Reykjavik",
+          "pct": 2.6
+        },
+        {
+          "name": "pagan worship",
+          "pct": 1.5
+        },
+        {
+          "name": "Icelandic Ethical Humanist Association",
+          "pct": 1.4
+        },
+        {
+          "name": "or unspecified",
+          "pct": 18.7
+        },
+        {
+          "name": "none",
+          "pct": 7.7
+        }
+      ],
+      "religionRaw": "Evangelical Lutheran Church of Iceland (official) 58.6% Roman Catholic 3.8%, Independent Congregation of Reykjavik 2.6%, Independent Congregation of Hafnarfjordur 1.9%, pagan worship 1.5%, Icelandic Ethical Humanist Association 1.4%, other (includes Zuist and Pentecostal) or unspecified 18.7%, none 7.7% (2024 est.)"
+    },
+    "it": {
+      "capital": "Rome",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 80.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 4.9
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 13.4
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        }
+      ],
+      "religionRaw": "Christian 80.8% (overwhelmingly Roman Catholic with very small groups of Jehovah's Witnesses and Protestants), Muslim 4.9%, unaffiliated 13.4%, other 0.9% (2020 est.)"
+    },
+    "jm": {
+      "capital": "Kingston",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 64.8
+        },
+        {
+          "name": "includes Seventh Day Adventist",
+          "pct": 12
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 11
+        },
+        {
+          "name": "Other Church of God",
+          "pct": 9.2
+        },
+        {
+          "name": "New Testament Church of God",
+          "pct": 7.2
+        },
+        {
+          "name": "Baptist",
+          "pct": 6.7
+        },
+        {
+          "name": "Church of God in Jamaica",
+          "pct": 4.8
+        },
+        {
+          "name": "Church of God of Prophecy",
+          "pct": 4.5
+        },
+        {
+          "name": "Anglican",
+          "pct": 2.8
+        },
+        {
+          "name": "United Church",
+          "pct": 2.1
+        },
+        {
+          "name": "Methodist",
+          "pct": 1.6
+        },
+        {
+          "name": "Revived",
+          "pct": 1.4
+        },
+        {
+          "name": "Brethren",
+          "pct": 0.9
+        },
+        {
+          "name": "and Moravian",
+          "pct": 0.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 2.2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.9
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 6.5
+        },
+        {
+          "name": "none",
+          "pct": 21.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 2.3
+        }
+      ],
+      "religionRaw": "Protestant 64.8% (includes Seventh Day Adventist 12.0%, Pentecostal 11.0%, Other Church of God 9.2%, New Testament Church of God 7.2%, Baptist 6.7%, Church of God in Jamaica 4.8%, Church of God of Prophecy 4.5%, Anglican 2.8%, United Church 2.1%, Methodist 1.6%, Revived 1.4%, Brethren 0.9%, and Moravian 0.7%), Roman Catholic 2.2%, Jehovah's Witness 1.9%, Rastafarian 1.1%, other 6.5%, none 21.3%, unspecified 2.3% (2011 est.)"
+    },
+    "jo": {
+      "capital": "Amman",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 97.1
+        },
+        {
+          "name": "Christian",
+          "pct": 2.1
+        },
+        {
+          "name": "Buddhist",
+          "pct": 0.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Muslim 97.1% (official; predominantly Sunni), Christian 2.1% (majority Greek Orthodox, but some Greek and Roman Catholics, Syrian Orthodox, Coptic Orthodox, Armenian Orthodox, and Protestant denominations), Buddhist 0.4%, Hindu 0.1%, Jewish &lt;0.1%, folk &lt;0.1%, other &lt;0.1%, unaffiliated &lt;0.1% (2020 est.)"
+    },
+    "jp": {
+      "capital": "Tokyo",
+      "religion": [
+        {
+          "name": "Shintoism",
+          "pct": 48.6
+        },
+        {
+          "name": "Buddhism",
+          "pct": 46.4
+        },
+        {
+          "name": "Christianity",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 4
+        }
+      ],
+      "religionRaw": "Shintoism 48.6%, Buddhism 46.4%, Christianity 1.1%, other 4% (2021 est.)"
+    },
+    "ke": {
+      "capital": "Nairobi",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 85.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 33.4
+        },
+        {
+          "name": "Catholic",
+          "pct": 20.6
+        },
+        {
+          "name": "Evangelical",
+          "pct": 20.4
+        },
+        {
+          "name": "African Instituted Churches",
+          "pct": 7
+        },
+        {
+          "name": "other Christian",
+          "pct": 4.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 10.9
+        },
+        {
+          "name": "other",
+          "pct": 1.8
+        },
+        {
+          "name": "none",
+          "pct": 1.6
+        },
+        {
+          "name": "don't know/no answer",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Christian 85.5% (Protestant 33.4%, Catholic 20.6%, Evangelical 20.4%, African Instituted Churches 7%, other Christian 4.1%), Muslim 10.9%, other 1.8%, none 1.6%, don't know/no answer 0.2% (2019 est.)"
+    },
+    "kg": {
+      "capital": "Bishkek",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 90
+        },
+        {
+          "name": "Christian",
+          "pct": 7
+        },
+        {
+          "name": "Russian Orthodox",
+          "pct": 3
+        },
+        {
+          "name": "other",
+          "pct": 3
+        }
+      ],
+      "religionRaw": "Muslim 90% (majority Sunni), Christian 7% (Russian Orthodox 3%), other 3% (includes Jewish, Buddhist, Baha'i) (2017 est.)"
+    },
+    "kh": {
+      "capital": "Phnom Penh",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 2
+        },
+        {
+          "name": "Christian",
+          "pct": 0.3
+        },
+        {
+          "name": "other",
+          "pct": 0.5
+        }
+      ],
+      "religionRaw": "Buddhist (official) 97.1%, Muslim 2%, Christian 0.3%, other 0.5% (2019 est.)"
+    },
+    "ki": {
+      "capital": "Tarawa",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 58.9
+        },
+        {
+          "name": "Kiribati Uniting Church",
+          "pct": 21.2
+        },
+        {
+          "name": "Kiribati Protestant Church",
+          "pct": 8.4
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 5.6
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 2.1
+        },
+        {
+          "name": "Baha'i",
+          "pct": 2.1
+        },
+        {
+          "name": "other",
+          "pct": 1.7
+        }
+      ],
+      "religionRaw": "Roman Catholic 58.9%, Kiribati Uniting Church 21.2%, Kiribati Protestant Church 8.4%, Church of Jesus Christ 5.6%, Seventh Day Adventist 2.1%, Baha'i 2.1%, other 1.7% (2020 est.)"
+    },
+    "km": {
+      "capital": "Moroni",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 98.1
+        },
+        {
+          "name": "ethnic religionist",
+          "pct": 1.1
+        },
+        {
+          "name": "Christian",
+          "pct": 0.6
+        },
+        {
+          "name": "other",
+          "pct": 0.3
+        }
+      ],
+      "religionRaw": "Muslim 98.1% (overwhelmingly Sunni Muslim, small Shia Muslim and Ahmadiyya Muslim populations), ethnic religionist 1.1%, Christian 0.6%, other 0.3% (2020 est.)"
+    },
+    "kn": {
+      "capital": "Basseterre"
+    },
+    "kp": {
+      "capital": "Pyongyang"
+    },
+    "kr": {
+      "capital": "Seoul",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 17
+        },
+        {
+          "name": "Buddhist",
+          "pct": 16
+        },
+        {
+          "name": "Catholic",
+          "pct": 6
+        },
+        {
+          "name": "none",
+          "pct": 60
+        }
+      ],
+      "religionRaw": "Protestant 17%, Buddhist 16%, Catholic 6%, none 60% (2021 est.)"
+    },
+    "kw": {
+      "capital": "Kuwait City",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 18.2
+        },
+        {
+          "name": "other and unspecified",
+          "pct": 7.2
+        }
+      ],
+      "religionRaw": "Muslim (official) 74.6%, Christian 18.2%, other and unspecified 7.2% (2013 est.)"
+    },
+    "ky": {
+      "capital": "George Town",
+      "capitalNote": "George Town (on Grand Cayman)",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 60.8
+        },
+        {
+          "name": "includes Church of God",
+          "pct": 19.5
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 8.7
+        },
+        {
+          "name": "non-denominational",
+          "pct": 8.3
+        },
+        {
+          "name": "Baptist",
+          "pct": 6.9
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 6.8
+        },
+        {
+          "name": "Presbyterian/United Church",
+          "pct": 5.7
+        },
+        {
+          "name": "Anglican",
+          "pct": 2.8
+        },
+        {
+          "name": "Wesleyan Holiness",
+          "pct": 1.5
+        },
+        {
+          "name": "Methodist",
+          "pct": 0.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 13.6
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.7
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 0.9
+        },
+        {
+          "name": "other",
+          "pct": 4.8
+        },
+        {
+          "name": "none",
+          "pct": 16.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.4
+        }
+      ],
+      "religionRaw": "Protestant 60.8% (includes Church of God 19.5%, Seventh Day Adventist 8.7%, non-denominational 8.3%, Baptist 6.9%, Pentecostal 6.8%, Presbyterian/United Church 5.7%, Anglican 2.8%, Wesleyan Holiness 1.5%, Methodist 0.5%), Roman Catholic 13.6%, Hindu 1.7%, Jehovah's Witness 0.9%, other 4.8%, none 16.7%, unspecified 1.4% (2021 est.)"
+    },
+    "kz": {
+      "capital": "Astana",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 69.3
+        },
+        {
+          "name": "Christian",
+          "pct": 17.2
+        },
+        {
+          "name": "Orthodox",
+          "pct": 17
+        },
+        {
+          "name": "other",
+          "pct": 0.2
+        },
+        {
+          "name": "Buddhism",
+          "pct": 0.1
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "non-believers",
+          "pct": 2.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 11
+        }
+      ],
+      "religionRaw": "Muslim 69.3%, Christian 17.2% (Orthodox 17%, other 0.2%), Buddhism 0.1%, other 0.1%, non-believers 2.3%, unspecified 11% (2021 est.)"
+    },
+    "la": {
+      "capital": "Vientiane",
+      "capitalNote": "Vientiane (Viangchan)",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 64.7
+        },
+        {
+          "name": "Christian",
+          "pct": 1.7
+        },
+        {
+          "name": "none",
+          "pct": 31.4
+        },
+        {
+          "name": "other/not stated",
+          "pct": 2.1
+        }
+      ],
+      "religionRaw": "Buddhist 64.7%, Christian 1.7%, none 31.4%, other/not stated 2.1% (2015 est.)"
+    },
+    "lb": {
+      "capital": "Beirut",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 67.8
+        },
+        {
+          "name": "Christian",
+          "pct": 32.4
+        },
+        {
+          "name": "Druze",
+          "pct": 4.5
+        }
+      ],
+      "religionRaw": "Muslim 67.8% (31.9% Sunni, 31.2% Shia, smaller percentages of Alawites and Ismailis), Christian 32.4% (Maronite Catholics are the largest Christian group), Druze 4.5%, very small numbers of Jews, Baha'is, Buddhists, and Hindus (2020 est.)"
+    },
+    "lc": {
+      "capital": "Castries",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 61.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 25.5
+        },
+        {
+          "name": "includes Seventh Day Adventist",
+          "pct": 10.4
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 8.9
+        },
+        {
+          "name": "Baptist",
+          "pct": 2.2
+        },
+        {
+          "name": "Anglican",
+          "pct": 1.6
+        },
+        {
+          "name": "Church of God",
+          "pct": 1.5
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.9
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.4
+        },
+        {
+          "name": "includes Evangelical",
+          "pct": 2.3
+        },
+        {
+          "name": "and Jehovah's Witness",
+          "pct": 1.1
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.9
+        },
+        {
+          "name": "other",
+          "pct": 0.4
+        },
+        {
+          "name": "none",
+          "pct": 5.9
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.4
+        }
+      ],
+      "religionRaw": "Roman Catholic 61.5%, Protestant 25.5% (includes Seventh Day Adventist 10.4%, Pentecostal 8.9%, Baptist 2.2%, Anglican 1.6%, Church of God 1.5%, other Protestant 0.9%), other Christian 3.4% (includes Evangelical 2.3% and Jehovah's Witness 1.1%), Rastafarian 1.9%, other 0.4%, none 5.9%, unspecified 1.4% (2010 est.)"
+    },
+    "li": {
+      "capital": "Vaduz",
+      "religion": [
+        {
+          "name": "Protestant Reformed",
+          "pct": 6.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 5.9
+        },
+        {
+          "name": "Christian Orthodox",
+          "pct": 1.3
+        },
+        {
+          "name": "Lutheran",
+          "pct": 1.2
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 0.3
+        },
+        {
+          "name": "other",
+          "pct": 0.8
+        },
+        {
+          "name": "none",
+          "pct": 7
+        },
+        {
+          "name": "unspecified",
+          "pct": 3.3
+        }
+      ],
+      "religionRaw": "Roman Catholic (official) 73.4%, Protestant Reformed 6.3%, Muslim 5.9%, Christian Orthodox 1.3%, Lutheran 1.2%, other Protestant 0.7%, other Christian 0.3%, other 0.8%, none 7%, unspecified 3.3% (2015 est.)"
+    },
+    "lk": {
+      "capital": "Colombo",
+      "capitalNote": "Colombo (commercial capital); Sri Jayewardenepura Kotte (legislative capital)",
+      "religion": [
+        {
+          "name": "Hindu",
+          "pct": 12.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 9.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 6.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 0.05
+        }
+      ],
+      "religionRaw": "Buddhist (official) 70.2%, Hindu 12.6%, Muslim 9.7%, Roman Catholic 6.1%, other Christian 1.3%, other 0.05% (2012 est.)"
+    },
+    "lr": {
+      "capital": "Monrovia",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 84.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 12
+        },
+        {
+          "name": "Traditional",
+          "pct": 0.5
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 2.6
+        }
+      ],
+      "religionRaw": "Christian 84.9%, Muslim 12%, Traditional 0.5%, other 0.1%, none 2.6% (2022 est.)"
+    },
+    "ls": {
+      "capital": "Maseru",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 47.8
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 23.1
+        },
+        {
+          "name": "Lesotho Evangelical",
+          "pct": 17.3
+        },
+        {
+          "name": "Anglican",
+          "pct": 7.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 39.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 9.1
+        },
+        {
+          "name": "non-Christian",
+          "pct": 1.4
+        },
+        {
+          "name": "none",
+          "pct": 2.3
+        }
+      ],
+      "religionRaw": "Protestant 47.8% (Pentecostal 23.1%, Lesotho Evangelical 17.3%, Anglican 7.4%), Roman Catholic 39.3%, other Christian 9.1%, non-Christian 1.4%, none 2.3% (2014 est.)"
+    },
+    "lt": {
+      "capital": "Vilnius",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 74.2
+        },
+        {
+          "name": "Russian Orthodox",
+          "pct": 3.7
+        },
+        {
+          "name": "Old Believer",
+          "pct": 0.6
+        },
+        {
+          "name": "Evangelical Lutheran",
+          "pct": 0.6
+        },
+        {
+          "name": "Evangelical Reformist",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 6.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 13.7
+        }
+      ],
+      "religionRaw": "Roman Catholic 74.2%, Russian Orthodox 3.7%, Old Believer 0.6%, Evangelical Lutheran 0.6%, Evangelical Reformist 0.2%, other (including Sunni Muslim, Jewish, Greek Catholic, and Karaite) 0.9%, none 6.1%, unspecified 13.7% (2021 est.)"
+    },
+    "lu": {
+      "capital": "Luxembourg",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 2.3
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 26.7
+        }
+      ],
+      "religionRaw": "Christian (predominantly Roman Catholic) 70.6%, Muslim 2.3%, other (includes Buddhist, folk religions, Hindu, Jewish) 0.4%, unaffiliated 26.7% (2020 est.)"
+    },
+    "lv": {
+      "capital": "Riga",
+      "religion": [
+        {
+          "name": "Lutheran",
+          "pct": 36.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 19.5
+        },
+        {
+          "name": "Orthodox",
+          "pct": 19.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 1.6
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "unspecified/none",
+          "pct": 23.5
+        }
+      ],
+      "religionRaw": "Lutheran 36.2%, Roman Catholic 19.5%, Orthodox 19.1%, other Christian 1.6%, other 0.1%, unspecified/none 23.5% (2017 est.)"
+    },
+    "ly": {
+      "capital": "Tripoli",
+      "capitalNote": "Tripoli (Tarabulus)",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 2.7
+        }
+      ],
+      "religionRaw": "Muslim (official; virtually all Sunni) 96.6%, Christian 2.7%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, folk religion &lt;1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+    },
+    "ma": {
+      "capital": "Rabat",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99
+        },
+        {
+          "name": "other",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Muslim 99% (official; virtually all Sunni, &lt;0.1% Shia), other 1% (includes Christian, Jewish, and Baha'i); note - Jewish about 3,000-3,500 (2020 est.)"
+    },
+    "mc": {
+      "capital": "Monaco",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 90
+        },
+        {
+          "name": "other",
+          "pct": 10
+        }
+      ],
+      "religionRaw": "Roman Catholic 90% (official), other 10%"
+    },
+    "md": {
+      "capital": "Chisinau in Romanian",
+      "capitalNote": "Chisinau in Romanian (Kishinev in Russian)",
+      "religion": [
+        {
+          "name": "Orthodox",
+          "pct": 90.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 2.6
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "atheist",
+          "pct": 0.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.9
+        }
+      ],
+      "religionRaw": "Orthodox 90.1%, other Christian 2.6%, other 0.1%, agnostic &lt;0.1%, atheist 0.2%, unspecified 6.9% (2014 est.)"
+    },
+    "me": {
+      "capital": "Podgorica",
+      "religion": [
+        {
+          "name": "Orthodox",
+          "pct": 72.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 19.1
+        },
+        {
+          "name": "Catholic",
+          "pct": 3.4
+        },
+        {
+          "name": "atheist",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 2.6
+        }
+      ],
+      "religionRaw": "Orthodox 72.1%, Muslim 19.1%, Catholic 3.4%, atheist 1.2%, other 1.5%, unspecified 2.6% (2011 est.)"
+    },
+    "mf": {
+      "capital": "Marigot"
+    },
+    "mg": {
+      "capital": "Antananarivo",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 32.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 8.1
+        },
+        {
+          "name": "traditional/Animist",
+          "pct": 1.7
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.4
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 21.9
+        }
+      ],
+      "religionRaw": "Church of Jesus Christ in Madagascar/Malagasy Lutheran Church/Anglican Church 34%, Roman Catholic 32.3%, other Christian 8.1%, traditional/Animist 1.7%, Muslim 1.4%, other 0.6%, none 21.9% (2021 est.)"
+    },
+    "mh": {
+      "capital": "Majuro",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 79.3
+        },
+        {
+          "name": "United Church of Christ",
+          "pct": 47.9
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 14.1
+        },
+        {
+          "name": "Full Gospel",
+          "pct": 5
+        },
+        {
+          "name": "Bukot Nan Jesus",
+          "pct": 3
+        },
+        {
+          "name": "Salvation Army",
+          "pct": 2.3
+        },
+        {
+          "name": "Reformed Congressional Church",
+          "pct": 2.2
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.7
+        },
+        {
+          "name": "New Beginning Church",
+          "pct": 1.4
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.6
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 9.3
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 5.7
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 3.3
+        },
+        {
+          "name": "none",
+          "pct": 1.1
+        }
+      ],
+      "religionRaw": "Protestant 79.3% (United Church of Christ 47.9%, Assembly of God 14.1%, Full Gospel 5%, Bukot Nan Jesus 3%, Salvation Army 2.3%, Reformed Congressional Church 2.2%, Seventh Day Adventist 1.7%, New Beginning Church 1.4%, other Protestant 1.6%), Roman Catholic 9.3%, Church of Jesus Christ 5.7%, Jehovah's Witness 1.3%, other 3.3%, none 1.1% (2021 est.)"
+    },
+    "mk": {
+      "capital": "Skopje",
+      "religion": [
+        {
+          "name": "Orthodox",
+          "pct": 46.1
+        },
+        {
+          "name": "Islam",
+          "pct": 32.2
+        },
+        {
+          "name": "Christian",
+          "pct": 13.2
+        },
+        {
+          "name": "Other",
+          "pct": 7.2
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Orthodox 46.1%, Islam 32.2%, Christian 13.2%, Other 7.2%; less than 1%: atheist, Catholic, other religions, not specified, Protestant (2021 est.)"
+    },
+    "ml": {
+      "capital": "Bamako",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 93.9
+        },
+        {
+          "name": "Christian",
+          "pct": 2.8
+        },
+        {
+          "name": "animist",
+          "pct": 0.7
+        },
+        {
+          "name": "none",
+          "pct": 2.5
+        }
+      ],
+      "religionRaw": "Muslim 93.9%, Christian 2.8%, animist 0.7%, none 2.5% (2018 est.)"
+    },
+    "mm": {
+      "capital": "Rangoon",
+      "capitalNote": "Rangoon (aka Yangon, continues to be recognized as the primary Burmese capital by the US Government); Nay Pyi Taw is the administrative capital",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 87.9
+        },
+        {
+          "name": "Christian",
+          "pct": 6.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 4.3
+        },
+        {
+          "name": "Animist",
+          "pct": 0.8
+        },
+        {
+          "name": "Hindu",
+          "pct": 0.5
+        },
+        {
+          "name": "other",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Buddhist 87.9%, Christian 6.2%, Muslim 4.3%, Animist 0.8%, Hindu 0.5%, other 0.2%, none 0.1% (2014 est.)"
+    },
+    "mn": {
+      "capital": "Ulaanbaatar",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 51.8
+        },
+        {
+          "name": "no religion",
+          "pct": 40.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 3.2
+        },
+        {
+          "name": "Shaman",
+          "pct": 2.5
+        },
+        {
+          "name": "Christian",
+          "pct": 1.3
+        },
+        {
+          "name": "Other",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Buddhist 51.8%, no religion 40.6%, Muslim 3.2%, Shaman 2.5%, Christian 1.3%, Other 0.6% (2020 est.)"
+    },
+    "mo": {
+      "religion": [
+        {
+          "name": "folk religion",
+          "pct": 58.9
+        },
+        {
+          "name": "Buddhist",
+          "pct": 17.3
+        },
+        {
+          "name": "Christian",
+          "pct": 7.2
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "none",
+          "pct": 15.4
+        }
+      ],
+      "religionRaw": "folk religion 58.9%, Buddhist 17.3%, Christian 7.2%, other 1.2%, none 15.4% (2020 est.)"
+    },
+    "mp": {
+      "capital": "Saipan"
+    },
+    "mr": {
+      "capital": "Nouakchott"
+    },
+    "mt": {
+      "capital": "Valletta",
+      "religion": [
+        {
+          "name": "more than",
+          "pct": 90
+        }
+      ],
+      "religionRaw": "Roman Catholic (official) more than 90% (2006 est.)"
+    },
+    "mu": {
+      "capital": "Port Louis",
+      "religion": [
+        {
+          "name": "Hindu",
+          "pct": 48.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 26.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 17.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 6.4
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 0.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Hindu 48.5%, Roman Catholic 26.3%, Muslim 17.3%, other Christian 6.4%, other 0.6%, none 0.7%, unspecified 0.1% (2011 est.)"
+    },
+    "mv": {
+      "capital": "Male"
+    },
+    "mw": {
+      "capital": "Lilongwe",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 33.5
+        },
+        {
+          "name": "Seventh Day Adventist/Baptist",
+          "pct": 9.4
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 7.6
+        },
+        {
+          "name": "Anglican",
+          "pct": 2.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 17.2
+        },
+        {
+          "name": "other Christian",
+          "pct": 26.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 13.8
+        },
+        {
+          "name": "traditionalist",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 5.6
+        },
+        {
+          "name": "none",
+          "pct": 2.1
+        }
+      ],
+      "religionRaw": "Protestant 33.5% (includes Church of Central Africa Presbyterian 14.2%, Seventh Day Adventist/Baptist 9.4%, Pentecostal 7.6%, Anglican 2.3%), Roman Catholic 17.2%, other Christian 26.6%, Muslim 13.8%, traditionalist 1.1%, other 5.6%, none 2.1% (2018 est.)"
+    },
+    "mx": {
+      "capital": "Mexico City",
+      "capitalNote": "Mexico City (Ciudad de Mexico)",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 77.7
+        },
+        {
+          "name": "no religion",
+          "pct": 10.6
+        },
+        {
+          "name": "other Evangelical Churches",
+          "pct": 7.5
+        },
+        {
+          "name": "Jehovah Witness",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Catholic 77.7%, no religion 10.6%, other Evangelical Churches 7.5%, Jehovah Witness 1.2%; less than 1 percent: Pentecostal, Seventh Day Adventist, Historics, not specified, Latter Day Saints, other religions  (2020 est.)"
+    },
+    "my": {
+      "capital": "Kuala Lumpur",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 18.7
+        },
+        {
+          "name": "Christian",
+          "pct": 9.1
+        },
+        {
+          "name": "Hindu",
+          "pct": 6.1
+        },
+        {
+          "name": "none/unspecified",
+          "pct": 1.8
+        }
+      ],
+      "religionRaw": "Muslim (official) 63.5%, Buddhist 18.7%, Christian 9.1%, Hindu 6.1%, other (Confucianism, Taoism, other traditional Chinese religions) 0.9%, none/unspecified 1.8% (2020 est.)"
+    },
+    "mz": {
+      "capital": "Maputo",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 27.3
+        },
+        {
+          "name": "Islam",
+          "pct": 19.1
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 16.7
+        },
+        {
+          "name": "Saio/Zione",
+          "pct": 16.3
+        },
+        {
+          "name": "no religion",
+          "pct": 13.5
+        },
+        {
+          "name": "other",
+          "pct": 4.3
+        },
+        {
+          "name": "Anglican",
+          "pct": 1.7
+        },
+        {
+          "name": "unknown",
+          "pct": 1.2
+        }
+      ],
+      "religionRaw": "Catholic 27.3%, Islam 19.1%, Pentecostal 16.7%, Saio/Zione 16.3%, no religion 13.5%, other 4.3%, Anglican 1.7%, unknown 1.2% (2017 est.)"
+    },
+    "na": {
+      "capital": "Windhoek",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 97.5
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 1.9
+        }
+      ],
+      "religionRaw": "Christian 97.5%, other 0.6% (includes Muslim, Baha'i, Jewish, Buddhist), unaffiliated 1.9% (2020 est.)"
+    },
+    "nc": {
+      "capital": "Noumea",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 85.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 2.8
+        },
+        {
+          "name": "other",
+          "pct": 1.6
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 10.4
+        }
+      ],
+      "religionRaw": "Christian 85.2%, Muslim 2.8%, other 1.6%, unaffiliated 10.4% (2020 est.)"
+    },
+    "ne": {
+      "capital": "Niamey",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 95.5
+        },
+        {
+          "name": "ethnic religionist",
+          "pct": 4.1
+        },
+        {
+          "name": "Christian",
+          "pct": 0.3
+        },
+        {
+          "name": "agnostics and other",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Muslim 95.5%, ethnic religionist 4.1%, Christian 0.3%, agnostics and other 0.1% (2020 est.)"
+    },
+    "ng": {
+      "capital": "Abuja",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 53.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 10.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 35.3
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Muslim 53.5%, Roman Catholic 10.6%, other Christian 35.3%, other 0.6% (2018 est.)"
+    },
+    "ni": {
+      "capital": "Managua",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 44.9
+        },
+        {
+          "name": "Protestant",
+          "pct": 38.7
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.5
+        },
+        {
+          "name": "other",
+          "pct": 1.2
+        },
+        {
+          "name": "believer but not belonging to a church",
+          "pct": 1
+        },
+        {
+          "name": "agnostic or atheist",
+          "pct": 0.4
+        },
+        {
+          "name": "none",
+          "pct": 13.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 44.9%, Protestant 38.7% (Evangelical 38.2, Adventist 0.5%), other 1.2%, (includes Jehovah's Witness and Church of Jesus Christ), believer but not belonging to a church 1%, agnostic or atheist 0.4%, none 13.7%, unspecified 0.2% (2020 est.)"
+    },
+    "nl": {
+      "capital": "Amsterdam",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 20.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 14.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 5
+        },
+        {
+          "name": "other",
+          "pct": 5.9
+        },
+        {
+          "name": "none",
+          "pct": 54.1
+        }
+      ],
+      "religionRaw": "Roman Catholic 20.1%, Protestant 14.8% (includes Dutch Reformed, Protestant Church of The Netherlands, Calvinist), Muslim 5%, other 5.9% (includes Hindu, Buddhist, Jewish), none 54.1% (2019 est.)"
+    },
+    "no": {
+      "capital": "Oslo",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 3.1
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 3.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.8
+        },
+        {
+          "name": "other",
+          "pct": 2.6
+        },
+        {
+          "name": "unspecified",
+          "pct": 19.9
+        }
+      ],
+      "religionRaw": "Church of Norway (Evangelical Lutheran - official) 67.5%, Muslim 3.1%, Roman Catholic 3.1%, other Christian 3.8%, other 2.6%, unspecified 19.9% (2021 est.)"
+    },
+    "np": {
+      "capital": "Kathmandu",
+      "religion": [
+        {
+          "name": "Hindu",
+          "pct": 81.2
+        },
+        {
+          "name": "Buddhist",
+          "pct": 8.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 5.1
+        },
+        {
+          "name": "Kirat",
+          "pct": 3.2
+        },
+        {
+          "name": "Christian",
+          "pct": 1.8
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Hindu 81.2%, Buddhist 8.2%, Muslim 5.1%, Kirat 3.2%, Christian 1.8%; less than 1%:  Prakriti, Bon, Jains, Sikh (2021 est.)"
+    },
+    "nr": {
+      "capital": "no official capital",
+      "capitalNote": "no official capital; government offices in the Yaren District",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 60.4
+        },
+        {
+          "name": "Nauruan Congregational",
+          "pct": 34.7
+        },
+        {
+          "name": "Assemblies of God",
+          "pct": 11.6
+        },
+        {
+          "name": "Pacific Light House",
+          "pct": 6.3
+        },
+        {
+          "name": "Nauru Independent",
+          "pct": 3.6
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.3
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 33.9
+        },
+        {
+          "name": "other",
+          "pct": 4.2
+        },
+        {
+          "name": "none",
+          "pct": 1.3
+        },
+        {
+          "name": "no answer",
+          "pct": 0.3
+        }
+      ],
+      "religionRaw": "Protestant 60.4% (Nauruan Congregational 34.7%, Assemblies of God 11.6%, Pacific Light House 6.3%, Nauru Independent 3.6%, Baptist 1.5, Seventh Day Adventist 1.3%, other Protestant 1.4%), Roman Catholic 33.9%, other 4.2%, none 1.3%, no answer 0.3% (2021 est.)"
+    },
+    "nz": {
+      "capital": "Wellington",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 37.3
+        },
+        {
+          "name": "Catholic",
+          "pct": 10.1
+        },
+        {
+          "name": "Anglican",
+          "pct": 6.8
+        },
+        {
+          "name": "Presbyterian and Congregational",
+          "pct": 5.2
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 1.8
+        },
+        {
+          "name": "Methodist",
+          "pct": 1.6
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 10.7
+        },
+        {
+          "name": "Hindu",
+          "pct": 2.7
+        },
+        {
+          "name": "Maori",
+          "pct": 1.3
+        },
+        {
+          "name": "Buddhist",
+          "pct": 1.1
+        },
+        {
+          "name": "other religion",
+          "pct": 1.6
+        },
+        {
+          "name": "no religion",
+          "pct": 48.6
+        },
+        {
+          "name": "objected to answering",
+          "pct": 6.7
+        }
+      ],
+      "religionRaw": "Christian 37.3% (Catholic 10.1%, Anglican 6.8%, Presbyterian and Congregational 5.2%, Pentecostal 1.8%, Methodist 1.6%, Church of Jesus Christ 1.2%, other 10.7%), Hindu 2.7%, Maori 1.3%, Muslim, 1.3%, Buddhist 1.1%, other religion 1.6% (includes Judaism, Spiritualism and New Age religions, Baha'i, Asian religions other than Buddhism), no religion 48.6%, objected to answering 6.7% (2018 est.)"
+    },
+    "om": {
+      "capital": "Muscat",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 85.9
+        },
+        {
+          "name": "Christian",
+          "pct": 6.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 5.7
+        },
+        {
+          "name": "other and unaffiliated",
+          "pct": 2
+        }
+      ],
+      "religionRaw": "Muslim 85.9%, Christian 6.4%, Hindu 5.7%, other and unaffiliated 2% (2020 est.)"
+    },
+    "pa": {
+      "capital": "Panama City",
+      "religion": [
+        {
+          "name": "Evangelical",
+          "pct": 55
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 33.4
+        },
+        {
+          "name": "none",
+          "pct": 10.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.5
+        }
+      ],
+      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)"
+    },
+    "pe": {
+      "capital": "Lima",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 76
+        },
+        {
+          "name": "Evangelical Christian",
+          "pct": 15.7
+        },
+        {
+          "name": "no religion",
+          "pct": 5.1
+        },
+        {
+          "name": "other religions",
+          "pct": 3.2
+        }
+      ],
+      "religionRaw": "Catholic 76%, Evangelical Christian 15.7%, no religion 5.1%, other religions 3.2% (2017 est.)"
+    },
+    "pf": {
+      "capital": "Papeete",
+      "capitalNote": "Papeete (located on Tahiti)",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 54
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 30
+        },
+        {
+          "name": "other",
+          "pct": 10
+        },
+        {
+          "name": "no religion",
+          "pct": 6
+        }
+      ],
+      "religionRaw": "Protestant 54%, Roman Catholic 30%, other 10%, no religion 6%"
+    },
+    "pg": {
+      "capital": "Port Moresby",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 64.3
+        },
+        {
+          "name": "Evangelical Lutheran",
+          "pct": 18.4
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 12.9
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 10.4
+        },
+        {
+          "name": "United Church",
+          "pct": 10.3
+        },
+        {
+          "name": "Evangelical Alliance",
+          "pct": 5.9
+        },
+        {
+          "name": "Anglican",
+          "pct": 3.2
+        },
+        {
+          "name": "Baptist",
+          "pct": 2.8
+        },
+        {
+          "name": "Salvation Army",
+          "pct": 0.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 26
+        },
+        {
+          "name": "other Christian",
+          "pct": 5.3
+        },
+        {
+          "name": "non-Christian",
+          "pct": 1.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 3.1
+        }
+      ],
+      "religionRaw": "Protestant 64.3% (Evangelical Lutheran 18.4%, Seventh Day Adventist 12.9%, Pentecostal 10.4%, United Church 10.3%, Evangelical Alliance 5.9%, Anglican 3.2%, Baptist 2.8%, Salvation Army 0.4%), Roman Catholic 26%, other Christian 5.3%, non-Christian 1.4%, unspecified 3.1% (2011 est.)"
+    },
+    "ph": {
+      "capital": "Manila",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 78.8
+        },
+        {
+          "name": "Muslim",
+          "pct": 6.4
+        },
+        {
+          "name": "Iglesia ni Cristo",
+          "pct": 2.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.9
+        },
+        {
+          "name": "other",
+          "pct": 8.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 78.8%, Muslim 6.4%, Iglesia ni Cristo 2.6%, other Christian 3.9%, other 8.2%, none/unspecified &lt;0.1 (2020 est.)"
+    },
+    "pk": {
+      "capital": "Islamabad",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 96.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.6
+        },
+        {
+          "name": "Christian",
+          "pct": 1.4
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Muslim 96.4%, Hindu 1.6%, Christian 1.4%; less than 1%: scheduled castes, Qadiani/Ahmadi, other, Sikh. (2020 est.)"
+    },
+    "pl": {
+      "capital": "Warsaw",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 70.7
+        },
+        {
+          "name": "refused to answer",
+          "pct": 20.9
+        },
+        {
+          "name": "no religion",
+          "pct": 6.9
+        }
+      ],
+      "religionRaw": "Roman Catholic 70.7%, refused to answer 20.9%, no religion 6.9%; less than 1 percent: Orthodox, Jehovah Witness, Evangelic of Augsburg, Greek Catholic, Pentecostal, other Protestant, not stated, old Catholic Mariavite Church, other Christians, Islam, Buddhist, Polish Catholic Church, other, Baptist Union of Poland, Pagan, Seventh Day Adventist, Hindu, other Catholic (2021 est.)"
+    },
+    "pr": {
+      "capital": "San Juan",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 56
+        },
+        {
+          "name": "Protestant",
+          "pct": 33
+        },
+        {
+          "name": "other",
+          "pct": 2
+        },
+        {
+          "name": "atheist",
+          "pct": 1
+        },
+        {
+          "name": "none",
+          "pct": 7
+        }
+      ],
+      "religionRaw": "Roman Catholic 56%, Protestant 33% (largely Pentecostal), other 2%, atheist 1%, none 7% (2014 est.)"
+    },
+    "ps": {
+      "capital": "Ramallah",
+      "capitalNote": "Ramallah (seat of government); East Jerusalem claimed as capital",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 93
+        },
+        {
+          "name": "Jewish",
+          "pct": 5
+        },
+        {
+          "name": "Christian",
+          "pct": 1
+        }
+      ]
+    },
+    "pt": {
+      "capital": "Lisbon",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 68.1
+        },
+        {
+          "name": "not applicable",
+          "pct": 12.9
+        },
+        {
+          "name": "no religion",
+          "pct": 12
+        },
+        {
+          "name": "no response",
+          "pct": 2.2
+        },
+        {
+          "name": "Protestant",
+          "pct": 1.8
+        },
+        {
+          "name": "other",
+          "pct": 1
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Catholic 68.1%, not applicable 12.9%, no religion 12.0%, no response 2.2%, Protestant 1.8%, other 1.0%; less than 1%: other Christians, Orthodox, Muslim (2021 est.)"
+    },
+    "pw": {
+      "capital": "Ngerulmud",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 46.9
+        },
+        {
+          "name": "Protestant",
+          "pct": 30.9
+        },
+        {
+          "name": "Evangelical",
+          "pct": 24.6
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 5
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.4
+        },
+        {
+          "name": "Modekngei",
+          "pct": 5.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 4.9
+        },
+        {
+          "name": "other",
+          "pct": 12.3
+        }
+      ],
+      "religionRaw": "Roman Catholic 46.9%, Protestant 30.9% (Evangelical 24.6%, Seventh Day Adventist 5%, other Protestant 1.4%), Modekngei 5.1% (indigenous to Palau), Muslim 4.9%, other 12.3% (2020 est.)"
+    },
+    "py": {
+      "capital": "Asuncion",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 80.4
+        },
+        {
+          "name": "Protestant",
+          "pct": 7
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 0.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 80.4%, Protestant 7% (Evangelical (non-specific) 6.7%, Evangelical Pentecostal &lt;0.1%, Adventist &lt;0.1%, Protestant (non-specific) &lt;0.1%), Believer (not belonging to the church) 5.7%, other 0.6%, agnostic &lt;0.1%, none 0.2%, unspecified 6.2% (2023 est.)"
+    },
+    "qa": {
+      "capital": "Doha",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 65.2
+        },
+        {
+          "name": "Christian",
+          "pct": 13.7
+        },
+        {
+          "name": "Hindu",
+          "pct": 15.9
+        },
+        {
+          "name": "Buddhist",
+          "pct": 3.8
+        }
+      ],
+      "religionRaw": "Muslim 65.2%, Christian 13.7%, Hindu 15.9%, Buddhist 3.8%, folk religion &lt;0.1%, Jewish &lt;0.1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+    },
+    "ro": {
+      "capital": "Bucharest",
+      "religion": [
+        {
+          "name": "Romanian Orthodox",
+          "pct": 85.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 4.5
+        },
+        {
+          "name": "Reformed",
+          "pct": 3
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 2.5
+        },
+        {
+          "name": "other",
+          "pct": 4.7
+        }
+      ],
+      "religionRaw": "Romanian Orthodox 85.3%, Roman Catholic 4.5%, Reformed 3%, Pentecostal 2.5%, other 4.7% (2021 est.)"
+    },
+    "rs": {
+      "capital": "Belgrade",
+      "capitalNote": "Belgrade (Beograd)",
+      "religion": [
+        {
+          "name": "Serbian Orthodox",
+          "pct": 81.1
+        },
+        {
+          "name": "unknown",
+          "pct": 5.3
+        },
+        {
+          "name": "Islam",
+          "pct": 4.2
+        },
+        {
+          "name": "Catholic",
+          "pct": 3.9
+        },
+        {
+          "name": "no response",
+          "pct": 2.5
+        },
+        {
+          "name": "atheist",
+          "pct": 1.1
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Serbian Orthodox 81.1%, unknown 5.3%, Islam 4.2%, Catholic 3.9%, no response 2.5%, atheist 1.1%; less than 1%: other Christians, Protestant, agnostic (2022)"
+    },
+    "ru": {
+      "capital": "Moscow",
+      "religion": [
+        {
+          "name": "other Christian",
+          "pct": 2
+        }
+      ],
+      "religionRaw": "Russian Orthodox 15-20%, Muslim 10-15%, other Christian 2% (2006 est.)"
+    },
+    "rw": {
+      "capital": "Kigali",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 39.9
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 21.3
+        },
+        {
+          "name": "Protestant",
+          "pct": 14.6
+        },
+        {
+          "name": "Adventist",
+          "pct": 12.2
+        },
+        {
+          "name": "other Christians",
+          "pct": 4.2
+        },
+        {
+          "name": "no religion",
+          "pct": 3
+        },
+        {
+          "name": "Muslim",
+          "pct": 2
+        },
+        {
+          "name": "other religions",
+          "pct": 2
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Catholic 39.9%, Pentecostal 21.3%, Protestant 14.6%, Adventist 12.2%, other Christians 4.2%, no religion 3.0%, Muslim 2.0%, other religions 2.0%; less than 1%: Jehovah Witness, not specified, Animist  (2022 est.)"
+    },
+    "sa": {
+      "capital": "Riyadh"
+    },
+    "sb": {
+      "capital": "Honiara",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 73.4
+        },
+        {
+          "name": "Church of Melanesia",
+          "pct": 31.9
+        },
+        {
+          "name": "South Sea Evangelical",
+          "pct": 17.1
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 11.7
+        },
+        {
+          "name": "United Church",
+          "pct": 10.1
+        },
+        {
+          "name": "Christian Fellowship Church",
+          "pct": 2.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 19.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 2.9
+        },
+        {
+          "name": "other",
+          "pct": 4
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Protestant 73.4% (Church of Melanesia 31.9%, South Sea Evangelical 17.1%, Seventh Day Adventist 11.7%, United Church 10.1%, Christian Fellowship Church 2.5%), Roman Catholic 19.6%, other Christian 2.9%, other 4%, unspecified 0.1% (2009 est.)"
+    },
+    "sc": {
+      "capital": "Victoria",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 76.2
+        },
+        {
+          "name": "Protestant",
+          "pct": 10.5
+        },
+        {
+          "name": "Anglican",
+          "pct": 6.1
+        },
+        {
+          "name": "Pentecostal Assembly",
+          "pct": 1.5
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.2
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.7
+        },
+        {
+          "name": "other Christian",
+          "pct": 2.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 2.4
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.6
+        },
+        {
+          "name": "other non-Christian",
+          "pct": 1.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 4.8
+        },
+        {
+          "name": "none",
+          "pct": 0.9
+        }
+      ],
+      "religionRaw": "Roman Catholic 76.2%, Protestant 10.5% (Anglican 6.1%, Pentecostal Assembly 1.5%, Seventh Day Adventist 1.2%, other Protestant 1.7%), other Christian 2.4%, Hindu 2.4%, Muslim 1.6%, other non-Christian 1.1%, unspecified 4.8%, none 0.9% (2010 est.)"
+    },
+    "sd": {
+      "capital": "Khartoum"
+    },
+    "se": {
+      "capital": "Stockholm",
+      "religion": [
+        {
+          "name": "none or unspecified",
+          "pct": 37.2
+        }
+      ],
+      "religionRaw": "Church of Sweden (Lutheran) 53.9%, other (includes Roman Catholic, Orthodox, Baptist, Muslim, Jewish, and Buddhist) 8.9%, none or unspecified 37.2% (2021 est.)"
+    },
+    "sg": {
+      "capital": "Singapore",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 31.1
+        },
+        {
+          "name": "Christian",
+          "pct": 18.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 15.6
+        },
+        {
+          "name": "Taoist",
+          "pct": 8.8
+        },
+        {
+          "name": "Hindu",
+          "pct": 5
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 20
+        }
+      ],
+      "religionRaw": "Buddhist 31.1%, Christian 18.9%, Muslim 15.6%, Taoist 8.8%, Hindu 5%, other 0.6%, none 20% (2020 est.)"
+    },
+    "si": {
+      "capital": "Ljubljana",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 69
+        },
+        {
+          "name": "Orthodox",
+          "pct": 4
+        },
+        {
+          "name": "Muslim",
+          "pct": 3
+        },
+        {
+          "name": "Christian",
+          "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 3
+        },
+        {
+          "name": "atheist",
+          "pct": 14
+        },
+        {
+          "name": "non-believer/agnostic",
+          "pct": 4
+        },
+        {
+          "name": "refused to answer",
+          "pct": 2
+        }
+      ],
+      "religionRaw": "Catholic 69%, Orthodox 4%, Muslim 3%, Christian 1%, other 3%, atheist 14%, non-believer/agnostic 4%, refused to answer 2% (2019 est.)"
+    },
+    "sk": {
+      "capital": "Bratislava",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 55.8
+        },
+        {
+          "name": "Greek Catholic",
+          "pct": 4
+        },
+        {
+          "name": "Reformed Christian",
+          "pct": 1.6
+        },
+        {
+          "name": "other",
+          "pct": 3
+        },
+        {
+          "name": "none",
+          "pct": 23.8
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.5
+        }
+      ],
+      "religionRaw": "Roman Catholic 55.8%, Evangelical Church of the Augsburg Confession 5.3%, Greek Catholic 4%, Reformed Christian 1.6%, other 3%, none 23.8%, unspecified 6.5% (2021 est.)"
+    },
+    "sl": {
+      "capital": "Freetown",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 77.1
+        },
+        {
+          "name": "Christian",
+          "pct": 22.9
+        }
+      ],
+      "religionRaw": "Muslim 77.1%, Christian 22.9% (2019 est.)"
+    },
+    "sm": {
+      "capital": "San Marino",
+      "capitalNote": "San Marino (city)"
+    },
+    "sn": {
+      "capital": "Dakar",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 97.2
+        },
+        {
+          "name": "Christian",
+          "pct": 2.7
+        }
+      ],
+      "religionRaw": "Muslim 97.2% (most adhere to one of the four main Sufi brotherhoods), Christian 2.7% (mostly Roman Catholic) (2019 est.)"
+    },
+    "so": {
+      "capital": "Mogadishu",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99.9
+        },
+        {
+          "name": "Sunni Muslim",
+          "pct": 98.1
+        },
+        {
+          "name": "Shia Muslim",
+          "pct": 1.2
+        },
+        {
+          "name": "Islamic schismatic",
+          "pct": 0.6
+        },
+        {
+          "name": "ethnic religionist",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Muslim 99.9% (Sunni Muslim 98.1%, Shia Muslim 1.2%, Islamic schismatic 0.6%), ethnic religionist 0.1% (2020 est.)"
+    },
+    "sr": {
+      "capital": "Paramaribo",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 23.6
+        },
+        {
+          "name": "includes Evangelical",
+          "pct": 11.2
+        },
+        {
+          "name": "Moravian",
+          "pct": 11.2
+        },
+        {
+          "name": "Reformed",
+          "pct": 0.7
+        },
+        {
+          "name": "Lutheran",
+          "pct": 0.5
+        },
+        {
+          "name": "Hindu",
+          "pct": 22.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 21.6
+        },
+        {
+          "name": "Muslim",
+          "pct": 13.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.2
+        },
+        {
+          "name": "Winti",
+          "pct": 1.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 1.7
+        },
+        {
+          "name": "none",
+          "pct": 7.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 3.2
+        }
+      ],
+      "religionRaw": "Protestant 23.6% (includes Evangelical 11.2%, Moravian 11.2%, Reformed 0.7%, Lutheran 0.5%), Hindu 22.3%, Roman Catholic 21.6%, Muslim 13.8%, other Christian 3.2%, Winti 1.8%, Jehovah's Witness 1.2%, other 1.7%, none 7.5%, unspecified 3.2% (2012 est.)"
+    },
+    "ss": {
+      "capital": "Juba",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 60.5
+        },
+        {
+          "name": "folk religion",
+          "pct": 32.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 6.2
+        }
+      ],
+      "religionRaw": "Christian 60.5%, folk religion 32.9%, Muslim 6.2%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+    },
+    "st": {
+      "capital": "Sao Tome",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 55.7
+        },
+        {
+          "name": "Adventist",
+          "pct": 4.1
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 3.4
+        },
+        {
+          "name": "New Apostolic",
+          "pct": 2.9
+        },
+        {
+          "name": "Mana",
+          "pct": 2.3
+        },
+        {
+          "name": "Universal Kingdom of God",
+          "pct": 2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 6.2
+        },
+        {
+          "name": "none",
+          "pct": 21.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Catholic 55.7%, Adventist 4.1%, Assembly of God 3.4%, New Apostolic 2.9%, Mana 2.3%, Universal Kingdom of God 2%, Jehovah's Witness 1.2%, other 6.2%, none 21.2%, unspecified 1% (2012 est.)"
+    },
+    "sv": {
+      "capital": "San Salvador",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 43.9
+        },
+        {
+          "name": "Protestant",
+          "pct": 39.6
+        },
+        {
+          "name": "Evangelical - unspecified",
+          "pct": 38.2
+        },
+        {
+          "name": "Evangelical - Methodist",
+          "pct": 1.3
+        },
+        {
+          "name": "Evangelical - Baptist",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 16.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Roman Catholic 43.9%, Protestant 39.6% (Evangelical - unspecified 38.2%, Evangelical - Methodist 1.3%, Evangelical - Baptist 0.1%), none 16.3%, unspecified 0.2% (2023 est.)"
+    },
+    "sx": {
+      "capital": "Philipsburg",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 41.9
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 14.7
+        },
+        {
+          "name": "Methodist",
+          "pct": 10
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 6.6
+        },
+        {
+          "name": "Baptist",
+          "pct": 4.7
+        },
+        {
+          "name": "Anglican",
+          "pct": 3.1
+        },
+        {
+          "name": "other Protestant",
+          "pct": 2.8
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 33.1
+        },
+        {
+          "name": "Hindu",
+          "pct": 5.2
+        },
+        {
+          "name": "Christian",
+          "pct": 4.1
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.7
+        },
+        {
+          "name": "Evangelical",
+          "pct": 1.4
+        },
+        {
+          "name": "Muslim/Jewish",
+          "pct": 1.1
+        },
+        {
+          "name": "other",
+          "pct": 1.3
+        },
+        {
+          "name": "none",
+          "pct": 7.9
+        },
+        {
+          "name": "no response",
+          "pct": 2.4
+        }
+      ],
+      "religionRaw": "Protestant 41.9% (Pentecostal 14.7%, Methodist 10.0%, Seventh Day Adventist 6.6%, Baptist 4.7%, Anglican 3.1%, other Protestant 2.8%), Roman Catholic 33.1%, Hindu 5.2%, Christian 4.1%, Jehovah's Witness 1.7%, Evangelical 1.4%, Muslim/Jewish 1.1%, other 1.3% (includes Buddhist, Sikh, Rastafarian), none 7.9%, no response 2.4% (2011 est.)"
+    },
+    "sy": {
+      "capital": "Damascus",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 87
+        },
+        {
+          "name": "includes Sunni",
+          "pct": 74
+        },
+        {
+          "name": "and Shia",
+          "pct": 13
+        },
+        {
+          "name": "Christian",
+          "pct": 10
+        },
+        {
+          "name": "Druze",
+          "pct": 3
+        }
+      ],
+      "religionRaw": "Muslim 87% (official; includes Sunni 74% and Alawi, Ismaili, and Shia 13%), Christian 10% (includes Orthodox, Uniate, and Nestorian), Druze 3%"
+    },
+    "sz": {
+      "capital": "Mbabane",
+      "capitalNote": "Mbabane (administrative capital); Lobamba (royal and legislative capital)",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 90
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 20
+        },
+        {
+          "name": "other Christian",
+          "pct": 30
+        },
+        {
+          "name": "Muslim",
+          "pct": 2
+        },
+        {
+          "name": "other",
+          "pct": 8
+        }
+      ],
+      "religionRaw": "Christian 90% (Zionist - a blend of Christianity and traditional African religions - 40%, Roman Catholic 20%, other Christian 30% - includes Anglican, Methodist, Church of Jesus Christ, Jehovah's Witness), Muslim 2%, other 8% (includes Baha'i, Buddhist, Hindu, indigenous, Jewish) (2015 est.)"
+    },
+    "tc": {
+      "capital": "Grand Turk",
+      "capitalNote": "Grand Turk (Cockburn Town)",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 72.8
+        },
+        {
+          "name": "Baptist",
+          "pct": 35.8
+        },
+        {
+          "name": "Church of God",
+          "pct": 11.7
+        },
+        {
+          "name": "Anglican",
+          "pct": 10
+        },
+        {
+          "name": "Methodist",
+          "pct": 9.3
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 6
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 11.4
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.8
+        },
+        {
+          "name": "other",
+          "pct": 14
+        }
+      ],
+      "religionRaw": "Protestant 72.8% (Baptist 35.8%, Church of God 11.7%, Anglican 10%, Methodist 9.3%, Seventh Day Adventist 6%), Roman Catholic 11.4%, Jehovah's Witness 1.8%, other 14% (2006 est.)"
+    },
+    "td": {
+      "capital": "N'Djamena",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 52.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 23.9
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 20
+        },
+        {
+          "name": "animist",
+          "pct": 0.3
+        },
+        {
+          "name": "other Christian",
+          "pct": 0.2
+        },
+        {
+          "name": "none",
+          "pct": 2.8
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.7
+        }
+      ],
+      "religionRaw": "Muslim 52.1%, Protestant 23.9%, Roman Catholic 20%, animist 0.3%, other Christian 0.2%, none 2.8%, unspecified 0.7% (2014-15 est.)"
+    },
+    "tg": {
+      "capital": "Lome",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 42.3
+        },
+        {
+          "name": "folk religion",
+          "pct": 36.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 14
+        },
+        {
+          "name": "none",
+          "pct": 6.2
+        }
+      ],
+      "religionRaw": "Christian 42.3%, folk religion 36.9%, Muslim 14%, Hindu &lt;1%, Buddhist &lt;1%, Jewish &lt;1%, other &lt;1%, none 6.2% (2020 est.)"
+    },
+    "th": {
+      "capital": "Bangkok",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 92.5
+        },
+        {
+          "name": "Muslim",
+          "pct": 5.4
+        },
+        {
+          "name": "Christian",
+          "pct": 1.2
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        }
+      ],
+      "religionRaw": "Buddhist 92.5%, Muslim 5.4%, Christian 1.2%, other 0.9% (includes animist, Confucian, Hindu, Jewish, Sikh, and Taoist) (2021 est.)"
+    },
+    "tj": {
+      "capital": "Dushanbe",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 98
+        },
+        {
+          "name": "Sunni",
+          "pct": 95
+        },
+        {
+          "name": "Shia",
+          "pct": 3
+        },
+        {
+          "name": "other",
+          "pct": 2
+        }
+      ],
+      "religionRaw": "Muslim 98% (Sunni 95%, Shia 3%) other 2% (2014 est.)"
+    },
+    "tl": {
+      "capital": "Dili",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 90.7
+        },
+        {
+          "name": "other",
+          "pct": 7.1
+        },
+        {
+          "name": "Protestant Evangelical",
+          "pct": 1.9
+        },
+        {
+          "name": "less than",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Catholic 90.7%, other 7.1%, Protestant Evangelical 1.9%; less than 1%: Islam, Buddhist, Hindu (2022 est.)"
+    },
+    "tm": {
+      "capital": "Ashgabat",
+      "capitalNote": "Ashgabat (Ashkhabad)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 93
+        },
+        {
+          "name": "Christian",
+          "pct": 6.4
+        }
+      ],
+      "religionRaw": "Muslim 93%, Christian 6.4%, Buddhist &lt;1%, folk religion &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified &lt;1% (2020 est.)"
+    },
+    "tn": {
+      "capital": "Tunis"
+    },
+    "to": {
+      "capital": "Nuku'alofa",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 63.9
+        },
+        {
+          "name": "Free Wesleyan Church",
+          "pct": 34.2
+        },
+        {
+          "name": "Free Church of Tonga",
+          "pct": 11.3
+        },
+        {
+          "name": "Church of Tonga",
+          "pct": 6.8
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 2.5
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 2.5
+        },
+        {
+          "name": "Tokaikolo/Maamafo'ou",
+          "pct": 1.5
+        },
+        {
+          "name": "Constitutional Church of Tonga",
+          "pct": 1.2
+        },
+        {
+          "name": "other Protestant",
+          "pct": 4
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 19.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 13.7
+        },
+        {
+          "name": "other",
+          "pct": 2.1
+        },
+        {
+          "name": "none",
+          "pct": 0.6
+        },
+        {
+          "name": "no answer",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Protestant 63.9% (Free Wesleyan Church 34.2%, Free Church of Tonga 11.3%, Church of Tonga 6.8%, Seventh Day Adventist 2.5%, Assembly of God 2.5%, Tokaikolo/Maamafo'ou 1.5%, Constitutional Church of Tonga 1.2%, other Protestant 4%), Church of Jesus Christ 19.7%, Roman Catholic 13.7%, other 2.1%, none 0.6%, no answer 0.1% (2021 est.)"
+    },
+    "tr": {
+      "capital": "Ankara",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99.8
+        },
+        {
+          "name": "other",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Muslim 99.8% (mostly Sunni), other 0.2% (mostly Christians and Jews)"
+    },
+    "tt": {
+      "capital": "Port of Spain",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 32.1
+        },
+        {
+          "name": "Pentecostal/Evangelical/Full Gospel",
+          "pct": 12
+        },
+        {
+          "name": "Baptist",
+          "pct": 6.9
+        },
+        {
+          "name": "Anglican",
+          "pct": 5.7
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 4.1
+        },
+        {
+          "name": "Presbyterian/Congregational",
+          "pct": 2.5
+        },
+        {
+          "name": "other Protestant",
+          "pct": 0.9
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 21.6
+        },
+        {
+          "name": "Hindu",
+          "pct": 18.2
+        },
+        {
+          "name": "Muslim",
+          "pct": 5
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 8.4
+        },
+        {
+          "name": "none",
+          "pct": 2.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 11.1
+        }
+      ],
+      "religionRaw": "Protestant 32.1% (Pentecostal/Evangelical/Full Gospel 12%, Baptist 6.9%, Anglican 5.7%, Seventh Day Adventist 4.1%, Presbyterian/Congregational 2.5%, other Protestant 0.9%), Roman Catholic 21.6%, Hindu 18.2%, Muslim 5%, Jehovah's Witness 1.5%, other 8.4%, none 2.2%, unspecified 11.1% (2011 est.)"
+    },
+    "tv": {
+      "capital": "Funafuti",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 92.7
+        },
+        {
+          "name": "Brethren",
+          "pct": 2.8
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 2.5
+        },
+        {
+          "name": "Assemblies of God",
+          "pct": 1.5
+        },
+        {
+          "name": "Baha'i",
+          "pct": 1.5
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 3.9
+        },
+        {
+          "name": "none or refused",
+          "pct": 0.4
+        }
+      ],
+      "religionRaw": "Protestant 92.7% (Congregational Christian Church of Tuvalu 85.9%, Brethren 2.8%, Seventh Day Adventist 2.5%, Assemblies of God 1.5%), Baha'i 1.5%, Jehovah's Witness 1.5%, other 3.9%, none or refused 0.4% (2017 est.)"
+    },
+    "tw": {
+      "capital": "Taipei",
+      "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 35.3
+        },
+        {
+          "name": "Taoist",
+          "pct": 33.2
+        },
+        {
+          "name": "Christian",
+          "pct": 3.9
+        },
+        {
+          "name": "approximately",
+          "pct": 10
+        },
+        {
+          "name": "none or unspecified",
+          "pct": 18.2
+        }
+      ],
+      "religionRaw": "Buddhist 35.3%, Taoist 33.2%, Christian 3.9%, folk religion (includes Confucian) approximately 10%, none or unspecified 18.2% (2005 est.)"
+    },
+    "tz": {
+      "capital": "Dodoma",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 63.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 34.1
+        },
+        {
+          "name": "folk religion",
+          "pct": 1.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 1.6
+        }
+      ],
+      "religionRaw": "Christian 63.1%, Muslim 34.1%, folk religion 1.1%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified 1.6% (2020 est.)"
+    },
+    "ua": {
+      "capital": "Kyiv",
+      "capitalNote": "Kyiv (Kiev is the transliteration from Russian)"
+    },
+    "ug": {
+      "capital": "Kampala",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 45.1
+        },
+        {
+          "name": "Anglican",
+          "pct": 32
+        },
+        {
+          "name": "Pentecostal/Born Again/Evangelical",
+          "pct": 11.1
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.7
+        },
+        {
+          "name": "Baptist .",
+          "pct": 3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 39.3
+        },
+        {
+          "name": "Muslim",
+          "pct": 13.7
+        },
+        {
+          "name": "other",
+          "pct": 1.6
+        },
+        {
+          "name": "none",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Protestant 45.1% (Anglican 32.0%, Pentecostal/Born Again/Evangelical 11.1%, Seventh Day Adventist 1.7%, Baptist .3%), Roman Catholic 39.3%, Muslim 13.7%, other 1.6%, none 0.2% (2014 est.)"
+    },
+    "us": {
+      "capital": "Washington, D.C.",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 46.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 20.8
+        },
+        {
+          "name": "Jewish",
+          "pct": 1.9
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 1.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 0.9
+        },
+        {
+          "name": "Muslim",
+          "pct": 0.9
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 0.8
+        },
+        {
+          "name": "Buddhist",
+          "pct": 0.7
+        },
+        {
+          "name": "Hindu",
+          "pct": 0.7
+        },
+        {
+          "name": "other",
+          "pct": 1.8
+        },
+        {
+          "name": "unaffiliated",
+          "pct": 22.8
+        },
+        {
+          "name": "don't know/refused",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Protestant 46.5%, Roman Catholic 20.8%, Jewish 1.9%, Church of Jesus Christ 1.6%, other Christian 0.9%, Muslim 0.9%, Jehovah's Witness 0.8%, Buddhist 0.7%, Hindu 0.7%, other 1.8%, unaffiliated 22.8%, don't know/refused 0.6% (2014 est.)"
+    },
+    "uy": {
+      "capital": "Montevideo",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 36.5
+        },
+        {
+          "name": "Protestant",
+          "pct": 5
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.2
+        },
+        {
+          "name": "African American Cults/Umbanda",
+          "pct": 2.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 0.6
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 0.2
+        },
+        {
+          "name": "other",
+          "pct": 1
+        },
+        {
+          "name": "agnostic",
+          "pct": 0.3
+        },
+        {
+          "name": "atheist",
+          "pct": 1.3
+        },
+        {
+          "name": "none",
+          "pct": 47.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 3.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 42
+        },
+        {
+          "name": "Protestant",
+          "pct": 15
+        },
+        {
+          "name": "other",
+          "pct": 6
+        },
+        {
+          "name": "agnostic",
+          "pct": 3
+        },
+        {
+          "name": "atheist",
+          "pct": 10
+        },
+        {
+          "name": "unspecified",
+          "pct": 24
+        }
+      ],
+      "religionRaw": "Roman Catholic 36.5%, Protestant 5% (Evangelical (non-specific) 4.6%, Adventist 0.2%, Protestant (non-specific) 0.3%), African American Cults/Umbanda 2.8%, Jehovah's Witness 0.6%, Church of Jesus Christ 0.2%, other 1%, Believer (not belonging to the church) 1.8%, agnostic 0.3%, atheist 1.3%, none 47.3%, unspecified 3.4%<br><br>Roman Catholic 42%, Protestant 15%, other 6%, agnostic 3%, atheist 10%, unspecified 24% (2023 est.)"
+    },
+    "uz": {
+      "capital": "Tashkent",
+      "capitalNote": "Tashkent (Toshkent)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 88
+        },
+        {
+          "name": "Eastern Orthodox",
+          "pct": 9
+        },
+        {
+          "name": "other",
+          "pct": 3
+        }
+      ],
+      "religionRaw": "Muslim 88% (mostly Sunni), Eastern Orthodox 9%, other 3%"
+    },
+    "vc": {
+      "capital": "Kingstown",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 75
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 27.6
+        },
+        {
+          "name": "Anglican",
+          "pct": 13.9
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 11.6
+        },
+        {
+          "name": "Baptist",
+          "pct": 8.9
+        },
+        {
+          "name": "Methodist",
+          "pct": 8.7
+        },
+        {
+          "name": "Evangelical",
+          "pct": 3.8
+        },
+        {
+          "name": "Salvation Army",
+          "pct": 0.3
+        },
+        {
+          "name": "Presbyterian/Congregational",
+          "pct": 0.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 6.3
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.1
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 0.8
+        },
+        {
+          "name": "other",
+          "pct": 4.7
+        },
+        {
+          "name": "none",
+          "pct": 7.5
+        },
+        {
+          "name": "unspecified",
+          "pct": 4.7
+        }
+      ],
+      "religionRaw": "Protestant 75% (Pentecostal 27.6%, Anglican 13.9%, Seventh Day Adventist 11.6%,  Baptist 8.9%, Methodist 8.7%, Evangelical 3.8%, Salvation Army 0.3%, Presbyterian/Congregational 0.3%), Roman Catholic 6.3%,  Rastafarian 1.1%, Jehovah's Witness 0.8%, other 4.7%, none 7.5%, unspecified 4.7% (2012 est.)"
+    },
+    "ve": {
+      "capital": "Caracas",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 48.1
+        },
+        {
+          "name": "Protestant",
+          "pct": 31.6
+        },
+        {
+          "name": "Evangelical",
+          "pct": 31.4
+        },
+        {
+          "name": "Adventist",
+          "pct": 0.2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.4
+        },
+        {
+          "name": "African American/umbanda",
+          "pct": 0.7
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "believer",
+          "pct": 3.5
+        },
+        {
+          "name": "agnostic",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 13.6
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Roman Catholic 48.1%, Protestant 31.6% (Evangelical 31.4%, Adventist 0.2%), Jehovah's Witness 1.4%, African American/umbanda 0.7%, other 0.1%, believer 3.5%, agnostic 0.1%, atheist, 0.4%, none 13.6%, unspecified 0.6% (2023 est.)"
+    },
+    "vg": {
+      "capital": "Road Town",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 70.2
+        },
+        {
+          "name": "Methodist",
+          "pct": 17.6
+        },
+        {
+          "name": "Church of God",
+          "pct": 10.4
+        },
+        {
+          "name": "Anglican",
+          "pct": 9.5
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 9
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 8.2
+        },
+        {
+          "name": "Baptist",
+          "pct": 7.4
+        },
+        {
+          "name": "New Testament Church of God",
+          "pct": 6.9
+        },
+        {
+          "name": "other Protestant",
+          "pct": 1.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 8.9
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 2.5
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.9
+        },
+        {
+          "name": "other",
+          "pct": 6.2
+        },
+        {
+          "name": "none",
+          "pct": 7.9
+        },
+        {
+          "name": "unspecified",
+          "pct": 2.4
+        }
+      ],
+      "religionRaw": "Protestant 70.2% (Methodist 17.6%, Church of God 10.4%, Anglican 9.5%, Seventh Day Adventist 9.0%, Pentecostal 8.2%, Baptist 7.4%, New Testament Church of God 6.9%, other Protestant 1.2%), Roman Catholic 8.9%, Jehovah's Witness 2.5%, Hindu 1.9%, other 6.2%, none 7.9%, unspecified 2.4% (2010 est.)"
+    },
+    "vi": {
+      "capital": "Charlotte Amalie",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 65.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 27.1
+        },
+        {
+          "name": "other Christians",
+          "pct": 2.2
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "none",
+          "pct": 3.7
+        }
+      ],
+      "religionRaw": "Protestant 65.5%, Roman Catholic 27.1%, other Christians 2.2%, other 1.5%, none 3.7% (2010 est.)"
+    },
+    "vn": {
+      "capital": "Hanoi",
+      "capitalNote": "Hanoi (Ha Noi)",
+      "religion": [
+        {
+          "name": "Catholic",
+          "pct": 6.1
+        },
+        {
+          "name": "Buddhist",
+          "pct": 5.8
+        },
+        {
+          "name": "Protestant",
+          "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 0.8
+        },
+        {
+          "name": "none",
+          "pct": 86.3
+        }
+      ],
+      "religionRaw": "Catholic 6.1%, Buddhist 5.8%, Protestant 1%, other 0.8%, none 86.3% (2019 est.)"
+    },
+    "vu": {
+      "capital": "Port-Vila",
+      "capitalNote": "Port-Vila (on Efate)",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 39.9
+        },
+        {
+          "name": "Presbyterian",
+          "pct": 27.2
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 14.8
+        },
+        {
+          "name": "Anglican",
+          "pct": 12
+        },
+        {
+          "name": "Churches of Christ",
+          "pct": 5
+        },
+        {
+          "name": "Assemblies of God",
+          "pct": 4.9
+        },
+        {
+          "name": "Neil Thomas Ministry/Inner Life Ministry",
+          "pct": 3.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 12.1
+        },
+        {
+          "name": "Apostolic",
+          "pct": 2.3
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 1.8
+        },
+        {
+          "name": "other",
+          "pct": 12
+        },
+        {
+          "name": "none",
+          "pct": 1.4
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.1
+        }
+      ],
+      "religionRaw": "Protestant 39.9% (Presbyterian 27.2%, Seventh Day Adventist 14.8%, Anglican 12%, Churches of Christ 5%, Assemblies of God 4.9%, Neil Thomas Ministry/Inner Life Ministry 3.2%), Roman Catholic 12.1%, Apostolic 2.3%, Church of Jesus Christ 1.8%, customary beliefs (including Jon Frum cargo cult) 3.1%, other 12%, none 1.4%, unspecified 0.1% (2020 est.)"
+    },
+    "ws": {
+      "capital": "Apia",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 54.9
+        },
+        {
+          "name": "Congregationalist",
+          "pct": 29
+        },
+        {
+          "name": "Methodist",
+          "pct": 12.4
+        },
+        {
+          "name": "Assembly of God",
+          "pct": 6.8
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 4.4
+        },
+        {
+          "name": "other Protestant",
+          "pct": 2.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 18.8
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 16.9
+        },
+        {
+          "name": "Worship Centre",
+          "pct": 2.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.6
+        },
+        {
+          "name": "other",
+          "pct": 2.9
+        },
+        {
+          "name": "none",
+          "pct": 0.2
+        }
+      ],
+      "religionRaw": "Protestant 54.9% (Congregationalist 29%, Methodist 12.4%, Assembly of God 6.8%, Seventh Day Adventist 4.4%, other Protestant 2.3%), Roman Catholic 18.8%, Church of Jesus Christ 16.9%, Worship Centre 2.8%, other Christian 3.6%, other 2.9% (includes Baha'i, Muslim), none 0.2% (2016 est.)"
+    },
+    "xk": {
+      "capital": "Pristina",
+      "capitalNote": "Pristina (Prishtine, Prishtina)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 95.6
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 2.2
+        },
+        {
+          "name": "Orthodox",
+          "pct": 1.5
+        },
+        {
+          "name": "other",
+          "pct": 0.1
+        },
+        {
+          "name": "none",
+          "pct": 0.1
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.6
+        }
+      ],
+      "religionRaw": "Muslim 95.6%, Roman Catholic 2.2%, Orthodox 1.5%, other 0.1%, none 0.1%, unspecified 0.6% (2011 est.)"
+    },
+    "xs": {
+      "capital": "Hargeisa",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 100
+        }
+      ]
+    },
+    "ye": {
+      "capital": "Sanaa",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99.1
+        },
+        {
+          "name": "an estimated",
+          "pct": 65
+        },
+        {
+          "name": "are Sunni and",
+          "pct": 35
+        },
+        {
+          "name": "other",
+          "pct": 0.9
+        }
+      ],
+      "religionRaw": "Muslim 99.1% (official; virtually all are citizens, an estimated 65% are Sunni and 35% are Shia), other 0.9% (includes Jewish, Baha'i, Hindu, and Christian; many are refugees or temporary foreign residents) (2020 est.)"
+    },
+    "za": {
+      "capital": "Pretoria",
+      "capitalNote": "Pretoria (administrative capital); Cape Town (legislative capital); Bloemfontein (judicial capital)",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 86
+        },
+        {
+          "name": "or other traditional African religions",
+          "pct": 5.4
+        },
+        {
+          "name": "Muslim",
+          "pct": 1.9
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "nothing in particular",
+          "pct": 5.2
+        }
+      ],
+      "religionRaw": "Christian 86%, ancestral, tribal, animist, or other traditional African religions 5.4%, Muslim 1.9%, other 1.5%, nothing in particular 5.2% (2015 est.)"
+    },
+    "zm": {
+      "capital": "Lusaka",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 75.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 20.2
+        },
+        {
+          "name": "other",
+          "pct": 2.7
+        },
+        {
+          "name": "none",
+          "pct": 1.8
+        }
+      ],
+      "religionRaw": "Protestant 75.3%, Roman Catholic 20.2%, other 2.7% (includes Muslim, Buddhist, Hindu, and Baha'i), none 1.8% (2010 est.)"
+    },
+    "zw": {
+      "capital": "Harare",
+      "religion": [
+        {
+          "name": "Apostolic Sect",
+          "pct": 40.3
+        },
+        {
+          "name": "Pentecostal",
+          "pct": 17
+        },
+        {
+          "name": "Protestant",
+          "pct": 13.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 7.8
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 6.4
+        },
+        {
+          "name": "African traditionalist",
+          "pct": 5
+        },
+        {
+          "name": "other",
+          "pct": 1.5
+        },
+        {
+          "name": "none",
+          "pct": 8.3
+        }
+      ],
+      "religionRaw": "Apostolic Sect 40.3%, Pentecostal 17%, Protestant 13.8%, other Christian 7.8%, Roman Catholic 6.4%, African traditionalist 5%, other 1.5% (includes Muslim, Jewish, Hindu), none 8.3% (2022 est.)"
+    }
+  },
+  "provenance": {
+    "dz": "CIA World Factbook (public domain)",
+    "ao": "CIA World Factbook (public domain)",
+    "bw": "CIA World Factbook (public domain)",
+    "bj": "CIA World Factbook (public domain)",
+    "bi": "CIA World Factbook (public domain)",
+    "td": "CIA World Factbook (public domain)",
+    "cg": "CIA World Factbook (public domain)",
+    "cd": "CIA World Factbook (public domain)",
+    "cm": "CIA World Factbook (public domain)",
+    "km": "CIA World Factbook (public domain)",
+    "cf": "CIA World Factbook (public domain)",
+    "cv": "CIA World Factbook (public domain)",
+    "dj": "CIA World Factbook (public domain)",
+    "eg": "CIA World Factbook (public domain)",
+    "gq": "CIA World Factbook (public domain)",
+    "er": "CIA World Factbook (public domain)",
+    "et": "CIA World Factbook (public domain)",
+    "gm": "CIA World Factbook (public domain)",
+    "ga": "CIA World Factbook (public domain)",
+    "gh": "CIA World Factbook (public domain)",
+    "gn": "CIA World Factbook (public domain)",
+    "ci": "CIA World Factbook (public domain)",
+    "ke": "CIA World Factbook (public domain)",
+    "lr": "CIA World Factbook (public domain)",
+    "ls": "CIA World Factbook (public domain)",
+    "ly": "CIA World Factbook (public domain)",
+    "mg": "CIA World Factbook (public domain)",
+    "mw": "CIA World Factbook (public domain)",
+    "ml": "CIA World Factbook (public domain)",
+    "ma": "CIA World Factbook (public domain)",
+    "mu": "CIA World Factbook (public domain)",
+    "mr": "CIA World Factbook (public domain)",
+    "mz": "CIA World Factbook (public domain)",
+    "ne": "CIA World Factbook (public domain)",
+    "ng": "CIA World Factbook (public domain)",
+    "ss": "CIA World Factbook (public domain)",
+    "gw": "CIA World Factbook (public domain)",
+    "rw": "CIA World Factbook (public domain)",
+    "sc": "CIA World Factbook (public domain)",
+    "za": "CIA World Factbook (public domain)",
+    "sn": "CIA World Factbook (public domain)",
+    "sl": "CIA World Factbook (public domain)",
+    "so": "CIA World Factbook (public domain)",
+    "sd": "CIA World Factbook (public domain)",
+    "tg": "CIA World Factbook (public domain)",
+    "st": "CIA World Factbook (public domain)",
+    "tn": "CIA World Factbook (public domain)",
+    "tz": "CIA World Factbook (public domain)",
+    "ug": "CIA World Factbook (public domain)",
+    "bf": "CIA World Factbook (public domain)",
+    "na": "CIA World Factbook (public domain)",
+    "sz": "CIA World Factbook (public domain)",
+    "zm": "CIA World Factbook (public domain)",
+    "zw": "CIA World Factbook (public domain)",
+    "as": "CIA World Factbook (public domain)",
+    "au": "CIA World Factbook (public domain)",
+    "sb": "CIA World Factbook (public domain)",
+    "mp": "CIA World Factbook (public domain)",
+    "fj": "CIA World Factbook (public domain)",
+    "fm": "CIA World Factbook (public domain)",
+    "pf": "CIA World Factbook (public domain)",
+    "gu": "CIA World Factbook (public domain)",
+    "ki": "CIA World Factbook (public domain)",
+    "nc": "CIA World Factbook (public domain)",
+    "vu": "CIA World Factbook (public domain)",
+    "nr": "CIA World Factbook (public domain)",
+    "nz": "CIA World Factbook (public domain)",
+    "pw": "CIA World Factbook (public domain)",
+    "mh": "CIA World Factbook (public domain)",
+    "to": "CIA World Factbook (public domain)",
+    "tv": "CIA World Factbook (public domain)",
+    "ws": "CIA World Factbook (public domain)",
+    "aw": "CIA World Factbook (public domain)",
+    "ag": "CIA World Factbook (public domain)",
+    "bb": "CIA World Factbook (public domain)",
+    "bs": "CIA World Factbook (public domain)",
+    "bz": "CIA World Factbook (public domain)",
+    "ky": "CIA World Factbook (public domain)",
+    "cr": "CIA World Factbook (public domain)",
+    "cu": "CIA World Factbook (public domain)",
+    "dm": "CIA World Factbook (public domain)",
+    "do": "CIA World Factbook (public domain)",
+    "sv": "CIA World Factbook (public domain)",
+    "gd": "CIA World Factbook (public domain)",
+    "gt": "CIA World Factbook (public domain)",
+    "ht": "CIA World Factbook (public domain)",
+    "hn": "CIA World Factbook (public domain)",
+    "jm": "CIA World Factbook (public domain)",
+    "sx": "CIA World Factbook (public domain)",
+    "ni": "CIA World Factbook (public domain)",
+    "pa": "CIA World Factbook (public domain)",
+    "mf": "CIA World Factbook (public domain)",
+    "pr": "CIA World Factbook (public domain)",
+    "kn": "CIA World Factbook (public domain)",
+    "lc": "CIA World Factbook (public domain)",
+    "tt": "CIA World Factbook (public domain)",
+    "tc": "CIA World Factbook (public domain)",
+    "cw": "CIA World Factbook (public domain)",
+    "vc": "CIA World Factbook (public domain)",
+    "vg": "CIA World Factbook (public domain)",
+    "vi": "CIA World Factbook (public domain)",
+    "az": "CIA World Factbook (public domain)",
+    "am": "CIA World Factbook (public domain)",
+    "ge": "CIA World Factbook (public domain)",
+    "kg": "CIA World Factbook (public domain)",
+    "kz": "CIA World Factbook (public domain)",
+    "ru": "CIA World Factbook (public domain)",
+    "tj": "CIA World Factbook (public domain)",
+    "tm": "CIA World Factbook (public domain)",
+    "uz": "CIA World Factbook (public domain)",
+    "mm": "CIA World Factbook (public domain)",
+    "bn": "CIA World Factbook (public domain)",
+    "kh": "CIA World Factbook (public domain)",
+    "cn": "CIA World Factbook (public domain)",
+    "hk": "CIA World Factbook (public domain)",
+    "id": "CIA World Factbook (public domain)",
+    "jp": "CIA World Factbook (public domain)",
+    "kp": "CIA World Factbook (public domain)",
+    "kr": "CIA World Factbook (public domain)",
+    "la": "CIA World Factbook (public domain)",
+    "mo": "CIA World Factbook (public domain)",
+    "mn": "CIA World Factbook (public domain)",
+    "my": "CIA World Factbook (public domain)",
+    "pg": "CIA World Factbook (public domain)",
+    "ph": "CIA World Factbook (public domain)",
+    "sg": "CIA World Factbook (public domain)",
+    "th": "CIA World Factbook (public domain)",
+    "tl": "CIA World Factbook (public domain)",
+    "tw": "CIA World Factbook (public domain)",
+    "vn": "CIA World Factbook (public domain)",
+    "al": "CIA World Factbook (public domain)",
+    "ad": "CIA World Factbook (public domain)",
+    "at": "CIA World Factbook (public domain)",
+    "be": "CIA World Factbook (public domain)",
+    "ba": "CIA World Factbook (public domain)",
+    "by": "CIA World Factbook (public domain)",
+    "bg": "CIA World Factbook (public domain)",
+    "cy": "CIA World Factbook (public domain)",
+    "dk": "CIA World Factbook (public domain)",
+    "ie": "CIA World Factbook (public domain)",
+    "ee": "CIA World Factbook (public domain)",
+    "cz": "CIA World Factbook (public domain)",
+    "fi": "CIA World Factbook (public domain)",
+    "fo": "CIA World Factbook (public domain)",
+    "fr": "CIA World Factbook (public domain)",
+    "gi": "CIA World Factbook (public domain)",
+    "de": "CIA World Factbook (public domain)",
+    "gr": "CIA World Factbook (public domain)",
+    "hr": "CIA World Factbook (public domain)",
+    "hu": "CIA World Factbook (public domain)",
+    "is": "CIA World Factbook (public domain)",
+    "im": "CIA World Factbook (public domain)",
+    "it": "CIA World Factbook (public domain)",
+    "xk": "CIA World Factbook (public domain)",
+    "lv": "CIA World Factbook (public domain)",
+    "lt": "CIA World Factbook (public domain)",
+    "sk": "CIA World Factbook (public domain)",
+    "li": "CIA World Factbook (public domain)",
+    "lu": "CIA World Factbook (public domain)",
+    "md": "CIA World Factbook (public domain)",
+    "me": "CIA World Factbook (public domain)",
+    "mk": "CIA World Factbook (public domain)",
+    "mc": "CIA World Factbook (public domain)",
+    "mt": "CIA World Factbook (public domain)",
+    "nl": "CIA World Factbook (public domain)",
+    "no": "CIA World Factbook (public domain)",
+    "pl": "CIA World Factbook (public domain)",
+    "pt": "CIA World Factbook (public domain)",
+    "rs": "CIA World Factbook (public domain)",
+    "ro": "CIA World Factbook (public domain)",
+    "si": "CIA World Factbook (public domain)",
+    "sm": "CIA World Factbook (public domain)",
+    "es": "CIA World Factbook (public domain)",
+    "se": "CIA World Factbook (public domain)",
+    "ch": "CIA World Factbook (public domain)",
+    "gb": "CIA World Factbook (public domain)",
+    "ua": "CIA World Factbook (public domain)",
+    "ae": "CIA World Factbook (public domain)",
+    "bh": "CIA World Factbook (public domain)",
+    "ir": "CIA World Factbook (public domain)",
+    "il": "CIA World Factbook (public domain)",
+    "iq": "CIA World Factbook (public domain)",
+    "jo": "CIA World Factbook (public domain)",
+    "kw": "CIA World Factbook (public domain)",
+    "lb": "CIA World Factbook (public domain)",
+    "om": "CIA World Factbook (public domain)",
+    "qa": "CIA World Factbook (public domain)",
+    "sa": "CIA World Factbook (public domain)",
+    "sy": "CIA World Factbook (public domain)",
+    "tr": "CIA World Factbook (public domain)",
+    "ye": "CIA World Factbook (public domain)",
+    "bm": "CIA World Factbook (public domain)",
+    "ca": "CIA World Factbook (public domain)",
+    "gl": "CIA World Factbook (public domain)",
+    "mx": "CIA World Factbook (public domain)",
+    "us": "CIA World Factbook (public domain)",
+    "ar": "CIA World Factbook (public domain)",
+    "bo": "CIA World Factbook (public domain)",
+    "br": "CIA World Factbook (public domain)",
+    "cl": "CIA World Factbook (public domain)",
+    "co": "CIA World Factbook (public domain)",
+    "ec": "CIA World Factbook (public domain)",
+    "fk": "CIA World Factbook (public domain)",
+    "gy": "CIA World Factbook (public domain)",
+    "sr": "CIA World Factbook (public domain)",
+    "py": "CIA World Factbook (public domain)",
+    "pe": "CIA World Factbook (public domain)",
+    "uy": "CIA World Factbook (public domain)",
+    "ve": "CIA World Factbook (public domain)",
+    "af": "CIA World Factbook (public domain)",
+    "bd": "CIA World Factbook (public domain)",
+    "bt": "CIA World Factbook (public domain)",
+    "lk": "CIA World Factbook (public domain)",
+    "in": "CIA World Factbook (public domain)",
+    "mv": "CIA World Factbook (public domain)",
+    "np": "CIA World Factbook (public domain)",
+    "pk": "CIA World Factbook (public domain)",
+    "eh": "CIA World Factbook (Western Sahara) — Sunni Muslim",
+    "ps": "CIA World Factbook (West Bank / Gaza Strip)",
+    "xs": "Somaliland government (de-facto state) — Sunni Muslim"
+  }
+}

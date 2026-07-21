@@ -13,7 +13,7 @@ const REGION_CONTINENT = {
   africa: 'Africa', europe: 'Europe', asia: 'Asia',
   'north-america': 'North America', 'south-america': 'South America', oceania: 'Oceania',
 };
-const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy'];
+const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy', 'exports', 'urbanization'];
 
 // Geometry names that don't normalize-match a flag/stat name → explicit ISO code.
 const NAME_OVERRIDE = {
@@ -42,6 +42,8 @@ const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
 const flags = read('data/flags.json').flags;
 const datasets = read('data/datasets.json');
+let attributes = {};
+try { attributes = read('data/attributes.json').attributes || {}; } catch { /* optional */ }
 
 const flagByName = new Map(flags.map((f) => [norm(f.name), f.code]));
 const flagNameByCode = new Map(flags.map((f) => [f.code, f.name]));
@@ -100,6 +102,8 @@ for (const code of [...allCodes].sort()) {
     continent: datasets.countries[code]?.continent || (geom ? REGION_CONTINENT[geom.region] : null) || null,
     hasGeometry: !!geom,
     hasFlag: flagCodes.has(code),
+    hasCapital: !!attributes[code]?.capital,
+    hasReligion: !!attributes[code]?.religion,
     region: geom ? geom.region : null,
     metrics,
   };

@@ -10,6 +10,8 @@ const INDICATORS = [
   { id: 'gdp-per-capita',  wb: 'NY.GDP.PCAP.CD',  name: 'GDP per capita', blurb: 'GDP per person, latest year (World Bank)',       format: 'currency-short' },
   { id: 'land-area',       wb: 'AG.LND.TOTL.K2',  name: 'Land area',      blurb: 'Land area in km², latest year (World Bank)',     format: 'area-km2' },
   { id: 'life-expectancy', wb: 'SP.DYN.LE00.IN',  name: 'Life expectancy',blurb: 'Life expectancy at birth, latest (World Bank)', format: 'years' },
+  { id: 'exports',         wb: 'NE.EXP.GNFS.CD',  name: 'Total exports',  blurb: 'Exports of goods & services, current US$ (World Bank)', format: 'currency-short' },
+  { id: 'urbanization',    wb: 'SP.URB.TOTL.IN.ZS', name: 'Urbanization', blurb: 'Urban population, % of total (World Bank)',       format: 'percent' },
 ];
 
 // Static ISO2 -> continent (transcontinental countries use their common/REST-Countries primary).
@@ -93,7 +95,7 @@ for (const ind of INDICATORS) {
   const best = await fetchIndicator(ind.wb);
   const values = {};
   for (const [iso2, v] of best) {
-    values[iso2] = ind.format === 'years' ? Math.round(v.value * 10) / 10 : Math.round(v.value);
+    values[iso2] = (ind.format === 'years' || ind.format === 'percent') ? Math.round(v.value * 10) / 10 : Math.round(v.value);
     usedCodes.add(iso2);
   }
   datasets.push({ id: ind.id, name: ind.name, blurb: ind.blurb, format: ind.format, higherFirst: true, values });

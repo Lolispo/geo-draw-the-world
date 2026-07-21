@@ -7,18 +7,22 @@ How the country data is structured and regenerated. Established by TODOS items 5
 | File | Purpose | Keyed by |
 |---|---|---|
 | `data/countries-{region}.json` | Drawing geometry (polygons) | `code` (ISO 3166-1 alpha-2) + `name` |
-| `data/datasets.json` | Stats (GDP, population, etc.) + per-code country registry | `code` |
+| `data/datasets.json` | Rankable metrics (GDP, population, exports, …) + per-code country registry | `code` |
+| `data/attributes.json` | Non-rankable country facts (capital, religion breakdown) | `code` |
 | `data/flags.json` | Flag quiz (code, name, colors) | `code` |
-| `data/entities.json` | **Canonical registry** — the join across all three | `code` |
+| `data/entities.json` | **Canonical registry** — the join across all four | `code` |
 
 Every system now shares the **ISO 3166-1 alpha-2 code** as its join key. Geometry
 previously had names only; `code` was added to all 164 entries.
 
 ## Regeneration pipeline (order matters)
 
-1. `node scripts/build-datasets.mjs` — fetches 5 World Bank indicators, merges
+1. `node scripts/build-datasets.mjs` — fetches 7 World Bank indicators, merges
    manual backfill (`MANUAL_VALUES`, gap-fill only), writes `data/datasets.json`
    with a `provenance` map for the manual values.
+1b. `node scripts/build-attributes.mjs` — fetches capital + religion from the CIA
+   World Factbook (public domain), name-matched to `entities.json` (alias table +
+   manual backfill), writes `data/attributes.json`. Independent of the metric build.
 2. `node scripts/build-entities.mjs --write` — resolves geometry names → codes,
    reconciles `datasets.json` display names to the common-name form (Vietnam,
    South Korea, Russia, …), and writes `data/entities.json`.
@@ -59,3 +63,29 @@ population for Western Sahara `eh`, Falklands `fk`, Somaliland `xs`.
   Somaliland `xs` (disputed/very small; figures unreliable).
 - Somaliland `xs` has **no flag** in the quiz — no official ISO code, so no
   flagcdn image exists. It remains drawable and in stats, flagless by necessity.
+
+## Metrics & attributes added (TODOS #16–17)
+
+**Rankable metrics** (`datasets.json`, World Bank, 2015–2023 latest-value window):
+- `exports` — Exports of goods & services, current US$ (`NE.EXP.GNFS.CD`), 188 countries.
+- `urbanization` — Urban population, % of total (`SP.URB.TOTL.IN.ZS`), 217 countries.
+
+Both are enumerated dynamically by the rank-line picker and Data Explorer, so no UI
+wiring is needed. `urbanization` uses the existing `percent` formatter.
+
+**Country attributes** (`data/attributes.json`, CIA World Factbook, public domain):
+- `capital` (string) + optional `capitalNote` (full text when multi-capital, e.g.
+  South Africa) — 218/221 entities.
+- `religion` — ordered `[{ name, pct }]` breakdown + `religionRaw` (source text) —
+  205/221 entities. `entities.json` gains `hasCapital` / `hasReligion` coverage flags.
+
+**Attribute gaps / known rough edges** (acceptable; modes should skip missing):
+- `jg` Channel Islands (aggregate) — no attributes (Factbook lists Jersey/Guernsey
+  separately). Left empty by design.
+- Manual backfill (`MANUAL_ATTR` in `build-attributes.mjs`): Western Sahara `eh`,
+  West Bank & Gaza `ps`, Somaliland `xs` — Factbook has no *conventional* name for
+  these, so they're filled manually (capital + majority religion).
+- Religion percentages given only as **ranges** (e.g. Saudi Arabia "85–90% Sunni")
+  don't parse into a breakdown yet → a few countries have `capital` but no `religion`.
+- A handful of multi-capital strings are cosmetically rough (e.g. Ivory Coast
+  "Yamoussoukro , Abidjan"); `capitalNote` preserves the full Factbook text.
