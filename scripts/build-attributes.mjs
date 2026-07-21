@@ -99,18 +99,22 @@ const NAME_ALIAS = {
 // "Roman Catholic 47%, Muslim 4%, ... none 33%, unspecified 9% (2021 est.)"
 function parseReligion(text) {
   if (!text) return { list: [], raw: '' };
-  // cut trailing "(2021 est.)" / notes after " - " or "note:"
-  let t = text.replace(/\((?:\d{4}[^)]*|[^)]*est\.[^)]*)\)/g, '');
-  t = t.split(/\bnote:/i)[0];
+  const raw = text.trim();
+  let t = text.split(/\bnote:/i)[0];
+  // Drop parentheticals: "(official)", "(2021 est.)", "(predominantly Sunni)", etc.
+  // This is why the majority used to vanish for e.g. Greece "Greek Orthodox (official) 81-90%".
+  t = t.replace(/\([^)]*\)/g, ' ');
   const list = [];
-  const re = /([A-Za-z][A-Za-z .'\/&-]*?)\s*(?:<\s*)?(\d+(?:\.\d+)?)\s*%/g;
+  // name  low[-high]%  — a range becomes its midpoint; "<1%" keeps its number.
+  const re = /([A-Za-z][A-Za-z .'\/&-]*?)\s*(?:<\s*)?(\d+(?:\.\d+)?)\s*(?:[-–]\s*(\d+(?:\.\d+)?))?\s*%/g;
   let m;
   while ((m = re.exec(t)) !== null) {
     const name = m[1].replace(/^[\s,;/]+|[\s,;/]+$/g, '').replace(/\s+/g, ' ');
-    const pct = parseFloat(m[2]);
+    const lo = parseFloat(m[2]);
+    const pct = m[3] != null ? Math.round(((lo + parseFloat(m[3])) / 2) * 10) / 10 : lo;
     if (name && name.length <= 40) list.push({ name, pct });
   }
-  return { list, raw: text.trim() };
+  return { list, raw };
 }
 
 function cleanCapital(text) {
@@ -196,14 +200,15 @@ const MANUAL_ATTR = {
         src: 'Somaliland government (de-facto state) — Sunni Muslim' },
 };
 for (const [code, m] of Object.entries(MANUAL_ATTR)) {
-  if (!entities[code] || attributes[code]) continue; // gap-fill only
-  const entry = {};
-  if (m.capital) entry.capital = m.capital;
-  if (m.capitalNote) entry.capitalNote = m.capitalNote;
-  if (m.religion) entry.religion = m.religion;
-  attributes[code] = entry;
-  provenance[code] = m.src;
-  matched++;
+  if (!entities[code]) continue;
+  const isNew = !attributes[code];
+  const entry = attributes[code] || (attributes[code] = {});
+  // Per-field gap-fill: only fill a field Factbook didn't already provide.
+  if (m.capital && !entry.capital) entry.capital = m.capital;
+  if (m.capitalNote && !entry.capitalNote) entry.capitalNote = m.capitalNote;
+  if (m.religion && !entry.religion) entry.religion = m.religion;
+  if (!provenance[code]) provenance[code] = m.src;
+  if (isNew) matched++;
 }
 
 // ---- write + report ------------------------------------------------------

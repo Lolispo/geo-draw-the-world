@@ -22,18 +22,6 @@
           "pct": 74.5
         },
         {
-          "name": "Sunni",
-          "pct": 63.3
-        },
-        {
-          "name": "Shia",
-          "pct": 6.7
-        },
-        {
-          "name": "other",
-          "pct": 4.4
-        },
-        {
           "name": "Christian",
           "pct": 12.9
         },
@@ -74,38 +62,6 @@
           "pct": 68.3
         },
         {
-          "name": "Anglican",
-          "pct": 17.6
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 12.4
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 12.2
-        },
-        {
-          "name": "Moravian",
-          "pct": 8.3
-        },
-        {
-          "name": "Methodist",
-          "pct": 5.6
-        },
-        {
-          "name": "Wesleyan Holiness",
-          "pct": 4.5
-        },
-        {
-          "name": "Church of God",
-          "pct": 4.1
-        },
-        {
-          "name": "Baptist",
-          "pct": 3.6
-        },
-        {
           "name": "Roman Catholic",
           "pct": 8.2
         },
@@ -143,6 +99,10 @@
         {
           "name": "atheist",
           "pct": 2.5
+        },
+        {
+          "name": "Bektashi",
+          "pct": 2.1
         },
         {
           "name": "other",
@@ -205,14 +165,6 @@
         {
           "name": "Evangelical",
           "pct": 15.3
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 13
-        },
-        {
-          "name": "other Evangelical",
-          "pct": 2.3
         },
         {
           "name": "other",
@@ -285,30 +237,6 @@
           "pct": 18.1
         },
         {
-          "name": "Anglican",
-          "pct": 9.8
-        },
-        {
-          "name": "Uniting Church",
-          "pct": 2.6
-        },
-        {
-          "name": "Presbyterian and Reformed",
-          "pct": 1.6
-        },
-        {
-          "name": "Baptist",
-          "pct": 1.4
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 1
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.7
-        },
-        {
           "name": "other Christian",
           "pct": 3.5
         },
@@ -327,14 +255,6 @@
         {
           "name": "Orthodox",
           "pct": 2.3
-        },
-        {
-          "name": "Eastern Orthodox",
-          "pct": 2.1
-        },
-        {
-          "name": "Oriental Orthodox",
-          "pct": 0.2
         },
         {
           "name": "other",
@@ -361,22 +281,6 @@
         {
           "name": "Protestant",
           "pct": 4.9
-        },
-        {
-          "name": "includes Methodist",
-          "pct": 0.9
-        },
-        {
-          "name": "Adventist",
-          "pct": 0.9
-        },
-        {
-          "name": "Anglican",
-          "pct": 0.4
-        },
-        {
-          "name": "other Protestant",
-          "pct": 2.7
         },
         {
           "name": "Jehovah's Witness",
@@ -454,60 +358,12 @@
           "pct": 66.4
         },
         {
-          "name": "includes Anglican",
-          "pct": 23.9
-        },
-        {
-          "name": "other Pentecostal",
-          "pct": 19.5
-        },
-        {
-          "name": "Adventist",
-          "pct": 5.9
-        },
-        {
-          "name": "Methodist",
-          "pct": 4.2
-        },
-        {
-          "name": "Wesleyan",
-          "pct": 3.4
-        },
-        {
-          "name": "Nazarene",
-          "pct": 3.2
-        },
-        {
-          "name": "Church of God",
-          "pct": 2.4
-        },
-        {
-          "name": "Baptist",
-          "pct": 1.8
-        },
-        {
-          "name": "Moravian",
-          "pct": 1.2
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.9
-        },
-        {
           "name": "Roman Catholic",
           "pct": 3.8
         },
         {
           "name": "other Christian",
           "pct": 5.4
-        },
-        {
-          "name": "includes Jehovah's Witness",
-          "pct": 2
-        },
-        {
-          "name": "other",
-          "pct": 3.4
         },
         {
           "name": "Rastafarian",
@@ -655,22 +511,6 @@
           "pct": 93.9
         },
         {
-          "name": "Roman Catholic",
-          "pct": 58.6
-        },
-        {
-          "name": "Protestant",
-          "pct": 35.3
-        },
-        {
-          "name": "includes Adventist",
-          "pct": 2.7
-        },
-        {
-          "name": "and other Protestant religions",
-          "pct": 32.6
-        },
-        {
           "name": "Muslim",
           "pct": 3.4
         },
@@ -702,18 +542,6 @@
           "pct": 13.5
         },
         {
-          "name": "Celestial",
-          "pct": 6.7
-        },
-        {
-          "name": "Methodist",
-          "pct": 3.4
-        },
-        {
-          "name": "other Protestant",
-          "pct": 3.4
-        },
-        {
           "name": "Vodoun",
           "pct": 11.6
         },
@@ -742,50 +570,6 @@
         {
           "name": "Protestant",
           "pct": 46.2
-        },
-        {
-          "name": "includes Anglican",
-          "pct": 15.8
-        },
-        {
-          "name": "African Methodist Episcopal",
-          "pct": 8.6
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 6.7
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 3.5
-        },
-        {
-          "name": "Methodist",
-          "pct": 2.7
-        },
-        {
-          "name": "Presbyterian",
-          "pct": 2
-        },
-        {
-          "name": "Church of God",
-          "pct": 1.6
-        },
-        {
-          "name": "Baptist",
-          "pct": 1.2
-        },
-        {
-          "name": "Salvation Army",
-          "pct": 1.1
-        },
-        {
-          "name": "Brethren",
-          "pct": 1
-        },
-        {
-          "name": "other Protestant",
-          "pct": 2
         },
         {
           "name": "Roman Catholic",
@@ -821,6 +605,10 @@
     "bn": {
       "capital": "Bandar Seri Begawan",
       "religion": [
+        {
+          "name": "Muslim",
+          "pct": 82.1
+        },
         {
           "name": "Christian",
           "pct": 6.7
@@ -865,6 +653,14 @@
           "pct": 2.8
         },
         {
+          "name": "Protestant",
+          "pct": 0.3
+        },
+        {
+          "name": "Believer",
+          "pct": 0.9
+        },
+        {
           "name": "other",
           "pct": 4.8
         },
@@ -907,6 +703,10 @@
           "pct": 4
         },
         {
+          "name": "Spirtism",
+          "pct": 1.8
+        },
+        {
           "name": "unspecified",
           "pct": 1.4
         },
@@ -933,48 +733,12 @@
           "pct": 69.9
         },
         {
-          "name": "includes Baptist",
-          "pct": 34.9
-        },
-        {
-          "name": "Anglican",
-          "pct": 13.7
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 8.9
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 4.4
-        },
-        {
-          "name": "Methodist",
-          "pct": 3.6
-        },
-        {
-          "name": "Church of God",
-          "pct": 1.9
-        },
-        {
-          "name": "Plymouth Brethren",
-          "pct": 1.6
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.9
-        },
-        {
           "name": "Roman Catholic",
           "pct": 12
         },
         {
           "name": "other Christian",
           "pct": 13
-        },
-        {
-          "name": "includes Jehovah's Witness",
-          "pct": 1.1
         },
         {
           "name": "other",
@@ -1069,34 +833,6 @@
           "pct": 31.5
         },
         {
-          "name": "includes Pentecostal",
-          "pct": 8.4
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 5.4
-        },
-        {
-          "name": "Anglican",
-          "pct": 4.7
-        },
-        {
-          "name": "Mennonite",
-          "pct": 3.7
-        },
-        {
-          "name": "Baptist",
-          "pct": 3.6
-        },
-        {
-          "name": "Methodist",
-          "pct": 2.9
-        },
-        {
-          "name": "Nazarene",
-          "pct": 2.8
-        },
-        {
           "name": "Jehovah's Witness",
           "pct": 1.7
         },
@@ -1143,6 +879,10 @@
           "pct": 0.9
         },
         {
+          "name": "Traditional",
+          "pct": 0.2
+        },
+        {
           "name": "none",
           "pct": 34.6
         }
@@ -1153,24 +893,16 @@
       "capital": "Kinshasa",
       "religion": [
         {
-          "name": "Roman Catholic",
-          "pct": 29.9
-        },
-        {
-          "name": "Protestant",
-          "pct": 26.7
-        },
-        {
-          "name": "other Christian",
-          "pct": 36.5
-        },
-        {
           "name": "Kimbanguist",
           "pct": 2.8
         },
         {
           "name": "Muslim",
           "pct": 1.3
+        },
+        {
+          "name": "other",
+          "pct": 1.2
         },
         {
           "name": "none",
@@ -1427,18 +1159,6 @@
           "pct": 17.2
         },
         {
-          "name": "Evangelical",
-          "pct": 16.7
-        },
-        {
-          "name": "Adventist",
-          "pct": 0.3
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.2
-        },
-        {
           "name": "Jehovah's Witness",
           "pct": 0.6
         },
@@ -1527,22 +1247,6 @@
         {
           "name": "Protestant",
           "pct": 4
-        },
-        {
-          "name": "includes Adventist",
-          "pct": 1.9
-        },
-        {
-          "name": "Nazarene",
-          "pct": 1.8
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 0.2
-        },
-        {
-          "name": "God is Love",
-          "pct": 0.1
         },
         {
           "name": "Christian Rationalism",
@@ -1646,6 +1350,10 @@
           "pct": 1
         },
         {
+          "name": "other",
+          "pct": 1.4
+        },
+        {
           "name": "unknown",
           "pct": 1.1
         },
@@ -1718,8 +1426,16 @@
       "capital": "Copenhagen",
       "religion": [
         {
+          "name": "Evangelical Lutheran",
+          "pct": 71.4
+        },
+        {
           "name": "Muslim",
           "pct": 4.3
+        },
+        {
+          "name": "other/none/unspecified",
+          "pct": 24.3
         }
       ],
       "religionRaw": "Evangelical Lutheran (official) 71.4%, Muslim 4.3%, other/none/unspecified (denominations include Roman Catholic, Jehovah's Witness, Serbian Orthodox Christian, Jewish, Baptist, Buddhist, Church of Jesus Christ, Pentecostal, and nondenominational Christian) 24.3% (2024 est.)"
@@ -1734,34 +1450,6 @@
         {
           "name": "Protestant",
           "pct": 29.7
-        },
-        {
-          "name": "includes Seventh Day Adventist",
-          "pct": 6.7
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 6.1
-        },
-        {
-          "name": "Baptist",
-          "pct": 5.2
-        },
-        {
-          "name": "Christian Union Church",
-          "pct": 3.9
-        },
-        {
-          "name": "Methodist",
-          "pct": 2.6
-        },
-        {
-          "name": "Gospel Mission",
-          "pct": 2.1
-        },
-        {
-          "name": "other Protestant",
-          "pct": 3.1
         },
         {
           "name": "Jehovah's Witness",
@@ -1809,7 +1497,14 @@
       "religionRaw": "Evangelical 50.2%, Roman Catholic 30.1%, none 18.5%, unspecified 1.2% (2023 est.)"
     },
     "dz": {
-      "capital": "Algiers"
+      "capital": "Algiers",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99
+        }
+      ],
+      "religionRaw": "Muslim (official; predominantly Sunni) 99%, other (includes Christian, Jewish, Ahmadi Muslim, Shia Muslim, Ibadi Muslim) &lt;1% (2012 est.)"
     },
     "ec": {
       "capital": "Quito",
@@ -1821,18 +1516,6 @@
         {
           "name": "Protestant",
           "pct": 19
-        },
-        {
-          "name": "Evangelical",
-          "pct": 18.3
-        },
-        {
-          "name": "Adventist",
-          "pct": 0.6
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.2
         },
         {
           "name": "Jehovah's Witness",
@@ -1865,14 +1548,6 @@
           "pct": 9.2
         },
         {
-          "name": "Lutheran",
-          "pct": 7.7
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.5
-        },
-        {
           "name": "other",
           "pct": 3
         },
@@ -1888,7 +1563,18 @@
       "religionRaw": "Orthodox 16.5%, Protestant 9.2% (Lutheran 7.7%, other Protestant 1.5%), other 3% (includes Roman Catholic, Muslim, Jehovah's Witness, Pentecostal, Buddhist, and Taara Believer), none 58.4%, unspecified 12.9% (2021 est.)"
     },
     "eg": {
-      "capital": "Cairo"
+      "capital": "Cairo",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 90
+        },
+        {
+          "name": "Christian",
+          "pct": 10
+        }
+      ],
+      "religionRaw": "Muslim (predominantly Sunni) 90%, Christian (majority Coptic Orthodox, other Christians include Armenian Apostolic, Catholic, Maronite, Orthodox, and Anglican) 10%"
     },
     "eh": {
       "capital": "El Aaiún",
@@ -1993,22 +1679,6 @@
           "pct": 45
         },
         {
-          "name": "Methodist",
-          "pct": 34.6
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 5.7
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 3.9
-        },
-        {
-          "name": "and Anglican",
-          "pct": 0.8
-        },
-        {
           "name": "Hindu",
           "pct": 27.9
         },
@@ -2071,22 +1741,6 @@
         {
           "name": "Protestant",
           "pct": 41.1
-        },
-        {
-          "name": "includes Congregational",
-          "pct": 38.5
-        },
-        {
-          "name": "Baptist",
-          "pct": 1.1
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 0.8
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 0.7
         },
         {
           "name": "Church of Jesus Christ",
@@ -2179,14 +1833,6 @@
           "pct": 46.4
         },
         {
-          "name": "Revival Church",
-          "pct": 37
-        },
-        {
-          "name": "other Protestant",
-          "pct": 9.4
-        },
-        {
           "name": "Roman Catholic",
           "pct": 29.8
         },
@@ -2217,6 +1863,10 @@
       "capital": "London",
       "religion": [
         {
+          "name": "Christian",
+          "pct": 59.5
+        },
+        {
           "name": "Muslim",
           "pct": 4.4
         },
@@ -2245,38 +1895,6 @@
         {
           "name": "Protestant",
           "pct": 49.2
-        },
-        {
-          "name": "includes Pentecostal",
-          "pct": 17.2
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 13.2
-        },
-        {
-          "name": "Anglican",
-          "pct": 8.5
-        },
-        {
-          "name": "Baptist",
-          "pct": 3.2
-        },
-        {
-          "name": "Church of God",
-          "pct": 2.4
-        },
-        {
-          "name": "Evangelical",
-          "pct": 1.9
-        },
-        {
-          "name": "Methodist",
-          "pct": 1.6
-        },
-        {
-          "name": "other",
-          "pct": 1.2
         },
         {
           "name": "Roman Catholic",
@@ -2309,6 +1927,10 @@
       "capital": "Tbilisi",
       "religion": [
         {
+          "name": "Eastern Orthodox Christian",
+          "pct": 83.4
+        },
+        {
           "name": "Muslim",
           "pct": 10.7
         },
@@ -2337,22 +1959,6 @@
         {
           "name": "Christian",
           "pct": 71.3
-        },
-        {
-          "name": "Pentecostal/Charismatic",
-          "pct": 31.6
-        },
-        {
-          "name": "Protestant",
-          "pct": 17.4
-        },
-        {
-          "name": "Catholic",
-          "pct": 10
-        },
-        {
-          "name": "other",
-          "pct": 12.3
         },
         {
           "name": "Muslim",
@@ -2485,12 +2091,20 @@
       "capital": "Athens",
       "religion": [
         {
+          "name": "Greek Orthodox",
+          "pct": 85.5
+        },
+        {
           "name": "Muslim",
           "pct": 2
         },
         {
           "name": "other",
           "pct": 3
+        },
+        {
+          "name": "none",
+          "pct": 9.5
         },
         {
           "name": "unspecified",
@@ -2525,6 +2139,10 @@
       "capital": "Hagatna",
       "capitalNote": "Hagatna (Agana)",
       "religion": [
+        {
+          "name": "Christian",
+          "pct": 94.2
+        },
         {
           "name": "folk religions",
           "pct": 1.5
@@ -2572,22 +2190,6 @@
         {
           "name": "Protestant",
           "pct": 34.8
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 22.8
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 5.4
-        },
-        {
-          "name": "Anglican",
-          "pct": 5.2
-        },
-        {
-          "name": "Methodist",
-          "pct": 1.4
         },
         {
           "name": "Hindu",
@@ -2755,24 +2357,16 @@
           "pct": 30.1
         },
         {
-          "name": "Roman Catholic",
-          "pct": 27.5
-        },
-        {
-          "name": "Greek Catholic",
-          "pct": 1.7
-        },
-        {
-          "name": "other Catholic",
-          "pct": 0.9
-        },
-        {
           "name": "Calvinist",
           "pct": 9.8
         },
         {
           "name": "Lutheran",
           "pct": 1.8
+        },
+        {
+          "name": "other Christian",
+          "pct": 1.6
         },
         {
           "name": "other",
@@ -2825,10 +2419,6 @@
         {
           "name": "Protestant",
           "pct": 3.7
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.2
         },
         {
           "name": "Orthodox",
@@ -2947,8 +2537,16 @@
       "capital": "Baghdad",
       "religion": [
         {
+          "name": "Muslim",
+          "pct": 96.5
+        },
+        {
           "name": "Christian",
           "pct": 1
+        },
+        {
+          "name": "other",
+          "pct": 2.5
         }
       ],
       "religionRaw": "Muslim (official) 95-98% (Shia 61-64%, Sunni 29-34%), Christian 1% (includes Catholic, Orthodox, Protestant, Assyrian Church of the East), other 1-4% (2015 est.)"
@@ -2956,6 +2554,10 @@
     "ir": {
       "capital": "Tehran",
       "religion": [
+        {
+          "name": "Muslim",
+          "pct": 98.5
+        },
         {
           "name": "Christian",
           "pct": 0.7
@@ -2967,6 +2569,10 @@
         {
           "name": "agnostic",
           "pct": 0.3
+        },
+        {
+          "name": "other",
+          "pct": 0.2
         }
       ],
       "religionRaw": "Muslim (official) 98.5%, Christian 0.7%, Baha'i 0.3%, agnostic 0.3%, other (includes Zoroastrian, Jewish, Hindu) 0.2% (2020 est.)"
@@ -2974,6 +2580,10 @@
     "is": {
       "capital": "Reykjavik",
       "religion": [
+        {
+          "name": "Evangelical Lutheran Church of Iceland",
+          "pct": 58.6
+        },
         {
           "name": "Roman Catholic",
           "pct": 3.8
@@ -2991,7 +2601,7 @@
           "pct": 1.4
         },
         {
-          "name": "or unspecified",
+          "name": "other or unspecified",
           "pct": 18.7
         },
         {
@@ -3029,58 +2639,6 @@
         {
           "name": "Protestant",
           "pct": 64.8
-        },
-        {
-          "name": "includes Seventh Day Adventist",
-          "pct": 12
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 11
-        },
-        {
-          "name": "Other Church of God",
-          "pct": 9.2
-        },
-        {
-          "name": "New Testament Church of God",
-          "pct": 7.2
-        },
-        {
-          "name": "Baptist",
-          "pct": 6.7
-        },
-        {
-          "name": "Church of God in Jamaica",
-          "pct": 4.8
-        },
-        {
-          "name": "Church of God of Prophecy",
-          "pct": 4.5
-        },
-        {
-          "name": "Anglican",
-          "pct": 2.8
-        },
-        {
-          "name": "United Church",
-          "pct": 2.1
-        },
-        {
-          "name": "Methodist",
-          "pct": 1.6
-        },
-        {
-          "name": "Revived",
-          "pct": 1.4
-        },
-        {
-          "name": "Brethren",
-          "pct": 0.9
-        },
-        {
-          "name": "and Moravian",
-          "pct": 0.7
         },
         {
           "name": "Roman Catholic",
@@ -3161,26 +2719,6 @@
           "pct": 85.5
         },
         {
-          "name": "Protestant",
-          "pct": 33.4
-        },
-        {
-          "name": "Catholic",
-          "pct": 20.6
-        },
-        {
-          "name": "Evangelical",
-          "pct": 20.4
-        },
-        {
-          "name": "African Instituted Churches",
-          "pct": 7
-        },
-        {
-          "name": "other Christian",
-          "pct": 4.1
-        },
-        {
           "name": "Muslim",
           "pct": 10.9
         },
@@ -3211,10 +2749,6 @@
           "pct": 7
         },
         {
-          "name": "Russian Orthodox",
-          "pct": 3
-        },
-        {
           "name": "other",
           "pct": 3
         }
@@ -3224,6 +2758,10 @@
     "kh": {
       "capital": "Phnom Penh",
       "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 97.1
+        },
         {
           "name": "Muslim",
           "pct": 2
@@ -3327,6 +2865,10 @@
       "capital": "Kuwait City",
       "religion": [
         {
+          "name": "Muslim",
+          "pct": 74.6
+        },
+        {
           "name": "Christian",
           "pct": 18.2
         },
@@ -3344,42 +2886,6 @@
         {
           "name": "Protestant",
           "pct": 60.8
-        },
-        {
-          "name": "includes Church of God",
-          "pct": 19.5
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 8.7
-        },
-        {
-          "name": "non-denominational",
-          "pct": 8.3
-        },
-        {
-          "name": "Baptist",
-          "pct": 6.9
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 6.8
-        },
-        {
-          "name": "Presbyterian/United Church",
-          "pct": 5.7
-        },
-        {
-          "name": "Anglican",
-          "pct": 2.8
-        },
-        {
-          "name": "Wesleyan Holiness",
-          "pct": 1.5
-        },
-        {
-          "name": "Methodist",
-          "pct": 0.5
         },
         {
           "name": "Roman Catholic",
@@ -3418,14 +2924,6 @@
         {
           "name": "Christian",
           "pct": 17.2
-        },
-        {
-          "name": "Orthodox",
-          "pct": 17
-        },
-        {
-          "name": "other",
-          "pct": 0.2
         },
         {
           "name": "Buddhism",
@@ -3499,40 +2997,8 @@
           "pct": 25.5
         },
         {
-          "name": "includes Seventh Day Adventist",
-          "pct": 10.4
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 8.9
-        },
-        {
-          "name": "Baptist",
-          "pct": 2.2
-        },
-        {
-          "name": "Anglican",
-          "pct": 1.6
-        },
-        {
-          "name": "Church of God",
-          "pct": 1.5
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.9
-        },
-        {
           "name": "other Christian",
           "pct": 3.4
-        },
-        {
-          "name": "includes Evangelical",
-          "pct": 2.3
-        },
-        {
-          "name": "and Jehovah's Witness",
-          "pct": 1.1
         },
         {
           "name": "Rastafarian",
@@ -3556,6 +3022,10 @@
     "li": {
       "capital": "Vaduz",
       "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 73.4
+        },
         {
           "name": "Protestant Reformed",
           "pct": 6.3
@@ -3599,6 +3069,10 @@
       "capital": "Colombo",
       "capitalNote": "Colombo (commercial capital); Sri Jayewardenepura Kotte (legislative capital)",
       "religion": [
+        {
+          "name": "Buddhist",
+          "pct": 70.2
+        },
         {
           "name": "Hindu",
           "pct": 12.6
@@ -3656,18 +3130,6 @@
           "pct": 47.8
         },
         {
-          "name": "Pentecostal",
-          "pct": 23.1
-        },
-        {
-          "name": "Lesotho Evangelical",
-          "pct": 17.3
-        },
-        {
-          "name": "Anglican",
-          "pct": 7.4
-        },
-        {
           "name": "Roman Catholic",
           "pct": 39.3
         },
@@ -3710,6 +3172,10 @@
           "pct": 0.2
         },
         {
+          "name": "other",
+          "pct": 0.9
+        },
+        {
           "name": "none",
           "pct": 6.1
         },
@@ -3724,8 +3190,16 @@
       "capital": "Luxembourg",
       "religion": [
         {
+          "name": "Christian",
+          "pct": 70.6
+        },
+        {
           "name": "Muslim",
           "pct": 2.3
+        },
+        {
+          "name": "other",
+          "pct": 0.4
         },
         {
           "name": "unaffiliated",
@@ -3768,6 +3242,10 @@
       "capital": "Tripoli",
       "capitalNote": "Tripoli (Tarabulus)",
       "religion": [
+        {
+          "name": "Muslim",
+          "pct": 96.6
+        },
         {
           "name": "Christian",
           "pct": 2.7
@@ -3899,42 +3377,6 @@
         {
           "name": "Protestant",
           "pct": 79.3
-        },
-        {
-          "name": "United Church of Christ",
-          "pct": 47.9
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 14.1
-        },
-        {
-          "name": "Full Gospel",
-          "pct": 5
-        },
-        {
-          "name": "Bukot Nan Jesus",
-          "pct": 3
-        },
-        {
-          "name": "Salvation Army",
-          "pct": 2.3
-        },
-        {
-          "name": "Reformed Congressional Church",
-          "pct": 2.2
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 1.7
-        },
-        {
-          "name": "New Beginning Church",
-          "pct": 1.4
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.6
         },
         {
           "name": "Roman Catholic",
@@ -4101,13 +3543,20 @@
       "capital": "Saipan"
     },
     "mr": {
-      "capital": "Nouakchott"
+      "capital": "Nouakchott",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 100
+        }
+      ],
+      "religionRaw": "Muslim (official) 100%"
     },
     "mt": {
       "capital": "Valletta",
       "religion": [
         {
-          "name": "more than",
+          "name": "Roman Catholic more than",
           "pct": 90
         }
       ],
@@ -4156,18 +3605,6 @@
         {
           "name": "Protestant",
           "pct": 33.5
-        },
-        {
-          "name": "Seventh Day Adventist/Baptist",
-          "pct": 9.4
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 7.6
-        },
-        {
-          "name": "Anglican",
-          "pct": 2.3
         },
         {
           "name": "Roman Catholic",
@@ -4223,6 +3660,10 @@
       "capital": "Kuala Lumpur",
       "religion": [
         {
+          "name": "Muslim",
+          "pct": 63.5
+        },
+        {
           "name": "Buddhist",
           "pct": 18.7
         },
@@ -4233,6 +3674,10 @@
         {
           "name": "Hindu",
           "pct": 6.1
+        },
+        {
+          "name": "other",
+          "pct": 0.9
         },
         {
           "name": "none/unspecified",
@@ -4375,10 +3820,6 @@
           "pct": 38.7
         },
         {
-          "name": "Adventist",
-          "pct": 0.5
-        },
-        {
           "name": "other",
           "pct": 1.2
         },
@@ -4430,6 +3871,10 @@
     "no": {
       "capital": "Oslo",
       "religion": [
+        {
+          "name": "Church of Norway",
+          "pct": 67.5
+        },
         {
           "name": "Muslim",
           "pct": 3.1
@@ -4492,30 +3937,6 @@
           "pct": 60.4
         },
         {
-          "name": "Nauruan Congregational",
-          "pct": 34.7
-        },
-        {
-          "name": "Assemblies of God",
-          "pct": 11.6
-        },
-        {
-          "name": "Pacific Light House",
-          "pct": 6.3
-        },
-        {
-          "name": "Nauru Independent",
-          "pct": 3.6
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 1.3
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.4
-        },
-        {
           "name": "Roman Catholic",
           "pct": 33.9
         },
@@ -4540,34 +3961,6 @@
         {
           "name": "Christian",
           "pct": 37.3
-        },
-        {
-          "name": "Catholic",
-          "pct": 10.1
-        },
-        {
-          "name": "Anglican",
-          "pct": 6.8
-        },
-        {
-          "name": "Presbyterian and Congregational",
-          "pct": 5.2
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 1.8
-        },
-        {
-          "name": "Methodist",
-          "pct": 1.6
-        },
-        {
-          "name": "Church of Jesus Christ",
-          "pct": 1.2
-        },
-        {
-          "name": "other",
-          "pct": 10.7
         },
         {
           "name": "Hindu",
@@ -4693,38 +4086,6 @@
           "pct": 64.3
         },
         {
-          "name": "Evangelical Lutheran",
-          "pct": 18.4
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 12.9
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 10.4
-        },
-        {
-          "name": "United Church",
-          "pct": 10.3
-        },
-        {
-          "name": "Evangelical Alliance",
-          "pct": 5.9
-        },
-        {
-          "name": "Anglican",
-          "pct": 3.2
-        },
-        {
-          "name": "Baptist",
-          "pct": 2.8
-        },
-        {
-          "name": "Salvation Army",
-          "pct": 0.4
-        },
-        {
           "name": "Roman Catholic",
           "pct": 26
         },
@@ -4836,22 +4197,23 @@
       "religionRaw": "Roman Catholic 56%, Protestant 33% (largely Pentecostal), other 2%, atheist 1%, none 7% (2014 est.)"
     },
     "ps": {
-      "capital": "Ramallah",
-      "capitalNote": "Ramallah (seat of government); East Jerusalem claimed as capital",
       "religion": [
         {
           "name": "Muslim",
-          "pct": 93
+          "pct": 82.5
         },
         {
           "name": "Jewish",
-          "pct": 5
+          "pct": 13
         },
         {
           "name": "Christian",
-          "pct": 1
+          "pct": 1.8
         }
-      ]
+      ],
+      "religionRaw": "Muslim 80-85% (predominantly Sunni), Jewish 12-14%, Christian 1-2.5% (mainly Greek Orthodox), other, unaffiliated, unspecified &lt;1% (2012 est.)",
+      "capital": "Ramallah",
+      "capitalNote": "Ramallah (seat of government); East Jerusalem claimed as capital"
     },
     "pt": {
       "capital": "Lisbon",
@@ -4899,18 +4261,6 @@
           "pct": 30.9
         },
         {
-          "name": "Evangelical",
-          "pct": 24.6
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 5
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.4
-        },
-        {
           "name": "Modekngei",
           "pct": 5.1
         },
@@ -4935,6 +4285,10 @@
         {
           "name": "Protestant",
           "pct": 7
+        },
+        {
+          "name": "Believer",
+          "pct": 5.7
         },
         {
           "name": "other",
@@ -5038,6 +4392,14 @@
       "capital": "Moscow",
       "religion": [
         {
+          "name": "Russian Orthodox",
+          "pct": 17.5
+        },
+        {
+          "name": "Muslim",
+          "pct": 12.5
+        },
+        {
           "name": "other Christian",
           "pct": 2
         }
@@ -5097,26 +4459,6 @@
           "pct": 73.4
         },
         {
-          "name": "Church of Melanesia",
-          "pct": 31.9
-        },
-        {
-          "name": "South Sea Evangelical",
-          "pct": 17.1
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 11.7
-        },
-        {
-          "name": "United Church",
-          "pct": 10.1
-        },
-        {
-          "name": "Christian Fellowship Church",
-          "pct": 2.5
-        },
-        {
           "name": "Roman Catholic",
           "pct": 19.6
         },
@@ -5145,22 +4487,6 @@
         {
           "name": "Protestant",
           "pct": 10.5
-        },
-        {
-          "name": "Anglican",
-          "pct": 6.1
-        },
-        {
-          "name": "Pentecostal Assembly",
-          "pct": 1.5
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 1.2
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.7
         },
         {
           "name": "other Christian",
@@ -5195,6 +4521,14 @@
     "se": {
       "capital": "Stockholm",
       "religion": [
+        {
+          "name": "Church of Sweden",
+          "pct": 53.9
+        },
+        {
+          "name": "other",
+          "pct": 8.9
+        },
         {
           "name": "none or unspecified",
           "pct": 37.2
@@ -5344,18 +4678,6 @@
           "pct": 99.9
         },
         {
-          "name": "Sunni Muslim",
-          "pct": 98.1
-        },
-        {
-          "name": "Shia Muslim",
-          "pct": 1.2
-        },
-        {
-          "name": "Islamic schismatic",
-          "pct": 0.6
-        },
-        {
           "name": "ethnic religionist",
           "pct": 0.1
         }
@@ -5368,22 +4690,6 @@
         {
           "name": "Protestant",
           "pct": 23.6
-        },
-        {
-          "name": "includes Evangelical",
-          "pct": 11.2
-        },
-        {
-          "name": "Moravian",
-          "pct": 11.2
-        },
-        {
-          "name": "Reformed",
-          "pct": 0.7
-        },
-        {
-          "name": "Lutheran",
-          "pct": 0.5
         },
         {
           "name": "Hindu",
@@ -5500,18 +4806,6 @@
           "pct": 39.6
         },
         {
-          "name": "Evangelical - unspecified",
-          "pct": 38.2
-        },
-        {
-          "name": "Evangelical - Methodist",
-          "pct": 1.3
-        },
-        {
-          "name": "Evangelical - Baptist",
-          "pct": 0.1
-        },
-        {
           "name": "none",
           "pct": 16.3
         },
@@ -5528,30 +4822,6 @@
         {
           "name": "Protestant",
           "pct": 41.9
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 14.7
-        },
-        {
-          "name": "Methodist",
-          "pct": 10
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 6.6
-        },
-        {
-          "name": "Baptist",
-          "pct": 4.7
-        },
-        {
-          "name": "Anglican",
-          "pct": 3.1
-        },
-        {
-          "name": "other Protestant",
-          "pct": 2.8
         },
         {
           "name": "Roman Catholic",
@@ -5600,14 +4870,6 @@
           "pct": 87
         },
         {
-          "name": "includes Sunni",
-          "pct": 74
-        },
-        {
-          "name": "and Shia",
-          "pct": 13
-        },
-        {
           "name": "Christian",
           "pct": 10
         },
@@ -5627,14 +4889,6 @@
           "pct": 90
         },
         {
-          "name": "Roman Catholic",
-          "pct": 20
-        },
-        {
-          "name": "other Christian",
-          "pct": 30
-        },
-        {
           "name": "Muslim",
           "pct": 2
         },
@@ -5652,26 +4906,6 @@
         {
           "name": "Protestant",
           "pct": 72.8
-        },
-        {
-          "name": "Baptist",
-          "pct": 35.8
-        },
-        {
-          "name": "Church of God",
-          "pct": 11.7
-        },
-        {
-          "name": "Anglican",
-          "pct": 10
-        },
-        {
-          "name": "Methodist",
-          "pct": 9.3
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 6
         },
         {
           "name": "Roman Catholic",
@@ -5774,14 +5008,6 @@
           "pct": 98
         },
         {
-          "name": "Sunni",
-          "pct": 95
-        },
-        {
-          "name": "Shia",
-          "pct": 3
-        },
-        {
           "name": "other",
           "pct": 2
         }
@@ -5826,7 +5052,14 @@
       "religionRaw": "Muslim 93%, Christian 6.4%, Buddhist &lt;1%, folk religion &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified &lt;1% (2020 est.)"
     },
     "tn": {
-      "capital": "Tunis"
+      "capital": "Tunis",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 99
+        }
+      ],
+      "religionRaw": "Muslim (official; Sunni) 99%, other (includes Christian, Jewish, Shia Muslim, and Baha'i) &lt;1%"
     },
     "to": {
       "capital": "Nuku'alofa",
@@ -5834,38 +5067,6 @@
         {
           "name": "Protestant",
           "pct": 63.9
-        },
-        {
-          "name": "Free Wesleyan Church",
-          "pct": 34.2
-        },
-        {
-          "name": "Free Church of Tonga",
-          "pct": 11.3
-        },
-        {
-          "name": "Church of Tonga",
-          "pct": 6.8
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 2.5
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 2.5
-        },
-        {
-          "name": "Tokaikolo/Maamafo'ou",
-          "pct": 1.5
-        },
-        {
-          "name": "Constitutional Church of Tonga",
-          "pct": 1.2
-        },
-        {
-          "name": "other Protestant",
-          "pct": 4
         },
         {
           "name": "Church of Jesus Christ",
@@ -5912,30 +5113,6 @@
           "pct": 32.1
         },
         {
-          "name": "Pentecostal/Evangelical/Full Gospel",
-          "pct": 12
-        },
-        {
-          "name": "Baptist",
-          "pct": 6.9
-        },
-        {
-          "name": "Anglican",
-          "pct": 5.7
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 4.1
-        },
-        {
-          "name": "Presbyterian/Congregational",
-          "pct": 2.5
-        },
-        {
-          "name": "other Protestant",
-          "pct": 0.9
-        },
-        {
           "name": "Roman Catholic",
           "pct": 21.6
         },
@@ -5974,18 +5151,6 @@
           "pct": 92.7
         },
         {
-          "name": "Brethren",
-          "pct": 2.8
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 2.5
-        },
-        {
-          "name": "Assemblies of God",
-          "pct": 1.5
-        },
-        {
           "name": "Baha'i",
           "pct": 1.5
         },
@@ -6020,7 +5185,7 @@
           "pct": 3.9
         },
         {
-          "name": "approximately",
+          "name": "folk religion approximately",
           "pct": 10
         },
         {
@@ -6062,22 +5227,6 @@
         {
           "name": "Protestant",
           "pct": 45.1
-        },
-        {
-          "name": "Anglican",
-          "pct": 32
-        },
-        {
-          "name": "Pentecostal/Born Again/Evangelical",
-          "pct": 11.1
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 1.7
-        },
-        {
-          "name": "Baptist .",
-          "pct": 3
         },
         {
           "name": "Roman Catholic",
@@ -6168,6 +5317,10 @@
           "pct": 0.2
         },
         {
+          "name": "Protestant",
+          "pct": 0.3
+        },
+        {
           "name": "African American Cults/Umbanda",
           "pct": 2.8
         },
@@ -6182,6 +5335,10 @@
         {
           "name": "other",
           "pct": 1
+        },
+        {
+          "name": "Believer",
+          "pct": 1.8
         },
         {
           "name": "agnostic",
@@ -6253,38 +5410,6 @@
           "pct": 75
         },
         {
-          "name": "Pentecostal",
-          "pct": 27.6
-        },
-        {
-          "name": "Anglican",
-          "pct": 13.9
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 11.6
-        },
-        {
-          "name": "Baptist",
-          "pct": 8.9
-        },
-        {
-          "name": "Methodist",
-          "pct": 8.7
-        },
-        {
-          "name": "Evangelical",
-          "pct": 3.8
-        },
-        {
-          "name": "Salvation Army",
-          "pct": 0.3
-        },
-        {
-          "name": "Presbyterian/Congregational",
-          "pct": 0.3
-        },
-        {
           "name": "Roman Catholic",
           "pct": 6.3
         },
@@ -6323,14 +5448,6 @@
           "pct": 31.6
         },
         {
-          "name": "Evangelical",
-          "pct": 31.4
-        },
-        {
-          "name": "Adventist",
-          "pct": 0.2
-        },
-        {
           "name": "Jehovah's Witness",
           "pct": 1.4
         },
@@ -6367,38 +5484,6 @@
         {
           "name": "Protestant",
           "pct": 70.2
-        },
-        {
-          "name": "Methodist",
-          "pct": 17.6
-        },
-        {
-          "name": "Church of God",
-          "pct": 10.4
-        },
-        {
-          "name": "Anglican",
-          "pct": 9.5
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 9
-        },
-        {
-          "name": "Pentecostal",
-          "pct": 8.2
-        },
-        {
-          "name": "Baptist",
-          "pct": 7.4
-        },
-        {
-          "name": "New Testament Church of God",
-          "pct": 6.9
-        },
-        {
-          "name": "other Protestant",
-          "pct": 1.2
         },
         {
           "name": "Roman Catholic",
@@ -6489,30 +5574,6 @@
           "pct": 39.9
         },
         {
-          "name": "Presbyterian",
-          "pct": 27.2
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 14.8
-        },
-        {
-          "name": "Anglican",
-          "pct": 12
-        },
-        {
-          "name": "Churches of Christ",
-          "pct": 5
-        },
-        {
-          "name": "Assemblies of God",
-          "pct": 4.9
-        },
-        {
-          "name": "Neil Thomas Ministry/Inner Life Ministry",
-          "pct": 3.2
-        },
-        {
           "name": "Roman Catholic",
           "pct": 12.1
         },
@@ -6523,6 +5584,10 @@
         {
           "name": "Church of Jesus Christ",
           "pct": 1.8
+        },
+        {
+          "name": "customary beliefs",
+          "pct": 3.1
         },
         {
           "name": "other",
@@ -6545,26 +5610,6 @@
         {
           "name": "Protestant",
           "pct": 54.9
-        },
-        {
-          "name": "Congregationalist",
-          "pct": 29
-        },
-        {
-          "name": "Methodist",
-          "pct": 12.4
-        },
-        {
-          "name": "Assembly of God",
-          "pct": 6.8
-        },
-        {
-          "name": "Seventh Day Adventist",
-          "pct": 4.4
-        },
-        {
-          "name": "other Protestant",
-          "pct": 2.3
         },
         {
           "name": "Roman Catholic",
@@ -6639,14 +5684,6 @@
         {
           "name": "Muslim",
           "pct": 99.1
-        },
-        {
-          "name": "an estimated",
-          "pct": 65
-        },
-        {
-          "name": "are Sunni and",
-          "pct": 35
         },
         {
           "name": "other",
@@ -6934,6 +5971,7 @@
     "sa": "CIA World Factbook (public domain)",
     "sy": "CIA World Factbook (public domain)",
     "tr": "CIA World Factbook (public domain)",
+    "ps": "CIA World Factbook (public domain)",
     "ye": "CIA World Factbook (public domain)",
     "bm": "CIA World Factbook (public domain)",
     "ca": "CIA World Factbook (public domain)",
@@ -6962,7 +6000,6 @@
     "np": "CIA World Factbook (public domain)",
     "pk": "CIA World Factbook (public domain)",
     "eh": "CIA World Factbook (Western Sahara) — Sunni Muslim",
-    "ps": "CIA World Factbook (West Bank / Gaza Strip)",
     "xs": "Somaliland government (de-facto state) — Sunni Muslim"
   }
 }

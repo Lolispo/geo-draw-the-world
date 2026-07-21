@@ -85,7 +85,10 @@ wiring is needed. `urbanization` uses the existing `percent` formatter.
 - Manual backfill (`MANUAL_ATTR` in `build-attributes.mjs`): Western Sahara `eh`,
   West Bank & Gaza `ps`, Somaliland `xs` — Factbook has no *conventional* name for
   these, so they're filled manually (capital + majority religion).
-- Religion percentages given only as **ranges** (e.g. Saudi Arabia "85–90% Sunni")
-  don't parse into a breakdown yet → a few countries have `capital` but no `religion`.
+- Religion **ranges** now parse to their midpoint (e.g. Greece "Greek Orthodox 81–90%"
+  → 85.5%), and parentheticals like "(official)" are stripped, so majorities are no
+  longer dropped. The only remaining gap is religions whose percentages live *entirely
+  inside* a parenthetical (e.g. Saudi Arabia "Muslim (official; citizens are 85–90%
+  Sunni…)") — those still yield `capital` but no `religion`.
 - A handful of multi-capital strings are cosmetically rough (e.g. Ivory Coast
   "Yamoussoukro , Abidjan"); `capitalNote` preserves the full Factbook text.

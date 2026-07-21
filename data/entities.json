@@ -1048,7 +1048,7 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1108,7 +1108,7 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2688,7 +2688,7 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3928,7 +3928,7 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
