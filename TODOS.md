@@ -445,6 +445,259 @@ appear; the choice persists across reloads.
 
 ---
 
+## 16. Add Exports + Urbanization as rankable metrics (World Bank)
+
+**What:** Two new numeric, rankable metrics in `data/datasets.json`, alongside the
+existing 5: **Total exports (current US$)** and **Urban population (% of total)**.
+
+**Why:** Owner wants export dollars (a lot of Sporcle quizzes rank on trade) and
+urbanization %. Both are numeric and rank cleanly, so they slot into the existing
+rank-the-world + Data Explorer machinery with almost no new plumbing.
+
+**Decided (owner, 2026-07-21):**
+- **Source = World Bank**, same pipeline as the current metrics (NOT OEC). Use
+  `NE.EXP.GNFS.CD` (Exports of goods and services, current US$) and
+  `SP.URB.TOTL.IN.ZS` (Urban population, % of total).
+- OEC's product-level "what does this country export" breakdown (treemap) is
+  explicitly **deferred** — a separate, richer feature (see item 22 / future), not
+  part of this metric add.
+
+**Approach / notes:**
+- Extend `scripts/build-datasets.mjs` (already pulls World Bank) to fetch the two
+  new indicator codes and emit them into the `datasets` array + per-country values.
+- Add two metric defs: exports → `format: "currency-short"`, `higherFirst: true`;
+  urbanization → `format: "percent"`, `higherFirst: true`. **The `percent` format
+  already exists** in `js/datasets.js` (`formatValue`), so no new formatter needed.
+- Regenerate `data/entities.json` (`scripts/build-entities.mjs`) so the coverage
+  matrix gains two columns and per-entity booleans.
+- Watch coverage: World Bank exports data is sparse for micro-states / territories;
+  modes already skip missing values gracefully — document any notable holes in
+  `docs/DATA.md` like item 6 did.
+
+**Acceptance:** "Total exports" and "Urbanization" appear as selectable datasets in
+rank-the-world and the Data Explorer, values format correctly ($-short and %), and
+the coverage matrix shows both columns.
+
+---
+
+## 17. Country profile attributes: capital + religion (new non-metric data layer)
+
+**What:** Add per-entity **attribute** data that isn't a rankable number: **capital
+city name** and **religion breakdown**. These live on the canonical entity registry,
+not in the numeric `datasets.json` metrics.
+
+**Why:** Owner wants capital names and religion coverage. Unlike GDP/exports these
+don't rank on a single axis — they're descriptive facts that power the country
+showcase panel (item 18) and the quiz game (item 22).
+
+**Decided (owner, 2026-07-21):**
+- **Religion = full % breakdown** (e.g. `{ "Christian": 70.6, "Muslim": 20.2, ... }`),
+  not just a majority label. The panel can still surface the majority + top few.
+- **Capital = string** (single primary capital; note multi-capital countries like
+  South Africa in a secondary field or a joined string).
+- Model these as a new **attributes layer** keyed by ISO/synthetic code, distinct
+  from the numeric metric model — the metric machinery (ranking, `higherFirst`,
+  `formatValue`) does not apply.
+
+**Approach / notes:**
+- Source: **CIA World Factbook** (public domain — safe to redistribute) for both
+  capital and religion %; cross-check capitals against `mledoze/countries` if handy.
+- Storage: add `capital` and `religion` (object of name→percent) fields to
+  `data/entities.json` (the canonical registry from item 5), OR a sibling
+  `data/attributes.json` joined on `code` — pick whichever keeps `entities.json`
+  from bloating; document the choice in `docs/DATA.md`.
+- Build step: extend or add a script (mirror `build-datasets.mjs`) that emits the
+  attributes; record provenance/year like the metric provenance block.
+- Coverage: extend the Data Explorer coverage matrix (item 7) with capital/religion
+  presence so gaps are visible.
+
+**Acceptance:** Every entity that has the data carries a `capital` string and a
+`religion` percentage breakdown; a documented source + provenance exists; the
+coverage matrix reflects both; nothing in the numeric rank modes breaks.
+
+---
+
+## 18. Country Showcase panel (flag + shape + all data) — FLAGSHIP, build first
+
+**What:** Press a country anywhere it's listed to open a **profile/showcase panel**
+that displays everything the app knows about it: flag image, the country's **shape
+silhouette**, and all metrics + attributes (GDP, population, exports, urbanization,
+life expectancy, land area, capital, religion breakdown).
+
+**Why:** This is the payoff that makes all the new data (items 16–17) visible and
+useful in one place, and it's a satisfying "learn about this country" moment.
+**Owner picked this cluster (16 → 17 → 18) as the top priority to build next.**
+
+**Decided (owner, 2026-07-21):**
+- **Reachable from: Data Explorer rows** ("browsing countries") **and the
+  rank-the-world game** (tap a country). (Flag games / draw results NOT in scope
+  for the first version — can be added later behind the same component.)
+- **Shape silhouette is rendered from the EXISTING Natural Earth geometry**
+  (normalized: centroid + scale to a box), so the panel needs **no new shape data**
+  and isn't blocked on the item-21 geometry upgrade — it'll simply improve when that
+  lands.
+- Show flag **image** (flagcdn), silhouette, every available metric with its
+  formatted value + rank, capital, and religion (majority + top-few, expandable to
+  the full breakdown).
+
+**Approach / notes:**
+- New reusable module, e.g. `js/country-panel.js`: given a `code`, read
+  `entities.json` + `datasets.json` + attributes, render a modal/overlay panel.
+  Keep it presentation-only and data-driven so new metrics/attributes appear
+  automatically.
+- Silhouette: factor a normalized single-shape renderer out of `js/geo-data.js` /
+  `js/shape.js` (reuse the compare-view normalization from item 2).
+- Wire triggers: click handler on Data Explorer rows (`js/data-explorer.js`) and on
+  rank-line country cards/rows (`js/rank-line-game.js`). One shared open function.
+- Missing-data resilience: skip absent metrics/attributes gracefully (like existing
+  modes); handle entities with geometry-only or flag-image-only.
+- Mobile: the panel must be usable on the stacked mobile layout.
+
+**Acceptance:** Clicking a country in the Data Explorer or rank-the-world opens a
+panel showing its flag, shape silhouette, and all available data; missing fields are
+omitted cleanly; works on mobile; adding a future metric needs no panel changes.
+
+---
+
+## 19. Fix the coverage board's flag-image vs flag-colors confusion
+
+**What:** The Data Explorer coverage matrix (item 7) marks Hong Kong (and Macao,
+West Bank/Gaza) as **flag ✗ "missing"** even though the flag **image displays fine**
+everywhere. Disambiguate so the board stops being misleading.
+
+**Why:** Owner hit exactly this ("Hong Kong's flag was 'missing' but it showed the
+flag, which made me confused about coverage"). It's a labeling bug, not a data gap.
+
+**Root cause (verified 2026-07-21):** Two independent "flag" concepts exist —
+1. **Flag image**: loaded from `flagcdn.com/{code}.png` (rank line, Data Explorer,
+   flag quiz). `hk.png` exists there, so the image always renders.
+2. **`data/flags.json`**: stores only flag **colors**, used *solely* by the color
+   quizzes. `hk`, `mo`, `ps` are absent from it.
+The coverage board's `hasFlag` reads `flags.json` (colors), so "✗" really means
+"no color data," but reads as "no flag."
+
+**Decided:** Not yet — pick one when implementing:
+- (a) Split into **two columns**: "Flag image" (does flagcdn have it) and "Flag
+  colors" (in `flags.json`); or
+- (b) Relabel the single column to "Flag colors" and add a tooltip; or
+- (c) Backfill the missing color entries (`hk`, `mo`, `ps`) into `flags.json`.
+Recommended: **(a)** — most honest, and directly answers "what's actually missing."
+
+**Approach / notes:**
+- `hasFlag` is computed in `scripts/build-entities.mjs` and rendered in
+  `js/data-explorer.js` `_renderCoverage`. Add a `hasFlagImage` vs `hasFlagColors`
+  distinction (flag-image presence can be assumed true for any ISO code flagcdn
+  serves, or validated at build time).
+
+**Acceptance:** The coverage board no longer implies a flag is missing when its image
+renders; the two flag concepts are clearly distinguished.
+
+---
+
+## 20. Autonomous / dependent territories: broad sweep + a play-with-them toggle
+
+**What:** Add smaller autonomous regions & dependent territories (Bonaire, Sint
+Eustatius, Saba, Abkhazia, South Ossetia, Transnistria, Artsakh, Northern Cyprus,
+etc.) as first-class entities with flag + capital + whatever data exists, and a
+**toggle to include/exclude them** in the relevant modes.
+
+**Why:** Owner wants these playable ("allow to toggle if you play with those on or
+not when suitable"), with flags/capitals like real countries.
+
+**Decided (owner, 2026-07-21):**
+- **Scope = broad territories sweep**: include as many autonomous/dependent/de-facto
+  regions **as have flag + capital data**. (Bigger effort accepted; expect missing
+  shapes and synthetic-key work.)
+- Gated behind a **toggle** so default play stays "standard countries"; turning it on
+  mixes territories in where it makes sense (Data Explorer, rank-the-world, showcase,
+  quiz — probably NOT forced into the draw modes that lack good geometry for them).
+
+**Approach / notes:**
+- **Key policy (extends item 5):** most of these lack ISO alpha-2 codes. Reuse the
+  synthetic-key convention already used for `xs` Somaliland; document the scheme.
+- **Data sources:** flags — flagcdn covers many (`bq`-BES via subdivisions is patchy;
+  de-facto states often absent → may need bundled SVG/PNG assets). Capitals/religion
+  — CIA World Factbook / Wikipedia. Geometry — Natural Earth has some map-units; the
+  rest may be geometry-less initially (allowed — showcase/quiz don't require shapes).
+- **`type` tagging:** extend the entity `type` enum (sovereign/territory/aggregate)
+  or add a subtype so the toggle can filter precisely.
+- Build a candidate list first (entity → has flag? capital? geometry? religion?) so
+  the "as have flag + capital data" cutoff is explicit and auditable.
+- Politically sensitive entities (Abkhazia, Artsakh, N. Cyprus, Somaliland): present
+  neutrally as "de-facto / disputed" where labeled.
+
+**Acceptance:** A documented list of added territories, each with a stable key +
+flag + capital (+ data where available); a persistent toggle includes/excludes them
+in the appropriate modes; nothing breaks when the toggle is off; geometry-less
+entities are handled gracefully.
+
+---
+
+## 21. Replace draw-the-world geometry with higher-fidelity vector shapes
+
+**What:** Source and switch to **higher-fidelity vector country shapes** (OEC-grade)
+to replace the current draw-the-world geometry — better reference outlines and IoU
+scoring, and a crisper silhouette in the showcase panel.
+
+**Why:** Owner: "I want to get better shape data, ideally SVG data like what OEC
+uses… this would be a lot better data to use than our current [outlines]." Shape
+quality is the draw game's benchmarked weakness (items 1, 10).
+
+**Decided (owner, 2026-07-21):**
+- Goal is a **geometry replacement**, not just a panel silhouette — prioritize
+  sourcing better vector shapes over reusing the current ones (though item 18's panel
+  ships on the existing geometry and simply benefits when this lands).
+
+**Approach / notes:**
+- Investigate sources at higher fidelity than the current Natural Earth 1:50m/1:10m
+  pass: e.g. Natural Earth 1:10m across the board, OEC's own map GeoJSON/topojson, or
+  other permissively-licensed vector country sets. Confirm **license** before adopting.
+- Must keep the **Mercator → 1600×900 projection** so existing placement + scoring
+  line up (see item 1 and project memory), or migrate scoring alongside.
+- This supersedes/absorbs the "next quality pass" framing of item 10 — reconcile the
+  two when picking this up (item 10 = smoothing the current data; item 21 = replacing
+  the source). Decide whether to smooth or replace, not both.
+- Heaviest, most uncertain data effort of this batch — timebox a source-evaluation
+  spike first (fidelity, coverage, license, file size) before committing.
+
+**Acceptance:** Reference outlines are visibly crisper/more accurate at peek/
+transform/compare sizes; scoring still produces sensible numbers; load time doesn't
+regress; the showcase silhouette (item 18) improves automatically.
+
+---
+
+## 22. New game: Random Geography Quiz (drill-down)
+
+**What:** A quiz game that generates **random questions from the datasets** and lets
+the player **drill down** (progressively narrower / follow-up questions). Uses every
+data axis: metrics (GDP, exports, urbanization, population…), attributes (capital,
+religion), flags, and continents.
+
+**Why:** Owner wants a flexible knowledge game that recycles all the data the other
+features add — high replay value, and it makes items 16–17 pull double duty.
+
+**Decided (owner, 2026-07-21):** Concept only — **"we can flesh this out later."**
+This item is a placeholder to hold the idea; it needs its own brainstorming pass
+before implementation.
+
+**Open questions to resolve when scoping (do NOT build yet):**
+- Question formats: multiple-choice? "which is bigger/smaller?" (reuse rank-line
+  logic)? "what's the capital of X?" "which religion is majority in X?" flag→country?
+- What does "drill down" mean concretely — a branching quiz that narrows by
+  continent → country, or increasing difficulty, or follow-ups on the same country?
+- Rounds/scoring/high-score structure (mirror the flag/rank games?).
+- Data dependencies: best built **after** items 16–17 so the question pool is rich.
+
+**Approach / notes:**
+- New module + hub card + high-score key, mirroring existing game structure
+  (`js/flag-game.js` / `js/rank-line-game.js`). Data-driven question generator over
+  `entities.json` + `datasets.json` + attributes.
+
+**Acceptance (placeholder):** Deferred — first output is a fleshed-out design from a
+dedicated brainstorming session, not code.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`
