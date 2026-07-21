@@ -101,12 +101,34 @@ for (const code of [...allCodes].sort()) {
     type: classify(code),
     continent: datasets.countries[code]?.continent || (geom ? REGION_CONTINENT[geom.region] : null) || null,
     hasGeometry: !!geom,
-    hasFlag: flagCodes.has(code),
+    hasFlag: flagCodes.has(code),            // flag COLORS in flags.json (used by color quizzes)
+    hasFlagImage: flagCodes.has(code),       // flag IMAGE on flagcdn (probed below for the rest)
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
     region: geom ? geom.region : null,
     metrics,
   };
+}
+
+// Probe flagcdn for entities that lack color data, so the coverage board can tell
+// "flag image exists" (flagcdn) apart from "flag colors in flags.json" (TODOS #19).
+// This is the exact case that confused the owner: Hong Kong has an image but no colors.
+{
+  const probe = Object.keys(entities).filter((c) => !entities[c].hasFlagImage);
+  const CONC = 12;
+  let i = 0;
+  async function worker() {
+    while (i < probe.length) {
+      const code = probe[i++];
+      try {
+        const r = await fetch(`https://flagcdn.com/w20/${code}.png`, { method: 'HEAD' });
+        entities[code].hasFlagImage = r.ok;
+      } catch { /* offline: leave false, degrades to colors-only */ }
+    }
+  }
+  await Promise.all(Array.from({ length: CONC }, worker));
+  const gained = probe.filter((c) => entities[c].hasFlagImage);
+  console.log(`Flag-image probe: ${gained.length}/${probe.length} of the color-less entities have a flagcdn image (${gained.join(' ') || 'none'})`);
 }
 
 // Coverage summary

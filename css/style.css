@@ -1807,6 +1807,7 @@ canvas {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -1840,7 +1841,8 @@ canvas {
 
 /* Coverage / audit table */
 .coverage-table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
 }
@@ -1882,6 +1884,8 @@ canvas {
   .explore-play { margin-left: 0; }
   .explore-select { flex: 1; }
 }
+
+.cov-legend { font-size: 0.72rem; color: var(--text-dim); margin-top: -4px; }
 
 /* ========== COUNTRY SHOWCASE PANEL (TODOS #18) ========== */
 .explore-row.is-clickable,

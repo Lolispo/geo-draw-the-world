@@ -570,6 +570,14 @@ omitted cleanly; works on mobile; adding a future metric needs no panel changes.
 
 ## 19. Fix the coverage board's flag-image vs flag-colors confusion
 
+**✅ DONE 2026-07-21** — chose approach (a): the coverage matrix now has separate
+**Flag** (image on flagcdn) and **Colors** (flag colors in `flags.json`) columns, plus
+new **Cap**/**Rel** columns, with a legend. `build-entities.mjs` adds `hasFlagImage` by
+probing flagcdn for the color-less entities (20/22 have an image — Hong Kong now reads
+Flag ✓ / Colors ✗, exactly resolving the confusion; only `xs`/`jg` lack images).
+"Complete" now keys on flag *image* not colors. Table made horizontally scrollable within
+its container (no page-body overflow). Verified live.
+
 **What:** The Data Explorer coverage matrix (item 7) marks Hong Kong (and Macao,
 West Bank/Gaza) as **flag ✗ "missing"** even though the flag **image displays fine**
 everywhere. Disambiguate so the board stops being misleading.

@@ -202,12 +202,14 @@ export class DataExplorer {
     const metrics = getMetricMeta();
     const shortLabel = {
       'gdp-nominal': 'GDP', 'population': 'Pop', 'gdp-per-capita': 'GDP/cap',
-      'land-area': 'Area', 'life-expectancy': 'Life',
+      'land-area': 'Area', 'life-expectancy': 'Life', 'exports': 'Exp', 'urbanization': 'Urb',
     };
     let ents = getEntitiesList();
     if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
 
-    const isComplete = (e) => e.hasGeometry && e.hasFlag && metrics.every((m) => e.metrics[m.id]);
+    // "Complete" = the hard, playable data (shape + flag image + every metric).
+    // Colors / Capital / Religion are shown as extra columns but don't gate completeness.
+    const isComplete = (e) => e.hasGeometry && e.hasFlagImage && metrics.every((m) => e.metrics[m.id]);
     const complete = ents.filter(isComplete).length;
     const aggregates = ents.filter((e) => e.type === 'aggregate').length;
 
@@ -216,10 +218,15 @@ export class DataExplorer {
     blurb.textContent = `Coverage${this.continent ? ` · ${this.continent}` : ''} · ${ents.length} entities · ${complete} complete · ${ents.length - complete} incomplete · ${aggregates} aggregate`;
     list.appendChild(blurb);
 
+    const legend = document.createElement('div');
+    legend.className = 'explore-blurb cov-legend';
+    legend.textContent = 'Flag = image (flagcdn) · Colors = flag colors for the color quizzes · Cap = capital · Rel = religion';
+    list.appendChild(legend);
+
     const table = document.createElement('table');
     table.className = 'coverage-table';
 
-    const headCols = ['', 'Entity', 'Type', 'Geo', 'Flag', ...metrics.map((m) => shortLabel[m.id] || m.name)];
+    const headCols = ['', 'Entity', 'Type', 'Geo', 'Flag', 'Colors', 'Cap', 'Rel', ...metrics.map((m) => shortLabel[m.id] || m.name)];
     const thead = document.createElement('thead');
     const htr = document.createElement('tr');
     for (const h of headCols) { const th = document.createElement('th'); th.textContent = h; htr.appendChild(th); }
@@ -256,7 +263,7 @@ export class DataExplorer {
       typeTd.className = 'cov-type';
       typeTd.textContent = e.type;
 
-      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlag), ...metrics.map((m) => cell(e.metrics[m.id])));
+      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlagImage), cell(e.hasFlag), cell(e.hasCapital), cell(e.hasReligion), ...metrics.map((m) => cell(e.metrics[m.id])));
       tbody.appendChild(tr);
     }
     table.appendChild(tbody);
