@@ -652,6 +652,15 @@ entities are handled gracefully.
 
 ## 21. Replace draw-the-world geometry with higher-fidelity vector shapes
 
+**🔬 SPIKE DONE 2026-07-21 — see `docs/geometry-spike.md`.** Recommendation: **stay on
+Natural Earth (public domain) and regenerate at 1:10m across the board with `DP_EPS`
+0.7 → 0.35.** Finding: the DP tolerance cap, not the source resolution, is the fidelity
+limiter — 1:10m alone is +42%, but 1:10m + eps 0.35 is +136% (12.7k → 29.9k verts,
+~250–300 KB gzipped) and visually Sporcle-competitive (islands/fjords/coastlines
+resolve). Low-risk (~1 day): same projection/clipping/join, so placement + scoring
+alignment holds; item-18 silhouette improves for free. geoBoundaries/OSM only if #20
+needs entities NE lacks. **Awaiting owner OK to run the regeneration.**
+
 **What:** Source and switch to **higher-fidelity vector country shapes** (OEC-grade)
 to replace the current draw-the-world geometry — better reference outlines and IoU
 scoring, and a crisper silhouette in the showcase panel.
