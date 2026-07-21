@@ -16,10 +16,9 @@ const AX = 4.4569, BX = 800.06, AY = -145.784, BY = 450.93;
 const mercY = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
 const project = (lon, lat) => [AX * lon + BX, AY * mercY(Math.max(-85, Math.min(85, lat))) + BY];
 
-const SMALL_AREA = 150;      // px^2 — below this, prefer 1:10m
 const CLIP_DIST = 220;       // px — keep rings within this of the main landmass...
 const CLIP_AREA_FRAC = 0.5;  // ...or rings at least this fraction of the largest
-const DP_EPS = 0.7;          // px — Douglas-Peucker tolerance
+const DP_EPS = 0.35;         // px — Douglas-Peucker tolerance (TODOS #21: 0.7 -> 0.35 for crisper coasts)
 const MIN_RING_AREA = 2;     // px^2 — drop dust rings (largest always kept)
 
 const REGION_OF = {
@@ -144,16 +143,12 @@ for (const [code, ent] of Object.entries(entities)) {
   const region = REGION_OF[ent.continent];
   if (!region) { stats.skipped.push(`${code}(no-region)`); continue; }
 
+  // TODOS #21: prefer 1:10m for every entity (finer coasts); fall back to 1:50m.
+  const f10 = findFeature(idx10, code, ent.name);
   const f50 = findFeature(idx50, code, ent.name);
-  let feature = f50, res = '50m';
-  if (f50) {
-    const rings = projectedRings(f50);
-    const maxA = Math.max(...rings.map(ringArea));
-    if (maxA < SMALL_AREA) { const f10 = findFeature(idx10, code, ent.name); if (f10) { feature = f10; res = '10m'; } }
-  } else {
-    const f10 = findFeature(idx10, code, ent.name);
-    if (f10) { feature = f10; res = '10m'; } else { stats.skipped.push(`${code}(no-NE)`); continue; }
-  }
+  const feature = f10 || f50;
+  const res = f10 ? '10m' : '50m';
+  if (!feature) { stats.skipped.push(`${code}(no-NE)`); continue; }
   if (res === '10m') stats.used10.push(code);
 
   let rings = clipToMain(projectedRings(feature));

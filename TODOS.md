@@ -652,14 +652,14 @@ entities are handled gracefully.
 
 ## 21. Replace draw-the-world geometry with higher-fidelity vector shapes
 
-**🔬 SPIKE DONE 2026-07-21 — see `docs/geometry-spike.md`.** Recommendation: **stay on
-Natural Earth (public domain) and regenerate at 1:10m across the board with `DP_EPS`
-0.7 → 0.35.** Finding: the DP tolerance cap, not the source resolution, is the fidelity
-limiter — 1:10m alone is +42%, but 1:10m + eps 0.35 is +136% (12.7k → 29.9k verts,
-~250–300 KB gzipped) and visually Sporcle-competitive (islands/fjords/coastlines
-resolve). Low-risk (~1 day): same projection/clipping/join, so placement + scoring
-alignment holds; item-18 silhouette improves for free. geoBoundaries/OSM only if #20
-needs entities NE lacks. **Awaiting owner OK to run the regeneration.**
+**✅ DONE 2026-07-22** — regenerated all geometry at Natural Earth **1:10m across the board,
+`DP_EPS` 0.7 → 0.35** (`scripts/build-geometry.mjs`). 220 countries, 12.7k → **29,872
+vertices** (+136%), **179 KB gzipped total** (regions load individually). Same projection /
+clipping / entity join → placement + scoring contract unchanged. Verified live: crisp coasts
+(Greece islands, Norway fjords), all region files load 200, no functional errors, item-18
+silhouette sharper for free. Spike write-up + source matrix in `docs/geometry-spike.md`.
+`SMALL_AREA` (old 50m/10m split) removed. geoBoundaries/OSM still the path only for
+entities NE lacks (ties to #20).
 
 **What:** Source and switch to **higher-fidelity vector country shapes** (OEC-grade)
 to replace the current draw-the-world geometry — better reference outlines and IoU
