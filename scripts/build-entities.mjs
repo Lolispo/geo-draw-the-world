@@ -44,6 +44,14 @@ const EXTRA_ENTITIES = {
   wf: { name: 'Wallis and Futuna', continent: 'Oceania', region: 'oceania', optional: true },
   io: { name: 'British Indian Ocean Territory', continent: 'Africa', region: 'africa', optional: true },
   tf: { name: 'French Southern Territories', continent: 'Africa', region: 'africa', optional: true },
+  // Tier 2 (no Natural Earth geometry — data-only: flag + capital). TODOS #20.
+  gp: { name: 'Guadeloupe', continent: 'North America', region: 'north-america', optional: true },
+  mq: { name: 'Martinique', continent: 'North America', region: 'north-america', optional: true },
+  gf: { name: 'French Guiana', continent: 'South America', region: 'south-america', optional: true },
+  re: { name: 'Réunion', continent: 'Africa', region: 'africa', optional: true },
+  yt: { name: 'Mayotte', continent: 'Africa', region: 'africa', optional: true },
+  bq: { name: 'Caribbean Netherlands', continent: 'North America', region: 'north-america', optional: true },
+  gs: { name: 'South Georgia', continent: 'South America', region: 'south-america', optional: true },
 };
 
 // type classification (informational; does NOT gate gameplay — all entities are playable)
@@ -53,6 +61,7 @@ const TERRITORIES = new Set([
   'aw', 'cw', 'sx', 'pf', 'gu', 'mp', 'as', 'tc', 'ai', 'ck', 'nu', 'tk', 'wf', 'yt',
   're', 'ps', 'eh', 'fk',
   'ax', 'ms', 'nf', 'pn', 'bl', 'sh', 'pm', 'io', 'tf', // TODOS #20 additions (va stays sovereign)
+  'gp', 'mq', 'gf', 're', 'yt', 'bq', 'gs',             // TODOS #20 Tier 2 (data-only)
 ]);
 function classify(code) {
   if (AGGREGATES.has(code)) return 'aggregate';

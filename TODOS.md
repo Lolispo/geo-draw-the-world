@@ -257,6 +257,10 @@ metrics and flags incomplete or non-country rows.
 
 ## 8. Rename the "Geo Draw" mode
 
+**✅ DONE 2026-07 — app renamed to "Know the World"** (title, menu, meta/OG tags). Confirmed
+by owner 2026-07-22.
+
+
 **What:** Change the name of the draw game currently labelled "Geo Draw".
 
 **Why:** Owner wants a clearer/better name for the mode.

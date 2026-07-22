@@ -1890,10 +1890,12 @@ canvas {
 /* ========== COUNTRY SHOWCASE PANEL (TODOS #18) ========== */
 .explore-row.is-clickable,
 .rank-row.is-clickable,
-.rank-result-row.is-clickable { cursor: pointer; }
+.rank-result-row.is-clickable,
+.coverage-table tr.is-clickable { cursor: pointer; }
 .explore-row.is-clickable:hover,
 .rank-row.is-clickable:hover,
-.rank-result-row.is-clickable:hover { background: var(--surface2); }
+.rank-result-row.is-clickable:hover,
+.coverage-table tr.is-clickable:hover { background: var(--surface2); }
 
 .country-panel-overlay {
   position: fixed;

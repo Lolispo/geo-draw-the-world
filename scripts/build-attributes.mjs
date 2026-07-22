@@ -203,6 +203,14 @@ const MANUAL_ATTR = {
         src: 'Somaliland government (de-facto state) — Sunni Muslim' },
   // TODOS #20: Factbook has no entry for Åland (part of Finland) — backfill its capital.
   ax: { capital: 'Mariehamn', src: 'Åland (autonomous region of Finland)' },
+  // Tier 2 dependencies Factbook folds into their parent — capitals backfilled.
+  gp: { capital: 'Basse-Terre', src: 'Guadeloupe (French overseas département)' },
+  mq: { capital: 'Fort-de-France', src: 'Martinique (French overseas département)' },
+  gf: { capital: 'Cayenne', src: 'French Guiana (French overseas département)' },
+  re: { capital: 'Saint-Denis', src: 'Réunion (French overseas département)' },
+  yt: { capital: 'Mamoudzou', src: 'Mayotte (French overseas département)' },
+  bq: { capital: 'Kralendijk', capitalNote: 'Kralendijk (Bonaire); the Caribbean Netherlands are Bonaire, Sint Eustatius & Saba', src: 'Caribbean Netherlands (special municipalities of the Netherlands)' },
+  gs: { capital: 'King Edward Point', src: 'South Georgia and the South Sandwich Islands (UK)' },
 };
 for (const [code, m] of Object.entries(MANUAL_ATTR)) {
   if (!entities[code]) continue;

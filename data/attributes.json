@@ -723,6 +723,10 @@
       ],
       "religionRaw": "Roman Catholic 65%, Protestant 19.6% (Evangelical (non-specific) 11.9%, Evangelical Baptist 2.1%, Evangelical Pentecostal 1.8%, Evangelical Methodist 0.7%, Adventist 2.8%, Protestant (non-specific) 0.3%), Believer (not belonging to the church) 0.9%, other 4.8%, atheist 1.7%, agnostic 0.6%, none 6.1%, unspecified 1.3% (2023 est.)"
     },
+    "bq": {
+      "capital": "Kralendijk",
+      "capitalNote": "Kralendijk (Bonaire); the Caribbean Netherlands are Bonaire, Sint Eustatius & Saba"
+    },
     "br": {
       "capital": "Brasilia",
       "religion": [
@@ -2027,6 +2031,9 @@
       ],
       "religionRaw": "Eastern Orthodox Christian (official) 83.4%, Muslim 10.7%, Armenian Apostolic Christian 2.9%, other 1.2% (includes Roman Catholic Christian, Jehovah's Witness, Yazidi, Protestant Christian, Jewish), none 0.5%, unspecified/no answer 1.2% (2014 est.)"
     },
+    "gf": {
+      "capital": "Cayenne"
+    },
     "gg": {
       "capital": "Saint Peter Port"
     },
@@ -2141,6 +2148,9 @@
       ],
       "religionRaw": "Muslim 85.2%, Christian 13.4%, animist 0.2%, none 1.2% (2018 est.)"
     },
+    "gp": {
+      "capital": "Basse-Terre"
+    },
     "gq": {
       "capital": "Malabo",
       "capitalNote": "Malabo; note - Malabo is on the island of Bioko; some months of the year, the government operates out of Bata on the mainland region.",
@@ -2189,6 +2199,9 @@
         }
       ],
       "religionRaw": "Greek Orthodox 81-90%, Muslim 2%, other 3%, none 4-15%, unspecified 1% (2015 est.)"
+    },
+    "gs": {
+      "capital": "King Edward Point"
     },
     "gt": {
       "capital": "Guatemala City",
@@ -3657,6 +3670,9 @@
     "mp": {
       "capital": "Saipan"
     },
+    "mq": {
+      "capital": "Fort-de-France"
+    },
     "mr": {
       "capital": "Nouakchott",
       "religion": [
@@ -4571,6 +4587,9 @@
         }
       ],
       "religionRaw": "Muslim 65.2%, Christian 13.7%, Hindu 15.9%, Buddhist 3.8%, folk religion &lt;0.1%, Jewish &lt;0.1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+    },
+    "re": {
+      "capital": "Saint-Denis"
     },
     "ro": {
       "capital": "Bucharest",
@@ -6005,6 +6024,9 @@
       ],
       "religionRaw": "Muslim 99.1% (official; virtually all are citizens, an estimated 65% are Sunni and 35% are Shia), other 0.9% (includes Jewish, Baha'i, Hindu, and Christian; many are refugees or temporary foreign residents) (2020 est.)"
     },
+    "yt": {
+      "capital": "Mamoudzou"
+    },
     "za": {
       "capital": "Pretoria",
       "capitalNote": "Pretoria (administrative capital); Cape Town (legislative capital); Bloemfontein (judicial capital)",
@@ -6328,6 +6350,13 @@
     "pk": "CIA World Factbook (public domain)",
     "eh": "CIA World Factbook (Western Sahara) — Sunni Muslim",
     "xs": "Somaliland government (de-facto state) — Sunni Muslim",
-    "ax": "Åland (autonomous region of Finland)"
+    "ax": "Åland (autonomous region of Finland)",
+    "gp": "Guadeloupe (French overseas département)",
+    "mq": "Martinique (French overseas département)",
+    "gf": "French Guiana (French overseas département)",
+    "re": "Réunion (French overseas département)",
+    "yt": "Mayotte (French overseas département)",
+    "bq": "Caribbean Netherlands (special municipalities of the Netherlands)",
+    "gs": "South Georgia and the South Sandwich Islands (UK)"
   }
 }

@@ -563,6 +563,27 @@
         "urbanization": true
       }
     },
+    "bq": {
+      "name": "Caribbean Netherlands",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "br": {
       "name": "Brazil",
       "type": "sovereign",
@@ -1484,6 +1505,27 @@
         "urbanization": true
       }
     },
+    "gf": {
+      "name": "French Guiana",
+      "type": "territory",
+      "continent": "South America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "gg": {
       "name": "Guernsey",
       "type": "territory",
@@ -1605,6 +1647,27 @@
         "urbanization": true
       }
     },
+    "gp": {
+      "name": "Guadeloupe",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "gq": {
       "name": "Equatorial Guinea",
       "type": "sovereign",
@@ -1643,6 +1706,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "gs": {
+      "name": "South Georgia",
+      "type": "territory",
+      "continent": "South America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "south-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "gt": {
@@ -2827,6 +2911,27 @@
         "urbanization": true
       }
     },
+    "mq": {
+      "name": "Martinique",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "mr": {
       "name": "Mauritania",
       "type": "sovereign",
@@ -3570,6 +3675,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "re": {
+      "name": "Réunion",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "ro": {
@@ -4693,6 +4819,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "yt": {
+      "name": "Mayotte",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": false,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "za": {

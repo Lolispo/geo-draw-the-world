@@ -245,6 +245,9 @@ export class DataExplorer {
       const tr = document.createElement('tr');
       if (!isComplete(e)) tr.classList.add('incomplete');
       if (e.type === 'aggregate') tr.classList.add('is-aggregate');
+      tr.classList.add('is-clickable');
+      tr.title = `View ${e.name}`;
+      tr.addEventListener('click', () => openCountryPanel(e.code));
 
       const flagTd = document.createElement('td');
       const img = document.createElement('img');
