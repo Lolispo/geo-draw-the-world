@@ -18,8 +18,8 @@ const project = (lon, lat) => [AX * lon + BX, AY * mercY(Math.max(-85, Math.min(
 
 const CLIP_DIST = 220;       // px — keep rings within this of the main landmass...
 const CLIP_AREA_FRAC = 0.5;  // ...or rings at least this fraction of the largest
-const DP_EPS = 0.35;         // px — Douglas-Peucker tolerance (TODOS #21: 0.7 -> 0.35 for crisper coasts)
-const MIN_RING_AREA = 2;     // px^2 — drop dust rings (largest always kept)
+const DP_EPS = 0.08;         // px — Douglas-Peucker tolerance (TODOS #24: high-def world geometry)
+const MIN_RING_AREA = 0.1;   // px^2 — keep small islands (was 2; only drops sub-pixel specks now)
 
 const REGION_OF = {
   Africa: 'africa', Europe: 'europe', Asia: 'asia',
@@ -158,8 +158,8 @@ for (const [code, ent] of Object.entries(entities)) {
   for (let i = 0; i < withArea.length; i++) {
     const { r, a } = withArea[i];
     if (i > 0 && a < MIN_RING_AREA) continue; // drop dust (but never the largest)
-    const eps = Math.min(DP_EPS, Math.max(0.02, Math.sqrt(a) * 0.08));
-    const dec = a < 100 ? 2 : 1; // finer precision for tiny shapes
+    const eps = Math.min(DP_EPS, Math.max(0.008, Math.sqrt(a) * 0.05));
+    const dec = a < 100 ? 3 : 2; // finer precision (TODOS #24 high-def)
     let s = simplifyRing(r, eps, dec);
     if (s.length < 3 && i === 0) s = r.map(([x, y]) => [Math.round(x * 100) / 100, Math.round(y * 100) / 100]);
     if (s.length >= 3) kept.push(s);

@@ -783,6 +783,21 @@ format(s) and whether this is standalone or folded into item 22.
 
 ## 24. Shape quality: still not good enough — iterate + owner approval
 
+**🚧 IN PROGRESS 2026-07-22.** Spike (`docs/highdef-shapes-plan.md`) found the low detail
+was **our pipeline, not the source**: Bahamas shipped as 1 island / 18 pts (squeezed to
+3×3 px) while Natural Earth 1:10m has 44 islands / 1,629 pts (≈ geoBoundaries — so no need
+to switch source or licenses). Owner wants **high-res everywhere incl. world placement**.
+Done so far: regenerated at `DP_EPS` 0.35→0.08, `MIN_RING_AREA` 2→0.1, 2–3 decimal
+precision → **29,872 → 116,976 vertices (4×)**, still **0.8 MB gzipped** world total
+(per-region 40–266 KB, on-demand). Verified: Bahamas panel now shows the archipelago,
+Sweden places with a real coastline, no errors. **Still TODO before owner sign-off:**
+- Rendering polish: high-DPI canvas + curve smoothing (compounds; shapes still a touch soft).
+- Perf: cache static layers in `world-canvas` so World-mode drag stays smooth at high vertex counts.
+- Decide whether to push detail further (eps 0.05) and whether a per-country native tier is
+  wanted for tiny archipelagos (single world-coord dataset caps them at ~15 of 44 islands).
+- **Gate:** owner approves before closing.
+
+
 **What:** Even after #21 (Natural Earth 1:10m @ eps 0.35), the owner is **still not happy
 with the shapes** (2026-07-22). Do another quality pass and get explicit owner sign-off
 before considering it done.
