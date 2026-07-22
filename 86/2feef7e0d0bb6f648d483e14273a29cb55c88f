@@ -1,0 +1,37 @@
+scripts/build-entities.mjs
+  s_fdc6d2f11ee255::t_a0c606b85a66c5 57-74
+  s_fdc6d2f11ee255::t_bfed325220b7cb 161
+css/style.css
+  s_fdc6d2f11ee255::t_80d99cfad0727c 1949,1951,1953,1955
+  s_fdc6d2f11ee255::t_461e2a8a94bdda 1959
+TODOS.md
+  s_fdc6d2f11ee255::t_bde9d3db6b958f 784-810
+js/country-panel.js
+  s_fdc6d2f11ee255::t_72cb469a1fec88 82
+  s_fdc6d2f11ee255::t_7bbe2f53e13357 81
+  s_fdc6d2f11ee255::t_a169c83c22f2c4 142-151
+  s_fdc6d2f11ee255::t_3b27af494cd938 12
+data/entities.json
+  s_fdc6d2f11ee255::t_05b0cc6f88a2c0 93,194,255,277,499,520,582,844,1005,1366,1407,1529,1551,1592,1613,1675,1737,1778,1839,2000,2042,2144,2425,2766,2907,2928,2950,2992,3173,3215,3357,3458,3560,3582,3603,3725,3947,4168,4229,4271,4692,4713,4775,4877
+js/data-explorer.js
+  s_fdc6d2f11ee255::t_99ccc5c60a746e 125-136
+  s_fdc6d2f11ee255::t_9f1a1f448e7761 6
+  s_fdc6d2f11ee255::t_e909323764ac27 225
+  s_fdc6d2f11ee255::t_13322799620ff7 171-175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "862feef7e0d0bb6f648d483e14273a29cb55c88f",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
