@@ -1,0 +1,35 @@
+js/drawing-canvas.js
+  s_fdc6d2f11ee255::t_0daa35d0c1e382 303-305
+scripts/build-entities.mjs
+  s_fdc6d2f11ee255::t_37e8d7af544e65 151,154,161-163
+data/countries-africa.json
+  s_fdc6d2f11ee255::t_dba346f0fc02c0 52690
+data/countries-asia.json
+  s_fdc6d2f11ee255::t_3c7189ff63ca13 25449,81983,136649
+data/countries-europe.json
+  s_fdc6d2f11ee255::t_65e4a44dd44596 15249,30028,46342
+data/countries-north-america.json
+  s_fdc6d2f11ee255::t_b2a1e03205806a 292,3455,3613,121348,125880,126959,179677,180534,180816,219375
+data/countries-oceania.json
+  s_fdc6d2f11ee255::t_831d76c2b8b560 19,18847,20379,21475,28306
+data/countries-south-america.json
+  s_fdc6d2f11ee255::t_eff3c08232efff 47633
+data/entities.json
+  s_fdc6d2f11ee255::t_2db0dce9df3b48 194,256,522,1008,1250,1371,1413,1599,1621,1787,1849,2011,2437,2920,2942,3188,3474,3620,3642,4187,4249,4713,4735
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "40faab6e6dcb413692e3ed5b9af0764ae267d057",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
