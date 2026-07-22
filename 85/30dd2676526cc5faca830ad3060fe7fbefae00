@@ -1,0 +1,41 @@
+scripts/build-datasets.mjs
+  s_fdc6d2f11ee255::t_662e67078b7a91 117-120
+  s_fdc6d2f11ee255::t_0a2f3a8ccac281 82-105
+data/datasets.json
+  s_fdc6d2f11ee255::t_be345f8bc3702f 29,64-66,107-110,123-126,175-178,311-318,339-342,351-354,411-414,431-434,591-594,599-602,643-646,671-674,711-718,743-746,787-790,851-853,953,973
+  s_fdc6d2f11ee255::t_bd18332367088c 27-28,30,63,854,951-952,954,971-972,974,1442-1461,1917-1939,2601-2623
+scripts/build-entities.mjs
+  s_fdc6d2f11ee255::t_85ee3d04178dea 215-217,225-226
+  s_9a86f7ed5b4448::t_beda4ac58dff27 227
+js/rank-line-game.js
+  s_fdc6d2f11ee255::t_f145033a3465d3 7,9
+  s_fdc6d2f11ee255::t_7fd0d50bfcafb0 101
+  s_fdc6d2f11ee255::t_0798d1393259cb 71-79
+  s_fdc6d2f11ee255::t_7f4d02d78830dd 116-120
+data/entities.json
+  s_fdc6d2f11ee255::t_3334a095b40c10 97,99,281,283,503,505,586,588,848,850,1533,1535,1555,1557,1679,1681,1743,2048,2148,2150,2954,2956,2996,2998,3219,3221,3361,3363,3564,3566,3586,3588,3729,3731,3951,3953,4277,4779,4781,4881,4883
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "8530dd2676526cc5faca830ad3060fe7fbefae00",
+  "prompts": {},
+  "sessions": {
+    "s_9a86f7ed5b4448": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "00c0eb9d-3927-4075-8c9d-4b9301552fa4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    },
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
