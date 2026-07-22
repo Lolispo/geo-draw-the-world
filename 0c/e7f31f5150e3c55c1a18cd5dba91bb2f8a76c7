@@ -1,0 +1,35 @@
+css/style.css
+  s_fdc6d2f11ee255::t_81927961b1a891 1893-1894,1897-1898
+scripts/build-attributes.mjs
+  s_fdc6d2f11ee255::t_eaf874688aa37a 206-213
+data/attributes.json
+  s_fdc6d2f11ee255::t_35f553d01e4f29 726-729,2034-2036,2151-2153,2203-2205,3673-3675,4591-4593,6027-6029,6353-6360
+data/entities.json
+  s_fdc6d2f11ee255::t_35f553d01e4f29 566-586,1508-1528,1650-1670,1711-1731,2914-2934,3680-3700,4824-4844
+TODOS.md
+  s_fdc6d2f11ee255::t_c39c87364f22e6 260-263
+scripts/build-entities.mjs
+  s_fdc6d2f11ee255::t_a7412256821656 47-54
+  s_fdc6d2f11ee255::t_9b07eab312227b 64
+data/countries-south-america.json
+  s_fdc6d2f11ee255::t_35f553d01e4f29 8742-8894
+  s_fdc6d2f11ee255::t_cb69c8055a6384 8741
+js/data-explorer.js
+  s_fdc6d2f11ee255::t_faf86ae789b823 248-250
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "0ce7f31f5150e3c55c1a18cd5dba91bb2f8a76c7",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
