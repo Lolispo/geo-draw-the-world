@@ -804,6 +804,14 @@ Verified live (dpr=1 headless): panels/placement/draw all render + function, no 
 Continents mode its own bounds (Antarctica). Verified: Italy boot + Africa (h/w 1.13 vs
 squished 0.65) correct. Scoring unaffected (independent x/y raster normalization).
 
+**Microstate detail ✅ 2026-07-22:** small countries (San Marino, Monaco, Singapore) were
+blobs — Natural Earth only has ~17 pts for San Marino. Added a **native per-country tier**
+(`data/shapes/{code}.json`, `scripts/build-shapes.mjs`) sourced from **geoBoundaries (CC BY)**:
+San Marino 17→52, Singapore 40→665, Monaco 12→27 pts. Loaded on demand per country (a few KB
+each). `getCountryByCode` uses it (panel/peek/compare); attribution in the panel footer.
+**Note:** the draw *reference* (peek) + compare still build from the world-coord geometry —
+switch them to this native tier too so microstates are detailed when drawing (follow-up).
+
 **Gate:** owner to hard-refresh on a retina display and approve, or flag what's still off.
 Not done (deferred unless owner wants): perf-caching the world map for World-mode drag (only
 needed if drag stutters at high vertex counts); a true per-country native tier for the last

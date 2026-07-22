@@ -11,6 +11,7 @@ How the country data is structured and regenerated. Established by TODOS items 5
 | `data/attributes.json` | Non-rankable country facts (capital, religion breakdown) | `code` |
 | `data/flags.json` | Flag quiz (code, name, colors) | `code` |
 | `data/entities.json` | **Canonical registry** — the join across all four | `code` |
+| `data/shapes/{code}.json` | High-detail per-country outline for the panel/peek/compare | `code` (filename) |
 
 Every system now shares the **ISO 3166-1 alpha-2 code** as its join key. Geometry
 previously had names only; `code` was added to all 164 entries.
@@ -63,6 +64,22 @@ population for Western Sahara `eh`, Falklands `fk`, Somaliland `xs`.
   Somaliland `xs` (disputed/very small; figures unreliable).
 - Somaliland `xs` has **no flag** in the quiz — no official ISO code, so no
   flagcdn image exists. It remains drawable and in stats, flagless by necessity.
+
+## High-detail country outlines (TODOS #24)
+
+`data/shapes/{code}.json` holds a **native-resolution** outline per country, used only by
+the showcase panel / draw reference / compare (single-country display). The world geometry
+(`countries-*.json`) squeezes everything into 1600×1100, so microstates become sub-pixel
+blobs — and Natural Earth 1:10m itself only has ~17 points for San Marino. This tier is
+sourced from **[geoBoundaries](https://www.geoboundaries.org) gbOpen (CC BY 4.0)**
+(San Marino ~929 pts), normalized to a ~1000px box and simplified there, so detail survives.
+Natural Earth is the fallback for the few entities geoBoundaries lacks.
+
+- Build: `node scripts/build-shapes.mjs` (fetches geoBoundaries via the LFS-resolving
+  `github.com/.../raw/main` URL; ISO2→ISO3 via `mledoze/countries`).
+- **Attribution (required by CC BY 4.0):** shown in the country panel footer
+  ("Outlines © geoBoundaries (CC BY 4.0)").
+- Per-country files (not one blob) so the panel loads only the shown country (~a few KB).
 
 ## Metrics & attributes added (TODOS #16–17)
 

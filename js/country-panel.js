@@ -135,6 +135,9 @@ function render(code) {
 
   body.appendChild(facts);
   cardEl.appendChild(body);
+
+  // Attribution — country outlines are from geoBoundaries (CC BY 4.0).
+  cardEl.appendChild(el('div', 'cp-credit', 'Outlines © geoBoundaries (CC BY 4.0)'));
 }
 
 function buildReligion(religion) {

@@ -2000,6 +2000,7 @@ canvas {
 .cp-rel-more { color: var(--text-dim); font-size: 0.75rem; }
 
 .cp-empty { color: var(--text-dim); font-size: 0.9rem; }
+.cp-credit { color: var(--text-dim); font-size: 0.62rem; opacity: 0.7; text-align: right; margin-top: 14px; }
 
 @media (max-width: 560px) {
   .country-panel { padding: 18px; }

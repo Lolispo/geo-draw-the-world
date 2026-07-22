@@ -49,18 +49,21 @@ export async function loadAllCountries() {
   };
 }
 
-// Find a single country's geometry entry by ISO code (raw — ignores the territories
-// toggle, so the showcase panel can render any entity the user clicks).
-let _byCode = null;
+// Single country's outline for the showcase panel / peek / compare — loads the NATIVE
+// per-country tier on demand (data/shapes/{code}.json, TODOS #24), sourced from
+// geoBoundaries so microstates keep full detail instead of collapsing to a blob at
+// world scale. Each file is a few KB; cached per code.
+const _shapeCache = new Map();
 export async function getCountryByCode(code) {
-  if (!_byCode) {
-    _byCode = new Map();
-    for (const region of getCountryRegions()) {
-      const data = await loadCountryDataRaw(region.file);
-      for (const c of data.countries) if (c.code) _byCode.set(c.code, c);
-    }
+  if (!_shapeCache.has(code)) {
+    let val = null;
+    try {
+      const resp = await fetch(`./data/shapes/${code}.json`);
+      if (resp.ok) { const d = await resp.json(); val = { code, color: d.color || '#7EA6E0', polygons: d.polygons }; }
+    } catch { /* no shape */ }
+    _shapeCache.set(code, val);
   }
-  return _byCode.get(code) || null;
+  return _shapeCache.get(code);
 }
 
 // Get a daily country (deterministic for today)
