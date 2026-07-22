@@ -1,0 +1,36 @@
+js/utils.js
+  s_fdc6d2f11ee255::t_d4118bc309c618 144-151
+js/world-canvas.js
+  s_fdc6d2f11ee255::t_98d8196cd7b271 290-292,294
+  s_fdc6d2f11ee255::t_2d9156ac2e81d7 87-90,92,98-99,102-103,106-107,110-111
+js/transform-controls.js
+  s_fdc6d2f11ee255::t_e17d4f7154dfc2 71-73
+  s_fdc6d2f11ee255::t_48204da38d83a0 298
+  s_fdc6d2f11ee255::t_b98b0633b8c097 4
+  s_fdc6d2f11ee255::t_e5241c52488278 86-87
+js/main.js
+  s_fdc6d2f11ee255::t_709a0a5aa486fa 13
+  s_fdc6d2f11ee255::t_9041bf50c68cdc 740
+  s_fdc6d2f11ee255::t_789e1fc698f403 130-139,143,148,152
+  s_fdc6d2f11ee255::t_89d39ff2036cfe 884
+js/drawing-canvas.js
+  s_fdc6d2f11ee255::t_410afa9cfd7859 209
+  s_fdc6d2f11ee255::t_a9a7434bcca86d 4
+  s_fdc6d2f11ee255::t_773f0bec3adbe7 303
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "3a592759e182f4805861fc8de9cead7d21df525d",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
