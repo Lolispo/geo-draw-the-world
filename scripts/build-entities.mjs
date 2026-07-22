@@ -54,6 +54,24 @@ const EXTRA_ENTITIES = {
   gs: { name: 'South Georgia', continent: 'South America', region: 'south-america', optional: true },
 };
 
+// Sovereign/administering country for dependent territories (shown in the panel).
+// Disputed/de-facto entities (ps, eh, xs) intentionally omitted.
+const SOVEREIGN_OF = {
+  nc: 'France', pf: 'France', wf: 'France', yt: 'France', re: 'France', bl: 'France',
+  pm: 'France', tf: 'France', gp: 'France', mq: 'France', gf: 'France', mf: 'France',
+  gi: 'United Kingdom', im: 'United Kingdom', je: 'United Kingdom', gg: 'United Kingdom',
+  bm: 'United Kingdom', ky: 'United Kingdom', tc: 'United Kingdom', ai: 'United Kingdom',
+  vg: 'United Kingdom', fk: 'United Kingdom', ms: 'United Kingdom', pn: 'United Kingdom',
+  sh: 'United Kingdom', io: 'United Kingdom', gs: 'United Kingdom',
+  pr: 'United States', vi: 'United States', gu: 'United States', mp: 'United States', as: 'United States',
+  aw: 'Netherlands', cw: 'Netherlands', sx: 'Netherlands', bq: 'Netherlands',
+  gl: 'Denmark', fo: 'Denmark',
+  hk: 'China', mo: 'China',
+  ck: 'New Zealand', nu: 'New Zealand', tk: 'New Zealand',
+  nf: 'Australia',
+  ax: 'Finland',
+};
+
 // type classification (informational; does NOT gate gameplay — all entities are playable)
 const AGGREGATES = new Set(['jg']); // Channel Islands = Jersey+Guernsey aggregate (World Bank)
 const TERRITORIES = new Set([
@@ -140,6 +158,7 @@ for (const code of [...allCodes].sort()) {
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
     ...(extra?.optional ? { optional: true } : {}), // TODOS #20: gated behind territories toggle
+    ...(SOVEREIGN_OF[code] ? { sovereign: SOVEREIGN_OF[code] } : {}),
     region: geom ? geom.region : (extra?.region || null),
     metrics,
   };

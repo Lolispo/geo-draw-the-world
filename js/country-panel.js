@@ -9,7 +9,7 @@ import {
 import { getCountryByCode } from './geo-data.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w320/';
-const MAX_RELIGION_ROWS = 6;
+const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
 
 let overlay = null;
 let cardEl = null;
@@ -78,7 +78,8 @@ function render(code) {
   titleWrap.appendChild(el('h2', 'cp-name', name));
   const sub = [];
   if (entity?.continent) sub.push(entity.continent);
-  if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type);
+  if (entity?.sovereign) sub.push(`Territory of ${entity.sovereign}`);
+  else if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type[0].toUpperCase() + entity.type.slice(1));
   if (sub.length) titleWrap.appendChild(el('div', 'cp-sub', sub.join(' · ')));
   header.append(flag, titleWrap);
   cardEl.appendChild(header);
@@ -138,7 +139,16 @@ function render(code) {
 function buildReligion(religion) {
   const wrap = el('div', 'cp-religion');
   wrap.appendChild(el('div', 'cp-section-label', 'Religion'));
-  const rows = religion.slice(0, MAX_RELIGION_ROWS);
+
+  // Sort most→least, keep the significant ones, fold the small tail into "Other".
+  const sorted = [...religion].sort((a, b) => b.pct - a.pct);
+  let major = sorted.filter((r) => r.pct >= RELIGION_MIN_PCT);
+  if (major.length < 2) major = sorted.slice(0, Math.min(3, sorted.length));
+  const majorSet = new Set(major);
+  const otherPct = sorted.filter((r) => !majorSet.has(r)).reduce((s, r) => s + r.pct, 0);
+  const rows = [...major];
+  if (otherPct >= 0.5) rows.push({ name: 'Other', pct: Math.round(otherPct * 10) / 10 });
+
   const max = Math.max(...rows.map((r) => r.pct), 1);
   for (const r of rows) {
     const row = el('div', 'cp-rel-row');
@@ -150,9 +160,6 @@ function buildReligion(religion) {
     row.appendChild(barWrap);
     row.appendChild(el('span', 'cp-rel-pct', `${r.pct}%`));
     wrap.appendChild(row);
-  }
-  if (religion.length > MAX_RELIGION_ROWS) {
-    wrap.appendChild(el('div', 'cp-rel-more', `+${religion.length - MAX_RELIGION_ROWS} more`));
   }
   return wrap;
 }

@@ -781,6 +781,33 @@ format(s) and whether this is standalone or folded into item 22.
 
 ---
 
+## 24. Shape quality: still not good enough — iterate + owner approval
+
+**What:** Even after #21 (Natural Earth 1:10m @ eps 0.35), the owner is **still not happy
+with the shapes** (2026-07-22). Do another quality pass and get explicit owner sign-off
+before considering it done.
+
+**Why:** Shapes are the draw game's benchmarked weakness; the current pass improved
+fidelity but not enough by eye.
+
+**Approach / notes — levers not yet pulled (see `docs/geometry-spike.md`):**
+- **Rendering, not just data:** draw reference/silhouette shapes on a
+  devicePixelRatio-scaled canvas with smoothing + rounded joins; consider curve
+  interpolation (Catmull-Rom/bezier) between vertices so coasts read smooth at small
+  sizes instead of faceted. This is likely the biggest visible win and is independent
+  of vertex count (ties to #10).
+- **Lower eps further** for the shapes actually shown large (peek/compare) — 0.35 → 0.2
+  costs ~180 KB gzipped total; measure if worth it.
+- **Evaluate a different source** for the worst offenders (geoBoundaries CC-BY / OSM
+  ODbL) if NE 1:10m still can't satisfy — spike compared these in `docs/geometry-spike.md`.
+- Compare side-by-side against Sporcle at the same on-screen size (the spike built a
+  comparison HTML harness that can be reused).
+- **Gate:** present before/after to the owner and get approval — do not self-close.
+
+**Acceptance:** Owner explicitly approves the shape quality at peek/compare/panel sizes.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

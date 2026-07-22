@@ -1946,16 +1946,17 @@ canvas {
 }
 .cp-close:hover { color: var(--text); border-color: var(--accent); }
 
-.cp-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-right: 36px; }
+.cp-header { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; padding-right: 36px; }
 .cp-flag {
-  width: 72px;
+  width: 128px;
   height: auto;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
 }
 .cp-name { font-size: 1.4rem; margin: 0; line-height: 1.15; }
-.cp-sub { color: var(--text-dim); font-size: 0.85rem; margin-top: 3px; text-transform: capitalize; }
+.cp-sub { color: var(--text-dim); font-size: 0.85rem; margin-top: 3px; }
 
 .cp-body { display: flex; gap: 20px; align-items: flex-start; }
 .cp-shape {

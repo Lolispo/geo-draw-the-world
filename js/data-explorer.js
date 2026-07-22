@@ -3,6 +3,7 @@
 
 import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, getMetricMeta, formatValue } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
+import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 
@@ -121,6 +122,18 @@ export class DataExplorer {
       bar.appendChild(sortBtn);
     }
 
+    // Territories toggle (both views) — shared with the draw menu (TODOS #20)
+    const terrBtn = document.createElement('button');
+    const terrOn = getIncludeTerritories();
+    terrBtn.className = 'btn btn-tool' + (terrOn ? ' active' : '');
+    terrBtn.textContent = terrOn ? '🏝️ Territories: On' : '🏝️ Territories: Off';
+    terrBtn.title = 'Include small dependent/autonomous territories';
+    terrBtn.addEventListener('click', () => {
+      setIncludeTerritories(!getIncludeTerritories());
+      this._render();
+    });
+    bar.appendChild(terrBtn);
+
     // View toggle (both)
     const viewBtn = document.createElement('button');
     viewBtn.className = 'btn btn-tool explore-view-toggle';
@@ -155,7 +168,11 @@ export class DataExplorer {
     list.innerHTML = '';
 
     const ds = getDataset(this.datasetId);
-    const entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst });
+    let entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst });
+    if (!getIncludeTerritories()) {
+      const optional = new Set(getEntitiesList().filter((e) => e.optional).map((e) => e.code));
+      entries = entries.filter((e) => !optional.has(e.code));
+    }
 
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
@@ -205,6 +222,7 @@ export class DataExplorer {
       'land-area': 'Area', 'life-expectancy': 'Life', 'exports': 'Exp', 'urbanization': 'Urb',
     };
     let ents = getEntitiesList();
+    if (!getIncludeTerritories()) ents = ents.filter((e) => !e.optional);
     if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
 
     // "Complete" = the hard, playable data (shape + flag image + every metric).
