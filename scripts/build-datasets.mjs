@@ -79,6 +79,30 @@ const MANUAL_VALUES = {
   fk: { 'land-area': 12173, 'population': 3800 },
   xs: { 'land-area': 176120, 'population': 5700000 },
   va: { 'land-area': 0.49, 'population': 764 }, // Vatican City (TODOS #20) — sovereign, not in World Bank
+  // Dependent/autonomous territories (TODOS #20) — land area (stable) + population
+  // (recent estimates) so the Territories toggle is rankable. Not in World Bank.
+  ai: { 'land-area': 91, 'population': 15900 },
+  ax: { 'land-area': 1580, 'population': 30500 },
+  ck: { 'land-area': 236, 'population': 15000 },
+  gg: { 'land-area': 78, 'population': 63900 },
+  je: { 'land-area': 116, 'population': 103300 },
+  ms: { 'land-area': 102, 'population': 4400 },
+  nu: { 'land-area': 261, 'population': 1600 },
+  nf: { 'land-area': 35, 'population': 2190 },
+  pn: { 'land-area': 47, 'population': 50 },
+  bl: { 'land-area': 25, 'population': 10900 },
+  sh: { 'land-area': 394, 'population': 5600 },
+  pm: { 'land-area': 242, 'population': 5800 },
+  wf: { 'land-area': 142, 'population': 11600 },
+  io: { 'land-area': 60 },
+  tf: { 'land-area': 7747 },
+  gp: { 'land-area': 1628, 'population': 384000 },
+  mq: { 'land-area': 1128, 'population': 361000 },
+  gf: { 'land-area': 83534, 'population': 295000 },
+  re: { 'land-area': 2511, 'population': 873000 },
+  yt: { 'land-area': 374, 'population': 320000 },
+  bq: { 'land-area': 328, 'population': 27000 },
+  gs: { 'land-area': 3903 },
 };
 const PROVENANCE = {
   tw: 'IMF WEO 2024 / Taiwan DGBAS (2023)',
@@ -90,6 +114,10 @@ const PROVENANCE = {
   xs: 'Somaliland government estimates (de-facto state)',
   va: 'Vatican City / Holy See official estimates',
 };
+// Territory land-area/population figures share a generic provenance.
+for (const code of Object.keys(MANUAL_VALUES)) {
+  if (!PROVENANCE[code]) PROVENANCE[code] = 'Territory land area + population (CIA World Factbook / official estimates)';
+}
 
 const datasets = [];
 const usedCodes = new Set();

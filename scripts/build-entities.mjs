@@ -212,13 +212,18 @@ for (const region of REGIONS) {
   writeFileSync(path, JSON.stringify(data, null, 2) + '\n');
 }
 
-// 5) Reconcile datasets.json display names to canonical (common) names
+// 5) Reconcile datasets.json display names to canonical (common) names, and
+//    backfill continent from the entity registry (territories added via manual
+//    values aren't in the build-datasets continent map — TODOS #20).
 let renamed = 0;
 for (const code of Object.keys(datasets.countries)) {
   const canon = canonicalName(code);
   if (canon && datasets.countries[code].name !== canon) {
     datasets.countries[code].name = canon;
     renamed++;
+  }
+  if (!datasets.countries[code].continent && entities[code]?.continent) {
+    datasets.countries[code].continent = entities[code].continent;
   }
 }
 writeFileSync('data/datasets.json', JSON.stringify(datasets, null, 2) + '\n');

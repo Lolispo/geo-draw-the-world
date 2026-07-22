@@ -24,6 +24,10 @@
       "name": "Antigua and Barbuda",
       "continent": "North America"
     },
+    "ai": {
+      "name": "Anguilla",
+      "continent": "North America"
+    },
     "al": {
       "name": "Albania",
       "continent": "Europe"
@@ -55,6 +59,10 @@
     "aw": {
       "name": "Aruba",
       "continent": "North America"
+    },
+    "ax": {
+      "name": "Åland Islands",
+      "continent": "Europe"
     },
     "az": {
       "name": "Azerbaijan",
@@ -96,6 +104,10 @@
       "name": "Benin",
       "continent": "Africa"
     },
+    "bl": {
+      "name": "Saint Barthélemy",
+      "continent": "North America"
+    },
     "bm": {
       "name": "Bermuda",
       "continent": "North America"
@@ -107,6 +119,10 @@
     "bo": {
       "name": "Bolivia",
       "continent": "South America"
+    },
+    "bq": {
+      "name": "Caribbean Netherlands",
+      "continent": "North America"
     },
     "br": {
       "name": "Brazil",
@@ -155,6 +171,10 @@
     "ci": {
       "name": "Ivory Coast",
       "continent": "Africa"
+    },
+    "ck": {
+      "name": "Cook Islands",
+      "continent": "Oceania"
     },
     "cl": {
       "name": "Chile",
@@ -288,6 +308,14 @@
       "name": "Georgia",
       "continent": "Asia"
     },
+    "gf": {
+      "name": "French Guiana",
+      "continent": "South America"
+    },
+    "gg": {
+      "name": "Guernsey",
+      "continent": "Europe"
+    },
     "gh": {
       "name": "Ghana",
       "continent": "Africa"
@@ -308,6 +336,10 @@
       "name": "Guinea",
       "continent": "Africa"
     },
+    "gp": {
+      "name": "Guadeloupe",
+      "continent": "North America"
+    },
     "gq": {
       "name": "Equatorial Guinea",
       "continent": "Africa"
@@ -315,6 +347,10 @@
     "gr": {
       "name": "Greece",
       "continent": "Europe"
+    },
+    "gs": {
+      "name": "South Georgia",
+      "continent": "South America"
     },
     "gt": {
       "name": "Guatemala",
@@ -372,6 +408,10 @@
       "name": "India",
       "continent": "Asia"
     },
+    "io": {
+      "name": "British Indian Ocean Territory",
+      "continent": "Africa"
+    },
     "iq": {
       "name": "Iraq",
       "continent": "Asia"
@@ -386,6 +426,10 @@
     },
     "it": {
       "name": "Italy",
+      "continent": "Europe"
+    },
+    "je": {
+      "name": "Jersey",
       "continent": "Europe"
     },
     "jg": {
@@ -544,9 +588,17 @@
       "name": "Northern Mariana Islands",
       "continent": "Oceania"
     },
+    "mq": {
+      "name": "Martinique",
+      "continent": "North America"
+    },
     "mr": {
       "name": "Mauritania",
       "continent": "Africa"
+    },
+    "ms": {
+      "name": "Montserrat",
+      "continent": "North America"
     },
     "mt": {
       "name": "Malta",
@@ -588,6 +640,10 @@
       "name": "Niger",
       "continent": "Africa"
     },
+    "nf": {
+      "name": "Norfolk Island",
+      "continent": "Oceania"
+    },
     "ng": {
       "name": "Nigeria",
       "continent": "Africa"
@@ -610,6 +666,10 @@
     },
     "nr": {
       "name": "Nauru",
+      "continent": "Oceania"
+    },
+    "nu": {
+      "name": "Niue",
       "continent": "Oceania"
     },
     "nz": {
@@ -648,6 +708,14 @@
       "name": "Poland",
       "continent": "Europe"
     },
+    "pm": {
+      "name": "Saint Pierre and Miquelon",
+      "continent": "North America"
+    },
+    "pn": {
+      "name": "Pitcairn Islands",
+      "continent": "Oceania"
+    },
     "pr": {
       "name": "Puerto Rico (US)",
       "continent": "North America"
@@ -671,6 +739,10 @@
     "qa": {
       "name": "Qatar",
       "continent": "Asia"
+    },
+    "re": {
+      "name": "Réunion",
+      "continent": "Africa"
     },
     "ro": {
       "name": "Romania",
@@ -711,6 +783,10 @@
     "sg": {
       "name": "Singapore",
       "continent": "Asia"
+    },
+    "sh": {
+      "name": "Saint Helena",
+      "continent": "Africa"
     },
     "si": {
       "name": "Slovenia",
@@ -770,6 +846,10 @@
     },
     "td": {
       "name": "Chad",
+      "continent": "Africa"
+    },
+    "tf": {
+      "name": "French Southern Territories",
       "continent": "Africa"
     },
     "tg": {
@@ -868,6 +948,10 @@
       "name": "Vanuatu",
       "continent": "Oceania"
     },
+    "wf": {
+      "name": "Wallis and Futuna",
+      "continent": "Oceania"
+    },
     "ws": {
       "name": "Samoa",
       "continent": "Oceania"
@@ -883,6 +967,10 @@
     "ye": {
       "name": "Yemen",
       "continent": "Asia"
+    },
+    "yt": {
+      "name": "Mayotte",
+      "continent": "Africa"
     },
     "za": {
       "name": "South Africa",
@@ -1351,7 +1439,26 @@
         "eh": 580000,
         "fk": 3800,
         "xs": 5700000,
-        "va": 764
+        "va": 764,
+        "ai": 15900,
+        "ax": 30500,
+        "ck": 15000,
+        "gg": 63900,
+        "je": 103300,
+        "ms": 4400,
+        "nu": 1600,
+        "nf": 2190,
+        "pn": 50,
+        "bl": 10900,
+        "sh": 5600,
+        "pm": 5800,
+        "wf": 11600,
+        "gp": 384000,
+        "mq": 361000,
+        "gf": 295000,
+        "re": 873000,
+        "yt": 320000,
+        "bq": 27000
       }
     },
     {
@@ -1807,7 +1914,29 @@
         "eh": 266000,
         "fk": 12173,
         "xs": 176120,
-        "va": 0.49
+        "va": 0.49,
+        "ai": 91,
+        "ax": 1580,
+        "ck": 236,
+        "gg": 78,
+        "je": 116,
+        "ms": 102,
+        "nu": 261,
+        "nf": 35,
+        "pn": 47,
+        "bl": 25,
+        "sh": 394,
+        "pm": 242,
+        "wf": 142,
+        "io": 60,
+        "tf": 7747,
+        "gp": 1628,
+        "mq": 1128,
+        "gf": 83534,
+        "re": 2511,
+        "yt": 374,
+        "bq": 328,
+        "gs": 3903
       }
     },
     {
@@ -2469,6 +2598,28 @@
     "eh": "CIA World Factbook / UN estimates",
     "fk": "Falkland Islands Government 2021 census",
     "xs": "Somaliland government estimates (de-facto state)",
-    "va": "Vatican City / Holy See official estimates"
+    "va": "Vatican City / Holy See official estimates",
+    "ai": "Territory land area + population (CIA World Factbook / official estimates)",
+    "ax": "Territory land area + population (CIA World Factbook / official estimates)",
+    "ck": "Territory land area + population (CIA World Factbook / official estimates)",
+    "gg": "Territory land area + population (CIA World Factbook / official estimates)",
+    "je": "Territory land area + population (CIA World Factbook / official estimates)",
+    "ms": "Territory land area + population (CIA World Factbook / official estimates)",
+    "nu": "Territory land area + population (CIA World Factbook / official estimates)",
+    "nf": "Territory land area + population (CIA World Factbook / official estimates)",
+    "pn": "Territory land area + population (CIA World Factbook / official estimates)",
+    "bl": "Territory land area + population (CIA World Factbook / official estimates)",
+    "sh": "Territory land area + population (CIA World Factbook / official estimates)",
+    "pm": "Territory land area + population (CIA World Factbook / official estimates)",
+    "wf": "Territory land area + population (CIA World Factbook / official estimates)",
+    "io": "Territory land area + population (CIA World Factbook / official estimates)",
+    "tf": "Territory land area + population (CIA World Factbook / official estimates)",
+    "gp": "Territory land area + population (CIA World Factbook / official estimates)",
+    "mq": "Territory land area + population (CIA World Factbook / official estimates)",
+    "gf": "Territory land area + population (CIA World Factbook / official estimates)",
+    "re": "Territory land area + population (CIA World Factbook / official estimates)",
+    "yt": "Territory land area + population (CIA World Factbook / official estimates)",
+    "bq": "Territory land area + population (CIA World Factbook / official estimates)",
+    "gs": "Territory land area + population (CIA World Factbook / official estimates)"
   }
 }

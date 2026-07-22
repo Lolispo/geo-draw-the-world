@@ -4,8 +4,9 @@
 
 import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
-import { loadDatasets, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, getEntity, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
+import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 const START_LIVES = 3;
@@ -67,6 +68,15 @@ export class RankLineGame {
     sub.textContent = 'Pick a dataset, then place each country on the line by its value. 3 lives.';
     panel.append(h, sub);
 
+    // Territories toggle (shared setting) — include small dependent territories.
+    const terrOn = getIncludeTerritories();
+    const terrBtn = document.createElement('button');
+    terrBtn.className = 'btn btn-tool' + (terrOn ? ' active' : '');
+    terrBtn.textContent = terrOn ? '🏝️ Territories: On' : '🏝️ Territories: Off';
+    terrBtn.title = 'Include small dependent/autonomous territories in the pool';
+    terrBtn.addEventListener('click', () => { setIncludeTerritories(!getIncludeTerritories()); this.showPicker(); });
+    panel.appendChild(terrBtn);
+
     const listWrap = document.createElement('div');
     listWrap.className = 'rank-picker-list';
     for (const d of getDatasetList()) {
@@ -88,6 +98,7 @@ export class RankLineGame {
   async loadData() {
     if (this._loaded) return;
     await loadDatasets();
+    await loadEntities(); // needed to gate optional territories
     this._loaded = true;
   }
 
@@ -102,8 +113,11 @@ export class RankLineGame {
   start(datasetId = 'gdp-nominal') {
     this._picking = false;
     this.dataset = getDataset(datasetId);
-    // Fresh entry objects each run (we mutate `.revealed` on them)
-    this.deck = this._shuffle(getEntries(datasetId));
+    // Fresh entry objects each run (we mutate `.revealed` on them).
+    // Exclude optional/dependent territories unless the toggle is on (TODOS #20).
+    let entries = getEntries(datasetId);
+    if (!getIncludeTerritories()) entries = entries.filter((e) => !getEntity(e.code)?.optional);
+    this.deck = this._shuffle(entries);
     this._poolSize = this.deck.length;
     this.placed = [];
     this.lives = START_LIVES;

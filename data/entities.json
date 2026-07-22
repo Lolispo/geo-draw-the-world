@@ -94,9 +94,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -278,9 +278,9 @@
       "region": "europe",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -500,9 +500,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -583,9 +583,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -845,9 +845,9 @@
       "region": "oceania",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -1530,9 +1530,9 @@
       "region": "south-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -1552,9 +1552,9 @@
       "region": "europe",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -1676,9 +1676,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -1740,7 +1740,7 @@
         "gdp-nominal": false,
         "population": false,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -2045,7 +2045,7 @@
         "gdp-nominal": false,
         "population": false,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -2145,9 +2145,9 @@
       "region": "europe",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -2951,9 +2951,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -2993,9 +2993,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3216,9 +3216,9 @@
       "region": "oceania",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3358,9 +3358,9 @@
       "region": "oceania",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3561,9 +3561,9 @@
       "region": "north-america",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3583,9 +3583,9 @@
       "region": "oceania",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3726,9 +3726,9 @@
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -3948,9 +3948,9 @@
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -4274,7 +4274,7 @@
         "gdp-nominal": false,
         "population": false,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -4776,9 +4776,9 @@
       "region": "oceania",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
@@ -4878,9 +4878,9 @@
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
-        "population": false,
+        "population": true,
         "gdp-per-capita": false,
-        "land-area": false,
+        "land-area": true,
         "life-expectancy": false,
         "exports": false,
         "urbanization": false
