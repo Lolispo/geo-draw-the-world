@@ -798,6 +798,12 @@ so no source switch/licensing needed). Delivered all four requested improvements
    is a grid (no basemap to speckle). Applies everywhere (panel, peek, compare, results).
 
 Verified live (dpr=1 headless): panels/placement/draw all render + function, no console errors.
+**Aspect fix (owner-reported squish) ✅ 2026-07-22:** the projection compressed y to
+0.571× (conformal x=255 px/rad but y=146). Made it conformal (y=−255.36·mercY), world
+900→1100, ocean labels repositioned; reprojected `continents.json` to match + gave
+Continents mode its own bounds (Antarctica). Verified: Italy boot + Africa (h/w 1.13 vs
+squished 0.65) correct. Scoring unaffected (independent x/y raster normalization).
+
 **Gate:** owner to hard-refresh on a retina display and approve, or flag what's still off.
 Not done (deferred unless owner wants): perf-caching the world map for World-mode drag (only
 needed if drag stutters at high vertex counts); a true per-country native tier for the last
@@ -826,6 +832,21 @@ fidelity but not enough by eye.
 - **Gate:** present before/after to the owner and get approval — do not self-close.
 
 **Acceptance:** Owner explicitly approves the shape quality at peek/compare/panel sizes.
+
+---
+
+## 25. Bug: Rank the World — can't continue after 10 placements (mobile)
+
+**What:** On phone, in Rank the World, after placing ~10 countries the player couldn't rank
+any more (owner, 2026-07-22).
+
+**Why / investigate:** Likely the deck/round logic or a mobile touch/scroll issue on the
+rank line once it grows long. Check `js/rank-line-game.js` — deck exhaustion vs. a stuck
+state, the gap tap/drag targets when the list is tall, and whether a game-over/continue
+path is missing. Repro on a narrow viewport.
+
+**Acceptance:** Ranking continues past 10 on mobile (or ends cleanly with a clear results
+screen), verified on a phone-width viewport.
 
 ---
 

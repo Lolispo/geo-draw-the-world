@@ -452,11 +452,22 @@ class Game {
   async startContinents() {
     this.gameMode = 'continents';
     this._currentRegion = null;
-    this._regionBounds = null;
     this.itemOrder = getContinentOrder();
     this.itemData = shuffleArray(this.itemOrder.map(name => getContinentByName(name)));
     this.itemOrder = this.itemData.map(c => c.name);
     this._allRefShapes = createAllReferenceShapes();
+    // Continents span more latitude (incl. Antarctica) than the country world, so fit
+    // the placement view to their own bounds rather than the 1600×1100 world (TODOS #24).
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const c of this.itemData) {
+      for (const ring of c.polygons) {
+        for (const [x, y] of ring) {
+          if (x < minX) minX = x; if (x > maxX) maxX = x;
+          if (y < minY) minY = y; if (y > maxY) maxY = y;
+        }
+      }
+    }
+    this._regionBounds = { minX, minY, maxX, maxY };
     this._startGame();
   }
 
