@@ -1,0 +1,24 @@
+data/continents.json
+  s_fdc6d2f11ee255::t_a1f5d5cf7a5efd 1
+TODOS.md
+  s_fdc6d2f11ee255::t_171193bad60830 801-806
+  s_fdc6d2f11ee255::t_622a13a2f41769 838-852
+js/main.js
+  s_fdc6d2f11ee255::t_b5b8b72780ad69 459-470
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "2f1fc2c0581ce726e97690b98c6b352f6045dcde",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
