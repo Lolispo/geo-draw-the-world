@@ -5,13 +5,13 @@ import { multiPolygonBoundingBox, multiPolygonCentroid, drawMultiPolygon, transf
 
 // Ocean labels in world-space coordinates (1600x900 Mercator)
 const OCEAN_LABELS = [
-  { name: 'ATLANTIC\nOCEAN', x: 560, y: 400 },
-  { name: 'PACIFIC\nOCEAN', x: 100, y: 380 },
-  { name: 'PACIFIC\nOCEAN', x: 1450, y: 380 },
-  { name: 'INDIAN\nOCEAN', x: 1130, y: 520 },
-  { name: 'ARCTIC OCEAN', x: 800, y: 50 },
-  { name: 'SOUTHERN OCEAN', x: 800, y: 830 },
-  { name: 'Mediterranean Sea', x: 830, y: 305 },
+  { name: 'ATLANTIC\nOCEAN', x: 560, y: 671 },
+  { name: 'PACIFIC\nOCEAN', x: 100, y: 636 },
+  { name: 'PACIFIC\nOCEAN', x: 1450, y: 636 },
+  { name: 'INDIAN\nOCEAN', x: 1130, y: 881 },
+  { name: 'ARCTIC OCEAN', x: 800, y: 58 },
+  { name: 'SOUTHERN OCEAN', x: 800, y: 1050 },
+  { name: 'Mediterranean Sea', x: 830, y: 505 },
 ];
 
 const HANDLE_SIZE = 10;
@@ -34,7 +34,7 @@ export class TransformControls {
 
     // World-space rendering params (passed from main)
     this.worldWidth = 1600;
-    this.worldHeight = 900;
+    this.worldHeight = 1100; // TODOS #24 conformal
     this.regionBounds = null;  // same as world canvas
     this.viewScale = 1;
     this.viewOffset = [0, 0];
@@ -64,7 +64,7 @@ export class TransformControls {
   setWorldParams(regionBounds, worldWidth, worldHeight) {
     this.regionBounds = regionBounds;
     this.worldWidth = worldWidth || 1600;
-    this.worldHeight = worldHeight || 900;
+    this.worldHeight = worldHeight || 1100;
   }
 
   _computeView() {

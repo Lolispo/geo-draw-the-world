@@ -10,13 +10,17 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const WRITE = process.argv.includes('--write');
-const W = 1600, H = 900;
-// Projection (fitted to original data)
-const AX = 4.4569, BX = 800.06, AY = -145.784, BY = 450.93;
+// TODOS #24: conformal Mercator. x keeps its scale (4.4569 px/° → 255.36 px/rad); y is
+// set to the SAME px/rad so shapes aren't vertically compressed (was 145.784 → squished
+// to 0.571×). World height grows from 900 to 1090 to hold the taller, correct map.
+const W = 1600, H = 1100;
+const AX = 4.4569, BX = 800.06;
+const AY = -(AX * 180 / Math.PI);  // = -255.36, matches x-scale → conformal
+const BY = 760;                     // equator y; positions ~83°N near the top
 const mercY = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
 const project = (lon, lat) => [AX * lon + BX, AY * mercY(Math.max(-85, Math.min(85, lat))) + BY];
 
-const CLIP_DIST = 220;       // px — keep rings within this of the main landmass...
+const CLIP_DIST = 385;       // px — keep rings within this of the main landmass (scaled 220×1.752 for taller map)...
 const CLIP_AREA_FRAC = 0.5;  // ...or rings at least this fraction of the largest
 const DP_EPS = 0.05;         // px — Douglas-Peucker tolerance (TODOS #24: high-def world geometry)
 const MIN_RING_AREA = 0.01;  // px^2 — keep small islands (was 2; only drops sub-pixel specks now)

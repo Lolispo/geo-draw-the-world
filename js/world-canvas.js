@@ -3,15 +3,15 @@
 
 import { drawMultiPolygon, multiPolygonBoundingBox } from './utils.js';
 
-// Ocean labels in world-space coordinates (1600x900 Mercator)
+// Ocean labels in world-space coordinates (1600x1100 conformal Mercator, TODOS #24)
 const OCEAN_LABELS = [
-  { name: 'ATLANTIC\nOCEAN', x: 560, y: 400 },
-  { name: 'PACIFIC\nOCEAN', x: 100, y: 380 },
-  { name: 'PACIFIC\nOCEAN', x: 1450, y: 380 },
-  { name: 'INDIAN\nOCEAN', x: 1130, y: 520 },
-  { name: 'ARCTIC OCEAN', x: 800, y: 50 },
-  { name: 'SOUTHERN OCEAN', x: 800, y: 830 },
-  { name: 'Mediterranean Sea', x: 830, y: 305 },
+  { name: 'ATLANTIC\nOCEAN', x: 560, y: 671 },
+  { name: 'PACIFIC\nOCEAN', x: 100, y: 636 },
+  { name: 'PACIFIC\nOCEAN', x: 1450, y: 636 },
+  { name: 'INDIAN\nOCEAN', x: 1130, y: 881 },
+  { name: 'ARCTIC OCEAN', x: 800, y: 58 },
+  { name: 'SOUTHERN OCEAN', x: 800, y: 1050 },
+  { name: 'Mediterranean Sea', x: 830, y: 505 },
 ];
 
 const ROTATE_HANDLE_DIST = 30;
@@ -26,7 +26,7 @@ export class WorldCanvas {
     this.viewScale = 1;
 
     this.worldWidth = 1600;
-    this.worldHeight = 900;
+    this.worldHeight = 1100; // TODOS #24: conformal Mercator (was 900, squished)
 
     this.placedShapes = [];
     this.activeShape = null;
