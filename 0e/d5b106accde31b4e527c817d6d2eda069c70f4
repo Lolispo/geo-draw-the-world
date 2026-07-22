@@ -1,0 +1,523 @@
+package.json
+  s_fdc6d2f11ee255::t_46867803a9323e 19
+js/geo-data.js
+  s_fdc6d2f11ee255::t_31e9e1acabe189 52-56,58-64,66
+scripts/build-shapes.mjs
+  s_fdc6d2f11ee255::t_c995e987423ac6 97-111,113
+  s_fdc6d2f11ee255::t_a5f473650b4f87 3-7,9,12-13,18-21,26-28,30-32,34-35,44-46,48-50,52-68,70,72-92,95,114-115
+  s_fdc6d2f11ee255::t_be86a9fe5e618c 10
+  s_fdc6d2f11ee255::t_9c0251648deb49 1-2,8,11,16-17,22-25,29,33,43,47,51,69,71,93-94,96,112
+  s_fdc6d2f11ee255::t_f775bbe26f955e 14-15
+  s_fdc6d2f11ee255::t_3c3941f73462a2 36-42
+docs/DATA.md
+  s_fdc6d2f11ee255::t_2c684dafca1fbf 14
+  s_fdc6d2f11ee255::t_4f7014a93e9bc5 68-83
+TODOS.md
+  s_fdc6d2f11ee255::t_839cdf172245fa 807-814
+css/style.css
+  s_fdc6d2f11ee255::t_2538154ac37376 2003
+js/country-panel.js
+  s_fdc6d2f11ee255::t_2b4663583d370a 138-140
+data/shapes/ad.json
+  s_fdc6d2f11ee255::t_166fdb7b4f2e36 1
+data/shapes/ae.json
+  s_fdc6d2f11ee255::t_bb81f0591d36da 1
+data/shapes/af.json
+  s_fdc6d2f11ee255::t_53eb4c8ebc18a2 1
+data/shapes/ag.json
+  s_fdc6d2f11ee255::t_a3532a98b42643 1
+data/shapes/ai.json
+  s_fdc6d2f11ee255::t_a79b46ad7b071a 1
+data/shapes/al.json
+  s_fdc6d2f11ee255::t_e17e844da3cc47 1
+data/shapes/am.json
+  s_fdc6d2f11ee255::t_d348afa2e31d56 1
+data/shapes/ao.json
+  s_fdc6d2f11ee255::t_a1d74ce7980486 1
+data/shapes/ar.json
+  s_fdc6d2f11ee255::t_eb321888b27133 1
+data/shapes/as.json
+  s_fdc6d2f11ee255::t_79a45ea228f432 1
+data/shapes/at.json
+  s_fdc6d2f11ee255::t_e5283d05f18395 1
+data/shapes/au.json
+  s_fdc6d2f11ee255::t_81becb5e539f0d 1
+data/shapes/aw.json
+  s_fdc6d2f11ee255::t_7f8c6b3acc8e5d 1
+data/shapes/ax.json
+  s_fdc6d2f11ee255::t_40b0d5fa2eeed8 1
+data/shapes/az.json
+  s_fdc6d2f11ee255::t_9c739691f010f7 1
+data/shapes/ba.json
+  s_fdc6d2f11ee255::t_665f09ddf34bef 1
+data/shapes/bb.json
+  s_fdc6d2f11ee255::t_2ec5f189c56b39 1
+data/shapes/bd.json
+  s_fdc6d2f11ee255::t_0837ccd31e0b0f 1
+data/shapes/be.json
+  s_fdc6d2f11ee255::t_b8564024f4053c 1
+data/shapes/bf.json
+  s_fdc6d2f11ee255::t_bc4ca435299ea2 1
+data/shapes/bg.json
+  s_fdc6d2f11ee255::t_968dc15e271423 1
+data/shapes/bh.json
+  s_fdc6d2f11ee255::t_18134132cc9514 1
+data/shapes/bi.json
+  s_fdc6d2f11ee255::t_7a598e51b6cd25 1
+data/shapes/bj.json
+  s_fdc6d2f11ee255::t_5c4d3d67632efb 1
+data/shapes/bl.json
+  s_fdc6d2f11ee255::t_3b88e7c7c90349 1
+data/shapes/bm.json
+  s_fdc6d2f11ee255::t_c00879371d782c 1
+data/shapes/bn.json
+  s_fdc6d2f11ee255::t_ec344d17d05dea 1
+data/shapes/bo.json
+  s_fdc6d2f11ee255::t_4ebac428a93c8f 1
+data/shapes/bq.json
+  s_fdc6d2f11ee255::t_74af60fd85e5bc 1
+data/shapes/br.json
+  s_fdc6d2f11ee255::t_e2c00a5e4284f5 1
+data/shapes/bs.json
+  s_fdc6d2f11ee255::t_0be281a3c597f3 1
+data/shapes/bt.json
+  s_fdc6d2f11ee255::t_17207eee6600fe 1
+data/shapes/bw.json
+  s_fdc6d2f11ee255::t_7e588d5208a51a 1
+data/shapes/by.json
+  s_fdc6d2f11ee255::t_0d262cb453ddf0 1
+data/shapes/bz.json
+  s_fdc6d2f11ee255::t_86641ebde44530 1
+data/shapes/ca.json
+  s_fdc6d2f11ee255::t_31188e655d1eb2 1
+data/shapes/cd.json
+  s_fdc6d2f11ee255::t_b5339ef7448fe8 1
+data/shapes/cf.json
+  s_fdc6d2f11ee255::t_c343612fb19354 1
+data/shapes/cg.json
+  s_fdc6d2f11ee255::t_55280f8acdf7a3 1
+data/shapes/ch.json
+  s_fdc6d2f11ee255::t_f4fdfe88a42641 1
+data/shapes/ci.json
+  s_fdc6d2f11ee255::t_786e3f3a9d1903 1
+data/shapes/ck.json
+  s_fdc6d2f11ee255::t_e9b5e33ce28a93 1
+data/shapes/cl.json
+  s_fdc6d2f11ee255::t_f81f79f3e03199 1
+data/shapes/cm.json
+  s_fdc6d2f11ee255::t_faca7236360712 1
+data/shapes/cn.json
+  s_fdc6d2f11ee255::t_9bb3213db07f8d 1
+data/shapes/co.json
+  s_fdc6d2f11ee255::t_87c6f82a8fd235 1
+data/shapes/cr.json
+  s_fdc6d2f11ee255::t_f9e29dd07f690e 1
+data/shapes/cu.json
+  s_fdc6d2f11ee255::t_854d45d78e26c0 1
+data/shapes/cv.json
+  s_fdc6d2f11ee255::t_98d43651f47cdd 1
+data/shapes/cw.json
+  s_fdc6d2f11ee255::t_8d1575d288d6b4 1
+data/shapes/cy.json
+  s_fdc6d2f11ee255::t_1551f09318edc2 1
+data/shapes/cz.json
+  s_fdc6d2f11ee255::t_d38529fbeed6fd 1
+data/shapes/de.json
+  s_fdc6d2f11ee255::t_330db966373cdd 1
+data/shapes/dj.json
+  s_fdc6d2f11ee255::t_552a3918914f83 1
+data/shapes/dk.json
+  s_fdc6d2f11ee255::t_82076ce8e53035 1
+data/shapes/dm.json
+  s_fdc6d2f11ee255::t_c93c758617a95b 1
+data/shapes/do.json
+  s_fdc6d2f11ee255::t_3fd12ceb9958f9 1
+data/shapes/dz.json
+  s_fdc6d2f11ee255::t_bbddc9bce2dd79 1
+data/shapes/ec.json
+  s_fdc6d2f11ee255::t_fd024a0563dae8 1
+data/shapes/ee.json
+  s_fdc6d2f11ee255::t_72955ea95b4555 1
+data/shapes/eg.json
+  s_fdc6d2f11ee255::t_553e889d09eed2 1
+data/shapes/eh.json
+  s_fdc6d2f11ee255::t_57ac1d0a4bc557 1
+data/shapes/er.json
+  s_fdc6d2f11ee255::t_a903118ca19cac 1
+data/shapes/es.json
+  s_fdc6d2f11ee255::t_25885638250f7e 1
+data/shapes/et.json
+  s_fdc6d2f11ee255::t_5bd98207c603da 1
+data/shapes/fi.json
+  s_fdc6d2f11ee255::t_44b5719239d9c2 1
+data/shapes/fj.json
+  s_fdc6d2f11ee255::t_cc280d8a852b77 1
+data/shapes/fk.json
+  s_fdc6d2f11ee255::t_f1c252fcf212c4 1
+data/shapes/fm.json
+  s_fdc6d2f11ee255::t_5fc65bd101a271 1
+data/shapes/fo.json
+  s_fdc6d2f11ee255::t_56cb8580069957 1
+data/shapes/fr.json
+  s_fdc6d2f11ee255::t_e9e76732c29b68 1
+data/shapes/ga.json
+  s_fdc6d2f11ee255::t_6769fd0136811f 1
+data/shapes/gb.json
+  s_fdc6d2f11ee255::t_efe0ce78537d0f 1
+data/shapes/gd.json
+  s_fdc6d2f11ee255::t_9744b205a62f22 1
+data/shapes/ge.json
+  s_fdc6d2f11ee255::t_d31d5d1da03ad0 1
+data/shapes/gf.json
+  s_fdc6d2f11ee255::t_1ffdb804d12d62 1
+data/shapes/gg.json
+  s_fdc6d2f11ee255::t_c601340c50d2cd 1
+data/shapes/gh.json
+  s_fdc6d2f11ee255::t_f3ecec2e967e9a 1
+data/shapes/gi.json
+  s_fdc6d2f11ee255::t_1c3e94af369bc1 1
+data/shapes/gl.json
+  s_fdc6d2f11ee255::t_59f66112a2e179 1
+data/shapes/gm.json
+  s_fdc6d2f11ee255::t_116e6d37de442c 1
+data/shapes/gn.json
+  s_fdc6d2f11ee255::t_3cb2ab7a431261 1
+data/shapes/gp.json
+  s_fdc6d2f11ee255::t_81bf2a55c22be9 1
+data/shapes/gq.json
+  s_fdc6d2f11ee255::t_d10082c1ca849d 1
+data/shapes/gr.json
+  s_fdc6d2f11ee255::t_67c7149e72634a 1
+data/shapes/gs.json
+  s_fdc6d2f11ee255::t_a2411284352831 1
+data/shapes/gt.json
+  s_fdc6d2f11ee255::t_37f6a21d9473f1 1
+data/shapes/gu.json
+  s_fdc6d2f11ee255::t_f77372de71caad 1
+data/shapes/gw.json
+  s_fdc6d2f11ee255::t_006cea3e0513aa 1
+data/shapes/gy.json
+  s_fdc6d2f11ee255::t_c71ef7c86c2fc9 1
+data/shapes/hk.json
+  s_fdc6d2f11ee255::t_5158d86b1615b8 1
+data/shapes/hn.json
+  s_fdc6d2f11ee255::t_49cf0194c81746 1
+data/shapes/hr.json
+  s_fdc6d2f11ee255::t_dbab47e3decfed 1
+data/shapes/ht.json
+  s_fdc6d2f11ee255::t_38f095080a06f5 1
+data/shapes/hu.json
+  s_fdc6d2f11ee255::t_5fb6024812da08 1
+data/shapes/id.json
+  s_fdc6d2f11ee255::t_fc8254f0e7e952 1
+data/shapes/ie.json
+  s_fdc6d2f11ee255::t_d5e79da76556b3 1
+data/shapes/il.json
+  s_fdc6d2f11ee255::t_e5c7f58e50cb99 1
+data/shapes/im.json
+  s_fdc6d2f11ee255::t_e0785c84c8509c 1
+data/shapes/in.json
+  s_fdc6d2f11ee255::t_6b08b5cad359c1 1
+data/shapes/io.json
+  s_fdc6d2f11ee255::t_2cf0b42bc6837a 1
+data/shapes/iq.json
+  s_fdc6d2f11ee255::t_eaeb4a87ea64b4 1
+data/shapes/ir.json
+  s_fdc6d2f11ee255::t_ecbdcc633c0c5b 1
+data/shapes/is.json
+  s_fdc6d2f11ee255::t_af0d61f71d06ce 1
+data/shapes/it.json
+  s_fdc6d2f11ee255::t_cd31f659119bb3 1
+data/shapes/je.json
+  s_fdc6d2f11ee255::t_627e5b3fc7f957 1
+data/shapes/jm.json
+  s_fdc6d2f11ee255::t_8455c81d8569ee 1
+data/shapes/jo.json
+  s_fdc6d2f11ee255::t_8d67db2eea2f10 1
+data/shapes/jp.json
+  s_fdc6d2f11ee255::t_f0b6badaa4774c 1
+data/shapes/ke.json
+  s_fdc6d2f11ee255::t_402e38dd3625f4 1
+data/shapes/kg.json
+  s_fdc6d2f11ee255::t_f14f7d0687576d 1
+data/shapes/kh.json
+  s_fdc6d2f11ee255::t_3286f5dc4a3eb7 1
+data/shapes/ki.json
+  s_fdc6d2f11ee255::t_61c0aacfa19313 1
+data/shapes/km.json
+  s_fdc6d2f11ee255::t_fc41cf601d55f0 1
+data/shapes/kn.json
+  s_fdc6d2f11ee255::t_846f1393cbb3a9 1
+data/shapes/kp.json
+  s_fdc6d2f11ee255::t_58f5a64b7b317f 1
+data/shapes/kr.json
+  s_fdc6d2f11ee255::t_86bbd047d2bc4d 1
+data/shapes/kw.json
+  s_fdc6d2f11ee255::t_f8198a4a4235d5 1
+data/shapes/ky.json
+  s_fdc6d2f11ee255::t_1ca932ebb53f3f 1
+data/shapes/kz.json
+  s_fdc6d2f11ee255::t_daaba2e193091d 1
+data/shapes/la.json
+  s_fdc6d2f11ee255::t_cbe80fd783dc66 1
+data/shapes/lb.json
+  s_fdc6d2f11ee255::t_60d8f9427b80fa 1
+data/shapes/lc.json
+  s_fdc6d2f11ee255::t_ae6ac0f98d05b9 1
+data/shapes/li.json
+  s_fdc6d2f11ee255::t_f34c09e6ebc848 1
+data/shapes/lk.json
+  s_fdc6d2f11ee255::t_238b3750a4b172 1
+data/shapes/lr.json
+  s_fdc6d2f11ee255::t_bb4e01c1d7f388 1
+data/shapes/ls.json
+  s_fdc6d2f11ee255::t_7620c1f93251d0 1
+data/shapes/lt.json
+  s_fdc6d2f11ee255::t_91c2c7a4623ddd 1
+data/shapes/lu.json
+  s_fdc6d2f11ee255::t_56ba778f8ed42e 1
+data/shapes/lv.json
+  s_fdc6d2f11ee255::t_237bdcf40c659e 1
+data/shapes/ly.json
+  s_fdc6d2f11ee255::t_313fdc751bbf11 1
+data/shapes/ma.json
+  s_fdc6d2f11ee255::t_9ff5a7e6d35695 1
+data/shapes/mc.json
+  s_fdc6d2f11ee255::t_76564f8768b8ed 1
+data/shapes/md.json
+  s_fdc6d2f11ee255::t_7abfcd725d0c57 1
+data/shapes/me.json
+  s_fdc6d2f11ee255::t_146a514649b711 1
+data/shapes/mf.json
+  s_fdc6d2f11ee255::t_aeecfbd15a94eb 1
+data/shapes/mg.json
+  s_fdc6d2f11ee255::t_677510fd63e791 1
+data/shapes/mh.json
+  s_fdc6d2f11ee255::t_3a0b8f535a0d4d 1
+data/shapes/mk.json
+  s_fdc6d2f11ee255::t_601669c6af7a3b 1
+data/shapes/ml.json
+  s_fdc6d2f11ee255::t_7f42aa72e15837 1
+data/shapes/mm.json
+  s_fdc6d2f11ee255::t_4d2c497c9c244e 1
+data/shapes/mn.json
+  s_fdc6d2f11ee255::t_f4867f5cf5e2c7 1
+data/shapes/mo.json
+  s_fdc6d2f11ee255::t_f330ba9b5d5ee5 1
+data/shapes/mp.json
+  s_fdc6d2f11ee255::t_19edce5d767e21 1
+data/shapes/mq.json
+  s_fdc6d2f11ee255::t_cba2cb3af40028 1
+data/shapes/mr.json
+  s_fdc6d2f11ee255::t_c7323475bdbbf2 1
+data/shapes/ms.json
+  s_fdc6d2f11ee255::t_4650545e789dbb 1
+data/shapes/mt.json
+  s_fdc6d2f11ee255::t_1d883c715a8d7a 1
+data/shapes/mu.json
+  s_fdc6d2f11ee255::t_590e13dcddaf7d 1
+data/shapes/mv.json
+  s_fdc6d2f11ee255::t_4bd5897306d558 1
+data/shapes/mw.json
+  s_fdc6d2f11ee255::t_1b54350b4529b3 1
+data/shapes/mx.json
+  s_fdc6d2f11ee255::t_f831feb911f609 1
+data/shapes/my.json
+  s_fdc6d2f11ee255::t_6101446ee09004 1
+data/shapes/mz.json
+  s_fdc6d2f11ee255::t_42d838bbd3b4ad 1
+data/shapes/na.json
+  s_fdc6d2f11ee255::t_9ff14036d8b874 1
+data/shapes/nc.json
+  s_fdc6d2f11ee255::t_75dee40c0a2486 1
+data/shapes/ne.json
+  s_fdc6d2f11ee255::t_8fb5c395472197 1
+data/shapes/nf.json
+  s_fdc6d2f11ee255::t_6a0a37b7c14cf8 1
+data/shapes/ng.json
+  s_fdc6d2f11ee255::t_df2f4c93ca8c3c 1
+data/shapes/ni.json
+  s_fdc6d2f11ee255::t_13748a0fdb4175 1
+data/shapes/nl.json
+  s_fdc6d2f11ee255::t_d561703232ee6f 1
+data/shapes/no.json
+  s_fdc6d2f11ee255::t_ee6a0e19e841db 1
+data/shapes/np.json
+  s_fdc6d2f11ee255::t_6a5752b6bf73a6 1
+data/shapes/nr.json
+  s_fdc6d2f11ee255::t_de9401d2d75b32 1
+data/shapes/nu.json
+  s_fdc6d2f11ee255::t_90afde63f3d9d5 1
+data/shapes/nz.json
+  s_fdc6d2f11ee255::t_26657383481948 1
+data/shapes/om.json
+  s_fdc6d2f11ee255::t_0769fa43f0de0a 1
+data/shapes/pa.json
+  s_fdc6d2f11ee255::t_e7aea3a8a29d73 1
+data/shapes/pe.json
+  s_fdc6d2f11ee255::t_feefb0ced35a3d 1
+data/shapes/pf.json
+  s_fdc6d2f11ee255::t_f0d1737c0b829d 1
+data/shapes/pg.json
+  s_fdc6d2f11ee255::t_60b2912aea0fe7 1
+data/shapes/ph.json
+  s_fdc6d2f11ee255::t_6bada741a31acf 1
+data/shapes/pk.json
+  s_fdc6d2f11ee255::t_b50c47af28f48b 1
+data/shapes/pl.json
+  s_fdc6d2f11ee255::t_6f6f5182410946 1
+data/shapes/pm.json
+  s_fdc6d2f11ee255::t_bda777bb58d979 1
+data/shapes/pn.json
+  s_fdc6d2f11ee255::t_a122f12579597d 1
+data/shapes/pr.json
+  s_fdc6d2f11ee255::t_eb49b28bf93981 1
+data/shapes/ps.json
+  s_fdc6d2f11ee255::t_548b9141b6c440 1
+data/shapes/pt.json
+  s_fdc6d2f11ee255::t_5b1501cf446374 1
+data/shapes/pw.json
+  s_fdc6d2f11ee255::t_7dba0eae190d7e 1
+data/shapes/py.json
+  s_fdc6d2f11ee255::t_bd4f498772c242 1
+data/shapes/qa.json
+  s_fdc6d2f11ee255::t_3a53ed43ee8c75 1
+data/shapes/re.json
+  s_fdc6d2f11ee255::t_90bc1d47b2a085 1
+data/shapes/ro.json
+  s_fdc6d2f11ee255::t_2d40318418d17d 1
+data/shapes/rs.json
+  s_fdc6d2f11ee255::t_f557809dcb5180 1
+data/shapes/ru.json
+  s_fdc6d2f11ee255::t_2671a4367b1c88 1
+data/shapes/rw.json
+  s_fdc6d2f11ee255::t_ee1de067088114 1
+data/shapes/sa.json
+  s_fdc6d2f11ee255::t_9a810ffd1b0988 1
+data/shapes/sb.json
+  s_fdc6d2f11ee255::t_c8125f93b88740 1
+data/shapes/sc.json
+  s_fdc6d2f11ee255::t_f174f5ebb9577f 1
+data/shapes/sd.json
+  s_fdc6d2f11ee255::t_cd30f405e6bcfe 1
+data/shapes/se.json
+  s_fdc6d2f11ee255::t_2da372f2799652 1
+data/shapes/sg.json
+  s_fdc6d2f11ee255::t_4a3bc6f8b79ba9 1
+data/shapes/sh.json
+  s_fdc6d2f11ee255::t_5084dac33afbae 1
+data/shapes/si.json
+  s_fdc6d2f11ee255::t_cbd9950aa4c9fb 1
+data/shapes/sk.json
+  s_fdc6d2f11ee255::t_2a4e7e356caa03 1
+data/shapes/sl.json
+  s_fdc6d2f11ee255::t_dba802c8fb2ae7 1
+data/shapes/sm.json
+  s_fdc6d2f11ee255::t_89bce01e382bc8 1
+data/shapes/sn.json
+  s_fdc6d2f11ee255::t_3a159fc4a77b76 1
+data/shapes/so.json
+  s_fdc6d2f11ee255::t_a936d89bfbf763 1
+data/shapes/sr.json
+  s_fdc6d2f11ee255::t_c921008461cb6e 1
+data/shapes/ss.json
+  s_fdc6d2f11ee255::t_d1bc00096e77df 1
+data/shapes/st.json
+  s_fdc6d2f11ee255::t_2d04e48ece84a4 1
+data/shapes/sv.json
+  s_fdc6d2f11ee255::t_46efb11a5b4fea 1
+data/shapes/sx.json
+  s_fdc6d2f11ee255::t_a7b80e8e6151fe 1
+data/shapes/sy.json
+  s_fdc6d2f11ee255::t_831890e77d8dbb 1
+data/shapes/sz.json
+  s_fdc6d2f11ee255::t_5c8b7a326ee828 1
+data/shapes/tc.json
+  s_fdc6d2f11ee255::t_6ca5056941366e 1
+data/shapes/td.json
+  s_fdc6d2f11ee255::t_d863eb978f7302 1
+data/shapes/tf.json
+  s_fdc6d2f11ee255::t_1e9eef606bf7a9 1
+data/shapes/tg.json
+  s_fdc6d2f11ee255::t_63007e904c11ec 1
+data/shapes/th.json
+  s_fdc6d2f11ee255::t_7acd58e00ed66d 1
+data/shapes/tj.json
+  s_fdc6d2f11ee255::t_84db70d78e6d41 1
+data/shapes/tl.json
+  s_fdc6d2f11ee255::t_f221559e96f6e2 1
+data/shapes/tm.json
+  s_fdc6d2f11ee255::t_60d000a9214b0d 1
+data/shapes/tn.json
+  s_fdc6d2f11ee255::t_ffb9d000650e9f 1
+data/shapes/to.json
+  s_fdc6d2f11ee255::t_a091e8cb854305 1
+data/shapes/tr.json
+  s_fdc6d2f11ee255::t_8cac5f4edb7a41 1
+data/shapes/tt.json
+  s_fdc6d2f11ee255::t_c79e2d362f6a27 1
+data/shapes/tv.json
+  s_fdc6d2f11ee255::t_6f5155923eaa93 1
+data/shapes/tw.json
+  s_fdc6d2f11ee255::t_63a8a9f3bde447 1
+data/shapes/tz.json
+  s_fdc6d2f11ee255::t_4df23b59d11740 1
+data/shapes/ua.json
+  s_fdc6d2f11ee255::t_7fec3ff837b7c2 1
+data/shapes/ug.json
+  s_fdc6d2f11ee255::t_da87505cf386a4 1
+data/shapes/us.json
+  s_fdc6d2f11ee255::t_9ccc00be93d506 1
+data/shapes/uy.json
+  s_fdc6d2f11ee255::t_2adcce61ce66e1 1
+data/shapes/uz.json
+  s_fdc6d2f11ee255::t_a7d1fdfb3a760c 1
+data/shapes/va.json
+  s_fdc6d2f11ee255::t_11c44170e9c701 1
+data/shapes/vc.json
+  s_fdc6d2f11ee255::t_48671a91316a10 1
+data/shapes/ve.json
+  s_fdc6d2f11ee255::t_bbb36345b6e8c1 1
+data/shapes/vg.json
+  s_fdc6d2f11ee255::t_64bd2142e34ebe 1
+data/shapes/vi.json
+  s_fdc6d2f11ee255::t_4992239b822110 1
+data/shapes/vn.json
+  s_fdc6d2f11ee255::t_1c9f0714996d67 1
+data/shapes/vu.json
+  s_fdc6d2f11ee255::t_d5b98ef490d15c 1
+data/shapes/wf.json
+  s_fdc6d2f11ee255::t_f45d170c1dcdb6 1
+data/shapes/ws.json
+  s_fdc6d2f11ee255::t_89c13854ada643 1
+data/shapes/xk.json
+  s_fdc6d2f11ee255::t_5fc638430aecfb 1
+data/shapes/xs.json
+  s_fdc6d2f11ee255::t_63697e05200d6b 1
+data/shapes/ye.json
+  s_fdc6d2f11ee255::t_299dde8b89405a 1
+data/shapes/yt.json
+  s_fdc6d2f11ee255::t_2ac4c1a66234ae 1
+data/shapes/za.json
+  s_fdc6d2f11ee255::t_fbdd3b5cce6f88 1
+data/shapes/zm.json
+  s_fdc6d2f11ee255::t_45dc6650ea74f1 1
+data/shapes/zw.json
+  s_fdc6d2f11ee255::t_87fb93b4a4f8d2 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "0ed5b106accde31b4e527c817d6d2eda069c70f4",
+  "prompts": {},
+  "sessions": {
+    "s_fdc6d2f11ee255": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3c2e30fb-cca5-4d74-b71e-30e76a35f353",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
