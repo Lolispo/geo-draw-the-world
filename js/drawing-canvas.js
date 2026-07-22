@@ -1,7 +1,7 @@
 // Drawing canvas: freehand draw with multi-shape support
 // Hold mouse to draw, release near start to close. Draw multiple shapes before confirming.
 
-import { distance, drawPolygon } from './utils.js';
+import { distance, drawPolygon, hidpiReset } from './utils.js';
 
 const CLOSE_THRESHOLD = 20;
 const MIN_POINT_DIST = 6;
@@ -206,8 +206,7 @@ export class DrawingCanvas {
 
   render() {
     const ctx = this.ctx;
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const [w, h] = hidpiReset(this.canvas, ctx);
 
     ctx.clearRect(0, 0, w, h);
 
@@ -301,8 +300,7 @@ export class DrawingCanvas {
 
   _drawInstructions() {
     const ctx = this.ctx;
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const h = this.canvas.height / (window.devicePixelRatio || 1);
     ctx.fillStyle = '#8b949e';
     ctx.font = '13px system-ui, sans-serif';
     ctx.textAlign = 'left';

@@ -10,7 +10,7 @@ import { DrawingCanvas } from './drawing-canvas.js';
 import { TransformControls } from './transform-controls.js';
 import { WorldCanvas } from './world-canvas.js';
 import { Shape } from './shape.js';
-import { multiPolygonCentroid, multiPolygonBoundingBox } from './utils.js';
+import { multiPolygonCentroid, multiPolygonBoundingBox, hidpiReset } from './utils.js';
 import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
@@ -127,23 +127,29 @@ class Game {
     const pad = isMobile ? 16 : 40;
     const headerH = isMobile ? 70 : 50;
 
+    // Hi-DPI: backing store = CSS size × dpr, displayed at CSS size (TODOS #24).
+    const dpr = window.devicePixelRatio || 1;
+    const setSize = (id, cssW, cssH) => {
+      const c = document.getElementById(id);
+      c.style.width = cssW + 'px';
+      c.style.height = cssH + 'px';
+      c.width = Math.round(cssW * dpr);
+      c.height = Math.round(cssH * dpr);
+    };
+
     const drawW = Math.min(vw - pad, 1200);
     const drawH = Math.min(vh - headerH - pad, 700);
     for (const id of ['canvas-drawing', 'canvas-transform', 'canvas-peek', 'canvas-compare']) {
-      const c = document.getElementById(id);
-      c.width = drawW;
-      c.height = drawH;
+      setSize(id, drawW, drawH);
     }
 
     const worldW = Math.min(vw - pad, 1400);
     const worldH = Math.min(vh - headerH - pad, 800);
-    document.getElementById('canvas-world').width = worldW;
-    document.getElementById('canvas-world').height = worldH;
+    setSize('canvas-world', worldW, worldH);
 
     const resultsW = isMobile ? vw - pad : Math.min(vw - 400, 1100);
     const resultsH = isMobile ? Math.min(vh * 0.4, 400) : Math.min(vh - 40, 800);
-    document.getElementById('canvas-results').width = resultsW;
-    document.getElementById('canvas-results').height = resultsH;
+    setSize('canvas-results', resultsW, resultsH);
   }
 
   _updateDevBadge() {
@@ -731,8 +737,7 @@ class Game {
     // Draw the reference shape on the peek canvas
     const canvas = document.getElementById('canvas-peek');
     const ctx = canvas.getContext('2d');
-    const w = canvas.width;
-    const h = canvas.height;
+    const [w, h] = hidpiReset(canvas, ctx);
 
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = '#161b22';
@@ -876,7 +881,7 @@ class Game {
   _renderCompare(playerShape, refShape) {
     const canvas = document.getElementById('canvas-compare');
     const ctx = canvas.getContext('2d');
-    const w = canvas.width, h = canvas.height;
+    const [w, h] = hidpiReset(canvas, ctx);
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = '#161b22';
     ctx.fillRect(0, 0, w, h);

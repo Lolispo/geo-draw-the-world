@@ -141,6 +141,14 @@ export function transformPoints(points, position, scale, rotation) {
 // Trace a closed ring, optionally smoothed with midpoint-quadratic curves
 // (curve passes through edge midpoints using each vertex as a control point —
 // gently rounds facets without overshooting). TODOS #24.
+// Hi-DPI: reset the transform to render in logical CSS px on a dpr-scaled backing
+// store, and return [logicalW, logicalH]. Call at the top of every render (TODOS #24).
+export function hidpiReset(canvas, ctx) {
+  const dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return [canvas.width / dpr, canvas.height / dpr];
+}
+
 export function traceRing(ctx, pts, smooth) {
   const n = pts.length;
   if (!smooth || n < 3) {

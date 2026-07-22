@@ -84,26 +84,31 @@ export class WorldCanvas {
     this.canvas.style.display = 'none';
   }
 
+  // Logical (CSS px) canvas size — backing store is dpr× larger (TODOS #24).
+  get _cssW() { return this.canvas.width / (window.devicePixelRatio || 1); }
+  get _cssH() { return this.canvas.height / (window.devicePixelRatio || 1); }
+
   _fitView() {
+    const cw = this._cssW, ch = this._cssH;
     if (this.regionBounds) {
       const b = this.regionBounds;
       const pad = 20;
       const rw = b.maxX - b.minX;
       const rh = b.maxY - b.minY;
-      const scaleX = (this.canvas.width - pad * 2) / rw;
-      const scaleY = (this.canvas.height - pad * 2) / rh;
+      const scaleX = (cw - pad * 2) / rw;
+      const scaleY = (ch - pad * 2) / rh;
       this.viewScale = Math.min(scaleX, scaleY);
       this.viewOffset = [
-        this.canvas.width / 2 - (b.minX + rw / 2) * this.viewScale,
-        this.canvas.height / 2 - (b.minY + rh / 2) * this.viewScale
+        cw / 2 - (b.minX + rw / 2) * this.viewScale,
+        ch / 2 - (b.minY + rh / 2) * this.viewScale
       ];
     } else {
-      const scaleX = this.canvas.width / this.worldWidth;
-      const scaleY = this.canvas.height / this.worldHeight;
+      const scaleX = cw / this.worldWidth;
+      const scaleY = ch / this.worldHeight;
       this.viewScale = Math.min(scaleX, scaleY) * 0.92;
       this.viewOffset = [
-        (this.canvas.width - this.worldWidth * this.viewScale) / 2,
-        (this.canvas.height - this.worldHeight * this.viewScale) / 2
+        (cw - this.worldWidth * this.viewScale) / 2,
+        (ch - this.worldHeight * this.viewScale) / 2
       ];
     }
   }
@@ -282,9 +287,11 @@ export class WorldCanvas {
 
   render() {
     const ctx = this.ctx;
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const dpr = window.devicePixelRatio || 1;
+    const w = this._cssW;
+    const h = this._cssH;
 
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // render in logical CSS px on a dpr-scaled backing store
     ctx.clearRect(0, 0, w, h);
 
     const grad = ctx.createLinearGradient(0, 0, 0, h);

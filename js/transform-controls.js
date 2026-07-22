@@ -1,7 +1,7 @@
 // Transform controls: resize and rotate a shape before placing
 // Renders in world-coordinate space so scale matches the placement canvas
 
-import { multiPolygonBoundingBox, multiPolygonCentroid, drawMultiPolygon, transformPoints } from './utils.js';
+import { multiPolygonBoundingBox, multiPolygonCentroid, drawMultiPolygon, transformPoints, hidpiReset } from './utils.js';
 
 // Ocean labels in world-space coordinates (1600x900 Mercator)
 const OCEAN_LABELS = [
@@ -68,8 +68,9 @@ export class TransformControls {
   }
 
   _computeView() {
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const dpr = window.devicePixelRatio || 1;
+    const w = this.canvas.width / dpr;
+    const h = this.canvas.height / dpr;
 
     if (this.regionBounds) {
       const b = this.regionBounds;
@@ -82,8 +83,8 @@ export class TransformControls {
         h / 2 - (b.minY + rh / 2) * this.viewScale
       ];
     } else {
-      const sx = this.canvas.width / this.worldWidth;
-      const sy = this.canvas.height / this.worldHeight;
+      const sx = w / this.worldWidth;
+      const sy = h / this.worldHeight;
       this.viewScale = Math.min(sx, sy) * 0.92;
       this.viewOffset = [
         (w - this.worldWidth * this.viewScale) / 2,
@@ -294,8 +295,7 @@ export class TransformControls {
 
   render() {
     const ctx = this.ctx;
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const [w, h] = hidpiReset(this.canvas, ctx);
 
     ctx.clearRect(0, 0, w, h);
 
