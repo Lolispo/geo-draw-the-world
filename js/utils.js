@@ -138,15 +138,39 @@ export function transformPoints(points, position, scale, rotation) {
   });
 }
 
-export function drawPolygon(ctx, points, { fill, stroke, lineWidth = 2, dash = [], closePath = true } = {}) {
+// Trace a closed ring, optionally smoothed with midpoint-quadratic curves
+// (curve passes through edge midpoints using each vertex as a control point —
+// gently rounds facets without overshooting). TODOS #24.
+export function traceRing(ctx, pts, smooth) {
+  const n = pts.length;
+  if (!smooth || n < 3) {
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < n; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.closePath();
+    return;
+  }
+  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const start = mid(pts[n - 1], pts[0]);
+  ctx.moveTo(start[0], start[1]);
+  for (let i = 0; i < n; i++) {
+    const curr = pts[i];
+    const m = mid(curr, pts[(i + 1) % n]);
+    ctx.quadraticCurveTo(curr[0], curr[1], m[0], m[1]);
+  }
+  ctx.closePath();
+}
+
+export function drawPolygon(ctx, points, { fill, stroke, lineWidth = 2, dash = [], closePath = true, smooth = false } = {}) {
   if (points.length < 2) return;
   ctx.beginPath();
   ctx.setLineDash(dash);
-  ctx.moveTo(points[0][0], points[0][1]);
-  for (let i = 1; i < points.length; i++) {
-    ctx.lineTo(points[i][0], points[i][1]);
+  if (closePath && smooth && points.length >= 3) {
+    traceRing(ctx, points, true);
+  } else {
+    ctx.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
+    if (closePath) ctx.closePath();
   }
-  if (closePath) ctx.closePath();
   if (fill) {
     ctx.fillStyle = fill;
     ctx.fill();
@@ -160,17 +184,13 @@ export function drawPolygon(ctx, points, { fill, stroke, lineWidth = 2, dash = [
 }
 
 // Draw multiple polygons as a single fill (so overlapping areas work correctly)
-export function drawMultiPolygon(ctx, polygons, { fill, stroke, lineWidth = 2, dash = [] } = {}) {
+export function drawMultiPolygon(ctx, polygons, { fill, stroke, lineWidth = 2, dash = [], smooth = false } = {}) {
   if (polygons.length === 0) return;
   ctx.beginPath();
   ctx.setLineDash(dash);
   for (const poly of polygons) {
     if (poly.length < 2) continue;
-    ctx.moveTo(poly[0][0], poly[0][1]);
-    for (let i = 1; i < poly.length; i++) {
-      ctx.lineTo(poly[i][0], poly[i][1]);
-    }
-    ctx.closePath();
+    traceRing(ctx, poly, smooth);
   }
   if (fill) {
     ctx.fillStyle = fill;

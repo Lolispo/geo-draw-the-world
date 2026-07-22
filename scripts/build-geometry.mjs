@@ -18,7 +18,7 @@ const project = (lon, lat) => [AX * lon + BX, AY * mercY(Math.max(-85, Math.min(
 
 const CLIP_DIST = 220;       // px — keep rings within this of the main landmass...
 const CLIP_AREA_FRAC = 0.5;  // ...or rings at least this fraction of the largest
-const DP_EPS = 0.08;         // px — Douglas-Peucker tolerance (TODOS #24: high-def world geometry)
+const DP_EPS = 0.05;         // px — Douglas-Peucker tolerance (TODOS #24: high-def world geometry)
 const MIN_RING_AREA = 0.1;   // px^2 — keep small islands (was 2; only drops sub-pixel specks now)
 
 const REGION_OF = {

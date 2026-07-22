@@ -63,14 +63,16 @@ export class Shape {
         stroke: this.color + '88',
         lineWidth: 0.8,
         dash: [4, 3],
-        fill: this.color + '11'
+        fill: this.color + '11',
+        smooth: true
       });
     } else {
       const alpha = Math.round(fillAlpha * 255).toString(16).padStart(2, '0');
       drawMultiPolygon(ctx, polygons, {
         fill: this.color + alpha,
         stroke: strokeColor || this.color,
-        lineWidth: 2
+        lineWidth: 2,
+        smooth: true
       });
     }
   }

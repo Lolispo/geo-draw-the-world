@@ -7,6 +7,7 @@ import {
   getEntity, getAttributes, getDatasetList, formatValue, getRank,
 } from './datasets.js';
 import { getCountryByCode } from './geo-data.js';
+import { traceRing } from './utils.js';
 
 const FLAG_CDN = 'https://flagcdn.com/w320/';
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
@@ -195,11 +196,7 @@ async function drawSilhouette(canvas, code, entity) {
 
   ctx.beginPath();
   for (const ring of country.polygons) {
-    ring.forEach(([x, y], i) => {
-      const px = x * scale + ox, py = y * scale + oy;
-      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-    });
-    ctx.closePath();
+    traceRing(ctx, ring.map(([x, y]) => [x * scale + ox, y * scale + oy]), true);
   }
   ctx.fillStyle = country.color || '#7EA6E0';
   ctx.fill('nonzero');
