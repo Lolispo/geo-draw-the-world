@@ -289,6 +289,7 @@
       "name": "Aruba",
       "code": "aw",
       "color": "#867dd4",
+      "optional": true,
       "polygons": [
         [
           [
@@ -3451,6 +3452,7 @@
       "name": "Bermuda",
       "code": "bm",
       "color": "#a47dd4",
+      "optional": true,
       "polygons": [
         [
           [
@@ -3608,6 +3610,7 @@
       "name": "British Virgin Islands",
       "code": "vg",
       "color": "#7dd4b8",
+      "optional": true,
       "polygons": [
         [
           [
@@ -121342,6 +121345,7 @@
       "name": "Cayman Islands",
       "code": "ky",
       "color": "#7dbad4",
+      "optional": true,
       "polygons": [
         [
           [
@@ -125873,6 +125877,7 @@
       "name": "Curacao",
       "code": "cw",
       "color": "#d47dc8",
+      "optional": true,
       "polygons": [
         [
           [
@@ -126951,6 +126956,7 @@
       "name": "Greenland",
       "code": "gl",
       "color": "#4DD0E1",
+      "optional": true,
       "polygons": [
         [
           [
@@ -179668,6 +179674,7 @@
       "name": "Puerto Rico (US)",
       "code": "pr",
       "color": "#d47d91",
+      "optional": true,
       "polygons": [
         [
           [
@@ -180524,6 +180531,7 @@
       "name": "Sint Maarten (Dutch part)",
       "code": "sx",
       "color": "#b0d47d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -180805,6 +180813,7 @@
       "name": "Turks and Caicos Islands",
       "code": "tc",
       "color": "#a1d47d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -219363,6 +219372,7 @@
       "name": "Virgin Islands (U.S.)",
       "code": "vi",
       "color": "#7dd4bb",
+      "optional": true,
       "polygons": [
         [
           [

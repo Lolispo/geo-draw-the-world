@@ -52687,6 +52687,7 @@
       "name": "Western Sahara",
       "code": "eh",
       "color": "#42A5F5",
+      "optional": true,
       "polygons": [
         [
           [

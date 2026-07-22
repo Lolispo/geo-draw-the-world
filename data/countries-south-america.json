@@ -47630,6 +47630,7 @@
       "name": "Falkland Islands",
       "code": "fk",
       "color": "#4DD0E1",
+      "optional": true,
       "polygons": [
         [
           [

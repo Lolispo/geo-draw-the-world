@@ -25446,6 +25446,7 @@
       "name": "Hong Kong SAR, China",
       "code": "hk",
       "color": "#a7d47d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -81979,6 +81980,7 @@
       "name": "Macao SAR, China",
       "code": "mo",
       "color": "#8b7dd4",
+      "optional": true,
       "polygons": [
         [
           [
@@ -136644,6 +136646,7 @@
       "name": "West Bank and Gaza",
       "code": "ps",
       "color": "#d47d90",
+      "optional": true,
       "polygons": [
         [
           [

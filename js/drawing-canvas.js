@@ -300,7 +300,9 @@ export class DrawingCanvas {
 
   _drawInstructions() {
     const ctx = this.ctx;
-    const h = this.canvas.height / (window.devicePixelRatio || 1);
+    const dpr = window.devicePixelRatio || 1;
+    const w = this.canvas.width / dpr;
+    const h = this.canvas.height / dpr;
     ctx.fillStyle = '#8b949e';
     ctx.font = '13px system-ui, sans-serif';
     ctx.textAlign = 'left';

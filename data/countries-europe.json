@@ -15246,6 +15246,7 @@
       "name": "Faroe Islands",
       "code": "fo",
       "color": "#d4ad7d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -30024,6 +30025,7 @@
       "name": "Gibraltar",
       "code": "gi",
       "color": "#d4d17d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -46337,6 +46339,7 @@
       "name": "Isle of Man",
       "code": "im",
       "color": "#7dd483",
+      "optional": true,
       "polygons": [
         [
           [

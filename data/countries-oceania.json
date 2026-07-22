@@ -16,6 +16,7 @@
       "name": "American Samoa",
       "code": "as",
       "color": "#807dd4",
+      "optional": true,
       "polygons": [
         [
           [
@@ -18843,6 +18844,7 @@
       "name": "French Polynesia",
       "code": "pf",
       "color": "#d47da3",
+      "optional": true,
       "polygons": [
         [
           [
@@ -20374,6 +20376,7 @@
       "name": "Guam",
       "code": "gu",
       "color": "#c5d47d",
+      "optional": true,
       "polygons": [
         [
           [
@@ -21469,6 +21472,7 @@
       "name": "New Caledonia",
       "code": "nc",
       "color": "#81C784",
+      "optional": true,
       "polygons": [
         [
           [
@@ -28299,6 +28303,7 @@
       "name": "Northern Mariana Islands",
       "code": "mp",
       "color": "#8d7dd4",
+      "optional": true,
       "polygons": [
         [
           [

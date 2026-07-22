@@ -148,16 +148,19 @@ for (const code of [...allCodes].sort()) {
   }
   const geom = geomByCode.get(code);
   const extra = EXTRA_ENTITIES[code];
+  const type = classify(code);
   entities[code] = {
     name: canonicalName(code),
-    type: classify(code),
+    type,
     continent: datasets.countries[code]?.continent || (geom ? REGION_CONTINENT[geom.region] : null) || extra?.continent || null,
     hasGeometry: !!geom,
     hasFlag: flagCodes.has(code),            // flag COLORS in flags.json (used by color quizzes)
     hasFlagImage: flagCodes.has(code),       // flag IMAGE on flagcdn (probed below for the rest)
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
-    ...(extra?.optional ? { optional: true } : {}), // TODOS #20: gated behind territories toggle
+    // TODOS #20: the Territories toggle gates ALL dependent territories (not just the
+    // newly-added ones) so it behaves consistently in browse/rank/draw.
+    ...(type === 'territory' ? { optional: true } : {}),
     ...(SOVEREIGN_OF[code] ? { sovereign: SOVEREIGN_OF[code] } : {}),
     region: geom ? geom.region : (extra?.region || null),
     metrics,

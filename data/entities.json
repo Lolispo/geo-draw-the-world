@@ -191,6 +191,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United States",
       "region": "oceania",
       "metrics": {
@@ -252,6 +253,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
       "metrics": {
@@ -517,6 +519,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
       "metrics": {
@@ -1002,6 +1005,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
       "metrics": {
@@ -1243,6 +1247,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
@@ -1363,6 +1368,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "south-america",
       "metrics": {
@@ -1404,6 +1410,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "Denmark",
       "region": "europe",
       "metrics": {
@@ -1589,6 +1596,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
       "metrics": {
@@ -1610,6 +1618,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "optional": true,
       "sovereign": "Denmark",
       "region": "north-america",
       "metrics": {
@@ -1775,6 +1784,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United States",
       "region": "oceania",
       "metrics": {
@@ -1836,6 +1846,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "China",
       "region": "asia",
       "metrics": {
@@ -1997,6 +2008,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
       "metrics": {
@@ -2422,6 +2434,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
       "metrics": {
@@ -2904,6 +2917,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "China",
       "region": "asia",
       "metrics": {
@@ -2925,6 +2939,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "optional": true,
       "sovereign": "United States",
       "region": "oceania",
       "metrics": {
@@ -3170,6 +3185,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "France",
       "region": "oceania",
       "metrics": {
@@ -3455,6 +3471,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "France",
       "region": "oceania",
       "metrics": {
@@ -3600,6 +3617,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United States",
       "region": "north-america",
       "metrics": {
@@ -3621,6 +3639,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4165,6 +4184,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
       "metrics": {
@@ -4226,6 +4246,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
       "metrics": {
@@ -4689,6 +4710,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
       "metrics": {
@@ -4710,6 +4732,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "optional": true,
       "sovereign": "United States",
       "region": "north-america",
       "metrics": {
