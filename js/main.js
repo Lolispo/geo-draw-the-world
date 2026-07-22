@@ -13,6 +13,7 @@ import { Shape } from './shape.js';
 import { multiPolygonCentroid, multiPolygonBoundingBox } from './utils.js';
 import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
+import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
@@ -254,6 +255,13 @@ class Game {
       this._updateHardBadge();
     });
 
+    // Territories toggle (TODOS #20) — persisted; affects the country pool on next start
+    document.getElementById('btn-territories-toggle').addEventListener('click', () => {
+      setIncludeTerritories(!getIncludeTerritories());
+      this._updateTerritoriesBadge();
+    });
+    this._updateTerritoriesBadge();
+
     // Drawing
     document.getElementById('btn-undo').addEventListener('click', () => {
       this.drawingCanvas.undo();
@@ -402,6 +410,12 @@ class Game {
     badge.style.display = this.hardMode ? 'inline-block' : 'none';
     const btn = document.getElementById('btn-hard-toggle');
     btn.classList.toggle('active', this.hardMode);
+  }
+
+  _updateTerritoriesBadge() {
+    const on = getIncludeTerritories();
+    document.getElementById('territories-badge').style.display = on ? 'inline-block' : 'none';
+    document.getElementById('btn-territories-toggle').classList.toggle('active', on);
   }
 
   showScreen(state) {

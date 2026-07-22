@@ -80,6 +80,40 @@
       ],
       "religionRaw": "Protestant 68.3% (Anglican 17.6%, Seventh Day Adventist 12.4%, Pentecostal 12.2%, Moravian 8.3%, Methodist 5.6%, Wesleyan Holiness 4.5%, Church of God 4.1%, Baptist 3.6%), Roman Catholic 8.2%, other 12.2%, unspecified 5.5%, none 5.9% (2011 est.)"
     },
+    "ai": {
+      "capital": "The Valley",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 73.2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 6.8
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1.1
+        },
+        {
+          "name": "other Christian",
+          "pct": 10.9
+        },
+        {
+          "name": "other",
+          "pct": 3.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.3
+        },
+        {
+          "name": "none",
+          "pct": 4.5
+        }
+      ],
+      "religionRaw": "Protestant 73.2% (includes Anglican 22.7%, Methodist 19.4%, Pentecostal 10.5%, Seventh Day Adventist 8.3%, Baptist 7.1%, Church of God 4.9%, Presbyterian 0.2%, Brethren 0.1%), Roman Catholic 6.8%, Jehovah's Witness 1.1%, other Christian 10.9%, other 3.2%, unspecified 0.3%, none 4.5% (2011 est.)"
+    },
     "al": {
       "capital": "Tirana",
       "capitalNote": "Tirana (Tirane)",
@@ -300,6 +334,9 @@
         }
       ],
       "religionRaw": "Roman Catholic 75.3%, Protestant 4.9% (includes Methodist 0.9%, Adventist 0.9%, Anglican 0.4%, other Protestant 2.7%), Jehovah's Witness 1.7%, other 12%, none 5.5%, unspecified 0.5% (2010 est.)"
+    },
+    "ax": {
+      "capital": "Mariehamn"
     },
     "az": {
       "capital": "Baku",
@@ -563,6 +600,9 @@
         }
       ],
       "religionRaw": "Muslim 27.7%, Roman Catholic 25.5%, Protestant 13.5% (Celestial 6.7%, Methodist 3.4%, other Protestant 3.4%), Vodoun 11.6%, other Christian 9.5%, other traditional religions 2.6%, other 2.6%, none 5.8% (2013 est.)"
+    },
+    "bl": {
+      "capital": "Gustavia"
     },
     "bm": {
       "capital": "Hamilton",
@@ -1059,6 +1099,40 @@
         }
       ],
       "religionRaw": "Muslim 42.9%, Catholic 17.2%, Evangelical 11.8%, Methodist 1.7%, other Christian 3.2%, animist 3.6%, other religion 0.5%, none 19.1% (2014 est.)"
+    },
+    "ck": {
+      "capital": "Avarua",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 55
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 16.7
+        },
+        {
+          "name": "Church of Jesus Christ",
+          "pct": 3.9
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 2.2
+        },
+        {
+          "name": "Apostolic Church",
+          "pct": 2.1
+        },
+        {
+          "name": "other",
+          "pct": 4.5
+        },
+        {
+          "name": "none/unspecified",
+          "pct": 15.6
+        }
+      ],
+      "religionRaw": "Protestant 55% (Cook Islands Christian Church 43.1%, Seventh Day Adventist 8.3%, Assemblies of God 3.6%), Roman Catholic 16.7%, Church of Jesus Christ 3.9%, Jehovah's Witness 2.2%, Apostolic Church 2.1%, other 4.5%, none/unspecified 15.6% (2021 est.)"
     },
     "cl": {
       "capital": "Santiago",
@@ -1953,6 +2027,9 @@
       ],
       "religionRaw": "Eastern Orthodox Christian (official) 83.4%, Muslim 10.7%, Armenian Apostolic Christian 2.9%, other 1.2% (includes Roman Catholic Christian, Jehovah's Witness, Yazidi, Protestant Christian, Jewish), none 0.5%, unspecified/no answer 1.2% (2014 est.)"
     },
+    "gg": {
+      "capital": "Saint Peter Port"
+    },
     "gh": {
       "capital": "Accra",
       "religion": [
@@ -2533,6 +2610,10 @@
       ],
       "religionRaw": "Hindu 79.8%, Muslim 14.2%, Christian 2.3%, Sikh 1.7%, other and unspecified 2% (2011 est.)"
     },
+    "io": {
+      "capital": "administered from London",
+      "capitalNote": "administered from London; often regarded as being on Diego Garcia"
+    },
     "iq": {
       "capital": "Baghdad",
       "religion": [
@@ -2632,6 +2713,40 @@
         }
       ],
       "religionRaw": "Christian 80.8% (overwhelmingly Roman Catholic with very small groups of Jehovah's Witnesses and Protestants), Muslim 4.9%, unaffiliated 13.4%, other 0.9% (2020 est.)"
+    },
+    "je": {
+      "capital": "Saint Helier",
+      "religion": [
+        {
+          "name": "Christian",
+          "pct": 85.2
+        },
+        {
+          "name": "Baha'i",
+          "pct": 0.3
+        },
+        {
+          "name": "Hindu",
+          "pct": 0.1
+        },
+        {
+          "name": "Jewish",
+          "pct": 0.1
+        },
+        {
+          "name": "Muslim",
+          "pct": 0.1
+        },
+        {
+          "name": "atheist",
+          "pct": 1.1
+        },
+        {
+          "name": "agnostic",
+          "pct": 13.1
+        }
+      ],
+      "religionRaw": "Christian 85.2%, Baha'i 0.3%, Hindu 0.1%, Jewish 0.1%, Muslim 0.1%, atheist 1.1%, agnostic 13.1% (2020 est.)"
     },
     "jm": {
       "capital": "Kingston",
@@ -3552,6 +3667,44 @@
       ],
       "religionRaw": "Muslim (official) 100%"
     },
+    "ms": {
+      "capital": "Plymouth",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 71.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 11.4
+        },
+        {
+          "name": "Rastafarian",
+          "pct": 1.4
+        },
+        {
+          "name": "Hindu",
+          "pct": 1.2
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 1
+        },
+        {
+          "name": "Muslim",
+          "pct": 0.4
+        },
+        {
+          "name": "other/not stated",
+          "pct": 5.1
+        },
+        {
+          "name": "none",
+          "pct": 7.9
+        }
+      ],
+      "religionRaw": "Protestant 71.4% (includes Anglican 17.7%, Pentecostal/Full Gospel 16.1%, Seventh Day Adventist 15%, Methodist 13.9%, Church of God 6.7%, other Protestant 2%), Roman Catholic 11.4%, Rastafarian 1.4%, Hindu 1.2%, Jehovah's Witness 1%, Muslim 0.4%, other/not stated 5.1%, none 7.9% (2018 est.)"
+    },
     "mt": {
       "capital": "Valletta",
       "religion": [
@@ -3786,6 +3939,36 @@
       ],
       "religionRaw": "Muslim 95.5%, ethnic religionist 4.1%, Christian 0.3%, agnostics and other 0.1% (2020 est.)"
     },
+    "nf": {
+      "capital": "Kingston",
+      "religion": [
+        {
+          "name": "Protestant",
+          "pct": 46.8
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 12.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 2.9
+        },
+        {
+          "name": "other",
+          "pct": 1.4
+        },
+        {
+          "name": "none",
+          "pct": 26.7
+        },
+        {
+          "name": "unspecified",
+          "pct": 9.5
+        }
+      ],
+      "religionRaw": "Protestant 46.8% (Anglican 29.2%, Uniting Church in Australia 9.8%, Presbyterian 2.9%, Seventh Day Adventist 2.7%, other 2.2%), Roman Catholic 12.6%, other Christian 2.9%, other 1.4%, none 26.7%, unspecified 9.5% (2016 est.)"
+    },
     "ng": {
       "capital": "Abuja",
       "religion": [
@@ -3954,6 +4137,44 @@
         }
       ],
       "religionRaw": "Protestant 60.4% (Nauruan Congregational 34.7%, Assemblies of God 11.6%, Pacific Light House 6.3%, Nauru Independent 3.6%, Baptist 1.5, Seventh Day Adventist 1.3%, other Protestant 1.4%), Roman Catholic 33.9%, other 4.2%, none 1.3%, no answer 0.3% (2021 est.)"
+    },
+    "nu": {
+      "capital": "Alofi",
+      "religion": [
+        {
+          "name": "Ekalesia Niue",
+          "pct": 61.7
+        },
+        {
+          "name": "Latter Day Saints",
+          "pct": 8.7
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 8.4
+        },
+        {
+          "name": "other",
+          "pct": 8.2
+        },
+        {
+          "name": "not stated",
+          "pct": 5.1
+        },
+        {
+          "name": "none",
+          "pct": 3.7
+        },
+        {
+          "name": "Jehovah's Witnesses",
+          "pct": 2.7
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.4
+        }
+      ],
+      "religionRaw": "Ekalesia Niue 61.7%, Latter Day Saints 8.7%, Roman Catholic 8.4%, other 8.2%, not stated 5.1%, none 3.7%, Jehovah's Witnesses 2.7%, Seventh Day Adventist 1.4% (2017 est.)"
     },
     "nz": {
       "capital": "Wellington",
@@ -4169,6 +4390,30 @@
         }
       ],
       "religionRaw": "Roman Catholic 70.7%, refused to answer 20.9%, no religion 6.9%; less than 1 percent: Orthodox, Jehovah Witness, Evangelic of Augsburg, Greek Catholic, Pentecostal, other Protestant, not stated, old Catholic Mariavite Church, other Christians, Islam, Buddhist, Polish Catholic Church, other, Baptist Union of Poland, Pagan, Seventh Day Adventist, Hindu, other Catholic (2021 est.)"
+    },
+    "pm": {
+      "capital": "Saint-Pierre",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 99
+        },
+        {
+          "name": "other",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Roman Catholic 99%, other 1%"
+    },
+    "pn": {
+      "capital": "Adamstown",
+      "religion": [
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 100
+        }
+      ],
+      "religionRaw": "Seventh Day Adventist 100%"
     },
     "pr": {
       "capital": "San Juan",
@@ -4569,6 +4814,56 @@
         }
       ],
       "religionRaw": "Buddhist 31.1%, Christian 18.9%, Muslim 15.6%, Taoist 8.8%, Hindu 5%, other 0.6%, none 20% (2020 est.)"
+    },
+    "sh": {
+      "capital": "Jamestown",
+      "religion": [
+        {
+          "name": "Anglican",
+          "pct": 63.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 11.4
+        },
+        {
+          "name": "no religion",
+          "pct": 9
+        },
+        {
+          "name": "Jehovah's Witness",
+          "pct": 3.8
+        },
+        {
+          "name": "Baptist",
+          "pct": 2.3
+        },
+        {
+          "name": "Salvation Army",
+          "pct": 2
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 2.2
+        },
+        {
+          "name": "Seventh Day Adventist",
+          "pct": 1.9
+        },
+        {
+          "name": "New Apostolic",
+          "pct": 1.6
+        },
+        {
+          "name": "other Christian",
+          "pct": 1.4
+        },
+        {
+          "name": "other",
+          "pct": 1.1
+        }
+      ],
+      "religionRaw": "Anglican 63.2%, unspecified 11.4%, no religion 9%, Jehovah's Witness 3.8%, Baptist 2.3%, Salvation Army 2%, Roman Catholic 2.2%, Seventh Day Adventist 1.9%, New Apostolic 1.6%, other Christian 1.4%, other 1.1% (2021 est.)"
     },
     "si": {
       "capital": "Ljubljana",
@@ -5402,6 +5697,9 @@
       ],
       "religionRaw": "Muslim 88% (mostly Sunni), Eastern Orthodox 9%, other 3%"
     },
+    "va": {
+      "capital": "Vatican City"
+    },
     "vc": {
       "capital": "Kingstown",
       "religion": [
@@ -5603,6 +5901,21 @@
         }
       ],
       "religionRaw": "Protestant 39.9% (Presbyterian 27.2%, Seventh Day Adventist 14.8%, Anglican 12%, Churches of Christ 5%, Assemblies of God 4.9%, Neil Thomas Ministry/Inner Life Ministry 3.2%), Roman Catholic 12.1%, Apostolic 2.3%, Church of Jesus Christ 1.8%, customary beliefs (including Jon Frum cargo cult) 3.1%, other 12%, none 1.4%, unspecified 0.1% (2020 est.)"
+    },
+    "wf": {
+      "capital": "Mata-Utu",
+      "capitalNote": "Mata-Utu (on Ile Uvea)",
+      "religion": [
+        {
+          "name": "Roman Catholic",
+          "pct": 99
+        },
+        {
+          "name": "other",
+          "pct": 1
+        }
+      ],
+      "religionRaw": "Roman Catholic 99%, other 1%"
     },
     "ws": {
       "capital": "Apia",
@@ -5822,6 +6135,7 @@
     "sc": "CIA World Factbook (public domain)",
     "za": "CIA World Factbook (public domain)",
     "sn": "CIA World Factbook (public domain)",
+    "sh": "CIA World Factbook (public domain)",
     "sl": "CIA World Factbook (public domain)",
     "so": "CIA World Factbook (public domain)",
     "sd": "CIA World Factbook (public domain)",
@@ -5839,22 +6153,28 @@
     "au": "CIA World Factbook (public domain)",
     "sb": "CIA World Factbook (public domain)",
     "mp": "CIA World Factbook (public domain)",
+    "ck": "CIA World Factbook (public domain)",
     "fj": "CIA World Factbook (public domain)",
     "fm": "CIA World Factbook (public domain)",
     "pf": "CIA World Factbook (public domain)",
     "gu": "CIA World Factbook (public domain)",
     "ki": "CIA World Factbook (public domain)",
     "nc": "CIA World Factbook (public domain)",
+    "nu": "CIA World Factbook (public domain)",
+    "nf": "CIA World Factbook (public domain)",
     "vu": "CIA World Factbook (public domain)",
     "nr": "CIA World Factbook (public domain)",
     "nz": "CIA World Factbook (public domain)",
+    "pn": "CIA World Factbook (public domain)",
     "pw": "CIA World Factbook (public domain)",
     "mh": "CIA World Factbook (public domain)",
     "to": "CIA World Factbook (public domain)",
     "tv": "CIA World Factbook (public domain)",
+    "wf": "CIA World Factbook (public domain)",
     "ws": "CIA World Factbook (public domain)",
     "aw": "CIA World Factbook (public domain)",
     "ag": "CIA World Factbook (public domain)",
+    "ai": "CIA World Factbook (public domain)",
     "bb": "CIA World Factbook (public domain)",
     "bs": "CIA World Factbook (public domain)",
     "bz": "CIA World Factbook (public domain)",
@@ -5869,6 +6189,7 @@
     "ht": "CIA World Factbook (public domain)",
     "hn": "CIA World Factbook (public domain)",
     "jm": "CIA World Factbook (public domain)",
+    "ms": "CIA World Factbook (public domain)",
     "sx": "CIA World Factbook (public domain)",
     "ni": "CIA World Factbook (public domain)",
     "pa": "CIA World Factbook (public domain)",
@@ -5876,6 +6197,7 @@
     "pr": "CIA World Factbook (public domain)",
     "kn": "CIA World Factbook (public domain)",
     "lc": "CIA World Factbook (public domain)",
+    "bl": "CIA World Factbook (public domain)",
     "tt": "CIA World Factbook (public domain)",
     "tc": "CIA World Factbook (public domain)",
     "cw": "CIA World Factbook (public domain)",
@@ -5927,6 +6249,7 @@
     "fo": "CIA World Factbook (public domain)",
     "fr": "CIA World Factbook (public domain)",
     "gi": "CIA World Factbook (public domain)",
+    "gg": "CIA World Factbook (public domain)",
     "de": "CIA World Factbook (public domain)",
     "gr": "CIA World Factbook (public domain)",
     "hr": "CIA World Factbook (public domain)",
@@ -5934,6 +6257,7 @@
     "is": "CIA World Factbook (public domain)",
     "im": "CIA World Factbook (public domain)",
     "it": "CIA World Factbook (public domain)",
+    "je": "CIA World Factbook (public domain)",
     "xk": "CIA World Factbook (public domain)",
     "lv": "CIA World Factbook (public domain)",
     "lt": "CIA World Factbook (public domain)",
@@ -5958,6 +6282,7 @@
     "ch": "CIA World Factbook (public domain)",
     "gb": "CIA World Factbook (public domain)",
     "ua": "CIA World Factbook (public domain)",
+    "va": "CIA World Factbook (public domain)",
     "ae": "CIA World Factbook (public domain)",
     "bh": "CIA World Factbook (public domain)",
     "ir": "CIA World Factbook (public domain)",
@@ -5977,6 +6302,7 @@
     "ca": "CIA World Factbook (public domain)",
     "gl": "CIA World Factbook (public domain)",
     "mx": "CIA World Factbook (public domain)",
+    "pm": "CIA World Factbook (public domain)",
     "us": "CIA World Factbook (public domain)",
     "ar": "CIA World Factbook (public domain)",
     "bo": "CIA World Factbook (public domain)",
@@ -5996,10 +6322,12 @@
     "bt": "CIA World Factbook (public domain)",
     "lk": "CIA World Factbook (public domain)",
     "in": "CIA World Factbook (public domain)",
+    "io": "CIA World Factbook (public domain)",
     "mv": "CIA World Factbook (public domain)",
     "np": "CIA World Factbook (public domain)",
     "pk": "CIA World Factbook (public domain)",
     "eh": "CIA World Factbook (Western Sahara) — Sunni Muslim",
-    "xs": "Somaliland government (de-facto state) — Sunni Muslim"
+    "xs": "Somaliland government (de-facto state) — Sunni Muslim",
+    "ax": "Åland (autonomous region of Finland)"
   }
 }

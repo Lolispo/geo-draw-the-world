@@ -80,6 +80,27 @@
         "urbanization": true
       }
     },
+    "ai": {
+      "name": "Anguilla",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "al": {
       "name": "Albania",
       "type": "sovereign",
@@ -238,6 +259,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "ax": {
+      "name": "Åland Islands",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "az": {
@@ -438,6 +480,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "bl": {
+      "name": "Saint Barthélemy",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "bm": {
@@ -738,6 +801,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "ck": {
+      "name": "Cook Islands",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "cl": {
@@ -1400,6 +1484,27 @@
         "urbanization": true
       }
     },
+    "gg": {
+      "name": "Guernsey",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "gh": {
       "name": "Ghana",
       "type": "sovereign",
@@ -1820,6 +1925,27 @@
         "urbanization": true
       }
     },
+    "io": {
+      "name": "British Indian Ocean Territory",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "iq": {
       "name": "Iraq",
       "type": "sovereign",
@@ -1898,6 +2024,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "je": {
+      "name": "Jersey",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "jg": {
@@ -2700,6 +2847,27 @@
         "urbanization": true
       }
     },
+    "ms": {
+      "name": "Montserrat",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "mt": {
       "name": "Malta",
       "type": "sovereign",
@@ -2900,6 +3068,27 @@
         "urbanization": true
       }
     },
+    "nf": {
+      "name": "Norfolk Island",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "ng": {
       "name": "Nigeria",
       "type": "sovereign",
@@ -3018,6 +3207,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "nu": {
+      "name": "Niue",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "nz": {
@@ -3198,6 +3408,48 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "pm": {
+      "name": "Saint Pierre and Miquelon",
+      "type": "territory",
+      "continent": "North America",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "north-america",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
+    "pn": {
+      "name": "Pitcairn Islands",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "pr": {
@@ -3520,6 +3772,27 @@
         "urbanization": true
       }
     },
+    "sh": {
+      "name": "Saint Helena",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "si": {
       "name": "Slovenia",
       "type": "sovereign",
@@ -3818,6 +4091,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "tf": {
+      "name": "French Southern Territories",
+      "type": "territory",
+      "continent": "Africa",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": false,
+      "hasReligion": false,
+      "optional": true,
+      "region": "africa",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "tg": {
@@ -4160,6 +4454,26 @@
         "urbanization": true
       }
     },
+    "va": {
+      "name": "Vatican City",
+      "type": "sovereign",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
+      }
+    },
     "vc": {
       "name": "Saint Vincent",
       "type": "sovereign",
@@ -4278,6 +4592,27 @@
         "life-expectancy": true,
         "exports": true,
         "urbanization": true
+      }
+    },
+    "wf": {
+      "name": "Wallis and Futuna",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": false,
+        "gdp-per-capita": false,
+        "land-area": false,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false
       }
     },
     "ws": {

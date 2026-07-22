@@ -171,7 +171,7 @@ for (const [code, ent] of Object.entries(entities)) {
   const xs = rings.flat().map((p) => p[0]);
   if (Math.max(...xs) - Math.min(...xs) > 0.6 * W) stats.wide.push(`${code} ${ent.name}`);
 
-  out[region].push({ name: ent.name, code, color: colorFor(code), polygons: rings });
+  out[region].push({ name: ent.name, code, color: colorFor(code), ...(ent.optional ? { optional: true } : {}), polygons: rings });
 }
 
 // Compose files

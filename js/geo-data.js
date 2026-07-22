@@ -2,9 +2,15 @@
 
 import { Shape } from './shape.js';
 import { multiPolygonCentroid } from './utils.js';
+import { getIncludeTerritories } from './settings.js';
 
 let continentData = null;
 let countryDataCache = {};
+
+// Optional/dependent territories (TODOS #20) are excluded from playable pools
+// unless the toggle is on. Applied to the game-facing loaders only — getCountryByCode
+// reads raw data so the showcase panel can still render any entity's silhouette.
+const playable = (c) => !c.optional || getIncludeTerritories();
 
 export async function loadContinentData() {
   const resp = await fetch('./data/continents.json');
@@ -12,7 +18,8 @@ export async function loadContinentData() {
   return continentData;
 }
 
-export async function loadCountryData(region) {
+// Raw, unfiltered region load (cached). Internal — callers get the filtered view.
+async function loadCountryDataRaw(region) {
   const key = region.toLowerCase().replace(/\s+/g, '-');
   if (countryDataCache[key]) return countryDataCache[key];
   const resp = await fetch(`./data/countries-${key}.json`);
@@ -22,26 +29,19 @@ export async function loadCountryData(region) {
   return data;
 }
 
-// Load all regions and merge into one dataset
+export async function loadCountryData(region) {
+  const data = await loadCountryDataRaw(region);
+  return { ...data, countries: data.countries.filter(playable) };
+}
+
+// Load all regions and merge into one dataset (playable pool)
 export async function loadAllCountries() {
   const regions = getCountryRegions();
   const allCountries = [];
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-
   for (const region of regions) {
-    const data = await loadCountryData(region.file);
-    for (const c of data.countries) {
-      allCountries.push(c);
-    }
-    if (data.regionBounds) {
-      const b = data.regionBounds;
-      if (b.minX < minX) minX = b.minX;
-      if (b.minY < minY) minY = b.minY;
-      if (b.maxX > maxX) maxX = b.maxX;
-      if (b.maxY > maxY) maxY = b.maxY;
-    }
+    const data = await loadCountryDataRaw(region.file);
+    for (const c of data.countries) if (playable(c)) allCountries.push(c);
   }
-
   return {
     region: 'World',
     regionBounds: null, // full world view
@@ -49,12 +49,16 @@ export async function loadAllCountries() {
   };
 }
 
-// Find a single country's geometry entry by ISO code (loads + caches all regions).
+// Find a single country's geometry entry by ISO code (raw — ignores the territories
+// toggle, so the showcase panel can render any entity the user clicks).
 let _byCode = null;
 export async function getCountryByCode(code) {
   if (!_byCode) {
-    const all = await loadAllCountries();
-    _byCode = new Map(all.countries.filter((c) => c.code).map((c) => [c.code, c]));
+    _byCode = new Map();
+    for (const region of getCountryRegions()) {
+      const data = await loadCountryDataRaw(region.file);
+      for (const c of data.countries) if (c.code) _byCode.set(c.code, c);
+    }
   }
   return _byCode.get(code) || null;
 }

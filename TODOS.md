@@ -613,6 +613,15 @@ renders; the two flag concepts are clearly distinguished.
 
 ## 20. Autonomous / dependent territories: broad sweep + a play-with-them toggle
 
+**✅ PHASE 1 DONE 2026-07-22 (Vatican + Tier 1).** Added **Vatican City (`va`) to the main
+pool** (name, geometry, capital, population 764, land-area 0.49 km²) and the **15 Tier-1
+territories behind a new 🏝️ Territories toggle** (`js/settings.js`, default OFF, persisted).
+Seeded via `EXTRA_ENTITIES` in `build-entities.mjs` (they have NE geometry + flagcdn but no
+WB/flags source); `optional:true` propagates into geometry files so `geo-data` filters the
+draw pool (`playable()`), while `getCountryByCode` reads raw so the panel shows any entity.
+Verified live: pool off=221 / on=236, Vatican always in, toggle persists, no errors.
+Remaining: Tier 2 (geometry-less) + Tier 3 (de-facto states) — see below / candidate doc.
+
 **🔬 CANDIDATE LIST DONE 2026-07-22 — see `docs/territories-candidates.md`.** Surveyed
 everything we're missing: 26 ISO-coded territories (all have flagcdn + capital) split into
 Tier 1 (16 with NE geometry — drop-in) and Tier 2 (10 without, e.g. French overseas dépts

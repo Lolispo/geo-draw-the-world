@@ -93,6 +93,9 @@ const NAME_ALIAS = {
   'falkland islands (islas malvinas)': 'Falkland Islands',
   'west bank': 'West Bank and Gaza',
   'the dominican': 'Dominican Republic',
+  // TODOS #20 territory additions (Factbook names differ from our display names)
+  'saint helena, ascension, and tristan da cunha': 'Saint Helena',
+  'french southern and antarctic lands': 'French Southern Territories',
 };
 
 // ---- religion parsing ----------------------------------------------------
@@ -198,6 +201,8 @@ const MANUAL_ATTR = {
         src: 'CIA World Factbook (West Bank / Gaza Strip)' },
   xs: { capital: 'Hargeisa', religion: [{ name: 'Muslim', pct: 100 }],
         src: 'Somaliland government (de-facto state) — Sunni Muslim' },
+  // TODOS #20: Factbook has no entry for Åland (part of Finland) — backfill its capital.
+  ax: { capital: 'Mariehamn', src: 'Åland (autonomous region of Finland)' },
 };
 for (const [code, m] of Object.entries(MANUAL_ATTR)) {
   if (!entities[code]) continue;

@@ -78,6 +78,7 @@ const MANUAL_VALUES = {
   eh: { 'land-area': 266000, 'population': 580000 },
   fk: { 'land-area': 12173, 'population': 3800 },
   xs: { 'land-area': 176120, 'population': 5700000 },
+  va: { 'land-area': 0.49, 'population': 764 }, // Vatican City (TODOS #20) — sovereign, not in World Bank
 };
 const PROVENANCE = {
   tw: 'IMF WEO 2024 / Taiwan DGBAS (2023)',
@@ -87,6 +88,7 @@ const PROVENANCE = {
   eh: 'CIA World Factbook / UN estimates',
   fk: 'Falkland Islands Government 2021 census',
   xs: 'Somaliland government estimates (de-facto state)',
+  va: 'Vatican City / Holy See official estimates',
 };
 
 const datasets = [];

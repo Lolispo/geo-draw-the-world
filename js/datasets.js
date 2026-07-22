@@ -106,6 +106,7 @@ const FORMATTERS = {
   'area-km2': (v) => {
     const a = Math.abs(v);
     if (a >= 1e6) return `${(a / 1e6).toFixed(1)}M km²`;
+    if (a < 1) return `${a.toFixed(2)} km²`;
     return `${Math.round(a).toLocaleString()} km²`;
   },
   'years': (v) => `${v.toFixed(1)} yrs`,

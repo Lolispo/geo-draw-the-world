@@ -24,12 +24,35 @@ const NAME_OVERRIDE = {
   'Somaliland': 'xs', // user-assigned ISO range; de-facto state, no official ISO/flag
 };
 
+// Entities that exist in Natural Earth geometry + flagcdn but have no WB/flags data
+// source to bootstrap them into the registry (TODOS #20). Seeded here.
+// `optional: true` => gated behind the "include territories" toggle; false => main pool.
+const EXTRA_ENTITIES = {
+  va: { name: 'Vatican City', continent: 'Europe', region: 'europe', optional: false },
+  ai: { name: 'Anguilla', continent: 'North America', region: 'north-america', optional: true },
+  ax: { name: 'Åland Islands', continent: 'Europe', region: 'europe', optional: true },
+  ck: { name: 'Cook Islands', continent: 'Oceania', region: 'oceania', optional: true },
+  gg: { name: 'Guernsey', continent: 'Europe', region: 'europe', optional: true },
+  je: { name: 'Jersey', continent: 'Europe', region: 'europe', optional: true },
+  ms: { name: 'Montserrat', continent: 'North America', region: 'north-america', optional: true },
+  nu: { name: 'Niue', continent: 'Oceania', region: 'oceania', optional: true },
+  nf: { name: 'Norfolk Island', continent: 'Oceania', region: 'oceania', optional: true },
+  pn: { name: 'Pitcairn Islands', continent: 'Oceania', region: 'oceania', optional: true },
+  bl: { name: 'Saint Barthélemy', continent: 'North America', region: 'north-america', optional: true },
+  sh: { name: 'Saint Helena', continent: 'Africa', region: 'africa', optional: true },
+  pm: { name: 'Saint Pierre and Miquelon', continent: 'North America', region: 'north-america', optional: true },
+  wf: { name: 'Wallis and Futuna', continent: 'Oceania', region: 'oceania', optional: true },
+  io: { name: 'British Indian Ocean Territory', continent: 'Africa', region: 'africa', optional: true },
+  tf: { name: 'French Southern Territories', continent: 'Africa', region: 'africa', optional: true },
+};
+
 // type classification (informational; does NOT gate gameplay — all entities are playable)
 const AGGREGATES = new Set(['jg']); // Channel Islands = Jersey+Guernsey aggregate (World Bank)
 const TERRITORIES = new Set([
   'gl', 'nc', 'hk', 'mo', 'pr', 'vi', 'vg', 'fo', 'gi', 'im', 'je', 'gg', 'bm', 'ky',
   'aw', 'cw', 'sx', 'pf', 'gu', 'mp', 'as', 'tc', 'ai', 'ck', 'nu', 'tk', 'wf', 'yt',
   're', 'ps', 'eh', 'fk',
+  'ax', 'ms', 'nf', 'pn', 'bl', 'sh', 'pm', 'io', 'tf', // TODOS #20 additions (va stays sovereign)
 ]);
 function classify(code) {
   if (AGGREGATES.has(code)) return 'aggregate';
@@ -66,7 +89,7 @@ for (const region of REGIONS) {
   const data = read(path);
   geomFiles[region] = { path, data };
   for (const c of data.countries) {
-    const code = resolveCode(c.name);
+    const code = c.code || resolveCode(c.name); // prefer the explicit code field (robust for seeded territories)
     if (!code) { unmatched.push(`${c.name} [${region}]`); continue; }
     if (geomByCode.has(code)) dupes.push(`${code}: ${geomByCode.get(code).name} vs ${c.name}`);
     geomByCode.set(code, { name: c.name, region });
@@ -82,12 +105,13 @@ if (dupes.length) { console.log(`DUPLICATE codes (${dupes.length}):\n  ${dupes.j
 // 2) Canonical name (prefer common-name sources: flag > geometry > stat)
 function canonicalName(code) {
   if (flagNameByCode.has(code)) return flagNameByCode.get(code);
+  if (EXTRA_ENTITIES[code]) return EXTRA_ENTITIES[code].name; // authoritative for seeded entities
   if (geomByCode.has(code)) return geomByCode.get(code).name;
   return datasets.countries[code]?.name || code;
 }
 
 // 3) Build the entities registry over the union of all codes
-const allCodes = new Set([...geomByCode.keys(), ...flagCodes, ...Object.keys(datasets.countries)]);
+const allCodes = new Set([...geomByCode.keys(), ...flagCodes, ...Object.keys(datasets.countries), ...Object.keys(EXTRA_ENTITIES)]);
 const entities = {};
 for (const code of [...allCodes].sort()) {
   const metrics = {};
@@ -96,16 +120,18 @@ for (const code of [...allCodes].sort()) {
     metrics[m] = !!(ds && ds.values[code] != null);
   }
   const geom = geomByCode.get(code);
+  const extra = EXTRA_ENTITIES[code];
   entities[code] = {
     name: canonicalName(code),
     type: classify(code),
-    continent: datasets.countries[code]?.continent || (geom ? REGION_CONTINENT[geom.region] : null) || null,
+    continent: datasets.countries[code]?.continent || (geom ? REGION_CONTINENT[geom.region] : null) || extra?.continent || null,
     hasGeometry: !!geom,
     hasFlag: flagCodes.has(code),            // flag COLORS in flags.json (used by color quizzes)
     hasFlagImage: flagCodes.has(code),       // flag IMAGE on flagcdn (probed below for the rest)
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
-    region: geom ? geom.region : null,
+    ...(extra?.optional ? { optional: true } : {}), // TODOS #20: gated behind territories toggle
+    region: geom ? geom.region : (extra?.region || null),
     metrics,
   };
 }
