@@ -13,6 +13,7 @@
   "scripts": {
     "start": "python3 -m http.server 8080",
     "serve": "python3 -m http.server 8080",
+    "build": "bash scripts/build-static.sh",
     "build:geometry": "node scripts/build-geometry.mjs",
     "build:datasets": "node scripts/build-datasets.mjs",
     "build:attributes": "node scripts/build-attributes.mjs",

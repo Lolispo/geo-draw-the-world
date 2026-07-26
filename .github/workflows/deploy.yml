@@ -1,0 +1,25 @@
+# Deploys geo (Know the World) to geo.petterbuilds.com on push to main.
+#
+# geo is a no-build, root-served static site; `npm run build` stages a clean
+# dist/ (see scripts/build-static.sh). This repo is PUBLIC, so it calls the
+# shared PUBLIC workflow in Lolispo/ci directly and passes the AWS deploy role
+# as a masked SECRET (keeps the account id out of these public run logs).
+# Access is gated by the OIDC trust policy (repo:Lolispo/*), not by secrecy.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    permissions:
+      id-token: write
+      contents: read
+    uses: Lolispo/ci/.github/workflows/deploy-app.yml@main
+    with:
+      app-id: geo
+      build-command: npm run build
+    secrets:
+      role-arn: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}

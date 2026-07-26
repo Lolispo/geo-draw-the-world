@@ -3,6 +3,9 @@
 .omc/
 .claude/
 
+# Build output (staged by scripts/build-static.sh for CI deploy)
+dist/
+
 # OS / editor
 .DS_Store
 
