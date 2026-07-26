@@ -1,0 +1,28 @@
+.github/workflows/deploy.yml
+  s_ea565c0433e786::t_c8dfd915f3656b 1-25
+.gitignore
+  s_ea565c0433e786::t_6a2daf6d6b42b4 6-8
+scripts/build-static.sh
+  s_ea565c0433e786::t_0b284c167ef999 1-19,21-25
+  s_ea565c0433e786::t_a30528d4d725be 20
+package.json
+  s_ea565c0433e786::t_7538f7e7f04207 16
+package-lock.json
+  s_ea565c0433e786::t_21d106db5b035b 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "3cc226e58e3b07ad4cc1179490338afc51119cda",
+  "prompts": {},
+  "sessions": {
+    "s_ea565c0433e786": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2291b027-685c-4ce7-b9c1-c187657e0e00",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
