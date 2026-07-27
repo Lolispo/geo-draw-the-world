@@ -1,0 +1,23 @@
+js/world-canvas.js
+  s_7ae3c49612a14b::t_37f1531402d003 4
+js/utils.js
+  s_7ae3c49612a14b::t_2000de19b07586 3-16
+js/transform-controls.js
+  s_7ae3c49612a14b::t_270365acad3b82 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "22e00a507ed5607856a9eca97a28556e15b74cee",
+  "prompts": {},
+  "sessions": {
+    "s_7ae3c49612a14b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "491b61a9-b052-48a4-8799-8622a6e915ec",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
