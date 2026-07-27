@@ -1,0 +1,21 @@
+js/transform-controls.js
+  s_7ae3c49612a14b::t_4e640c745e03f4 6
+js/main.js
+  s_7ae3c49612a14b::t_e36876ae8ae7b5 861-864
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "91cdfb81c04d6e7d47bdc27d8fa8b878c372f927",
+  "prompts": {},
+  "sessions": {
+    "s_7ae3c49612a14b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "491b61a9-b052-48a4-8799-8622a6e915ec",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
