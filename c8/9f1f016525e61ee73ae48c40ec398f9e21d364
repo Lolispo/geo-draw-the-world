@@ -1,0 +1,19 @@
+favicon.svg
+  s_db8e33926e4a77::t_72b7cc885dab95 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "c89f1f016525e61ee73ae48c40ec398f9e21d364",
+  "prompts": {},
+  "sessions": {
+    "s_db8e33926e4a77": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3653ff3f-bdab-4eaa-bc42-0bdf6008859e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
