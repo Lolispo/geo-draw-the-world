@@ -1,36 +1,7 @@
 // Scoring: compare player shapes to reference shapes
 // Supports multi-polygon reference shapes
 
-import { polygonArea, multiPolygonArea, multiPolygonCentroid, distance, multiPolygonBoundingBox } from './utils.js';
-
-// Nonzero winding number — self-intersecting polygons fill as union
-function pointInPolygonFast(x, y, polygon) {
-  let winding = 0;
-  const n = polygon.length;
-  for (let i = 0, j = n - 1; i < n; j = i++) {
-    const xi = polygon[i][0], yi = polygon[i][1];
-    const xj = polygon[j][0], yj = polygon[j][1];
-    if (yj <= y) {
-      if (yi > y) {
-        const cross = (xj - x) * (yi - y) - (xi - x) * (yj - y);
-        if (cross > 0) winding++;
-      }
-    } else {
-      if (yi <= y) {
-        const cross = (xj - x) * (yi - y) - (xi - x) * (yj - y);
-        if (cross < 0) winding--;
-      }
-    }
-  }
-  return winding !== 0;
-}
-
-function pointInMultiPolygonFast(x, y, polygons) {
-  for (const poly of polygons) {
-    if (pointInPolygonFast(x, y, poly)) return true;
-  }
-  return false;
-}
+import { polygonArea, multiPolygonArea, multiPolygonCentroid, distance, multiPolygonBoundingBox, pointInMultiPolygon } from './utils.js';
 
 // Rasterize multi-polygon onto a grid
 function rasterizeMulti(polygons, bb, gridSize = 80) {
@@ -42,7 +13,7 @@ function rasterizeMulti(polygons, bb, gridSize = 80) {
     for (let gx = 0; gx < gridSize; gx++) {
       const x = bb.minX + (gx + 0.5) / scaleX;
       const y = bb.minY + (gy + 0.5) / scaleY;
-      if (pointInMultiPolygonFast(x, y, polygons)) {
+      if (pointInMultiPolygon(x, y, polygons)) {
         filled.add(`${gx},${gy}`);
       }
     }
