@@ -3,7 +3,7 @@
 
 import { multiPolygonBoundingBox, multiPolygonCentroid, drawMultiPolygon, transformPoints, hidpiReset } from './utils.js';
 
-// Ocean labels in world-space coordinates (1600x900 Mercator)
+// Ocean labels in world-space coordinates (1600x1100 conformal Mercator, TODOS #24)
 const OCEAN_LABELS = [
   { name: 'ATLANTIC\nOCEAN', x: 560, y: 671 },
   { name: 'PACIFIC\nOCEAN', x: 100, y: 636 },

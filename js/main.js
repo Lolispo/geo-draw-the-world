@@ -858,7 +858,10 @@ class Game {
     // Reveal name in transform/place stages even in blind mode
     document.getElementById('transform-label').textContent = `Resize & Rotate: ${entry.name}`;
     this.showScreen(STATES.TRANSFORM);
-    this.transformControls.setWorldParams(this._regionBounds, 1600, 900);
+    // Let TransformControls use its own 1600x1100 conformal defaults (TODOS #24).
+    // Passing 900 here kept the transform stage on the old squished projection
+    // while the placement canvas used 1100, so shapes were sized ~22% too large.
+    this.transformControls.setWorldParams(this._regionBounds);
     // Hard mode: no hint shape for scale reference
     if (this.hardMode) {
       this.transformControls.setReferenceShapes([], entry.name);
