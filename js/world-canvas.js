@@ -1,18 +1,7 @@
 // World map canvas: pan, zoom, place shapes, show results
 // Supports region-focused view for country modes
 
-import { drawMultiPolygon, multiPolygonBoundingBox } from './utils.js';
-
-// Ocean labels in world-space coordinates (1600x1100 conformal Mercator, TODOS #24)
-const OCEAN_LABELS = [
-  { name: 'ATLANTIC\nOCEAN', x: 560, y: 671 },
-  { name: 'PACIFIC\nOCEAN', x: 100, y: 636 },
-  { name: 'PACIFIC\nOCEAN', x: 1450, y: 636 },
-  { name: 'INDIAN\nOCEAN', x: 1130, y: 881 },
-  { name: 'ARCTIC OCEAN', x: 800, y: 58 },
-  { name: 'SOUTHERN OCEAN', x: 800, y: 1050 },
-  { name: 'Mediterranean Sea', x: 830, y: 505 },
-];
+import { drawMultiPolygon, multiPolygonBoundingBox, OCEAN_LABELS } from './utils.js';
 
 const ROTATE_HANDLE_DIST = 30;
 const ROTATE_HANDLE_RADIUS = 8;

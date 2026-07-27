@@ -1,5 +1,19 @@
 // Math and geometry utilities
 
+// Ocean labels in world-space coordinates (1600x1100 conformal Mercator, TODOS #24).
+// Shared by transform-controls.js and world-canvas.js — they must agree, since both
+// render into the same world space. Note SOUTHERN OCEAN at y=1050 only fits a
+// 1100-tall world, which is why the two copies drifting apart was a real bug.
+export const OCEAN_LABELS = [
+  { name: 'ATLANTIC\nOCEAN', x: 560, y: 671 },
+  { name: 'PACIFIC\nOCEAN', x: 100, y: 636 },
+  { name: 'PACIFIC\nOCEAN', x: 1450, y: 636 },
+  { name: 'INDIAN\nOCEAN', x: 1130, y: 881 },
+  { name: 'ARCTIC OCEAN', x: 800, y: 58 },
+  { name: 'SOUTHERN OCEAN', x: 800, y: 1050 },
+  { name: 'Mediterranean Sea', x: 830, y: 505 },
+];
+
 export function polygonArea(points) {
   let area = 0;
   const n = points.length;
