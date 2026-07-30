@@ -11,6 +11,11 @@ import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 const FLAG_CDN = 'https://flagcdn.com/w40/';
 const START_LIVES = 3;
 
+// Touch layout is gated on pointer type, not screen width — a small window on a
+// desktop still has a mouse. Evaluated per render rather than cached, so a
+// device with both input types behaves correctly after switching.
+const isTouch = () => window.matchMedia('(pointer: coarse)').matches;
+
 export class RankLineGame {
   constructor(containerEl, onFinish) {
     this.container = containerEl;
@@ -34,10 +39,14 @@ export class RankLineGame {
     this._onPointerMove = null;
     this._onPointerUp = null;
 
-    // keyboard state
-    this._kbGapIndex = -1;
+    // Pending insertion index — the gap the next placement will target.
+    // Written by the keyboard on desktop, and by scroll position on touch.
+    this._cursorGap = -1;
     this._picking = false;
     window.addEventListener('keydown', (e) => this._handleKey(e));
+    // Spacer height depends on list height, so rotation must re-measure.
+    // Registered once here — _renderLine runs every turn and would leak.
+    window.addEventListener('resize', () => this._sizeSpacers());
   }
 
   // Dataset picker — shown before a run when no dataset is preselected.
@@ -148,9 +157,18 @@ export class RankLineGame {
     if (this.lives <= 0) { this._showResults(); return; }
     if (this.deck.length === 0) { this._showResults(true); return; }
     this.current = this.deck.pop();
-    this._kbGapIndex = Math.floor(this.placed.length / 2);
     this._render();
-    this._highlightKbGap();
+
+    if (isTouch()) {
+      // _render() wiped the list, so scrollTop is 0. Restore continuity by
+      // centring the row just placed, then derive the cursor from there.
+      this._sizeSpacers();
+      if (this._justPlacedIndex != null) this._centerRow(this._justPlacedIndex);
+      else this._centerGap(Math.floor(this.placed.length / 2));
+      this._syncCursorToScroll();
+    } else {
+      this._setCursor(Math.floor(this.placed.length / 2), { scroll: 'nearest' });
+    }
   }
 
   // ---------- Rendering ----------
@@ -163,8 +181,12 @@ export class RankLineGame {
     const stage = document.createElement('div');
     stage.className = 'rank-stage';
 
-    stage.appendChild(this._renderCardTray());
-    stage.appendChild(this._renderLine());
+    // On touch the card sits at the bottom, in the thumb zone. Swap real DOM
+    // order rather than using CSS `order`, so reading order matches visual order.
+    const tray = this._renderCardTray();
+    const line = this._renderLine();
+    if (isTouch()) stage.append(line, tray);
+    else stage.append(tray, line);
 
     c.appendChild(stage);
   }
@@ -200,6 +222,7 @@ export class RankLineGame {
   }
 
   _renderCardTray() {
+    const touch = isTouch();
     const tray = document.createElement('div');
     tray.className = 'rank-tray';
 
@@ -214,7 +237,9 @@ export class RankLineGame {
 
     const hint = document.createElement('div');
     hint.className = 'rank-hint';
-    hint.textContent = 'Drag onto the line, or use ↑ ↓ then Enter';
+    hint.textContent = touch
+      ? 'Scroll the line, then tap Place'
+      : 'Drag onto the line, or use ↑ ↓ then Enter';
 
     const card = document.createElement('div');
     card.className = 'rank-card';
@@ -224,11 +249,52 @@ export class RankLineGame {
     name.textContent = this.current.name;
     card.appendChild(name);
 
-    card.addEventListener('pointerdown', (e) => this._startDrag(e, card));
+    // Touch never drags: not attaching the listener makes the drag/ghost/
+    // autoscroll path unreachable, rather than guarded from the inside.
+    if (!touch) card.addEventListener('pointerdown', (e) => this._startDrag(e, card));
 
     this._cardEl = card;
-    tray.append(hint, card);
+    if (touch) tray.append(hint, card, this._renderTouchControls());
+    else tray.append(hint, card);
     return tray;
+  }
+
+  // Bottom control row: coarse navigation is the flick gesture, these buttons
+  // are the fine adjustment and the commit.
+  _renderTouchControls() {
+    const row = document.createElement('div');
+    row.className = 'rank-touch-controls';
+
+    const nudge = (delta) => {
+      if (!this.current || this.gameOver) return;
+      const maxGap = this.placed.length;
+      const from = this._cursorGap < 0 ? Math.floor(maxGap / 2) : this._cursorGap;
+      this._setCursor(Math.max(0, Math.min(maxGap, from + delta)), { scroll: 'center' });
+      playNav();
+    };
+
+    const up = document.createElement('button');
+    up.className = 'btn btn-tool rank-nudge';
+    up.textContent = '▲';
+    up.setAttribute('aria-label', 'Move insertion point up');
+    up.addEventListener('click', () => nudge(-1));
+
+    const place = document.createElement('button');
+    place.className = 'btn btn-accent rank-place';
+    place.textContent = 'Place';
+    place.addEventListener('click', () => {
+      if (!this.current || this.gameOver || this._cursorGap < 0) return;
+      this._resolve(this._cursorGap);
+    });
+
+    const down = document.createElement('button');
+    down.className = 'btn btn-tool rank-nudge';
+    down.textContent = '▼';
+    down.setAttribute('aria-label', 'Move insertion point down');
+    down.addEventListener('click', () => nudge(1));
+
+    row.append(up, place, down);
+    return row;
   }
 
   _renderLine() {
@@ -236,23 +302,91 @@ export class RankLineGame {
     list.className = 'rank-line-list';
     this._listEl = list;
 
+    const touch = isTouch();
+
+    // Half-viewport spacers let the first and last gaps reach the center line.
+    // Touch only — desktop has no scroll-derived cursor and needs no padding.
+    if (touch) list.appendChild(this._spacer());
+
     const topLabel = document.createElement('div');
-    topLabel.className = 'rank-axis-label';
+    topLabel.className = 'rank-axis-label top';
     topLabel.textContent = this.dataset.higherFirst ? '▲ highest' : '▲ lowest';
     list.appendChild(topLabel);
 
     list.appendChild(this._gap(0));
     for (let i = 0; i < this.placed.length; i++) {
-      list.appendChild(this._row(this.placed[i], i === this._justPlacedIndex));
+      list.appendChild(this._row(this.placed[i], i === this._justPlacedIndex, i));
       list.appendChild(this._gap(i + 1));
     }
 
     const botLabel = document.createElement('div');
-    botLabel.className = 'rank-axis-label';
+    botLabel.className = 'rank-axis-label bottom';
     botLabel.textContent = this.dataset.higherFirst ? '▼ lowest' : '▼ highest';
     list.appendChild(botLabel);
 
+    if (touch) {
+      list.appendChild(this._spacer());
+      this._attachScrollCursor(list);
+    }
+
     return list;
+  }
+
+  _spacer() {
+    const pad = document.createElement('div');
+    pad.className = 'rank-line-pad';
+    return pad;
+  }
+
+  // Over-padding is harmless (you can scroll slightly past the ends);
+  // under-padding makes the extreme gaps unreachable. So use a full half
+  // and do not try to subtract label or gap heights.
+  _sizeSpacers() {
+    if (!this._listEl || !this._listEl.isConnected) return;
+    const pads = this._listEl.querySelectorAll('.rank-line-pad');
+    if (!pads.length) return;
+    const h = Math.round(this._listEl.clientHeight / 2);
+    pads.forEach((p) => { p.style.height = h + 'px'; });
+  }
+
+  _attachScrollCursor(list) {
+    let raf = null;
+    list.addEventListener('scroll', () => {
+      if (raf) return; // coalesce a burst of scroll events into one frame
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        this._syncCursorToScroll();
+      });
+    });
+  }
+
+  // The cursor IS "the gap nearest the viewport centre" — derived, never stored
+  // independently, so it cannot drift out of sync with the scroll position.
+  _syncCursorToScroll() {
+    if (!this.current || this.gameOver || !this._listEl) return;
+    const r = this._listEl.getBoundingClientRect();
+    const mid = r.top + r.height / 2;
+    let best = -1;
+    let bestDist = Infinity;
+    this._listEl.querySelectorAll('.rank-gap').forEach((g) => {
+      const gr = g.getBoundingClientRect();
+      const d = Math.abs(gr.top + gr.height / 2 - mid);
+      if (d < bestDist) { bestDist = d; best = parseInt(g.dataset.gapIndex, 10); }
+    });
+    // scroll: 'none' — highlight only. Scrolling here would fight the gesture.
+    if (best >= 0 && best !== this._cursorGap) this._setCursor(best);
+  }
+
+  _centerRow(index) {
+    if (!this._listEl || index == null || index < 0) return;
+    const row = this._listEl.querySelector(`.rank-row[data-row-index='${index}']`);
+    if (row) row.scrollIntoView({ block: 'center', behavior: 'auto' });
+  }
+
+  _centerGap(index) {
+    if (!this._listEl) return;
+    const gap = this._listEl.querySelector(`.rank-gap[data-gap-index='${index}']`);
+    if (gap) gap.scrollIntoView({ block: 'center', behavior: 'auto' });
   }
 
   _gap(index) {
@@ -267,9 +401,10 @@ export class RankLineGame {
     return gap;
   }
 
-  _row(entry, highlight) {
+  _row(entry, highlight, index) {
     const row = document.createElement('div');
     row.className = 'rank-row' + (highlight ? ' just-placed' : '');
+    row.dataset.rowIndex = index;
     row.appendChild(this._flagImg(entry.code));
     const name = document.createElement('span');
     name.className = 'rank-row-name';
@@ -278,9 +413,17 @@ export class RankLineGame {
     val.className = 'rank-row-value';
     val.textContent = formatValue(this.dataset.format, entry.value);
     row.append(name, val);
-    row.classList.add('is-clickable');
-    row.title = `View ${entry.name}`;
-    row.addEventListener('click', () => openCountryPanel(entry.code));
+
+    // While a card is pending on touch, every tap on the line is about placing,
+    // so rows must not open the country panel — a near-miss on a gap would pop
+    // a modal instead. `this.current` is set exactly during a live turn, so
+    // rows go live again between turns and on the results screen for free.
+    const inert = isTouch() && !!this.current;
+    if (!inert) {
+      row.classList.add('is-clickable');
+      row.title = `View ${entry.name}`;
+      row.addEventListener('click', () => openCountryPanel(entry.code));
+    }
     return row;
   }
 
@@ -401,26 +544,37 @@ export class RankLineGame {
 
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
-      if (this._kbGapIndex < 0) this._kbGapIndex = Math.floor(maxGap / 2);
-      else this._kbGapIndex += (e.key === 'ArrowUp' ? -1 : 1);
-      this._kbGapIndex = Math.max(0, Math.min(maxGap, this._kbGapIndex));
-      this._highlightKbGap();
+      const next = this._cursorGap < 0
+        ? Math.floor(maxGap / 2)
+        : this._cursorGap + (e.key === 'ArrowUp' ? -1 : 1);
+      this._setCursor(Math.max(0, Math.min(maxGap, next)), { scroll: 'nearest' });
       playNav();
     } else if (e.key === 'Enter' || e.key === ' ') {
-      if (this._kbGapIndex < 0) return;
+      if (this._cursorGap < 0) return;
       e.preventDefault();
-      this._resolve(this._kbGapIndex);
+      this._resolve(this._cursorGap);
     }
   }
 
-  _highlightKbGap() {
+  // Move the insertion cursor. `scroll` decides whether the list follows:
+  //   'none'    — highlight only. Used by the touch scroll handler, which must
+  //               never scroll or it would fight the user's own gesture.
+  //   'nearest' — smooth, minimal scroll. Preserves the desktop keyboard feel.
+  //   'center'  — instant, centered. Used by the touch nudge buttons: because
+  //               the touch cursor is derived from center proximity, centering
+  //               the target makes the resulting scroll event re-derive this
+  //               same gap, so the two mechanisms agree without a lock flag.
+  _setCursor(index, { scroll = 'none' } = {}) {
+    this._cursorGap = index;
     if (!this._listEl) return;
-    this._listEl.querySelectorAll('.rank-gap.kb-active').forEach(g => g.classList.remove('kb-active'));
-    const gap = this._listEl.querySelector(`.rank-gap[data-gap-index='${this._kbGapIndex}']`);
-    if (gap) {
-      gap.classList.add('kb-active');
-      gap.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
+    this._listEl.querySelectorAll('.rank-gap.cursor')
+      .forEach((g) => g.classList.remove('cursor'));
+    if (index < 0) return;
+    const gap = this._listEl.querySelector(`.rank-gap[data-gap-index='${index}']`);
+    if (!gap) return;
+    gap.classList.add('cursor');
+    if (scroll === 'nearest') gap.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    else if (scroll === 'center') gap.scrollIntoView({ block: 'center', behavior: 'auto' });
   }
 
   // ---------- Resolve a guess ----------

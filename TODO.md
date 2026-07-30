@@ -845,6 +845,16 @@ fidelity but not enough by eye.
 
 ## 25. Bug: Rank the World — can't continue after 10 placements (mobile)
 
+**✅ DONE 2026-07-30** — root cause found and fixed: `.rank-line-list` is a flex column, so
+its children defaulted to `flex-shrink: 1`. Once the line overflowed the viewport, all the
+shrinkage landed on the gaps, collapsing them from a nominal 10px to **0–4px** — the drop
+targets literally vanished, so no tap or drop could land and the run was stuck. Reproduced on
+pristine `main` at 390×844 with touch emulation: target gap height 0px by 14 rows, real
+coordinate tap failing at 15 rows. Fixed by `.rank-line-list > * { flex-shrink: 0 }`, which
+restores natural heights on both pointer types; verified all taps land through 16+ rows. Note
+this affected **desktop drag too**, not just mobile. Shipped alongside the touch-ergonomics
+rework (design + plan under `docs/superpowers/`), which also raises touch gaps to 28px.
+
 **What:** On phone, in Rank the World, after placing ~10 countries the player couldn't rank
 any more (owner, 2026-07-22).
 

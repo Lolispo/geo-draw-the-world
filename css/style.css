@@ -26,7 +26,11 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow: hidden;
+  /* 100vh first as a fallback: browsers without dvh support keep the old value,
+     browsers with it override on the next line. Mobile chrome overlays 100vh,
+     which would hide the bottom control bar. */
   height: 100vh;
+  height: 100dvh;
   /* Prevent pull-to-refresh and bounce on mobile */
   overscroll-behavior: none;
   -webkit-user-select: none;
@@ -1514,6 +1518,12 @@ canvas {
   border: 1px solid var(--border);
   border-radius: 12px;
 }
+/* The list is a flex column, so its children default to flex-shrink: 1 and get
+   squashed once content overflows — gaps collapsed from 10px to 0-4px on a long
+   line, making the drop targets nearly unhittable. Everything inside a scroll
+   container should keep its natural height. */
+.rank-line-list > * { flex-shrink: 0; }
+
 .rank-axis-label {
   text-align: center;
   font-size: 0.7rem;
@@ -1535,7 +1545,7 @@ canvas {
     45deg, #bc8cff33, #bc8cff33 8px, #bc8cff55 8px, #bc8cff55 16px);
   border: 1px dashed var(--purple);
 }
-.rank-gap.kb-active {
+.rank-gap.cursor {
   height: 32px;
   background: var(--accent-glow);
   border: 2px solid var(--accent);
@@ -1640,6 +1650,85 @@ canvas {
   .rank-card-name { font-size: 1rem; }
   .rank-row-name { font-size: 0.88rem; }
   .rank-flag { width: 26px; }
+}
+
+/* Touch layout: card and controls live at the bottom, in the thumb zone. */
+@media (pointer: coarse) {
+  .rank-tray {
+    width: 100%;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .rank-card {
+    cursor: default;
+    width: 100%;
+    max-width: 420px;
+  }
+  .rank-touch-controls {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+  }
+  .rank-nudge {
+    flex: 0 0 64px;
+    min-height: 48px;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0;
+    /* btn-tool dims its text; these are primary controls, so keep full contrast. */
+    color: var(--text);
+  }
+
+  /* The dev toggle is fixed at bottom-left with z-index 999, which lands it on
+     top of the up-nudge and steals its taps. A phone has no use for it. */
+  #dev-controls { display: none; }
+  .rank-place {
+    flex: 1;
+    min-height: 48px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  /* Spacers get their height in JS and flex-shrink: 0 from .rank-line-list > *. */
+
+  /* Spacers leave blank space at the ends, so pin the axis labels rather than
+     letting them drift out of view inside it. */
+  .rank-axis-label.top,
+  .rank-axis-label.bottom {
+    position: sticky;
+    z-index: 2;
+    background: var(--surface);
+  }
+  .rank-axis-label.top { top: 0; }
+  .rank-axis-label.bottom { bottom: 0; }
+
+  /* 10px is a quarter of the minimum touch target. */
+  .rank-gap { height: 28px; }
+  .rank-gap.cursor {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rank-gap.cursor::after {
+    content: 'place here';
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* Scoped to .rank-results-panel: .results-actions is shared with other
+     modes' results screens, which are not long enough to need this. */
+  .rank-results-panel .results-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    margin-top: auto;
+    padding: 10px 0;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    background: var(--bg);
+  }
 }
 
 /* ========== MAIN MENU: ACTIVITY HUB ========== */
