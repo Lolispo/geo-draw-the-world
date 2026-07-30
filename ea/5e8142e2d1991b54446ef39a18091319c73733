@@ -1,0 +1,21 @@
+docs/superpowers/specs/2026-07-30-rank-line-touch-ergonomics-design.md
+  s_9ddce10bbdd0c0::t_9959501dd29cf6 88-93
+  s_9ddce10bbdd0c0::t_6d9e09877c1b7e 1-87,94-128,135-233
+  s_9ddce10bbdd0c0::t_d0a382e4aaa959 129-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "ea5e8142e2d1991b54446ef39a18091319c73733",
+  "prompts": {},
+  "sessions": {
+    "s_9ddce10bbdd0c0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9fa5f6f4-ca24-429e-bf55-94ccf17c70e9",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
