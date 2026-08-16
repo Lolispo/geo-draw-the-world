@@ -1,0 +1,42 @@
+js/shape.js
+  s_09eb9cd6346fc5::t_1b9dac8ac08b8d 59-61,66,76
+js/transform-controls.js
+  s_09eb9cd6346fc5::t_8e6806eb1b9500 177-179
+  s_09eb9cd6346fc5::t_84642a1a152863 394
+  s_09eb9cd6346fc5::t_907b5c72cf63b4 218,225-228,230,233-234
+  s_09eb9cd6346fc5::t_06d5d59177e1e6 417-419
+  s_09eb9cd6346fc5::t_9262e7703bbe9a 341-342
+  s_09eb9cd6346fc5::t_f2750bc1ba9f09 2-4,6,11-18
+  s_09eb9cd6346fc5::t_7b321a75ed9515 41-43
+  s_09eb9cd6346fc5::t_08efee3129d4b8 73,79-127,130,132-176,180-191,201-205
+  s_09eb9cd6346fc5::t_0899277b97aac1 412
+  s_09eb9cd6346fc5::t_22c393ebe43649 425
+  s_09eb9cd6346fc5::t_d7a66f5aa1011b 432
+  s_09eb9cd6346fc5::t_4dbdbda85009c9 192-200
+  s_09eb9cd6346fc5::t_d31c11b72a8463 392-393,395-396,398-399,401-402,405-406
+  s_6ff00e281022f8::t_f9f21967939160 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "b5767825e550b22dcc8508868a247f55e963877c",
+  "prompts": {},
+  "sessions": {
+    "s_09eb9cd6346fc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "414607d4-c4e5-43ab-819e-64154b557660",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    },
+    "s_6ff00e281022f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a12da9ba-cd39-4020-9f7d-6225cc4238be",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
