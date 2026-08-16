@@ -635,16 +635,6 @@ canvas {
   font-weight: 500;
 }
 
-/* ========== LIVE SCORE ========== */
-.live-score {
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  min-width: 90px;
-  text-align: center;
-  transition: color 0.2s ease;
-}
-
 /* ========== TWEAK CONTROLS ========== */
 .tweak-controls {
   display: flex;

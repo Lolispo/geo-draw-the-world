@@ -92,6 +92,12 @@ export function getContinentByName(name) {
   return continentData.continents.find(c => c.name === name);
 }
 
+// Continent outlines for the placement-canvas basemap. Already in the same
+// 1600x1100 world space the world canvas draws in, so they need no transform.
+export function getContinentPolygons() {
+  return continentData.continents.map(c => c.polygons);
+}
+
 export function createReferenceShape(entry) {
   const shape = new Shape(entry.polygons, entry.name, entry.color);
   shape.position = multiPolygonCentroid(entry.polygons);

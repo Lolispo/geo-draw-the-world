@@ -56,12 +56,14 @@ export class Shape {
     return pointInMultiPolygon(x, y, this.getTransformedPolygons());
   }
 
-  draw(ctx, { fillAlpha = 0.4, strokeColor = null, ghostMode = false } = {}) {
+  // lineWidth is in world units. Callers rendering at a zoomed-in viewScale should
+  // pass px/viewScale, or the outline swells into a blob (see transform-controls).
+  draw(ctx, { fillAlpha = 0.4, strokeColor = null, ghostMode = false, lineWidth = null } = {}) {
     const polygons = this.getTransformedPolygons();
     if (ghostMode) {
       drawMultiPolygon(ctx, polygons, {
         stroke: this.color + '88',
-        lineWidth: 0.8,
+        lineWidth: lineWidth ?? 0.8,
         dash: [4, 3],
         fill: this.color + '11',
         smooth: true
@@ -71,7 +73,7 @@ export class Shape {
       drawMultiPolygon(ctx, polygons, {
         fill: this.color + alpha,
         stroke: strokeColor || this.color,
-        lineWidth: 2,
+        lineWidth: lineWidth ?? 2,
         smooth: true
       });
     }

@@ -2,7 +2,7 @@
 
 import {
   loadContinentData, loadCountryData, loadAllCountries, getDailyCountry,
-  getContinentOrder, getContinentByName,
+  getContinentOrder, getContinentByName, getContinentPolygons,
   createReferenceShape, createAllReferenceShapes, createCountryReferenceShapes,
   getCountryRegions, shuffleArray, getLargestCountries
 } from './geo-data.js';
@@ -57,7 +57,6 @@ class Game {
     this._allRefShapes = [];
     this._currentRegion = null;
     this._regionBounds = null;
-    this._liveScoreEl = null;
     this._tweakingIndex = -1;
 
     // Speed round state
@@ -326,9 +325,6 @@ class Game {
 
     // Resize canvases on window resize / orientation change
     window.addEventListener('resize', () => this._sizeCanvases());
-
-    // Live scoring: update on shape move
-    this.worldCanvas.onShapeMove = () => this._updateLiveScore();
   }
 
   _onKeyDown(e) {
@@ -644,6 +640,10 @@ class Game {
     this.worldCanvas.placedShapes = [];
     this.worldCanvas.referenceShapes = this._allRefShapes;
     this.worldCanvas.showGhosts = this.devMode;
+    // Continent outlines would hand you the answer in Continents mode, and Hard
+    // mode is defined by stripping placement aids, so both go without.
+    this.worldCanvas.basemap =
+      (this.gameMode === 'continents' || this.hardMode) ? [] : getContinentPolygons();
     this.worldCanvas.setRegionBounds(this._regionBounds);
     this.worldCanvas.tweakMode = false;
 
@@ -942,9 +942,6 @@ class Game {
     const entry = this.itemData[this.currentIndex];
     document.getElementById('placing-label').textContent = `Place: ${entry.name}`;
     this.showScreen(STATES.PLACING);
-    if (!this.hardMode) {
-      this._showLiveScore();
-    }
     this.worldCanvas.activate();
     this.worldCanvas.setActiveShape(this.currentShape);
   }
@@ -984,7 +981,6 @@ class Game {
       : scoreShape(this.currentShape, refShape);
     this.scores.push({ name: entry.name, ...score });
 
-    this._hideLiveScore();
     this._flashScore(score.total);
     this.worldCanvas.deactivate();
     playPlace();
@@ -1019,32 +1015,6 @@ class Game {
     score.size = 100;
     score.total = Math.round(100 * 0.4 + 100 * 0.3 + score.placement * 0.3);
     return score;
-  }
-
-  // --- Live scoring ---
-  _showLiveScore() {
-    let el = document.getElementById('live-score');
-    if (!el) return;
-    el.style.display = 'block';
-    el.textContent = '';
-  }
-
-  _hideLiveScore() {
-    const el = document.getElementById('live-score');
-    if (el) el.style.display = 'none';
-  }
-
-  _updateLiveScore() {
-    if (this.state !== STATES.PLACING || !this.currentShape || this.puzzleMode || this.hardMode) return;
-    const el = document.getElementById('live-score');
-    if (!el) return;
-
-    const entry = this.itemData[this.currentIndex];
-    const refShape = createReferenceShape(entry);
-    const score = scoreShape(this.currentShape, refShape);
-
-    el.textContent = `Score: ${score.total}`;
-    el.style.color = score.total >= 60 ? '#3fb950' : score.total >= 30 ? '#d29922' : '#f85149';
   }
 
   // --- Timer (speed round) ---
@@ -1104,7 +1074,6 @@ class Game {
       this.worldCanvas.enableRotation = false;
       this.worldCanvas.deactivate();
     }
-    this._hideLiveScore();
 
     this._showToast("Time's up!");
     this.showResults();
@@ -1144,7 +1113,6 @@ class Game {
       this.worldCanvas.enableRotation = false;
       this.worldCanvas.deactivate();
     }
-    this._hideLiveScore();
 
     const lastScore = this.scores[this.scores.length - 1];
     this._showToast(`Streak over! Scored ${lastScore?.total || 0} (need 25+)`);
@@ -1336,6 +1304,8 @@ class Game {
     this.resultsWorldCanvas.placedShapes = [...this.playerShapes];
     this.resultsWorldCanvas.referenceShapes = this._allRefShapes;
     this.resultsWorldCanvas.showGhosts = true;
+    // Answers are already revealed here, so the basemap shows in every mode
+    this.resultsWorldCanvas.basemap = getContinentPolygons();
     this.resultsWorldCanvas.setRegionBounds(this._regionBounds);
     this.resultsWorldCanvas.activate();
 

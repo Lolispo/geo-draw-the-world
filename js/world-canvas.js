@@ -27,6 +27,9 @@ export class WorldCanvas {
     this.initialAngle = 0;
 
     this.referenceShapes = [];
+    // Faint continent outlines drawn under everything, so placement has real
+    // coastlines to aim at instead of a bare grid. Empty = no basemap.
+    this.basemap = [];
     this.showGhosts = false;
     this.enableRotation = false;
     this.tweakMode = false;
@@ -42,7 +45,6 @@ export class WorldCanvas {
     this._onTouchEnd = this._onTouchEnd.bind(this);
 
     this.onShapePlaced = null;
-    this.onShapeMove = null;
   }
 
   setRegionBounds(bounds) {
@@ -188,7 +190,6 @@ export class WorldCanvas {
       const angle = Math.atan2(pos[1] - center[1], pos[0] - center[0]);
       this.activeShape.rotation = this.initialRotation + (angle - this.initialAngle);
       this.render();
-      if (this.onShapeMove) this.onShapeMove();
       return;
     }
 
@@ -199,7 +200,6 @@ export class WorldCanvas {
         worldPos[1] - this.dragOffset[1]
       ];
       this.render();
-      if (this.onShapeMove) this.onShapeMove();
       return;
     }
 
@@ -323,6 +323,9 @@ export class WorldCanvas {
     // Ocean labels
     this._drawOceanLabels(ctx);
 
+    // Continent basemap — above the grid/labels, below anything the player owns
+    this._drawBasemap(ctx);
+
     // Ghost overlays
     if (this.showGhosts) {
       for (const ref of this.referenceShapes) {
@@ -364,6 +367,26 @@ export class WorldCanvas {
       ctx.textAlign = 'left';
       ctx.fillText('Drag to move, orange handle to rotate', 8, h - 6);
     }
+  }
+
+  // Fill, not stroke. continents.json stores each continent as country-level rings
+  // (Africa's largest ring is 9% of its area), so stroking would draw every national
+  // border and hand the player the answer slot. A single nonzero-winding fill per
+  // continent merges those rings into one landmass, leaving just the coastline.
+  _drawBasemap(ctx) {
+    if (!this.basemap || this.basemap.length === 0) return;
+    // Antarctica runs past y=worldHeight, so clip to the map frame — otherwise
+    // land spills outside the world boundary the canvas draws.
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, this.worldWidth, this.worldHeight);
+    ctx.clip();
+    for (const polygons of this.basemap) {
+      // smooth:false is required, not cosmetic: smoothing warps each ring on its
+      // own, so shared national borders stop coinciding and open up hairline seams.
+      drawMultiPolygon(ctx, polygons, { fill: '#1b2c42', smooth: false });
+    }
+    ctx.restore();
   }
 
   _drawOceanLabels(ctx) {

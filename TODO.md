@@ -868,6 +868,21 @@ screen), verified on a phone-width viewport.
 
 ---
 
+## 26. Bug: sizing screen footer text overlaps itself on narrow viewports
+
+**What:** On the transform/sizing screen the two footer strings collide at phone widths —
+the left "Drag corners to resize, orange handle to rotate" and the right
+`"<Country>" shown at real size for scale reference` render on top of each other.
+
+**Why:** Both are drawn in `TransformControls.render()` (`js/transform-controls.js`), one
+`textAlign: left` at x=12 and one `textAlign: right` at w-12, with no width check. Reproduced
+at 390×844.
+
+**Acceptance:** Both strings legible at 390px wide — shorten, stack, or drop the right one
+below some width threshold.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

@@ -1,10 +1,21 @@
 // Transform controls: resize and rotate a shape before placing
-// Renders in world-coordinate space so scale matches the placement canvas
+// Renders in world-coordinate space so scale matches the placement canvas.
+// The view frames the shape and the example side by side rather than the whole
+// world — at world zoom a country is a few pixels wide and you can't judge it.
 
-import { multiPolygonBoundingBox, multiPolygonCentroid, drawMultiPolygon, transformPoints, hidpiReset, OCEAN_LABELS } from './utils.js';
+import { multiPolygonBoundingBox, hidpiReset } from './utils.js';
 
 const HANDLE_SIZE = 10;
 const ROTATE_HANDLE_DIST = 35;
+
+// Padding around the framed content, as a fraction of its larger dimension
+const VIEW_PAD_FRAC = 0.18;
+// Gap between the player's shape and the example, relative to the larger of the two
+const SIDE_GAP_FRAC = 0.35;
+// World units. Floor on the framed size, so a microstate example can't zoom in absurdly.
+const MIN_VIEW_SIZE = 60;
+// Grid steps to choose from, aiming for ~10 lines across the view
+const GRID_STEPS = [1, 2, 5, 10, 25, 50, 100, 200, 400];
 
 export class TransformControls {
   constructor(canvas) {
@@ -27,6 +38,9 @@ export class TransformControls {
     this.regionBounds = null;  // same as world canvas
     this.viewScale = 1;
     this.viewOffset = [0, 0];
+    // World-space rect the canvas is framed on. Set in activate(), then only
+    // ever grown by _ensureFits().
+    this.viewBox = null;
 
     this._onMouseDown = this._onMouseDown.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
@@ -56,30 +70,139 @@ export class TransformControls {
     this.worldHeight = worldHeight || 1100;
   }
 
+  // Fit this.viewBox to the canvas. Padding already lives in the box.
   _computeView() {
     const dpr = window.devicePixelRatio || 1;
     const w = this.canvas.width / dpr;
     const h = this.canvas.height / dpr;
 
+    const b = this.viewBox || {
+      minX: 0, minY: 0, maxX: this.worldWidth, maxY: this.worldHeight
+    };
+    const bw = Math.max(1e-6, b.maxX - b.minX);
+    const bh = Math.max(1e-6, b.maxY - b.minY);
+
+    this.viewScale = Math.min(w / bw, h / bh);
+    this.viewOffset = [
+      w / 2 - (b.minX + bw / 2) * this.viewScale,
+      h / 2 - (b.minY + bh / 2) * this.viewScale
+    ];
+  }
+
+  _unionBoxes(a, b) {
+    return {
+      minX: Math.min(a.minX, b.minX), minY: Math.min(a.minY, b.minY),
+      maxX: Math.max(a.maxX, b.maxX), maxY: Math.max(a.maxY, b.maxY)
+    };
+  }
+
+  _offsetBox(box, [dx, dy]) {
+    return {
+      minX: box.minX + dx, minY: box.minY + dy,
+      maxX: box.maxX + dx, maxY: box.maxY + dy
+    };
+  }
+
+  // Grow a content box by MIN_VIEW_SIZE and the padding fraction, keeping its centre
+  _padded(box) {
+    const w = Math.max(box.maxX - box.minX, MIN_VIEW_SIZE);
+    const h = Math.max(box.maxY - box.minY, MIN_VIEW_SIZE);
+    const pad = Math.max(w, h) * VIEW_PAD_FRAC;
+    const cx = (box.minX + box.maxX) / 2;
+    const cy = (box.minY + box.maxY) / 2;
+    return {
+      minX: cx - w / 2 - pad, maxX: cx + w / 2 + pad,
+      minY: cy - h / 2 - pad, maxY: cy + h / 2 + pad
+    };
+  }
+
+  // Size of the example shape, which anchors both the starting scale and the framing
+  _hintWorldSize() {
+    if (!this.hintShape) return 0;
+    const bb = this.hintShape.getBoundingBox();
+    return Math.max(bb.maxX - bb.minX, bb.maxY - bb.minY);
+  }
+
+  // Used when there is no example to anchor to (Hard mode)
+  _fallbackWorldSize() {
     if (this.regionBounds) {
       const b = this.regionBounds;
-      const pad = 30;
-      const rw = b.maxX - b.minX;
-      const rh = b.maxY - b.minY;
-      this.viewScale = Math.min((w - pad * 2) / rw, (h - pad * 2) / rh);
-      this.viewOffset = [
-        w / 2 - (b.minX + rw / 2) * this.viewScale,
-        h / 2 - (b.minY + rh / 2) * this.viewScale
-      ];
-    } else {
-      const sx = w / this.worldWidth;
-      const sy = h / this.worldHeight;
-      this.viewScale = Math.min(sx, sy) * 0.92;
-      this.viewOffset = [
-        (w - this.worldWidth * this.viewScale) / 2,
-        (h - this.worldHeight * this.viewScale) / 2
-      ];
+      return Math.max(b.maxX - b.minX, b.maxY - b.minY) * 0.3;
     }
+    return Math.max(this.worldWidth, this.worldHeight) * 0.15;
+  }
+
+  _viewCentre() {
+    if (this.regionBounds) {
+      const b = this.regionBounds;
+      return [(b.minX + b.maxX) / 2, (b.minY + b.maxY) / 2];
+    }
+    return [this.worldWidth / 2, this.worldHeight / 2];
+  }
+
+  // Lay the player shape and the example out side by side around the view centre,
+  // then frame the pair. World position here is throwaway — the placement canvas
+  // repositions the shape when it takes over.
+  _layout(playerSize, hintSize) {
+    const centre = this._viewCentre();
+
+    if (!this.hintShape) {
+      this.shape.position = centre;
+      this.hintOffset = [0, 0];
+      this.viewBox = this._padded(this.shape.getBoundingBox());
+      return;
+    }
+
+    const sep = playerSize / 2 + Math.max(playerSize, hintSize) * SIDE_GAP_FRAC + hintSize / 2;
+    this.shape.position = [centre[0] - sep / 2, centre[1]];
+
+    const hintBB = this.hintShape.getBoundingBox();
+    this.hintOffset = [
+      centre[0] + sep / 2 - (hintBB.minX + hintBB.maxX) / 2,
+      centre[1] - (hintBB.minY + hintBB.maxY) / 2
+    ];
+
+    this.viewBox = this._padded(this._unionBoxes(
+      this.shape.getBoundingBox(),
+      this._offsetBox(hintBB, this.hintOffset)
+    ));
+  }
+
+  // Grow the view (never shrink it) so the shape and its handles stay reachable
+  // after scaling up. Monotonic within a sizing session, so dragging a corner
+  // doesn't make the view breathe in and out.
+  _ensureFits() {
+    if (!this.shape || !this.viewBox) return;
+    const bb = this.shape.getBoundingBox();
+    // Handles are screen-space: corner squares plus the rotate arm above the shape,
+    // with enough slack that they don't end up hugging the canvas edge
+    const margin = (ROTATE_HANDLE_DIST + HANDLE_SIZE * 4) / this.viewScale;
+    const needed = {
+      minX: bb.minX - margin, maxX: bb.maxX + margin,
+      minY: bb.minY - margin, maxY: bb.maxY + margin
+    };
+    const b = this.viewBox;
+    if (needed.minX >= b.minX && needed.maxX <= b.maxX &&
+        needed.minY >= b.minY && needed.maxY <= b.maxY) return;
+
+    this.viewBox = this._unionBoxes(b, needed);
+    this._computeView();
+  }
+
+  // World rect actually visible on canvas. Wider than viewBox whenever the box
+  // and the canvas differ in aspect ratio, which is what the grid should cover.
+  _visibleWorldRect() {
+    const dpr = window.devicePixelRatio || 1;
+    const [minX, minY] = this._screenToWorld(0, 0);
+    const [maxX, maxY] = this._screenToWorld(this.canvas.width / dpr, this.canvas.height / dpr);
+    return { minX, minY, maxX, maxY };
+  }
+
+  _gridStep() {
+    const b = this.viewBox;
+    if (!b) return 100;
+    const target = Math.max(b.maxX - b.minX, b.maxY - b.minY) / 10;
+    return GRID_STEPS.find(s => s >= target) || GRID_STEPS[GRID_STEPS.length - 1];
   }
 
   _worldToScreen(wx, wy) {
@@ -92,39 +215,23 @@ export class TransformControls {
 
   activate(shape) {
     this.shape = shape;
-    this._computeView();
-
-    // Position player shape left of center to leave room for hint on the right
-    if (this.regionBounds) {
-      const b = this.regionBounds;
-      const rw = b.maxX - b.minX;
-      shape.position = [b.minX + rw * 0.35, (b.minY + b.maxY) / 2];
-    } else {
-      shape.position = [this.worldWidth * 0.35, this.worldHeight / 2];
-    }
-
+    shape.position = this._viewCentre();
     shape.scale = 1;
     shape.rotation = 0;
 
     const bb = multiPolygonBoundingBox(shape.localPolygons);
     const shapeLocalSize = Math.max(bb.width, bb.height);
 
-    let targetWorldSize;
-    if (this.regionBounds) {
-      const b = this.regionBounds;
-      targetWorldSize = Math.max(b.maxX - b.minX, b.maxY - b.minY) * 0.3;
-    } else {
-      targetWorldSize = Math.max(this.worldWidth, this.worldHeight) * 0.15;
-    }
-
+    // Start the shape at the example's size. That's a neutral anchor — the example
+    // is a random other country — and it guarantees both fit the framing at once.
+    const hintSize = this._hintWorldSize();
+    const playerSize = Math.max(hintSize || this._fallbackWorldSize(), MIN_VIEW_SIZE / 2);
     if (shapeLocalSize > 0) {
-      shape.scale = targetWorldSize / shapeLocalSize;
+      shape.scale = playerSize / shapeLocalSize;
     }
 
-    // Move hint shape to the right side so it doesn't overlap with player shape
-    if (this.hintShape) {
-      this._positionHintOnSide();
-    }
+    this._layout(playerSize, hintSize);
+    this._computeView();
 
     this.canvas.style.display = 'block';
     this.canvas.addEventListener('mousedown', this._onMouseDown);
@@ -134,27 +241,6 @@ export class TransformControls {
     this.canvas.addEventListener('touchmove', this._onTouchMove, { passive: false });
     this.canvas.addEventListener('touchend', this._onTouchEnd, { passive: false });
     this.render();
-  }
-
-  // Compute offset to render hint shape on the right side
-  _positionHintOnSide() {
-    if (!this.hintShape) return;
-    const hintBB = this.hintShape.getBoundingBox();
-    const hintCx = (hintBB.minX + hintBB.maxX) / 2;
-    const hintCy = (hintBB.minY + hintBB.maxY) / 2;
-
-    let targetX, targetY;
-    if (this.regionBounds) {
-      const b = this.regionBounds;
-      const rw = b.maxX - b.minX;
-      targetX = b.minX + rw * 0.75;
-      targetY = (b.minY + b.maxY) / 2;
-    } else {
-      targetX = this.worldWidth * 0.75;
-      targetY = this.worldHeight / 2;
-    }
-
-    this.hintOffset = [targetX - hintCx, targetY - hintCy];
   }
 
   deactivate() {
@@ -252,6 +338,8 @@ export class TransformControls {
       }
     }
 
+    // Rotating changes the bounding box too, so both paths need the check
+    this._ensureFits();
     this.render();
   }
 
@@ -301,55 +389,47 @@ export class TransformControls {
     ctx.strokeStyle = '#21262d';
     ctx.lineWidth = 1 / this.viewScale;
 
-    const gridStep = this.regionBounds ? 50 : 100;
-    const startX = this.regionBounds ? Math.floor(this.regionBounds.minX / gridStep) * gridStep : 0;
-    const endX = this.regionBounds ? this.regionBounds.maxX : this.worldWidth;
-    const startY = this.regionBounds ? Math.floor(this.regionBounds.minY / gridStep) * gridStep : 0;
-    const endY = this.regionBounds ? this.regionBounds.maxY : this.worldHeight;
+    // Step scales with the framing, so the grid stays readable at any zoom
+    const gridStep = this._gridStep();
+    const vb = this._visibleWorldRect();
+    const startX = Math.floor(vb.minX / gridStep) * gridStep;
+    const startY = Math.floor(vb.minY / gridStep) * gridStep;
 
-    for (let x = startX; x <= endX; x += gridStep) {
-      ctx.beginPath(); ctx.moveTo(x, startY); ctx.lineTo(x, endY); ctx.stroke();
+    for (let x = startX; x <= vb.maxX; x += gridStep) {
+      ctx.beginPath(); ctx.moveTo(x, vb.minY); ctx.lineTo(x, vb.maxY); ctx.stroke();
     }
-    for (let y = startY; y <= endY; y += gridStep) {
-      ctx.beginPath(); ctx.moveTo(startX, y); ctx.lineTo(endX, y); ctx.stroke();
+    for (let y = startY; y <= vb.maxY; y += gridStep) {
+      ctx.beginPath(); ctx.moveTo(vb.minX, y); ctx.lineTo(vb.maxX, y); ctx.stroke();
     }
 
-    // Ocean labels in world space
-    ctx.textAlign = 'center';
-    for (const ocean of OCEAN_LABELS) {
-      const isLarge = ocean.name.includes('OCEAN');
-      const fontSize = isLarge ? 16 : 10;
-      ctx.fillStyle = isLarge ? '#1a3a5a' : '#1a3050';
-      ctx.font = `${isLarge ? 600 : 400} ${fontSize}px 'Space Grotesk', system-ui, sans-serif`;
-      const lines = ocean.name.split('\n');
-      for (let i = 0; i < lines.length; i++) {
-        ctx.fillText(lines[i], ocean.x, ocean.y + i * (fontSize + 4));
-      }
-    }
+    // Ocean labels are deliberately absent: they sit at fixed world coordinates
+    // and are meaningless once the view is framed on a couple of countries.
 
     // Draw hint reference shape offset to the right side
     if (this.hintShape) {
       ctx.save();
       ctx.translate(this.hintOffset[0] || 0, this.hintOffset[1] || 0);
-      this.hintShape.draw(ctx, { ghostMode: true });
+      this.hintShape.draw(ctx, { ghostMode: true, lineWidth: 1.2 / this.viewScale });
       // Draw name label on the hint shape
       const hintBB = this.hintShape.getBoundingBox();
       const hcx = (hintBB.minX + hintBB.maxX) / 2;
       const hcy = (hintBB.minY + hintBB.maxY) / 2;
-      const fontSize = Math.max(8, Math.min(14, (hintBB.maxX - hintBB.minX) * 0.12));
+      // Font in world units, derived from screen px, so the label keeps a constant
+      // on-screen size however tightly the view is framed
+      const fontSize = 12 / this.viewScale;
       ctx.fillStyle = this.hintShape.color + 'aa';
       ctx.font = `${fontSize}px 'Space Grotesk', system-ui, sans-serif`;
       ctx.textAlign = 'center';
       ctx.fillText(this.hintLabel, hcx, hcy + fontSize * 0.4);
       ctx.fillStyle = this.hintShape.color + '66';
-      ctx.font = `${Math.max(6, fontSize * 0.6)}px 'Space Grotesk', system-ui, sans-serif`;
+      ctx.font = `${fontSize * 0.7}px 'Space Grotesk', system-ui, sans-serif`;
       ctx.fillText('(example for scale)', hcx, hcy + fontSize * 1.3);
       ctx.restore();
     }
 
     // Draw player shape (in world space — localPolygons * scale + position)
     if (this.shape) {
-      this.shape.draw(ctx, { fillAlpha: 0.35 });
+      this.shape.draw(ctx, { fillAlpha: 0.35, lineWidth: 2 / this.viewScale });
     }
 
     ctx.restore();
