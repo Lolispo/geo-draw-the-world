@@ -1,0 +1,32 @@
+js/geo-data.js
+  s_09eb9cd6346fc5::t_767a6d20ac9978 95-100
+js/world-canvas.js
+  s_09eb9cd6346fc5::t_65f17c46cbf318 385-387
+  s_09eb9cd6346fc5::t_9c1a548b4fd91a 30-32
+  s_09eb9cd6346fc5::t_c0d3ef2f61e6bb 376-377,384
+  s_09eb9cd6346fc5::t_0a8ee9cdeea6b4 326-328
+  s_09eb9cd6346fc5::t_6bcf165c3e547e 372-375
+  s_09eb9cd6346fc5::t_761d5e6007875a 389
+  s_09eb9cd6346fc5::t_8a308dc18c6d47 378-383
+  s_09eb9cd6346fc5::t_bd891892b1090f 388,390-391
+js/main.js
+  s_09eb9cd6346fc5::t_a05fba9d16a15d 1307-1308
+  s_09eb9cd6346fc5::t_6e9177120e86a9 643-646
+  s_09eb9cd6346fc5::t_060c7940773d4e 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "988f14edcf02efe7d1ca16e0ff61a36669b71506",
+  "prompts": {},
+  "sessions": {
+    "s_09eb9cd6346fc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "414607d4-c4e5-43ab-819e-64154b557660",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
