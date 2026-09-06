@@ -88,7 +88,10 @@ export class RankLineGame {
 
     const listWrap = document.createElement('div');
     listWrap.className = 'rank-picker-list';
-    for (const d of getDatasetList()) {
+    // Datasets where most countries share one value (e.g. 0% nuclear) make a
+    // degenerate round — build-datasets.mjs marks those rankable:false. They stay
+    // fully browsable in the Data Explorer.
+    for (const d of getDatasetList().filter((d) => d.rankable !== false)) {
       const hs = getHighScore(`rank-line-${d.id}`);
       const btn = document.createElement('button');
       btn.className = 'btn rank-picker-item';

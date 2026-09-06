@@ -3,14 +3,31 @@
 // Reusable modal: openCountryPanel(code) from any screen.
 
 import {
-  loadDatasets, loadEntities, loadAttributes,
-  getEntity, getAttributes, getDatasetList, formatValue, getRank,
+  loadDatasets, loadEntities, loadAttributes, loadElectricity,
+  getEntity, getAttributes, getElectricity, getDatasetList, formatValue, getRank,
 } from './datasets.js';
 import { getCountryByCode } from './geo-data.js';
 import { flagUrl } from './flags.js';
 import { traceRing } from './utils.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
+const ELECTRICITY_MIN_PCT = 3; // smaller generation sources fold into "Other"
+
+// Fixed colours per generation source (TODOS #29). Unlike religions, this is a closed
+// set, so a country's mix stays recognisable at a glance and reads the same everywhere:
+// fossils warm/dark, nuclear violet, water/wind/sun their obvious hues.
+const ELECTRICITY_COLORS = {
+  Coal: '#4b5563',
+  Gas: '#f97316',
+  Oil: '#78350f',
+  Nuclear: '#a855f7',
+  Hydro: '#3b82f6',
+  Wind: '#22d3ee',
+  Solar: '#facc15',
+  Bioenergy: '#84cc16',
+  'Other renewables': '#10b981',
+  Other: '#6b7280',
+};
 
 let overlay = null;
 let cardEl = null;
@@ -19,7 +36,7 @@ let escHandler = null;
 
 function ensureData() {
   if (!dataPromise) {
-    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes()]);
+    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity()]);
   }
   return dataPromise;
 }
@@ -129,10 +146,21 @@ function render(code) {
 
   // Religion
   if (Array.isArray(attr.religion) && attr.religion.length) {
-    facts.appendChild(buildReligion(attr.religion));
+    facts.appendChild(buildBreakdown('Religion', attr.religion, { minPct: RELIGION_MIN_PCT }));
   }
 
-  if (!attr.capital && !anyMetric && !attr.religion) {
+  // Electricity mix (TODOS #29). The year matters here in a way it doesn't for
+  // religion — mixes move fast — so it's shown rather than buried in provenance.
+  const elec = getElectricity(code);
+  if (elec && elec.sources?.length) {
+    facts.appendChild(buildBreakdown('Electricity', elec.sources, {
+      minPct: ELECTRICITY_MIN_PCT,
+      colors: ELECTRICITY_COLORS,
+      note: `Share of electricity generated, ${elec.year}`,
+    }));
+  }
+
+  if (!attr.capital && !anyMetric && !attr.religion && !elec) {
     facts.appendChild(el('div', 'cp-empty', 'No extra data for this entity yet.'));
   }
 
@@ -144,18 +172,29 @@ function render(code) {
   cardEl.appendChild(el('div', 'cp-credit', 'Outlines © geoBoundaries (CC BY 4.0) · Natural Earth'));
 }
 
-function buildReligion(religion) {
+// Shared labelled-bar breakdown, used by religion and the electricity mix (TODOS #29)
+// and ready for export products (TODOS #32). `colors` maps a row name to a bar colour;
+// without it every bar uses the default accent, which is what religion wants.
+function buildBreakdown(label, items, { minPct = 5, colors = null, note = null } = {}) {
   const wrap = el('div', 'cp-religion');
-  wrap.appendChild(el('div', 'cp-section-label', 'Religion'));
+  wrap.appendChild(el('div', 'cp-section-label', label));
+  if (note) wrap.appendChild(el('div', 'cp-section-note', note));
 
   // Sort most→least, keep the significant ones, fold the small tail into "Other".
-  const sorted = [...religion].sort((a, b) => b.pct - a.pct);
-  let major = sorted.filter((r) => r.pct >= RELIGION_MIN_PCT);
+  const sorted = [...items].sort((a, b) => b.pct - a.pct);
+  let major = sorted.filter((r) => r.pct >= minPct);
   if (major.length < 2) major = sorted.slice(0, Math.min(3, sorted.length));
   const majorSet = new Set(major);
   const otherPct = sorted.filter((r) => !majorSet.has(r)).reduce((s, r) => s + r.pct, 0);
   const rows = [...major];
-  if (otherPct >= 0.5) rows.push({ name: 'Other', pct: Math.round(otherPct * 10) / 10 });
+  if (otherPct >= 0.5) {
+    // Some sources already carry their own catch-all row (the Factbook's religion
+    // lists have a literal "other"), which used to render alongside ours as
+    // "other 5.1%" / "Other 3.7%". Merge into it rather than showing both.
+    const existing = rows.find((r) => /^other$/i.test(r.name));
+    if (existing) existing.pct = Math.round((existing.pct + otherPct) * 10) / 10;
+    else rows.push({ name: 'Other', pct: Math.round(otherPct * 10) / 10 });
+  }
 
   const max = Math.max(...rows.map((r) => r.pct), 1);
   for (const r of rows) {
@@ -164,6 +203,7 @@ function buildReligion(religion) {
     const barWrap = el('div', 'cp-rel-bar');
     const bar = el('div', 'cp-rel-fill');
     bar.style.width = `${(r.pct / max) * 100}%`;
+    if (colors && colors[r.name]) bar.style.background = colors[r.name];
     barWrap.appendChild(bar);
     row.appendChild(barWrap);
     row.appendChild(el('span', 'cp-rel-pct', `${r.pct}%`));

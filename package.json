@@ -17,6 +17,7 @@
     "build:geometry": "node scripts/build-geometry.mjs",
     "build:datasets": "node scripts/build-datasets.mjs",
     "build:attributes": "node scripts/build-attributes.mjs",
+    "build:electricity": "node scripts/build-electricity.mjs",
     "build:shapes": "node scripts/build-shapes.mjs",
     "build:entities": "node scripts/build-entities.mjs"
   },

@@ -200,6 +200,59 @@ async function readJsonIfPresent(path) {
   }
 }
 
+{
+  // TODOS #29 — rankable slices of the electricity mix built by build-electricity.mjs.
+  // A country present in electricity.json but with no nuclear row genuinely generates
+  // ~0% nuclear, so it gets 0 rather than being omitted: "Poland: 0% nuclear" is a
+  // true and useful fact, and omitting it would misread as missing data.
+  const elec = (await readJsonIfPresent('data/electricity.json'))?.electricity;
+  if (!elec) {
+    console.log('! data/electricity.json missing — skipping electricity datasets. Run build-electricity.mjs, then re-run this.');
+  } else {
+    const RENEWABLE = new Set(['Hydro', 'Wind', 'Solar', 'Bioenergy', 'Other renewables']);
+    const SLICES = [
+      { id: 'elec-nuclear-pct',   name: 'Electricity from nuclear',    match: (n) => n === 'Nuclear',
+        blurb: 'Share of electricity generated from nuclear (Ember)' },
+      { id: 'elec-coal-pct',      name: 'Electricity from coal',       match: (n) => n === 'Coal',
+        blurb: 'Share of electricity generated from coal (Ember)' },
+      { id: 'elec-renewable-pct', name: 'Electricity from renewables', match: (n) => RENEWABLE.has(n),
+        blurb: 'Share from hydro, wind, solar, bioenergy & other renewables (Ember)' },
+    ];
+    for (const slice of SLICES) {
+      const values = {};
+      for (const [code, entry] of Object.entries(elec)) {
+        const pct = entry.sources.filter((s) => slice.match(s.name)).reduce((sum, s) => sum + s.pct, 0);
+        // Summing already-rounded component shares can overshoot (an all-renewable
+        // grid totalling 100.1%). It's a share of generation, so clamp at 100.
+        values[code] = Math.min(100, Math.round(pct * 10) / 10);
+        usedCodes.add(code);
+      }
+      datasets.push({ id: slice.id, name: slice.name, blurb: slice.blurb, format: 'percent', higherFirst: true, values });
+      console.log(`${slice.name}: ${Object.keys(values).length} countries (derived)`);
+    }
+  }
+}
+
+// Flag datasets that make a poor ranking game. Rank the World asks you to place
+// countries on a line by value; if most of them share one value there's nothing to
+// place — "% of electricity from nuclear" is 0 for 181 of 213 countries. Such a
+// dataset stays fully browsable in the Data Explorer, it's just not offered as a
+// round. Measured from the data rather than hardcoded, so it self-corrects when a
+// source changes: if the modal value covers more than this share, it's degenerate.
+const DEGENERATE_SHARE = 0.4;
+for (const ds of datasets) {
+  const vals = Object.values(ds.values);
+  if (!vals.length) continue;
+  const counts = new Map();
+  for (const v of vals) counts.set(v, (counts.get(v) || 0) + 1);
+  const modal = Math.max(...counts.values());
+  if (modal / vals.length > DEGENERATE_SHARE) {
+    ds.rankable = false;
+    const modalValue = [...counts.entries()].find(([, n]) => n === modal)[0];
+    console.log(`  ${ds.name}: not rankable — ${modal}/${vals.length} countries share the value ${modalValue}`);
+  }
+}
+
 // Country registry for every code used by any dataset
 const countries = {};
 let missingCont = 0;

@@ -14,7 +14,8 @@ const REGION_CONTINENT = {
   'north-america': 'North America', 'south-america': 'South America', oceania: 'Oceania',
 };
 const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy', 'exports', 'urbanization',
-  'export-share-gdp', 'independence-year']; // TODOS #27, #28
+  'export-share-gdp', 'independence-year', // TODOS #27, #28
+  'elec-nuclear-pct', 'elec-coal-pct', 'elec-renewable-pct']; // TODOS #29
 
 // Geometry names that don't normalize-match a flag/stat name → explicit ISO code.
 const NAME_OVERRIDE = {
@@ -119,6 +120,8 @@ const flags = read('data/flags.json').flags;
 const datasets = read('data/datasets.json');
 let attributes = {};
 try { attributes = read('data/attributes.json').attributes || {}; } catch { /* optional */ }
+let electricity = {};
+try { electricity = read('data/electricity.json').electricity || {}; } catch { /* optional */ }
 
 const flagByName = new Map(flags.map((f) => [norm(f.name), f.code]));
 const flagNameByCode = new Map(flags.map((f) => [f.code, f.name]));
@@ -183,6 +186,7 @@ for (const code of [...allCodes].sort()) {
     hasFlagImage: flagCodes.has(code),       // flag IMAGE on flagcdn (probed below for the rest)
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
+    hasElectricity: !!electricity[code], // TODOS #29
     // TODOS #20: the Territories toggle gates ALL dependent territories (not just the
     // newly-added ones) so it behaves consistently in browse/rank/draw.
     ...(type === 'territory' || type === 'de-facto' ? { optional: true } : {}),

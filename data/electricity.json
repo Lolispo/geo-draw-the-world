@@ -1,0 +1,5308 @@
+{
+  "electricity": {
+    "ae": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 68.3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 22.9
+        },
+        {
+          "name": "Solar",
+          "pct": 8.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "af": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 75.8
+        },
+        {
+          "name": "Solar",
+          "pct": 11.1
+        },
+        {
+          "name": "Oil",
+          "pct": 10.1
+        },
+        {
+          "name": "Coal",
+          "pct": 3
+        }
+      ]
+    },
+    "ag": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 91.9
+        },
+        {
+          "name": "Solar",
+          "pct": 8.1
+        }
+      ]
+    },
+    "al": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 95.9
+        },
+        {
+          "name": "Solar",
+          "pct": 4.1
+        }
+      ]
+    },
+    "am": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 34.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 28
+        },
+        {
+          "name": "Nuclear",
+          "pct": 27
+        },
+        {
+          "name": "Solar",
+          "pct": 11
+        }
+      ]
+    },
+    "ao": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 70.6
+        },
+        {
+          "name": "Oil",
+          "pct": 17.3
+        },
+        {
+          "name": "Gas",
+          "pct": 9
+        },
+        {
+          "name": "Solar",
+          "pct": 2.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.3
+        }
+      ]
+    },
+    "ar": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 52.7
+        },
+        {
+          "name": "Hydro",
+          "pct": 17.1
+        },
+        {
+          "name": "Wind",
+          "pct": 12.2
+        },
+        {
+          "name": "Nuclear",
+          "pct": 7
+        },
+        {
+          "name": "Oil",
+          "pct": 3.9
+        },
+        {
+          "name": "Solar",
+          "pct": 3.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.9
+        },
+        {
+          "name": "Coal",
+          "pct": 1.8
+        }
+      ]
+    },
+    "as": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 94.4
+        },
+        {
+          "name": "Solar",
+          "pct": 5.6
+        }
+      ]
+    },
+    "at": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 51.8
+        },
+        {
+          "name": "Solar",
+          "pct": 14.1
+        },
+        {
+          "name": "Gas",
+          "pct": 11.9
+        },
+        {
+          "name": "Wind",
+          "pct": 11.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.4
+        },
+        {
+          "name": "Oil",
+          "pct": 4.5
+        }
+      ]
+    },
+    "au": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 42.7
+        },
+        {
+          "name": "Solar",
+          "pct": 19.6
+        },
+        {
+          "name": "Gas",
+          "pct": 16.4
+        },
+        {
+          "name": "Wind",
+          "pct": 13.7
+        },
+        {
+          "name": "Hydro",
+          "pct": 4.3
+        },
+        {
+          "name": "Oil",
+          "pct": 2.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.1
+        }
+      ]
+    },
+    "aw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 83
+        },
+        {
+          "name": "Wind",
+          "pct": 14
+        },
+        {
+          "name": "Solar",
+          "pct": 3
+        }
+      ]
+    },
+    "az": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 87.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 11.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.3
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ba": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 55.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 36.6
+        },
+        {
+          "name": "Solar",
+          "pct": 4.1
+        },
+        {
+          "name": "Wind",
+          "pct": 2.6
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.3
+        }
+      ]
+    },
+    "bb": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 88.3
+        },
+        {
+          "name": "Solar",
+          "pct": 9
+        },
+        {
+          "name": "Gas",
+          "pct": 2.7
+        }
+      ]
+    },
+    "bd": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 64.3
+        },
+        {
+          "name": "Coal",
+          "pct": 21.5
+        },
+        {
+          "name": "Oil",
+          "pct": 12.1
+        },
+        {
+          "name": "Solar",
+          "pct": 1.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        }
+      ]
+    },
+    "be": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 33.1
+        },
+        {
+          "name": "Gas",
+          "pct": 21.5
+        },
+        {
+          "name": "Wind",
+          "pct": 18.8
+        },
+        {
+          "name": "Solar",
+          "pct": 14.3
+        },
+        {
+          "name": "Oil",
+          "pct": 6.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        }
+      ]
+    },
+    "bf": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 82.8
+        },
+        {
+          "name": "Solar",
+          "pct": 6.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 5.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.3
+        }
+      ]
+    },
+    "bg": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 39.1
+        },
+        {
+          "name": "Coal",
+          "pct": 22.5
+        },
+        {
+          "name": "Solar",
+          "pct": 18.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 6.7
+        },
+        {
+          "name": "Gas",
+          "pct": 4.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 4.5
+        },
+        {
+          "name": "Wind",
+          "pct": 3.5
+        },
+        {
+          "name": "Oil",
+          "pct": 0.7
+        }
+      ]
+    },
+    "bh": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 99.7
+        },
+        {
+          "name": "Solar",
+          "pct": 0.3
+        }
+      ]
+    },
+    "bi": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 73.5
+        },
+        {
+          "name": "Oil",
+          "pct": 24.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2
+        }
+      ]
+    },
+    "bj": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 72.3
+        },
+        {
+          "name": "Oil",
+          "pct": 23.8
+        },
+        {
+          "name": "Solar",
+          "pct": 4
+        }
+      ]
+    },
+    "bm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 98.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.6
+        }
+      ]
+    },
+    "bn": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 79.1
+        },
+        {
+          "name": "Coal",
+          "pct": 19.8
+        },
+        {
+          "name": "Oil",
+          "pct": 0.9
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "bo": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 62.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 27.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 3.2
+        },
+        {
+          "name": "Solar",
+          "pct": 2.9
+        },
+        {
+          "name": "Wind",
+          "pct": 2.1
+        },
+        {
+          "name": "Oil",
+          "pct": 1.5
+        }
+      ]
+    },
+    "br": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 51.8
+        },
+        {
+          "name": "Wind",
+          "pct": 15.7
+        },
+        {
+          "name": "Solar",
+          "pct": 11.8
+        },
+        {
+          "name": "Gas",
+          "pct": 7.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 7.3
+        },
+        {
+          "name": "Coal",
+          "pct": 2.3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 2.1
+        },
+        {
+          "name": "Oil",
+          "pct": 1.7
+        }
+      ]
+    },
+    "bs": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 99.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.9
+        }
+      ]
+    },
+    "bt": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 100
+        }
+      ]
+    },
+    "bw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 98.3
+        },
+        {
+          "name": "Oil",
+          "pct": 1.5
+        },
+        {
+          "name": "Solar",
+          "pct": 0.3
+        }
+      ]
+    },
+    "by": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 54.5
+        },
+        {
+          "name": "Nuclear",
+          "pct": 36.6
+        },
+        {
+          "name": "Oil",
+          "pct": 4
+        },
+        {
+          "name": "Hydro",
+          "pct": 2
+        },
+        {
+          "name": "Wind",
+          "pct": 1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.8
+        }
+      ]
+    },
+    "bz": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 51.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 34
+        },
+        {
+          "name": "Oil",
+          "pct": 12.8
+        },
+        {
+          "name": "Solar",
+          "pct": 2.1
+        }
+      ]
+    },
+    "ca": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 52.8
+        },
+        {
+          "name": "Gas",
+          "pct": 17.8
+        },
+        {
+          "name": "Nuclear",
+          "pct": 13.1
+        },
+        {
+          "name": "Wind",
+          "pct": 7.9
+        },
+        {
+          "name": "Coal",
+          "pct": 4.1
+        },
+        {
+          "name": "Solar",
+          "pct": 1.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.6
+        },
+        {
+          "name": "Oil",
+          "pct": 1.2
+        }
+      ]
+    },
+    "cd": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 84.2
+        },
+        {
+          "name": "Solar",
+          "pct": 15.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "cf": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 100
+        }
+      ]
+    },
+    "cg": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 73.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 20.1
+        },
+        {
+          "name": "Oil",
+          "pct": 5.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.5
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ch": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 52.3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 29.9
+        },
+        {
+          "name": "Solar",
+          "pct": 12.1
+        },
+        {
+          "name": "Oil",
+          "pct": 1.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 1.6
+        },
+        {
+          "name": "Gas",
+          "pct": 0.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ci": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 70.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 27.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.9
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ck": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 50
+        },
+        {
+          "name": "Solar",
+          "pct": 50
+        }
+      ]
+    },
+    "cl": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Solar",
+          "pct": 25.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 22.2
+        },
+        {
+          "name": "Coal",
+          "pct": 17.8
+        },
+        {
+          "name": "Gas",
+          "pct": 15.3
+        },
+        {
+          "name": "Wind",
+          "pct": 13.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.7
+        },
+        {
+          "name": "Oil",
+          "pct": 0.6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.3
+        }
+      ]
+    },
+    "cm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 72
+        },
+        {
+          "name": "Gas",
+          "pct": 22
+        },
+        {
+          "name": "Oil",
+          "pct": 4.8
+        },
+        {
+          "name": "Solar",
+          "pct": 0.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.6
+        }
+      ]
+    },
+    "cn": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 54.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 13.2
+        },
+        {
+          "name": "Solar",
+          "pct": 11.1
+        },
+        {
+          "name": "Wind",
+          "pct": 10.7
+        },
+        {
+          "name": "Nuclear",
+          "pct": 4.6
+        },
+        {
+          "name": "Gas",
+          "pct": 3.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2
+        },
+        {
+          "name": "Oil",
+          "pct": 0.8
+        }
+      ]
+    },
+    "co": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 69.2
+        },
+        {
+          "name": "Gas",
+          "pct": 13.8
+        },
+        {
+          "name": "Coal",
+          "pct": 6.1
+        },
+        {
+          "name": "Solar",
+          "pct": 5.1
+        },
+        {
+          "name": "Oil",
+          "pct": 3.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.2
+        }
+      ]
+    },
+    "cr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 74.8
+        },
+        {
+          "name": "Wind",
+          "pct": 12.1
+        },
+        {
+          "name": "Other renewables",
+          "pct": 11.9
+        },
+        {
+          "name": "Solar",
+          "pct": 0.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.5
+        }
+      ]
+    },
+    "cu": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 82.3
+        },
+        {
+          "name": "Gas",
+          "pct": 13.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.8
+        },
+        {
+          "name": "Solar",
+          "pct": 1.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.4
+        }
+      ]
+    },
+    "cv": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 69.2
+        },
+        {
+          "name": "Wind",
+          "pct": 15.4
+        },
+        {
+          "name": "Solar",
+          "pct": 15.4
+        }
+      ]
+    },
+    "cy": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 72.3
+        },
+        {
+          "name": "Solar",
+          "pct": 23.2
+        },
+        {
+          "name": "Wind",
+          "pct": 3.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1
+        }
+      ]
+    },
+    "cz": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 42.3
+        },
+        {
+          "name": "Coal",
+          "pct": 35.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 8
+        },
+        {
+          "name": "Solar",
+          "pct": 5.8
+        },
+        {
+          "name": "Gas",
+          "pct": 5.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 2.3
+        },
+        {
+          "name": "Wind",
+          "pct": 0.8
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        }
+      ]
+    },
+    "de": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Wind",
+          "pct": 27.2
+        },
+        {
+          "name": "Coal",
+          "pct": 20.6
+        },
+        {
+          "name": "Solar",
+          "pct": 17.9
+        },
+        {
+          "name": "Gas",
+          "pct": 16.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 10.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 3.9
+        },
+        {
+          "name": "Oil",
+          "pct": 3.8
+        }
+      ]
+    },
+    "dj": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 65
+        },
+        {
+          "name": "Wind",
+          "pct": 35
+        }
+      ]
+    },
+    "dk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Wind",
+          "pct": 57.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 20.1
+        },
+        {
+          "name": "Solar",
+          "pct": 13.4
+        },
+        {
+          "name": "Oil",
+          "pct": 3.7
+        },
+        {
+          "name": "Coal",
+          "pct": 2.7
+        },
+        {
+          "name": "Gas",
+          "pct": 2.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.1
+        }
+      ]
+    },
+    "dm": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 86.7
+        },
+        {
+          "name": "Hydro",
+          "pct": 13.3
+        }
+      ]
+    },
+    "do": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 29.1
+        },
+        {
+          "name": "Gas",
+          "pct": 26.8
+        },
+        {
+          "name": "Oil",
+          "pct": 20.4
+        },
+        {
+          "name": "Solar",
+          "pct": 9.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 6.7
+        },
+        {
+          "name": "Wind",
+          "pct": 6.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.9
+        }
+      ]
+    },
+    "dz": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 98.6
+        },
+        {
+          "name": "Solar",
+          "pct": 1
+        },
+        {
+          "name": "Oil",
+          "pct": 0.3
+        }
+      ]
+    },
+    "ec": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 77.9
+        },
+        {
+          "name": "Oil",
+          "pct": 17.9
+        },
+        {
+          "name": "Gas",
+          "pct": 2.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.9
+        },
+        {
+          "name": "Wind",
+          "pct": 0.5
+        },
+        {
+          "name": "Solar",
+          "pct": 0.1
+        }
+      ]
+    },
+    "ee": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 39.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 21.8
+        },
+        {
+          "name": "Wind",
+          "pct": 18.8
+        },
+        {
+          "name": "Solar",
+          "pct": 18.5
+        },
+        {
+          "name": "Gas",
+          "pct": 1.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.5
+        }
+      ]
+    },
+    "eg": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 79.6
+        },
+        {
+          "name": "Oil",
+          "pct": 7.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 6.1
+        },
+        {
+          "name": "Wind",
+          "pct": 3.8
+        },
+        {
+          "name": "Solar",
+          "pct": 3.1
+        }
+      ]
+    },
+    "er": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 88.9
+        },
+        {
+          "name": "Solar",
+          "pct": 11.1
+        }
+      ]
+    },
+    "es": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Solar",
+          "pct": 21.8
+        },
+        {
+          "name": "Gas",
+          "pct": 21.6
+        },
+        {
+          "name": "Wind",
+          "pct": 20.4
+        },
+        {
+          "name": "Nuclear",
+          "pct": 18.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 11.4
+        },
+        {
+          "name": "Oil",
+          "pct": 3.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.2
+        },
+        {
+          "name": "Coal",
+          "pct": 0.3
+        }
+      ]
+    },
+    "et": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 96.5
+        },
+        {
+          "name": "Wind",
+          "pct": 3.3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.1
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.1
+        }
+      ]
+    },
+    "fi": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 39.9
+        },
+        {
+          "name": "Wind",
+          "pct": 27.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 15.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 12.6
+        },
+        {
+          "name": "Oil",
+          "pct": 2.3
+        },
+        {
+          "name": "Gas",
+          "pct": 1.2
+        },
+        {
+          "name": "Solar",
+          "pct": 1.2
+        },
+        {
+          "name": "Coal",
+          "pct": 0.2
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.2
+        }
+      ]
+    },
+    "fj": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 52.2
+        },
+        {
+          "name": "Oil",
+          "pct": 36.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 10.4
+        },
+        {
+          "name": "Solar",
+          "pct": 0.9
+        }
+      ]
+    },
+    "fk": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "fo": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 53.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 26.5
+        },
+        {
+          "name": "Wind",
+          "pct": 18.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2
+        }
+      ]
+    },
+    "fr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 68.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 10.4
+        },
+        {
+          "name": "Wind",
+          "pct": 8.2
+        },
+        {
+          "name": "Solar",
+          "pct": 5.6
+        },
+        {
+          "name": "Gas",
+          "pct": 3
+        },
+        {
+          "name": "Oil",
+          "pct": 1.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.8
+        },
+        {
+          "name": "Coal",
+          "pct": 0.3
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.1
+        }
+      ]
+    },
+    "ga": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 44.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 35
+        },
+        {
+          "name": "Oil",
+          "pct": 20.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.4
+        }
+      ]
+    },
+    "gb": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 31.1
+        },
+        {
+          "name": "Wind",
+          "pct": 29.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 14.1
+        },
+        {
+          "name": "Nuclear",
+          "pct": 12.4
+        },
+        {
+          "name": "Solar",
+          "pct": 6.6
+        },
+        {
+          "name": "Oil",
+          "pct": 4.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 1.9
+        },
+        {
+          "name": "Coal",
+          "pct": 0.1
+        }
+      ]
+    },
+    "gd": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "ge": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 78.8
+        },
+        {
+          "name": "Gas",
+          "pct": 20.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.6
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "gf": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 53.1
+        },
+        {
+          "name": "Oil",
+          "pct": 34.7
+        },
+        {
+          "name": "Solar",
+          "pct": 6.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.1
+        }
+      ]
+    },
+    "gh": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 61.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 35.4
+        },
+        {
+          "name": "Oil",
+          "pct": 2.3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "gi": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 81.8
+        },
+        {
+          "name": "Oil",
+          "pct": 18.2
+        }
+      ]
+    },
+    "gl": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 78.3
+        },
+        {
+          "name": "Oil",
+          "pct": 16.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5
+        }
+      ]
+    },
+    "gm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "gn": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 74.4
+        },
+        {
+          "name": "Oil",
+          "pct": 24.8
+        },
+        {
+          "name": "Solar",
+          "pct": 0.7
+        }
+      ]
+    },
+    "gp": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 51.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 15.6
+        },
+        {
+          "name": "Coal",
+          "pct": 13.2
+        },
+        {
+          "name": "Solar",
+          "pct": 6.6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 6.6
+        },
+        {
+          "name": "Wind",
+          "pct": 6
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        }
+      ]
+    },
+    "gq": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 72.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 26.8
+        },
+        {
+          "name": "Oil",
+          "pct": 0.7
+        }
+      ]
+    },
+    "gr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 38.4
+        },
+        {
+          "name": "Solar",
+          "pct": 22.2
+        },
+        {
+          "name": "Wind",
+          "pct": 20.4
+        },
+        {
+          "name": "Oil",
+          "pct": 7.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 5.9
+        },
+        {
+          "name": "Coal",
+          "pct": 4.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        }
+      ]
+    },
+    "gt": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 39.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 22.2
+        },
+        {
+          "name": "Coal",
+          "pct": 15.8
+        },
+        {
+          "name": "Oil",
+          "pct": 15.8
+        },
+        {
+          "name": "Wind",
+          "pct": 2.3
+        },
+        {
+          "name": "Other renewables",
+          "pct": 2.2
+        },
+        {
+          "name": "Solar",
+          "pct": 1.8
+        }
+      ]
+    },
+    "gu": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 91.4
+        },
+        {
+          "name": "Solar",
+          "pct": 8.6
+        }
+      ]
+    },
+    "gw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "gy": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 96.4
+        },
+        {
+          "name": "Solar",
+          "pct": 1.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.4
+        },
+        {
+          "name": "Gas",
+          "pct": 0.7
+        }
+      ]
+    },
+    "hk": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 64.1
+        },
+        {
+          "name": "Coal",
+          "pct": 33.7
+        },
+        {
+          "name": "Oil",
+          "pct": 1.2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.4
+        }
+      ]
+    },
+    "hn": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 44.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 30.4
+        },
+        {
+          "name": "Solar",
+          "pct": 9.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.7
+        },
+        {
+          "name": "Wind",
+          "pct": 6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 2.8
+        },
+        {
+          "name": "Coal",
+          "pct": 0.5
+        }
+      ]
+    },
+    "hr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 39.3
+        },
+        {
+          "name": "Wind",
+          "pct": 21.4
+        },
+        {
+          "name": "Gas",
+          "pct": 18.8
+        },
+        {
+          "name": "Solar",
+          "pct": 8.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.8
+        },
+        {
+          "name": "Coal",
+          "pct": 5
+        }
+      ]
+    },
+    "ht": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 81.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 18.6
+        }
+      ]
+    },
+    "hu": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 40
+        },
+        {
+          "name": "Solar",
+          "pct": 27.3
+        },
+        {
+          "name": "Gas",
+          "pct": 20.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.9
+        },
+        {
+          "name": "Coal",
+          "pct": 3.4
+        },
+        {
+          "name": "Wind",
+          "pct": 1.5
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        }
+      ]
+    },
+    "id": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 61.5
+        },
+        {
+          "name": "Gas",
+          "pct": 18.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 7.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.7
+        },
+        {
+          "name": "Other renewables",
+          "pct": 4.5
+        },
+        {
+          "name": "Oil",
+          "pct": 1.9
+        },
+        {
+          "name": "Solar",
+          "pct": 0.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.1
+        }
+      ]
+    },
+    "ie": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 48.4
+        },
+        {
+          "name": "Wind",
+          "pct": 38
+        },
+        {
+          "name": "Solar",
+          "pct": 4.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 3.3
+        },
+        {
+          "name": "Oil",
+          "pct": 3
+        },
+        {
+          "name": "Hydro",
+          "pct": 2.1
+        },
+        {
+          "name": "Coal",
+          "pct": 0.5
+        }
+      ]
+    },
+    "il": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 79.7
+        },
+        {
+          "name": "Solar",
+          "pct": 16.2
+        },
+        {
+          "name": "Coal",
+          "pct": 3.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.2
+        }
+      ]
+    },
+    "in": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 70.8
+        },
+        {
+          "name": "Solar",
+          "pct": 9.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 8.5
+        },
+        {
+          "name": "Wind",
+          "pct": 5
+        },
+        {
+          "name": "Nuclear",
+          "pct": 2.6
+        },
+        {
+          "name": "Gas",
+          "pct": 2.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.1
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        }
+      ]
+    },
+    "iq": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 53
+        },
+        {
+          "name": "Oil",
+          "pct": 45.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 1.3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.3
+        }
+      ]
+    },
+    "ir": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 89.5
+        },
+        {
+          "name": "Oil",
+          "pct": 4.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 3.3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 1.9
+        },
+        {
+          "name": "Wind",
+          "pct": 0.3
+        },
+        {
+          "name": "Coal",
+          "pct": 0.2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "is": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 70.7
+        },
+        {
+          "name": "Other renewables",
+          "pct": 29.2
+        },
+        {
+          "name": "Wind",
+          "pct": 0.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.1
+        }
+      ]
+    },
+    "it": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 47.2
+        },
+        {
+          "name": "Solar",
+          "pct": 16.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 15.8
+        },
+        {
+          "name": "Wind",
+          "pct": 8.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.9
+        },
+        {
+          "name": "Oil",
+          "pct": 2.6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 2.1
+        },
+        {
+          "name": "Coal",
+          "pct": 1.4
+        }
+      ]
+    },
+    "jm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 56.9
+        },
+        {
+          "name": "Oil",
+          "pct": 30.5
+        },
+        {
+          "name": "Wind",
+          "pct": 5.9
+        },
+        {
+          "name": "Solar",
+          "pct": 3
+        },
+        {
+          "name": "Hydro",
+          "pct": 2.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        }
+      ]
+    },
+    "jo": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 62
+        },
+        {
+          "name": "Solar",
+          "pct": 16.6
+        },
+        {
+          "name": "Oil",
+          "pct": 13.9
+        },
+        {
+          "name": "Wind",
+          "pct": 7.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.1
+        }
+      ]
+    },
+    "jp": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 32.8
+        },
+        {
+          "name": "Coal",
+          "pct": 32.1
+        },
+        {
+          "name": "Solar",
+          "pct": 9.8
+        },
+        {
+          "name": "Nuclear",
+          "pct": 9.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 7.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.3
+        },
+        {
+          "name": "Oil",
+          "pct": 2.5
+        },
+        {
+          "name": "Wind",
+          "pct": 1.2
+        }
+      ]
+    },
+    "ke": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Other renewables",
+          "pct": 45.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 20.9
+        },
+        {
+          "name": "Wind",
+          "pct": 16.4
+        },
+        {
+          "name": "Oil",
+          "pct": 10
+        },
+        {
+          "name": "Solar",
+          "pct": 4.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.1
+        }
+      ]
+    },
+    "kg": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 84.7
+        },
+        {
+          "name": "Coal",
+          "pct": 12.6
+        },
+        {
+          "name": "Gas",
+          "pct": 1.7
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        }
+      ]
+    },
+    "kh": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 56.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 29.9
+        },
+        {
+          "name": "Solar",
+          "pct": 10.6
+        },
+        {
+          "name": "Oil",
+          "pct": 2.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.3
+        }
+      ]
+    },
+    "ki": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 75
+        },
+        {
+          "name": "Solar",
+          "pct": 25
+        }
+      ]
+    },
+    "km": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "kn": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 91.3
+        },
+        {
+          "name": "Wind",
+          "pct": 4.3
+        },
+        {
+          "name": "Solar",
+          "pct": 4.3
+        }
+      ]
+    },
+    "kp": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 62.7
+        },
+        {
+          "name": "Coal",
+          "pct": 34.1
+        },
+        {
+          "name": "Oil",
+          "pct": 2.6
+        },
+        {
+          "name": "Solar",
+          "pct": 0.6
+        }
+      ]
+    },
+    "kr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 31.1
+        },
+        {
+          "name": "Nuclear",
+          "pct": 29.6
+        },
+        {
+          "name": "Gas",
+          "pct": 27.9
+        },
+        {
+          "name": "Solar",
+          "pct": 6.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 3.2
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.6
+        }
+      ]
+    },
+    "kw": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 62
+        },
+        {
+          "name": "Oil",
+          "pct": 35.8
+        },
+        {
+          "name": "Wind",
+          "pct": 2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ky": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 95.8
+        },
+        {
+          "name": "Solar",
+          "pct": 4.2
+        }
+      ]
+    },
+    "kz": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 54.3
+        },
+        {
+          "name": "Gas",
+          "pct": 29.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 8.5
+        },
+        {
+          "name": "Wind",
+          "pct": 4.7
+        },
+        {
+          "name": "Solar",
+          "pct": 1.6
+        },
+        {
+          "name": "Oil",
+          "pct": 1.5
+        }
+      ]
+    },
+    "la": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 76.5
+        },
+        {
+          "name": "Coal",
+          "pct": 23.3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "lb": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 56.2
+        },
+        {
+          "name": "Solar",
+          "pct": 30
+        },
+        {
+          "name": "Hydro",
+          "pct": 13.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.2
+        }
+      ]
+    },
+    "lc": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 97.5
+        },
+        {
+          "name": "Solar",
+          "pct": 2.5
+        }
+      ]
+    },
+    "lk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 38.2
+        },
+        {
+          "name": "Coal",
+          "pct": 27.5
+        },
+        {
+          "name": "Solar",
+          "pct": 16.5
+        },
+        {
+          "name": "Oil",
+          "pct": 10.8
+        },
+        {
+          "name": "Wind",
+          "pct": 5.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.3
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.2
+        }
+      ]
+    },
+    "lr": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 52.6
+        },
+        {
+          "name": "Oil",
+          "pct": 45.6
+        },
+        {
+          "name": "Solar",
+          "pct": 1.8
+        }
+      ]
+    },
+    "ls": {
+      "year": 2022,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 100
+        }
+      ]
+    },
+    "lt": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Wind",
+          "pct": 44.9
+        },
+        {
+          "name": "Solar",
+          "pct": 18.8
+        },
+        {
+          "name": "Gas",
+          "pct": 16.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 10
+        },
+        {
+          "name": "Oil",
+          "pct": 5.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 3.9
+        }
+      ]
+    },
+    "lu": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Wind",
+          "pct": 30.5
+        },
+        {
+          "name": "Solar",
+          "pct": 30.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 27.3
+        },
+        {
+          "name": "Oil",
+          "pct": 4.5
+        },
+        {
+          "name": "Gas",
+          "pct": 3.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 3.2
+        }
+      ]
+    },
+    "lv": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 46.7
+        },
+        {
+          "name": "Gas",
+          "pct": 26.2
+        },
+        {
+          "name": "Solar",
+          "pct": 13.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 9.7
+        },
+        {
+          "name": "Wind",
+          "pct": 3.5
+        },
+        {
+          "name": "Oil",
+          "pct": 0.8
+        }
+      ]
+    },
+    "ly": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 74.5
+        },
+        {
+          "name": "Oil",
+          "pct": 25.4
+        }
+      ]
+    },
+    "ma": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 61.5
+        },
+        {
+          "name": "Wind",
+          "pct": 16
+        },
+        {
+          "name": "Gas",
+          "pct": 10.9
+        },
+        {
+          "name": "Solar",
+          "pct": 5.8
+        },
+        {
+          "name": "Oil",
+          "pct": 3.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "md": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 85.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 5.7
+        },
+        {
+          "name": "Oil",
+          "pct": 3.6
+        },
+        {
+          "name": "Wind",
+          "pct": 2.6
+        },
+        {
+          "name": "Solar",
+          "pct": 2.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.3
+        }
+      ]
+    },
+    "me": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 58.5
+        },
+        {
+          "name": "Coal",
+          "pct": 24.4
+        },
+        {
+          "name": "Wind",
+          "pct": 11.4
+        },
+        {
+          "name": "Solar",
+          "pct": 5.7
+        }
+      ]
+    },
+    "mg": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 37
+        },
+        {
+          "name": "Hydro",
+          "pct": 37
+        },
+        {
+          "name": "Coal",
+          "pct": 20.6
+        },
+        {
+          "name": "Solar",
+          "pct": 4.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        }
+      ]
+    },
+    "mk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 30.6
+        },
+        {
+          "name": "Solar",
+          "pct": 23.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 19.9
+        },
+        {
+          "name": "Gas",
+          "pct": 19.6
+        },
+        {
+          "name": "Wind",
+          "pct": 2.9
+        },
+        {
+          "name": "Oil",
+          "pct": 2.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.6
+        }
+      ]
+    },
+    "ml": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 80.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 15.4
+        },
+        {
+          "name": "Solar",
+          "pct": 2.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        }
+      ]
+    },
+    "mm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 46.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 46.1
+        },
+        {
+          "name": "Coal",
+          "pct": 5.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        },
+        {
+          "name": "Oil",
+          "pct": 0.6
+        },
+        {
+          "name": "Solar",
+          "pct": 0.6
+        }
+      ]
+    },
+    "mn": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 85.8
+        },
+        {
+          "name": "Oil",
+          "pct": 5.9
+        },
+        {
+          "name": "Wind",
+          "pct": 5.6
+        },
+        {
+          "name": "Solar",
+          "pct": 2.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.6
+        }
+      ]
+    },
+    "mo": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 62.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 30.8
+        },
+        {
+          "name": "Oil",
+          "pct": 6.4
+        }
+      ]
+    },
+    "mq": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 74.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 15.9
+        },
+        {
+          "name": "Solar",
+          "pct": 7.3
+        },
+        {
+          "name": "Wind",
+          "pct": 2
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.7
+        }
+      ]
+    },
+    "mr": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 77.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 10.1
+        },
+        {
+          "name": "Solar",
+          "pct": 7.7
+        },
+        {
+          "name": "Wind",
+          "pct": 4.8
+        }
+      ]
+    },
+    "ms": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "mt": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 83.1
+        },
+        {
+          "name": "Solar",
+          "pct": 15.5
+        },
+        {
+          "name": "Oil",
+          "pct": 0.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.5
+        }
+      ]
+    },
+    "mu": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 42.8
+        },
+        {
+          "name": "Coal",
+          "pct": 39.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 9.4
+        },
+        {
+          "name": "Solar",
+          "pct": 5
+        },
+        {
+          "name": "Hydro",
+          "pct": 3.2
+        },
+        {
+          "name": "Wind",
+          "pct": 0.3
+        }
+      ]
+    },
+    "mv": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 92.9
+        },
+        {
+          "name": "Solar",
+          "pct": 7.1
+        }
+      ]
+    },
+    "mw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 92.3
+        },
+        {
+          "name": "Oil",
+          "pct": 4.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.7
+        },
+        {
+          "name": "Solar",
+          "pct": 0.5
+        }
+      ]
+    },
+    "mx": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 61.6
+        },
+        {
+          "name": "Oil",
+          "pct": 9.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 8.1
+        },
+        {
+          "name": "Solar",
+          "pct": 7.4
+        },
+        {
+          "name": "Wind",
+          "pct": 6
+        },
+        {
+          "name": "Coal",
+          "pct": 3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 2.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.7
+        }
+      ]
+    },
+    "my": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 44.6
+        },
+        {
+          "name": "Gas",
+          "pct": 33.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 17.5
+        },
+        {
+          "name": "Solar",
+          "pct": 2.2
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.9
+        }
+      ]
+    },
+    "mz": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 82.4
+        },
+        {
+          "name": "Gas",
+          "pct": 15.8
+        },
+        {
+          "name": "Oil",
+          "pct": 0.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.7
+        },
+        {
+          "name": "Solar",
+          "pct": 0.4
+        }
+      ]
+    },
+    "na": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 61
+        },
+        {
+          "name": "Solar",
+          "pct": 35.4
+        },
+        {
+          "name": "Coal",
+          "pct": 2.4
+        },
+        {
+          "name": "Wind",
+          "pct": 1.2
+        }
+      ]
+    },
+    "nc": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 36.5
+        },
+        {
+          "name": "Oil",
+          "pct": 36.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 17.3
+        },
+        {
+          "name": "Solar",
+          "pct": 8.3
+        },
+        {
+          "name": "Wind",
+          "pct": 1.3
+        }
+      ]
+    },
+    "ne": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 73.7
+        },
+        {
+          "name": "Coal",
+          "pct": 17.9
+        },
+        {
+          "name": "Gas",
+          "pct": 5.3
+        },
+        {
+          "name": "Solar",
+          "pct": 3.2
+        }
+      ]
+    },
+    "ng": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 68.7
+        },
+        {
+          "name": "Hydro",
+          "pct": 30.9
+        },
+        {
+          "name": "Solar",
+          "pct": 0.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "ni": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 37.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 19.7
+        },
+        {
+          "name": "Other renewables",
+          "pct": 15.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 14.4
+        },
+        {
+          "name": "Wind",
+          "pct": 12.4
+        },
+        {
+          "name": "Solar",
+          "pct": 0.7
+        }
+      ]
+    },
+    "nl": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 34.9
+        },
+        {
+          "name": "Wind",
+          "pct": 25
+        },
+        {
+          "name": "Solar",
+          "pct": 21.1
+        },
+        {
+          "name": "Coal",
+          "pct": 7.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.1
+        },
+        {
+          "name": "Oil",
+          "pct": 3.9
+        },
+        {
+          "name": "Nuclear",
+          "pct": 3
+        }
+      ]
+    },
+    "no": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 90
+        },
+        {
+          "name": "Wind",
+          "pct": 8.4
+        },
+        {
+          "name": "Gas",
+          "pct": 0.6
+        },
+        {
+          "name": "Oil",
+          "pct": 0.4
+        },
+        {
+          "name": "Solar",
+          "pct": 0.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.1
+        }
+      ]
+    },
+    "np": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 98.8
+        },
+        {
+          "name": "Solar",
+          "pct": 1.1
+        },
+        {
+          "name": "Wind",
+          "pct": 0.1
+        }
+      ]
+    },
+    "nr": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 80
+        },
+        {
+          "name": "Solar",
+          "pct": 20
+        }
+      ]
+    },
+    "nz": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 54.8
+        },
+        {
+          "name": "Other renewables",
+          "pct": 21.8
+        },
+        {
+          "name": "Wind",
+          "pct": 9.7
+        },
+        {
+          "name": "Gas",
+          "pct": 8.9
+        },
+        {
+          "name": "Oil",
+          "pct": 1.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.3
+        },
+        {
+          "name": "Coal",
+          "pct": 1.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.9
+        }
+      ]
+    },
+    "om": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 91.9
+        },
+        {
+          "name": "Solar",
+          "pct": 4.4
+        },
+        {
+          "name": "Oil",
+          "pct": 3.6
+        },
+        {
+          "name": "Wind",
+          "pct": 0.2
+        }
+      ]
+    },
+    "pa": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 53.1
+        },
+        {
+          "name": "Gas",
+          "pct": 20.8
+        },
+        {
+          "name": "Oil",
+          "pct": 7.4
+        },
+        {
+          "name": "Solar",
+          "pct": 7.4
+        },
+        {
+          "name": "Wind",
+          "pct": 7.1
+        },
+        {
+          "name": "Coal",
+          "pct": 3.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.4
+        }
+      ]
+    },
+    "pe": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 56.1
+        },
+        {
+          "name": "Gas",
+          "pct": 36.1
+        },
+        {
+          "name": "Wind",
+          "pct": 3.5
+        },
+        {
+          "name": "Solar",
+          "pct": 3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.1
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        }
+      ]
+    },
+    "pf": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 65.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 26.4
+        },
+        {
+          "name": "Solar",
+          "pct": 8.3
+        }
+      ]
+    },
+    "pg": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 57.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 21.1
+        },
+        {
+          "name": "Gas",
+          "pct": 19.2
+        },
+        {
+          "name": "Other renewables",
+          "pct": 2.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ph": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 58.7
+        },
+        {
+          "name": "Gas",
+          "pct": 17.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 10.3
+        },
+        {
+          "name": "Other renewables",
+          "pct": 8.2
+        },
+        {
+          "name": "Solar",
+          "pct": 2.4
+        },
+        {
+          "name": "Wind",
+          "pct": 1.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        },
+        {
+          "name": "Oil",
+          "pct": 0.8
+        }
+      ]
+    },
+    "pk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 21
+        },
+        {
+          "name": "Hydro",
+          "pct": 20.2
+        },
+        {
+          "name": "Solar",
+          "pct": 18.8
+        },
+        {
+          "name": "Coal",
+          "pct": 14.8
+        },
+        {
+          "name": "Nuclear",
+          "pct": 12.2
+        },
+        {
+          "name": "Oil",
+          "pct": 9.2
+        },
+        {
+          "name": "Wind",
+          "pct": 2.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.9
+        }
+      ]
+    },
+    "pl": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 50.4
+        },
+        {
+          "name": "Gas",
+          "pct": 14.3
+        },
+        {
+          "name": "Wind",
+          "pct": 14.2
+        },
+        {
+          "name": "Solar",
+          "pct": 11.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 4.9
+        },
+        {
+          "name": "Oil",
+          "pct": 3.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 1
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.1
+        }
+      ]
+    },
+    "pm": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "pr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 47.6
+        },
+        {
+          "name": "Gas",
+          "pct": 29.5
+        },
+        {
+          "name": "Coal",
+          "pct": 16.5
+        },
+        {
+          "name": "Solar",
+          "pct": 4.9
+        },
+        {
+          "name": "Wind",
+          "pct": 1.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ps": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 60.6
+        },
+        {
+          "name": "Solar",
+          "pct": 39.4
+        }
+      ]
+    },
+    "pt": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 29.7
+        },
+        {
+          "name": "Wind",
+          "pct": 26.7
+        },
+        {
+          "name": "Solar",
+          "pct": 17.3
+        },
+        {
+          "name": "Gas",
+          "pct": 16.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.8
+        },
+        {
+          "name": "Oil",
+          "pct": 2.6
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.4
+        }
+      ]
+    },
+    "py": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 99.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.5
+        }
+      ]
+    },
+    "qa": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 95.9
+        },
+        {
+          "name": "Solar",
+          "pct": 3.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.2
+        }
+      ]
+    },
+    "re": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Bioenergy",
+          "pct": 33.9
+        },
+        {
+          "name": "Oil",
+          "pct": 30.3
+        },
+        {
+          "name": "Coal",
+          "pct": 13
+        },
+        {
+          "name": "Hydro",
+          "pct": 12.7
+        },
+        {
+          "name": "Solar",
+          "pct": 9.4
+        },
+        {
+          "name": "Wind",
+          "pct": 0.7
+        }
+      ]
+    },
+    "ro": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 24.3
+        },
+        {
+          "name": "Nuclear",
+          "pct": 20.5
+        },
+        {
+          "name": "Gas",
+          "pct": 18.7
+        },
+        {
+          "name": "Coal",
+          "pct": 13.4
+        },
+        {
+          "name": "Wind",
+          "pct": 12
+        },
+        {
+          "name": "Solar",
+          "pct": 9.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1
+        },
+        {
+          "name": "Oil",
+          "pct": 0.4
+        }
+      ]
+    },
+    "rs": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 65
+        },
+        {
+          "name": "Hydro",
+          "pct": 22.2
+        },
+        {
+          "name": "Gas",
+          "pct": 6.9
+        },
+        {
+          "name": "Wind",
+          "pct": 4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.4
+        },
+        {
+          "name": "Oil",
+          "pct": 0.3
+        }
+      ]
+    },
+    "ru": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 44.7
+        },
+        {
+          "name": "Coal",
+          "pct": 18.4
+        },
+        {
+          "name": "Nuclear",
+          "pct": 18.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 16.7
+        },
+        {
+          "name": "Oil",
+          "pct": 1.2
+        },
+        {
+          "name": "Wind",
+          "pct": 0.3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "rw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 46
+        },
+        {
+          "name": "Gas",
+          "pct": 26.5
+        },
+        {
+          "name": "Coal",
+          "pct": 15
+        },
+        {
+          "name": "Oil",
+          "pct": 8.8
+        },
+        {
+          "name": "Solar",
+          "pct": 3.5
+        }
+      ]
+    },
+    "sa": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 63.3
+        },
+        {
+          "name": "Oil",
+          "pct": 34.5
+        },
+        {
+          "name": "Solar",
+          "pct": 1.8
+        },
+        {
+          "name": "Wind",
+          "pct": 0.3
+        }
+      ]
+    },
+    "sb": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 90.9
+        },
+        {
+          "name": "Solar",
+          "pct": 9.1
+        }
+      ]
+    },
+    "sc": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 84.1
+        },
+        {
+          "name": "Solar",
+          "pct": 14.3
+        },
+        {
+          "name": "Wind",
+          "pct": 1.6
+        }
+      ]
+    },
+    "sd": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 77.9
+        },
+        {
+          "name": "Oil",
+          "pct": 20.3
+        },
+        {
+          "name": "Solar",
+          "pct": 1.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.7
+        }
+      ]
+    },
+    "se": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 40
+        },
+        {
+          "name": "Nuclear",
+          "pct": 27.6
+        },
+        {
+          "name": "Wind",
+          "pct": 22.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.8
+        },
+        {
+          "name": "Solar",
+          "pct": 2.6
+        },
+        {
+          "name": "Oil",
+          "pct": 1.2
+        },
+        {
+          "name": "Gas",
+          "pct": 0.1
+        }
+      ]
+    },
+    "sg": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 91.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.8
+        },
+        {
+          "name": "Solar",
+          "pct": 2.7
+        },
+        {
+          "name": "Oil",
+          "pct": 2.4
+        },
+        {
+          "name": "Coal",
+          "pct": 0.9
+        }
+      ]
+    },
+    "sh": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "si": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 39.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 27.2
+        },
+        {
+          "name": "Coal",
+          "pct": 14.7
+        },
+        {
+          "name": "Solar",
+          "pct": 10.4
+        },
+        {
+          "name": "Gas",
+          "pct": 6.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2
+        },
+        {
+          "name": "Wind",
+          "pct": 0.1
+        }
+      ]
+    },
+    "sk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 66.4
+        },
+        {
+          "name": "Gas",
+          "pct": 11.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 10.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.4
+        },
+        {
+          "name": "Oil",
+          "pct": 2.5
+        },
+        {
+          "name": "Solar",
+          "pct": 2.4
+        },
+        {
+          "name": "Coal",
+          "pct": 1.1
+        }
+      ]
+    },
+    "sl": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 85.7
+        },
+        {
+          "name": "Solar",
+          "pct": 9.5
+        },
+        {
+          "name": "Oil",
+          "pct": 4.8
+        }
+      ]
+    },
+    "sn": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 78.6
+        },
+        {
+          "name": "Solar",
+          "pct": 8.9
+        },
+        {
+          "name": "Wind",
+          "pct": 5.4
+        },
+        {
+          "name": "Hydro",
+          "pct": 4.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.4
+        },
+        {
+          "name": "Coal",
+          "pct": 1.3
+        },
+        {
+          "name": "Gas",
+          "pct": 0.3
+        }
+      ]
+    },
+    "so": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 79.1
+        },
+        {
+          "name": "Solar",
+          "pct": 18.6
+        },
+        {
+          "name": "Wind",
+          "pct": 2.3
+        }
+      ]
+    },
+    "sr": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 51.7
+        },
+        {
+          "name": "Oil",
+          "pct": 46
+        },
+        {
+          "name": "Gas",
+          "pct": 1.1
+        },
+        {
+          "name": "Solar",
+          "pct": 0.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.6
+        }
+      ]
+    },
+    "ss": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 98.2
+        },
+        {
+          "name": "Solar",
+          "pct": 1.8
+        }
+      ]
+    },
+    "st": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 88.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 11.1
+        }
+      ]
+    },
+    "sv": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 30.3
+        },
+        {
+          "name": "Other renewables",
+          "pct": 20.7
+        },
+        {
+          "name": "Solar",
+          "pct": 20.3
+        },
+        {
+          "name": "Oil",
+          "pct": 13.5
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 12.1
+        },
+        {
+          "name": "Wind",
+          "pct": 3.1
+        }
+      ]
+    },
+    "sy": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 52.3
+        },
+        {
+          "name": "Oil",
+          "pct": 44.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 3
+        },
+        {
+          "name": "Solar",
+          "pct": 0.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.1
+        }
+      ]
+    },
+    "sz": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 57.4
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 34.4
+        },
+        {
+          "name": "Solar",
+          "pct": 4.9
+        },
+        {
+          "name": "Coal",
+          "pct": 3.3
+        }
+      ]
+    },
+    "tc": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 96.3
+        },
+        {
+          "name": "Solar",
+          "pct": 3.7
+        }
+      ]
+    },
+    "td": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 94.6
+        },
+        {
+          "name": "Wind",
+          "pct": 2.7
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.7
+        }
+      ]
+    },
+    "tg": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 70.4
+        },
+        {
+          "name": "Solar",
+          "pct": 18.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 11.3
+        }
+      ]
+    },
+    "th": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 65.5
+        },
+        {
+          "name": "Coal",
+          "pct": 17.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 5.4
+        },
+        {
+          "name": "Solar",
+          "pct": 5.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 4
+        },
+        {
+          "name": "Wind",
+          "pct": 1.8
+        },
+        {
+          "name": "Oil",
+          "pct": 0.1
+        }
+      ]
+    },
+    "tj": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 94.4
+        },
+        {
+          "name": "Coal",
+          "pct": 4.7
+        },
+        {
+          "name": "Gas",
+          "pct": 1
+        }
+      ]
+    },
+    "tl": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "tm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 100
+        }
+      ]
+    },
+    "tn": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 94.9
+        },
+        {
+          "name": "Solar",
+          "pct": 2.5
+        },
+        {
+          "name": "Wind",
+          "pct": 1.5
+        },
+        {
+          "name": "Oil",
+          "pct": 1
+        }
+      ]
+    },
+    "to": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 85.7
+        },
+        {
+          "name": "Solar",
+          "pct": 14.3
+        }
+      ]
+    },
+    "tr": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 34.3
+        },
+        {
+          "name": "Gas",
+          "pct": 22.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 16.2
+        },
+        {
+          "name": "Wind",
+          "pct": 11.1
+        },
+        {
+          "name": "Solar",
+          "pct": 10.5
+        },
+        {
+          "name": "Other renewables",
+          "pct": 3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 2.4
+        },
+        {
+          "name": "Oil",
+          "pct": 0.3
+        }
+      ]
+    },
+    "tt": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 99.5
+        },
+        {
+          "name": "Oil",
+          "pct": 0.4
+        },
+        {
+          "name": "Solar",
+          "pct": 0.1
+        }
+      ]
+    },
+    "tw": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 48.8
+        },
+        {
+          "name": "Coal",
+          "pct": 36.3
+        },
+        {
+          "name": "Solar",
+          "pct": 5.4
+        },
+        {
+          "name": "Wind",
+          "pct": 4.2
+        },
+        {
+          "name": "Hydro",
+          "pct": 1.9
+        },
+        {
+          "name": "Oil",
+          "pct": 1.6
+        },
+        {
+          "name": "Nuclear",
+          "pct": 1.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.7
+        }
+      ]
+    },
+    "tz": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 62.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 31.7
+        },
+        {
+          "name": "Oil",
+          "pct": 4.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.8
+        },
+        {
+          "name": "Solar",
+          "pct": 0.5
+        }
+      ]
+    },
+    "ua": {
+      "year": 2022,
+      "sources": [
+        {
+          "name": "Nuclear",
+          "pct": 55.8
+        },
+        {
+          "name": "Coal",
+          "pct": 20.9
+        },
+        {
+          "name": "Hydro",
+          "pct": 9.9
+        },
+        {
+          "name": "Gas",
+          "pct": 6.4
+        },
+        {
+          "name": "Solar",
+          "pct": 4.6
+        },
+        {
+          "name": "Wind",
+          "pct": 1.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.7
+        },
+        {
+          "name": "Oil",
+          "pct": 0.5
+        }
+      ]
+    },
+    "ug": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 86.1
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 8.1
+        },
+        {
+          "name": "Oil",
+          "pct": 2.9
+        },
+        {
+          "name": "Solar",
+          "pct": 2.9
+        }
+      ]
+    },
+    "us": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 40
+        },
+        {
+          "name": "Nuclear",
+          "pct": 17.4
+        },
+        {
+          "name": "Coal",
+          "pct": 16.3
+        },
+        {
+          "name": "Wind",
+          "pct": 10.3
+        },
+        {
+          "name": "Solar",
+          "pct": 8.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 5.3
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1
+        },
+        {
+          "name": "Oil",
+          "pct": 0.7
+        },
+        {
+          "name": "Other renewables",
+          "pct": 0.4
+        }
+      ]
+    },
+    "uy": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Wind",
+          "pct": 40.6
+        },
+        {
+          "name": "Hydro",
+          "pct": 27.2
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 24.9
+        },
+        {
+          "name": "Solar",
+          "pct": 5.1
+        },
+        {
+          "name": "Oil",
+          "pct": 2.2
+        }
+      ]
+    },
+    "uz": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Gas",
+          "pct": 72.3
+        },
+        {
+          "name": "Solar",
+          "pct": 7.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 7.3
+        },
+        {
+          "name": "Coal",
+          "pct": 6.6
+        },
+        {
+          "name": "Wind",
+          "pct": 4.6
+        },
+        {
+          "name": "Oil",
+          "pct": 1.7
+        }
+      ]
+    },
+    "vc": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 86.7
+        },
+        {
+          "name": "Hydro",
+          "pct": 13.3
+        }
+      ]
+    },
+    "ve": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 91.1
+        },
+        {
+          "name": "Gas",
+          "pct": 4.5
+        },
+        {
+          "name": "Oil",
+          "pct": 4.4
+        }
+      ]
+    },
+    "vg": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 100
+        }
+      ]
+    },
+    "vi": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 97.1
+        },
+        {
+          "name": "Solar",
+          "pct": 2.9
+        }
+      ]
+    },
+    "vn": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 48.1
+        },
+        {
+          "name": "Hydro",
+          "pct": 33
+        },
+        {
+          "name": "Solar",
+          "pct": 7.4
+        },
+        {
+          "name": "Gas",
+          "pct": 6.2
+        },
+        {
+          "name": "Wind",
+          "pct": 4.6
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.3
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        }
+      ]
+    },
+    "vu": {
+      "year": 2023,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 75
+        },
+        {
+          "name": "Hydro",
+          "pct": 12.5
+        },
+        {
+          "name": "Solar",
+          "pct": 12.5
+        }
+      ]
+    },
+    "ws": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 56.3
+        },
+        {
+          "name": "Hydro",
+          "pct": 18.8
+        },
+        {
+          "name": "Solar",
+          "pct": 18.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 6.3
+        }
+      ]
+    },
+    "xk": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 88.8
+        },
+        {
+          "name": "Wind",
+          "pct": 6.5
+        },
+        {
+          "name": "Hydro",
+          "pct": 4.3
+        },
+        {
+          "name": "Oil",
+          "pct": 0.2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.2
+        }
+      ]
+    },
+    "ye": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Oil",
+          "pct": 87.6
+        },
+        {
+          "name": "Solar",
+          "pct": 11.2
+        },
+        {
+          "name": "Gas",
+          "pct": 1.1
+        }
+      ]
+    },
+    "za": {
+      "year": 2025,
+      "sources": [
+        {
+          "name": "Coal",
+          "pct": 81.4
+        },
+        {
+          "name": "Solar",
+          "pct": 8
+        },
+        {
+          "name": "Wind",
+          "pct": 4.7
+        },
+        {
+          "name": "Nuclear",
+          "pct": 4.2
+        },
+        {
+          "name": "Oil",
+          "pct": 0.8
+        },
+        {
+          "name": "Hydro",
+          "pct": 0.8
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.2
+        }
+      ]
+    },
+    "zm": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 86.2
+        },
+        {
+          "name": "Coal",
+          "pct": 10.8
+        },
+        {
+          "name": "Oil",
+          "pct": 1.7
+        },
+        {
+          "name": "Solar",
+          "pct": 0.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 0.4
+        }
+      ]
+    },
+    "zw": {
+      "year": 2024,
+      "sources": [
+        {
+          "name": "Hydro",
+          "pct": 55.6
+        },
+        {
+          "name": "Coal",
+          "pct": 42.9
+        },
+        {
+          "name": "Bioenergy",
+          "pct": 1.2
+        },
+        {
+          "name": "Solar",
+          "pct": 0.4
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "af": "Ember via Our World in Data (2024), share of electricity generated",
+    "al": "Ember via Our World in Data (2024), share of electricity generated",
+    "dz": "Ember via Our World in Data (2024), share of electricity generated",
+    "as": "Ember via Our World in Data (2024), share of electricity generated",
+    "ao": "Ember via Our World in Data (2024), share of electricity generated",
+    "ag": "Ember via Our World in Data (2024), share of electricity generated",
+    "ar": "Ember via Our World in Data (2025), share of electricity generated",
+    "am": "Ember via Our World in Data (2025), share of electricity generated",
+    "aw": "Ember via Our World in Data (2024), share of electricity generated",
+    "au": "Ember via Our World in Data (2025), share of electricity generated",
+    "at": "Ember via Our World in Data (2025), share of electricity generated",
+    "az": "Ember via Our World in Data (2025), share of electricity generated",
+    "bs": "Ember via Our World in Data (2024), share of electricity generated",
+    "bh": "Ember via Our World in Data (2024), share of electricity generated",
+    "bd": "Ember via Our World in Data (2025), share of electricity generated",
+    "bb": "Ember via Our World in Data (2024), share of electricity generated",
+    "by": "Ember via Our World in Data (2025), share of electricity generated",
+    "be": "Ember via Our World in Data (2025), share of electricity generated",
+    "bz": "Ember via Our World in Data (2024), share of electricity generated",
+    "bj": "Ember via Our World in Data (2024), share of electricity generated",
+    "bm": "Ember via Our World in Data (2024), share of electricity generated",
+    "bt": "Ember via Our World in Data (2024), share of electricity generated",
+    "bo": "Ember via Our World in Data (2025), share of electricity generated",
+    "ba": "Ember via Our World in Data (2025), share of electricity generated",
+    "bw": "Ember via Our World in Data (2024), share of electricity generated",
+    "br": "Ember via Our World in Data (2025), share of electricity generated",
+    "vg": "Ember via Our World in Data (2023), share of electricity generated",
+    "bn": "Ember via Our World in Data (2024), share of electricity generated",
+    "bg": "Ember via Our World in Data (2025), share of electricity generated",
+    "bf": "Ember via Our World in Data (2024), share of electricity generated",
+    "bi": "Ember via Our World in Data (2024), share of electricity generated",
+    "kh": "Ember via Our World in Data (2025), share of electricity generated",
+    "cm": "Ember via Our World in Data (2024), share of electricity generated",
+    "ca": "Ember via Our World in Data (2025), share of electricity generated",
+    "cv": "Ember via Our World in Data (2024), share of electricity generated",
+    "ky": "Ember via Our World in Data (2024), share of electricity generated",
+    "cf": "Ember via Our World in Data (2023), share of electricity generated",
+    "td": "Ember via Our World in Data (2024), share of electricity generated",
+    "cl": "Ember via Our World in Data (2025), share of electricity generated",
+    "cn": "Ember via Our World in Data (2025), share of electricity generated",
+    "co": "Ember via Our World in Data (2025), share of electricity generated",
+    "km": "Ember via Our World in Data (2023), share of electricity generated",
+    "cg": "Ember via Our World in Data (2024), share of electricity generated",
+    "ck": "Ember via Our World in Data (2024), share of electricity generated",
+    "cr": "Ember via Our World in Data (2025), share of electricity generated",
+    "ci": "Ember via Our World in Data (2024), share of electricity generated",
+    "hr": "Ember via Our World in Data (2025), share of electricity generated",
+    "cu": "Ember via Our World in Data (2024), share of electricity generated",
+    "cy": "Ember via Our World in Data (2025), share of electricity generated",
+    "cz": "Ember via Our World in Data (2025), share of electricity generated",
+    "cd": "Ember via Our World in Data (2024), share of electricity generated",
+    "dk": "Ember via Our World in Data (2025), share of electricity generated",
+    "dj": "Ember via Our World in Data (2024), share of electricity generated",
+    "dm": "Ember via Our World in Data (2023), share of electricity generated",
+    "do": "Ember via Our World in Data (2025), share of electricity generated",
+    "tl": "Ember via Our World in Data (2024), share of electricity generated",
+    "ec": "Ember via Our World in Data (2025), share of electricity generated",
+    "eg": "Ember via Our World in Data (2025), share of electricity generated",
+    "sv": "Ember via Our World in Data (2025), share of electricity generated",
+    "gq": "Ember via Our World in Data (2024), share of electricity generated",
+    "er": "Ember via Our World in Data (2024), share of electricity generated",
+    "ee": "Ember via Our World in Data (2025), share of electricity generated",
+    "sz": "Ember via Our World in Data (2024), share of electricity generated",
+    "et": "Ember via Our World in Data (2025), share of electricity generated",
+    "fk": "Ember via Our World in Data (2023), share of electricity generated",
+    "fo": "Ember via Our World in Data (2023), share of electricity generated",
+    "fj": "Ember via Our World in Data (2024), share of electricity generated",
+    "fi": "Ember via Our World in Data (2025), share of electricity generated",
+    "fr": "Ember via Our World in Data (2025), share of electricity generated",
+    "gf": "Ember via Our World in Data (2023), share of electricity generated",
+    "pf": "Ember via Our World in Data (2024), share of electricity generated",
+    "ga": "Ember via Our World in Data (2024), share of electricity generated",
+    "gm": "Ember via Our World in Data (2024), share of electricity generated",
+    "ge": "Ember via Our World in Data (2025), share of electricity generated",
+    "de": "Ember via Our World in Data (2025), share of electricity generated",
+    "gh": "Ember via Our World in Data (2024), share of electricity generated",
+    "gi": "Ember via Our World in Data (2024), share of electricity generated",
+    "gr": "Ember via Our World in Data (2025), share of electricity generated",
+    "gl": "Ember via Our World in Data (2024), share of electricity generated",
+    "gd": "Ember via Our World in Data (2024), share of electricity generated",
+    "gp": "Ember via Our World in Data (2023), share of electricity generated",
+    "gu": "Ember via Our World in Data (2024), share of electricity generated",
+    "gt": "Ember via Our World in Data (2024), share of electricity generated",
+    "gn": "Ember via Our World in Data (2024), share of electricity generated",
+    "gw": "Ember via Our World in Data (2024), share of electricity generated",
+    "gy": "Ember via Our World in Data (2024), share of electricity generated",
+    "ht": "Ember via Our World in Data (2024), share of electricity generated",
+    "hn": "Ember via Our World in Data (2024), share of electricity generated",
+    "hk": "Ember via Our World in Data (2024), share of electricity generated",
+    "hu": "Ember via Our World in Data (2025), share of electricity generated",
+    "is": "Ember via Our World in Data (2024), share of electricity generated",
+    "in": "Ember via Our World in Data (2025), share of electricity generated",
+    "id": "Ember via Our World in Data (2024), share of electricity generated",
+    "ir": "Ember via Our World in Data (2025), share of electricity generated",
+    "iq": "Ember via Our World in Data (2024), share of electricity generated",
+    "ie": "Ember via Our World in Data (2025), share of electricity generated",
+    "il": "Ember via Our World in Data (2025), share of electricity generated",
+    "it": "Ember via Our World in Data (2025), share of electricity generated",
+    "jm": "Ember via Our World in Data (2024), share of electricity generated",
+    "jp": "Ember via Our World in Data (2025), share of electricity generated",
+    "jo": "Ember via Our World in Data (2024), share of electricity generated",
+    "kz": "Ember via Our World in Data (2025), share of electricity generated",
+    "ke": "Ember via Our World in Data (2025), share of electricity generated",
+    "ki": "Ember via Our World in Data (2024), share of electricity generated",
+    "xk": "Ember via Our World in Data (2025), share of electricity generated",
+    "kw": "Ember via Our World in Data (2025), share of electricity generated",
+    "kg": "Ember via Our World in Data (2025), share of electricity generated",
+    "la": "Ember via Our World in Data (2024), share of electricity generated",
+    "lv": "Ember via Our World in Data (2025), share of electricity generated",
+    "lb": "Ember via Our World in Data (2024), share of electricity generated",
+    "ls": "Ember via Our World in Data (2022), share of electricity generated",
+    "lr": "Ember via Our World in Data (2024), share of electricity generated",
+    "ly": "Ember via Our World in Data (2024), share of electricity generated",
+    "lt": "Ember via Our World in Data (2025), share of electricity generated",
+    "lu": "Ember via Our World in Data (2025), share of electricity generated",
+    "mo": "Ember via Our World in Data (2024), share of electricity generated",
+    "mg": "Ember via Our World in Data (2024), share of electricity generated",
+    "mw": "Ember via Our World in Data (2024), share of electricity generated",
+    "my": "Ember via Our World in Data (2025), share of electricity generated",
+    "mv": "Ember via Our World in Data (2024), share of electricity generated",
+    "ml": "Ember via Our World in Data (2024), share of electricity generated",
+    "mt": "Ember via Our World in Data (2025), share of electricity generated",
+    "mq": "Ember via Our World in Data (2023), share of electricity generated",
+    "mr": "Ember via Our World in Data (2024), share of electricity generated",
+    "mu": "Ember via Our World in Data (2024), share of electricity generated",
+    "mx": "Ember via Our World in Data (2025), share of electricity generated",
+    "md": "Ember via Our World in Data (2025), share of electricity generated",
+    "mn": "Ember via Our World in Data (2025), share of electricity generated",
+    "me": "Ember via Our World in Data (2025), share of electricity generated",
+    "ms": "Ember via Our World in Data (2024), share of electricity generated",
+    "ma": "Ember via Our World in Data (2025), share of electricity generated",
+    "mz": "Ember via Our World in Data (2024), share of electricity generated",
+    "mm": "Ember via Our World in Data (2024), share of electricity generated",
+    "na": "Ember via Our World in Data (2024), share of electricity generated",
+    "nr": "Ember via Our World in Data (2024), share of electricity generated",
+    "np": "Ember via Our World in Data (2024), share of electricity generated",
+    "nl": "Ember via Our World in Data (2025), share of electricity generated",
+    "nc": "Ember via Our World in Data (2024), share of electricity generated",
+    "nz": "Ember via Our World in Data (2025), share of electricity generated",
+    "ni": "Ember via Our World in Data (2024), share of electricity generated",
+    "ne": "Ember via Our World in Data (2024), share of electricity generated",
+    "ng": "Ember via Our World in Data (2025), share of electricity generated",
+    "kp": "Ember via Our World in Data (2024), share of electricity generated",
+    "mk": "Ember via Our World in Data (2025), share of electricity generated",
+    "no": "Ember via Our World in Data (2025), share of electricity generated",
+    "om": "Ember via Our World in Data (2025), share of electricity generated",
+    "pk": "Ember via Our World in Data (2025), share of electricity generated",
+    "ps": "Ember via Our World in Data (2024), share of electricity generated",
+    "pa": "Ember via Our World in Data (2024), share of electricity generated",
+    "pg": "Ember via Our World in Data (2024), share of electricity generated",
+    "py": "Ember via Our World in Data (2025), share of electricity generated",
+    "pe": "Ember via Our World in Data (2025), share of electricity generated",
+    "ph": "Ember via Our World in Data (2025), share of electricity generated",
+    "pl": "Ember via Our World in Data (2025), share of electricity generated",
+    "pt": "Ember via Our World in Data (2025), share of electricity generated",
+    "pr": "Ember via Our World in Data (2025), share of electricity generated",
+    "qa": "Ember via Our World in Data (2025), share of electricity generated",
+    "re": "Ember via Our World in Data (2023), share of electricity generated",
+    "ro": "Ember via Our World in Data (2025), share of electricity generated",
+    "ru": "Ember via Our World in Data (2025), share of electricity generated",
+    "rw": "Ember via Our World in Data (2024), share of electricity generated",
+    "sh": "Ember via Our World in Data (2023), share of electricity generated",
+    "kn": "Ember via Our World in Data (2024), share of electricity generated",
+    "lc": "Ember via Our World in Data (2024), share of electricity generated",
+    "pm": "Ember via Our World in Data (2023), share of electricity generated",
+    "vc": "Ember via Our World in Data (2024), share of electricity generated",
+    "ws": "Ember via Our World in Data (2024), share of electricity generated",
+    "st": "Ember via Our World in Data (2023), share of electricity generated",
+    "sa": "Ember via Our World in Data (2024), share of electricity generated",
+    "sn": "Ember via Our World in Data (2024), share of electricity generated",
+    "rs": "Ember via Our World in Data (2025), share of electricity generated",
+    "sc": "Ember via Our World in Data (2024), share of electricity generated",
+    "sl": "Ember via Our World in Data (2024), share of electricity generated",
+    "sg": "Ember via Our World in Data (2025), share of electricity generated",
+    "sk": "Ember via Our World in Data (2025), share of electricity generated",
+    "si": "Ember via Our World in Data (2025), share of electricity generated",
+    "sb": "Ember via Our World in Data (2024), share of electricity generated",
+    "so": "Ember via Our World in Data (2024), share of electricity generated",
+    "za": "Ember via Our World in Data (2025), share of electricity generated",
+    "kr": "Ember via Our World in Data (2025), share of electricity generated",
+    "ss": "Ember via Our World in Data (2024), share of electricity generated",
+    "es": "Ember via Our World in Data (2025), share of electricity generated",
+    "lk": "Ember via Our World in Data (2025), share of electricity generated",
+    "sd": "Ember via Our World in Data (2024), share of electricity generated",
+    "sr": "Ember via Our World in Data (2024), share of electricity generated",
+    "se": "Ember via Our World in Data (2025), share of electricity generated",
+    "ch": "Ember via Our World in Data (2025), share of electricity generated",
+    "sy": "Ember via Our World in Data (2024), share of electricity generated",
+    "tw": "Ember via Our World in Data (2025), share of electricity generated",
+    "tj": "Ember via Our World in Data (2025), share of electricity generated",
+    "tz": "Ember via Our World in Data (2024), share of electricity generated",
+    "th": "Ember via Our World in Data (2025), share of electricity generated",
+    "tg": "Ember via Our World in Data (2024), share of electricity generated",
+    "to": "Ember via Our World in Data (2024), share of electricity generated",
+    "tt": "Ember via Our World in Data (2024), share of electricity generated",
+    "tn": "Ember via Our World in Data (2025), share of electricity generated",
+    "tr": "Ember via Our World in Data (2025), share of electricity generated",
+    "tm": "Ember via Our World in Data (2024), share of electricity generated",
+    "tc": "Ember via Our World in Data (2024), share of electricity generated",
+    "ug": "Ember via Our World in Data (2024), share of electricity generated",
+    "ua": "Ember via Our World in Data (2022), share of electricity generated",
+    "ae": "Ember via Our World in Data (2024), share of electricity generated",
+    "gb": "Ember via Our World in Data (2025), share of electricity generated",
+    "us": "Ember via Our World in Data (2025), share of electricity generated",
+    "vi": "Ember via Our World in Data (2023), share of electricity generated",
+    "uy": "Ember via Our World in Data (2025), share of electricity generated",
+    "uz": "Ember via Our World in Data (2025), share of electricity generated",
+    "vu": "Ember via Our World in Data (2023), share of electricity generated",
+    "ve": "Ember via Our World in Data (2024), share of electricity generated",
+    "vn": "Ember via Our World in Data (2025), share of electricity generated",
+    "ye": "Ember via Our World in Data (2024), share of electricity generated",
+    "zm": "Ember via Our World in Data (2024), share of electricity generated",
+    "zw": "Ember via Our World in Data (2024), share of electricity generated"
+  }
+}

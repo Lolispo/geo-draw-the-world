@@ -2054,6 +2054,8 @@ canvas {
 .cp-capital { display: flex; flex-direction: column; gap: 2px; }
 .cp-capital-label,
 .cp-section-label { color: var(--text-dim); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+/* Dated qualifier under a breakdown heading (e.g. the electricity mix year, TODOS #29). */
+.cp-section-note { color: var(--text-dim); font-size: 0.68rem; opacity: 0.8; margin-top: 2px; }
 .cp-capital-value { font-size: 1.05rem; font-weight: 600; }
 
 .cp-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }

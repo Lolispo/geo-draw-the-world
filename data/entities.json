@@ -9,6 +9,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -19,7 +20,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "ae": {
@@ -31,6 +35,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -41,7 +46,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "af": {
@@ -53,6 +61,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -63,7 +72,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ag": {
@@ -75,6 +87,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -85,7 +98,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ai": {
@@ -97,6 +113,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -109,7 +126,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "al": {
@@ -121,6 +141,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -131,7 +152,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "am": {
@@ -143,6 +167,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -153,7 +178,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ao": {
@@ -165,6 +193,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -175,7 +204,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ar": {
@@ -187,6 +219,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -197,7 +230,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "as": {
@@ -209,6 +245,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
       "region": "oceania",
@@ -221,7 +258,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "at": {
@@ -233,6 +273,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -243,7 +284,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "au": {
@@ -255,6 +299,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -265,7 +310,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "aw": {
@@ -277,6 +325,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
@@ -289,7 +338,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ax": {
@@ -301,6 +353,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Finland",
       "region": "europe",
@@ -313,7 +366,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "az": {
@@ -325,6 +381,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -335,7 +392,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ba": {
@@ -347,6 +407,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -357,7 +418,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bb": {
@@ -369,6 +433,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -379,7 +444,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bd": {
@@ -391,6 +459,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -401,7 +470,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "be": {
@@ -413,6 +485,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -423,7 +496,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bf": {
@@ -435,6 +511,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -445,7 +522,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bg": {
@@ -457,6 +537,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -467,7 +548,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bh": {
@@ -479,6 +563,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -489,7 +574,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bi": {
@@ -501,6 +589,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -511,7 +600,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bj": {
@@ -523,6 +615,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -533,7 +626,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bl": {
@@ -545,6 +641,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
       "region": "north-america",
@@ -557,7 +654,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "bm": {
@@ -569,6 +669,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -581,7 +682,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bn": {
@@ -593,6 +697,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -603,7 +708,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bo": {
@@ -615,6 +723,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -625,7 +734,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bq": {
@@ -637,6 +749,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
@@ -649,7 +762,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "br": {
@@ -661,6 +777,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -671,7 +788,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bs": {
@@ -683,6 +803,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -693,7 +814,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bt": {
@@ -705,6 +829,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -715,7 +840,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bw": {
@@ -727,6 +855,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -737,7 +866,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "by": {
@@ -749,6 +881,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -759,7 +892,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "bz": {
@@ -771,6 +907,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -781,7 +918,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ca": {
@@ -793,6 +933,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -803,7 +944,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cc": {
@@ -815,6 +959,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
       "region": "oceania",
@@ -827,7 +972,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "cd": {
@@ -839,6 +987,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -849,7 +998,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cf": {
@@ -861,6 +1013,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -871,7 +1024,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cg": {
@@ -883,6 +1039,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -893,7 +1050,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ch": {
@@ -905,6 +1065,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -915,7 +1076,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ci": {
@@ -927,6 +1091,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -937,7 +1102,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ck": {
@@ -949,6 +1117,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "New Zealand",
       "region": "oceania",
@@ -961,7 +1130,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cl": {
@@ -973,6 +1145,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -983,7 +1156,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cm": {
@@ -995,6 +1171,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1005,7 +1182,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cn": {
@@ -1017,6 +1197,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -1027,7 +1208,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "co": {
@@ -1039,6 +1223,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1049,7 +1234,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cr": {
@@ -1061,6 +1249,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1071,7 +1260,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cu": {
@@ -1083,6 +1275,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1093,7 +1286,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cv": {
@@ -1105,6 +1301,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1115,7 +1312,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cw": {
@@ -1127,6 +1327,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
@@ -1139,7 +1340,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "cx": {
@@ -1151,6 +1355,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
       "region": "oceania",
@@ -1163,7 +1368,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "cy": {
@@ -1175,6 +1383,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1185,7 +1394,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "cz": {
@@ -1197,6 +1409,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1207,7 +1420,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "de": {
@@ -1219,6 +1435,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1229,7 +1446,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "dj": {
@@ -1241,6 +1461,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1251,7 +1472,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "dk": {
@@ -1263,6 +1487,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1273,7 +1498,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "dm": {
@@ -1285,6 +1513,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1295,7 +1524,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "do": {
@@ -1307,6 +1539,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1317,7 +1550,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "dz": {
@@ -1329,6 +1565,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1339,7 +1576,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ec": {
@@ -1351,6 +1591,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1361,7 +1602,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ee": {
@@ -1373,6 +1617,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1383,7 +1628,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "eg": {
@@ -1395,6 +1643,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1405,7 +1654,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "eh": {
@@ -1417,6 +1669,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "region": "africa",
       "metrics": {
@@ -1428,7 +1681,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "er": {
@@ -1440,6 +1696,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1450,7 +1707,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "es": {
@@ -1462,6 +1722,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1472,7 +1733,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "et": {
@@ -1484,6 +1748,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1494,7 +1759,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "fi": {
@@ -1506,6 +1774,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1516,7 +1785,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "fj": {
@@ -1528,6 +1800,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -1538,7 +1811,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "fk": {
@@ -1550,6 +1826,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "south-america",
@@ -1562,7 +1839,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "fm": {
@@ -1574,6 +1854,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -1584,7 +1865,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "fo": {
@@ -1596,6 +1880,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "Denmark",
       "region": "europe",
@@ -1608,7 +1893,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "fr": {
@@ -1620,6 +1908,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1630,7 +1919,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ga": {
@@ -1642,6 +1934,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1652,7 +1945,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gb": {
@@ -1664,6 +1960,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1674,7 +1971,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gd": {
@@ -1686,6 +1986,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1696,7 +1997,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ge": {
@@ -1708,6 +2012,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -1718,7 +2023,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gf": {
@@ -1730,6 +2038,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "south-america",
@@ -1742,7 +2051,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gg": {
@@ -1754,6 +2066,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
@@ -1766,7 +2079,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "gh": {
@@ -1778,6 +2094,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1788,7 +2105,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gi": {
@@ -1800,6 +2120,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
@@ -1812,7 +2133,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gl": {
@@ -1824,6 +2148,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "Denmark",
       "region": "north-america",
@@ -1836,7 +2161,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gm": {
@@ -1848,6 +2176,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1858,7 +2187,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gn": {
@@ -1870,6 +2202,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1880,7 +2213,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gp": {
@@ -1892,6 +2228,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "north-america",
@@ -1904,7 +2241,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gq": {
@@ -1916,6 +2256,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -1926,7 +2267,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gr": {
@@ -1938,6 +2282,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -1948,7 +2293,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gs": {
@@ -1960,6 +2308,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "south-america",
@@ -1972,7 +2321,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "gt": {
@@ -1984,6 +2336,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -1994,7 +2347,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gu": {
@@ -2006,6 +2362,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
       "region": "oceania",
@@ -2018,7 +2375,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gw": {
@@ -2030,6 +2390,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2040,7 +2401,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "gy": {
@@ -2052,6 +2416,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2062,7 +2427,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "hk": {
@@ -2074,6 +2442,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "China",
       "region": "asia",
@@ -2086,7 +2455,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "hn": {
@@ -2098,6 +2470,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2108,7 +2481,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "hr": {
@@ -2120,6 +2496,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2130,7 +2507,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ht": {
@@ -2142,6 +2522,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2152,7 +2533,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "hu": {
@@ -2164,6 +2548,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2174,7 +2559,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "id": {
@@ -2186,6 +2574,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2196,7 +2585,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ie": {
@@ -2208,6 +2600,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2218,7 +2611,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "il": {
@@ -2230,6 +2626,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2240,7 +2637,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "im": {
@@ -2252,6 +2652,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
@@ -2264,7 +2665,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "in": {
@@ -2276,6 +2680,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2286,7 +2691,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "io": {
@@ -2298,6 +2706,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "africa",
@@ -2310,7 +2719,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "iq": {
@@ -2322,6 +2734,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2332,7 +2745,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ir": {
@@ -2344,6 +2760,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2354,7 +2771,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "is": {
@@ -2366,6 +2786,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2376,7 +2797,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "it": {
@@ -2388,6 +2812,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2398,7 +2823,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "je": {
@@ -2410,6 +2838,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "europe",
@@ -2422,7 +2851,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "jg": {
@@ -2434,6 +2866,7 @@
       "hasFlagImage": false,
       "hasCapital": false,
       "hasReligion": false,
+      "hasElectricity": false,
       "region": null,
       "metrics": {
         "gdp-nominal": true,
@@ -2444,7 +2877,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "jm": {
@@ -2456,6 +2892,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2466,7 +2903,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "jo": {
@@ -2478,6 +2918,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2488,7 +2929,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "jp": {
@@ -2500,6 +2944,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2510,7 +2955,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ke": {
@@ -2522,6 +2970,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2532,7 +2981,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kg": {
@@ -2544,6 +2996,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2554,7 +3007,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kh": {
@@ -2566,6 +3022,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2576,7 +3033,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ki": {
@@ -2588,6 +3048,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -2598,7 +3059,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "km": {
@@ -2610,6 +3074,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2620,7 +3085,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kn": {
@@ -2632,6 +3100,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2642,7 +3111,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kp": {
@@ -2654,6 +3126,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2664,7 +3137,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kr": {
@@ -2676,6 +3152,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2686,7 +3163,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kw": {
@@ -2698,6 +3178,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2708,7 +3189,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ky": {
@@ -2720,6 +3204,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -2732,7 +3217,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "kz": {
@@ -2744,6 +3232,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2754,7 +3243,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "la": {
@@ -2766,6 +3258,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2776,7 +3269,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lb": {
@@ -2788,6 +3284,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2798,7 +3295,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lc": {
@@ -2810,6 +3310,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -2820,7 +3321,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "li": {
@@ -2832,6 +3336,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2842,7 +3347,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "lk": {
@@ -2854,6 +3362,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -2864,7 +3373,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lr": {
@@ -2876,6 +3388,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2886,7 +3399,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ls": {
@@ -2898,6 +3414,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2908,7 +3425,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lt": {
@@ -2920,6 +3440,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2930,7 +3451,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lu": {
@@ -2942,6 +3466,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2952,7 +3477,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "lv": {
@@ -2964,6 +3492,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -2974,7 +3503,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ly": {
@@ -2986,6 +3518,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -2996,7 +3529,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ma": {
@@ -3008,6 +3544,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3018,7 +3555,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mc": {
@@ -3030,6 +3570,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3040,7 +3581,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "md": {
@@ -3052,6 +3596,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3062,7 +3607,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "me": {
@@ -3074,6 +3622,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3084,7 +3633,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mf": {
@@ -3096,6 +3648,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
       "region": "north-america",
@@ -3108,7 +3661,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "mg": {
@@ -3120,6 +3676,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3130,7 +3687,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mh": {
@@ -3142,6 +3702,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -3152,7 +3713,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "mk": {
@@ -3164,6 +3728,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3174,7 +3739,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ml": {
@@ -3186,6 +3754,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3196,7 +3765,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mm": {
@@ -3208,6 +3780,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3218,7 +3791,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mn": {
@@ -3230,6 +3806,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3240,7 +3817,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mo": {
@@ -3252,6 +3832,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "China",
       "region": "asia",
@@ -3264,7 +3845,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mp": {
@@ -3276,6 +3860,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United States",
       "region": "oceania",
@@ -3288,7 +3873,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "mq": {
@@ -3300,6 +3888,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "north-america",
@@ -3312,7 +3901,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mr": {
@@ -3324,6 +3916,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3334,7 +3927,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ms": {
@@ -3346,6 +3942,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -3358,7 +3955,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mt": {
@@ -3370,6 +3970,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3380,7 +3981,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mu": {
@@ -3392,6 +3996,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3402,7 +4007,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mv": {
@@ -3414,6 +4022,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3424,7 +4033,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mw": {
@@ -3436,6 +4048,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3446,7 +4059,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mx": {
@@ -3458,6 +4074,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -3468,7 +4085,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "my": {
@@ -3480,6 +4100,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3490,7 +4111,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "mz": {
@@ -3502,6 +4126,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3512,7 +4137,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "na": {
@@ -3524,6 +4152,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3534,7 +4163,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "nc": {
@@ -3546,6 +4178,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "oceania",
@@ -3558,7 +4191,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ne": {
@@ -3570,6 +4206,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3580,7 +4217,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "nf": {
@@ -3592,6 +4232,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
       "region": "oceania",
@@ -3604,7 +4245,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "ng": {
@@ -3616,6 +4260,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -3626,7 +4271,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ni": {
@@ -3638,6 +4286,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -3648,7 +4297,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "nl": {
@@ -3660,6 +4312,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3670,7 +4323,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "no": {
@@ -3682,6 +4338,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3692,7 +4349,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "np": {
@@ -3704,6 +4364,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3714,7 +4375,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "nr": {
@@ -3726,6 +4390,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -3736,7 +4401,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "nu": {
@@ -3748,6 +4416,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "New Zealand",
       "region": "oceania",
@@ -3760,7 +4429,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "nz": {
@@ -3772,6 +4444,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -3782,7 +4455,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "om": {
@@ -3794,6 +4470,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3804,7 +4481,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pa": {
@@ -3816,6 +4496,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -3826,7 +4507,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pe": {
@@ -3838,6 +4522,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -3848,7 +4533,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pf": {
@@ -3860,6 +4548,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "oceania",
@@ -3872,7 +4561,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pg": {
@@ -3884,6 +4576,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -3894,7 +4587,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ph": {
@@ -3906,6 +4602,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3916,7 +4613,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pk": {
@@ -3928,6 +4628,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -3938,7 +4639,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pl": {
@@ -3950,6 +4654,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -3960,7 +4665,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pm": {
@@ -3972,6 +4680,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "north-america",
@@ -3984,7 +4693,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pn": {
@@ -3996,6 +4708,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "oceania",
@@ -4008,7 +4721,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "pr": {
@@ -4020,6 +4736,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
       "region": "north-america",
@@ -4032,7 +4749,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ps": {
@@ -4044,6 +4764,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "region": "asia",
       "metrics": {
@@ -4055,7 +4776,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pt": {
@@ -4067,6 +4791,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4077,7 +4802,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "pw": {
@@ -4089,6 +4817,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -4099,7 +4828,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "py": {
@@ -4111,6 +4843,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -4121,7 +4854,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "qa": {
@@ -4133,6 +4869,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4143,7 +4880,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "re": {
@@ -4155,6 +4895,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
       "region": "africa",
@@ -4167,7 +4908,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ro": {
@@ -4179,6 +4923,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4189,7 +4934,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "rs": {
@@ -4201,6 +4949,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4211,7 +4960,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ru": {
@@ -4223,6 +4975,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4233,7 +4986,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "rw": {
@@ -4245,6 +5001,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4255,7 +5012,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sa": {
@@ -4267,6 +5027,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4277,7 +5038,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sb": {
@@ -4289,6 +5053,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -4299,7 +5064,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sc": {
@@ -4311,6 +5079,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4321,7 +5090,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sd": {
@@ -4333,6 +5105,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4343,7 +5116,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "se": {
@@ -4355,6 +5131,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4365,7 +5142,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sg": {
@@ -4377,6 +5157,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4387,7 +5168,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sh": {
@@ -4399,6 +5183,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "africa",
@@ -4411,7 +5196,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "si": {
@@ -4423,6 +5211,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4433,7 +5222,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sj": {
@@ -4445,6 +5237,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Norway",
       "region": "europe",
@@ -4457,7 +5250,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "sk": {
@@ -4469,6 +5265,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4479,7 +5276,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sl": {
@@ -4491,6 +5291,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4501,7 +5302,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sm": {
@@ -4513,6 +5317,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -4523,7 +5328,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "sn": {
@@ -4535,6 +5343,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4545,7 +5354,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "so": {
@@ -4557,6 +5369,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4567,7 +5380,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sr": {
@@ -4579,6 +5395,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -4589,7 +5406,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ss": {
@@ -4601,6 +5421,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4611,7 +5432,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "st": {
@@ -4623,6 +5447,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4633,7 +5458,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sv": {
@@ -4645,6 +5473,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -4655,7 +5484,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sx": {
@@ -4667,6 +5499,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
       "region": "north-america",
@@ -4679,7 +5512,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "sy": {
@@ -4691,6 +5527,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4701,7 +5538,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "sz": {
@@ -4713,6 +5553,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4723,7 +5564,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tc": {
@@ -4735,6 +5579,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -4747,7 +5592,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "td": {
@@ -4759,6 +5607,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4769,7 +5618,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tf": {
@@ -4781,6 +5633,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
       "region": "africa",
@@ -4793,7 +5646,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "tg": {
@@ -4805,6 +5661,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4815,7 +5672,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "th": {
@@ -4827,6 +5687,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4837,7 +5698,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tj": {
@@ -4849,6 +5713,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4859,7 +5724,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tk": {
@@ -4871,6 +5739,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "New Zealand",
       "region": "oceania",
@@ -4883,7 +5752,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "tl": {
@@ -4895,6 +5767,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4905,7 +5778,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tm": {
@@ -4917,6 +5793,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4927,7 +5804,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tn": {
@@ -4939,6 +5819,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -4949,7 +5830,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "to": {
@@ -4961,6 +5845,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -4971,7 +5856,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tr": {
@@ -4983,6 +5871,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -4993,7 +5882,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tt": {
@@ -5005,6 +5897,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -5015,7 +5908,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tv": {
@@ -5027,6 +5923,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -5037,7 +5934,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "tw": {
@@ -5049,6 +5949,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -5059,7 +5960,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "tz": {
@@ -5071,6 +5975,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -5081,7 +5986,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ua": {
@@ -5093,6 +6001,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -5103,7 +6012,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ug": {
@@ -5115,6 +6027,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -5125,7 +6038,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "us": {
@@ -5137,6 +6053,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -5147,7 +6064,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "uy": {
@@ -5159,6 +6079,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -5169,7 +6090,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "uz": {
@@ -5181,6 +6105,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -5191,7 +6116,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "va": {
@@ -5203,6 +6131,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "region": "europe",
       "metrics": {
         "gdp-nominal": false,
@@ -5213,7 +6142,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "vc": {
@@ -5225,6 +6157,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "north-america",
       "metrics": {
         "gdp-nominal": true,
@@ -5235,7 +6168,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "ve": {
@@ -5247,6 +6183,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "south-america",
       "metrics": {
         "gdp-nominal": true,
@@ -5257,7 +6194,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "vg": {
@@ -5269,6 +6209,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
       "region": "north-america",
@@ -5281,7 +6222,10 @@
         "exports": false,
         "urbanization": true,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "vi": {
@@ -5293,6 +6237,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
       "region": "north-america",
@@ -5305,7 +6250,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "vn": {
@@ -5317,6 +6265,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -5327,7 +6276,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "vu": {
@@ -5339,6 +6291,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -5349,7 +6302,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "wf": {
@@ -5361,6 +6317,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
       "region": "oceania",
@@ -5373,7 +6330,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "ws": {
@@ -5385,6 +6345,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "oceania",
       "metrics": {
         "gdp-nominal": true,
@@ -5395,7 +6356,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "xa": {
@@ -5407,6 +6371,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "disputed": "Self-governing; claimed by Georgia",
       "region": "asia",
@@ -5419,7 +6384,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "xc": {
@@ -5431,6 +6399,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "disputed": "Self-governing; claimed by Cyprus",
       "region": "asia",
@@ -5443,7 +6412,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "xk": {
@@ -5455,6 +6427,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "europe",
       "metrics": {
         "gdp-nominal": true,
@@ -5465,7 +6438,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "xo": {
@@ -5477,6 +6453,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "disputed": "Self-governing; claimed by Georgia",
       "region": "asia",
@@ -5489,7 +6466,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "xs": {
@@ -5501,6 +6481,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": false,
       "region": "africa",
       "metrics": {
         "gdp-nominal": false,
@@ -5511,7 +6492,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "xt": {
@@ -5523,6 +6507,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "disputed": "Self-governing; claimed by Moldova",
       "region": "europe",
@@ -5535,7 +6520,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "ye": {
@@ -5547,6 +6535,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "asia",
       "metrics": {
         "gdp-nominal": true,
@@ -5557,7 +6546,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "yt": {
@@ -5569,6 +6561,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
       "region": "africa",
@@ -5581,7 +6574,10 @@
         "exports": false,
         "urbanization": false,
         "export-share-gdp": false,
-        "independence-year": false
+        "independence-year": false,
+        "elec-nuclear-pct": false,
+        "elec-coal-pct": false,
+        "elec-renewable-pct": false
       }
     },
     "za": {
@@ -5593,6 +6589,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -5603,7 +6600,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "zm": {
@@ -5615,6 +6615,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -5625,7 +6626,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     },
     "zw": {
@@ -5637,6 +6641,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasElectricity": true,
       "region": "africa",
       "metrics": {
         "gdp-nominal": true,
@@ -5647,7 +6652,10 @@
         "exports": true,
         "urbanization": true,
         "export-share-gdp": true,
-        "independence-year": true
+        "independence-year": true,
+        "elec-nuclear-pct": true,
+        "elec-coal-pct": true,
+        "elec-renewable-pct": true
       }
     }
   }

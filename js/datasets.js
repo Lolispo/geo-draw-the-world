@@ -6,6 +6,7 @@ import { getIncludeTerritories } from './settings.js';
 let _data = null;
 let _entities = null;
 let _attributes = null;
+let _electricity = null;
 
 export async function loadDatasets() {
   if (_data) return _data;
@@ -48,6 +49,20 @@ export function inCountryPool(codeOrEntity) {
 
 export function getAttributes(code) {
   return _attributes ? _attributes[code] || null : null;
+}
+
+// TODOS #29. Separate file from attributes.json because a different build script owns
+// it — a failing Ember fetch must not be able to blank out capitals and religions.
+export async function loadElectricity() {
+  if (_electricity) return _electricity;
+  const resp = await fetch('data/electricity.json');
+  _electricity = (await resp.json()).electricity;
+  return _electricity;
+}
+
+// { year, sources: [{ name, pct }] } sorted most->least, or null.
+export function getElectricity(code) {
+  return _electricity ? _electricity[code] || null : null;
 }
 
 // A code's rank within a metric: { rank, total } (1-based), or null if absent.

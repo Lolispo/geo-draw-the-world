@@ -14,103 +14,13 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
-## 11. Placement & results-map overhaul
-
-**🔍 REVIEW 2026-09-06** — mostly shipped: placement uses per-continent `regionBounds` (zoomed, single-continent) and a continent-outline basemap with no islands (`getContinentPolygons()`, commit da4b5a0). **Not done: the North/South pole markers**, and "results map noticeably smaller" is unverified — `.results-map-area` is still a plain flex fill. Judge whether the poles still matter; if not, this closes.
-
-**Related: #35** — merging the sizing stage into this same screen. Do them together; #35 changes what the placement screen has to support (resize handles as well as move and rotate).
-
-**What:** The globe/map placement step plays badly and the results-screen map is too
-big. Rework placement to be more forgiving and legible.
-
-**Why:** Placement is the weakest mechanic; owner wants it focused and clearer.
-
-**Decided (owner):**
-- **Focus one continent at a time** for placement instead of the whole world.
-- **Mark the North and South poles clearly.**
-- Option to use **all continent borders but no islands** as the placement backdrop.
-- **More zoomed-in by default.**
-- **Shrink the map in the results screen** (currently too large).
-
-**Approach / notes:**
-- Placement + results map render in `js/world-canvas.js` (+ results layout in
-  `js/main.js` / `css/style.css`). Add a continent-scoped view using per-continent
-  bounds (`data/continents.json` / `regionBounds`) and a default zoom level.
-- Island-free backdrop: render continent outlines only, skipping island polygons
-  (filter by ring area or an island flag) to cut clutter.
-- Pole markers: fixed world-space markers/labels like the existing ocean labels.
-- Results map: reduce canvas size/scale in the results layout, especially on mobile.
-
-**Acceptance:** Placement defaults to a zoomed, single-continent view with visible
-poles and an optional island-free backdrop; the results map is noticeably smaller.
-
----
-
-## 24. Shape quality: still not good enough — iterate + owner approval
-
-**🔍 REVIEW** — already flagged 🚧 AWAITING OWNER APPROVAL since 2026-07-22. All four requested improvements shipped; it has been sitting on your sign-off for six weeks.
-
-**🚧 AWAITING OWNER APPROVAL (retina) 2026-07-22.** Spike (`docs/highdef-shapes-plan.md`)
-found the low detail was **our pipeline, not the source** (Bahamas shipped 1 island / 18 pts
-crushed to 3×3 px; Natural Earth 1:10m already has 44 islands / 1,629 pts ≈ geoBoundaries —
-so no source switch/licensing needed). Delivered all four requested improvements:
-1. **Detail**: `DP_EPS` 0.35 → **0.05**, `MIN_RING_AREA` 2 → **0.01**, 2–3 decimal precision
-   → **29,872 → 168,329 vertices**, **1.1 MB gzipped** world total (per-region, on-demand).
-2. **Curve smoothing**: midpoint-quadratic in `traceRing` (utils), on all Shape rendering +
-   panel silhouette (display-only; scoring unaffected).
-3. **Hi-DPI**: all canvases render at native retina resolution (`hidpiReset`); pointer/hit-test
-   math unchanged, verified with an exact-coord draw→transform→place walk.
-4. **Per-country archipelago detail**: achieved *within the single dataset* via `MIN_RING_AREA`
-   0.01 (Bahamas 1 → **32 of 44 islands**) — no separate tier needed, since the placement map
-   is a grid (no basemap to speckle). Applies everywhere (panel, peek, compare, results).
-
-Verified live (dpr=1 headless): panels/placement/draw all render + function, no console errors.
-**Aspect fix (owner-reported squish) ✅ 2026-07-22:** the projection compressed y to
-0.571× (conformal x=255 px/rad but y=146). Made it conformal (y=−255.36·mercY), world
-900→1100, ocean labels repositioned; reprojected `continents.json` to match + gave
-Continents mode its own bounds (Antarctica). Verified: Italy boot + Africa (h/w 1.13 vs
-squished 0.65) correct. Scoring unaffected (independent x/y raster normalization).
-
-**Microstate detail ✅ 2026-07-22:** small countries (San Marino, Monaco, Singapore) were
-blobs — Natural Earth only has ~17 pts for San Marino. Added a **native per-country tier**
-(`data/shapes/{code}.json`, `scripts/build-shapes.mjs`) sourced from **geoBoundaries (CC BY)**:
-San Marino 17→52, Singapore 40→665, Monaco 12→27 pts. Loaded on demand per country (a few KB
-each). `getCountryByCode` uses it (panel/peek/compare); attribution in the panel footer.
-**Note:** the draw *reference* (peek) + compare still build from the world-coord geometry —
-switch them to this native tier too so microstates are detailed when drawing (follow-up).
-
-**Gate:** owner to hard-refresh on a retina display and approve, or flag what's still off.
-Not done (deferred unless owner wants): perf-caching the world map for World-mode drag (only
-needed if drag stutters at high vertex counts); a true per-country native tier for the last
-~12 sub-pixel Bahamas cays.
-
-
-**What:** Even after #21 (Natural Earth 1:10m @ eps 0.35), the owner is **still not happy
-with the shapes** (2026-07-22). Do another quality pass and get explicit owner sign-off
-before considering it done.
-
-**Why:** Shapes are the draw game's benchmarked weakness; the current pass improved
-fidelity but not enough by eye.
-
-**Approach / notes — levers not yet pulled (see `docs/geometry-spike.md`):**
-- **Rendering, not just data:** draw reference/silhouette shapes on a
-  devicePixelRatio-scaled canvas with smoothing + rounded joins; consider curve
-  interpolation (Catmull-Rom/bezier) between vertices so coasts read smooth at small
-  sizes instead of faceted. This is likely the biggest visible win and is independent
-  of vertex count (ties to #10).
-- **Lower eps further** for the shapes actually shown large (peek/compare) — 0.35 → 0.2
-  costs ~180 KB gzipped total; measure if worth it.
-- **Evaluate a different source** for the worst offenders (geoBoundaries CC-BY / OSM
-  ODbL) if NE 1:10m still can't satisfy — spike compared these in `docs/geometry-spike.md`.
-- Compare side-by-side against Sporcle at the same on-screen size (the spike built a
-  comparison HTML harness that can be reused).
-- **Gate:** present before/after to the owner and get approval — do not self-close.
-
-**Acceptance:** Owner explicitly approves the shape quality at peek/compare/panel sizes.
-
----
-
 ## 27. Export share of GDP (dataset expansion, wave 1)
+
+**REVIEW:** open Data Explorer → "Exports % of GDP". Check the top end reads sensibly
+(Luxembourg/Singapore/Ireland are re-export & finance hubs, so >100% is correct, not a bug).
+
+**✅ DONE 2026-09-06** — shipped as `export-share-gdp` from World Bank `NE.EXP.GNFS.ZS`
+(188 countries). Luxembourg 217.4%, Singapore 180.4% top; Sudan 1.1% bottom. Live.
 
 **🔍 REVIEW 2026-09-06** — the dataset is live and matches acceptance (Luxembourg 217.4%, San Marino 186%, Singapore 180.4% at the top). **But its own precondition was skipped**: the entry says a `summable` flag must exist in `build-datasets.mjs` before this or any wave dataset lands, and it does not. Decide: close and re-open the flag as its own item, or keep this open until #37 needs it. Built by session `geo-draw-the-world-43`, still open.
 
@@ -140,6 +50,16 @@ top, US/Japan/Brazil near the bottom; coverage board shows the new metric.
 
 ## 28. Independence year (dataset expansion, wave 1)
 
+**REVIEW:** open Data Explorer → "Independence year". Two judgement calls to sign off:
+the US shows **1776** (declaration) not 1783 (recognition), and Japan shows **1947**
+(current constitution) — both are what the Factbook leads with. Say if you'd rather have
+different dates. Ethiopia is absent on purpose.
+
+**✅ DONE 2026-09-06** — shipped as `independence-year`, parsed from the Factbook,
+oldest-first (196 countries). San Marino 301, Sweden 1523, US 1776 (first year outside
+the parenthetical, so not the 1783 recognition date). New `year` formatter. Live.
+Ethiopia is deliberately null — the Factbook gives prose, not a date. See #33.
+
 **🔍 REVIEW 2026-09-06** — live and matches acceptance: ranks oldest-first (San Marino 301, France 486, UK 927), no thousands separator, BC handled. Built by session `geo-draw-the-world-43`, still open — confirm with it before closing.
 
 **What:** New rankable dataset for when the country became independent, ranked
@@ -166,9 +86,56 @@ top, South Sudan / Montenegro near the bottom; no thousands separator.
 
 ---
 
+## 29. Electricity generation mix (dataset expansion, wave 2)
+
+**REVIEW:** open any country panel (e.g. Germany, France, Norway) → "Electricity"
+section. Two calls to sign off: nuclear and coal are **hidden from Rank the World** as
+degenerate rounds but still browsable in the Explorer; and the source is Ember
+(generation) not the Factbook (installed capacity) — the swap you asked about.
+
+**✅ DONE 2026-09-06** — `scripts/build-electricity.mjs` → `data/electricity.json` from
+Ember via OWID (213 entities, all shares total 100±2%). Country panel shows the mix as a
+coloured breakdown with its year; three derived rankables added. France 68.8% nuclear,
+Botswana 98.3% coal, Iceland 100% renewable.
+
+Two things learned building it: the nuclear and coal slices are **not offered in Rank the
+World** — 181 of 213 countries are 0% nuclear, which makes a degenerate round — so
+`build-datasets.mjs` now measures modal-value share and marks such datasets
+`rankable: false`; they stay fully browsable in the Explorer. And `buildReligion` in
+`js/country-panel.js` was generalized to `buildBreakdown`, ready for export products (#32).
+
+**What:** Per-country breakdown of how electricity is generated — coal, gas, hydro,
+solar, wind, oil, nuclear, bioenergy, other renewables — shown in the country panel
+like religion, plus three derived rankable datasets (% nuclear, % coal, % renewable).
+
+**Why:** Owner request (2026-09-06), explicitly modelled on the religion breakdown.
+
+**Approach / notes:**
+- **Source: Ember, via Our World in Data.** One CSV, ~560 KB, no API key:
+  `https://ourworldindata.org/grapher/share-elec-by-source.csv?csvType=full&useColumnShortNames=true`
+  Verified reachable. Columns are ISO3 + year + pre-computed `*_share_of_electricity__pct`
+  for all nine sources. Filter to the latest year per country; map ISO3 → our ISO2.
+- **Do NOT use the CIA Factbook for this**, even though we already download it. Its
+  `Energy → Electricity generation sources` reports *installed capacity*, not
+  generation. A 1 GW solar farm generates ~10-20% of the hours a 1 GW nuclear plant
+  does, so capacity share overstates solar/wind and understates nuclear/coal/gas.
+  "Runs on nuclear" is a claim about generation. This was considered and rejected —
+  see the design doc.
+- New `scripts/build-electricity.mjs` → `data/electricity.json`. Derived percentages
+  merge into `datasets.json` at the end of `build-datasets.mjs` (see design doc on
+  build ordering).
+- Expect gaps for territories and de-facto states — Ember covers fewer entities than
+  the World Bank. Normal; the UI already handles missing values.
+
+**Acceptance:** Panel shows the mix as a labelled bar for well-covered countries
+(France nuclear-dominated, Norway hydro-dominated, Poland coal-dominated); three new
+rankables appear in Explorer + Rank.
+
+---
+
 ## 9. Draw the World: better default modes, disable the weak ones
 
-**Related: #35** — merging sizing into placement removes the weakest step in the draw loop, which is half the reason the current default plays badly. Re-evaluate the default after #35 lands.
+**Related: #35** — merging sizing into placement removes the weakest step in the draw loop. Re-evaluate the default after #35 lands.
 
 **What:** Revisit which modes "Draw the World" offers and which is the default.
 Disable/hide the ones that play badly; make the default put the best foot forward.
@@ -176,7 +143,16 @@ Disable/hide the ones that play badly; make the default put the best foot forwar
 **Why:** Some draw modes are weak right now (placement especially — item 11), and
 the current default doesn't showcase the game well.
 
-**Decided:**
+**Decided (owner, 2026-09-06):**
+- **Quick 10 is too long for drawing.** Ten freehand countries is a slog when each one
+  is draw → size → place. Replace or supplement it with a **Quick 3** for Draw the
+  World (`btn-quick10` / `startQuick10()` in `js/main.js:516`, label in
+  `index.html:124`). Rank the World can keep 10 — the cost per item there is a tap.
+- Shape quality (#24) and placement (#11) both signed off as good enough on
+  2026-09-06, so the original "disable modes gated on weak placement" reasoning below
+  no longer applies. Re-scope this item to mode *length* and the default, not quality.
+
+**Decided (earlier):**
 - Disable the "bad" modes (candidate: anything gated on weak placement, e.g.
   **Placement Only**) at least until items 10–11 land.
 - Change the default mode to a stronger one (e.g. the **Shape-Only** compare from
@@ -194,6 +170,10 @@ the current default doesn't showcase the game well.
 ---
 
 ## 10. Push draw shape fidelity to Sporcle level
+
+**⚠️ Probably closable** — this is the same bar as #24, which the owner signed off as
+"good enough for now" on 2026-09-06. Kept only because it was not named explicitly.
+Delete it unless there is a fidelity concern #24's sign-off did not cover.
 
 **What:** Drawn/reference shapes still look rough compared to Sporcle and similar
 apps. Improve outline quality further (item 1 regenerated geometry from Natural
@@ -358,37 +338,6 @@ at 390×844.
 
 **Acceptance:** Both strings legible at 390px wide — shorten, stack, or drop the right one
 below some width threshold.
-
----
-
-## 29. Electricity generation mix (dataset expansion, wave 2)
-
-**What:** Per-country breakdown of how electricity is generated — coal, gas, hydro,
-solar, wind, oil, nuclear, bioenergy, other renewables — shown in the country panel
-like religion, plus three derived rankable datasets (% nuclear, % coal, % renewable).
-
-**Why:** Owner request (2026-09-06), explicitly modelled on the religion breakdown.
-
-**Approach / notes:**
-- **Source: Ember, via Our World in Data.** One CSV, ~560 KB, no API key:
-  `https://ourworldindata.org/grapher/share-elec-by-source.csv?csvType=full&useColumnShortNames=true`
-  Verified reachable. Columns are ISO3 + year + pre-computed `*_share_of_electricity__pct`
-  for all nine sources. Filter to the latest year per country; map ISO3 → our ISO2.
-- **Do NOT use the CIA Factbook for this**, even though we already download it. Its
-  `Energy → Electricity generation sources` reports *installed capacity*, not
-  generation. A 1 GW solar farm generates ~10-20% of the hours a 1 GW nuclear plant
-  does, so capacity share overstates solar/wind and understates nuclear/coal/gas.
-  "Runs on nuclear" is a claim about generation. This was considered and rejected —
-  see the design doc.
-- New `scripts/build-electricity.mjs` → `data/electricity.json`. Derived percentages
-  merge into `datasets.json` at the end of `build-datasets.mjs` (see design doc on
-  build ordering).
-- Expect gaps for territories and de-facto states — Ember covers fewer entities than
-  the World Bank. Normal; the UI already handles missing values.
-
-**Acceptance:** Panel shows the mix as a labelled bar for well-covered countries
-(France nuclear-dominated, Norway hydro-dominated, Poland coal-dominated); three new
-rankables appear in Explorer + Rank.
 
 ---
 
@@ -786,3 +735,5 @@ full write-ups are in git history.
 - **#25** Bug: Rank the World — can't continue after 10 placements (mobile) — 2026-07-30
 - **#16** Add Exports + Urbanization as rankable metrics (World Bank) — 2026-09-06
 - **#17** Country profile attributes: capital + religion (new non-metric data layer) — 2026-09-06
+- **#11** Placement & results-map overhaul — 2026-09-06
+- **#24** Shape quality: iterate + owner approval — 2026-09-06
