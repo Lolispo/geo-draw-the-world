@@ -1,11 +1,11 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, getMetricMeta, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
+import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
-const FLAG_CDN = 'https://flagcdn.com/w40/';
 
 export class DataExplorer {
   constructor(containerEl, onFinish, onPlayDataset) {
@@ -168,11 +168,8 @@ export class DataExplorer {
     list.innerHTML = '';
 
     const ds = getDataset(this.datasetId);
-    let entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst });
-    if (!getIncludeTerritories()) {
-      const optional = new Set(getEntitiesList().filter((e) => e.optional).map((e) => e.code));
-      entries = entries.filter((e) => !optional.has(e.code));
-    }
+    const entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst })
+      .filter((e) => inCountryPool(e.code));
 
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
@@ -190,7 +187,7 @@ export class DataExplorer {
 
       const img = document.createElement('img');
       img.className = 'rank-flag';
-      img.src = `${FLAG_CDN}${e.code}.png`;
+      img.src = flagUrl(e.code, 'w40');
       img.alt = '';
       img.loading = 'lazy';
       img.addEventListener('error', () => { img.style.visibility = 'hidden'; });
@@ -270,7 +267,7 @@ export class DataExplorer {
       const flagTd = document.createElement('td');
       const img = document.createElement('img');
       img.className = 'rank-flag';
-      img.src = `${FLAG_CDN}${e.code}.png`;
+      img.src = flagUrl(e.code, 'w40');
       img.alt = '';
       img.loading = 'lazy';
       img.addEventListener('error', () => { img.style.visibility = 'hidden'; });

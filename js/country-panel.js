@@ -7,9 +7,9 @@ import {
   getEntity, getAttributes, getDatasetList, formatValue, getRank,
 } from './datasets.js';
 import { getCountryByCode } from './geo-data.js';
+import { flagUrl } from './flags.js';
 import { traceRing } from './utils.js';
 
-const FLAG_CDN = 'https://flagcdn.com/w320/';
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
 
 let overlay = null;
@@ -72,7 +72,7 @@ function render(code) {
   const header = el('div', 'cp-header');
   const flag = document.createElement('img');
   flag.className = 'cp-flag';
-  flag.src = `${FLAG_CDN}${code}.png`;
+  flag.src = flagUrl(code, 'w320');
   flag.alt = `Flag of ${name}`;
   flag.addEventListener('error', () => { flag.style.display = 'none'; });
   const titleWrap = el('div', 'cp-title-wrap');
@@ -80,6 +80,9 @@ function render(code) {
   const sub = [];
   if (entity?.continent) sub.push(entity.continent);
   if (entity?.sovereign) sub.push(`Territory of ${entity.sovereign}`);
+  // De-facto states carry Natural Earth's neutral claim note; show that rather than
+  // the bare type, which would read as taking a side either way (TODOS #20).
+  else if (entity?.disputed) sub.push(entity.disputed);
   else if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type[0].toUpperCase() + entity.type.slice(1));
   if (sub.length) titleWrap.appendChild(el('div', 'cp-sub', sub.join(' · ')));
   header.append(flag, titleWrap);
@@ -136,8 +139,9 @@ function render(code) {
   body.appendChild(facts);
   cardEl.appendChild(body);
 
-  // Attribution — country outlines are from geoBoundaries (CC BY 4.0).
-  cardEl.appendChild(el('div', 'cp-credit', 'Outlines © geoBoundaries (CC BY 4.0)'));
+  // Attribution — most outlines are geoBoundaries (CC BY 4.0); the entities it lacks
+  // (dependencies, de-facto states) fall back to Natural Earth, which is public domain.
+  cardEl.appendChild(el('div', 'cp-credit', 'Outlines © geoBoundaries (CC BY 4.0) · Natural Earth'));
 }
 
 function buildReligion(religion) {

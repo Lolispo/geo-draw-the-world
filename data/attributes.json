@@ -12,7 +12,9 @@
           "pct": 1.7
         }
       ],
-      "religionRaw": "Christian (predominantly Roman Catholic) 89.5, other 8.8%, unaffiliated 1.7% (2020 est.)"
+      "religionRaw": "Christian (predominantly Roman Catholic) 89.5, other 8.8%, unaffiliated 1.7% (2020 est.)",
+      "independenceYear": 1278,
+      "independenceRaw": "1278 (formed under the joint sovereignty of the French Count of Foix and the Spanish Bishop of Urgell)"
     },
     "ae": {
       "capital": "Abu Dhabi",
@@ -42,7 +44,9 @@
           "pct": 1.9
         }
       ],
-      "religionRaw": "Muslim 74.5% (official) (Sunni 63.3%, Shia 6.7%, other 4.4%), Christian 12.9%, Hindu 6.2%, Buddhist 3.2%, agnostic 1.3%, other 1.9% (2020 est.)"
+      "religionRaw": "Muslim 74.5% (official) (Sunni 63.3%, Shia 6.7%, other 4.4%), Christian 12.9%, Hindu 6.2%, Buddhist 3.2%, agnostic 1.3%, other 1.9% (2020 est.)",
+      "independenceYear": 1971,
+      "independenceRaw": "2 December 1971 (from the UK)"
     },
     "af": {
       "capital": "Kabul",
@@ -52,7 +56,9 @@
           "pct": 99.7
         }
       ],
-      "religionRaw": "Muslim 99.7% (Sunni 84.7 - 89.7%, Shia 10 - 15%), other &lt;0.3% (2009 est.)"
+      "religionRaw": "Muslim 99.7% (Sunni 84.7 - 89.7%, Shia 10 - 15%), other &lt;0.3% (2009 est.)",
+      "independenceYear": 1919,
+      "independenceRaw": "19 August 1919 (from UK control over Afghan foreign affairs)"
     },
     "ag": {
       "capital": "Saint John's",
@@ -78,7 +84,9 @@
           "pct": 5.9
         }
       ],
-      "religionRaw": "Protestant 68.3% (Anglican 17.6%, Seventh Day Adventist 12.4%, Pentecostal 12.2%, Moravian 8.3%, Methodist 5.6%, Wesleyan Holiness 4.5%, Church of God 4.1%, Baptist 3.6%), Roman Catholic 8.2%, other 12.2%, unspecified 5.5%, none 5.9% (2011 est.)"
+      "religionRaw": "Protestant 68.3% (Anglican 17.6%, Seventh Day Adventist 12.4%, Pentecostal 12.2%, Moravian 8.3%, Methodist 5.6%, Wesleyan Holiness 4.5%, Church of God 4.1%, Baptist 3.6%), Roman Catholic 8.2%, other 12.2%, unspecified 5.5%, none 5.9% (2011 est.)",
+      "independenceYear": 1981,
+      "independenceRaw": "1 November 1981 (from the UK)"
     },
     "ai": {
       "capital": "The Valley",
@@ -147,7 +155,9 @@
           "pct": 16.2
         }
       ],
-      "religionRaw": "Muslim 56.7%, Roman Catholic 10%, Orthodox 6.8%, atheist 2.5%, Bektashi (a Sufi order) 2.1%, other 5.7%, unspecified 16.2% (2011 est.)"
+      "religionRaw": "Muslim 56.7%, Roman Catholic 10%, Orthodox 6.8%, atheist 2.5%, Bektashi (a Sufi order) 2.1%, other 5.7%, unspecified 16.2% (2011 est.)",
+      "independenceYear": 1912,
+      "independenceRaw": "28 November 1912 (from the Ottoman Empire)"
     },
     "am": {
       "capital": "Yerevan",
@@ -165,7 +175,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Armenian Apostolic 95.2%, not stated 1.7%; less than 1%: Catholic, no religion, Evangelical, Shar-fadinian, other, Armenian Orthodox, Jehovah's Witness, Pagan, Molokan (2022 est.)"
+      "religionRaw": "Armenian Apostolic 95.2%, not stated 1.7%; less than 1%: Catholic, no religion, Evangelical, Shar-fadinian, other, Armenian Orthodox, Jehovah's Witness, Pagan, Molokan (2022 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "21 September 1991 (from the Soviet Union); notable earlier dates: 321 B.C. (Kingdom of Armenia established under the Orontid Dynasty), A.D. 884 (Armenian Kingdom reestablished under the Bagratid Dynasty); 1198 (Cilician Kingdom established); 28 May 1918 (Democratic Republic of Armenia declared)"
     },
     "ao": {
       "capital": "Luanda",
@@ -187,7 +199,9 @@
           "pct": 12.3
         }
       ],
-      "religionRaw": "Roman Catholic 41.1%, Protestant 38.1%, other 8.6%, none 12.3% (2014 est.)"
+      "religionRaw": "Roman Catholic 41.1%, Protestant 38.1%, other 8.6%, none 12.3% (2014 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "11 November 1975 (from Portugal)"
     },
     "ar": {
       "capital": "Buenos Aires",
@@ -213,7 +227,9 @@
           "pct": 0.3
         }
       ],
-      "religionRaw": "Roman Catholic 62.9%, Evangelical 15.3% (Pentecostal 13%, other Evangelical 2.3%), Jehovah's Witness and Church of Jesus Christ 1.4%, other 1.2% (includes Muslim, Jewish), none 18.9% (includes agnostic and atheist), unspecified 0.3% (2019 est.)"
+      "religionRaw": "Roman Catholic 62.9%, Evangelical 15.3% (Pentecostal 13%, other Evangelical 2.3%), Jehovah's Witness and Church of Jesus Christ 1.4%, other 1.2% (includes Muslim, Jewish), none 18.9% (includes agnostic and atheist), unspecified 0.3% (2019 est.)",
+      "independenceYear": 1816,
+      "independenceRaw": "9 July 1816 (from Spain)"
     },
     "as": {
       "capital": "Pago Pago",
@@ -257,7 +273,9 @@
           "pct": 22.4
         }
       ],
-      "religionRaw": "Roman Catholic 55.2%, Muslim 8.3%, Orthodox 4.9%, Evangelical Christian 3.8%, Jewish 0.1%, other 5.4%, none 22.4% (2021 est.)"
+      "religionRaw": "Roman Catholic 55.2%, Muslim 8.3%, Orthodox 4.9%, Evangelical Christian 3.8%, Jewish 0.1%, other 5.4%, none 22.4% (2021 est.)",
+      "independenceYear": 976,
+      "independenceRaw": "no official date of independence: 976 (Margravate of Austria established); 17 September 1156 (Duchy of Austria founded); 6 January 1453 (Archduchy of Austria acknowledged); 11 August 1804 (Austrian Empire proclaimed); 30 March 1867 (Austro-Hungarian dual monarchy established); 12 November 1918 (First Republic proclaimed); 27 April 1945 (Second Republic proclaimed)"
     },
     "au": {
       "capital": "Canberra",
@@ -303,7 +321,9 @@
           "pct": 7.3
         }
       ],
-      "religionRaw": "Roman Catholic 20%, Protestant 18.1% (Anglican 9.8%, Uniting Church 2.6%, Presbyterian and Reformed 1.6%, Baptist 1.4%, Pentecostal 1%, other Protestant 1.7%), other Christian 3.5%, Muslim 3.2%, Hindu 2.7%, Buddhist 2.4%, Orthodox 2.3% (Eastern Orthodox 2.1%, Oriental Orthodox 0.2%), other 2.1%, none 38.4%, unspecified 7.3% (2021 est.)"
+      "religionRaw": "Roman Catholic 20%, Protestant 18.1% (Anglican 9.8%, Uniting Church 2.6%, Presbyterian and Reformed 1.6%, Baptist 1.4%, Pentecostal 1%, other Protestant 1.7%), other Christian 3.5%, Muslim 3.2%, Hindu 2.7%, Buddhist 2.4%, Orthodox 2.3% (Eastern Orthodox 2.1%, Oriental Orthodox 0.2%), other 2.1%, none 38.4%, unspecified 7.3% (2021 est.)",
+      "independenceYear": 1901,
+      "independenceRaw": "1 January 1901 (from the federation of UK colonies)"
     },
     "aw": {
       "capital": "Oranjestad",
@@ -351,7 +371,9 @@
           "pct": 2.6
         }
       ],
-      "religionRaw": "Muslim 97.3% (predominantly Shia), Christian 2.6%, other &lt;0.1, unaffiliated &lt;0.1 (2020 est.)"
+      "religionRaw": "Muslim 97.3% (predominantly Shia), Christian 2.6%, other &lt;0.1, unaffiliated &lt;0.1 (2020 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "30 August 1991 (declared from the Soviet Union); 18 October 1991 (adopted by the Supreme Council of Azerbaijan)"
     },
     "ba": {
       "capital": "Sarajevo",
@@ -385,7 +407,9 @@
           "pct": 1.1
         }
       ],
-      "religionRaw": "Muslim 50.7%, Orthodox 30.7%, Roman Catholic 15.2%, atheist 0.8%, agnostic 0.3%, other 1.2%, undeclared/no answer 1.1% (2013 est.)"
+      "religionRaw": "Muslim 50.7%, Orthodox 30.7%, Roman Catholic 15.2%, atheist 0.8%, agnostic 0.3%, other 1.2%, undeclared/no answer 1.1% (2013 est.)",
+      "independenceYear": 1992,
+      "independenceRaw": "1 March 1992 (from Yugoslavia)"
     },
     "bb": {
       "capital": "Bridgetown",
@@ -419,7 +443,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Protestant 66.4% (includes Anglican 23.9%, other Pentecostal 19.5%, Adventist 5.9%, Methodist 4.2%, Wesleyan 3.4%, Nazarene 3.2%, Church of God 2.4%, Baptist 1.8%, Moravian 1.2%, other Protestant 0.9%), Roman Catholic 3.8%, other Christian 5.4% (includes Jehovah's Witness 2.0%, other 3.4%), Rastafarian 1%, other 1.5%, none 20.6%, unspecified 1.2% (2010 est.)"
+      "religionRaw": "Protestant 66.4% (includes Anglican 23.9%, other Pentecostal 19.5%, Adventist 5.9%, Methodist 4.2%, Wesleyan 3.4%, Nazarene 3.2%, Church of God 2.4%, Baptist 1.8%, Moravian 1.2%, other Protestant 0.9%), Roman Catholic 3.8%, other Christian 5.4% (includes Jehovah's Witness 2.0%, other 3.4%), Rastafarian 1%, other 1.5%, none 20.6%, unspecified 1.2% (2010 est.)",
+      "independenceYear": 1966,
+      "independenceRaw": "30 November 1966 (from the UK)"
     },
     "bd": {
       "capital": "Dhaka",
@@ -437,7 +463,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Muslim 91%, Hindu 8%, other 1% (2022 est.)"
+      "religionRaw": "Muslim 91%, Hindu 8%, other 1% (2022 est.)",
+      "independenceYear": 1971,
+      "independenceRaw": "16 December 1971 (from Pakistan)"
     },
     "be": {
       "capital": "Brussels",
@@ -467,7 +495,9 @@
           "pct": 20.2
         }
       ],
-      "religionRaw": "Roman Catholic 57.1%, Protestant 2.3%, other Christian, 2.8%, Muslim 6.8%, other 1.7%, atheist 9.1%, nonbeliever/agnostic 20.2% (2018 est.)"
+      "religionRaw": "Roman Catholic 57.1%, Protestant 2.3%, other Christian, 2.8%, Muslim 6.8%, other 1.7%, atheist 9.1%, nonbeliever/agnostic 20.2% (2018 est.)",
+      "independenceYear": 1830,
+      "independenceRaw": "4 October 1830 (a provisional government declared independence from the Netherlands); 21 July 1831 (King LEOPOLD I ascended to the throne)"
     },
     "bf": {
       "capital": "Ouagadougou",
@@ -497,7 +527,9 @@
           "pct": 0.7
         }
       ],
-      "religionRaw": "Muslim 63.8%, Roman Catholic 20.1%, Animiste 9%, Protestant 6.2%, other 0.2%, none 0.7% (2019 est.)"
+      "religionRaw": "Muslim 63.8%, Roman Catholic 20.1%, Animiste 9%, Protestant 6.2%, other 0.2%, none 0.7% (2019 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "5 August 1960 (from France)"
     },
     "bg": {
       "capital": "Sofia",
@@ -523,7 +555,9 @@
           "pct": 20.7
         }
       ],
-      "religionRaw": "Christian 64.7%, Muslim 9.8%, other 0.1%, none 4.7%, unspecified 20.7% (2021 est.)"
+      "religionRaw": "Christian 64.7%, Muslim 9.8%, other 0.1%, none 4.7%, unspecified 20.7% (2021 est.)",
+      "independenceYear": 1878,
+      "independenceRaw": "3 March 1878 (as an autonomous principality within the Ottoman Empire); 22 September 1908 (complete independence from the Ottoman Empire)"
     },
     "bh": {
       "capital": "Manama",
@@ -537,7 +571,9 @@
           "pct": 25.9
         }
       ],
-      "religionRaw": "Muslim 74.2%, other 25.9% (2020 est)"
+      "religionRaw": "Muslim 74.2%, other 25.9% (2020 est)",
+      "independenceYear": 1971,
+      "independenceRaw": "15 August 1971 (from the UK)"
     },
     "bi": {
       "capital": "Gitega , Bujumbura",
@@ -560,7 +596,9 @@
           "pct": 1.3
         }
       ],
-      "religionRaw": "Christian 93.9% (Roman Catholic 58.6%, Protestant 35.3% [includes Adventist 2.7% and other Protestant religions 32.6%]), Muslim 3.4%, other 1.3%, none 1.3% (2016-17 est.)"
+      "religionRaw": "Christian 93.9% (Roman Catholic 58.6%, Protestant 35.3% [includes Adventist 2.7% and other Protestant religions 32.6%]), Muslim 3.4%, other 1.3%, none 1.3% (2016-17 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "1 July 1962 (from UN trusteeship under Belgian administration)"
     },
     "bj": {
       "capital": "Porto-Novo",
@@ -599,7 +637,9 @@
           "pct": 5.8
         }
       ],
-      "religionRaw": "Muslim 27.7%, Roman Catholic 25.5%, Protestant 13.5% (Celestial 6.7%, Methodist 3.4%, other Protestant 3.4%), Vodoun 11.6%, other Christian 9.5%, other traditional religions 2.6%, other 2.6%, none 5.8% (2013 est.)"
+      "religionRaw": "Muslim 27.7%, Roman Catholic 25.5%, Protestant 13.5% (Celestial 6.7%, Methodist 3.4%, other Protestant 3.4%), Vodoun 11.6%, other Christian 9.5%, other traditional religions 2.6%, other 2.6%, none 5.8% (2013 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "1 August 1960 (from France)"
     },
     "bl": {
       "capital": "Gustavia"
@@ -662,7 +702,9 @@
           "pct": 4.9
         }
       ],
-      "religionRaw": "Muslim (official) 82.1%, Christian 6.7%, Buddhist 6.3%, other 4.9% (2021 est.)"
+      "religionRaw": "Muslim (official) 82.1%, Christian 6.7%, Buddhist 6.3%, other 4.9% (2021 est.)",
+      "independenceYear": 1984,
+      "independenceRaw": "1 January 1984 (from the UK)"
     },
     "bo": {
       "capital": "La Paz",
@@ -721,7 +763,9 @@
           "pct": 1.3
         }
       ],
-      "religionRaw": "Roman Catholic 65%, Protestant 19.6% (Evangelical (non-specific) 11.9%, Evangelical Baptist 2.1%, Evangelical Pentecostal 1.8%, Evangelical Methodist 0.7%, Adventist 2.8%, Protestant (non-specific) 0.3%), Believer (not belonging to the church) 0.9%, other 4.8%, atheist 1.7%, agnostic 0.6%, none 6.1%, unspecified 1.3% (2023 est.)"
+      "religionRaw": "Roman Catholic 65%, Protestant 19.6% (Evangelical (non-specific) 11.9%, Evangelical Baptist 2.1%, Evangelical Pentecostal 1.8%, Evangelical Methodist 0.7%, Adventist 2.8%, Protestant (non-specific) 0.3%), Believer (not belonging to the church) 0.9%, other 4.8%, atheist 1.7%, agnostic 0.6%, none 6.1%, unspecified 1.3% (2023 est.)",
+      "independenceYear": 1825,
+      "independenceRaw": "6 August 1825 (from Spain)"
     },
     "bq": {
       "capital": "Kralendijk",
@@ -767,7 +811,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Roman Catholic 56.8%, Evangelical 26.9%, none 9.3%, other 4%, Spirtism (Espirita) 1.8%, unspecified 1.4%, Umbanda and Candomble 1.1%, Indigenous religions .06%, undeclared 0.2% (2022)"
+      "religionRaw": "Roman Catholic 56.8%, Evangelical 26.9%, none 9.3%, other 4%, Spirtism (Espirita) 1.8%, unspecified 1.4%, Umbanda and Candomble 1.1%, Indigenous religions .06%, undeclared 0.2% (2022)",
+      "independenceYear": 1822,
+      "independenceRaw": "7 September 1822 (from Portugal)"
     },
     "bs": {
       "capital": "Nassau",
@@ -797,7 +843,9 @@
           "pct": 2.6
         }
       ],
-      "religionRaw": "Protestant 69.9% (includes Baptist 34.9%, Anglican 13.7%, Pentecostal 8.9% Seventh Day Adventist 4.4%, Methodist 3.6%, Church of God 1.9%, Plymouth Brethren 1.6%, other Protestant 0.9%), Roman Catholic 12%, other Christian 13% (includes Jehovah's Witness 1.1%), other 0.6%, none 1.9%, unspecified 2.6% (2010 est.)"
+      "religionRaw": "Protestant 69.9% (includes Baptist 34.9%, Anglican 13.7%, Pentecostal 8.9% Seventh Day Adventist 4.4%, Methodist 3.6%, Church of God 1.9%, Plymouth Brethren 1.6%, other Protestant 0.9%), Roman Catholic 12%, other Christian 13% (includes Jehovah's Witness 1.1%), other 0.6%, none 1.9%, unspecified 2.6% (2010 est.)",
+      "independenceYear": 1973,
+      "independenceRaw": "10 July 1973 (from the UK)"
     },
     "bt": {
       "capital": "Thimphu",
@@ -815,7 +863,9 @@
           "pct": 2.6
         }
       ],
-      "religionRaw": "Lamaistic Buddhist 75.3%, Indian- and Nepali-influenced Hinduism 22.1%, other 2.6% (2005 est.)"
+      "religionRaw": "Lamaistic Buddhist 75.3%, Indian- and Nepali-influenced Hinduism 22.1%, other 2.6% (2005 est.)",
+      "independenceYear": 1907,
+      "independenceRaw": "17 December 1907 (became a unified kingdom under its first hereditary king); 8 August 1949 (Treaty of Friendship with India maintains Bhutanese independence)"
     },
     "bw": {
       "capital": "Gaborone",
@@ -841,7 +891,9 @@
           "pct": 0.3
         }
       ],
-      "religionRaw": "Christian 79.1%, Badimo 4.1%, other 1.4% (includes Baha'i, Hindu, Muslim, Rastafarian), none 15.2%, unspecified 0.3% (2011 est.)"
+      "religionRaw": "Christian 79.1%, Badimo 4.1%, other 1.4% (includes Baha'i, Hindu, Muslim, Rastafarian), none 15.2%, unspecified 0.3% (2011 est.)",
+      "independenceYear": 1966,
+      "independenceRaw": "30 September 1966 (from the UK)"
     },
     "by": {
       "capital": "Minsk",
@@ -863,7 +915,9 @@
           "pct": 41.1
         }
       ],
-      "religionRaw": "Orthodox 48.3%, Catholic 7.1%, other 3.5%, non-believers 41.1% (2011 est.)"
+      "religionRaw": "Orthodox 48.3%, Catholic 7.1%, other 3.5%, non-believers 41.1% (2011 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "25 August 1991 (from the Soviet Union)"
     },
     "bz": {
       "capital": "Belmopan",
@@ -893,7 +947,9 @@
           "pct": 15.5
         }
       ],
-      "religionRaw": "Roman Catholic 40.1%, Protestant 31.5% (includes Pentecostal 8.4%, Seventh Day Adventist 5.4%, Anglican 4.7%, Mennonite 3.7%, Baptist 3.6%, Methodist 2.9%, Nazarene 2.8%), Jehovah's Witness 1.7%, other 10.5% (includes Baha'i, Buddhist, Hindu, Church of Jesus Christ, Muslim, Rastafarian, Salvation Army), unspecified 0.6%, none 15.5% (2010 est.)"
+      "religionRaw": "Roman Catholic 40.1%, Protestant 31.5% (includes Pentecostal 8.4%, Seventh Day Adventist 5.4%, Anglican 4.7%, Mennonite 3.7%, Baptist 3.6%, Methodist 2.9%, Nazarene 2.8%), Jehovah's Witness 1.7%, other 10.5% (includes Baha'i, Buddhist, Hindu, Church of Jesus Christ, Muslim, Rastafarian, Salvation Army), unspecified 0.6%, none 15.5% (2010 est.)",
+      "independenceYear": 1981,
+      "independenceRaw": "21 September 1981 (from the UK)"
     },
     "ca": {
       "capital": "Ottawa",
@@ -931,7 +987,35 @@
           "pct": 34.6
         }
       ],
-      "religionRaw": "Christian 53.3%, Muslim 4.9%, Hindu 2.3%, Sikh 2.1%, Buddhist 1%, Jewish 0.9%, Traditional (North American Indigenous) 0.2%, other religions and traditional spirituality 0.6%, none 34.6% (2021 est.)"
+      "religionRaw": "Christian 53.3%, Muslim 4.9%, Hindu 2.3%, Sikh 2.1%, Buddhist 1%, Jewish 0.9%, Traditional (North American Indigenous) 0.2%, other religions and traditional spirituality 0.6%, none 34.6% (2021 est.)",
+      "independenceYear": 1867,
+      "independenceRaw": "1 July 1867 (union of British North American colonies); 11 December 1931 (recognized by UK per Statute of Westminster)"
+    },
+    "cc": {
+      "capital": "West Island",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 75
+        },
+        {
+          "name": "Anglican",
+          "pct": 3.5
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 2.2
+        },
+        {
+          "name": "none",
+          "pct": 12.9
+        },
+        {
+          "name": "unspecified",
+          "pct": 6.3
+        }
+      ],
+      "religionRaw": "Muslim (predominantly Sunni) 75%, Anglican 3.5%, Roman Catholic 2.2%, none 12.9%, unspecified 6.3% (2016 est.)"
     },
     "cd": {
       "capital": "Kinshasa",
@@ -957,7 +1041,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Christian 93/1% (Roman Catholic 29.9%, Protestant 26.7%, other Christian 36.5%), Kimbanguist 2.8%, Muslim 1.3%, other (includes syncretic sects and indigenous beliefs) 1.2%, none 1.3%, unspecified 0.2% (2014 est.)"
+      "religionRaw": "Christian 93/1% (Roman Catholic 29.9%, Protestant 26.7%, other Christian 36.5%), Kimbanguist 2.8%, Muslim 1.3%, other (includes syncretic sects and indigenous beliefs) 1.2%, none 1.3%, unspecified 0.2% (2014 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "30 June 1960 (from Belgium)"
     },
     "cf": {
       "capital": "Bangui",
@@ -991,7 +1077,9 @@
           "pct": 0.7
         }
       ],
-      "religionRaw": "Roman Catholic 34.6%, Protestant 15.7%, other Christian 22.9%, Muslim 13.8%, ethnic religionist 12%, Baha'i 0.2%, agnostic/atheist 0.7% (2020 est.)"
+      "religionRaw": "Roman Catholic 34.6%, Protestant 15.7%, other Christian 22.9%, Muslim 13.8%, ethnic religionist 12%, Baha'i 0.2%, agnostic/atheist 0.7% (2020 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "13 August 1960 (from France)"
     },
     "cg": {
       "capital": "Brazzaville",
@@ -1029,7 +1117,9 @@
           "pct": 11.3
         }
       ],
-      "religionRaw": "Roman Catholic 33.1%, Awakening Churches/Christian Revival 22.3%, Protestant 19.9%, Salutiste 2.2%, Muslim 1.6%, Kimbanguist 1.5%, other 8.1%, none 11.3% (2007 est.)"
+      "religionRaw": "Roman Catholic 33.1%, Awakening Churches/Christian Revival 22.3%, Protestant 19.9%, Salutiste 2.2%, Muslim 1.6%, Kimbanguist 1.5%, other 8.1%, none 11.3% (2007 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "15 August 1960 (from France)"
     },
     "ch": {
       "capital": "Bern",
@@ -1063,7 +1153,9 @@
           "pct": 1.1
         }
       ],
-      "religionRaw": "Roman Catholic 34.4%, Protestant 22.5%, other Christian 5.7%, Muslim 5.4%, other 1.5%, none 29.4%, unspecified 1.1% (2020 est.)"
+      "religionRaw": "Roman Catholic 34.4%, Protestant 22.5%, other Christian 5.7%, Muslim 5.4%, other 1.5%, none 29.4%, unspecified 1.1% (2020 est.)",
+      "independenceYear": 1291,
+      "independenceRaw": "1 August 1291 (founding of the Swiss Confederation)"
     },
     "ci": {
       "capital": "Yamoussoukro , Abidjan",
@@ -1102,7 +1194,9 @@
           "pct": 19.1
         }
       ],
-      "religionRaw": "Muslim 42.9%, Catholic 17.2%, Evangelical 11.8%, Methodist 1.7%, other Christian 3.2%, animist 3.6%, other religion 0.5%, none 19.1% (2014 est.)"
+      "religionRaw": "Muslim 42.9%, Catholic 17.2%, Evangelical 11.8%, Methodist 1.7%, other Christian 3.2%, animist 3.6%, other religion 0.5%, none 19.1% (2014 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "7 August 1960 (from France)"
     },
     "ck": {
       "capital": "Avarua",
@@ -1136,7 +1230,9 @@
           "pct": 15.6
         }
       ],
-      "religionRaw": "Protestant 55% (Cook Islands Christian Church 43.1%, Seventh Day Adventist 8.3%, Assemblies of God 3.6%), Roman Catholic 16.7%, Church of Jesus Christ 3.9%, Jehovah's Witness 2.2%, Apostolic Church 2.1%, other 4.5%, none/unspecified 15.6% (2021 est.)"
+      "religionRaw": "Protestant 55% (Cook Islands Christian Church 43.1%, Seventh Day Adventist 8.3%, Assemblies of God 3.6%), Roman Catholic 16.7%, Church of Jesus Christ 3.9%, Jehovah's Witness 2.2%, Apostolic Church 2.1%, other 4.5%, none/unspecified 15.6% (2021 est.)",
+      "independenceYear": 1965,
+      "independenceRaw": "4 August 1965 (Cook Islands became self-governing state in free association with New Zealand)"
     },
     "cl": {
       "capital": "Santiago",
@@ -1159,7 +1255,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Catholic 57%, none 25.7%, Evangelical or Protestant 16.2%, other Christians and traditions related to Christ 1.3%; less than 1%: Buddhist, Catholic Orthodox, Church of Jesus Christ of Latter-Day Saints, Islam, Judaism, other religions, no religion (2024)"
+      "religionRaw": "Catholic 57%, none 25.7%, Evangelical or Protestant 16.2%, other Christians and traditions related to Christ 1.3%; less than 1%: Buddhist, Catholic Orthodox, Church of Jesus Christ of Latter-Day Saints, Islam, Judaism, other religions, no religion (2024)",
+      "independenceYear": 1810,
+      "independenceRaw": "18 September 1810 (from Spain)"
     },
     "cm": {
       "capital": "Yaounde",
@@ -1193,7 +1291,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Roman Catholic 33.1%, Muslim 30.6%, Protestant 27.1% other Christian 6.1%, animist 1.3%, other 0.7%, none 1.2% (2022 est.)"
+      "religionRaw": "Roman Catholic 33.1%, Muslim 30.6%, Protestant 27.1% other Christian 6.1%, animist 1.3%, other 0.7%, none 1.2% (2022 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "1 January 1960 (from French-administered UN trusteeship)"
     },
     "cn": {
       "capital": "Beijing",
@@ -1223,7 +1323,9 @@
           "pct": 52.1
         }
       ],
-      "religionRaw": "folk religion 21.9%, Buddhist 18.2%, Christian 5.1%, Muslim 1.8%, Hindu &lt; 0.1%, Jewish &lt; 0.1%, other 0.7% (includes Daoist (Taoist)), unaffiliated 52.1% (2021 est.)"
+      "religionRaw": "folk religion 21.9%, Buddhist 18.2%, Christian 5.1%, Muslim 1.8%, Hindu &lt; 0.1%, Jewish &lt; 0.1%, other 0.7% (includes Daoist (Taoist)), unaffiliated 52.1% (2021 est.)",
+      "independenceYear": 1949,
+      "independenceRaw": "1 October 1949 (People's Republic of China established); notable earlier dates: 221 B.C. (unification under the Qin Dynasty); 1 January 1912 (Qing Dynasty replaced by the Republic of China)"
     },
     "co": {
       "capital": "Bogota",
@@ -1265,7 +1367,9 @@
           "pct": 1.8
         }
       ],
-      "religionRaw": "Roman Catholic 63.6%, Protestant 17.2% (Evangelical 16.7%, Adventist 0.3%, other Protestant 0.2%), Jehovah's Witness 0.6%, Church of Jesus Christ 0.1%, other 0.3%, believer, 0.2%. agnostic 1%, atheist 1%, none 14.2%, unspecified 1.8% (2023 est.)"
+      "religionRaw": "Roman Catholic 63.6%, Protestant 17.2% (Evangelical 16.7%, Adventist 0.3%, other Protestant 0.2%), Jehovah's Witness 0.6%, Church of Jesus Christ 0.1%, other 0.3%, believer, 0.2%. agnostic 1%, atheist 1%, none 14.2%, unspecified 1.8% (2023 est.)",
+      "independenceYear": 1810,
+      "independenceRaw": "20 July 1810 (from Spain)"
     },
     "cr": {
       "capital": "San Jose",
@@ -1295,7 +1399,9 @@
           "pct": 27
         }
       ],
-      "religionRaw": "Roman Catholic 47.5%, Evangelical and Pentecostal 19.8%, Jehovah's Witness 1.4%, other Protestant 1.2%, other 3.1%, none 27% (2021 est.)"
+      "religionRaw": "Roman Catholic 47.5%, Evangelical and Pentecostal 19.8%, Jehovah's Witness 1.4%, other Protestant 1.2%, other 3.1%, none 27% (2021 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "15 September 1821 (from Spain)"
     },
     "cu": {
       "capital": "Havana",
@@ -1313,7 +1419,9 @@
           "pct": 23.2
         }
       ],
-      "religionRaw": "Christian 58.9%, folk religion 17.6%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, Muslim &lt;1%, other &lt;1%, none 23.2% (2020 est.)"
+      "religionRaw": "Christian 58.9%, folk religion 17.6%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, Muslim &lt;1%, other &lt;1%, none 23.2% (2020 est.)",
+      "independenceYear": 1902,
+      "independenceRaw": "20 May 1902 (from US administration); 10 December 1898 (from Spain); not acknowledged by the Cuban Government as days of independence"
     },
     "cv": {
       "capital": "Praia",
@@ -1359,7 +1467,9 @@
           "pct": 0.4
         }
       ],
-      "religionRaw": "Roman Catholic 72.5%, Protestant 4% (includes Adventist 1.9%, Nazarene 1.8%, Assembly of God 0.2%, God is Love 0.1%), Christian Rationalism 1.7%, Muslim 1.3%, Jehovah's Witness 1.2%, Church of Jesus Christ 1%, other Christian 1.3%, other 1.2%, none 15.6%, no response 0.4% (2021 est.)"
+      "religionRaw": "Roman Catholic 72.5%, Protestant 4% (includes Adventist 1.9%, Nazarene 1.8%, Assembly of God 0.2%, God is Love 0.1%), Christian Rationalism 1.7%, Muslim 1.3%, Jehovah's Witness 1.2%, Church of Jesus Christ 1%, other Christian 1.3%, other 1.2%, none 15.6%, no response 0.4% (2021 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "5 July 1975 (from Portugal)"
     },
     "cw": {
       "capital": "Willemstad",
@@ -1403,6 +1513,45 @@
       ],
       "religionRaw": "Roman Catholic 72.8%, Pentecostal 6.6%, Protestant 3.2%, Adventist 3%, Jehovah's Witness 2%, Evangelical 1.9%, other 3.8%, none 6%, unspecified 0.6% (2011 est.)"
     },
+    "cx": {
+      "capital": "The Settlement",
+      "capitalNote": "The Settlement (Flying Fish Cove)",
+      "religion": [
+        {
+          "name": "Muslim",
+          "pct": 19.4
+        },
+        {
+          "name": "Buddhist",
+          "pct": 18.3
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 8.8
+        },
+        {
+          "name": "Protestant",
+          "pct": 6.5
+        },
+        {
+          "name": "other Christian",
+          "pct": 3.3
+        },
+        {
+          "name": "other",
+          "pct": 0.6
+        },
+        {
+          "name": "none",
+          "pct": 15.3
+        },
+        {
+          "name": "unspecified",
+          "pct": 27.7
+        }
+      ],
+      "religionRaw": "Muslim 19.4%, Buddhist 18.3%, Roman Catholic 8.8%, Protestant 6.5% (includes Anglican 3.6%, Uniting Church 1.2%, other 1.7%), other Christian 3.3%, other 0.6%, none 15.3%, unspecified 27.7% (2016 est.)"
+    },
     "cy": {
       "capital": "Nicosia",
       "capitalNote": "Nicosia (Lefkosia/Lefkosa)",
@@ -1440,7 +1589,9 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Eastern Orthodox Christian 89.1%, Roman Catholic 2.9%, Protestant/Anglican 2%, Muslim 1.8%, Buddhist 1%, other (includes Maronite Catholic, Armenian Apostolic, Hindu) 1.4%, unknown 1.1%, none/atheist 0.6% (2011 est.)"
+      "religionRaw": "Eastern Orthodox Christian 89.1%, Roman Catholic 2.9%, Protestant/Anglican 2%, Muslim 1.8%, Buddhist 1%, other (includes Maronite Catholic, Armenian Apostolic, Hindu) 1.4%, unknown 1.1%, none/atheist 0.6% (2011 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "16 August 1960 (from the UK)"
     },
     "cz": {
       "capital": "Prague",
@@ -1458,7 +1609,9 @@
           "pct": 30.1
         }
       ],
-      "religionRaw": "Roman Catholic 7%, other believers belonging to a church or religious society 6% (includes Evangelical United Brethren Church and Czechoslovak Hussite Church), believers unaffiliated with a religious society 9.1%, none 47.8%, unspecified 30.1% (2021 est.)"
+      "religionRaw": "Roman Catholic 7%, other believers belonging to a church or religious society 6% (includes Evangelical United Brethren Church and Czechoslovak Hussite Church), believers unaffiliated with a religious society 9.1%, none 47.8%, unspecified 30.1% (2021 est.)",
+      "independenceYear": 1993,
+      "independenceRaw": "1 January 1993 (Czechoslovakia split into the Czech Republic and Slovakia)"
     },
     "de": {
       "capital": "Berlin",
@@ -1484,7 +1637,9 @@
           "pct": 43.8
         }
       ],
-      "religionRaw": "Roman Catholic 24.8%, Protestant 22.6%, Muslim 3.7%, other 5.1%, none 43.8% (2022 est.)"
+      "religionRaw": "Roman Catholic 24.8%, Protestant 22.6%, Muslim 3.7%, other 5.1%, none 43.8% (2022 est.)",
+      "independenceYear": 1871,
+      "independenceRaw": "18 January 1871 (establishment of the German Empire); divided into four zones of occupation (UK, US, USSR, and France) in 1945 after World War II; Federal Republic of Germany (FRG or West Germany) proclaimed on 23 May 1949 and included the former UK, US, and French zones; German Democratic Republic (GDR or East Germany) proclaimed on 7 October 1949 and included the former USSR zone; West Germany and East Germany unified on 3 October 1990, with all four powers formally relinquishing rights on 15 March 1991; notable earlier dates: 10 August 843 (Eastern Francia established from the division of the Carolingian Empire); 2 February 962 (crowning of OTTO I, recognized as the first Holy Roman Emperor)"
     },
     "dj": {
       "capital": "Djibouti",
@@ -1498,7 +1653,9 @@
           "pct": 6
         }
       ],
-      "religionRaw": "Sunni Muslim 94% (nearly all Djiboutians), other 6% (mainly foreign-born residents - Shia Muslim, Christian, Hindu, Jewish, Baha'i, and atheist)"
+      "religionRaw": "Sunni Muslim 94% (nearly all Djiboutians), other 6% (mainly foreign-born residents - Shia Muslim, Christian, Hindu, Jewish, Baha'i, and atheist)",
+      "independenceYear": 1977,
+      "independenceRaw": "27 June 1977 (from France)"
     },
     "dk": {
       "capital": "Copenhagen",
@@ -1516,7 +1673,9 @@
           "pct": 24.3
         }
       ],
-      "religionRaw": "Evangelical Lutheran (official) 71.4%, Muslim 4.3%, other/none/unspecified (denominations include Roman Catholic, Jehovah's Witness, Serbian Orthodox Christian, Jewish, Baptist, Buddhist, Church of Jesus Christ, Pentecostal, and nondenominational Christian) 24.3% (2024 est.)"
+      "religionRaw": "Evangelical Lutheran (official) 71.4%, Muslim 4.3%, other/none/unspecified (denominations include Roman Catholic, Jehovah's Witness, Serbian Orthodox Christian, Jewish, Baptist, Buddhist, Church of Jesus Christ, Pentecostal, and nondenominational Christian) 24.3% (2024 est.)",
+      "independenceYear": 965,
+      "independenceRaw": "ca. 965 (unified and Christianized under Harald I GORMSSON); 5 June 1849 (became a parliamentary constitutional monarchy)"
     },
     "dm": {
       "capital": "Roseau",
@@ -1550,7 +1709,9 @@
           "pct": 1.4
         }
       ],
-      "religionRaw": "Roman Catholic 52.7%, Protestant 29.7% (includes Seventh Day Adventist 6.7%, Pentecostal 6.1%, Baptist 5.2%, Christian Union Church 3.9%, Methodist 2.6%, Gospel Mission 2.1%, other Protestant 3.1%), Jehovah's Witness 1.3%, Rastafarian 1.1%, other 4.3%, none 9.4%, unspecified 1.4% (2011 est.)"
+      "religionRaw": "Roman Catholic 52.7%, Protestant 29.7% (includes Seventh Day Adventist 6.7%, Pentecostal 6.1%, Baptist 5.2%, Christian Union Church 3.9%, Methodist 2.6%, Gospel Mission 2.1%, other Protestant 3.1%), Jehovah's Witness 1.3%, Rastafarian 1.1%, other 4.3%, none 9.4%, unspecified 1.4% (2011 est.)",
+      "independenceYear": 1978,
+      "independenceRaw": "3 November 1978 (from the UK)"
     },
     "do": {
       "capital": "Santo Domingo",
@@ -1572,7 +1733,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Evangelical 50.2%, Roman Catholic 30.1%, none 18.5%, unspecified 1.2% (2023 est.)"
+      "religionRaw": "Evangelical 50.2%, Roman Catholic 30.1%, none 18.5%, unspecified 1.2% (2023 est.)",
+      "independenceYear": 1844,
+      "independenceRaw": "27 February 1844 (from Haiti)"
     },
     "dz": {
       "capital": "Algiers",
@@ -1582,7 +1745,9 @@
           "pct": 99
         }
       ],
-      "religionRaw": "Muslim (official; predominantly Sunni) 99%, other (includes Christian, Jewish, Ahmadi Muslim, Shia Muslim, Ibadi Muslim) &lt;1% (2012 est.)"
+      "religionRaw": "Muslim (official; predominantly Sunni) 99%, other (includes Christian, Jewish, Ahmadi Muslim, Shia Muslim, Ibadi Muslim) &lt;1% (2012 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "5 July 1962 (from France)"
     },
     "ec": {
       "capital": "Quito",
@@ -1612,7 +1777,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Roman Catholic 68.2%, Protestant 19% (Evangelical 18.3%, Adventist 0.6%, other Protestant 0.2%), Jehovah's Witness 1.4%, other 2.3%, none 8.2% don't know/no response 1% (2023 est.)"
+      "religionRaw": "Roman Catholic 68.2%, Protestant 19% (Evangelical 18.3%, Adventist 0.6%, other Protestant 0.2%), Jehovah's Witness 1.4%, other 2.3%, none 8.2% don't know/no response 1% (2023 est.)",
+      "independenceYear": 1822,
+      "independenceRaw": "24 May 1822 (from Spain)"
     },
     "ee": {
       "capital": "Tallinn",
@@ -1638,7 +1805,9 @@
           "pct": 12.9
         }
       ],
-      "religionRaw": "Orthodox 16.5%, Protestant 9.2% (Lutheran 7.7%, other Protestant 1.5%), other 3% (includes Roman Catholic, Muslim, Jehovah's Witness, Pentecostal, Buddhist, and Taara Believer), none 58.4%, unspecified 12.9% (2021 est.)"
+      "religionRaw": "Orthodox 16.5%, Protestant 9.2% (Lutheran 7.7%, other Protestant 1.5%), other 3% (includes Roman Catholic, Muslim, Jehovah's Witness, Pentecostal, Buddhist, and Taara Believer), none 58.4%, unspecified 12.9% (2021 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "24 February 1918 (from Soviet Russia); 20 August 1991 (declared from the Soviet Union); 6 September 1991 (recognized by the Soviet Union)"
     },
     "eg": {
       "capital": "Cairo",
@@ -1652,7 +1821,9 @@
           "pct": 10
         }
       ],
-      "religionRaw": "Muslim (predominantly Sunni) 90%, Christian (majority Coptic Orthodox, other Christians include Armenian Apostolic, Catholic, Maronite, Orthodox, and Anglican) 10%"
+      "religionRaw": "Muslim (predominantly Sunni) 90%, Christian (majority Coptic Orthodox, other Christians include Armenian Apostolic, Catholic, Maronite, Orthodox, and Anglican) 10%",
+      "independenceYear": 1922,
+      "independenceRaw": "28 February 1922 (from UK protectorate status; the military-led revolution that began on 23 July 1952 led to a republic being declared on 18 June 1953 and all British troops withdrawn on 18 June 1956)"
     },
     "eh": {
       "capital": "El Aaiún",
@@ -1664,7 +1835,9 @@
       ]
     },
     "er": {
-      "capital": "Asmara"
+      "capital": "Asmara",
+      "independenceYear": 1993,
+      "independenceRaw": "24 May 1993 (from Ethiopia)"
     },
     "es": {
       "capital": "Madrid",
@@ -1694,7 +1867,9 @@
           "pct": 1.7
         }
       ],
-      "religionRaw": "Roman Catholic 58.2%, atheist 16.2%, agnostic 10.8%, other 2.7%, non-believer 10.5%, unspecified 1.7% (2021 est.)"
+      "religionRaw": "Roman Catholic 58.2%, atheist 16.2%, agnostic 10.8%, other 2.7%, non-believer 10.5%, unspecified 1.7% (2021 est.)",
+      "independenceYear": 1492,
+      "independenceRaw": "1492"
     },
     "et": {
       "capital": "Addis Ababa",
@@ -1724,7 +1899,8 @@
           "pct": 0.8
         }
       ],
-      "religionRaw": "Ethiopian Orthodox 43.8%, Muslim 31.3%, Protestant 22.8%, Catholic 0.7%, traditional 0.6%, other 0.8% (2016 est.)"
+      "religionRaw": "Ethiopian Orthodox 43.8%, Muslim 31.3%, Protestant 22.8%, Catholic 0.7%, traditional 0.6%, other 0.8% (2016 est.)",
+      "independenceRaw": "oldest independent country in Africa and one of the oldest in the world, at least 2,000 years; may be traced to the Aksumite Kingdom, which appeared in the first century B.C."
     },
     "fi": {
       "capital": "Helsinki",
@@ -1746,7 +1922,9 @@
           "pct": 30.6
         }
       ],
-      "religionRaw": "Lutheran 66.6%, Greek Orthodox 1.1%, other 1.7%, none 30.6% (2022 est.)"
+      "religionRaw": "Lutheran 66.6%, Greek Orthodox 1.1%, other 1.7%, none 30.6% (2022 est.)",
+      "independenceYear": 1917,
+      "independenceRaw": "6 December 1917 (from Russia)"
     },
     "fj": {
       "capital": "Suva",
@@ -1785,7 +1963,9 @@
           "pct": 0.8
         }
       ],
-      "religionRaw": "Protestant 45% (Methodist 34.6%, Assembly of God 5.7%, Seventh Day Adventist 3.9%, and Anglican 0.8%), Hindu 27.9%, other Christian 10.4%, Roman Catholic 9.1%, Muslim 6.3%, Sikh 0.3%, other 0.3%, none 0.8% (2007 est.)"
+      "religionRaw": "Protestant 45% (Methodist 34.6%, Assembly of God 5.7%, Seventh Day Adventist 3.9%, and Anglican 0.8%), Hindu 27.9%, other Christian 10.4%, Roman Catholic 9.1%, Muslim 6.3%, Sikh 0.3%, other 0.3%, none 0.8% (2007 est.)",
+      "independenceYear": 1970,
+      "independenceRaw": "10 October 1970 (from the UK)"
     },
     "fk": {
       "capital": "Stanley",
@@ -1837,7 +2017,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Roman Catholic 54.7%, Protestant 41.1% (includes Congregational 38.5%, Baptist 1.1%, Seventh Day Adventist 0.8%, Assembly of God 0.7%), Church of Jesus Christ 1.5%, other 1.9%, none 0.7%, unspecified 0.1% (2010 est.)"
+      "religionRaw": "Roman Catholic 54.7%, Protestant 41.1% (includes Congregational 38.5%, Baptist 1.1%, Seventh Day Adventist 0.8%, Assembly of God 0.7%), Church of Jesus Christ 1.5%, other 1.9%, none 0.7%, unspecified 0.1% (2010 est.)",
+      "independenceYear": 1986,
+      "independenceRaw": "3 November 1986 (from the US-administered UN trusteeship)"
     },
     "fo": {
       "capital": "Torshavn",
@@ -1901,7 +2083,9 @@
           "pct": 9
         }
       ],
-      "religionRaw": "Roman Catholic 47%, Muslim 4%, Protestant 2%, Buddhist 2%, Orthodox 1%, Jewish 1%, other 1%, none 33%, unspecified 9% (2021 est.)"
+      "religionRaw": "Roman Catholic 47%, Muslim 4%, Protestant 2%, Buddhist 2%, Orthodox 1%, Jewish 1%, other 1%, none 33%, unspecified 9% (2021 est.)",
+      "independenceYear": 486,
+      "independenceRaw": "no official date of independence: 486 (Frankish tribes unified under Merovingian kingship); 10 August 843 (Western Francia established from the division of the Carolingian Empire); 14 July 1789 (French monarchy overthrown); 22 September 1792 (First French Republic established); 4 October 1958 (Fifth French Republic established)"
     },
     "ga": {
       "capital": "Libreville",
@@ -1935,7 +2119,9 @@
           "pct": 7
         }
       ],
-      "religionRaw": "Protestant 46.4% (Revival Church 37%, other Protestant 9.4%), Roman Catholic 29.8%, other Christian 4%, Muslim 10.8%, traditional/animist 1.1%, other 0.9%, none 7% (2019-21 est.)"
+      "religionRaw": "Protestant 46.4% (Revival Church 37%, other Protestant 9.4%), Roman Catholic 29.8%, other Christian 4%, Muslim 10.8%, traditional/animist 1.1%, other 0.9%, none 7% (2019-21 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "17 August 1960 (from France)"
     },
     "gb": {
       "capital": "London",
@@ -1965,7 +2151,9 @@
           "pct": 25.7
         }
       ],
-      "religionRaw": "Christian (includes Anglican, Roman Catholic, Presbyterian, Methodist) 59.5%, Muslim 4.4%, Hindu 1.3%, other 2%, unspecified 7.2%, none 25.7% (2011 est.)"
+      "religionRaw": "Christian (includes Anglican, Roman Catholic, Presbyterian, Methodist) 59.5%, Muslim 4.4%, Hindu 1.3%, other 2%, unspecified 7.2%, none 25.7% (2011 est.)",
+      "independenceYear": 927,
+      "independenceRaw": "no official date of independence: 927 (minor English kingdoms unite); 3 March 1284 (enactment of the Statute of Rhuddlan uniting England and Wales); 1536 (Act of Union incorporates England and Wales); 1 May 1707 (Acts of Union unite England, Scotland, and Wales as Great Britain); 1 January 1801 (Acts of Union unite Great Britain and Ireland as the United Kingdom of Great Britain and Ireland); 6 December 1921 (Anglo-Irish Treaty formalizes partition of Ireland; six counties become Northern Ireland and remain part of the UK); 12 April 1927 (Royal and Parliamentary Titles Act establishes current name of the United Kingdom of Great Britain and Northern Ireland)"
     },
     "gd": {
       "capital": "Saint George's",
@@ -1999,7 +2187,9 @@
           "pct": 1.3
         }
       ],
-      "religionRaw": "Protestant 49.2% (includes Pentecostal 17.2%, Seventh Day Adventist 13.2%, Anglican 8.5%, Baptist 3.2%, Church of God 2.4%, Evangelical 1.9%, Methodist 1.6%, other 1.2%), Roman Catholic 36%, Jehovah's Witness 1.2%, Rastafarian 1.2%, other 5.5%, none 5.7%, unspecified 1.3% (2011 est.)"
+      "religionRaw": "Protestant 49.2% (includes Pentecostal 17.2%, Seventh Day Adventist 13.2%, Anglican 8.5%, Baptist 3.2%, Church of God 2.4%, Evangelical 1.9%, Methodist 1.6%, other 1.2%), Roman Catholic 36%, Jehovah's Witness 1.2%, Rastafarian 1.2%, other 5.5%, none 5.7%, unspecified 1.3% (2011 est.)",
+      "independenceYear": 1974,
+      "independenceRaw": "7 February 1974 (from the UK)"
     },
     "ge": {
       "capital": "Tbilisi",
@@ -2029,7 +2219,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Eastern Orthodox Christian (official) 83.4%, Muslim 10.7%, Armenian Apostolic Christian 2.9%, other 1.2% (includes Roman Catholic Christian, Jehovah's Witness, Yazidi, Protestant Christian, Jewish), none 0.5%, unspecified/no answer 1.2% (2014 est.)"
+      "religionRaw": "Eastern Orthodox Christian (official) 83.4%, Muslim 10.7%, Armenian Apostolic Christian 2.9%, other 1.2% (includes Roman Catholic Christian, Jehovah's Witness, Yazidi, Protestant Christian, Jewish), none 0.5%, unspecified/no answer 1.2% (2014 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "9 April 1991 (from the Soviet Union); notable earlier date: A.D. 1008 (Georgia unified under King BAGRAT III)"
     },
     "gf": {
       "capital": "Cayenne"
@@ -2061,7 +2253,9 @@
           "pct": 1.1
         }
       ],
-      "religionRaw": "Christian 71.3% (Pentecostal/Charismatic 31.6%, Protestant 17.4%, Catholic 10%, other 12.3%), Muslim 19.9%, traditionalist 3.2%, other 4.5%, none 1.1% (2021 est.)"
+      "religionRaw": "Christian 71.3% (Pentecostal/Charismatic 31.6%, Protestant 17.4%, Catholic 10%, other 12.3%), Muslim 19.9%, traditionalist 3.2%, other 4.5%, none 1.1% (2021 est.)",
+      "independenceYear": 1957,
+      "independenceRaw": "6 March 1957 (from the UK)"
     },
     "gi": {
       "capital": "Gibraltar",
@@ -2124,7 +2318,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Muslim 96.4%, Christian 3.5%, other or none 0.1% (2019-20 est.)"
+      "religionRaw": "Muslim 96.4%, Christian 3.5%, other or none 0.1% (2019-20 est.)",
+      "independenceYear": 1965,
+      "independenceRaw": "18 February 1965 (from the UK)"
     },
     "gn": {
       "capital": "Conakry",
@@ -2146,7 +2342,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Muslim 85.2%, Christian 13.4%, animist 0.2%, none 1.2% (2018 est.)"
+      "religionRaw": "Muslim 85.2%, Christian 13.4%, animist 0.2%, none 1.2% (2018 est.)",
+      "independenceYear": 1958,
+      "independenceRaw": "2 October 1958 (from France)"
     },
     "gp": {
       "capital": "Basse-Terre"
@@ -2172,7 +2370,9 @@
           "pct": 5
         }
       ],
-      "religionRaw": "Roman Catholic 88%, Protestant 5%, Muslim 2%, other 5% (animist, Baha'i, Jewish) (2015 est.)"
+      "religionRaw": "Roman Catholic 88%, Protestant 5%, Muslim 2%, other 5% (animist, Baha'i, Jewish) (2015 est.)",
+      "independenceYear": 1968,
+      "independenceRaw": "12 October 1968 (from Spain)"
     },
     "gr": {
       "capital": "Athens",
@@ -2198,7 +2398,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Greek Orthodox 81-90%, Muslim 2%, other 3%, none 4-15%, unspecified 1% (2015 est.)"
+      "religionRaw": "Greek Orthodox 81-90%, Muslim 2%, other 3%, none 4-15%, unspecified 1% (2015 est.)",
+      "independenceYear": 1830,
+      "independenceRaw": "3 February 1830 (from the Ottoman Empire)"
     },
     "gs": {
       "capital": "King Edward Point"
@@ -2223,7 +2425,9 @@
           "pct": 0.9
         }
       ],
-      "religionRaw": "Evangelical 45.7%, Roman Catholic 42.4%, none 11%, unspecified 0.9% (2023 est.)"
+      "religionRaw": "Evangelical 45.7%, Roman Catholic 42.4%, none 11%, unspecified 0.9% (2023 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "15 September 1821 (from Spain)"
     },
     "gu": {
       "capital": "Hagatna",
@@ -2272,7 +2476,9 @@
           "pct": 4.4
         }
       ],
-      "religionRaw": "Muslim 46.1%, folk religions 30.6%, Christian 18.9%, other or unaffiliated 4.4% (2020 est.)"
+      "religionRaw": "Muslim 46.1%, folk religions 30.6%, Christian 18.9%, other or unaffiliated 4.4% (2020 est.)",
+      "independenceYear": 1973,
+      "independenceRaw": "24 September 1973 (declared); 10 September 1974 (from Portugal)"
     },
     "gy": {
       "capital": "Georgetown",
@@ -2314,7 +2520,9 @@
           "pct": 3.1
         }
       ],
-      "religionRaw": "Protestant 34.8% (Pentecostal 22.8%, Seventh Day Adventist 5.4%, Anglican 5.2%, Methodist 1.4%), Hindu 24.8%, other Christian 20.8%, Roman Catholic 7.1%, Muslim 6.8%, Jehovah's Witness 1.3%, Rastafarian 0.5%, other 0.9%, none 3.1% (2012 est.)"
+      "religionRaw": "Protestant 34.8% (Pentecostal 22.8%, Seventh Day Adventist 5.4%, Anglican 5.2%, Methodist 1.4%), Hindu 24.8%, other Christian 20.8%, Roman Catholic 7.1%, Muslim 6.8%, Jehovah's Witness 1.3%, Rastafarian 0.5%, other 0.9%, none 3.1% (2012 est.)",
+      "independenceYear": 1966,
+      "independenceRaw": "26 May 1966 (from the UK)"
     },
     "hk": {
       "religion": [
@@ -2369,7 +2577,9 @@
           "pct": 1.5
         }
       ],
-      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)"
+      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "15 September 1821 (from Spain)"
     },
     "hr": {
       "capital": "Zagreb",
@@ -2411,7 +2621,9 @@
           "pct": 3.9
         }
       ],
-      "religionRaw": "Roman Catholic 79%, Orthodox 3.3%, Protestant 0.3%, other Christian 4.8%, Muslim 1.3%, other 1.1%, agnostic 1.7%, none or atheist 4.7%, unspecified 3.9% (2021 est.)"
+      "religionRaw": "Roman Catholic 79%, Orthodox 3.3%, Protestant 0.3%, other Christian 4.8%, Muslim 1.3%, other 1.1%, agnostic 1.7%, none or atheist 4.7%, unspecified 3.9% (2021 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "25 June 1991 (from Yugoslavia); notable earlier dates: ca. 925 (Kingdom of Croatia established), 1 December 1918 (Kingdom of Serbs, Croats, and Slovenes established, later became Yugoslavia)"
     },
     "ht": {
       "capital": "Port-au-Prince",
@@ -2437,7 +2649,9 @@
           "pct": 10
         }
       ],
-      "religionRaw": "Catholic 55%, Protestant 29%, Vodou 2.1%, other 4.6%, none 10% (2018 est.)"
+      "religionRaw": "Catholic 55%, Protestant 29%, Vodou 2.1%, other 4.6%, none 10% (2018 est.)",
+      "independenceYear": 1804,
+      "independenceRaw": "1 January 1804 (from France)"
     },
     "hu": {
       "capital": "Budapest",
@@ -2471,7 +2685,9 @@
           "pct": 40.1
         }
       ],
-      "religionRaw": "Catholic 30.1% (Roman Catholic 27.5%, Greek Catholic 1.7%, other Catholic 0.9%), Calvinist 9.8%, Lutheran 1.8%, other Christian (includes Orthodox) 1.6%, other 0.4%, none 16.1%, no answer 40.1% (2022 est.)"
+      "religionRaw": "Catholic 30.1% (Roman Catholic 27.5%, Greek Catholic 1.7%, other Catholic 0.9%), Calvinist 9.8%, Lutheran 1.8%, other Christian (includes Orthodox) 1.6%, other 0.4%, none 16.1%, no answer 40.1% (2022 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "16 November 1918 (republic proclaimed); notable earlier dates: 25 December 1000 (crowning of King STEPHEN I, traditional founding date); 30 March 1867 (Austro-Hungarian dual monarchy established)"
     },
     "id": {
       "capital": "Jakarta",
@@ -2497,7 +2713,9 @@
           "pct": 0.8
         }
       ],
-      "religionRaw": "Muslim 87.4%, Protestant 7.5%, Roman Catholic 3.1%, Hindu 1.7%, other 0.8% (includes Buddhist and Confucian) (2022 est.)"
+      "religionRaw": "Muslim 87.4%, Protestant 7.5%, Roman Catholic 3.1%, Hindu 1.7%, other 0.8% (includes Buddhist and Confucian) (2022 est.)",
+      "independenceYear": 1945,
+      "independenceRaw": "17 August 1945 (declared independence from the Netherlands)"
     },
     "ie": {
       "capital": "Dublin",
@@ -2539,7 +2757,9 @@
           "pct": 6.7
         }
       ],
-      "religionRaw": "Roman Catholic 69.2% (includes lapsed), Protestant 3.7% (Church of Ireland/England/Anglican/Episcopalian 2.5%, other Protestant 1.2%), Orthodox 2%, other Christian 0.9%, Muslim 1.6%, other 1.4%, agnostic/atheist 0.1%, none 14.5%, unspecified 6.7% (2022 est.)"
+      "religionRaw": "Roman Catholic 69.2% (includes lapsed), Protestant 3.7% (Church of Ireland/England/Anglican/Episcopalian 2.5%, other Protestant 1.2%), Orthodox 2%, other Christian 0.9%, Muslim 1.6%, other 1.4%, agnostic/atheist 0.1%, none 14.5%, unspecified 6.7% (2022 est.)",
+      "independenceYear": 1921,
+      "independenceRaw": "6 December 1921 (from the UK); 6 December 1922 (Irish Free State established); 18 April 1949 (Republic of Ireland Act enabled)"
     },
     "il": {
       "capital": "Jerusalem",
@@ -2565,7 +2785,9 @@
           "pct": 4.9
         }
       ],
-      "religionRaw": "Jewish 73.5%, Muslim 18.1%, Christian 1.9%, Druze 1.6%, other 4.9% (2022 est.)"
+      "religionRaw": "Jewish 73.5%, Muslim 18.1%, Christian 1.9%, Druze 1.6%, other 4.9% (2022 est.)",
+      "independenceYear": 1948,
+      "independenceRaw": "14 May 1948 (following League of Nations mandate under British administration)"
     },
     "im": {
       "capital": "Douglas",
@@ -2621,7 +2843,9 @@
           "pct": 2
         }
       ],
-      "religionRaw": "Hindu 79.8%, Muslim 14.2%, Christian 2.3%, Sikh 1.7%, other and unspecified 2% (2011 est.)"
+      "religionRaw": "Hindu 79.8%, Muslim 14.2%, Christian 2.3%, Sikh 1.7%, other and unspecified 2% (2011 est.)",
+      "independenceYear": 1947,
+      "independenceRaw": "15 August 1947 (from the UK)"
     },
     "io": {
       "capital": "administered from London",
@@ -2643,7 +2867,9 @@
           "pct": 2.5
         }
       ],
-      "religionRaw": "Muslim (official) 95-98% (Shia 61-64%, Sunni 29-34%), Christian 1% (includes Catholic, Orthodox, Protestant, Assyrian Church of the East), other 1-4% (2015 est.)"
+      "religionRaw": "Muslim (official) 95-98% (Shia 61-64%, Sunni 29-34%), Christian 1% (includes Catholic, Orthodox, Protestant, Assyrian Church of the East), other 1-4% (2015 est.)",
+      "independenceYear": 1932,
+      "independenceRaw": "3 October 1932 (from League of Nations mandate under British administration)"
     },
     "ir": {
       "capital": "Tehran",
@@ -2669,7 +2895,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Muslim (official) 98.5%, Christian 0.7%, Baha'i 0.3%, agnostic 0.3%, other (includes Zoroastrian, Jewish, Hindu) 0.2% (2020 est.)"
+      "religionRaw": "Muslim (official) 98.5%, Christian 0.7%, Baha'i 0.3%, agnostic 0.3%, other (includes Zoroastrian, Jewish, Hindu) 0.2% (2020 est.)",
+      "independenceYear": 1979,
+      "independenceRaw": "1 April 1979 (Islamic Republic of Iran proclaimed); notable earlier dates: ca. 550 B.C. (Achaemenid or Persian Empire established); A.D. 1501 (Iran reunified under the Safavid dynasty); 1794 (beginning of Qajar dynasty); 12 December 1925 (modern Iran established under the PAHLAVI dynasty)"
     },
     "is": {
       "capital": "Reykjavik",
@@ -2703,7 +2931,9 @@
           "pct": 7.7
         }
       ],
-      "religionRaw": "Evangelical Lutheran Church of Iceland (official) 58.6% Roman Catholic 3.8%, Independent Congregation of Reykjavik 2.6%, Independent Congregation of Hafnarfjordur 1.9%, pagan worship 1.5%, Icelandic Ethical Humanist Association 1.4%, other (includes Zuist and Pentecostal) or unspecified 18.7%, none 7.7% (2024 est.)"
+      "religionRaw": "Evangelical Lutheran Church of Iceland (official) 58.6% Roman Catholic 3.8%, Independent Congregation of Reykjavik 2.6%, Independent Congregation of Hafnarfjordur 1.9%, pagan worship 1.5%, Icelandic Ethical Humanist Association 1.4%, other (includes Zuist and Pentecostal) or unspecified 18.7%, none 7.7% (2024 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "1 December 1918 (became a sovereign state under the Danish Crown); 17 June 1944 (from Denmark; birthday of Jon SIGURDSSON, leader of Iceland's 19th-century independence movement)"
     },
     "it": {
       "capital": "Rome",
@@ -2725,7 +2955,9 @@
           "pct": 0.9
         }
       ],
-      "religionRaw": "Christian 80.8% (overwhelmingly Roman Catholic with very small groups of Jehovah's Witnesses and Protestants), Muslim 4.9%, unaffiliated 13.4%, other 0.9% (2020 est.)"
+      "religionRaw": "Christian 80.8% (overwhelmingly Roman Catholic with very small groups of Jehovah's Witnesses and Protestants), Muslim 4.9%, unaffiliated 13.4%, other 0.9% (2020 est.)",
+      "independenceYear": 1861,
+      "independenceRaw": "17 March 1861"
     },
     "je": {
       "capital": "Saint Helier",
@@ -2793,7 +3025,9 @@
           "pct": 2.3
         }
       ],
-      "religionRaw": "Protestant 64.8% (includes Seventh Day Adventist 12.0%, Pentecostal 11.0%, Other Church of God 9.2%, New Testament Church of God 7.2%, Baptist 6.7%, Church of God in Jamaica 4.8%, Church of God of Prophecy 4.5%, Anglican 2.8%, United Church 2.1%, Methodist 1.6%, Revived 1.4%, Brethren 0.9%, and Moravian 0.7%), Roman Catholic 2.2%, Jehovah's Witness 1.9%, Rastafarian 1.1%, other 6.5%, none 21.3%, unspecified 2.3% (2011 est.)"
+      "religionRaw": "Protestant 64.8% (includes Seventh Day Adventist 12.0%, Pentecostal 11.0%, Other Church of God 9.2%, New Testament Church of God 7.2%, Baptist 6.7%, Church of God in Jamaica 4.8%, Church of God of Prophecy 4.5%, Anglican 2.8%, United Church 2.1%, Methodist 1.6%, Revived 1.4%, Brethren 0.9%, and Moravian 0.7%), Roman Catholic 2.2%, Jehovah's Witness 1.9%, Rastafarian 1.1%, other 6.5%, none 21.3%, unspecified 2.3% (2011 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "6 August 1962 (from the UK)"
     },
     "jo": {
       "capital": "Amman",
@@ -2815,7 +3049,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Muslim 97.1% (official; predominantly Sunni), Christian 2.1% (majority Greek Orthodox, but some Greek and Roman Catholics, Syrian Orthodox, Coptic Orthodox, Armenian Orthodox, and Protestant denominations), Buddhist 0.4%, Hindu 0.1%, Jewish &lt;0.1%, folk &lt;0.1%, other &lt;0.1%, unaffiliated &lt;0.1% (2020 est.)"
+      "religionRaw": "Muslim 97.1% (official; predominantly Sunni), Christian 2.1% (majority Greek Orthodox, but some Greek and Roman Catholics, Syrian Orthodox, Coptic Orthodox, Armenian Orthodox, and Protestant denominations), Buddhist 0.4%, Hindu 0.1%, Jewish &lt;0.1%, folk &lt;0.1%, other &lt;0.1%, unaffiliated &lt;0.1% (2020 est.)",
+      "independenceYear": 1946,
+      "independenceRaw": "25 May 1946 (from League of Nations mandate under British administration)"
     },
     "jp": {
       "capital": "Tokyo",
@@ -2837,7 +3073,9 @@
           "pct": 4
         }
       ],
-      "religionRaw": "Shintoism 48.6%, Buddhism 46.4%, Christianity 1.1%, other 4% (2021 est.)"
+      "religionRaw": "Shintoism 48.6%, Buddhism 46.4%, Christianity 1.1%, other 4% (2021 est.)",
+      "independenceYear": 1947,
+      "independenceRaw": "3 May 1947 (current constitution adopted as amendment to Meiji Constitution); notable earlier dates: 11 February 660 B.C. (mythological date of Emperor JIMMU founding the nation); 29 November 1890 (Meiji Constitution provides for constitutional monarchy)"
     },
     "ke": {
       "capital": "Nairobi",
@@ -2863,7 +3101,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Christian 85.5% (Protestant 33.4%, Catholic 20.6%, Evangelical 20.4%, African Instituted Churches 7%, other Christian 4.1%), Muslim 10.9%, other 1.8%, none 1.6%, don't know/no answer 0.2% (2019 est.)"
+      "religionRaw": "Christian 85.5% (Protestant 33.4%, Catholic 20.6%, Evangelical 20.4%, African Instituted Churches 7%, other Christian 4.1%), Muslim 10.9%, other 1.8%, none 1.6%, don't know/no answer 0.2% (2019 est.)",
+      "independenceYear": 1963,
+      "independenceRaw": "12 December 1963 (from the UK)"
     },
     "kg": {
       "capital": "Bishkek",
@@ -2881,7 +3121,9 @@
           "pct": 3
         }
       ],
-      "religionRaw": "Muslim 90% (majority Sunni), Christian 7% (Russian Orthodox 3%), other 3% (includes Jewish, Buddhist, Baha'i) (2017 est.)"
+      "religionRaw": "Muslim 90% (majority Sunni), Christian 7% (Russian Orthodox 3%), other 3% (includes Jewish, Buddhist, Baha'i) (2017 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "31 August 1991 (from the Soviet Union)"
     },
     "kh": {
       "capital": "Phnom Penh",
@@ -2903,7 +3145,9 @@
           "pct": 0.5
         }
       ],
-      "religionRaw": "Buddhist (official) 97.1%, Muslim 2%, Christian 0.3%, other 0.5% (2019 est.)"
+      "religionRaw": "Buddhist (official) 97.1%, Muslim 2%, Christian 0.3%, other 0.5% (2019 est.)",
+      "independenceYear": 1953,
+      "independenceRaw": "9 November 1953 (from France)"
     },
     "ki": {
       "capital": "Tarawa",
@@ -2937,7 +3181,9 @@
           "pct": 1.7
         }
       ],
-      "religionRaw": "Roman Catholic 58.9%, Kiribati Uniting Church 21.2%, Kiribati Protestant Church 8.4%, Church of Jesus Christ 5.6%, Seventh Day Adventist 2.1%, Baha'i 2.1%, other 1.7% (2020 est.)"
+      "religionRaw": "Roman Catholic 58.9%, Kiribati Uniting Church 21.2%, Kiribati Protestant Church 8.4%, Church of Jesus Christ 5.6%, Seventh Day Adventist 2.1%, Baha'i 2.1%, other 1.7% (2020 est.)",
+      "independenceYear": 1979,
+      "independenceRaw": "12 July 1979 (from the UK)"
     },
     "km": {
       "capital": "Moroni",
@@ -2959,13 +3205,19 @@
           "pct": 0.3
         }
       ],
-      "religionRaw": "Muslim 98.1% (overwhelmingly Sunni Muslim, small Shia Muslim and Ahmadiyya Muslim populations), ethnic religionist 1.1%, Christian 0.6%, other 0.3% (2020 est.)"
+      "religionRaw": "Muslim 98.1% (overwhelmingly Sunni Muslim, small Shia Muslim and Ahmadiyya Muslim populations), ethnic religionist 1.1%, Christian 0.6%, other 0.3% (2020 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "6 July 1975 (from France)"
     },
     "kn": {
-      "capital": "Basseterre"
+      "capital": "Basseterre",
+      "independenceYear": 1983,
+      "independenceRaw": "19 September 1983 (from the UK)"
     },
     "kp": {
-      "capital": "Pyongyang"
+      "capital": "Pyongyang",
+      "independenceYear": 1945,
+      "independenceRaw": "15 August 1945 (from Japan)"
     },
     "kr": {
       "capital": "Seoul",
@@ -2987,7 +3239,9 @@
           "pct": 60
         }
       ],
-      "religionRaw": "Protestant 17%, Buddhist 16%, Catholic 6%, none 60% (2021 est.)"
+      "religionRaw": "Protestant 17%, Buddhist 16%, Catholic 6%, none 60% (2021 est.)",
+      "independenceYear": 1945,
+      "independenceRaw": "15 August 1945 (from Japan)"
     },
     "kw": {
       "capital": "Kuwait City",
@@ -3005,7 +3259,9 @@
           "pct": 7.2
         }
       ],
-      "religionRaw": "Muslim (official) 74.6%, Christian 18.2%, other and unspecified 7.2% (2013 est.)"
+      "religionRaw": "Muslim (official) 74.6%, Christian 18.2%, other and unspecified 7.2% (2013 est.)",
+      "independenceYear": 1961,
+      "independenceRaw": "19 June 1961 (from the UK)"
     },
     "ky": {
       "capital": "George Town",
@@ -3070,7 +3326,9 @@
           "pct": 11
         }
       ],
-      "religionRaw": "Muslim 69.3%, Christian 17.2% (Orthodox 17%, other 0.2%), Buddhism 0.1%, other 0.1%, non-believers 2.3%, unspecified 11% (2021 est.)"
+      "religionRaw": "Muslim 69.3%, Christian 17.2% (Orthodox 17%, other 0.2%), Buddhism 0.1%, other 0.1%, non-believers 2.3%, unspecified 11% (2021 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "16 December 1991 (from the Soviet Union)"
     },
     "la": {
       "capital": "Vientiane",
@@ -3093,7 +3351,9 @@
           "pct": 2.1
         }
       ],
-      "religionRaw": "Buddhist 64.7%, Christian 1.7%, none 31.4%, other/not stated 2.1% (2015 est.)"
+      "religionRaw": "Buddhist 64.7%, Christian 1.7%, none 31.4%, other/not stated 2.1% (2015 est.)",
+      "independenceYear": 1949,
+      "independenceRaw": "19 July 1949 (from France); 22 October 1953 (Franco-Lao Treaty recognizes full independence)"
     },
     "lb": {
       "capital": "Beirut",
@@ -3111,7 +3371,9 @@
           "pct": 4.5
         }
       ],
-      "religionRaw": "Muslim 67.8% (31.9% Sunni, 31.2% Shia, smaller percentages of Alawites and Ismailis), Christian 32.4% (Maronite Catholics are the largest Christian group), Druze 4.5%, very small numbers of Jews, Baha'is, Buddhists, and Hindus (2020 est.)"
+      "religionRaw": "Muslim 67.8% (31.9% Sunni, 31.2% Shia, smaller percentages of Alawites and Ismailis), Christian 32.4% (Maronite Catholics are the largest Christian group), Druze 4.5%, very small numbers of Jews, Baha'is, Buddhists, and Hindus (2020 est.)",
+      "independenceYear": 1943,
+      "independenceRaw": "22 November 1943 (from League of Nations mandate under French administration)"
     },
     "lc": {
       "capital": "Castries",
@@ -3145,7 +3407,9 @@
           "pct": 1.4
         }
       ],
-      "religionRaw": "Roman Catholic 61.5%, Protestant 25.5% (includes Seventh Day Adventist 10.4%, Pentecostal 8.9%, Baptist 2.2%, Anglican 1.6%, Church of God 1.5%, other Protestant 0.9%), other Christian 3.4% (includes Evangelical 2.3% and Jehovah's Witness 1.1%), Rastafarian 1.9%, other 0.4%, none 5.9%, unspecified 1.4% (2010 est.)"
+      "religionRaw": "Roman Catholic 61.5%, Protestant 25.5% (includes Seventh Day Adventist 10.4%, Pentecostal 8.9%, Baptist 2.2%, Anglican 1.6%, Church of God 1.5%, other Protestant 0.9%), other Christian 3.4% (includes Evangelical 2.3% and Jehovah's Witness 1.1%), Rastafarian 1.9%, other 0.4%, none 5.9%, unspecified 1.4% (2010 est.)",
+      "independenceYear": 1979,
+      "independenceRaw": "22 February 1979 (from the UK)"
     },
     "li": {
       "capital": "Vaduz",
@@ -3191,7 +3455,9 @@
           "pct": 3.3
         }
       ],
-      "religionRaw": "Roman Catholic (official) 73.4%, Protestant Reformed 6.3%, Muslim 5.9%, Christian Orthodox 1.3%, Lutheran 1.2%, other Protestant 0.7%, other Christian 0.3%, other 0.8%, none 7%, unspecified 3.3% (2015 est.)"
+      "religionRaw": "Roman Catholic (official) 73.4%, Protestant Reformed 6.3%, Muslim 5.9%, Christian Orthodox 1.3%, Lutheran 1.2%, other Protestant 0.7%, other Christian 0.3%, other 0.8%, none 7%, unspecified 3.3% (2015 est.)",
+      "independenceYear": 1719,
+      "independenceRaw": "23 January 1719 (Principality of Liechtenstein established); 12 July 1806 (independence from the Holy Roman Empire); 24 August 1866 (independence from the German Confederation)"
     },
     "lk": {
       "capital": "Colombo",
@@ -3222,7 +3488,9 @@
           "pct": 0.05
         }
       ],
-      "religionRaw": "Buddhist (official) 70.2%, Hindu 12.6%, Muslim 9.7%, Roman Catholic 6.1%, other Christian 1.3%, other 0.05% (2012 est.)"
+      "religionRaw": "Buddhist (official) 70.2%, Hindu 12.6%, Muslim 9.7%, Roman Catholic 6.1%, other Christian 1.3%, other 0.05% (2012 est.)",
+      "independenceYear": 1948,
+      "independenceRaw": "4 February 1948 (from the UK)"
     },
     "lr": {
       "capital": "Monrovia",
@@ -3248,7 +3516,9 @@
           "pct": 2.6
         }
       ],
-      "religionRaw": "Christian 84.9%, Muslim 12%, Traditional 0.5%, other 0.1%, none 2.6% (2022 est.)"
+      "religionRaw": "Christian 84.9%, Muslim 12%, Traditional 0.5%, other 0.1%, none 2.6% (2022 est.)",
+      "independenceYear": 1847,
+      "independenceRaw": "26 July 1847"
     },
     "ls": {
       "capital": "Maseru",
@@ -3274,7 +3544,9 @@
           "pct": 2.3
         }
       ],
-      "religionRaw": "Protestant 47.8% (Pentecostal 23.1%, Lesotho Evangelical 17.3%, Anglican 7.4%), Roman Catholic 39.3%, other Christian 9.1%, non-Christian 1.4%, none 2.3% (2014 est.)"
+      "religionRaw": "Protestant 47.8% (Pentecostal 23.1%, Lesotho Evangelical 17.3%, Anglican 7.4%), Roman Catholic 39.3%, other Christian 9.1%, non-Christian 1.4%, none 2.3% (2014 est.)",
+      "independenceYear": 1966,
+      "independenceRaw": "4 October 1966 (from the UK)"
     },
     "lt": {
       "capital": "Vilnius",
@@ -3312,7 +3584,9 @@
           "pct": 13.7
         }
       ],
-      "religionRaw": "Roman Catholic 74.2%, Russian Orthodox 3.7%, Old Believer 0.6%, Evangelical Lutheran 0.6%, Evangelical Reformist 0.2%, other (including Sunni Muslim, Jewish, Greek Catholic, and Karaite) 0.9%, none 6.1%, unspecified 13.7% (2021 est.)"
+      "religionRaw": "Roman Catholic 74.2%, Russian Orthodox 3.7%, Old Believer 0.6%, Evangelical Lutheran 0.6%, Evangelical Reformist 0.2%, other (including Sunni Muslim, Jewish, Greek Catholic, and Karaite) 0.9%, none 6.1%, unspecified 13.7% (2021 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "16 February 1918 (from Soviet Russia and Germany); 11 March 1990 (declared from the Soviet Union); 6 September 1991 (recognized by the Soviet Union); notable earlier dates: 6 July 1253 (coronation of MINDAUGAS, traditional founding date); 1 July 1569 (Polish-Lithuanian Commonwealth created)"
     },
     "lu": {
       "capital": "Luxembourg",
@@ -3334,7 +3608,9 @@
           "pct": 26.7
         }
       ],
-      "religionRaw": "Christian (predominantly Roman Catholic) 70.6%, Muslim 2.3%, other (includes Buddhist, folk religions, Hindu, Jewish) 0.4%, unaffiliated 26.7% (2020 est.)"
+      "religionRaw": "Christian (predominantly Roman Catholic) 70.6%, Muslim 2.3%, other (includes Buddhist, folk religions, Hindu, Jewish) 0.4%, unaffiliated 26.7% (2020 est.)",
+      "independenceYear": 1839,
+      "independenceRaw": "1839 (from the Netherlands)"
     },
     "lv": {
       "capital": "Riga",
@@ -3364,7 +3640,9 @@
           "pct": 23.5
         }
       ],
-      "religionRaw": "Lutheran 36.2%, Roman Catholic 19.5%, Orthodox 19.1%, other Christian 1.6%, other 0.1%, unspecified/none 23.5% (2017 est.)"
+      "religionRaw": "Lutheran 36.2%, Roman Catholic 19.5%, Orthodox 19.1%, other Christian 1.6%, other 0.1%, unspecified/none 23.5% (2017 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "18 November 1918 (from Soviet Russia); 4 May 1990 (declared from the Soviet Union); 6 September 1991 (recognized by the Soviet Union)"
     },
     "ly": {
       "capital": "Tripoli",
@@ -3379,7 +3657,9 @@
           "pct": 2.7
         }
       ],
-      "religionRaw": "Muslim (official; virtually all Sunni) 96.6%, Christian 2.7%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, folk religion &lt;1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+      "religionRaw": "Muslim (official; virtually all Sunni) 96.6%, Christian 2.7%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, folk religion &lt;1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)",
+      "independenceYear": 1951,
+      "independenceRaw": "24 December 1951 (from UN trusteeship)"
     },
     "ma": {
       "capital": "Rabat",
@@ -3393,7 +3673,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Muslim 99% (official; virtually all Sunni, &lt;0.1% Shia), other 1% (includes Christian, Jewish, and Baha'i); note - Jewish about 3,000-3,500 (2020 est.)"
+      "religionRaw": "Muslim 99% (official; virtually all Sunni, &lt;0.1% Shia), other 1% (includes Christian, Jewish, and Baha'i); note - Jewish about 3,000-3,500 (2020 est.)",
+      "independenceYear": 1956,
+      "independenceRaw": "2 March 1956 (from France)"
     },
     "mc": {
       "capital": "Monaco",
@@ -3407,7 +3689,9 @@
           "pct": 10
         }
       ],
-      "religionRaw": "Roman Catholic 90% (official), other 10%"
+      "religionRaw": "Roman Catholic 90% (official), other 10%",
+      "independenceYear": 1419,
+      "independenceRaw": "1419 (beginning of permanent rule by the House of GRIMALDI)"
     },
     "md": {
       "capital": "Chisinau in Romanian",
@@ -3434,7 +3718,9 @@
           "pct": 6.9
         }
       ],
-      "religionRaw": "Orthodox 90.1%, other Christian 2.6%, other 0.1%, agnostic &lt;0.1%, atheist 0.2%, unspecified 6.9% (2014 est.)"
+      "religionRaw": "Orthodox 90.1%, other Christian 2.6%, other 0.1%, agnostic &lt;0.1%, atheist 0.2%, unspecified 6.9% (2014 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "27 August 1991 (from the Soviet Union)"
     },
     "me": {
       "capital": "Podgorica",
@@ -3464,7 +3750,9 @@
           "pct": 2.6
         }
       ],
-      "religionRaw": "Orthodox 72.1%, Muslim 19.1%, Catholic 3.4%, atheist 1.2%, other 1.5%, unspecified 2.6% (2011 est.)"
+      "religionRaw": "Orthodox 72.1%, Muslim 19.1%, Catholic 3.4%, atheist 1.2%, other 1.5%, unspecified 2.6% (2011 est.)",
+      "independenceYear": 2006,
+      "independenceRaw": "3 June 2006 (from the State Union of Serbia and Montenegro); notable earlier dates: 13 March 1852 (Principality of Montenegro established); 13 July 1878 (Congress of Berlin recognizes Montenegrin independence); 28 August 1910 (Kingdom of Montenegro established)"
     },
     "mf": {
       "capital": "Marigot"
@@ -3497,7 +3785,9 @@
           "pct": 21.9
         }
       ],
-      "religionRaw": "Church of Jesus Christ in Madagascar/Malagasy Lutheran Church/Anglican Church 34%, Roman Catholic 32.3%, other Christian 8.1%, traditional/Animist 1.7%, Muslim 1.4%, other 0.6%, none 21.9% (2021 est.)"
+      "religionRaw": "Church of Jesus Christ in Madagascar/Malagasy Lutheran Church/Anglican Church 34%, Roman Catholic 32.3%, other Christian 8.1%, traditional/Animist 1.7%, Muslim 1.4%, other 0.6%, none 21.9% (2021 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "26 June 1960 (from France)"
     },
     "mh": {
       "capital": "Majuro",
@@ -3527,7 +3817,9 @@
           "pct": 1.1
         }
       ],
-      "religionRaw": "Protestant 79.3% (United Church of Christ 47.9%, Assembly of God 14.1%, Full Gospel 5%, Bukot Nan Jesus 3%, Salvation Army 2.3%, Reformed Congressional Church 2.2%, Seventh Day Adventist 1.7%, New Beginning Church 1.4%, other Protestant 1.6%), Roman Catholic 9.3%, Church of Jesus Christ 5.7%, Jehovah's Witness 1.3%, other 3.3%, none 1.1% (2021 est.)"
+      "religionRaw": "Protestant 79.3% (United Church of Christ 47.9%, Assembly of God 14.1%, Full Gospel 5%, Bukot Nan Jesus 3%, Salvation Army 2.3%, Reformed Congressional Church 2.2%, Seventh Day Adventist 1.7%, New Beginning Church 1.4%, other Protestant 1.6%), Roman Catholic 9.3%, Church of Jesus Christ 5.7%, Jehovah's Witness 1.3%, other 3.3%, none 1.1% (2021 est.)",
+      "independenceYear": 1986,
+      "independenceRaw": "21 October 1986 (from the US-administered UN trusteeship)"
     },
     "mk": {
       "capital": "Skopje",
@@ -3553,7 +3845,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Orthodox 46.1%, Islam 32.2%, Christian 13.2%, Other 7.2%; less than 1%: atheist, Catholic, other religions, not specified, Protestant (2021 est.)"
+      "religionRaw": "Orthodox 46.1%, Islam 32.2%, Christian 13.2%, Other 7.2%; less than 1%: atheist, Catholic, other religions, not specified, Protestant (2021 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "8 September 1991 (referendum endorsed independence from Yugoslavia)"
     },
     "ml": {
       "capital": "Bamako",
@@ -3575,7 +3869,9 @@
           "pct": 2.5
         }
       ],
-      "religionRaw": "Muslim 93.9%, Christian 2.8%, animist 0.7%, none 2.5% (2018 est.)"
+      "religionRaw": "Muslim 93.9%, Christian 2.8%, animist 0.7%, none 2.5% (2018 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "22 September 1960 (from France)"
     },
     "mm": {
       "capital": "Rangoon",
@@ -3610,7 +3906,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Buddhist 87.9%, Christian 6.2%, Muslim 4.3%, Animist 0.8%, Hindu 0.5%, other 0.2%, none 0.1% (2014 est.)"
+      "religionRaw": "Buddhist 87.9%, Christian 6.2%, Muslim 4.3%, Animist 0.8%, Hindu 0.5%, other 0.2%, none 0.1% (2014 est.)",
+      "independenceYear": 1948,
+      "independenceRaw": "4 January 1948 (from the UK)"
     },
     "mn": {
       "capital": "Ulaanbaatar",
@@ -3640,7 +3938,9 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Buddhist 51.8%, no religion 40.6%, Muslim 3.2%, Shaman 2.5%, Christian 1.3%, Other 0.6% (2020 est.)"
+      "religionRaw": "Buddhist 51.8%, no religion 40.6%, Muslim 3.2%, Shaman 2.5%, Christian 1.3%, Other 0.6% (2020 est.)",
+      "independenceYear": 1911,
+      "independenceRaw": "29 December 1911 (independence declared from China; in actuality, autonomy attained); 11 July 1921 (from China)"
     },
     "mo": {
       "religion": [
@@ -3681,7 +3981,9 @@
           "pct": 100
         }
       ],
-      "religionRaw": "Muslim (official) 100%"
+      "religionRaw": "Muslim (official) 100%",
+      "independenceYear": 1960,
+      "independenceRaw": "28 November 1960 (from France)"
     },
     "ms": {
       "capital": "Plymouth",
@@ -3729,7 +4031,9 @@
           "pct": 90
         }
       ],
-      "religionRaw": "Roman Catholic (official) more than 90% (2006 est.)"
+      "religionRaw": "Roman Catholic (official) more than 90% (2006 est.)",
+      "independenceYear": 1964,
+      "independenceRaw": "21 September 1964 (from the UK)"
     },
     "mu": {
       "capital": "Port Louis",
@@ -3763,10 +4067,14 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Hindu 48.5%, Roman Catholic 26.3%, Muslim 17.3%, other Christian 6.4%, other 0.6%, none 0.7%, unspecified 0.1% (2011 est.)"
+      "religionRaw": "Hindu 48.5%, Roman Catholic 26.3%, Muslim 17.3%, other Christian 6.4%, other 0.6%, none 0.7%, unspecified 0.1% (2011 est.)",
+      "independenceYear": 1968,
+      "independenceRaw": "12 March 1968 (from the UK)"
     },
     "mv": {
-      "capital": "Male"
+      "capital": "Male",
+      "independenceYear": 1965,
+      "independenceRaw": "26 July 1965 (from the UK)"
     },
     "mw": {
       "capital": "Lilongwe",
@@ -3800,7 +4108,9 @@
           "pct": 2.1
         }
       ],
-      "religionRaw": "Protestant 33.5% (includes Church of Central Africa Presbyterian 14.2%, Seventh Day Adventist/Baptist 9.4%, Pentecostal 7.6%, Anglican 2.3%), Roman Catholic 17.2%, other Christian 26.6%, Muslim 13.8%, traditionalist 1.1%, other 5.6%, none 2.1% (2018 est.)"
+      "religionRaw": "Protestant 33.5% (includes Church of Central Africa Presbyterian 14.2%, Seventh Day Adventist/Baptist 9.4%, Pentecostal 7.6%, Anglican 2.3%), Roman Catholic 17.2%, other Christian 26.6%, Muslim 13.8%, traditionalist 1.1%, other 5.6%, none 2.1% (2018 est.)",
+      "independenceYear": 1964,
+      "independenceRaw": "6 July 1964 (from the UK)"
     },
     "mx": {
       "capital": "Mexico City",
@@ -3823,7 +4133,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Catholic 77.7%, no religion 10.6%, other Evangelical Churches 7.5%, Jehovah Witness 1.2%; less than 1 percent: Pentecostal, Seventh Day Adventist, Historics, not specified, Latter Day Saints, other religions  (2020 est.)"
+      "religionRaw": "Catholic 77.7%, no religion 10.6%, other Evangelical Churches 7.5%, Jehovah Witness 1.2%; less than 1 percent: Pentecostal, Seventh Day Adventist, Historics, not specified, Latter Day Saints, other religions  (2020 est.)",
+      "independenceYear": 1810,
+      "independenceRaw": "16 September 1810 (declared independence from Spain); 27 September 1821 (recognized by Spain)"
     },
     "my": {
       "capital": "Kuala Lumpur",
@@ -3853,7 +4165,9 @@
           "pct": 1.8
         }
       ],
-      "religionRaw": "Muslim (official) 63.5%, Buddhist 18.7%, Christian 9.1%, Hindu 6.1%, other (Confucianism, Taoism, other traditional Chinese religions) 0.9%, none/unspecified 1.8% (2020 est.)"
+      "religionRaw": "Muslim (official) 63.5%, Buddhist 18.7%, Christian 9.1%, Hindu 6.1%, other (Confucianism, Taoism, other traditional Chinese religions) 0.9%, none/unspecified 1.8% (2020 est.)",
+      "independenceYear": 1957,
+      "independenceRaw": "31 August 1957 (from the UK)"
     },
     "mz": {
       "capital": "Maputo",
@@ -3891,7 +4205,9 @@
           "pct": 1.2
         }
       ],
-      "religionRaw": "Catholic 27.3%, Islam 19.1%, Pentecostal 16.7%, Saio/Zione 16.3%, no religion 13.5%, other 4.3%, Anglican 1.7%, unknown 1.2% (2017 est.)"
+      "religionRaw": "Catholic 27.3%, Islam 19.1%, Pentecostal 16.7%, Saio/Zione 16.3%, no religion 13.5%, other 4.3%, Anglican 1.7%, unknown 1.2% (2017 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "25 June 1975 (from Portugal)"
     },
     "na": {
       "capital": "Windhoek",
@@ -3909,7 +4225,9 @@
           "pct": 1.9
         }
       ],
-      "religionRaw": "Christian 97.5%, other 0.6% (includes Muslim, Baha'i, Jewish, Buddhist), unaffiliated 1.9% (2020 est.)"
+      "religionRaw": "Christian 97.5%, other 0.6% (includes Muslim, Baha'i, Jewish, Buddhist), unaffiliated 1.9% (2020 est.)",
+      "independenceYear": 1990,
+      "independenceRaw": "21 March 1990 (from South African mandate)"
     },
     "nc": {
       "capital": "Noumea",
@@ -3953,7 +4271,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Muslim 95.5%, ethnic religionist 4.1%, Christian 0.3%, agnostics and other 0.1% (2020 est.)"
+      "religionRaw": "Muslim 95.5%, ethnic religionist 4.1%, Christian 0.3%, agnostics and other 0.1% (2020 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "3 August 1960 (from France)"
     },
     "nf": {
       "capital": "Kingston",
@@ -4005,7 +4325,9 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Muslim 53.5%, Roman Catholic 10.6%, other Christian 35.3%, other 0.6% (2018 est.)"
+      "religionRaw": "Muslim 53.5%, Roman Catholic 10.6%, other Christian 35.3%, other 0.6% (2018 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "1 October 1960 (from the UK)"
     },
     "ni": {
       "capital": "Managua",
@@ -4039,7 +4361,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Roman Catholic 44.9%, Protestant 38.7% (Evangelical 38.2, Adventist 0.5%), other 1.2%, (includes Jehovah's Witness and Church of Jesus Christ), believer but not belonging to a church 1%, agnostic or atheist 0.4%, none 13.7%, unspecified 0.2% (2020 est.)"
+      "religionRaw": "Roman Catholic 44.9%, Protestant 38.7% (Evangelical 38.2, Adventist 0.5%), other 1.2%, (includes Jehovah's Witness and Church of Jesus Christ), believer but not belonging to a church 1%, agnostic or atheist 0.4%, none 13.7%, unspecified 0.2% (2020 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "15 September 1821 (from Spain)"
     },
     "nl": {
       "capital": "Amsterdam",
@@ -4065,7 +4389,9 @@
           "pct": 54.1
         }
       ],
-      "religionRaw": "Roman Catholic 20.1%, Protestant 14.8% (includes Dutch Reformed, Protestant Church of The Netherlands, Calvinist), Muslim 5%, other 5.9% (includes Hindu, Buddhist, Jewish), none 54.1% (2019 est.)"
+      "religionRaw": "Roman Catholic 20.1%, Protestant 14.8% (includes Dutch Reformed, Protestant Church of The Netherlands, Calvinist), Muslim 5%, other 5.9% (includes Hindu, Buddhist, Jewish), none 54.1% (2019 est.)",
+      "independenceYear": 1581,
+      "independenceRaw": "26 July 1581"
     },
     "no": {
       "capital": "Oslo",
@@ -4095,7 +4421,9 @@
           "pct": 19.9
         }
       ],
-      "religionRaw": "Church of Norway (Evangelical Lutheran - official) 67.5%, Muslim 3.1%, Roman Catholic 3.1%, other Christian 3.8%, other 2.6%, unspecified 19.9% (2021 est.)"
+      "religionRaw": "Church of Norway (Evangelical Lutheran - official) 67.5%, Muslim 3.1%, Roman Catholic 3.1%, other Christian 3.8%, other 2.6%, unspecified 19.9% (2021 est.)",
+      "independenceYear": 1905,
+      "independenceRaw": "7 June 1905 (union with Sweden declared dissolved); 26 October 1905 (Sweden agreed to the repeal of the union); notable earlier dates: ca. 872 (traditional unification of Norwegian kingdoms by HARALD Fairhair); 1397 (Kalmar Union of Denmark, Norway, and Sweden); 1524 (Denmark-Norway); 17 May 1814 (Norwegian constitution adopted); 4 November 1814 (Sweden-Norway union confirmed)"
     },
     "np": {
       "capital": "Kathmandu",
@@ -4125,7 +4453,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Hindu 81.2%, Buddhist 8.2%, Muslim 5.1%, Kirat 3.2%, Christian 1.8%; less than 1%:  Prakriti, Bon, Jains, Sikh (2021 est.)"
+      "religionRaw": "Hindu 81.2%, Buddhist 8.2%, Muslim 5.1%, Kirat 3.2%, Christian 1.8%; less than 1%:  Prakriti, Bon, Jains, Sikh (2021 est.)",
+      "independenceYear": 1768,
+      "independenceRaw": "1768 (unified by Prithvi Narayan SHAH)"
     },
     "nr": {
       "capital": "no official capital",
@@ -4152,7 +4482,9 @@
           "pct": 0.3
         }
       ],
-      "religionRaw": "Protestant 60.4% (Nauruan Congregational 34.7%, Assemblies of God 11.6%, Pacific Light House 6.3%, Nauru Independent 3.6%, Baptist 1.5, Seventh Day Adventist 1.3%, other Protestant 1.4%), Roman Catholic 33.9%, other 4.2%, none 1.3%, no answer 0.3% (2021 est.)"
+      "religionRaw": "Protestant 60.4% (Nauruan Congregational 34.7%, Assemblies of God 11.6%, Pacific Light House 6.3%, Nauru Independent 3.6%, Baptist 1.5, Seventh Day Adventist 1.3%, other Protestant 1.4%), Roman Catholic 33.9%, other 4.2%, none 1.3%, no answer 0.3% (2021 est.)",
+      "independenceYear": 1968,
+      "independenceRaw": "31 January 1968 (from the Australia-, NZ-, and UK-administered UN trusteeship)"
     },
     "nu": {
       "capital": "Alofi",
@@ -4190,7 +4522,9 @@
           "pct": 1.4
         }
       ],
-      "religionRaw": "Ekalesia Niue 61.7%, Latter Day Saints 8.7%, Roman Catholic 8.4%, other 8.2%, not stated 5.1%, none 3.7%, Jehovah's Witnesses 2.7%, Seventh Day Adventist 1.4% (2017 est.)"
+      "religionRaw": "Ekalesia Niue 61.7%, Latter Day Saints 8.7%, Roman Catholic 8.4%, other 8.2%, not stated 5.1%, none 3.7%, Jehovah's Witnesses 2.7%, Seventh Day Adventist 1.4% (2017 est.)",
+      "independenceYear": 1974,
+      "independenceRaw": "19 October 1974 (Niue became a self-governing state in free association with New Zealand)"
     },
     "nz": {
       "capital": "Wellington",
@@ -4224,7 +4558,9 @@
           "pct": 6.7
         }
       ],
-      "religionRaw": "Christian 37.3% (Catholic 10.1%, Anglican 6.8%, Presbyterian and Congregational 5.2%, Pentecostal 1.8%, Methodist 1.6%, Church of Jesus Christ 1.2%, other 10.7%), Hindu 2.7%, Maori 1.3%, Muslim, 1.3%, Buddhist 1.1%, other religion 1.6% (includes Judaism, Spiritualism and New Age religions, Baha'i, Asian religions other than Buddhism), no religion 48.6%, objected to answering 6.7% (2018 est.)"
+      "religionRaw": "Christian 37.3% (Catholic 10.1%, Anglican 6.8%, Presbyterian and Congregational 5.2%, Pentecostal 1.8%, Methodist 1.6%, Church of Jesus Christ 1.2%, other 10.7%), Hindu 2.7%, Maori 1.3%, Muslim, 1.3%, Buddhist 1.1%, other religion 1.6% (includes Judaism, Spiritualism and New Age religions, Baha'i, Asian religions other than Buddhism), no religion 48.6%, objected to answering 6.7% (2018 est.)",
+      "independenceYear": 1907,
+      "independenceRaw": "26 September 1907 (from the UK)"
     },
     "om": {
       "capital": "Muscat",
@@ -4246,7 +4582,9 @@
           "pct": 2
         }
       ],
-      "religionRaw": "Muslim 85.9%, Christian 6.4%, Hindu 5.7%, other and unaffiliated 2% (2020 est.)"
+      "religionRaw": "Muslim 85.9%, Christian 6.4%, Hindu 5.7%, other and unaffiliated 2% (2020 est.)",
+      "independenceYear": 1650,
+      "independenceRaw": "1650 (expulsion of the Portuguese)"
     },
     "pa": {
       "capital": "Panama City",
@@ -4268,7 +4606,9 @@
           "pct": 1.5
         }
       ],
-      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)"
+      "religionRaw": "Evangelical 55%, Roman Catholic 33.4%, none 10.1%, unspecified 1.5% (2023 est.)",
+      "independenceYear": 1903,
+      "independenceRaw": "3 November 1903 (from Colombia); 28 November 1821 (from Spain)"
     },
     "pe": {
       "capital": "Lima",
@@ -4290,7 +4630,9 @@
           "pct": 3.2
         }
       ],
-      "religionRaw": "Catholic 76%, Evangelical Christian 15.7%, no religion 5.1%, other religions 3.2% (2017 est.)"
+      "religionRaw": "Catholic 76%, Evangelical Christian 15.7%, no religion 5.1%, other religions 3.2% (2017 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "28 July 1821 (from Spain)"
     },
     "pf": {
       "capital": "Papeete",
@@ -4339,7 +4681,9 @@
           "pct": 3.1
         }
       ],
-      "religionRaw": "Protestant 64.3% (Evangelical Lutheran 18.4%, Seventh Day Adventist 12.9%, Pentecostal 10.4%, United Church 10.3%, Evangelical Alliance 5.9%, Anglican 3.2%, Baptist 2.8%, Salvation Army 0.4%), Roman Catholic 26%, other Christian 5.3%, non-Christian 1.4%, unspecified 3.1% (2011 est.)"
+      "religionRaw": "Protestant 64.3% (Evangelical Lutheran 18.4%, Seventh Day Adventist 12.9%, Pentecostal 10.4%, United Church 10.3%, Evangelical Alliance 5.9%, Anglican 3.2%, Baptist 2.8%, Salvation Army 0.4%), Roman Catholic 26%, other Christian 5.3%, non-Christian 1.4%, unspecified 3.1% (2011 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "16 September 1975 (from the Australia-administered UN trusteeship)"
     },
     "ph": {
       "capital": "Manila",
@@ -4365,7 +4709,9 @@
           "pct": 8.2
         }
       ],
-      "religionRaw": "Roman Catholic 78.8%, Muslim 6.4%, Iglesia ni Cristo 2.6%, other Christian 3.9%, other 8.2%, none/unspecified &lt;0.1 (2020 est.)"
+      "religionRaw": "Roman Catholic 78.8%, Muslim 6.4%, Iglesia ni Cristo 2.6%, other Christian 3.9%, other 8.2%, none/unspecified &lt;0.1 (2020 est.)",
+      "independenceYear": 1946,
+      "independenceRaw": "4 July 1946 (from the US)"
     },
     "pk": {
       "capital": "Islamabad",
@@ -4387,7 +4733,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Muslim 96.4%, Hindu 1.6%, Christian 1.4%; less than 1%: scheduled castes, Qadiani/Ahmadi, other, Sikh. (2020 est.)"
+      "religionRaw": "Muslim 96.4%, Hindu 1.6%, Christian 1.4%; less than 1%: scheduled castes, Qadiani/Ahmadi, other, Sikh. (2020 est.)",
+      "independenceYear": 1947,
+      "independenceRaw": "14 August 1947 (from British India)"
     },
     "pl": {
       "capital": "Warsaw",
@@ -4405,7 +4753,9 @@
           "pct": 6.9
         }
       ],
-      "religionRaw": "Roman Catholic 70.7%, refused to answer 20.9%, no religion 6.9%; less than 1 percent: Orthodox, Jehovah Witness, Evangelic of Augsburg, Greek Catholic, Pentecostal, other Protestant, not stated, old Catholic Mariavite Church, other Christians, Islam, Buddhist, Polish Catholic Church, other, Baptist Union of Poland, Pagan, Seventh Day Adventist, Hindu, other Catholic (2021 est.)"
+      "religionRaw": "Roman Catholic 70.7%, refused to answer 20.9%, no religion 6.9%; less than 1 percent: Orthodox, Jehovah Witness, Evangelic of Augsburg, Greek Catholic, Pentecostal, other Protestant, not stated, old Catholic Mariavite Church, other Christians, Islam, Buddhist, Polish Catholic Church, other, Baptist Union of Poland, Pagan, Seventh Day Adventist, Hindu, other Catholic (2021 est.)",
+      "independenceYear": 1918,
+      "independenceRaw": "11 November 1918 (republic proclaimed); notable earlier dates: 14 April 966 (adoption of Christianity, traditional founding date), 1 July 1569 (Polish-Lithuanian Commonwealth created)"
     },
     "pm": {
       "capital": "Saint-Pierre",
@@ -4508,7 +4858,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Catholic 68.1%, not applicable 12.9%, no religion 12.0%, no response 2.2%, Protestant 1.8%, other 1.0%; less than 1%: other Christians, Orthodox, Muslim (2021 est.)"
+      "religionRaw": "Catholic 68.1%, not applicable 12.9%, no religion 12.0%, no response 2.2%, Protestant 1.8%, other 1.0%; less than 1%: other Christians, Orthodox, Muslim (2021 est.)",
+      "independenceYear": 1143,
+      "independenceRaw": "1143 (Kingdom of Portugal recognized); 1 December 1640 (independence reestablished after 60 years of Spanish rule); 5 October 1910 (republic proclaimed)"
     },
     "pw": {
       "capital": "Ngerulmud",
@@ -4534,7 +4886,9 @@
           "pct": 12.3
         }
       ],
-      "religionRaw": "Roman Catholic 46.9%, Protestant 30.9% (Evangelical 24.6%, Seventh Day Adventist 5%, other Protestant 1.4%), Modekngei 5.1% (indigenous to Palau), Muslim 4.9%, other 12.3% (2020 est.)"
+      "religionRaw": "Roman Catholic 46.9%, Protestant 30.9% (Evangelical 24.6%, Seventh Day Adventist 5%, other Protestant 1.4%), Modekngei 5.1% (indigenous to Palau), Muslim 4.9%, other 12.3% (2020 est.)",
+      "independenceYear": 1994,
+      "independenceRaw": "1 October 1994 (from the US-administered UN trusteeship)"
     },
     "py": {
       "capital": "Asuncion",
@@ -4564,7 +4918,9 @@
           "pct": 6.2
         }
       ],
-      "religionRaw": "Roman Catholic 80.4%, Protestant 7% (Evangelical (non-specific) 6.7%, Evangelical Pentecostal &lt;0.1%, Adventist &lt;0.1%, Protestant (non-specific) &lt;0.1%), Believer (not belonging to the church) 5.7%, other 0.6%, agnostic &lt;0.1%, none 0.2%, unspecified 6.2% (2023 est.)"
+      "religionRaw": "Roman Catholic 80.4%, Protestant 7% (Evangelical (non-specific) 6.7%, Evangelical Pentecostal &lt;0.1%, Adventist &lt;0.1%, Protestant (non-specific) &lt;0.1%), Believer (not belonging to the church) 5.7%, other 0.6%, agnostic &lt;0.1%, none 0.2%, unspecified 6.2% (2023 est.)",
+      "independenceYear": 1811,
+      "independenceRaw": "14-15 May 1811 (from Spain)"
     },
     "qa": {
       "capital": "Doha",
@@ -4586,7 +4942,9 @@
           "pct": 3.8
         }
       ],
-      "religionRaw": "Muslim 65.2%, Christian 13.7%, Hindu 15.9%, Buddhist 3.8%, folk religion &lt;0.1%, Jewish &lt;0.1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+      "religionRaw": "Muslim 65.2%, Christian 13.7%, Hindu 15.9%, Buddhist 3.8%, folk religion &lt;0.1%, Jewish &lt;0.1%, other &lt;1%, unaffiliated &lt;1% (2020 est.)",
+      "independenceYear": 1971,
+      "independenceRaw": "3 September 1971 (from the UK)"
     },
     "re": {
       "capital": "Saint-Denis"
@@ -4615,7 +4973,9 @@
           "pct": 4.7
         }
       ],
-      "religionRaw": "Romanian Orthodox 85.3%, Roman Catholic 4.5%, Reformed 3%, Pentecostal 2.5%, other 4.7% (2021 est.)"
+      "religionRaw": "Romanian Orthodox 85.3%, Roman Catholic 4.5%, Reformed 3%, Pentecostal 2.5%, other 4.7% (2021 est.)",
+      "independenceYear": 1877,
+      "independenceRaw": "9 May 1877 (independence proclaimed from the Ottoman Empire; 13 July 1878 (independence recognized by the Treaty of Berlin); 26 March 1881 (kingdom proclaimed); 30 December 1947 (republic proclaimed)"
     },
     "rs": {
       "capital": "Belgrade",
@@ -4650,7 +5010,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Serbian Orthodox 81.1%, unknown 5.3%, Islam 4.2%, Catholic 3.9%, no response 2.5%, atheist 1.1%; less than 1%: other Christians, Protestant, agnostic (2022)"
+      "religionRaw": "Serbian Orthodox 81.1%, unknown 5.3%, Islam 4.2%, Catholic 3.9%, no response 2.5%, atheist 1.1%; less than 1%: other Christians, Protestant, agnostic (2022)",
+      "independenceYear": 2006,
+      "independenceRaw": "5 June 2006 (from the State Union of Serbia and Montenegro); notable earlier dates: 1217 (Serbian Kingdom established); 16 April 1346 (Serbian Empire established); 13 July 1878 (Congress of Berlin recognizes Serbian independence); 1 December 1918 (Kingdom of Serbs, Croats, and Slovenes established, later known as Yugoslavia)"
     },
     "ru": {
       "capital": "Moscow",
@@ -4668,7 +5030,9 @@
           "pct": 2
         }
       ],
-      "religionRaw": "Russian Orthodox 15-20%, Muslim 10-15%, other Christian 2% (2006 est.)"
+      "religionRaw": "Russian Orthodox 15-20%, Muslim 10-15%, other Christian 2% (2006 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "25 December 1991 (from the Soviet Union; Russian SFSR renamed Russian Federation); notable earlier dates: 1157 (Principality of Vladimir-Suzdal created); 16 January 1547 (Tsardom of Muscovy established); 22 October 1721 (Russian Empire proclaimed); 30 December 1922 (Soviet Union established)"
     },
     "rw": {
       "capital": "Kigali",
@@ -4710,10 +5074,14 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Catholic 39.9%, Pentecostal 21.3%, Protestant 14.6%, Adventist 12.2%, other Christians 4.2%, no religion 3.0%, Muslim 2.0%, other religions 2.0%; less than 1%: Jehovah Witness, not specified, Animist  (2022 est.)"
+      "religionRaw": "Catholic 39.9%, Pentecostal 21.3%, Protestant 14.6%, Adventist 12.2%, other Christians 4.2%, no religion 3.0%, Muslim 2.0%, other religions 2.0%; less than 1%: Jehovah Witness, not specified, Animist  (2022 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "1 July 1962 (from Belgium-administered UN trusteeship)"
     },
     "sa": {
-      "capital": "Riyadh"
+      "capital": "Riyadh",
+      "independenceYear": 1932,
+      "independenceRaw": "23 September 1932 (unification of the kingdom)"
     },
     "sb": {
       "capital": "Honiara",
@@ -4739,7 +5107,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Protestant 73.4% (Church of Melanesia 31.9%, South Sea Evangelical 17.1%, Seventh Day Adventist 11.7%, United Church 10.1%, Christian Fellowship Church 2.5%), Roman Catholic 19.6%, other Christian 2.9%, other 4%, unspecified 0.1% (2009 est.)"
+      "religionRaw": "Protestant 73.4% (Church of Melanesia 31.9%, South Sea Evangelical 17.1%, Seventh Day Adventist 11.7%, United Church 10.1%, Christian Fellowship Church 2.5%), Roman Catholic 19.6%, other Christian 2.9%, other 4%, unspecified 0.1% (2009 est.)",
+      "independenceYear": 1978,
+      "independenceRaw": "7 July 1978 (from the UK)"
     },
     "sc": {
       "capital": "Victoria",
@@ -4777,10 +5147,14 @@
           "pct": 0.9
         }
       ],
-      "religionRaw": "Roman Catholic 76.2%, Protestant 10.5% (Anglican 6.1%, Pentecostal Assembly 1.5%, Seventh Day Adventist 1.2%, other Protestant 1.7%), other Christian 2.4%, Hindu 2.4%, Muslim 1.6%, other non-Christian 1.1%, unspecified 4.8%, none 0.9% (2010 est.)"
+      "religionRaw": "Roman Catholic 76.2%, Protestant 10.5% (Anglican 6.1%, Pentecostal Assembly 1.5%, Seventh Day Adventist 1.2%, other Protestant 1.7%), other Christian 2.4%, Hindu 2.4%, Muslim 1.6%, other non-Christian 1.1%, unspecified 4.8%, none 0.9% (2010 est.)",
+      "independenceYear": 1976,
+      "independenceRaw": "29 June 1976 (from the UK)"
     },
     "sd": {
-      "capital": "Khartoum"
+      "capital": "Khartoum",
+      "independenceYear": 1956,
+      "independenceRaw": "1 January 1956 (from Egypt and the UK)"
     },
     "se": {
       "capital": "Stockholm",
@@ -4798,7 +5172,9 @@
           "pct": 37.2
         }
       ],
-      "religionRaw": "Church of Sweden (Lutheran) 53.9%, other (includes Roman Catholic, Orthodox, Baptist, Muslim, Jewish, and Buddhist) 8.9%, none or unspecified 37.2% (2021 est.)"
+      "religionRaw": "Church of Sweden (Lutheran) 53.9%, other (includes Roman Catholic, Orthodox, Baptist, Muslim, Jewish, and Buddhist) 8.9%, none or unspecified 37.2% (2021 est.)",
+      "independenceYear": 1523,
+      "independenceRaw": "6 June 1523 (Gustav VASA elected king of Sweden, marking the abolishment of the Kalmar Union of Denmark, Norway, and Sweden)"
     },
     "sg": {
       "capital": "Singapore",
@@ -4832,7 +5208,9 @@
           "pct": 20
         }
       ],
-      "religionRaw": "Buddhist 31.1%, Christian 18.9%, Muslim 15.6%, Taoist 8.8%, Hindu 5%, other 0.6%, none 20% (2020 est.)"
+      "religionRaw": "Buddhist 31.1%, Christian 18.9%, Muslim 15.6%, Taoist 8.8%, Hindu 5%, other 0.6%, none 20% (2020 est.)",
+      "independenceYear": 1965,
+      "independenceRaw": "9 August 1965 (from Malaysian Federation)"
     },
     "sh": {
       "capital": "Jamestown",
@@ -4920,7 +5298,13 @@
           "pct": 2
         }
       ],
-      "religionRaw": "Catholic 69%, Orthodox 4%, Muslim 3%, Christian 1%, other 3%, atheist 14%, non-believer/agnostic 4%, refused to answer 2% (2019 est.)"
+      "religionRaw": "Catholic 69%, Orthodox 4%, Muslim 3%, Christian 1%, other 3%, atheist 14%, non-believer/agnostic 4%, refused to answer 2% (2019 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "25 June 1991 (from Yugoslavia)"
+    },
+    "sj": {
+      "capital": "Longyearbyen",
+      "capitalNote": "Longyearbyen (Svalbard); Jan Mayen has no permanent inhabitants"
     },
     "sk": {
       "capital": "Bratislava",
@@ -4950,7 +5334,9 @@
           "pct": 6.5
         }
       ],
-      "religionRaw": "Roman Catholic 55.8%, Evangelical Church of the Augsburg Confession 5.3%, Greek Catholic 4%, Reformed Christian 1.6%, other 3%, none 23.8%, unspecified 6.5% (2021 est.)"
+      "religionRaw": "Roman Catholic 55.8%, Evangelical Church of the Augsburg Confession 5.3%, Greek Catholic 4%, Reformed Christian 1.6%, other 3%, none 23.8%, unspecified 6.5% (2021 est.)",
+      "independenceYear": 1993,
+      "independenceRaw": "1 January 1993 (Czechoslovakia split into the Czech Republic and Slovakia)"
     },
     "sl": {
       "capital": "Freetown",
@@ -4964,11 +5350,15 @@
           "pct": 22.9
         }
       ],
-      "religionRaw": "Muslim 77.1%, Christian 22.9% (2019 est.)"
+      "religionRaw": "Muslim 77.1%, Christian 22.9% (2019 est.)",
+      "independenceYear": 1961,
+      "independenceRaw": "27 April 1961 (from the UK)"
     },
     "sm": {
       "capital": "San Marino",
-      "capitalNote": "San Marino (city)"
+      "capitalNote": "San Marino (city)",
+      "independenceYear": 301,
+      "independenceRaw": "3 September 301 (traditional founding date)"
     },
     "sn": {
       "capital": "Dakar",
@@ -4982,7 +5372,9 @@
           "pct": 2.7
         }
       ],
-      "religionRaw": "Muslim 97.2% (most adhere to one of the four main Sufi brotherhoods), Christian 2.7% (mostly Roman Catholic) (2019 est.)"
+      "religionRaw": "Muslim 97.2% (most adhere to one of the four main Sufi brotherhoods), Christian 2.7% (mostly Roman Catholic) (2019 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "4 April 1960 (from France); 20 August 1960 (full independence after federation with Mali is dissolved)"
     },
     "so": {
       "capital": "Mogadishu",
@@ -4996,7 +5388,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Muslim 99.9% (Sunni Muslim 98.1%, Shia Muslim 1.2%, Islamic schismatic 0.6%), ethnic religionist 0.1% (2020 est.)"
+      "religionRaw": "Muslim 99.9% (Sunni Muslim 98.1%, Shia Muslim 1.2%, Islamic schismatic 0.6%), ethnic religionist 0.1% (2020 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "1 July 1960 (from a merger of British Somaliland, which became independent from the UK on 26 June 1960, and Italian Somaliland, which became independent from the Italian-administered UN trusteeship on 1 July 1960 to form the Somali Republic)"
     },
     "sr": {
       "capital": "Paramaribo",
@@ -5042,7 +5436,9 @@
           "pct": 3.2
         }
       ],
-      "religionRaw": "Protestant 23.6% (includes Evangelical 11.2%, Moravian 11.2%, Reformed 0.7%, Lutheran 0.5%), Hindu 22.3%, Roman Catholic 21.6%, Muslim 13.8%, other Christian 3.2%, Winti 1.8%, Jehovah's Witness 1.2%, other 1.7%, none 7.5%, unspecified 3.2% (2012 est.)"
+      "religionRaw": "Protestant 23.6% (includes Evangelical 11.2%, Moravian 11.2%, Reformed 0.7%, Lutheran 0.5%), Hindu 22.3%, Roman Catholic 21.6%, Muslim 13.8%, other Christian 3.2%, Winti 1.8%, Jehovah's Witness 1.2%, other 1.7%, none 7.5%, unspecified 3.2% (2012 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "25 November 1975 (from the Netherlands)"
     },
     "ss": {
       "capital": "Juba",
@@ -5060,7 +5456,9 @@
           "pct": 6.2
         }
       ],
-      "religionRaw": "Christian 60.5%, folk religion 32.9%, Muslim 6.2%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+      "religionRaw": "Christian 60.5%, folk religion 32.9%, Muslim 6.2%, other &lt;1%, unaffiliated &lt;1% (2020 est.)",
+      "independenceYear": 2011,
+      "independenceRaw": "9 July 2011 (from Sudan)"
     },
     "st": {
       "capital": "Sao Tome",
@@ -5106,7 +5504,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Catholic 55.7%, Adventist 4.1%, Assembly of God 3.4%, New Apostolic 2.9%, Mana 2.3%, Universal Kingdom of God 2%, Jehovah's Witness 1.2%, other 6.2%, none 21.2%, unspecified 1% (2012 est.)"
+      "religionRaw": "Catholic 55.7%, Adventist 4.1%, Assembly of God 3.4%, New Apostolic 2.9%, Mana 2.3%, Universal Kingdom of God 2%, Jehovah's Witness 1.2%, other 6.2%, none 21.2%, unspecified 1% (2012 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "12 July 1975 (from Portugal)"
     },
     "sv": {
       "capital": "San Salvador",
@@ -5128,7 +5528,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Roman Catholic 43.9%, Protestant 39.6% (Evangelical - unspecified 38.2%, Evangelical - Methodist 1.3%, Evangelical - Baptist 0.1%), none 16.3%, unspecified 0.2% (2023 est.)"
+      "religionRaw": "Roman Catholic 43.9%, Protestant 39.6% (Evangelical - unspecified 38.2%, Evangelical - Methodist 1.3%, Evangelical - Baptist 0.1%), none 16.3%, unspecified 0.2% (2023 est.)",
+      "independenceYear": 1821,
+      "independenceRaw": "15 September 1821 (from Spain)"
     },
     "sx": {
       "capital": "Philipsburg",
@@ -5192,7 +5594,9 @@
           "pct": 3
         }
       ],
-      "religionRaw": "Muslim 87% (official; includes Sunni 74% and Alawi, Ismaili, and Shia 13%), Christian 10% (includes Orthodox, Uniate, and Nestorian), Druze 3%"
+      "religionRaw": "Muslim 87% (official; includes Sunni 74% and Alawi, Ismaili, and Shia 13%), Christian 10% (includes Orthodox, Uniate, and Nestorian), Druze 3%",
+      "independenceYear": 1946,
+      "independenceRaw": "17 April 1946 (from League of Nations mandate under French administration)"
     },
     "sz": {
       "capital": "Mbabane",
@@ -5211,7 +5615,9 @@
           "pct": 8
         }
       ],
-      "religionRaw": "Christian 90% (Zionist - a blend of Christianity and traditional African religions - 40%, Roman Catholic 20%, other Christian 30% - includes Anglican, Methodist, Church of Jesus Christ, Jehovah's Witness), Muslim 2%, other 8% (includes Baha'i, Buddhist, Hindu, indigenous, Jewish) (2015 est.)"
+      "religionRaw": "Christian 90% (Zionist - a blend of Christianity and traditional African religions - 40%, Roman Catholic 20%, other Christian 30% - includes Anglican, Methodist, Church of Jesus Christ, Jehovah's Witness), Muslim 2%, other 8% (includes Baha'i, Buddhist, Hindu, indigenous, Jewish) (2015 est.)",
+      "independenceYear": 1968,
+      "independenceRaw": "6 September 1968 (from the UK)"
     },
     "tc": {
       "capital": "Grand Turk",
@@ -5268,7 +5674,9 @@
           "pct": 0.7
         }
       ],
-      "religionRaw": "Muslim 52.1%, Protestant 23.9%, Roman Catholic 20%, animist 0.3%, other Christian 0.2%, none 2.8%, unspecified 0.7% (2014-15 est.)"
+      "religionRaw": "Muslim 52.1%, Protestant 23.9%, Roman Catholic 20%, animist 0.3%, other Christian 0.2%, none 2.8%, unspecified 0.7% (2014-15 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "11 August 1960 (from France)"
     },
     "tg": {
       "capital": "Lome",
@@ -5290,7 +5698,9 @@
           "pct": 6.2
         }
       ],
-      "religionRaw": "Christian 42.3%, folk religion 36.9%, Muslim 14%, Hindu &lt;1%, Buddhist &lt;1%, Jewish &lt;1%, other &lt;1%, none 6.2% (2020 est.)"
+      "religionRaw": "Christian 42.3%, folk religion 36.9%, Muslim 14%, Hindu &lt;1%, Buddhist &lt;1%, Jewish &lt;1%, other &lt;1%, none 6.2% (2020 est.)",
+      "independenceYear": 1960,
+      "independenceRaw": "27 April 1960 (from French-administered UN trusteeship)"
     },
     "th": {
       "capital": "Bangkok",
@@ -5312,7 +5722,9 @@
           "pct": 0.9
         }
       ],
-      "religionRaw": "Buddhist 92.5%, Muslim 5.4%, Christian 1.2%, other 0.9% (includes animist, Confucian, Hindu, Jewish, Sikh, and Taoist) (2021 est.)"
+      "religionRaw": "Buddhist 92.5%, Muslim 5.4%, Christian 1.2%, other 0.9% (includes animist, Confucian, Hindu, Jewish, Sikh, and Taoist) (2021 est.)",
+      "independenceYear": 1238,
+      "independenceRaw": "1238 (traditional founding date; never colonized)"
     },
     "tj": {
       "capital": "Dushanbe",
@@ -5326,7 +5738,35 @@
           "pct": 2
         }
       ],
-      "religionRaw": "Muslim 98% (Sunni 95%, Shia 3%) other 2% (2014 est.)"
+      "religionRaw": "Muslim 98% (Sunni 95%, Shia 3%) other 2% (2014 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "9 September 1991 (from the Soviet Union)"
+    },
+    "tk": {
+      "religion": [
+        {
+          "name": "Congregational Christian Church",
+          "pct": 50.4
+        },
+        {
+          "name": "Roman Catholic",
+          "pct": 38.7
+        },
+        {
+          "name": "Presbyterian",
+          "pct": 5.9
+        },
+        {
+          "name": "other Christian",
+          "pct": 4.2
+        },
+        {
+          "name": "unspecified",
+          "pct": 0.8
+        }
+      ],
+      "religionRaw": "Congregational Christian Church 50.4%, Roman Catholic 38.7%, Presbyterian 5.9%, other Christian 4.2%, unspecified 0.8% (2016 est.)",
+      "capitalNote": "No capital; each of the three atolls has its own administrative centre"
     },
     "tl": {
       "capital": "Dili",
@@ -5348,7 +5788,9 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Catholic 90.7%, other 7.1%, Protestant Evangelical 1.9%; less than 1%: Islam, Buddhist, Hindu (2022 est.)"
+      "religionRaw": "Catholic 90.7%, other 7.1%, Protestant Evangelical 1.9%; less than 1%: Islam, Buddhist, Hindu (2022 est.)",
+      "independenceYear": 1975,
+      "independenceRaw": "28 November 1975 (from Portugal); 20 May 2002 (from Indonesia)"
     },
     "tm": {
       "capital": "Ashgabat",
@@ -5363,7 +5805,9 @@
           "pct": 6.4
         }
       ],
-      "religionRaw": "Muslim 93%, Christian 6.4%, Buddhist &lt;1%, folk religion &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified &lt;1% (2020 est.)"
+      "religionRaw": "Muslim 93%, Christian 6.4%, Buddhist &lt;1%, folk religion &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified &lt;1% (2020 est.)",
+      "independenceYear": 1991,
+      "independenceRaw": "27 October 1991 (from the Soviet Union)"
     },
     "tn": {
       "capital": "Tunis",
@@ -5373,7 +5817,9 @@
           "pct": 99
         }
       ],
-      "religionRaw": "Muslim (official; Sunni) 99%, other (includes Christian, Jewish, Shia Muslim, and Baha'i) &lt;1%"
+      "religionRaw": "Muslim (official; Sunni) 99%, other (includes Christian, Jewish, Shia Muslim, and Baha'i) &lt;1%",
+      "independenceYear": 1956,
+      "independenceRaw": "20 March 1956 (from France)"
     },
     "to": {
       "capital": "Nuku'alofa",
@@ -5403,7 +5849,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Protestant 63.9% (Free Wesleyan Church 34.2%, Free Church of Tonga 11.3%, Church of Tonga 6.8%, Seventh Day Adventist 2.5%, Assembly of God 2.5%, Tokaikolo/Maamafo'ou 1.5%, Constitutional Church of Tonga 1.2%, other Protestant 4%), Church of Jesus Christ 19.7%, Roman Catholic 13.7%, other 2.1%, none 0.6%, no answer 0.1% (2021 est.)"
+      "religionRaw": "Protestant 63.9% (Free Wesleyan Church 34.2%, Free Church of Tonga 11.3%, Church of Tonga 6.8%, Seventh Day Adventist 2.5%, Assembly of God 2.5%, Tokaikolo/Maamafo'ou 1.5%, Constitutional Church of Tonga 1.2%, other Protestant 4%), Church of Jesus Christ 19.7%, Roman Catholic 13.7%, other 2.1%, none 0.6%, no answer 0.1% (2021 est.)",
+      "independenceYear": 1970,
+      "independenceRaw": "4 June 1970 (from UK protectorate status)"
     },
     "tr": {
       "capital": "Ankara",
@@ -5417,7 +5865,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Muslim 99.8% (mostly Sunni), other 0.2% (mostly Christians and Jews)"
+      "religionRaw": "Muslim 99.8% (mostly Sunni), other 0.2% (mostly Christians and Jews)",
+      "independenceYear": 1923,
+      "independenceRaw": "29 October 1923 (republic proclaimed, succeeding the Ottoman Empire)"
     },
     "tt": {
       "capital": "Port of Spain",
@@ -5455,7 +5905,9 @@
           "pct": 11.1
         }
       ],
-      "religionRaw": "Protestant 32.1% (Pentecostal/Evangelical/Full Gospel 12%, Baptist 6.9%, Anglican 5.7%, Seventh Day Adventist 4.1%, Presbyterian/Congregational 2.5%, other Protestant 0.9%), Roman Catholic 21.6%, Hindu 18.2%, Muslim 5%, Jehovah's Witness 1.5%, other 8.4%, none 2.2%, unspecified 11.1% (2011 est.)"
+      "religionRaw": "Protestant 32.1% (Pentecostal/Evangelical/Full Gospel 12%, Baptist 6.9%, Anglican 5.7%, Seventh Day Adventist 4.1%, Presbyterian/Congregational 2.5%, other Protestant 0.9%), Roman Catholic 21.6%, Hindu 18.2%, Muslim 5%, Jehovah's Witness 1.5%, other 8.4%, none 2.2%, unspecified 11.1% (2011 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "31 August 1962 (from the UK)"
     },
     "tv": {
       "capital": "Funafuti",
@@ -5481,7 +5933,9 @@
           "pct": 0.4
         }
       ],
-      "religionRaw": "Protestant 92.7% (Congregational Christian Church of Tuvalu 85.9%, Brethren 2.8%, Seventh Day Adventist 2.5%, Assemblies of God 1.5%), Baha'i 1.5%, Jehovah's Witness 1.5%, other 3.9%, none or refused 0.4% (2017 est.)"
+      "religionRaw": "Protestant 92.7% (Congregational Christian Church of Tuvalu 85.9%, Brethren 2.8%, Seventh Day Adventist 2.5%, Assemblies of God 1.5%), Baha'i 1.5%, Jehovah's Witness 1.5%, other 3.9%, none or refused 0.4% (2017 est.)",
+      "independenceYear": 1978,
+      "independenceRaw": "1 October 1978 (from the UK)"
     },
     "tw": {
       "capital": "Taipei",
@@ -5529,11 +5983,15 @@
           "pct": 1.6
         }
       ],
-      "religionRaw": "Christian 63.1%, Muslim 34.1%, folk religion 1.1%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified 1.6% (2020 est.)"
+      "religionRaw": "Christian 63.1%, Muslim 34.1%, folk religion 1.1%, Buddhist &lt;1%, Hindu &lt;1%, Jewish &lt;1%, other &lt;1%, unspecified 1.6% (2020 est.)",
+      "independenceYear": 1964,
+      "independenceRaw": "26 April 1964 (Tanganyika united with Zanzibar to form the United Republic of Tanganyika and Zanzibar); 29 October 1964 (renamed United Republic of Tanzania); notable earlier dates: 9 December 1961 (Tanganyika became independent from UK-administered UN trusteeship); 10 December 1963 (Zanzibar became independent from UK)"
     },
     "ua": {
       "capital": "Kyiv",
-      "capitalNote": "Kyiv (Kiev is the transliteration from Russian)"
+      "capitalNote": "Kyiv (Kiev is the transliteration from Russian)",
+      "independenceYear": 1991,
+      "independenceRaw": "24 August 1991 (from the Soviet Union); notable earlier dates: ca. 982 (VOLODYMYR I consolidates Kyivan Rus); 1199 (Principality (later Kingdom) of Ruthenia formed); 1648 (establishment of the Cossack Hetmanate); 22 January 1918 (from Soviet Russia)"
     },
     "ug": {
       "capital": "Kampala",
@@ -5559,7 +6017,9 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Protestant 45.1% (Anglican 32.0%, Pentecostal/Born Again/Evangelical 11.1%, Seventh Day Adventist 1.7%, Baptist .3%), Roman Catholic 39.3%, Muslim 13.7%, other 1.6%, none 0.2% (2014 est.)"
+      "religionRaw": "Protestant 45.1% (Anglican 32.0%, Pentecostal/Born Again/Evangelical 11.1%, Seventh Day Adventist 1.7%, Baptist .3%), Roman Catholic 39.3%, Muslim 13.7%, other 1.6%, none 0.2% (2014 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "9 October 1962 (from the UK)"
     },
     "us": {
       "capital": "Washington, D.C.",
@@ -5613,7 +6073,9 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Protestant 46.5%, Roman Catholic 20.8%, Jewish 1.9%, Church of Jesus Christ 1.6%, other Christian 0.9%, Muslim 0.9%, Jehovah's Witness 0.8%, Buddhist 0.7%, Hindu 0.7%, other 1.8%, unaffiliated 22.8%, don't know/refused 0.6% (2014 est.)"
+      "religionRaw": "Protestant 46.5%, Roman Catholic 20.8%, Jewish 1.9%, Church of Jesus Christ 1.6%, other Christian 0.9%, Muslim 0.9%, Jehovah's Witness 0.8%, Buddhist 0.7%, Hindu 0.7%, other 1.8%, unaffiliated 22.8%, don't know/refused 0.6% (2014 est.)",
+      "independenceYear": 1776,
+      "independenceRaw": "4 July 1776 (declared independence from Great Britain); 3 September 1783 (recognized by Great Britain)"
     },
     "uy": {
       "capital": "Montevideo",
@@ -5695,7 +6157,9 @@
           "pct": 24
         }
       ],
-      "religionRaw": "Roman Catholic 36.5%, Protestant 5% (Evangelical (non-specific) 4.6%, Adventist 0.2%, Protestant (non-specific) 0.3%), African American Cults/Umbanda 2.8%, Jehovah's Witness 0.6%, Church of Jesus Christ 0.2%, other 1%, Believer (not belonging to the church) 1.8%, agnostic 0.3%, atheist 1.3%, none 47.3%, unspecified 3.4%<br><br>Roman Catholic 42%, Protestant 15%, other 6%, agnostic 3%, atheist 10%, unspecified 24% (2023 est.)"
+      "religionRaw": "Roman Catholic 36.5%, Protestant 5% (Evangelical (non-specific) 4.6%, Adventist 0.2%, Protestant (non-specific) 0.3%), African American Cults/Umbanda 2.8%, Jehovah's Witness 0.6%, Church of Jesus Christ 0.2%, other 1%, Believer (not belonging to the church) 1.8%, agnostic 0.3%, atheist 1.3%, none 47.3%, unspecified 3.4%<br><br>Roman Catholic 42%, Protestant 15%, other 6%, agnostic 3%, atheist 10%, unspecified 24% (2023 est.)",
+      "independenceYear": 1825,
+      "independenceRaw": "25 August 1825 (from Brazil)"
     },
     "uz": {
       "capital": "Tashkent",
@@ -5714,10 +6178,14 @@
           "pct": 3
         }
       ],
-      "religionRaw": "Muslim 88% (mostly Sunni), Eastern Orthodox 9%, other 3%"
+      "religionRaw": "Muslim 88% (mostly Sunni), Eastern Orthodox 9%, other 3%",
+      "independenceYear": 1991,
+      "independenceRaw": "1 September 1991 (from the Soviet Union)"
     },
     "va": {
-      "capital": "Vatican City"
+      "capital": "Vatican City",
+      "independenceYear": 1929,
+      "independenceRaw": "11 February 1929"
     },
     "vc": {
       "capital": "Kingstown",
@@ -5751,7 +6219,9 @@
           "pct": 4.7
         }
       ],
-      "religionRaw": "Protestant 75% (Pentecostal 27.6%, Anglican 13.9%, Seventh Day Adventist 11.6%,  Baptist 8.9%, Methodist 8.7%, Evangelical 3.8%, Salvation Army 0.3%, Presbyterian/Congregational 0.3%), Roman Catholic 6.3%,  Rastafarian 1.1%, Jehovah's Witness 0.8%, other 4.7%, none 7.5%, unspecified 4.7% (2012 est.)"
+      "religionRaw": "Protestant 75% (Pentecostal 27.6%, Anglican 13.9%, Seventh Day Adventist 11.6%,  Baptist 8.9%, Methodist 8.7%, Evangelical 3.8%, Salvation Army 0.3%, Presbyterian/Congregational 0.3%), Roman Catholic 6.3%,  Rastafarian 1.1%, Jehovah's Witness 0.8%, other 4.7%, none 7.5%, unspecified 4.7% (2012 est.)",
+      "independenceYear": 1979,
+      "independenceRaw": "27 October 1979 (from the UK)"
     },
     "ve": {
       "capital": "Caracas",
@@ -5793,7 +6263,9 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Roman Catholic 48.1%, Protestant 31.6% (Evangelical 31.4%, Adventist 0.2%), Jehovah's Witness 1.4%, African American/umbanda 0.7%, other 0.1%, believer 3.5%, agnostic 0.1%, atheist, 0.4%, none 13.6%, unspecified 0.6% (2023 est.)"
+      "religionRaw": "Roman Catholic 48.1%, Protestant 31.6% (Evangelical 31.4%, Adventist 0.2%), Jehovah's Witness 1.4%, African American/umbanda 0.7%, other 0.1%, believer 3.5%, agnostic 0.1%, atheist, 0.4%, none 13.6%, unspecified 0.6% (2023 est.)",
+      "independenceYear": 1811,
+      "independenceRaw": "5 July 1811 (from Spain)"
     },
     "vg": {
       "capital": "Road Town",
@@ -5880,7 +6352,9 @@
           "pct": 86.3
         }
       ],
-      "religionRaw": "Catholic 6.1%, Buddhist 5.8%, Protestant 1%, other 0.8%, none 86.3% (2019 est.)"
+      "religionRaw": "Catholic 6.1%, Buddhist 5.8%, Protestant 1%, other 0.8%, none 86.3% (2019 est.)",
+      "independenceYear": 1945,
+      "independenceRaw": "2 September 1945 (from France)"
     },
     "vu": {
       "capital": "Port-Vila",
@@ -5919,7 +6393,9 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Protestant 39.9% (Presbyterian 27.2%, Seventh Day Adventist 14.8%, Anglican 12%, Churches of Christ 5%, Assemblies of God 4.9%, Neil Thomas Ministry/Inner Life Ministry 3.2%), Roman Catholic 12.1%, Apostolic 2.3%, Church of Jesus Christ 1.8%, customary beliefs (including Jon Frum cargo cult) 3.1%, other 12%, none 1.4%, unspecified 0.1% (2020 est.)"
+      "religionRaw": "Protestant 39.9% (Presbyterian 27.2%, Seventh Day Adventist 14.8%, Anglican 12%, Churches of Christ 5%, Assemblies of God 4.9%, Neil Thomas Ministry/Inner Life Ministry 3.2%), Roman Catholic 12.1%, Apostolic 2.3%, Church of Jesus Christ 1.8%, customary beliefs (including Jon Frum cargo cult) 3.1%, other 12%, none 1.4%, unspecified 0.1% (2020 est.)",
+      "independenceYear": 1980,
+      "independenceRaw": "30 July 1980 (from France and the UK)"
     },
     "wf": {
       "capital": "Mata-Utu",
@@ -5968,7 +6444,16 @@
           "pct": 0.2
         }
       ],
-      "religionRaw": "Protestant 54.9% (Congregationalist 29%, Methodist 12.4%, Assembly of God 6.8%, Seventh Day Adventist 4.4%, other Protestant 2.3%), Roman Catholic 18.8%, Church of Jesus Christ 16.9%, Worship Centre 2.8%, other Christian 3.6%, other 2.9% (includes Baha'i, Muslim), none 0.2% (2016 est.)"
+      "religionRaw": "Protestant 54.9% (Congregationalist 29%, Methodist 12.4%, Assembly of God 6.8%, Seventh Day Adventist 4.4%, other Protestant 2.3%), Roman Catholic 18.8%, Church of Jesus Christ 16.9%, Worship Centre 2.8%, other Christian 3.6%, other 2.9% (includes Baha'i, Muslim), none 0.2% (2016 est.)",
+      "independenceYear": 1962,
+      "independenceRaw": "1 January 1962 (from New Zealand-administered UN trusteeship)"
+    },
+    "xa": {
+      "capital": "Sukhumi"
+    },
+    "xc": {
+      "capital": "North Nicosia",
+      "capitalNote": "North Nicosia (Lefkosa); the northern part of divided Nicosia"
     },
     "xk": {
       "capital": "Pristina",
@@ -5999,7 +6484,12 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Muslim 95.6%, Roman Catholic 2.2%, Orthodox 1.5%, other 0.1%, none 0.1%, unspecified 0.6% (2011 est.)"
+      "religionRaw": "Muslim 95.6%, Roman Catholic 2.2%, Orthodox 1.5%, other 0.1%, none 0.1%, unspecified 0.6% (2011 est.)",
+      "independenceYear": 2008,
+      "independenceRaw": "17 February 2008 (from Serbia)"
+    },
+    "xo": {
+      "capital": "Tskhinvali"
     },
     "xs": {
       "capital": "Hargeisa",
@@ -6009,6 +6499,9 @@
           "pct": 100
         }
       ]
+    },
+    "xt": {
+      "capital": "Tiraspol"
     },
     "ye": {
       "capital": "Sanaa",
@@ -6022,7 +6515,9 @@
           "pct": 0.9
         }
       ],
-      "religionRaw": "Muslim 99.1% (official; virtually all are citizens, an estimated 65% are Sunni and 35% are Shia), other 0.9% (includes Jewish, Baha'i, Hindu, and Christian; many are refugees or temporary foreign residents) (2020 est.)"
+      "religionRaw": "Muslim 99.1% (official; virtually all are citizens, an estimated 65% are Sunni and 35% are Shia), other 0.9% (includes Jewish, Baha'i, Hindu, and Christian; many are refugees or temporary foreign residents) (2020 est.)",
+      "independenceYear": 1990,
+      "independenceRaw": "22 May 1990 (Republic of Yemen established with the merger of the Yemen Arab Republic [Yemen (Sanaa) or North Yemen] and the People's Democratic Republic of Yemen [Yemen (Aden) or South Yemen]); notable earlier dates: 1 November 1918 (North Yemen independent from the Ottoman Empire), 27 September 1962 (North Yemen becomes republic), 30 November 1967 (South Yemen independent from the UK)"
     },
     "yt": {
       "capital": "Mamoudzou"
@@ -6052,7 +6547,9 @@
           "pct": 5.2
         }
       ],
-      "religionRaw": "Christian 86%, ancestral, tribal, animist, or other traditional African religions 5.4%, Muslim 1.9%, other 1.5%, nothing in particular 5.2% (2015 est.)"
+      "religionRaw": "Christian 86%, ancestral, tribal, animist, or other traditional African religions 5.4%, Muslim 1.9%, other 1.5%, nothing in particular 5.2% (2015 est.)",
+      "independenceYear": 1910,
+      "independenceRaw": "31 May 1910 (Union of South Africa formed from four British colonies: Cape Colony, Natal, Transvaal, and Orange Free State); 22 August 1934 (Status of the Union Act); 31 May 1961 (republic declared); 27 April 1994 (majority rule)"
     },
     "zm": {
       "capital": "Lusaka",
@@ -6074,7 +6571,9 @@
           "pct": 1.8
         }
       ],
-      "religionRaw": "Protestant 75.3%, Roman Catholic 20.2%, other 2.7% (includes Muslim, Buddhist, Hindu, and Baha'i), none 1.8% (2010 est.)"
+      "religionRaw": "Protestant 75.3%, Roman Catholic 20.2%, other 2.7% (includes Muslim, Buddhist, Hindu, and Baha'i), none 1.8% (2010 est.)",
+      "independenceYear": 1964,
+      "independenceRaw": "24 October 1964 (from the UK)"
     },
     "zw": {
       "capital": "Harare",
@@ -6112,7 +6611,9 @@
           "pct": 8.3
         }
       ],
-      "religionRaw": "Apostolic Sect 40.3%, Pentecostal 17%, Protestant 13.8%, other Christian 7.8%, Roman Catholic 6.4%, African traditionalist 5%, other 1.5% (includes Muslim, Jewish, Hindu), none 8.3% (2022 est.)"
+      "religionRaw": "Apostolic Sect 40.3%, Pentecostal 17%, Protestant 13.8%, other Christian 7.8%, Roman Catholic 6.4%, African traditionalist 5%, other 1.5% (includes Muslim, Jewish, Hindu), none 8.3% (2022 est.)",
+      "independenceYear": 1980,
+      "independenceRaw": "18 April 1980 (from the UK)"
     }
   },
   "provenance": {
@@ -6174,6 +6675,7 @@
     "as": "CIA World Factbook (public domain)",
     "au": "CIA World Factbook (public domain)",
     "sb": "CIA World Factbook (public domain)",
+    "cc": "CIA World Factbook (public domain)",
     "mp": "CIA World Factbook (public domain)",
     "ck": "CIA World Factbook (public domain)",
     "fj": "CIA World Factbook (public domain)",
@@ -6181,6 +6683,7 @@
     "pf": "CIA World Factbook (public domain)",
     "gu": "CIA World Factbook (public domain)",
     "ki": "CIA World Factbook (public domain)",
+    "cx": "CIA World Factbook (public domain)",
     "nc": "CIA World Factbook (public domain)",
     "nu": "CIA World Factbook (public domain)",
     "nf": "CIA World Factbook (public domain)",
@@ -6190,6 +6693,7 @@
     "pn": "CIA World Factbook (public domain)",
     "pw": "CIA World Factbook (public domain)",
     "mh": "CIA World Factbook (public domain)",
+    "tk": "CIA World Factbook (public domain)",
     "to": "CIA World Factbook (public domain)",
     "tv": "CIA World Factbook (public domain)",
     "wf": "CIA World Factbook (public domain)",
@@ -6357,6 +6861,11 @@
     "re": "Réunion (French overseas département)",
     "yt": "Mayotte (French overseas département)",
     "bq": "Caribbean Netherlands (special municipalities of the Netherlands)",
-    "gs": "South Georgia and the South Sandwich Islands (UK)"
+    "gs": "South Georgia and the South Sandwich Islands (UK)",
+    "sj": "CIA World Factbook — Svalbard + Jan Mayen (Norway)",
+    "xc": "De-facto state — capital per its own administration",
+    "xa": "De-facto state — capital per its own administration",
+    "xo": "De-facto state — capital per its own administration",
+    "xt": "De-facto state — capital per its own administration"
   }
 }

@@ -6,7 +6,8 @@
 // Each country is normalized to its OWN ~1000px box + simplified at that scale, so it
 // keeps full detail. Used by the showcase panel / peek / compare (single-country views).
 //
-// Usage: node scripts/build-shapes.mjs
+// Usage: node scripts/build-shapes.mjs [code...]   (codes = rebuild only those,
+// leaving every other file in data/shapes/ untouched; no args = full rebuild)
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 
 const NORM = 1000, DP_EPS = 0.35, CLIP_DEG = 15, CLIP_AREA_FRAC = 0.35, MIN_RING_FRAC = 0.0008;
@@ -19,6 +20,22 @@ const ml = JSON.parse(readFileSync('/tmp/mledoze.json', 'utf8'));
 const iso3 = new Map(ml.filter((c) => c.cca2 && c.cca3).map((c) => [c.cca2.toLowerCase(), c.cca3]));
 iso3.set('xk', 'XKX'); // geoBoundaries uses XKX for Kosovo (mledoze says UNK)
 const ne10 = JSON.parse(readFileSync('/tmp/ne10.geojson', 'utf8'));
+// Same two extra Natural Earth layers build-geometry.mjs uses: map units carry the
+// dependencies admin_0_countries folds into a parent, disputed areas carry the
+// de-facto states (TODOS #20).
+const neUnits = JSON.parse(readFileSync('/tmp/ne10_units.geojson', 'utf8'));
+const neDisputed = JSON.parse(readFileSync('/tmp/ne_10m_admin_0_disputed_areas.geojson', 'utf8'));
+const unitByCode = new Map();
+for (const f of neUnits.features) {
+  const c = (f.properties.ISO_A2_EH || f.properties.ISO_A2 || '').toLowerCase();
+  if (c && c !== '-99' && !unitByCode.has(c)) unitByCode.set(c, f);
+}
+// Keyed on BRK_NAME only — a disputed area's NAME is the state claiming it.
+const DISPUTED_BRK = { xc: 'N. Cyprus', xa: 'Abkhazia', xo: 'South Ossetia', xt: 'Transnistria' };
+const disputedByBrk = new Map(neDisputed.features.map((f) => [f.properties.BRK_NAME, f]));
+
+// Rebuild just these codes when given, so a one-entity fix doesn't rewrite all 243.
+const ONLY = new Set(process.argv.slice(2).filter((a) => /^[a-z]{2}$/.test(a)));
 
 const mercY = (lat) => Math.log(Math.tan(Math.PI / 4 + (Math.max(-85, Math.min(85, lat)) * Math.PI) / 360));
 const proj = (lon, lat) => [lon, -mercY(lat) * 180 / Math.PI];
@@ -67,7 +84,9 @@ function processRings(rings) {
   return out;
 }
 
-const codes = Object.keys(entities).filter((c) => entities[c].type !== 'aggregate');
+const codes = Object.keys(entities)
+  .filter((c) => entities[c].type !== 'aggregate')
+  .filter((c) => !ONLY.size || ONLY.has(c));
 const shapes = {};
 const src = { gb: 0, ne: 0, none: [] };
 let next = 0;
@@ -84,7 +103,8 @@ async function worker() {
       if (g) { rings = ringsOf(g); from = 'gb'; }
     }
     if (!rings) {
-      const f = neByCode.get(code) || neByName.get(norm(ent.name));
+      const f = neByCode.get(code) || neByName.get(norm(ent.name))
+        || unitByCode.get(code) || disputedByBrk.get(DISPUTED_BRK[code]);
       if (f) { rings = ringsOf(f.geometry); from = 'ne'; }
     }
     if (!rings) { src.none.push(code); continue; }
@@ -104,7 +124,7 @@ for (const region of ['africa','europe','asia','north-america','south-america','
 
 // Per-country files (data/shapes/{code}.json) so the panel/peek loads only the one
 // country it shows (~a few KB) instead of one ~1.5 MB blob.
-rmSync('data/shapes', { recursive: true, force: true });
+if (!ONLY.size) rmSync('data/shapes', { recursive: true, force: true });
 mkdirSync('data/shapes', { recursive: true });
 for (const [code, polygons] of Object.entries(shapes)) {
   writeFileSync(`data/shapes/${code}.json`, JSON.stringify({ color: colorByCode.get(code) || '#7EA6E0', polygons }));

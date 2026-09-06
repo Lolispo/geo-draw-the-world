@@ -33,11 +33,16 @@ state we're simply missing** — arguably belongs in the *standard* pool, not be
 | io | British Indian Ocean Terr. | Diego Garcia | UK (disputed w/ Mauritius) |
 | tf | French Southern & Antarctic | Port-aux-Français | France (near-uninhabited) |
 
-## Tier 2 — ISO code + flag + capital, but NO Natural Earth geometry
+## Tier 2 — ISO code + flag + capital
 
-Addable to the data layer / showcase panel / quiz, but **no drawable shape** (the French
+> **Correction (2026-09-06):** the "no Natural Earth geometry" claim below was wrong. It
+> was based on NE's `admin_0_countries` layer alone, where these are folded into their
+> parent. `admin_0_map_units` carries **all ten** of them separately, so every Tier 2
+> entity is drawable. All ten now ship with geometry; none are data-only.
+
+~~Addable to the data layer / showcase panel / quiz, but **no drawable shape** (the French
 overseas départements are folded into France in NE; would need separate sourcing —
-geoBoundaries/OSM, ties to #21's fallback plan). Would show "no shape" in the panel.
+geoBoundaries/OSM, ties to #21's fallback plan). Would show "no shape" in the panel.~~
 
 | code | name | capital | parent |
 |---|---|---|---|
@@ -57,6 +62,12 @@ three BES islands individually is possible but they lack their own ISO codes →
 keys, same as Tier 3.
 
 ## Tier 3 — non-ISO de-facto states (synthetic keys, patchy sources)
+
+> **Added 2026-09-06** (all but Artsakh), as `type: 'de-facto'` behind the Territories
+> toggle. Geometry and population came from NE's `admin_0_disputed_areas` layer — the
+> "needs sourced geometry" note below was pessimistic. Flags are bundled public-domain
+> SVGs from Wikimedia Commons in `assets/flags/`. Keys: `xc` N. Cyprus, `xa` Abkhazia,
+> `xo` S. Ossetia, `xt` Transnistria.
 
 No ISO code ⇒ no flagcdn image (need a bundled flag asset) and a synthetic key like the
 existing `xs` Somaliland. Politically sensitive — present neutrally as "de-facto / disputed".

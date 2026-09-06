@@ -17,7 +17,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ae": {
@@ -37,7 +39,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "af": {
@@ -57,7 +61,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ag": {
@@ -77,7 +83,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ai": {
@@ -99,7 +107,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "al": {
@@ -119,7 +129,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "am": {
@@ -139,7 +151,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ao": {
@@ -159,7 +173,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ar": {
@@ -179,7 +195,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "as": {
@@ -201,7 +219,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "at": {
@@ -221,7 +241,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "au": {
@@ -241,7 +263,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "aw": {
@@ -263,7 +287,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "ax": {
@@ -285,7 +311,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "az": {
@@ -305,7 +333,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ba": {
@@ -325,7 +355,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bb": {
@@ -345,7 +377,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "bd": {
@@ -365,7 +399,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "be": {
@@ -385,7 +421,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bf": {
@@ -405,7 +443,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bg": {
@@ -425,7 +465,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bh": {
@@ -445,7 +487,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bi": {
@@ -465,7 +509,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "bj": {
@@ -485,7 +531,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bl": {
@@ -507,7 +555,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "bm": {
@@ -529,7 +579,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "bn": {
@@ -549,7 +601,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bo": {
@@ -569,14 +623,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bq": {
       "name": "Caribbean Netherlands",
       "type": "territory",
       "continent": "North America",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -591,7 +647,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "br": {
@@ -611,7 +669,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bs": {
@@ -631,7 +691,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bt": {
@@ -651,7 +713,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bw": {
@@ -671,7 +735,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "by": {
@@ -691,7 +757,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "bz": {
@@ -711,7 +779,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ca": {
@@ -731,7 +801,33 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
+      }
+    },
+    "cc": {
+      "name": "Cocos (Keeling) Islands",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "sovereign": "Australia",
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "cd": {
@@ -751,7 +847,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cf": {
@@ -771,7 +869,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cg": {
@@ -791,7 +891,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ch": {
@@ -811,7 +913,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ci": {
@@ -831,7 +935,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ck": {
@@ -853,7 +959,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "cl": {
@@ -873,7 +981,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cm": {
@@ -893,7 +1003,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cn": {
@@ -913,7 +1025,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "co": {
@@ -933,7 +1047,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cr": {
@@ -953,7 +1069,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cu": {
@@ -973,7 +1091,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cv": {
@@ -993,7 +1113,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cw": {
@@ -1015,7 +1137,33 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
+      }
+    },
+    "cx": {
+      "name": "Christmas Island",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": true,
+      "optional": true,
+      "sovereign": "Australia",
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "cy": {
@@ -1035,7 +1183,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "cz": {
@@ -1055,7 +1205,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "de": {
@@ -1075,7 +1227,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "dj": {
@@ -1095,7 +1249,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "dk": {
@@ -1115,7 +1271,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "dm": {
@@ -1135,7 +1293,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "do": {
@@ -1155,7 +1315,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "dz": {
@@ -1175,7 +1337,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ec": {
@@ -1195,7 +1359,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ee": {
@@ -1215,7 +1381,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "eg": {
@@ -1235,7 +1403,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "eh": {
@@ -1256,7 +1426,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "er": {
@@ -1276,7 +1448,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "es": {
@@ -1296,7 +1470,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "et": {
@@ -1316,7 +1492,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "fi": {
@@ -1336,7 +1514,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "fj": {
@@ -1356,7 +1536,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "fk": {
@@ -1378,7 +1560,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "fm": {
@@ -1398,7 +1582,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "fo": {
@@ -1420,7 +1606,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "fr": {
@@ -1440,7 +1628,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ga": {
@@ -1460,7 +1650,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gb": {
@@ -1480,7 +1672,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gd": {
@@ -1500,7 +1694,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ge": {
@@ -1520,14 +1716,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gf": {
       "name": "French Guiana",
       "type": "territory",
       "continent": "South America",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -1542,7 +1740,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "gg": {
@@ -1564,7 +1764,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "gh": {
@@ -1584,7 +1786,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gi": {
@@ -1606,7 +1810,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "gl": {
@@ -1628,7 +1834,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "gm": {
@@ -1648,7 +1856,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gn": {
@@ -1668,14 +1878,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gp": {
       "name": "Guadeloupe",
       "type": "territory",
       "continent": "North America",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -1690,7 +1902,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "gq": {
@@ -1710,7 +1924,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gr": {
@@ -1730,7 +1946,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gs": {
@@ -1752,7 +1970,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "gt": {
@@ -1772,7 +1992,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gu": {
@@ -1794,7 +2016,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "gw": {
@@ -1814,7 +2038,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "gy": {
@@ -1834,7 +2060,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "hk": {
@@ -1856,7 +2084,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "hn": {
@@ -1876,7 +2106,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "hr": {
@@ -1896,7 +2128,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ht": {
@@ -1916,7 +2150,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "hu": {
@@ -1936,7 +2172,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "id": {
@@ -1956,7 +2194,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ie": {
@@ -1976,7 +2216,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "il": {
@@ -1996,7 +2238,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "im": {
@@ -2018,7 +2262,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "in": {
@@ -2038,7 +2284,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "io": {
@@ -2060,7 +2308,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "iq": {
@@ -2080,7 +2330,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ir": {
@@ -2100,7 +2352,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "is": {
@@ -2120,7 +2374,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "it": {
@@ -2140,7 +2396,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "je": {
@@ -2162,7 +2420,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "jg": {
@@ -2182,7 +2442,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "jm": {
@@ -2202,7 +2464,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "jo": {
@@ -2222,7 +2486,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "jp": {
@@ -2242,7 +2508,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ke": {
@@ -2262,7 +2530,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "kg": {
@@ -2282,7 +2552,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "kh": {
@@ -2302,7 +2574,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ki": {
@@ -2322,7 +2596,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "km": {
@@ -2342,7 +2618,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "kn": {
@@ -2362,7 +2640,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "kp": {
@@ -2382,7 +2662,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "kr": {
@@ -2402,7 +2684,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "kw": {
@@ -2422,7 +2706,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ky": {
@@ -2444,7 +2730,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "kz": {
@@ -2464,7 +2752,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "la": {
@@ -2484,7 +2774,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lb": {
@@ -2504,7 +2796,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lc": {
@@ -2524,7 +2818,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "li": {
@@ -2544,7 +2840,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "lk": {
@@ -2564,7 +2862,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lr": {
@@ -2584,7 +2884,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ls": {
@@ -2604,7 +2906,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lt": {
@@ -2624,7 +2928,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lu": {
@@ -2644,7 +2950,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "lv": {
@@ -2664,7 +2972,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ly": {
@@ -2684,7 +2994,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ma": {
@@ -2704,7 +3016,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mc": {
@@ -2724,7 +3038,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "md": {
@@ -2744,7 +3060,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "me": {
@@ -2764,18 +3082,21 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mf": {
       "name": "St. Martin (French part)",
-      "type": "sovereign",
+      "type": "territory",
       "continent": "North America",
       "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "optional": true,
       "sovereign": "France",
       "region": "north-america",
       "metrics": {
@@ -2785,7 +3106,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "mg": {
@@ -2805,7 +3128,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mh": {
@@ -2825,7 +3150,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mk": {
@@ -2845,7 +3172,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ml": {
@@ -2865,7 +3194,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mm": {
@@ -2885,7 +3216,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "mn": {
@@ -2905,7 +3238,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mo": {
@@ -2927,7 +3262,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "mp": {
@@ -2949,14 +3286,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "mq": {
       "name": "Martinique",
       "type": "territory",
       "continent": "North America",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -2971,7 +3310,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "mr": {
@@ -2991,7 +3332,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ms": {
@@ -3013,7 +3356,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "mt": {
@@ -3033,7 +3378,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mu": {
@@ -3053,7 +3400,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mv": {
@@ -3073,7 +3422,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mw": {
@@ -3093,7 +3444,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mx": {
@@ -3113,7 +3466,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "my": {
@@ -3133,7 +3488,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "mz": {
@@ -3153,7 +3510,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "na": {
@@ -3173,7 +3532,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "nc": {
@@ -3195,7 +3556,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "ne": {
@@ -3215,7 +3578,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "nf": {
@@ -3237,7 +3602,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "ng": {
@@ -3257,7 +3624,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ni": {
@@ -3277,7 +3646,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "nl": {
@@ -3297,7 +3668,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "no": {
@@ -3317,7 +3690,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "np": {
@@ -3337,7 +3712,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "nr": {
@@ -3357,7 +3734,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "nu": {
@@ -3379,7 +3758,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "nz": {
@@ -3399,7 +3780,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "om": {
@@ -3419,7 +3802,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pa": {
@@ -3439,7 +3824,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pe": {
@@ -3459,7 +3846,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pf": {
@@ -3481,7 +3870,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "pg": {
@@ -3501,7 +3892,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ph": {
@@ -3521,7 +3914,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pk": {
@@ -3541,7 +3936,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pl": {
@@ -3561,7 +3958,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pm": {
@@ -3583,7 +3982,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "pn": {
@@ -3605,7 +4006,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "pr": {
@@ -3627,7 +4030,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "ps": {
@@ -3648,7 +4053,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "pt": {
@@ -3668,7 +4075,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "pw": {
@@ -3688,7 +4097,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "py": {
@@ -3708,7 +4119,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "qa": {
@@ -3728,14 +4141,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "re": {
       "name": "Réunion",
       "type": "territory",
       "continent": "Africa",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -3750,7 +4165,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "ro": {
@@ -3770,7 +4187,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "rs": {
@@ -3790,7 +4209,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ru": {
@@ -3810,7 +4231,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "rw": {
@@ -3830,7 +4253,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sa": {
@@ -3850,7 +4275,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sb": {
@@ -3870,7 +4297,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sc": {
@@ -3890,7 +4319,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sd": {
@@ -3910,7 +4341,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "se": {
@@ -3930,7 +4363,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sg": {
@@ -3950,7 +4385,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sh": {
@@ -3972,7 +4409,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "si": {
@@ -3992,7 +4431,33 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
+      }
+    },
+    "sj": {
+      "name": "Svalbard and Jan Mayen",
+      "type": "territory",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "sovereign": "Norway",
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "sk": {
@@ -4012,7 +4477,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sl": {
@@ -4032,7 +4499,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sm": {
@@ -4052,7 +4521,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sn": {
@@ -4072,7 +4543,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "so": {
@@ -4092,7 +4565,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sr": {
@@ -4112,7 +4587,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ss": {
@@ -4132,7 +4609,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "st": {
@@ -4152,7 +4631,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sv": {
@@ -4172,7 +4653,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sx": {
@@ -4194,7 +4677,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "sy": {
@@ -4214,7 +4699,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "sz": {
@@ -4234,7 +4721,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tc": {
@@ -4256,7 +4745,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "td": {
@@ -4276,7 +4767,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tf": {
@@ -4298,7 +4791,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "tg": {
@@ -4318,7 +4813,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "th": {
@@ -4338,7 +4835,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tj": {
@@ -4358,7 +4857,33 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
+      }
+    },
+    "tk": {
+      "name": "Tokelau",
+      "type": "territory",
+      "continent": "Oceania",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": false,
+      "hasReligion": true,
+      "optional": true,
+      "sovereign": "New Zealand",
+      "region": "oceania",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "tl": {
@@ -4378,7 +4903,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tm": {
@@ -4398,7 +4925,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tn": {
@@ -4418,7 +4947,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "to": {
@@ -4438,7 +4969,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tr": {
@@ -4458,7 +4991,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "tt": {
@@ -4478,7 +5013,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "tv": {
@@ -4498,7 +5035,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "tw": {
@@ -4518,7 +5057,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "tz": {
@@ -4538,7 +5079,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ua": {
@@ -4558,7 +5101,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "ug": {
@@ -4578,7 +5123,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "us": {
@@ -4598,7 +5145,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "uy": {
@@ -4618,7 +5167,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "uz": {
@@ -4638,7 +5189,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "va": {
@@ -4658,7 +5211,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "vc": {
@@ -4678,7 +5233,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": true
       }
     },
     "ve": {
@@ -4698,7 +5255,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "vg": {
@@ -4720,7 +5279,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": false,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "vi": {
@@ -4742,7 +5303,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": false
       }
     },
     "vn": {
@@ -4762,7 +5325,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "vu": {
@@ -4782,7 +5347,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "wf": {
@@ -4804,7 +5371,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "ws": {
@@ -4824,7 +5393,57 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
+      }
+    },
+    "xa": {
+      "name": "Abkhazia",
+      "type": "de-facto",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "disputed": "Self-governing; claimed by Georgia",
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
+      }
+    },
+    "xc": {
+      "name": "Northern Cyprus",
+      "type": "de-facto",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "disputed": "Self-governing; claimed by Cyprus",
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "xk": {
@@ -4844,7 +5463,33 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
+      }
+    },
+    "xo": {
+      "name": "South Ossetia",
+      "type": "de-facto",
+      "continent": "Asia",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "disputed": "Self-governing; claimed by Georgia",
+      "region": "asia",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "xs": {
@@ -4853,7 +5498,7 @@
       "continent": "Africa",
       "hasGeometry": true,
       "hasFlag": false,
-      "hasFlagImage": false,
+      "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
       "region": "africa",
@@ -4864,7 +5509,33 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
+      }
+    },
+    "xt": {
+      "name": "Transnistria",
+      "type": "de-facto",
+      "continent": "Europe",
+      "hasGeometry": true,
+      "hasFlag": false,
+      "hasFlagImage": true,
+      "hasCapital": true,
+      "hasReligion": false,
+      "optional": true,
+      "disputed": "Self-governing; claimed by Moldova",
+      "region": "europe",
+      "metrics": {
+        "gdp-nominal": false,
+        "population": true,
+        "gdp-per-capita": false,
+        "land-area": true,
+        "life-expectancy": false,
+        "exports": false,
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "ye": {
@@ -4884,14 +5555,16 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "yt": {
       "name": "Mayotte",
       "type": "territory",
       "continent": "Africa",
-      "hasGeometry": false,
+      "hasGeometry": true,
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
@@ -4906,7 +5579,9 @@
         "land-area": true,
         "life-expectancy": false,
         "exports": false,
-        "urbanization": false
+        "urbanization": false,
+        "export-share-gdp": false,
+        "independence-year": false
       }
     },
     "za": {
@@ -4926,7 +5601,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "zm": {
@@ -4946,7 +5623,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     },
     "zw": {
@@ -4966,7 +5645,9 @@
         "land-area": true,
         "life-expectancy": true,
         "exports": true,
-        "urbanization": true
+        "urbanization": true,
+        "export-share-gdp": true,
+        "independence-year": true
       }
     }
   }

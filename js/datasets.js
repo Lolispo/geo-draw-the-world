@@ -1,5 +1,7 @@
-// Shared dataset loader + value formatters.
-// Single source consumed by both the Data Explorer and the Rank line game.
+// Shared dataset loader, canonical country-pool rule, and value formatters.
+// Single source consumed by the Data Explorer, Rank line game and the flag quizzes.
+
+import { getIncludeTerritories } from './settings.js';
 
 let _data = null;
 let _entities = null;
@@ -28,6 +30,20 @@ export async function loadAttributes() {
 
 export function getEntity(code) {
   return _entities ? _entities[code] || null : null;
+}
+
+// The country pool every game mode plays with. Two rules, one place (TODOS #5, #20):
+//  - statistical aggregates are never in it, at any toggle setting. `jg` Channel
+//    Islands is Jersey + Guernsey summed, so it double-counts its own members.
+//  - dependent territories are in it only while the territories toggle is on.
+// Views that deliberately show everything (the Coverage audit board, the country
+// panel) read the registry directly instead of going through this.
+// Unknown codes pass: a registry that failed to load must not empty a quiz.
+export function inCountryPool(codeOrEntity) {
+  const e = typeof codeOrEntity === 'string' ? getEntity(codeOrEntity) : codeOrEntity;
+  if (!e) return true;
+  if (e.type === 'aggregate') return false;
+  return !e.optional || getIncludeTerritories();
 }
 
 export function getAttributes(code) {
@@ -110,6 +126,9 @@ const FORMATTERS = {
     return `${Math.round(a).toLocaleString()} km²`;
   },
   'years': (v) => `${v.toFixed(1)} yrs`,
+  // TODOS #28/#33. A year is not a quantity: no thousands separator ("1,523" is wrong).
+  // Negative = BC, for the curated statehood dates that reach back before year 1.
+  'year': (v) => (v < 0 ? `${Math.abs(Math.round(v))} BC` : `${Math.round(v)}`),
   'number': (v) => v.toLocaleString(),
   'percent': (v) => `${v}%`,
 };

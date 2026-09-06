@@ -33,6 +33,11 @@ const REGION_OF = {
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const ne50 = read('/tmp/ne50.geojson');
 const ne10 = read('/tmp/ne10.geojson');
+// admin_0_countries folds dependencies like Svalbard and the French overseas
+// departements into their parent; admin_0_map_units carries them separately.
+const neUnits = read('/tmp/ne10_units.geojson');
+// Breakaway/de-facto states have no ISO code and live only in this layer.
+const neDisputed = read('/tmp/ne_10m_admin_0_disputed_areas.geojson');
 const entities = read('data/entities.json').entities;
 
 // Index NE features by code and by normalized name
@@ -48,8 +53,15 @@ function indexNE(fc) {
   }
   return { byCode, byName };
 }
-const idx50 = indexNE(ne50), idx10 = indexNE(ne10);
+const idx50 = indexNE(ne50), idx10 = indexNE(ne10), idxUnits = indexNE(neUnits);
 const findFeature = (idx, code, name) => idx.byCode.get(code) || idx.byName.get(norm(name)) || null;
+
+// Disputed areas get their own narrow index, keyed ONLY on BRK_NAME. Their NAME
+// field holds the *claiming* state ("Georgia" for Abkhazia), so indexing them the
+// normal way would hand Georgia's entry Abkhazia's outline.
+const DISPUTED_BRK = { xc: 'N. Cyprus', xa: 'Abkhazia', xo: 'South Ossetia', xt: 'Transnistria' };
+const disputedByBrk = new Map(neDisputed.features.map((f) => [f.properties.BRK_NAME, f]));
+const findDisputed = (code) => disputedByBrk.get(DISPUTED_BRK[code]) || null;
 
 // outer rings of a feature, projected
 function projectedRings(feature) {
@@ -140,20 +152,26 @@ function colorFor(code) {
 
 // Build geometry per region
 const out = {}; for (const r of REGIONS) out[r] = [];
-const stats = { used10: [], skipped: [], wide: [] };
+const stats = { used10: [], skipped: [], wide: [], extraLayer: [] };
 
 for (const [code, ent] of Object.entries(entities)) {
   if (ent.type === 'aggregate') { stats.skipped.push(`${code}(aggregate)`); continue; }
   const region = REGION_OF[ent.continent];
   if (!region) { stats.skipped.push(`${code}(no-region)`); continue; }
 
-  // TODOS #21: prefer 1:10m for every entity (finer coasts); fall back to 1:50m.
+  // TODOS #21: prefer 1:10m for every entity (finer coasts); fall back to 1:50m,
+  // then to the 1:10m map-units and disputed-areas layers for entities the country
+  // layer folds into a parent or omits entirely (TODOS #20 Tier 2 + Tier 3).
   const f10 = findFeature(idx10, code, ent.name);
   const f50 = findFeature(idx50, code, ent.name);
-  const feature = f10 || f50;
-  const res = f10 ? '10m' : '50m';
+  // Match map units by code only — their names collide with their parent's.
+  const fUnit = idxUnits.byCode.get(code) || null;
+  const fDisp = findDisputed(code);
+  const feature = f10 || f50 || fUnit || fDisp;
+  const res = f10 ? '10m' : f50 ? '50m' : fUnit ? 'unit' : 'disputed';
   if (!feature) { stats.skipped.push(`${code}(no-NE)`); continue; }
   if (res === '10m') stats.used10.push(code);
+  if (res === 'unit' || res === 'disputed') stats.extraLayer.push(`${code}(${res})`);
 
   let rings = clipToMain(projectedRings(feature));
   // simplify each ring with tolerance scaled to its size; always keep the largest
@@ -199,6 +217,7 @@ for (const region of REGIONS) {
 }
 console.log(`\nTotal: ${totalCountries} countries, ${(totalBytes / 1024).toFixed(0)} KB`);
 console.log(`Used 1:10m (${stats.used10.length}): ${stats.used10.join(' ')}`);
+console.log(`From map-units / disputed layers (${stats.extraLayer.length}): ${stats.extraLayer.join(' ') || 'none'}`);
 console.log(`Skipped (${stats.skipped.length}): ${stats.skipped.join(' ')}`);
 console.log(`Still wide / check antimeridian (${stats.wide.length}): ${stats.wide.join(', ') || 'none'}`);
 if (!WRITE) console.log('\nDRY RUN — re-run with --write to overwrite data/countries-*.json');

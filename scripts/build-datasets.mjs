@@ -1,6 +1,7 @@
-// Build data/datasets.json from World Bank indicators + a static continent map.
+// Build data/datasets.json from World Bank indicators + a static continent map,
+// plus datasets derived from files other build scripts own (see 'derived datasets').
 // Usage: node scripts/build-datasets.mjs [outPath]
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 const OUT = process.argv[2] || 'data/datasets.json';
 
@@ -12,6 +13,10 @@ const INDICATORS = [
   { id: 'life-expectancy', wb: 'SP.DYN.LE00.IN',  name: 'Life expectancy',blurb: 'Life expectancy at birth, latest (World Bank)', format: 'years' },
   { id: 'exports',         wb: 'NE.EXP.GNFS.CD',  name: 'Total exports',  blurb: 'Exports of goods & services, current US$ (World Bank)', format: 'currency-short' },
   { id: 'urbanization',    wb: 'SP.URB.TOTL.IN.ZS', name: 'Urbanization', blurb: 'Urban population, % of total (World Bank)',       format: 'percent' },
+  // TODOS #27. Taken straight from the World Bank rather than dividing our own
+  // `exports` by `gdp-nominal`: those two resolve their latest non-null year per
+  // country independently, so the ratio could silently mix 2019 exports with 2023 GDP.
+  { id: 'export-share-gdp', wb: 'NE.EXP.GNFS.ZS', name: 'Exports % of GDP', blurb: 'Exports of goods & services as % of GDP (World Bank)', format: 'percent' },
 ];
 
 // Static ISO2 -> continent (transcontinental countries use their common/REST-Countries primary).
@@ -103,6 +108,21 @@ const MANUAL_VALUES = {
   yt: { 'land-area': 374, 'population': 320000 },
   bq: { 'land-area': 328, 'population': 27000 },
   gs: { 'land-area': 3903 },
+  // TODOS #20 Tier 2 completion — CIA World Factbook (public domain), 2021-2025 ests.
+  // sj = Svalbard 62,045 km2 + Jan Mayen 377 km2; population is Svalbard's (Jan Mayen
+  // has no permanent inhabitants).
+  cx: { 'land-area': 135, 'population': 1692 },
+  cc: { 'land-area': 14, 'population': 593 },
+  sj: { 'land-area': 62422, 'population': 2556 },
+  tk: { 'land-area': 12, 'population': 2453 },
+  // TODOS #20 Tier 3 — de-facto states. Population from Natural Earth's disputed-areas
+  // layer (POP_EST). Land area is the claimed territory: it matches the NE polygon
+  // within 1% for Abkhazia and N. Cyprus, but the NE control-line polygon runs 14%
+  // larger for South Ossetia and 27% smaller for Transnistria (Bender/Tighina).
+  xc: { 'land-area': 3355, 'population': 326000 },
+  xa: { 'land-area': 8660, 'population': 245246 },
+  xo: { 'land-area': 3900, 'population': 53532 },
+  xt: { 'land-area': 4163, 'population': 469000 },
 };
 const PROVENANCE = {
   tw: 'IMF WEO 2024 / Taiwan DGBAS (2023)',
@@ -113,6 +133,10 @@ const PROVENANCE = {
   fk: 'Falkland Islands Government 2021 census',
   xs: 'Somaliland government estimates (de-facto state)',
   va: 'Vatican City / Holy See official estimates',
+  xc: 'Natural Earth disputed areas POP_EST 2017; area = claimed territory (de-facto state)',
+  xa: 'Natural Earth disputed areas POP_EST 2018; area = claimed territory (de-facto state)',
+  xo: 'Natural Earth disputed areas POP_EST 2015; area = claimed territory (de-facto state)',
+  xt: 'Natural Earth disputed areas POP_EST 2018; area = claimed territory (de-facto state)',
 };
 // Territory land-area/population figures share a generic provenance.
 for (const code of Object.keys(MANUAL_VALUES)) {
@@ -137,6 +161,42 @@ for (const [code, metrics] of Object.entries(MANUAL_VALUES)) {
   for (const [metricId, value] of Object.entries(metrics)) {
     const ds = datasets.find((d) => d.id === metricId);
     if (ds && ds.values[code] == null) { ds.values[code] = value; usedCodes.add(code); }
+  }
+}
+
+// ---- derived datasets ----------------------------------------------------
+// Some rankable datasets are computed from files other scripts own (attributes.json,
+// electricity.json) rather than fetched from the World Bank. They're merged here so
+// datasets.json keeps a single owner, and the reads are optional so any build order
+// works — the same convergence pattern build-entities.mjs already uses for
+// attributes.json. Re-run this script after the upstream one to pick up changes.
+async function readJsonIfPresent(path) {
+  try { return JSON.parse(await readFile(path, 'utf8')); }
+  catch { return null; }
+}
+
+{
+  // TODOS #28 — independence year, parsed from the Factbook by build-attributes.mjs.
+  // higherFirst:false so the oldest states rank first, which is the interesting end.
+  const attrs = (await readJsonIfPresent('data/attributes.json'))?.attributes;
+  if (!attrs) {
+    console.log('\n! data/attributes.json missing — skipping independence-year. Run build-attributes.mjs, then re-run this.');
+  } else {
+    const values = {};
+    for (const [code, a] of Object.entries(attrs)) {
+      if (a.independenceYear == null) continue;
+      values[code] = a.independenceYear;
+      usedCodes.add(code);
+    }
+    datasets.push({
+      id: 'independence-year',
+      name: 'Independence year',
+      blurb: 'Year the country became independent (CIA World Factbook)',
+      format: 'year',
+      higherFirst: false,
+      values,
+    });
+    console.log(`Independence year: ${Object.keys(values).length} countries (derived)`);
   }
 }
 

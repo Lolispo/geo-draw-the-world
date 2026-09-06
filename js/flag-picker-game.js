@@ -4,8 +4,9 @@
 import { playPlace, playScoreReveal, playClick } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { deltaE, hexToRgb, rgbToHex } from './color.js';
+import { loadEntities, inCountryPool } from './datasets.js';
+import { flagUrl } from './flags.js';
 
-const FLAG_CDN = 'https://flagcdn.com/w640/';
 
 function hsvToRgb(h, s, v) {
   const c = v * s;
@@ -30,7 +31,8 @@ export class FlagPickerGame {
   constructor(containerEl, onFinish) {
     this.container = containerEl;
     this.onFinish = onFinish;
-    this.flags = [];
+    this.flags = [];   // every flag in flags.json
+    this.pool = [];    // the subset this run quizzes on
     this._loaded = false;
     this._imageCache = {};
 
@@ -48,6 +50,7 @@ export class FlagPickerGame {
     if (this._loaded) return;
     const resp = await fetch('data/flags.json');
     this.flags = (await resp.json()).flags;
+    await loadEntities(); // needed to gate territories/aggregates (TODOS #20)
     this._loaded = true;
   }
 
@@ -56,7 +59,9 @@ export class FlagPickerGame {
     this.round = 0;
     this.score = 0;
     this.results = [];
-    this._deck = this._shuffle([...this.flags]);
+    // Refreshed each run so flipping the territories toggle takes effect (TODOS #20).
+    this.pool = this.flags.filter((f) => inCountryPool(f.code));
+    this._deck = this._shuffle([...this.pool]);
     this._idx = 0;
     this._nextRound();
   }
@@ -73,7 +78,7 @@ export class FlagPickerGame {
   _isNearBlack(hex) { const { r, g, b } = hexToRgb(hex); return r < 35 && g < 35 && b < 35; }
 
   _pickFlag() {
-    if (this._idx >= this._deck.length) { this._deck = this._shuffle([...this.flags]); this._idx = 0; }
+    if (this._idx >= this._deck.length) { this._deck = this._shuffle([...this.pool]); this._idx = 0; }
     return this._deck[this._idx++];
   }
 
@@ -325,7 +330,7 @@ export class FlagPickerGame {
   }
 
   _renderFlag(canvas, flag, removed) {
-    const url = `${FLAG_CDN}${flag.code}.png`;
+    const url = flagUrl(flag.code, 'w640');
     this._loadImage(url).then((img) => {
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
@@ -398,7 +403,7 @@ export class FlagPickerGame {
   _showFullFlag(flag) {
     const canvas = this._flagCanvas;
     if (!canvas) return;
-    this._loadImage(`${FLAG_CDN}${flag.code}.png`).then((img) => {
+    this._loadImage(flagUrl(flag.code, 'w640')).then((img) => {
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
       canvas.getContext('2d').drawImage(img, 0, 0);

@@ -4,11 +4,11 @@
 
 import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
-import { loadDatasets, loadEntities, getEntity, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, inCountryPool, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
+import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
-const FLAG_CDN = 'https://flagcdn.com/w40/';
 const START_LIVES = 3;
 
 // Touch layout is gated on pointer type, not screen width — a small window on a
@@ -123,9 +123,8 @@ export class RankLineGame {
     this._picking = false;
     this.dataset = getDataset(datasetId);
     // Fresh entry objects each run (we mutate `.revealed` on them).
-    // Exclude optional/dependent territories unless the toggle is on (TODOS #20).
-    let entries = getEntries(datasetId);
-    if (!getIncludeTerritories()) entries = entries.filter((e) => !getEntity(e.code)?.optional);
+    // Aggregates out always, dependent territories out unless the toggle is on.
+    const entries = getEntries(datasetId).filter((e) => inCountryPool(e.code));
     this.deck = this._shuffle(entries);
     this._poolSize = this.deck.length;
     this.placed = [];
@@ -430,7 +429,7 @@ export class RankLineGame {
   _flagImg(code) {
     const img = document.createElement('img');
     img.className = 'rank-flag';
-    img.src = `${FLAG_CDN}${code}.png`;
+    img.src = flagUrl(code, 'w40');
     img.alt = '';
     img.loading = 'eager';
     img.addEventListener('error', () => { img.style.visibility = 'hidden'; });
@@ -643,7 +642,7 @@ export class RankLineGame {
     const finalList = this.placed.map((e, i) => `
       <div class="rank-result-row is-clickable" data-code="${e.code}" title="View ${e.name}" style="animation-delay:${Math.min(i, 30) * 0.03}s">
         <span class="rank-result-rank">${i + 1}</span>
-        <img class="rank-flag" src="${FLAG_CDN}${e.code}.png" alt="" onerror="this.style.visibility='hidden'">
+        <img class="rank-flag" src="${flagUrl(e.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">
         <span class="rank-result-name">${e.name}</span>
         <span class="rank-result-value">${formatValue(this.dataset.format, e.value)}</span>
       </div>

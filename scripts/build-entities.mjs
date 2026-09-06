@@ -13,7 +13,8 @@ const REGION_CONTINENT = {
   africa: 'Africa', europe: 'Europe', asia: 'Asia',
   'north-america': 'North America', 'south-america': 'South America', oceania: 'Oceania',
 };
-const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy', 'exports', 'urbanization'];
+const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy', 'exports', 'urbanization',
+  'export-share-gdp', 'independence-year']; // TODOS #27, #28
 
 // Geometry names that don't normalize-match a flag/stat name → explicit ISO code.
 const NAME_OVERRIDE = {
@@ -52,6 +53,21 @@ const EXTRA_ENTITIES = {
   yt: { name: 'Mayotte', continent: 'Africa', region: 'africa', optional: true },
   bq: { name: 'Caribbean Netherlands', continent: 'North America', region: 'north-america', optional: true },
   gs: { name: 'South Georgia', continent: 'South America', region: 'south-america', optional: true },
+  // Tier 2 completion. The original sweep looked only at NE's admin_0_countries layer,
+  // where these are folded into their parent; admin_0_map_units carries all four, so
+  // unlike the rest of Tier 2 they are drawable rather than data-only.
+  cx: { name: 'Christmas Island', continent: 'Oceania', region: 'oceania', optional: true },
+  cc: { name: 'Cocos (Keeling) Islands', continent: 'Oceania', region: 'oceania', optional: true },
+  sj: { name: 'Svalbard and Jan Mayen', continent: 'Europe', region: 'europe', optional: true },
+  tk: { name: 'Tokelau', continent: 'Oceania', region: 'oceania', optional: true },
+  // Tier 3 — de-facto states with no ISO code. Synthetic keys from the ISO
+  // user-assigned XA-XZ range, the same convention as `xs` Somaliland. Geometry and
+  // population come from NE's disputed-areas layer; `disputed` carries NE's neutral
+  // claim note, which the country panel shows instead of a sovereign parent.
+  xc: { name: 'Northern Cyprus', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Cyprus' },
+  xa: { name: 'Abkhazia', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Georgia' },
+  xo: { name: 'South Ossetia', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Georgia' },
+  xt: { name: 'Transnistria', continent: 'Europe', region: 'europe', disputed: 'Self-governing; claimed by Moldova' },
 };
 
 // Sovereign/administering country for dependent territories (shown in the panel).
@@ -68,8 +84,9 @@ const SOVEREIGN_OF = {
   gl: 'Denmark', fo: 'Denmark',
   hk: 'China', mo: 'China',
   ck: 'New Zealand', nu: 'New Zealand', tk: 'New Zealand',
-  nf: 'Australia',
+  nf: 'Australia', cx: 'Australia', cc: 'Australia',
   ax: 'Finland',
+  sj: 'Norway',
 };
 
 // type classification (informational; does NOT gate gameplay — all entities are playable)
@@ -78,11 +95,19 @@ const TERRITORIES = new Set([
   'gl', 'nc', 'hk', 'mo', 'pr', 'vi', 'vg', 'fo', 'gi', 'im', 'je', 'gg', 'bm', 'ky',
   'aw', 'cw', 'sx', 'pf', 'gu', 'mp', 'as', 'tc', 'ai', 'ck', 'nu', 'tk', 'wf', 'yt',
   're', 'ps', 'eh', 'fk',
-  'ax', 'ms', 'nf', 'pn', 'bl', 'sh', 'pm', 'io', 'tf', // TODOS #20 additions (va stays sovereign)
+  'ax', 'ms', 'nf', 'pn', 'bl', 'sh', 'pm', 'io', 'tf', 'mf', // TODOS #20 additions (va stays sovereign)
   'gp', 'mq', 'gf', 're', 'yt', 'bq', 'gs',             // TODOS #20 Tier 2 (data-only)
+  'cx', 'cc', 'sj', 'tk',                               // TODOS #20 Tier 2 completion
 ]);
+// De-facto states: self-governing, little or no recognition, claimed by another state.
+// A distinct `type` (TODOS #20) so the panel can label them honestly; they share the
+// territories toggle rather than getting one of their own. Note the older de-facto
+// entries (xk Kosovo, tw Taiwan, xs Somaliland) stay classified sovereign and in the
+// main pool — reclassifying them would silently change standard play.
+const DE_FACTO = new Set(['xc', 'xa', 'xo', 'xt']);
 function classify(code) {
   if (AGGREGATES.has(code)) return 'aggregate';
+  if (DE_FACTO.has(code)) return 'de-facto';
   if (TERRITORIES.has(code)) return 'territory';
   return 'sovereign';
 }
@@ -160,12 +185,19 @@ for (const code of [...allCodes].sort()) {
     hasReligion: !!attributes[code]?.religion,
     // TODOS #20: the Territories toggle gates ALL dependent territories (not just the
     // newly-added ones) so it behaves consistently in browse/rank/draw.
-    ...(type === 'territory' ? { optional: true } : {}),
+    ...(type === 'territory' || type === 'de-facto' ? { optional: true } : {}),
     ...(SOVEREIGN_OF[code] ? { sovereign: SOVEREIGN_OF[code] } : {}),
+    ...(extra?.disputed ? { disputed: extra.disputed } : {}),
     region: geom ? geom.region : (extra?.region || null),
     metrics,
   };
 }
+
+// De-facto states have no ISO code, so flagcdn has nothing for them; they ship as
+// bundled public-domain SVGs under assets/flags/. Keep in sync with BUNDLED in
+// js/flags.js, which resolves the URL.
+const BUNDLED_FLAGS = new Set(['xa', 'xc', 'xo', 'xs', 'xt']);
+for (const code of BUNDLED_FLAGS) if (entities[code]) entities[code].hasFlagImage = true;
 
 // Probe flagcdn for entities that lack color data, so the coverage board can tell
 // "flag image exists" (flagcdn) apart from "flag colors in flags.json" (TODOS #19).
@@ -194,6 +226,7 @@ const summary = {
   total: list.length,
   sovereign: list.filter(([, e]) => e.type === 'sovereign').length,
   territory: list.filter(([, e]) => e.type === 'territory').length,
+  'de-facto': list.filter(([, e]) => e.type === 'de-facto').length,
   aggregate: list.filter(([, e]) => e.type === 'aggregate').length,
   geometry: list.filter(([, e]) => e.hasGeometry).length,
   flag: list.filter(([, e]) => e.hasFlag).length,
@@ -205,12 +238,23 @@ if (!WRITE) {
   process.exit(0);
 }
 
-// 4) Write code into geometry files (key order: name, code, color, polygons, ...rest)
+// 4) Write code + `optional` into geometry files. The registry is the single source
+//    of truth for which entries are territories, so re-sync the flag here rather than
+//    trusting whatever the geometry file happened to carry. Key order matches
+//    build-geometry.mjs: name, code, color, optional, polygons, ...rest.
 for (const region of REGIONS) {
   const { path, data } = geomFiles[region];
   data.countries = data.countries.map((c) => {
-    const { name, _code, color, polygons, ...rest } = c;
-    return { name, ...(_code ? { code: _code } : {}), color, polygons, ...rest };
+    const { name, _code, color, optional, polygons, ...rest } = c;
+    const isOptional = _code ? !!entities[_code]?.optional : !!optional;
+    return {
+      name,
+      ...(_code ? { code: _code } : {}),
+      color,
+      ...(isOptional ? { optional: true } : {}),
+      polygons,
+      ...rest,
+    };
   });
   writeFileSync(path, JSON.stringify(data, null, 2) + '\n');
 }

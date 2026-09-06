@@ -4,14 +4,16 @@
 import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { deltaE } from './color.js';
+import { loadEntities, inCountryPool } from './datasets.js';
+import { flagUrl } from './flags.js';
 
-const FLAG_CDN = 'https://flagcdn.com/w640/';
 
 export class FlagGame {
   constructor(containerEl, onFinish) {
     this.container = containerEl;
     this.onFinish = onFinish; // callback when game ends
-    this.flags = [];
+    this.flags = [];   // every flag in flags.json
+    this.pool = [];    // the subset this run quizzes on
     this.round = 0;
     this.totalRounds = 10;
     this.score = 0;
@@ -30,6 +32,7 @@ export class FlagGame {
     const resp = await fetch('data/flags.json');
     const data = await resp.json();
     this.flags = data.flags;
+    await loadEntities(); // needed to gate territories/aggregates (TODOS #20)
     this._loaded = true;
   }
 
@@ -38,7 +41,12 @@ export class FlagGame {
     this.round = 0;
     this.score = 0;
     this.results = [];
-    this._shuffledFlags = this._shuffle([...this.flags]);
+
+    // Quiz pool, refreshed each run so flipping the territories toggle takes effect
+    // without a reload. Decoys are drawn from it too — with territories off you
+    // should not see Greenland offered as a wrong answer either (TODOS #20).
+    this.pool = this.flags.filter((f) => inCountryPool(f.code));
+    this._shuffledFlags = this._shuffle([...this.pool]);
     this._usedIndices = new Set();
     this._nextRound();
   }
@@ -60,7 +68,7 @@ export class FlagGame {
       }
     }
     // Fallback: reshuffle
-    this._shuffledFlags = this._shuffle([...this.flags]);
+    this._shuffledFlags = this._shuffle([...this.pool]);
     this._usedIndices.clear();
     this._usedIndices.add(0);
     return this._shuffledFlags[0];
@@ -100,7 +108,7 @@ export class FlagGame {
 
     if (!correct || !wrongs || wrongs.length < 2) {
       // Absolute fallback — just pick any 2 other flags
-      const others = this.flags.filter(f => f.code !== mainFlag.code && f.code !== correct?.code);
+      const others = this.pool.filter(f => f.code !== mainFlag.code && f.code !== correct?.code);
       wrongs = this._shuffle(others).slice(0, 2);
     }
 
@@ -146,7 +154,7 @@ export class FlagGame {
 
   _findFlagWithColor(color, excludeCode) {
     // Find flags with a close match, sorted by best match first
-    const scored = this.flags
+    const scored = this.pool
       .filter(f => f.code !== excludeCode)
       .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
       .filter(s => s.dist < 10) // tight ΔE threshold for correct answer
@@ -154,7 +162,7 @@ export class FlagGame {
 
     if (scored.length === 0) {
       // Relax slightly
-      const relaxed = this.flags
+      const relaxed = this.pool
         .filter(f => f.code !== excludeCode)
         .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
         .filter(s => s.dist < 20)
@@ -176,7 +184,7 @@ export class FlagGame {
     const REMOVED_THRESHOLD = 25; // ΔE — decoy must be clearly far from the removed color
     const SHARED_THRESHOLD = 12;  // ΔE — close enough to count as a shared visible color
 
-    const candidates = this.flags.filter(f => {
+    const candidates = this.pool.filter(f => {
       if (excludeCodes.includes(f.code)) return false;
       // Must not have the removed color
       if (this._flagHasColor(f, removedColor, REMOVED_THRESHOLD)) return false;
@@ -206,7 +214,7 @@ export class FlagGame {
   }
 
   _getFlagUrl(code) {
-    return `${FLAG_CDN}${code}.png`;
+    return flagUrl(code, 'w640');
   }
 
   _loadImage(url) {

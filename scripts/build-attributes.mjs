@@ -1,4 +1,5 @@
-// Build data/attributes.json (capital + religion breakdown) from the CIA World
+// Build data/attributes.json (capital, religion breakdown, independence year) from
+// the CIA World
 // Factbook (public domain), name-matched to the canonical entity registry.
 // Usage: node scripts/build-attributes.mjs [outPath]
 //
@@ -120,6 +121,31 @@ function parseReligion(text) {
   return { list, raw };
 }
 
+// ---- independence parsing ------------------------------------------------
+// "6 June 1523 (Gustav VASA elected king of Sweden, marking the abolishment of
+//  the Kalmar Union of Denmark, Norway, and Sweden)"  -> 1523
+// Territories say things like "none (overseas department of France)" -> null.
+//
+// Takes the FIRST year outside any parenthetical, which is the date the Factbook
+// leads with. Reading inside the parentheses would be wrong: Sweden's note names
+// the Kalmar Union, and many entries cite an earlier or later date as context.
+// Multi-date entries ("4 July 1776 ... 3 September 1783") likewise resolve to the
+// first, which is the one the Factbook considers the independence date.
+function parseIndependence(text) {
+  if (!text) return null;
+  const raw = decodeEnt(text).trim();
+  // Territories and dependencies: "none (overseas department of France)". Not a
+  // parse failure — there is genuinely no date, so don't report it as unparsed.
+  if (/^none\b/i.test(raw)) return null;
+  const outside = raw.replace(/\([^)]*\)/g, ' ');
+  const m = outside.match(/\b(\d{3,4})\b/);
+  if (!m) return { year: null, text: raw };
+  const year = parseInt(m[1], 10);
+  // A 3-4 digit number that isn't a plausible year means the parse went wrong.
+  if (year < 1 || year > new Date().getFullYear()) return { year: null, text: raw };
+  return { year, text: raw };
+}
+
 function cleanCapital(text) {
   if (!text) return { capital: null, note: null };
   const raw = decodeEnt(text).trim();
@@ -153,6 +179,7 @@ console.log(`Fetching ${paths.length} country files…`);
 const attributes = {};
 const provenance = {};
 const unmatchedFb = [];
+const unparsedIndependence = []; // TODOS #28 — report, never drop silently
 let matched = 0;
 
 const files = await pool(paths, async (p) => {
@@ -179,17 +206,31 @@ for (const f of files) {
 
   const { capital, note } = cleanCapital(gov.Capital?.name?.text);
   const rel = parseReligion(decodeEnt(d['People and Society']?.Religions?.text));
+  const indep = parseIndependence(gov.Independence?.text); // TODOS #28
 
   const entry = {};
   if (capital) entry.capital = capital;
   if (note) entry.capitalNote = note;
   if (rel.list.length) { entry.religion = rel.list; entry.religionRaw = rel.raw; }
+  if (indep) {
+    // Keep the raw text as provenance even when no year parsed, the way religionRaw
+    // does — an unparsed entry should be visible, not invisible.
+    if (indep.year != null) entry.independenceYear = indep.year;
+    entry.independenceRaw = indep.text;
+    if (indep.year == null) unparsedIndependence.push(`${code} ${fbName}: ${indep.text.slice(0, 80)}`);
+  }
   if (Object.keys(entry).length) {
     attributes[code] = entry;
     provenance[code] = 'CIA World Factbook (public domain)';
     matched++;
   }
 }
+
+// Known independence-year gap, deliberately NOT backfilled: Ethiopia (et). The
+// Factbook gives prose, not a date — "oldest independent country in Africa ... at
+// least 2,000 years" — because Ethiopia was never colonized and so has no
+// independence event. Any year here would be invented. It belongs in the curated
+// oldest-statehood dataset (TODOS #33) instead. Leave it null.
 
 // Manual backfill for entities Factbook lists without a conventional name
 // (disputed/de-facto). Gap-fill only. Sources noted in provenance.
@@ -211,6 +252,20 @@ const MANUAL_ATTR = {
   yt: { capital: 'Mamoudzou', src: 'Mayotte (French overseas département)' },
   bq: { capital: 'Kralendijk', capitalNote: 'Kralendijk (Bonaire); the Caribbean Netherlands are Bonaire, Sint Eustatius & Saba', src: 'Caribbean Netherlands (special municipalities of the Netherlands)' },
   gs: { capital: 'King Edward Point', src: 'South Georgia and the South Sandwich Islands (UK)' },
+  // TODOS #20 Tier 2 completion. cx/cc/tk name-match the Factbook directly; `sj` does
+  // not, because the Factbook files Svalbard and Jan Mayen as two separate entries.
+  sj: { capital: 'Longyearbyen', capitalNote: 'Longyearbyen (Svalbard); Jan Mayen has no permanent inhabitants',
+        src: 'CIA World Factbook — Svalbard + Jan Mayen (Norway)' },
+  // Tokelau genuinely has no capital: each of the three atolls has its own
+  // administrative centre and the seat of government rotates between them.
+  tk: { capitalNote: 'No capital; each of the three atolls has its own administrative centre',
+        src: 'CIA World Factbook — Tokelau (New Zealand)' },
+  // TODOS #20 Tier 3 — de-facto states, absent from the Factbook (unrecognized).
+  xc: { capital: 'North Nicosia', capitalNote: 'North Nicosia (Lefkosa); the northern part of divided Nicosia',
+        src: 'De-facto state — capital per its own administration' },
+  xa: { capital: 'Sukhumi', src: 'De-facto state — capital per its own administration' },
+  xo: { capital: 'Tskhinvali', src: 'De-facto state — capital per its own administration' },
+  xt: { capital: 'Tiraspol', src: 'De-facto state — capital per its own administration' },
 };
 for (const [code, m] of Object.entries(MANUAL_ATTR)) {
   if (!entities[code]) continue;
@@ -232,7 +287,15 @@ await writeFile(OUT, JSON.stringify({ attributes: sorted, provenance }, null, 2)
 console.log(`\nWrote ${matched} entities to ${OUT}`);
 const withCap = Object.values(sorted).filter((e) => e.capital).length;
 const withRel = Object.values(sorted).filter((e) => e.religion).length;
-console.log(`  capital: ${withCap}  |  religion: ${withRel}`);
+const withInd = Object.values(sorted).filter((e) => e.independenceYear != null).length;
+console.log(`  capital: ${withCap}  |  religion: ${withRel}  |  independence: ${withInd}`);
+
+// TODOS #28: an entry whose Independence text exists but yielded no year is a parser
+// gap, not missing data — surface it so it gets fixed rather than silently lost.
+if (unparsedIndependence.length) {
+  console.log(`\nIndependence text present but NO year parsed (${unparsedIndependence.length}):`);
+  console.log('  ' + unparsedIndependence.sort().join('\n  '));
+}
 
 const ourMissing = Object.keys(entities).filter((c) => !attributes[c]).sort();
 console.log(`\nOur entities with NO attributes (${ourMissing.length}):`);
