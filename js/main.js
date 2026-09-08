@@ -17,6 +17,7 @@ import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUn
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
 import { RankLineGame } from './rank-line-game.js';
+import { TopNGame } from './top-n-game.js';
 import { DataExplorer } from './data-explorer.js';
 import { FlagPickerGame } from './flag-picker-game.js';
 
@@ -32,6 +33,7 @@ const STATES = {
   FLAG_QUIZ: 'flag-quiz',
   FLAG_PICKER: 'flag-picker',
   RANK_LINE: 'rank-line',
+  TOP_N: 'top-n',
   EXPLORE: 'explore'
 };
 
@@ -78,6 +80,7 @@ class Game {
       'flag-quiz': document.getElementById('screen-flag-quiz'),
       'flag-picker': document.getElementById('screen-flag-picker'),
       'rank-line': document.getElementById('screen-rank-line'),
+      'top-n': document.getElementById('screen-top-n'),
       'explore': document.getElementById('screen-explore')
     };
 
@@ -91,6 +94,10 @@ class Game {
     );
     this.rankLineGame = new RankLineGame(
       document.getElementById('rank-line-container'),
+      () => this.showScreen(STATES.MENU)
+    );
+    this.topNGame = new TopNGame(
+      document.getElementById('top-n-container'),
       () => this.showScreen(STATES.MENU)
     );
     this.dataExplorer = new DataExplorer(
@@ -207,6 +214,7 @@ class Game {
     // Hub activity cards
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
+    document.getElementById('btn-activity-top-n').addEventListener('click', () => this.startTopN());
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
@@ -417,7 +425,7 @@ class Game {
       el.classList.toggle('active', name === state);
     }
     // Globe background on menu-like screens; off during gameplay
-    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER];
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER];
     const bg = document.getElementById('app-bg');
     if (globeStates.includes(state)) {
       if (bg) bg.classList.remove('hidden');
@@ -596,6 +604,14 @@ class Game {
     else this.rankLineGame.showPicker();
   }
 
+  async startTopN() {
+    this.gameMode = 'top-n';
+    this._currentRegion = 'top-n';
+    await this.topNGame.loadData();
+    this.showScreen(STATES.TOP_N);
+    this.topNGame.showPicker();
+  }
+
   openDrawMenu() {
     this.showScreen(STATES.DRAW_MENU);
   }
@@ -620,6 +636,7 @@ class Game {
     else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
     else if (this.gameMode === 'flag-picker') this.startFlagPicker();
     else if (this.gameMode === 'rank-line') this.startRankLine();
+    else if (this.gameMode === 'top-n') this.startTopN();
     else this.startCountries(this._currentRegion);
   }
 

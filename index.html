@@ -14,12 +14,12 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Know the World">
   <meta property="og:description" content="Draw countries freehand, place them on a world map, and get scored on how close you are. Plus flag quizzes, a rank-the-economies mode, and a data explorer.">
-  <meta property="og:url" content="https://lolispo.github.io/geo-draw-the-world/">
-  <meta property="og:image" content="https://lolispo.github.io/geo-draw-the-world/og-image.png">
+  <meta property="og:url" content="https://geo.petterbuilds.com/">
+  <meta property="og:image" content="https://geo.petterbuilds.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Know the World">
   <meta name="twitter:description" content="Draw countries freehand, place them on a world map, and get scored on how close you are.">
-  <meta name="twitter:image" content="https://lolispo.github.io/geo-draw-the-world/og-image.png">
+  <meta name="twitter:image" content="https://geo.petterbuilds.com/og-image.png">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -52,6 +52,11 @@
           <span class="hub-icon">🏦</span>
           <span class="hub-label">Rank the World</span>
           <span class="hub-desc">Place countries on a line by the numbers</span>
+        </button>
+        <button id="btn-activity-top-n" class="btn hub-card hub-rank">
+          <span class="hub-icon">🔟</span>
+          <span class="hub-label">Top 10 / Bottom 10</span>
+          <span class="hub-desc">Pick the countries at the top — or the bottom — of a ranking</span>
         </button>
         <button id="btn-activity-explore" class="btn hub-card hub-explore">
           <span class="hub-icon">📊</span>
@@ -272,6 +277,10 @@
   <!-- FLAG QUIZ -->
   <div id="screen-rank-line" class="screen">
     <div id="rank-line-container" class="rank-line-container"></div>
+  </div>
+
+  <div id="screen-top-n" class="screen">
+    <div id="top-n-container" class="top-n-container"></div>
   </div>
 
   <div id="screen-explore" class="screen">

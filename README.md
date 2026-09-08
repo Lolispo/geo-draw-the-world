@@ -9,7 +9,7 @@ get scored on how close your shape and position are to the real thing. Plus flag
 quizzes, a "rank the economies" mode, and a data explorer — all in vanilla
 HTML/CSS/JS with no build step.
 
-**Play it:** https://lolispo.github.io/geo-draw-the-world/
+**Play it:** https://geo.petterbuilds.com/
 
 ## Game modes
 
@@ -20,6 +20,8 @@ HTML/CSS/JS with no build step.
 - **Streak** — keep going until your score drops below 25
 - **Continents / World** — all 7 continents, or every country
 - **Regions** — Africa, Europe, Asia, N. America, S. America, Oceania
+
+- **Top 10 / Bottom 10** — pick the countries at the top (or bottom) of a ranking
 
 Plus combinable toggles (Placement Only, Tweak, Blind, Explorer, Hard) and
 separate flag-guessing, flag-color-picker, rank-line, and data-explorer modes.

@@ -92,6 +92,18 @@ export function getDataset(id) {
   return _data ? _data.datasets.find(d => d.id === id) || null : null;
 }
 
+// Can two countries' values for this dataset meaningfully be added together?
+// Declared in scripts/build-datasets.mjs and defaulting to false, so a dataset that
+// predates the flag or forgets it is treated as un-addable rather than silently
+// producing nonsense like "Sweden's independence year + Norway's" (TODOS #37).
+export function isSummable(id) {
+  return getDataset(id)?.summable === true;
+}
+
+export function getSummableDatasets() {
+  return getDatasetList().filter((d) => d.summable === true);
+}
+
 export function getContinents() {
   return _data ? _data.continents : [];
 }

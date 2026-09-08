@@ -97,6 +97,111 @@ provably independent of the correct answer. No dead references to `TransformCont
 
 ---
 
+## 36. New mode: Top 10 / Bottom 10
+
+**REVIEW:** open the hub → "Top 10 / Bottom 10". Play a World round and an Oceania one, and
+try Hard difficulty. Two judgement calls to check: whether Easy/Hard feel meaningfully
+different, and whether the boundary rule is set right — it is at **0.5%, not the ~1% this entry
+proposed** (see below), so a round can still come down to one near-miss.
+
+**✅ DONE 2026-09-08** — `js/top-n-game.js`, modelled on `js/rank-line-game.js`, plus a hub card,
+`STATES.TOP_N` and its styles. Picker offers direction (Top/Bottom), difficulty (Easy/Hard),
+scope (World + 6 continents), a random roll, the Force-10 override and the shared territories
+toggle. Rounds go through `getEntries()` + `inCountryPool()`, and the metric list reuses Rank the
+World's own `rankable` verdict, so new datasets join automatically and degenerate ones stay out.
+Selection is capped at N, so the score is always hits out of N. Results show the true ranked list
+with hits and misses, then "You also picked" with each wrong pick's real rank — the near-miss is
+the point. Verified with Playwright at 1440×900 and 390×844: 38 checks, no page errors.
+
+**Adaptive N confirmed against live data** (2026-09-08): the eligible counts in the table below
+still hold exactly. World plays Top 10 of 24, Oceania and South America drop to Top 5 of 12, and
+exports × South America (10 eligible) is unreachable, as designed.
+
+**⚠️ Deviation — boundary gap is 0.5%, not 1%.** At 1% the rule rejects 33 of 134 combos, and one
+of them is the mode's most obvious round: Top 10 Population — World, because Mexico (129.7M)
+edges Ethiopia (128.7M) by 0.8%. The ~1% intuition comes from a 1-versus-1 comparison, where a
+tight boundary decides the whole question; here you pick N from a pool, so it costs at most one
+point out of N. 0.5% offers 110 combos and rejects 24, still excluding all 10 exact ties
+(independence years — Armenia and Azerbaijan are both 1991). Revisit if a round feels unfair.
+
+**Not built:** the "mind the flex-shrink trap" note from #25 did not apply — the pool is a CSS
+grid, not a flex column.
+
+**Related: #38** — the letter filter would be a third scope alongside world/continent here, and the
+adaptive-N rule is what makes most letters unplayable in this mode. It now lives in
+`N_RULES` in `js/top-n-game.js`; reuse it, don't fork it.
+
+**What:** A round states a superlative — *"Top 10 Total GDP — Oceania"*, *"Bottom 10
+Urbanization — Africa"* — and shows a shuffled pool of candidate countries. You tap the
+ones you think belong, lock in, and score hits out of N. Metric, direction and filter are
+chosen manually or rolled at random.
+
+**Why:** Owner request (2026-09-06). Rank the World already covers *ordering*; this
+covers a different and arguably more natural kind of knowledge — where the **threshold**
+sits. It reuses the whole existing dataset layer, so it's cheap for how much play it adds.
+
+**Decided (owner, 2026-09-06):**
+- Play loop is **pick N from a pool**, not ordering and not one-at-a-time. Score = hits.
+- Setup supports both **manual** (choose metric × direction × filter) and **random roll**.
+- **N adapts to the filter by default** (table below), but the owner wants a manual
+  **override to force Top 10 anyway** on a small filter, accepting the degenerate odds.
+
+**The data forces the adaptive N.** Eligible sovereign countries per continent per
+metric (territories off), measured 2026-09-06:
+
+| metric | Africa | Asia | Europe | N.Am | S.Am | Oceania | World |
+|---|---|---|---|---|---|---|---|
+| gdp-nominal | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
+| population | 55 | 47 | 46 | 23 | 12 | 14 | 197 |
+| gdp-per-capita | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
+| land-area | 55 | 47 | 46 | 23 | 12 | 14 | 197 |
+| life-expectancy | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
+| exports | 50 | 43 | 42 | 15 | 10 | 12 | 172 |
+| urbanization | 54 | 46 | 45 | 23 | 12 | 14 | 194 |
+
+Oceania is 14 countries total. "Pick the top 10 of 14" scores ~7 by guessing, so a fixed
+N=10 is broken for the small continents. Rule:
+
+| eligible in filter | mode | pool size |
+|---|---|---|
+| ≥ 22 | Top / Bottom **10** | 24 (or all eligible if fewer) |
+| ≥ 12 | Top / Bottom **5** | 12 |
+| < 12 | not offered | — |
+
+So Oceania and South America play Top 5, and bad combos self-censor: exports × South
+America has only 10 eligible, so it simply never rolls.
+
+**Approach / notes:**
+- New `js/top-n-game.js`, modelled on `js/rank-line-game.js` (same screen/deck/results
+  skeleton). Data comes from `js/datasets.js`: `getEntries(id, { continent, higherFirst })`
+  already returns the sorted, continent-filtered list, and `inCountryPool()` is the
+  canonical eligibility rule — go through it, don't re-filter by hand, or territories and
+  the `jg` aggregate leak back in (see #5, #20).
+- **Direction** is just `higherFirst`; `getEntries` takes it as an override, so Bottom N
+  is free.
+- **Distractors are the difficulty knob.** Hard: draw the non-answers from ranks
+  N+1…N+14, so every wrong option is a near-miss. Easy: sample them across the whole
+  tail. Expose this as an Easy/Hard toggle rather than a hidden constant.
+- **Boundary fairness:** skip a (metric, filter, direction) combo when rank N and rank
+  N+1 differ by less than ~1% — a coin-flip boundary isn't a fair question. This matters
+  most for `land-area` and `urbanization`, where the tail bunches up.
+- **Override:** a "force Top 10" setting that ignores the adaptive table and plays N=10
+  against whatever pool exists. Show the pool size in the UI so it's obvious the pick is
+  near-total (e.g. "10 of 14"). Default off.
+- **Results screen** should show the true ranked list with formatted values (`formatValue`
+  from `js/datasets.js`), marking hits, misses and the ones you wrongly included. The
+  near-misses are the interesting part — a country at rank 11 deserves to be seen.
+- New datasets (#27-#34) join automatically, since everything reads the dataset registry.
+  Sanity-check each new one against the ≥12 eligibility rule as it lands.
+- Mind the flex-shrink trap from #25 if the pool renders as a flex column.
+
+**Acceptance:** "Top 10 Total GDP — World" and "Bottom 5 Urbanization — Oceania" both
+play end to end. The adaptive table picks N correctly for every metric × continent pair.
+A filter with fewer than 12 eligible countries is unreachable unless the override is on.
+Results name every correct answer with its value. Playable at 390px wide.
+
+---
+
 ## 27. Export share of GDP (dataset expansion, wave 1)
 
 **REVIEW:** open Data Explorer → "Exports % of GDP". Check the top end reads sensibly
@@ -105,9 +210,15 @@ provably independent of the correct answer. No dead references to `TransformCont
 **✅ DONE 2026-09-06** — shipped as `export-share-gdp` from World Bank `NE.EXP.GNFS.ZS`
 (188 countries). Luxembourg 217.4%, Singapore 180.4% top; Sudan 1.1% bottom. Live.
 
-**🔍 REVIEW 2026-09-06** — the dataset is live and matches acceptance (Luxembourg 217.4%, San Marino 186%, Singapore 180.4% at the top). **But its own precondition was skipped**: the entry says a `summable` flag must exist in `build-datasets.mjs` before this or any wave dataset lands, and it does not. Decide: close and re-open the flag as its own item, or keep this open until #37 needs it. Built by session `geo-draw-the-world-43`, still open.
+**🔍 REVIEW 2026-09-06** — the dataset is live and matches acceptance (Luxembourg 217.4%, San Marino 186%, Singapore 180.4% at the top). Built by session `geo-draw-the-world-43`. Only the data itself is still awaiting sign-off.
 
-**⚠️ Blocks #37** — this is a *percentage*, so it is NOT summable. Before this or any other wave dataset lands, `scripts/build-datasets.mjs` needs a `summable` flag (default false) that #37's combination generator opts in on. Without it the generator will produce nonsense questions from percentages and years.
+**✅ Precondition settled 2026-09-08** — the missing `summable` flag now exists.
+`scripts/build-datasets.mjs` declares it (default false) on the four extensive metrics
+only — `gdp-nominal`, `population`, `land-area`, `exports` — and `js/datasets.js`
+surfaces it as `isSummable(id)` / `getSummableDatasets()`. `export-share-gdp` is a
+percentage and is correctly excluded, as are `independence-year` and the electricity
+shares. A build-time guard throws if an intensive *format* (`percent`, `year`, `years`)
+is ever marked summable. #37 can now opt in on the flag rather than inferring.
 
 **What:** New rankable dataset: exports as a percentage of GDP. A country exporting
 $3M of a $4M economy ranks far above one exporting $3M of $400M.
@@ -551,82 +662,6 @@ precision than it has.
 
 ---
 
-## 36. New mode: Top 10 / Bottom 10
-
-**Related: #38** — the letter filter would be a third scope alongside world/continent here, and its
-adaptive-N rule is what makes most letters unplayable in this mode. Reuse this table, don't fork it.
-
-**What:** A round states a superlative — *"Top 10 Total GDP — Oceania"*, *"Bottom 10
-Urbanization — Africa"* — and shows a shuffled pool of candidate countries. You tap the
-ones you think belong, lock in, and score hits out of N. Metric, direction and filter are
-chosen manually or rolled at random.
-
-**Why:** Owner request (2026-09-06). Rank the World already covers *ordering*; this
-covers a different and arguably more natural kind of knowledge — where the **threshold**
-sits. It reuses the whole existing dataset layer, so it's cheap for how much play it adds.
-
-**Decided (owner, 2026-09-06):**
-- Play loop is **pick N from a pool**, not ordering and not one-at-a-time. Score = hits.
-- Setup supports both **manual** (choose metric × direction × filter) and **random roll**.
-- **N adapts to the filter by default** (table below), but the owner wants a manual
-  **override to force Top 10 anyway** on a small filter, accepting the degenerate odds.
-
-**The data forces the adaptive N.** Eligible sovereign countries per continent per
-metric (territories off), measured 2026-09-06:
-
-| metric | Africa | Asia | Europe | N.Am | S.Am | Oceania | World |
-|---|---|---|---|---|---|---|---|
-| gdp-nominal | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
-| population | 55 | 47 | 46 | 23 | 12 | 14 | 197 |
-| gdp-per-capita | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
-| land-area | 55 | 47 | 46 | 23 | 12 | 14 | 197 |
-| life-expectancy | 54 | 47 | 45 | 23 | 12 | 14 | 195 |
-| exports | 50 | 43 | 42 | 15 | 10 | 12 | 172 |
-| urbanization | 54 | 46 | 45 | 23 | 12 | 14 | 194 |
-
-Oceania is 14 countries total. "Pick the top 10 of 14" scores ~7 by guessing, so a fixed
-N=10 is broken for the small continents. Rule:
-
-| eligible in filter | mode | pool size |
-|---|---|---|
-| ≥ 22 | Top / Bottom **10** | 24 (or all eligible if fewer) |
-| ≥ 12 | Top / Bottom **5** | 12 |
-| < 12 | not offered | — |
-
-So Oceania and South America play Top 5, and bad combos self-censor: exports × South
-America has only 10 eligible, so it simply never rolls.
-
-**Approach / notes:**
-- New `js/top-n-game.js`, modelled on `js/rank-line-game.js` (same screen/deck/results
-  skeleton). Data comes from `js/datasets.js`: `getEntries(id, { continent, higherFirst })`
-  already returns the sorted, continent-filtered list, and `inCountryPool()` is the
-  canonical eligibility rule — go through it, don't re-filter by hand, or territories and
-  the `jg` aggregate leak back in (see #5, #20).
-- **Direction** is just `higherFirst`; `getEntries` takes it as an override, so Bottom N
-  is free.
-- **Distractors are the difficulty knob.** Hard: draw the non-answers from ranks
-  N+1…N+14, so every wrong option is a near-miss. Easy: sample them across the whole
-  tail. Expose this as an Easy/Hard toggle rather than a hidden constant.
-- **Boundary fairness:** skip a (metric, filter, direction) combo when rank N and rank
-  N+1 differ by less than ~1% — a coin-flip boundary isn't a fair question. This matters
-  most for `land-area` and `urbanization`, where the tail bunches up.
-- **Override:** a "force Top 10" setting that ignores the adaptive table and plays N=10
-  against whatever pool exists. Show the pool size in the UI so it's obvious the pick is
-  near-total (e.g. "10 of 14"). Default off.
-- **Results screen** should show the true ranked list with formatted values (`formatValue`
-  from `js/datasets.js`), marking hits, misses and the ones you wrongly included. The
-  near-misses are the interesting part — a country at rank 11 deserves to be seen.
-- New datasets (#27-#34) join automatically, since everything reads the dataset registry.
-  Sanity-check each new one against the ≥12 eligibility rule as it lands.
-- Mind the flex-shrink trap from #25 if the pool renders as a flex column.
-
-**Acceptance:** "Top 10 Total GDP — World" and "Bottom 5 Urbanization — Oceania" both
-play end to end. The adaptive table picks N correctly for every metric × continent pair.
-A filter with fewer than 12 eligible countries is unreachable unless the override is on.
-Results name every correct answer with its value. Playable at 390px wide.
-
----
-
 ## 37. New mode: combination questions ("is X + Y bigger than Z?")
 
 **What:** Auto-generated comparison questions built by *summing* countries:
@@ -672,16 +707,16 @@ Armenia vs Andorra"* (10.9x), *"Afghanistan + Andorra vs Algeria"* (0.08x).
    the question looks obvious.
 
 **Approach / notes:**
-- **Summability must be declared, not inferred.** Only extensive quantities can be added:
-  `gdp-nominal`, `population`, `land-area`, `exports`. Adding `gdp-per-capita`,
-  `life-expectancy` or `urbanization` is mathematically wrong (they need population
-  weighting). **This is urgent given #27-#34**: wave 1 adds `export-share-gdp` (a
-  percentage) and independence/statehood **years**, and without an opt-in flag the
-  generator would cheerfully ask *"is Sweden's independence year + Norway's bigger than
-  Denmark's?"* Add `summable: true` to the dataset definitions in
-  `scripts/build-datasets.mjs` (it currently emits only `id, name, blurb, format,
-  higherFirst, values`), surface it through `js/datasets.js`, and have the generator
-  **opt in** on that flag — default false.
+- **Summability is declared, not inferred — and the flag now exists (2026-09-08).**
+  `scripts/build-datasets.mjs` marks exactly the four extensive quantities
+  `summable: true` (`gdp-nominal`, `population`, `land-area`, `exports`); everything
+  else defaults to false, including `gdp-per-capita`, `life-expectancy` and
+  `urbanization` (all need population weighting), `export-share-gdp` (#27, a
+  percentage), `independence-year` (#28, a point on a timeline) and the electricity
+  shares (#29). A build-time guard throws if an intensive format is ever flagged.
+  Read it through `isSummable(id)` / `getSummableDatasets()` in `js/datasets.js` and
+  **opt in** — never enumerate metric ids in the generator, or the next dataset wave
+  silently joins the question pool.
 - **Relevance rule:** every addend must contribute **≥15% of its own side's sum**.
   Without it the generator produces "USA + Tuvalu vs China", which is just "USA vs China"
   wearing a hat. All the counts above already apply this filter.

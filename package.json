@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "A browser geography game: draw countries freehand, place them on a world map, and get scored on accuracy. Plus flag quizzes, a rank-the-economies mode, and a data explorer.",
-  "homepage": "https://lolispo.github.io/geo-draw-the-world/",
+  "homepage": "https://geo.petterbuilds.com/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lolispo/geo-draw-the-world.git"

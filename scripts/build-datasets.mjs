@@ -5,13 +5,20 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const OUT = process.argv[2] || 'data/datasets.json';
 
+// `summable: true` marks an EXTENSIVE quantity — one where adding two countries'
+// values produces a meaningful third (TODOS #37, which generates "is A + B bigger
+// than C?" questions). It is declared, never inferred, and defaults to false,
+// because the wrong answer is silent: summing GDP per capita, life expectancy,
+// urbanization or any percentage share is arithmetic nonsense (they need
+// population weighting), and summing independence years is nonsense of a more
+// obvious kind. Anything that consumes this flag must opt in on it.
 const INDICATORS = [
-  { id: 'gdp-nominal',     wb: 'NY.GDP.MKTP.CD', name: 'Total GDP',       blurb: 'Nominal GDP, latest year (World Bank)',         format: 'currency-short' },
-  { id: 'population',      wb: 'SP.POP.TOTL',     name: 'Population',      blurb: 'Total population, latest year (World Bank)',     format: 'number-short' },
+  { id: 'gdp-nominal',     wb: 'NY.GDP.MKTP.CD', name: 'Total GDP',       blurb: 'Nominal GDP, latest year (World Bank)',         format: 'currency-short', summable: true },
+  { id: 'population',      wb: 'SP.POP.TOTL',     name: 'Population',      blurb: 'Total population, latest year (World Bank)',     format: 'number-short', summable: true },
   { id: 'gdp-per-capita',  wb: 'NY.GDP.PCAP.CD',  name: 'GDP per capita', blurb: 'GDP per person, latest year (World Bank)',       format: 'currency-short' },
-  { id: 'land-area',       wb: 'AG.LND.TOTL.K2',  name: 'Land area',      blurb: 'Land area in km², latest year (World Bank)',     format: 'area-km2' },
+  { id: 'land-area',       wb: 'AG.LND.TOTL.K2',  name: 'Land area',      blurb: 'Land area in km², latest year (World Bank)',     format: 'area-km2', summable: true },
   { id: 'life-expectancy', wb: 'SP.DYN.LE00.IN',  name: 'Life expectancy',blurb: 'Life expectancy at birth, latest (World Bank)', format: 'years' },
-  { id: 'exports',         wb: 'NE.EXP.GNFS.CD',  name: 'Total exports',  blurb: 'Exports of goods & services, current US$ (World Bank)', format: 'currency-short' },
+  { id: 'exports',         wb: 'NE.EXP.GNFS.CD',  name: 'Total exports',  blurb: 'Exports of goods & services, current US$ (World Bank)', format: 'currency-short', summable: true },
   { id: 'urbanization',    wb: 'SP.URB.TOTL.IN.ZS', name: 'Urbanization', blurb: 'Urban population, % of total (World Bank)',       format: 'percent' },
   // TODOS #27. Taken straight from the World Bank rather than dividing our own
   // `exports` by `gdp-nominal`: those two resolve their latest non-null year per
@@ -152,7 +159,11 @@ for (const ind of INDICATORS) {
     values[iso2] = (ind.format === 'years' || ind.format === 'percent') ? Math.round(v.value * 10) / 10 : Math.round(v.value);
     usedCodes.add(iso2);
   }
-  datasets.push({ id: ind.id, name: ind.name, blurb: ind.blurb, format: ind.format, higherFirst: true, values });
+  datasets.push({
+    id: ind.id, name: ind.name, blurb: ind.blurb, format: ind.format, higherFirst: true,
+    ...(ind.summable ? { summable: true } : {}),
+    values,
+  });
   console.log(`${ind.name}: ${Object.keys(values).length} countries`);
 }
 
@@ -178,6 +189,7 @@ async function readJsonIfPresent(path) {
 {
   // TODOS #28 — independence year, parsed from the Factbook by build-attributes.mjs.
   // higherFirst:false so the oldest states rank first, which is the interesting end.
+  // Not summable: a year is a point on a timeline, not a quantity.
   const attrs = (await readJsonIfPresent('data/attributes.json'))?.attributes;
   if (!attrs) {
     console.log('\n! data/attributes.json missing — skipping independence-year. Run build-attributes.mjs, then re-run this.');
@@ -202,6 +214,7 @@ async function readJsonIfPresent(path) {
 
 {
   // TODOS #29 — rankable slices of the electricity mix built by build-electricity.mjs.
+  // Not summable: these are percentage shares of each country's own generation.
   // A country present in electricity.json but with no nuclear row genuinely generates
   // ~0% nuclear, so it gets 0 rather than being omitted: "Poland: 0% nuclear" is a
   // true and useful fact, and omitting it would misread as missing data.
@@ -232,6 +245,18 @@ async function readJsonIfPresent(path) {
     }
   }
 }
+
+// Guard the summable flag against the mistake it exists to prevent. This catches the
+// intensive *formats*; it cannot catch an intensive quantity wearing an extensive
+// format — GDP per capita is currency, same as total GDP — so those stay a matter of
+// declaring the flag correctly above.
+const INTENSIVE_FORMATS = new Set(['percent', 'year', 'years']);
+for (const ds of datasets) {
+  if (ds.summable && INTENSIVE_FORMATS.has(ds.format)) {
+    throw new Error(`${ds.id} is marked summable but its format (${ds.format}) is intensive`);
+  }
+}
+console.log(`\nSummable (addable across countries): ${datasets.filter((d) => d.summable).map((d) => d.id).join(', ')}`);
 
 // Flag datasets that make a poor ranking game. Rank the World asks you to place
 // countries on a line by value; if most of them share one value there's nothing to

@@ -1024,6 +1024,7 @@
       "blurb": "Nominal GDP, latest year (World Bank)",
       "format": "currency-short",
       "higherFirst": true,
+      "summable": true,
       "values": {
         "af": 17152234637,
         "al": 23491242727,
@@ -1249,6 +1250,7 @@
       "blurb": "Total population, latest year (World Bank)",
       "format": "number-short",
       "higherFirst": true,
+      "summable": true,
       "values": {
         "af": 41454761,
         "al": 2411658,
@@ -1732,6 +1734,7 @@
       "blurb": "Land area in km², latest year (World Bank)",
       "format": "area-km2",
       "higherFirst": true,
+      "summable": true,
       "values": {
         "af": 652230,
         "al": 27400,
@@ -2220,6 +2223,7 @@
       "blurb": "Exports of goods & services, current US$ (World Bank)",
       "format": "currency-short",
       "higherFirst": true,
+      "summable": true,
       "values": {
         "af": 2784713052,
         "al": 9025058562,
