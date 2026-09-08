@@ -14,7 +14,7 @@ HTML/CSS/JS with no build step.
 ## Game modes
 
 - **Daily Challenge** — one deterministic country per day
-- **Quick 10** — 10 random countries
+- **Quick 3** — 3 random countries (drawing three is a session; ten is a slog)
 - **Famous 5** — the 5 largest countries by area
 - **Speed Round** — a 3-minute timer, as many as you can
 - **Streak** — keep going until your score drops below 25

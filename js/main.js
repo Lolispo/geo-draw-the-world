@@ -179,7 +179,7 @@ class Game {
     const specialModes = [
       { id: 'btn-continents', key: 'continents' },
       { id: 'btn-world', key: 'world' },
-      { id: 'btn-quick10', key: 'quick10' },
+      { id: 'btn-quick3', key: 'quick3' },
       { id: 'btn-famous5', key: 'famous5' },
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
@@ -207,7 +207,7 @@ class Game {
     document.getElementById('btn-continents').addEventListener('click', () => this.startContinents());
     document.getElementById('btn-world').addEventListener('click', () => this.startWorld());
     document.getElementById('btn-daily').addEventListener('click', () => this.startDaily());
-    document.getElementById('btn-quick10').addEventListener('click', () => this.startQuick10());
+    document.getElementById('btn-quick3').addEventListener('click', () => this.startQuick3());
     document.getElementById('btn-speed').addEventListener('click', () => this.startSpeedRound());
     document.getElementById('btn-streak').addEventListener('click', () => this.startStreak());
     document.getElementById('btn-famous5').addEventListener('click', () => this.startFamous5());
@@ -511,9 +511,12 @@ class Game {
     this._startGame();
   }
 
-  async startQuick10() {
-    this.gameMode = 'quick10';
-    this._currentRegion = 'quick10';
+  // Three, not ten (TODOS #9). Each item here is draw -> size -> place, so ten of
+  // them is a long sitting; Rank the World keeps its ten because the cost per item
+  // there is a single tap.
+  async startQuick3() {
+    this.gameMode = 'quick3';
+    this._currentRegion = 'quick3';
 
     document.getElementById('prompt-name').textContent = 'Loading...';
     this.showScreen(STATES.PROMPT);
@@ -521,7 +524,7 @@ class Game {
     const data = await loadAllCountries();
     this._regionBounds = null;
     const shuffled = shuffleArray(data.countries);
-    this.itemData = shuffled.slice(0, 10);
+    this.itemData = shuffled.slice(0, 3);
     this.itemOrder = this.itemData.map(c => c.name);
     this._allRefShapes = data.countries.map(c => createReferenceShape(c));
     this._startGame();
@@ -629,7 +632,7 @@ class Game {
     if (this.gameMode === 'continents') this.startContinents();
     else if (this.gameMode === 'world') this.startWorld();
     else if (this.gameMode === 'daily') this.startDaily();
-    else if (this.gameMode === 'quick10') this.startQuick10();
+    else if (this.gameMode === 'quick3') this.startQuick3();
     else if (this.gameMode === 'famous5') this.startFamous5();
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
@@ -1236,7 +1239,7 @@ class Game {
       'continents': 'Continents',
       'world': 'World',
       'daily': 'Daily',
-      'quick10': 'Quick 10',
+      'quick3': 'Quick 3',
       'famous5': 'Famous 5',
       'speed': 'Speed Round',
       'streak': 'Streak',
@@ -1421,7 +1424,7 @@ class Game {
         'continents': 'Continents',
         'world': 'World',
         'daily': 'Daily',
-        'quick10': 'Quick 10',
+        'quick3': 'Quick 3',
         'famous5': 'Famous 5',
         'speed': 'Speed Round',
         'streak': 'Streak',

@@ -330,8 +330,30 @@ rankables appear in Explorer + Rank.
 ## 9. Draw the World: better default modes, disable the weak ones
 
 **#35 has landed** (2026-09-08) — sizing is merged into placement, so the weakest step in
-the draw loop is gone. That was half the reason the default played badly; the open part of
-this item is now purely mode *length* (Quick 3 for drawing) and which mode opens by default.
+the draw loop is gone. That was half the reason the default played badly.
+
+**✅ Half done 2026-09-08 — Quick 3 shipped.** `Quick 10` is replaced outright (not
+supplemented) by `Quick 3`: `startQuick3()` / `btn-quick3`, three random countries, same
+loop. Replacing rather than adding was the read of "Quick 10 is too long for drawing" —
+keeping both would have left the slog as the prominent option. Rank the World is untouched.
+Note the high-score key moved from `quick10` to `quick3`, so any existing Quick 10 best is
+orphaned in localStorage rather than migrated; a best over ten items is not comparable to
+one over three.
+
+**❓ Still open — the "default", which needs an owner decision.** There is no auto-start
+default to change: Draw the World is a menu, so "the default" is really *what the menu
+puts forward*. Today the hero button is **Daily Challenge** (one country), with Quick 3,
+Famous 5, Speed Round and Streak below it, then Continents/World, then the six regions.
+With Quick 3 in place both prominent options are now short, which may be all this item
+needed. Decide one of:
+- leave it — Daily Challenge as hero is already a good first impression; close this item;
+- promote **Quick 3** to hero instead, on the grounds that a daily is a returning-player
+  feature and a first-time player wants to just play;
+- de-emphasise the long modes (World is ~197 items, Continents 7) by moving them below the
+  regions or behind a "more" disclosure.
+
+Nothing about the modes *dead-ends* — verified by playing Quick 3 end to end after the
+change, so the acceptance criterion below is met apart from the default question.
 
 **What:** Revisit which modes "Draw the World" offers and which is the default.
 Disable/hide the ones that play badly; make the default put the best foot forward.
