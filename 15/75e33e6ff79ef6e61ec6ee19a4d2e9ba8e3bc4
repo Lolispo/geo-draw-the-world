@@ -1,0 +1,43 @@
+js/shape-handles.js
+  s_1025e9c6652cf6::t_c4bdf40c8b949d 1-50,52-55,69-147,149-151,153-176
+  s_1025e9c6652cf6::t_317b9cb8404e87 51,56-68,148,152
+js/utils.js
+  s_1025e9c6652cf6::t_8a5ff513f000ec 4-5
+TODO.md
+  s_1025e9c6652cf6::t_9a802912141ac1 556-558
+  s_1025e9c6652cf6::t_318c0895d9525a 31-32
+  s_1025e9c6652cf6::t_bf5a9fc5a9f0b6 221-223,837
+  s_1025e9c6652cf6::t_484519d4ab40ce 17-28,33-99
+  s_1025e9c6652cf6::t_743ed27aceff29 721-805
+  s_1025e9c6652cf6::t_b407fa2bf7d336 29-30
+README.md
+  s_1025e9c6652cf6::t_bf5a9fc5a9f0b6 40
+  s_1025e9c6652cf6::t_fee2cd66099f94 43-44
+  s_1025e9c6652cf6::t_8a5ff513f000ec 60
+js/shape.js
+  s_1025e9c6652cf6::t_8a5ff513f000ec 60
+js/world-canvas.js
+  s_1025e9c6652cf6::t_68bce91f5296e5 1,3-6,9,11-15,33-35,43,116-134,171,173-181,202,204-205,221-223,236,246-257,260-267,277-292,301-304,437
+  s_1025e9c6652cf6::t_3d7ee8d701511a 388-390,392,404-406
+  s_1025e9c6652cf6::t_fa90c00e9f5fc1 411-413,421-422,424,428-436
+  s_1025e9c6652cf6::t_e73a9e016cdebc 438
+js/main.js
+  s_1025e9c6652cf6::t_8a5ff513f000ec 1114-1116
+  s_1025e9c6652cf6::t_648c0394d8e535 137,347,810,825,847-869,955-956,963,1063,1098
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "1575e33e6ff79ef6e61ec6ee19a4d2e9ba8e3bc4",
+  "prompts": {},
+  "sessions": {
+    "s_1025e9c6652cf6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c7e60529-46ce-45c4-8b82-d013bda11ae7",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
