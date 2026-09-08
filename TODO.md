@@ -99,12 +99,43 @@ provably independent of the correct answer. No dead references to `TransformCont
 
 ## 36. New mode: Top 10 / Bottom 10
 
-**REVIEW:** open the hub → "Top 10 / Bottom 10". Play a World round and an Oceania one, and
-try Hard difficulty. Two judgement calls to check: whether Easy/Hard feel meaningfully
-different, and whether the boundary rule is set right — it is at **0.5%, not the ~1% this entry
-proposed** (see below), so a round can still come down to one near-miss.
+**REVIEW:** open the hub → "Top 10 / Bottom 10". Play a World round in each of the three input
+styles, and one on a continent. Judgement calls to check: whether three lives is the right
+number, whether Easy/Hard feel meaningfully different, whether the flags-only and typing styles
+earn their place, and whether the boundary rule is set right — it is at **0.5%, not the ~1% this
+entry proposed** (see below), so a round can still come down to one near-miss.
 
-**✅ DONE 2026-09-08** — `js/top-n-game.js`, modelled on `js/rank-line-game.js`, plus a hub card,
+**✅ v2 2026-09-08 — the loop was rebuilt on owner feedback.** The first version had you tick N
+countries blind and lock them all in at once; the owner's verdict was that the countries ate the
+screen, the menu was a long vertical scroll, and it would be more interesting one at a time with
+the data shown as you go. So:
+- **One pick at a time, three lives.** Each pick immediately reveals that country's true rank and
+  value in a feedback strip and on the card itself. Correct picks lock in; a wrong one costs a
+  life and stays on screen, dimmed, so the miss teaches something. The round ends when you find
+  all N or run out of lives. Score is still hits out of N.
+- **Three input styles**, all sharing that loop: **Cards** (flag + name, packed three-across so
+  all 24 fit a 390px screen without scrolling), **Flags only** (five-across, name revealed on the
+  pick, so it doubles as flag practice), and **Type the name** (no pool at all — an autocomplete
+  over the eligible countries, recalling from memory). Difficulty is the distractor rule, so it is
+  disabled for typing, which has no distractors.
+- **A typo is not a wrong answer.** In the typing style a name that is not a country in range, or
+  one already guessed, is a nudge that costs no life. Only a real, in-range country that misses
+  the cut takes one. Names are matched with diacritics stripped, so `Cote d'Ivoire` works.
+- **The picker is a form now**, not a scroll: five selects (metric / filter / direction /
+  difficulty / input), a summary line, Start and Random roll. It fits one phone screen with no
+  scrolling — verified. Metrics that are not playable under the current filter appear disabled
+  with their reason, and if a filter change strands the current metric the picker falls back to
+  the first playable one.
+- **High scores start over.** Keys moved to a `topn2-` namespace and now include the input style:
+  finding 8 of 10 with feedback and three lives is not the feat the old blind pick-N scored, and
+  naming countries from memory is not the same as ticking a pool. Old bests are orphaned, not
+  migrated.
+
+Verified with Playwright at 1440×900 and 390×844: 60 checks over both end conditions, lives
+accounting, reveal contents, re-pick prevention, all three styles, the typo rule and the picker.
+No page errors.
+
+**✅ v1 2026-09-08 (superseded by v2 above)** — `js/top-n-game.js`, modelled on `js/rank-line-game.js`, plus a hub card,
 `STATES.TOP_N` and its styles. Picker offers direction (Top/Bottom), difficulty (Easy/Hard),
 scope (World + 6 continents), a random roll, the Force-10 override and the shared territories
 toggle. Rounds go through `getEntries()` + `inCountryPool()`, and the metric list reuses Rank the
