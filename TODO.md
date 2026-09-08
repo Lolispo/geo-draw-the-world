@@ -101,11 +101,34 @@ provably independent of the correct answer. No dead references to `TransformCont
 
 **REVIEW:** open the hub → "Top 10 / Bottom 10". Play a World round in each of the three input
 styles, and one on a continent. Judgement calls to check: whether three lives is the right
-number, whether Easy/Hard feel meaningfully different, whether the flags-only and typing styles
-earn their place, and whether the boundary rule is set right — it is at **0.5%, not the ~1% this
-entry proposed** (see below), so a round can still come down to one near-miss.
+number, whether the ladder's empty slots take too much of the phone screen before a round gets
+going, whether the flags-only and typing styles earn their place, and whether the boundary rule
+is set right — it is at **0.5%, not the ~1% this entry proposed** (see below), so a round can
+still come down to one near-miss.
 
-**✅ v2 2026-09-08 — the loop was rebuilt on owner feedback.** The first version had you tick N
+**✅ v3 2026-09-08 — the shared rank ladder.** Owner feedback on v2: keep the growing result list
+from the typing style everywhere, so it is clear which ranks are taken and which are left, and
+make the score screen use the same shape.
+- **Slots 1..N are always on screen**, in every input style. A filled slot names the country and
+  its value; an empty one is its number and a dashed line, so the gaps are read at a glance
+  rather than counted. Wrong picks collect beneath under "Missed", at the rank they actually
+  hold — being sixty places out looks different from being one place out.
+- **The results screen is that same ladder with every slot revealed** — one builder renders both,
+  so the end of a round is the finished version of the board you were filling in, not a new
+  layout. Only the results rows link to the country panel: mid-round it would show every metric
+  for that country, including the one being played.
+- **Easy/Hard kept as they were, with the reason spelled out.** The owner noticed a Top 10 round
+  plays partly by exclusion, because Easy draws its wrong options from across the whole ranking
+  and some are obviously not contenders. Tightening Easy to a rank band was offered and declined
+  — the spread is wanted — so instead the picker now states what the setting does, as a tooltip
+  and as a visible line: *"Easy — wrong options are drawn from across the whole ranking"* /
+  *"Hard — wrong options are the countries just below the cut"*.
+
+Verified with Playwright at 1440×900 and 390×844: 40 further checks on the ladder (empty slots,
+slot filling, misses landing below and not consuming a slot, all three styles, results
+completeness and clickability, the difficulty hints), on top of the 60 from v2. No page errors.
+
+**✅ v2 2026-09-08 — the loop was rebuilt on owner feedback.** (Layout superseded by v3 above.) The first version had you tick N
 countries blind and lock them all in at once; the owner's verdict was that the countries ate the
 screen, the menu was a long vertical scroll, and it would be more interesting one at a time with
 the data shown as you go. So:

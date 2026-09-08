@@ -58,6 +58,14 @@ const INPUT_STYLES = [
   { id: 'type', label: 'Type the name' },
 ];
 
+// What Easy and Hard actually change. Nobody can guess "the wrong options are
+// drawn from just below the cut" from the word Hard, so it is said out loud.
+const DIFFICULTY_HINT = {
+  easy: 'Easy — wrong options are drawn from across the whole ranking.',
+  hard: 'Hard — wrong options are the countries just below the cut.',
+  type: 'Typing has no options to draw from, so difficulty does not apply.',
+};
+
 // Suggestions shown while typing. Enough to be a real aid, few enough that the
 // list is not simply the answer sheet.
 const MAX_SUGGESTIONS = 8;
@@ -325,11 +333,20 @@ export class TopNGame {
       { id: 'hi', label: 'Top' }, { id: 'lo', label: 'Bottom' },
     ], this.higherFirst ? 'hi' : 'lo', (v) => { this.higherFirst = v === 'hi'; this.showPicker(); }));
     // Difficulty is the distractor rule, and the typing style has no distractors.
-    pairRow.appendChild(this._select([
+    const diffSelect = this._select([
       { id: 'easy', label: 'Easy' }, { id: 'hard', label: 'Hard' },
     ], this.hard ? 'hard' : 'easy', (v) => { this.hard = v === 'hard'; this.showPicker(); },
-    this.inputStyle === 'type'));
+    this.inputStyle === 'type');
+    diffSelect.title = DIFFICULTY_HINT[this.inputStyle === 'type' ? 'type' : (this.hard ? 'hard' : 'easy')];
+    pairRow.appendChild(diffSelect);
     form.appendChild(pairRow);
+
+    // The tooltip only exists for a mouse, and what difficulty means here is not
+    // guessable — spell it out in a line under the form.
+    const hint = document.createElement('div');
+    hint.className = 'topn-hint';
+    hint.textContent = diffSelect.title;
+    form.appendChild(hint);
 
     form.appendChild(this._selectRow('Input', INPUT_STYLES, this.inputStyle,
       (v) => { this.inputStyle = v; this.showPicker(); }));
@@ -432,10 +449,13 @@ export class TopNGame {
     panel.appendChild(this._renderRoundHead());
     panel.appendChild(this._renderFeedback());
 
+    // The ladder sits above whatever you pick with, in every style — it is the
+    // running record of the round, and the pool below it is only the input.
     if (r.style === 'type') {
       panel.appendChild(this._renderTypeInput());
-      panel.appendChild(this._renderRevealedList());
+      panel.appendChild(this._renderLadder());
     } else {
+      panel.appendChild(this._renderLadder());
       panel.appendChild(this._renderGrid());
     }
 
@@ -587,37 +607,65 @@ export class TopNGame {
     return wrap;
   }
 
-  // In the typing style there is no pool to mark up, so guesses collect in their
-  // own list, ordered by rank — that is the picture of the ranking you are building.
-  _renderRevealedList() {
+  // ---- the ladder ---------------------------------------------------------
+  //
+  // Slots 1..N, always all of them. A filled slot names the country and its value;
+  // an empty one is just its number, so which ranks are still missing is readable
+  // at a glance rather than counted. The same builder renders the in-round board
+  // and the results screen — the results screen is simply the ladder with every
+  // slot revealed, so the end of a round looks like the finished version of the
+  // thing you were filling in.
+  _slotsHtml({ reveal, clickable }) {
     const r = this.round;
-    const list = document.createElement('div');
-    list.className = 'topn-revealed';
+    return r.answers.map((e, i) => {
+      const rank = i + 1;
+      const found = r.found.has(e.code);
+      if (!found && !reveal) {
+        return `<div class="topn-row is-empty"><span class="topn-result-rank">${rank}</span>` +
+               '<span class="topn-blank"></span></div>';
+      }
+      return this._rowHtml({
+        cls: found ? 'is-hit' : 'is-miss',
+        mark: found ? '✓' : '✗',
+        rank, entry: e, clickable, delay: reveal ? Math.min(i, 20) * 0.03 : 0,
+      });
+    }).join('');
+  }
 
-    const rows = [...r.revealed.entries()]
-      .map(([code, v]) => ({ code, ...v, name: r.sorted[v.rank - 1].name }))
+  // Wrong picks, under the ladder, at the rank they actually hold. Being sixty
+  // places out should look different from being one place out.
+  _missesHtml({ clickable }) {
+    const r = this.round;
+    const wrong = [...r.revealed.entries()]
+      .filter(([, v]) => !v.correct)
+      .map(([code, v]) => ({ code, ...v, entry: r.sorted[v.rank - 1] }))
       .sort((a, b) => a.rank - b.rank);
+    if (!wrong.length) return '';
+    return '<div class="topn-ladder-sub">Missed</div>' + wrong.map((w) => this._rowHtml({
+      cls: 'is-wrong', mark: '✗', rank: w.rank, entry: w.entry, clickable,
+    })).join('');
+  }
 
-    if (!rows.length) {
-      const empty = document.createElement('div');
-      empty.className = 'topn-revealed-empty';
-      empty.textContent = 'Your guesses will appear here, in rank order.';
-      list.appendChild(empty);
-      return list;
-    }
+  _rowHtml({ cls, mark, rank, entry, clickable, delay = 0 }) {
+    const r = this.round;
+    // Only the results screen links out. Mid-round the country panel would show
+    // every metric for that country, including the one being played.
+    const link = clickable ? ` is-clickable" data-code="${entry.code}" title="View ${entry.name}` : '';
+    return `<div class="topn-row topn-result-row ${cls}${link}" style="animation-delay:${delay}s">` +
+      `<span class="topn-result-mark">${mark}</span>` +
+      `<span class="topn-result-rank">${rank}</span>` +
+      `<img class="topn-flag" src="${flagUrl(entry.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
+      `<span class="topn-result-name">${entry.name}</span>` +
+      `<span class="topn-result-value">${formatValue(r.dataset.format, entry.value)}</span>` +
+      '</div>';
+  }
 
-    for (const row of rows) {
-      const el = document.createElement('div');
-      el.className = `topn-result-row ${row.correct ? 'is-hit' : 'is-wrong'}`;
-      el.innerHTML =
-        `<span class="topn-result-mark">${row.correct ? '✓' : '✗'}</span>` +
-        `<span class="topn-result-rank">${row.rank}</span>` +
-        `<img class="topn-flag" src="${flagUrl(row.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
-        `<span class="topn-result-name">${row.name}</span>` +
-        `<span class="topn-result-value">${formatValue(r.dataset.format, row.value)}</span>`;
-      list.appendChild(el);
-    }
-    return list;
+  _renderLadder() {
+    const el = document.createElement('div');
+    el.className = 'topn-ladder';
+    el.innerHTML = this._slotsHtml({ reveal: false, clickable: false }) +
+                   this._missesHtml({ clickable: false });
+    return el;
   }
 
   // A typed name that is not a country in this round is a typo or an out-of-scope
@@ -692,32 +740,10 @@ export class TopNGame {
     else if (pct >= 0.7) grade = 'So close';
     else if (pct >= 0.4) grade = 'Halfway there';
 
-    const answerRows = r.answers.map((e, i) => {
-      const got = r.found.has(e.code);
-      return `
-        <div class="topn-result-row ${got ? 'is-hit' : 'is-miss'} is-clickable" data-code="${e.code}"
-             title="View ${e.name}" style="animation-delay:${Math.min(i, 20) * 0.03}s">
-          <span class="topn-result-mark">${got ? '✓' : '✗'}</span>
-          <span class="topn-result-rank">${i + 1}</span>
-          <img class="topn-flag" src="${flagUrl(e.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">
-          <span class="topn-result-name">${e.name}</span>
-          <span class="topn-result-value">${formatValue(r.dataset.format, e.value)}</span>
-        </div>`;
-    }).join('');
-
-    const wrong = [...r.revealed.entries()]
-      .filter(([, v]) => !v.correct)
-      .map(([code, v]) => ({ code, ...v, name: r.sorted[v.rank - 1].name }))
-      .sort((a, b) => a.rank - b.rank);
-
-    const wrongRows = wrong.map((e) => `
-      <div class="topn-result-row is-wrong is-clickable" data-code="${e.code}" title="View ${e.name}">
-        <span class="topn-result-mark">·</span>
-        <span class="topn-result-rank">${e.rank}</span>
-        <img class="topn-flag" src="${flagUrl(e.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">
-        <span class="topn-result-name">${e.name}</span>
-        <span class="topn-result-value">${formatValue(r.dataset.format, e.value)}</span>
-      </div>`).join('');
+    // The same ladder the round was played on, with the slots you never filled
+    // now revealed — so the results screen is the finished board, not a new one.
+    const answerRows = this._slotsHtml({ reveal: true, clickable: true });
+    const wrongRows = this._missesHtml({ clickable: true });
 
     const styleLabel = INPUT_STYLES.find((s) => s.id === r.style).label.split('—')[0].trim();
     const endNote = cleared
@@ -739,10 +765,7 @@ export class TopNGame {
           : (prev ? `<div class="high-score-note" style="display:block">Best: ${prev.score}/${r.n}</div>` : '')}
       </div>
       <div class="topn-results-subhead">The real ${this._directionWord(r.dataset.format, r.higherFirst).toLowerCase()} ${r.n}</div>
-      <div class="topn-results-list">${answerRows}</div>
-      ${wrong.length ? `
-        <div class="topn-results-subhead">Where your misses actually ranked</div>
-        <div class="topn-results-list">${wrongRows}</div>` : ''}
+      <div class="topn-ladder is-final">${answerRows}${wrongRows}</div>
       <div class="results-actions">
         <button id="topn-again" class="btn btn-accent">Play Again</button>
         <button id="topn-change" class="btn btn-tool">Change round</button>
