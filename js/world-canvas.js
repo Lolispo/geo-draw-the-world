@@ -1,10 +1,18 @@
-// World map canvas: pan, zoom, place shapes, show results
+// World map canvas: zoom, size, place shapes, show results
 // Supports region-focused view for country modes
+//
+// Since TODOS #35 this is also where the drawn shape is *sized*: the standalone
+// sizing screen is gone, so corner handles resize the shape while the wheel and
+// pinch zoom the view. One meaning per gesture — they never overlap.
 
 import { drawMultiPolygon, multiPolygonBoundingBox, OCEAN_LABELS } from './utils.js';
+import { ShapeHandles } from './shape-handles.js';
 
-const ROTATE_HANDLE_DIST = 30;
-const ROTATE_HANDLE_RADIUS = 8;
+// Neutral drop size for a freshly drawn shape, as a fraction of the canvas's
+// shorter side. It is deliberately a *viewport* fraction and never derived from
+// the reference shape: size is 30% of the score, so a start scale that knew the
+// answer would hand that 30% away. See setNeutralScale().
+const NEUTRAL_SIZE_FRAC = 0.15;
 
 export class WorldCanvas {
   constructor(canvas) {
@@ -20,11 +28,11 @@ export class WorldCanvas {
     this.placedShapes = [];
     this.activeShape = null;
     this.isDragging = false;
-    this.isRotating = false;
     this.lastMouse = [0, 0];
     this.dragOffset = [0, 0];
-    this.initialRotation = 0;
-    this.initialAngle = 0;
+
+    this.handles = new ShapeHandles((wx, wy) => this._worldToCanvas(wx, wy));
+    this._pinch = null;
 
     this.referenceShapes = [];
     // Faint continent outlines drawn under everything, so placement has real
@@ -32,6 +40,7 @@ export class WorldCanvas {
     this.basemap = [];
     this.showGhosts = false;
     this.enableRotation = false;
+    this.enableScaling = false;
     this.tweakMode = false;
 
     this.regionBounds = null;
@@ -104,6 +113,25 @@ export class WorldCanvas {
     }
   }
 
+  _syncHandles() {
+    this.handles.showCorners = this.enableScaling;
+    this.handles.showRotate = this.enableRotation;
+  }
+
+  // Drop a freshly drawn shape at a neutral size: longest side = a fixed
+  // fraction of the canvas's shorter side, converted to world units through the
+  // current view scale. Computed from the viewport alone, so it carries no
+  // information about how big the country actually is (TODOS #35).
+  // Call after activate(), which is what fits the view.
+  setNeutralScale(shape) {
+    const bb = multiPolygonBoundingBox(shape.localPolygons);
+    const localSize = Math.max(bb.width, bb.height);
+    if (!(localSize > 0)) return;
+    const targetPx = NEUTRAL_SIZE_FRAC * Math.min(this._cssW, this._cssH);
+    shape.scale = (targetPx / this.viewScale) / localSize;
+    shape.rotation = 0;
+  }
+
   setActiveShape(shape) {
     this.activeShape = shape;
     if (!this.tweakMode) {
@@ -137,33 +165,20 @@ export class WorldCanvas {
     ];
   }
 
-  _getRotateHandle() {
-    if (!this.activeShape || !this.enableRotation) return null;
-    const bb = this.activeShape.getBoundingBox();
-    const topCenter = this._worldToCanvas((bb.minX + bb.maxX) / 2, bb.minY);
-    return [topCenter[0], topCenter[1] - ROTATE_HANDLE_DIST];
-  }
-
-  _hitRotateHandle(pos) {
-    const handle = this._getRotateHandle();
-    if (!handle) return false;
-    const dx = pos[0] - handle[0];
-    const dy = pos[1] - handle[1];
-    return dx * dx + dy * dy < (ROTATE_HANDLE_RADIUS + 6) ** 2;
-  }
-
   _onMouseDown(e) {
     const pos = this._getCanvasPos(e);
     this.lastMouse = pos;
+    this._syncHandles();
 
-    // Check rotate handle first
-    if (this.activeShape && this.enableRotation && this._hitRotateHandle(pos)) {
-      this.isRotating = true;
-      this.initialRotation = this.activeShape.rotation;
-      const center = this._worldToCanvas(this.activeShape.position[0], this.activeShape.position[1]);
-      this.initialAngle = Math.atan2(pos[1] - center[1], pos[0] - center[0]);
-      this.canvas.style.cursor = 'crosshair';
-      return;
+    // Handles sit on the bounding box, which overlaps the shape body, so they
+    // have to be tested before the drag-to-move path or they're unreachable.
+    if (this.activeShape) {
+      const handle = this.handles.hitTest(this.activeShape, pos);
+      if (handle) {
+        this.handles.begin(this.activeShape, handle, pos);
+        this.canvas.style.cursor = this.handles.cursorFor(handle);
+        return;
+      }
     }
 
     if (this.activeShape) {
@@ -184,12 +199,10 @@ export class WorldCanvas {
 
   _onMouseMove(e) {
     const pos = this._getCanvasPos(e);
+    this._syncHandles();
 
-    if (this.isRotating && this.activeShape) {
-      const center = this._worldToCanvas(this.activeShape.position[0], this.activeShape.position[1]);
-      const angle = Math.atan2(pos[1] - center[1], pos[0] - center[0]);
-      this.activeShape.rotation = this.initialRotation + (angle - this.initialAngle);
-      this.render();
+    if (this.handles.active && this.activeShape) {
+      if (this.handles.drag(this.activeShape, pos)) this.render();
       return;
     }
 
@@ -205,8 +218,9 @@ export class WorldCanvas {
 
     // Cursor hints
     if (this.activeShape) {
-      if (this.enableRotation && this._hitRotateHandle(pos)) {
-        this.canvas.style.cursor = 'crosshair';
+      const handle = this.handles.hitTest(this.activeShape, pos);
+      if (handle) {
+        this.canvas.style.cursor = this.handles.cursorFor(handle);
       } else {
         const worldPos = this._canvasToWorld(pos[0], pos[1]);
         this.canvas.style.cursor = this.activeShape.containsPoint(worldPos[0], worldPos[1])
@@ -219,7 +233,7 @@ export class WorldCanvas {
 
   _onMouseUp() {
     this.isDragging = false;
-    this.isRotating = false;
+    this.handles.end();
     this.canvas.style.cursor = 'default';
   }
 
@@ -229,8 +243,28 @@ export class WorldCanvas {
     return [touch.clientX - rect.left, touch.clientY - rect.top];
   }
 
+  // Midpoint and spread of a two-finger gesture, in canvas coordinates
+  _pinchState(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    const [a, b] = [e.touches[0], e.touches[1]];
+    const ax = a.clientX - rect.left, ay = a.clientY - rect.top;
+    const bx = b.clientX - rect.left, by = b.clientY - rect.top;
+    return {
+      center: [(ax + bx) / 2, (ay + by) / 2],
+      dist: Math.max(1, Math.hypot(bx - ax, by - ay))
+    };
+  }
+
   _onTouchStart(e) {
     e.preventDefault();
+    if (e.touches.length >= 2) {
+      // A second finger always means "zoom the view", so abandon whatever the
+      // first finger was doing to the shape rather than doing both at once.
+      this.isDragging = false;
+      this.handles.end();
+      this._pinch = this._pinchState(e);
+      return;
+    }
     if (e.touches.length === 1) {
       const pos = this._touchToCanvasPos(e);
       const rect = this.canvas.getBoundingClientRect();
@@ -240,7 +274,22 @@ export class WorldCanvas {
 
   _onTouchMove(e) {
     e.preventDefault();
-    if (e.touches.length === 1) {
+    if (e.touches.length >= 2) {
+      if (!this._pinch) this._pinch = this._pinchState(e);
+      const now = this._pinchState(e);
+      const prev = this._pinch;
+      const factor = now.dist / prev.dist;
+      // Zoom about the pinch midpoint, then follow the midpoint. The follow is
+      // what gives touch a way to pan at all — dragging pans nothing, because a
+      // one-finger drag belongs to the shape.
+      this.viewScale *= factor;
+      this.viewOffset[0] = now.center[0] - (prev.center[0] - this.viewOffset[0]) * factor;
+      this.viewOffset[1] = now.center[1] - (prev.center[1] - this.viewOffset[1]) * factor;
+      this._pinch = now;
+      this.render();
+      return;
+    }
+    if (e.touches.length === 1 && !this._pinch) {
       const pos = this._touchToCanvasPos(e);
       const rect = this.canvas.getBoundingClientRect();
       this._onMouseMove({ clientX: pos[0] + rect.left, clientY: pos[1] + rect.top });
@@ -249,7 +298,10 @@ export class WorldCanvas {
 
   _onTouchEnd(e) {
     e.preventDefault();
-    this._onMouseUp();
+    // Lifting one of two fingers leaves the other mid-gesture with no anchor;
+    // end the pinch and make the player start a fresh touch.
+    if (e.touches.length < 2) this._pinch = null;
+    if (e.touches.length === 0) this._onMouseUp();
   }
 
   _onWheel(e) {
@@ -333,9 +385,11 @@ export class WorldCanvas {
       }
     }
 
-    // Placed shapes
+    // Placed shapes. Line widths are divided by viewScale so an outline stays
+    // ~2px however far the view is zoomed — it matters now that pinch and wheel
+    // zoom are part of the placement loop (TODOS #35).
     for (const shape of this.placedShapes) {
-      shape.draw(ctx);
+      shape.draw(ctx, { lineWidth: 2 / this.viewScale });
       const bb = shape.getBoundingBox();
       const cx = (bb.minX + bb.maxX) / 2;
       const cy = (bb.minY + bb.maxY) / 2;
@@ -347,15 +401,16 @@ export class WorldCanvas {
 
     // Active shape
     if (this.activeShape) {
-      this.activeShape.draw(ctx, { fillAlpha: 0.55, strokeColor: '#e6edf3' });
+      this.activeShape.draw(ctx, {
+        fillAlpha: 0.55, strokeColor: '#e6edf3', lineWidth: 2.5 / this.viewScale
+      });
     }
 
     ctx.restore();
 
-    // Rotation handle in screen space
-    if (this.activeShape && this.enableRotation) {
-      this._drawRotateHandle(ctx);
-    }
+    // Handles in screen space, so they keep their size at any zoom
+    this._syncHandles();
+    if (this.activeShape) this.handles.draw(ctx, this.activeShape);
 
     // HUD
     ctx.fillStyle = '#8b949e';
@@ -363,10 +418,22 @@ export class WorldCanvas {
     ctx.textAlign = 'right';
     ctx.fillText(`${Math.round(this.viewScale * 100)}%`, w - 8, h - 6);
 
-    if (this.enableRotation) {
+    const hint = this._gestureHint();
+    if (hint) {
       ctx.textAlign = 'left';
-      ctx.fillText('Drag to move, orange handle to rotate', 8, h - 6);
+      ctx.fillText(hint, 8, h - 6);
     }
+  }
+
+  // One line naming only the gestures that are actually live. Deliberately
+  // short: the old sizing screen ran two footer strings into each other at
+  // phone widths (TODOS #26), and the zoom readout sits at the right edge.
+  _gestureHint() {
+    if (!this.activeShape) return null;
+    if (this.enableScaling && this.enableRotation) return 'Drag to move · corners resize · orange rotates';
+    if (this.enableRotation) return 'Drag to move, orange handle to rotate';
+    if (this.enableScaling) return 'Drag to move, corners to resize';
+    return null;
   }
 
   // Fill, not stroke. continents.json stores each continent as country-level rings
@@ -419,28 +486,4 @@ export class WorldCanvas {
     }
   }
 
-  _drawRotateHandle(ctx) {
-    const handle = this._getRotateHandle();
-    if (!handle) return;
-
-    const bb = this.activeShape.getBoundingBox();
-    const topCenter = this._worldToCanvas((bb.minX + bb.maxX) / 2, bb.minY);
-
-    // Line from shape to handle
-    ctx.strokeStyle = '#30363d';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(topCenter[0], topCenter[1]);
-    ctx.lineTo(handle[0], handle[1]);
-    ctx.stroke();
-
-    // Handle circle
-    ctx.beginPath();
-    ctx.arc(handle[0], handle[1], ROTATE_HANDLE_RADIUS, 0, Math.PI * 2);
-    ctx.fillStyle = '#d29922';
-    ctx.fill();
-    ctx.strokeStyle = '#0d1117';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-  }
 }

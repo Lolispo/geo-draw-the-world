@@ -57,7 +57,7 @@ export class Shape {
   }
 
   // lineWidth is in world units. Callers rendering at a zoomed-in viewScale should
-  // pass px/viewScale, or the outline swells into a blob (see transform-controls).
+  // pass px/viewScale, or the outline swells into a blob at high zoom.
   draw(ctx, { fillAlpha = 0.4, strokeColor = null, ghostMode = false, lineWidth = null } = {}) {
     const polygons = this.getTransformedPolygons();
     if (ghostMode) {

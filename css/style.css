@@ -334,7 +334,6 @@ body {
 
 /* ========== CANVAS SCREENS ========== */
 #screen-drawing,
-#screen-transform,
 #screen-placing,
 #screen-results {
   gap: 10px;
@@ -1240,7 +1239,6 @@ canvas {
 
   /* Canvas screens */
   #screen-drawing,
-  #screen-transform,
   #screen-placing,
   #screen-results {
     padding: 6px;

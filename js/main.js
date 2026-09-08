@@ -7,7 +7,6 @@ import {
   getCountryRegions, shuffleArray, getLargestCountries
 } from './geo-data.js';
 import { DrawingCanvas } from './drawing-canvas.js';
-import { TransformControls } from './transform-controls.js';
 import { WorldCanvas } from './world-canvas.js';
 import { Shape } from './shape.js';
 import { multiPolygonCentroid, multiPolygonBoundingBox, hidpiReset } from './utils.js';
@@ -27,7 +26,6 @@ const STATES = {
   PROMPT: 'prompt',
   PEEK: 'peek',
   DRAWING: 'drawing',
-  TRANSFORM: 'transform',
   PLACING: 'placing',
   RESULTS: 'results',
   COMPARE: 'compare',
@@ -74,7 +72,6 @@ class Game {
       prompt: document.getElementById('screen-prompt'),
       peek: document.getElementById('screen-peek'),
       drawing: document.getElementById('screen-drawing'),
-      transform: document.getElementById('screen-transform'),
       placing: document.getElementById('screen-placing'),
       results: document.getElementById('screen-results'),
       compare: document.getElementById('screen-compare'),
@@ -85,7 +82,6 @@ class Game {
     };
 
     this.drawingCanvas = new DrawingCanvas(document.getElementById('canvas-drawing'));
-    this.transformControls = new TransformControls(document.getElementById('canvas-transform'));
     this.worldCanvas = new WorldCanvas(document.getElementById('canvas-world'));
     this.resultsWorldCanvas = new WorldCanvas(document.getElementById('canvas-results'));
     this.menuGlobe = new MenuGlobe(document.getElementById('menu-globe-canvas'));
@@ -138,7 +134,7 @@ class Game {
 
     const drawW = Math.min(vw - pad, 1200);
     const drawH = Math.min(vh - headerH - pad, 700);
-    for (const id of ['canvas-drawing', 'canvas-transform', 'canvas-peek', 'canvas-compare']) {
+    for (const id of ['canvas-drawing', 'canvas-peek', 'canvas-compare']) {
       setSize(id, drawW, drawH);
     }
 
@@ -284,9 +280,6 @@ class Game {
       document.getElementById('btn-done-drawing').disabled = true;
     };
 
-    // Transform
-    document.getElementById('btn-done-transform').addEventListener('click', () => this.onTransformDone());
-
     // Placing
     document.getElementById('btn-place').addEventListener('click', () => this.onPlace());
 
@@ -342,8 +335,6 @@ class Game {
         if (this.state === STATES.DRAWING) {
           const btn = document.getElementById('btn-done-drawing');
           if (!btn.disabled) this.onDrawingDone();
-        } else if (this.state === STATES.TRANSFORM) {
-          this.onTransformDone();
         } else if (this.state === STATES.PLACING) {
           this.onPlace();
         } else if (this.state === STATES.COMPARE) {
@@ -353,7 +344,7 @@ class Game {
         }
         break;
       case 'Escape':
-        if (this.state === STATES.PEEK || this.state === STATES.DRAWING || this.state === STATES.TRANSFORM || this.state === STATES.PLACING) {
+        if (this.state === STATES.PEEK || this.state === STATES.DRAWING || this.state === STATES.PLACING) {
           this.onSkip();
         }
         break;
@@ -816,8 +807,7 @@ class Game {
         this._peekCountdown = null;
       }
       if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-      if (this.state === STATES.TRANSFORM) this.transformControls.deactivate();
-      if (this.state === STATES.PLACING) this.worldCanvas.deactivate();
+      if (this.state === STATES.PLACING) this._leavePlacing();
       this._onStreakEnd();
       return;
     }
@@ -832,8 +822,7 @@ class Game {
       this._peekCountdown = null;
     }
     if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.TRANSFORM) this.transformControls.deactivate();
-    if (this.state === STATES.PLACING) this.worldCanvas.deactivate();
+    if (this.state === STATES.PLACING) this._leavePlacing();
 
     playSkip();
     this.currentIndex++;
@@ -855,20 +844,29 @@ class Game {
       return;
     }
 
-    // Reveal name in transform/place stages even in blind mode
-    document.getElementById('transform-label').textContent = `Resize & Rotate: ${entry.name}`;
-    this.showScreen(STATES.TRANSFORM);
-    // Let TransformControls use its own 1600x1100 conformal defaults (TODOS #24).
-    // Passing 900 here kept the transform stage on the old squished projection
-    // while the placement canvas used 1100, so shapes were sized ~22% too large.
-    this.transformControls.setWorldParams(this._regionBounds);
-    // Hard mode: no hint shape for scale reference
-    if (this.hardMode) {
-      this.transformControls.setReferenceShapes([], entry.name);
-    } else {
-      this.transformControls.setReferenceShapes(this._allRefShapes, entry.name);
-    }
-    this.transformControls.activate(this.currentShape);
+    this._enterPlacing(entry);
+  }
+
+  // Sizing and placement are one screen (TODOS #35). The shape lands on the map
+  // at a neutral size and is resized, rotated and moved there, judged against
+  // real coastlines instead of an abstract hint shape on an empty canvas.
+  _enterPlacing(entry) {
+    // The name is revealed here even in blind mode — you can't place what you
+    // can't name.
+    document.getElementById('placing-label').textContent = `Size & Place: ${entry.name}`;
+    this.showScreen(STATES.PLACING);
+    this.worldCanvas.activate();
+    this.worldCanvas.enableRotation = true;
+    this.worldCanvas.enableScaling = true;
+    // Must follow activate(): that's what fits the view the neutral size reads.
+    this.worldCanvas.setNeutralScale(this.currentShape);
+    this.worldCanvas.setActiveShape(this.currentShape);
+  }
+
+  _leavePlacing() {
+    this.worldCanvas.enableRotation = false;
+    this.worldCanvas.enableScaling = false;
+    this.worldCanvas.deactivate();
   }
 
   // --- Shape-only mode: overlay compare + shape score ---
@@ -936,16 +934,6 @@ class Game {
     this.promptNext();
   }
 
-  onTransformDone() {
-    this.transformControls.deactivate();
-
-    const entry = this.itemData[this.currentIndex];
-    document.getElementById('placing-label').textContent = `Place: ${entry.name}`;
-    this.showScreen(STATES.PLACING);
-    this.worldCanvas.activate();
-    this.worldCanvas.setActiveShape(this.currentShape);
-  }
-
   _startPuzzlePlacing() {
     const entry = this.itemData[this.currentIndex];
     const refShape = createReferenceShape(entry);
@@ -964,12 +952,15 @@ class Game {
     // No live score in placement-only mode
     this.worldCanvas.activate();
     this.worldCanvas.enableRotation = true;
+    // Scale stays locked at true size — placement is the whole point of this mode
+    this.worldCanvas.enableScaling = false;
     this.worldCanvas.setActiveShape(this.currentShape);
   }
 
   onPlace() {
     this.worldCanvas.placeActiveShape();
     this.worldCanvas.enableRotation = false;
+    this.worldCanvas.enableScaling = false;
     this.playerShapes.push(this.currentShape);
 
     const entry = this.itemData[this.currentIndex];
@@ -1069,11 +1060,7 @@ class Game {
       this._peekCountdown = null;
     }
     if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.TRANSFORM) this.transformControls.deactivate();
-    if (this.state === STATES.PLACING) {
-      this.worldCanvas.enableRotation = false;
-      this.worldCanvas.deactivate();
-    }
+    if (this.state === STATES.PLACING) this._leavePlacing();
 
     this._showToast("Time's up!");
     this.showResults();
@@ -1108,11 +1095,7 @@ class Game {
       this._peekCountdown = null;
     }
     if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.TRANSFORM) this.transformControls.deactivate();
-    if (this.state === STATES.PLACING) {
-      this.worldCanvas.enableRotation = false;
-      this.worldCanvas.deactivate();
-    }
+    if (this.state === STATES.PLACING) this._leavePlacing();
 
     const lastScore = this.scores[this.scores.length - 1];
     this._showToast(`Streak over! Scored ${lastScore?.total || 0} (need 25+)`);
@@ -1128,6 +1111,9 @@ class Game {
     this.showScreen(STATES.PLACING);
     this.worldCanvas.showGhosts = true;
     this.worldCanvas.tweakMode = true;
+    // Tweaking nudges placements only — sizing was already committed per shape
+    this.worldCanvas.enableRotation = false;
+    this.worldCanvas.enableScaling = false;
     this.worldCanvas.activate();
 
     this._tweakingIndex = 0;

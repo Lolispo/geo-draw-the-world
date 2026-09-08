@@ -14,6 +14,89 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
+## 35. Draw the World: merge the sizing stage into placement
+
+**REVIEW:** play a few rounds of Draw the World (any region). After you finish a drawing you
+now land straight on the map: drag the shape to move it, drag a blue corner to resize, drag the
+orange handle to rotate, wheel/pinch to zoom. Check the shape lands at a workable size, that
+sizing against real coastlines feels like a geography question rather than a guess, and that
+scores still read sensibly with size at 30% of the total.
+
+**✅ DONE 2026-09-08** — `TransformControls`, the `transform` screen and `STATES.TRANSFORM` are
+deleted. Handle geometry, hit-testing and drag maths were extracted to `js/shape-handles.js` and
+are consumed by `js/world-canvas.js`. Neutral drop size is 15% of the canvas's shorter side,
+derived from the viewport alone (`WorldCanvas.setNeutralScale`) — verified at 14.9% desktop /
+15.0% at 390px. **That fraction is 15%, not the ~25% this entry proposed**: measured against
+the geometry, the median country is only 3% of the world view's shorter dimension and 2-18% of
+a region view's, so 25% started every shape absurdly large. Two-finger pinch zooms the view; one
+finger belongs to the shape. Placement Only
+keeps scale locked at true size, Tweak stays move-only, Hard mode still has no basemap. Verified
+end to end with Playwright at 1440×900 and 390×844 (resize, rotate, move, zoom, place, skip,
+Blind, Shape Only, Tweak): 45 checks, no page errors.
+
+**⚠️ Known rough edge:** in World mode the neutral size is larger than most countries — at world
+zoom a typical country is ~30 world units and the drop size is ~180, so nearly every round starts
+by shrinking. That is deliberate (a start size small enough to match a median country is too small
+to grab, and one derived from the answer would hand away 30% of the score), but if it annoys in
+play the fix is to zoom the placement view in a little rather than to shrink the drop.
+
+**What:** Delete the standalone sizing/transform screen. The drawn shape goes straight
+onto the world map, where you move, rotate **and resize** it in one place, then confirm.
+State machine becomes `PROMPT → [PEEK] → DRAWING → PLACING → RESULTS`.
+
+**Why:** Owner (2026-09-06): "the sizing step today is too wonky and uninteresting."
+It asks you to judge a country's size against an abstract hint shape on an empty canvas,
+with no map context — so it's a guess, not a skill. Judged against real coastlines and
+neighbours it becomes a genuine geography question. Also kills a whole screen of UI.
+
+**Decided (owner, 2026-09-06):**
+- **Size stays scored.** Weights stay `shape 40 / size 30 / placement 30` in
+  `scoreShape()` — this is a UI merge, not a scoring change.
+- The shape drops at a **neutral size**, not its true size. Sizing must remain a real
+  decision.
+- One meaning per gesture: **corner handles resize the shape; wheel and pinch zoom the
+  view.** No overloading.
+
+**Approach / notes:**
+- **Neutral start size (do not leak the answer):** scale the drawn shape so its bounding
+  box's longest side is a fixed fraction (~25%) of the visible world rect's smaller
+  dimension. It MUST be computed from the viewport only — never from the reference
+  shape's real size, or the starting scale hands the player 30% of the score.
+- **Extract, don't duplicate.** The handle hit-testing and drag maths live in
+  `js/transform-controls.js` (`_getHandles`, `_hitHandle`, `_onMouseDown/_onMouseMove`,
+  `_drawHandles`). Lift them into a shared `js/shape-handles.js` and consume it from
+  `js/world-canvas.js`, which already has rotate (`_getRotateHandle`, `_hitRotateHandle`,
+  `enableRotation`) and view zoom (`_onWheel`) but no scale handles. Copying 200 lines of
+  handle code into the world canvas is the wrong move.
+- Once nothing references it: delete `TransformControls`, the `transform` screen in
+  `index.html`, `STATES.TRANSFORM` (`js/main.js` ~line 30) and its CSS.
+- Call sites to rewire in `js/main.js`: `onDrawingDone()` (currently sets
+  `transform-label` and activates `TransformControls`), `onTransformDone()` (folds into
+  the placement entry), and the deactivate branches that check `STATES.TRANSFORM`
+  (several — grep for it).
+- **Placement Only** mode (`_startPuzzlePlacing()`) keeps its scale **locked at true
+  size** — placement is the entire point of that mode, so it gets move + rotate only.
+- **Hard mode** is unchanged: it already hides the continent basemap (`js/main.js` ~646),
+  which is now the only scale reference, so hard mode gets meaningfully harder for free.
+  Verify it's still winnable before shipping.
+- **Shape Only** mode is unaffected — it already skips both stages.
+- Watch the touch ergonomics work from #25: handles need ≥28px touch targets, and four
+  corner handles plus a rotate handle on a phone-width map is crowded. Consider hiding
+  the corner handles until the shape is tapped/selected.
+
+**Knock-ons:**
+- **Retires #26** (sizing-screen footer overlap) — the screen ceases to exist.
+- **Folds into #11** (placement & results-map overhaul); do them together.
+- **Unblocks #9** (better default draw modes) — the weak sizing step was half the reason
+  the default plays badly.
+
+**Acceptance:** One screen between drawing and results. Resize, rotate and move all work
+on the map with mouse and touch at 390px wide. Size still scores. The starting scale is
+provably independent of the correct answer. No dead references to `TransformControls` or
+`STATES.TRANSFORM` anywhere in the repo.
+
+---
+
 ## 27. Export share of GDP (dataset expansion, wave 1)
 
 **REVIEW:** open Data Explorer → "Exports % of GDP". Check the top end reads sensibly
@@ -135,7 +218,9 @@ rankables appear in Explorer + Rank.
 
 ## 9. Draw the World: better default modes, disable the weak ones
 
-**Related: #35** — merging sizing into placement removes the weakest step in the draw loop. Re-evaluate the default after #35 lands.
+**#35 has landed** (2026-09-08) — sizing is merged into placement, so the weakest step in
+the draw loop is gone. That was half the reason the default played badly; the open part of
+this item is now purely mode *length* (Quick 3 for drawing) and which mode opens by default.
 
 **What:** Revisit which modes "Draw the World" offers and which is the default.
 Disable/hide the ones that play badly; make the default put the best foot forward.
@@ -324,23 +409,6 @@ format(s) and whether this is standalone or folded into item 22.
 
 ---
 
-## 26. Bug: sizing screen footer text overlaps itself on narrow viewports
-
-**⛔ SUPERSEDED BY #35** — the sizing screen is being merged into the placement screen, so this footer ceases to exist. Only fix it standalone if #35 is deferred.
-
-**What:** On the transform/sizing screen the two footer strings collide at phone widths —
-the left "Drag corners to resize, orange handle to rotate" and the right
-`"<Country>" shown at real size for scale reference` render on top of each other.
-
-**Why:** Both are drawn in `TransformControls.render()` (`js/transform-controls.js`), one
-`textAlign: left` at x=12 and one `textAlign: right` at w-12, with no width check. Reproduced
-at 390×844.
-
-**Acceptance:** Both strings legible at 390px wide — shorten, stack, or drop the right one
-below some width threshold.
-
----
-
 ## 30. Biggest trade partner + the relations data shape (dataset expansion, wave 3)
 
 **What:** "The countries this country trades with the most" — top export partners with
@@ -483,66 +551,10 @@ precision than it has.
 
 ---
 
-## 35. Draw the World: merge the sizing stage into placement
-
-**What:** Delete the standalone sizing/transform screen. The drawn shape goes straight
-onto the world map, where you move, rotate **and resize** it in one place, then confirm.
-State machine becomes `PROMPT → [PEEK] → DRAWING → PLACING → RESULTS`.
-
-**Why:** Owner (2026-09-06): "the sizing step today is too wonky and uninteresting."
-It asks you to judge a country's size against an abstract hint shape on an empty canvas,
-with no map context — so it's a guess, not a skill. Judged against real coastlines and
-neighbours it becomes a genuine geography question. Also kills a whole screen of UI.
-
-**Decided (owner, 2026-09-06):**
-- **Size stays scored.** Weights stay `shape 40 / size 30 / placement 30` in
-  `scoreShape()` — this is a UI merge, not a scoring change.
-- The shape drops at a **neutral size**, not its true size. Sizing must remain a real
-  decision.
-- One meaning per gesture: **corner handles resize the shape; wheel and pinch zoom the
-  view.** No overloading.
-
-**Approach / notes:**
-- **Neutral start size (do not leak the answer):** scale the drawn shape so its bounding
-  box's longest side is a fixed fraction (~25%) of the visible world rect's smaller
-  dimension. It MUST be computed from the viewport only — never from the reference
-  shape's real size, or the starting scale hands the player 30% of the score.
-- **Extract, don't duplicate.** The handle hit-testing and drag maths live in
-  `js/transform-controls.js` (`_getHandles`, `_hitHandle`, `_onMouseDown/_onMouseMove`,
-  `_drawHandles`). Lift them into a shared `js/shape-handles.js` and consume it from
-  `js/world-canvas.js`, which already has rotate (`_getRotateHandle`, `_hitRotateHandle`,
-  `enableRotation`) and view zoom (`_onWheel`) but no scale handles. Copying 200 lines of
-  handle code into the world canvas is the wrong move.
-- Once nothing references it: delete `TransformControls`, the `transform` screen in
-  `index.html`, `STATES.TRANSFORM` (`js/main.js` ~line 30) and its CSS.
-- Call sites to rewire in `js/main.js`: `onDrawingDone()` (currently sets
-  `transform-label` and activates `TransformControls`), `onTransformDone()` (folds into
-  the placement entry), and the deactivate branches that check `STATES.TRANSFORM`
-  (several — grep for it).
-- **Placement Only** mode (`_startPuzzlePlacing()`) keeps its scale **locked at true
-  size** — placement is the entire point of that mode, so it gets move + rotate only.
-- **Hard mode** is unchanged: it already hides the continent basemap (`js/main.js` ~646),
-  which is now the only scale reference, so hard mode gets meaningfully harder for free.
-  Verify it's still winnable before shipping.
-- **Shape Only** mode is unaffected — it already skips both stages.
-- Watch the touch ergonomics work from #25: handles need ≥28px touch targets, and four
-  corner handles plus a rotate handle on a phone-width map is crowded. Consider hiding
-  the corner handles until the shape is tapped/selected.
-
-**Knock-ons:**
-- **Retires #26** (sizing-screen footer overlap) — the screen ceases to exist.
-- **Folds into #11** (placement & results-map overhaul); do them together.
-- **Unblocks #9** (better default draw modes) — the weak sizing step was half the reason
-  the default plays badly.
-
-**Acceptance:** One screen between drawing and results. Resize, rotate and move all work
-on the map with mouse and touch at 390px wide. Size still scores. The starting scale is
-provably independent of the correct answer. No dead references to `TransformControls` or
-`STATES.TRANSFORM` anywhere in the repo.
-
----
-
 ## 36. New mode: Top 10 / Bottom 10
+
+**Related: #38** — the letter filter would be a third scope alongside world/continent here, and its
+adaptive-N rule is what makes most letters unplayable in this mode. Reuse this table, don't fork it.
 
 **What:** A round states a superlative — *"Top 10 Total GDP — Oceania"*, *"Bottom 10
 Urbanization — Africa"* — and shows a shuffled pool of candidate countries. You tap the
@@ -706,6 +718,91 @@ Playable at 390px wide.
 
 ---
 
+## 38. Letter filter: "countries starting with A-Z"
+
+**What:** A cross-cutting **letter filter** alongside the existing continent/region
+filter: play only the countries whose name starts with a chosen letter — *"Draw every
+country starting with S"*, *"Rank the B countries by GDP"*, *"Flag quiz: M"*. Manual
+pick from an A-Z grid, plus a "random letter" roll.
+
+**Why:** Owner request (2026-09-08). It slices the same 197 countries a completely
+different way from continents, and the alphabet is a natural, memorable challenge unit
+("all 27 S countries") that maps well to daily/streak framing.
+
+**The letter distribution is measured, not assumed** (2026-09-08, against
+`data/entities.json`; sovereign countries only, territories off). Every sovereign
+entity has both geometry and a flag image, so the counts are identical for draw, flag
+and rank modes — only the dataset-backed modes drop below these numbers, and only where
+a metric has gaps:
+
+| letter | n | letter | n | letter | n |
+|---|---|---|---|---|---|
+| A | 11 | J | 3 | S | **27** |
+| B | 17 | K | 6 | T | 12 |
+| C | 16 | L | 9 | U | 7 |
+| D | 5 | M | **18** | V | 4 |
+| E | 8 | N | 11 | W | **0** |
+| F | 3 | O | **1** | X | **0** |
+| G | 11 | P | 9 | Y | **1** |
+| H | 3 | Q | **1** | Z | 2 |
+| I | 9 | R | 3 | | |
+
+Total 197. The distribution is the whole design problem:
+
+- **W and X have zero sovereign countries.** W only becomes non-empty with the
+  territories toggle on (Western Sahara, Wallis and Futuna, West Bank and Gaza — see
+  #20). X is empty under every setting.
+- **O, Q and Y are one country each** (Oman, Qatar, Yemen) and Z is two. A "quiz" of one
+  is not a quiz — but it *is* a legitimate one-country draw round.
+- **S (27), M (18), B (17), C (16)** are longer than any existing draw mode. Ten freehand
+  countries is already called a slog in #9, so a 27-country draw round needs a cap.
+
+**Decided (owner, 2026-09-08):** concept accepted, details open — see the questions
+below before building.
+
+**Open questions to resolve when scoping:**
+- **Which modes get it.** Cheapest useful set is Draw the World country modes + Rank the
+  World + the flag quizzes. Is it a filter on *every* mode (like the continent filter),
+  or its own hub entry ("A-Z Challenge")?
+- **Empty and tiny letters.** Grey out a letter with 0 eligible, or hide it? Minimum
+  playable n per mode — draw can honestly play n=1, rank-line needs ~5, Top 10 (#36)
+  needs ≥12 by its own table, so under the adaptive rule only A, B, C, G, I, L, M, N, P,
+  S, T (and U at Top 5) would offer it. The grid must be filtered **per mode**, not
+  globally.
+- **Cap on the long letters.** Sample k of the 27 S countries, or play all of them?
+  Sampling breaks the "all the S countries" completionist appeal, which is most of the
+  charm; a cap is probably right for draw and wrong for flags.
+- **Does it combine with the continent filter?** "African countries starting with M" is
+  4-ish and mostly empty combos; likely they should be mutually exclusive.
+
+**Approach / notes:**
+- **Normalize the first letter.** Territories include `Åland Islands`; bucket by
+  `name.normalize('NFD').replace(/\p{Diacritic}/gu,'')[0].toUpperCase()` so Å lands under
+  A rather than creating a 27th bucket. Verify nothing else non-ASCII sneaks in when the
+  territories toggle is on.
+- **Sort by the displayed name**, and remember `The Gambia` / `The Bahamas` style names
+  are already stored as `Gambia` / `Bahamas` in `entities.json` — check the few
+  article-prefixed and "Saint …" names read the way a player expects before shipping.
+- Eligibility goes through `inCountryPool()` (`js/datasets.js`) like every other mode, so
+  aggregates and (by default) territories stay out — do not re-filter by hand (#5, #20).
+- Draw modes select their pool via `getCountryRegions()` / `startCountries(regionFile)`
+  (`js/geo-data.js:119`, `js/main.js:470`), which loads one `data/countries-<region>.json`
+  per region. A letter set spans all six files, so it needs the `loadAllCountries()` path
+  (`js/geo-data.js:38`) plus world region bounds (`this._regionBounds = null`), not the
+  per-region loader.
+- High-score keys: mirror the region pattern — `countries-letter-s`, `rank-letter-s`, etc.
+  Keys are permanent once shipped; pick the shape deliberately.
+- The A-Z grid is 26 buttons; at 390px that is a 5- or 6-column grid of ≥44px targets.
+  Disabled states must be visibly distinct, not just non-clickable.
+
+**Acceptance:** Pick a letter in at least one mode and play only those countries, with
+the count shown up front ("S — 27 countries"). Letters with too few countries for the
+chosen mode are visibly unavailable and unreachable. Random-letter roll never lands on an
+unplayable letter. Works at 390px wide.
+
+---
+
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`
@@ -737,3 +834,4 @@ full write-ups are in git history.
 - **#17** Country profile attributes: capital + religion (new non-metric data layer) — 2026-09-06
 - **#11** Placement & results-map overhaul — 2026-09-06
 - **#24** Shape quality: iterate + owner approval — 2026-09-06
+- **#26** Sizing-screen footer overlap — retired 2026-09-08, the screen was deleted by #35

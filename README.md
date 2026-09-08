@@ -37,10 +37,11 @@ python3 -m http.server 8080
 ## How it works
 
 - **Canvas** for all rendering; freehand drawing supports multiple shapes.
-- Shapes are projected with a **Mercator projection** into a 1600×900 world space.
+- Shapes are projected with a **Mercator projection** into a 1600×1100 world space.
 - Scoring rasterizes your placed shape and the reference and computes
   **intersection-over-union (IoU)**.
-- Touch support on the drawing, transform, and world canvases.
+- Touch support on both canvases: one finger draws, moves and resizes; two fingers
+  pinch-zoom the map.
 
 ## Data
 
@@ -56,7 +57,7 @@ python3 -m http.server 8080
 |---|---|
 | `index.html` | All game screens |
 | `js/main.js` | Central `Game` class / state machine |
-| `js/drawing-canvas.js`, `js/transform-controls.js`, `js/world-canvas.js` | The three interactive canvases |
+| `js/drawing-canvas.js`, `js/world-canvas.js`, `js/shape-handles.js` | The two interactive canvases and their shared resize/rotate handles |
 | `js/scoring.js` | Rasterized IoU scoring |
 | `js/geo-data.js`, `js/datasets.js` | Data loading and reference shapes |
 | `data/` | Country geometry, stats, flags |
