@@ -78,7 +78,7 @@ existing `xs` Somaliland. Politically sensitive — present neutrally as "de-fac
 | Abkhazia | ❌ no | needs asset | needs sourced geometry |
 | South Ossetia | ❌ no | needs asset | needs sourced geometry |
 | Transnistria | ❌ no | needs asset | needs sourced geometry |
-| Nagorno-Karabakh (Artsakh) | ❌ no | needs asset | **dissolved 2024 — probably exclude** |
+| Nagorno-Karabakh (Artsakh) | ❌ no | needs asset | **dissolved 2024 — excluded, and staying excluded** |
 
 (Already in our set: `xk` Kosovo, `tw` Taiwan, `xs` Somaliland, `eh` Western Sahara.)
 

@@ -16,7 +16,7 @@ import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './soun
 import { getHighScore, saveScore } from './high-scores.js';
 import {
   loadDatasets, loadEntities, inCountryPool, getDataset, getDatasetList,
-  getEntries, getContinents, formatValue
+  getEntries, getEntitiesList, getContinents, formatValue
 } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
@@ -70,6 +70,17 @@ const DIFFICULTY_HINT = {
 // list is not simply the answer sheet.
 const MAX_SUGGESTIONS = 8;
 
+// The picker fields the random roll is allowed to change, in form order. Each one
+// gets a lock beside it, so "same metric, surprise continent" is one click rather
+// than a hunt through the dropdowns (owner, 2026-09-12).
+const LOCKABLE = [
+  { key: 'metric', label: 'Metric' },
+  { key: 'scope', label: 'Filter' },
+  { key: 'end', label: 'End' },
+  { key: 'difficulty', label: 'Difficulty' },
+  { key: 'input', label: 'Input' },
+];
+
 // Names are compared with diacritics stripped and case folded, so "Cote d'Ivoire"
 // matches "Côte d'Ivoire" and nobody loses a life to a keyboard layout.
 function normalizeName(s) {
@@ -90,6 +101,13 @@ export class TopNGame {
     this.hard = false;
     this.force10 = false;
     this.inputStyle = 'cards';
+    // Flags-only makes the flag the whole card, and at 38px an emblem-heavy flag is
+    // a smudge. Session preference, not a saved setting.
+    this.flagSize = 'normal';
+
+    // Difficulty and input start locked: the roll never touched them before locks
+    // existed, and one that silently drops you into typing is a different game.
+    this.locks = { metric: false, scope: false, end: false, difficulty: true, input: true };
 
     this.round = null;
   }
@@ -123,6 +141,19 @@ export class TopNGame {
   _eligible(datasetId, scope, higherFirst) {
     const continent = scope === SCOPE_WORLD ? null : scope;
     return getEntries(datasetId, { continent, higherFirst }).filter((e) => inCountryPool(e.code));
+  }
+
+  // Countries in scope that the metric has no number for at all. Tuvalu is absent
+  // from the exports table, so "lowest exports" can never contain it — but its
+  // absence is exactly what makes a player name it first, and being told "not one
+  // of the 188 in range" reads as "wrong" rather than "we have no figure". The
+  // roster is shown in the round so the gap is visible instead of inferred
+  // (owner, 2026-09-12).
+  _unranked(datasetId, scope) {
+    const have = new Set(getEntries(datasetId).map((e) => e.code));
+    return getEntitiesList().filter((e) =>
+      !have.has(e.code) && inCountryPool(e) &&
+      (scope === SCOPE_WORLD || e.continent === scope));
   }
 
   // Is the cut between rank n and n+1 a real question? Years are integers on a
@@ -232,6 +263,7 @@ export class TopNGame {
       style: this.inputStyle,
       hard: this.hard,
       eligible: plan.sorted.length,
+      unranked: this._unranked(datasetId, scope),
       sorted: plan.sorted,
       rankOf: new Map(plan.sorted.map((e, i) => [e.code, i + 1])),
       answers,
@@ -246,10 +278,24 @@ export class TopNGame {
     this._renderRound();
   }
 
+  // Every playable combination that also satisfies whatever is locked.
+  _rollCombos() {
+    return this._validCombos().filter((c) =>
+      (!this.locks.metric || c.datasetId === this.datasetId) &&
+      (!this.locks.scope || c.scope === this.scope) &&
+      (!this.locks.end || c.higherFirst === this.higherFirst));
+  }
+
   startRandom() {
-    const combos = this._validCombos();
+    const combos = this._rollCombos();
     if (!combos.length) { this.showPicker(); return; }
     const pick = combos[Math.floor(Math.random() * combos.length)];
+    // Style and difficulty are independent of whether a combination is playable,
+    // so they are rolled separately rather than multiplied into the combo list.
+    if (!this.locks.input) {
+      this.inputStyle = INPUT_STYLES[Math.floor(Math.random() * INPUT_STYLES.length)].id;
+    }
+    if (!this.locks.difficulty) this.hard = Math.random() < 0.5;
     playNav();
     this.start(pick.datasetId, pick.scope, pick.higherFirst);
   }
@@ -306,8 +352,11 @@ export class TopNGame {
     panel.appendChild(head);
 
     // A metric can stop being playable when the filter changes under it, so the
-    // selection is repaired before anything is drawn rather than left dangling.
-    if (!this._plan(this.datasetId, this.scope, this.higherFirst).n) {
+    // selection is repaired before anything is drawn rather than left dangling —
+    // unless the metric is locked, in which case swapping it out is exactly the
+    // behind-your-back change the lock exists to prevent. Locked and unplayable
+    // shows "nothing playable here" instead, which the roll can still get you out of.
+    if (!this.locks.metric && !this._plan(this.datasetId, this.scope, this.higherFirst).n) {
       const fallback = this._datasets().find((d) => this._plan(d.id, this.scope, this.higherFirst).n);
       if (fallback) this.datasetId = fallback.id;
     }
@@ -318,10 +367,10 @@ export class TopNGame {
     form.appendChild(this._selectRow('Metric', this._datasets().map((d) => {
       const plan = this._plan(d.id, this.scope, this.higherFirst);
       return { id: d.id, label: plan.n ? d.name : `${d.name} — ${plan.reason}`, disabled: !plan.n };
-    }), this.datasetId, (v) => { this.datasetId = v; this.showPicker(); }));
+    }), this.datasetId, (v) => { this.datasetId = v; this.showPicker(); }, 'metric'));
 
     form.appendChild(this._selectRow('Filter', this._scopes(), this.scope,
-      (v) => { this.scope = v; this.showPicker(); }));
+      (v) => { this.scope = v; this.showPicker(); }, 'scope'));
 
     const pairRow = document.createElement('div');
     pairRow.className = 'topn-form-row topn-form-pair';
@@ -332,6 +381,7 @@ export class TopNGame {
     pairRow.appendChild(this._select([
       { id: 'hi', label: 'Top' }, { id: 'lo', label: 'Bottom' },
     ], this.higherFirst ? 'hi' : 'lo', (v) => { this.higherFirst = v === 'hi'; this.showPicker(); }));
+    pairRow.appendChild(this._lockBtn('end'));
     // Difficulty is the distractor rule, and the typing style has no distractors.
     const diffSelect = this._select([
       { id: 'easy', label: 'Easy' }, { id: 'hard', label: 'Hard' },
@@ -339,6 +389,9 @@ export class TopNGame {
     this.inputStyle === 'type');
     diffSelect.title = DIFFICULTY_HINT[this.inputStyle === 'type' ? 'type' : (this.hard ? 'hard' : 'easy')];
     pairRow.appendChild(diffSelect);
+    // Locking difficulty is meaningless when the style is typing AND the roll cannot
+    // move off typing — there is then no round in which distractors exist.
+    pairRow.appendChild(this._lockBtn('difficulty', this.inputStyle === 'type' && this.locks.input));
     form.appendChild(pairRow);
 
     // The tooltip only exists for a mouse, and what difficulty means here is not
@@ -349,7 +402,7 @@ export class TopNGame {
     form.appendChild(hint);
 
     form.appendChild(this._selectRow('Input', INPUT_STYLES, this.inputStyle,
-      (v) => { this.inputStyle = v; this.showPicker(); }));
+      (v) => { this.inputStyle = v; this.showPicker(); }, 'input'));
 
     panel.appendChild(form);
 
@@ -387,9 +440,24 @@ export class TopNGame {
     const rollBtn = document.createElement('button');
     rollBtn.className = 'btn btn-tool topn-roll';
     rollBtn.textContent = '🎲 Random roll';
+    const open = LOCKABLE.filter((f) => !this.locks[f.key]);
+    const rollable = this._rollCombos().length > 0;
+    rollBtn.disabled = !rollable;
     rollBtn.addEventListener('click', () => this.startRandom());
     actions.append(startBtn, rollBtn);
     panel.appendChild(actions);
+
+    // What the roll will actually change. Without this the locks are invisible
+    // state and the button is a mystery box.
+    const rollHint = document.createElement('div');
+    rollHint.className = 'topn-hint topn-roll-hint';
+    rollHint.textContent = !rollable
+      ? 'No round matches the locked fields — unlock one to roll.'
+      : open.length
+        ? `Roll changes: ${open.map((f) => f.label.toLowerCase()).join(', ')}. Tap 🔒 to lock a field.`
+        : 'Everything is locked — the roll would change nothing. Tap 🔒 to free a field.';
+    rollBtn.title = rollHint.textContent;
+    panel.appendChild(rollHint);
 
     const opts = document.createElement('div');
     opts.className = 'topn-options';
@@ -426,14 +494,31 @@ export class TopNGame {
     return sel;
   }
 
-  _selectRow(label, options, value, onPick) {
+  _selectRow(label, options, value, onPick, lockKey = null) {
     const row = document.createElement('div');
     row.className = 'topn-form-row';
     const lab = document.createElement('label');
     lab.className = 'topn-form-label';
     lab.textContent = label;
     row.append(lab, this._select(options, value, onPick));
+    if (lockKey) row.appendChild(this._lockBtn(lockKey));
     return row;
+  }
+
+  // 🔒 = the roll keeps this, 🎲 = the roll may change it. The dice face is the
+  // point: it says what happens next, where an open padlock only says "unlocked".
+  _lockBtn(key, disabled = false) {
+    const locked = this.locks[key];
+    const label = LOCKABLE.find((f) => f.key === key).label;
+    const b = document.createElement('button');
+    b.className = 'btn topn-lock' + (locked ? ' is-locked' : '');
+    b.textContent = locked ? '🔒' : '🎲';
+    b.disabled = disabled;
+    b.title = locked ? `${label} is locked — the roll keeps it` : `${label} is free — the roll may change it`;
+    b.setAttribute('aria-pressed', String(locked));
+    b.setAttribute('aria-label', b.title);
+    b.addEventListener('click', () => { this.locks[key] = !locked; playClick(); this.showPicker(); });
+    return b;
   }
 
   // ---- round --------------------------------------------------------------
@@ -458,6 +543,7 @@ export class TopNGame {
       panel.appendChild(this._renderLadder());
       panel.appendChild(this._renderGrid());
     }
+    panel.appendChild(this._renderUnranked());
 
     c.appendChild(panel);
     if (r.style === 'type') this._typeInput?.focus();
@@ -490,7 +576,22 @@ export class TopNGame {
       `<span class="heart ${i < r.lives ? '' : 'lost'}">❤</span>`).join('');
 
     head.append(back, title, scope, found, lives);
+    if (r.style === 'flags') head.appendChild(this._flagSizeBtn());
     return head;
+  }
+
+  _flagSizeBtn() {
+    const big = this.flagSize === 'large';
+    const b = document.createElement('button');
+    b.className = 'btn btn-tool topn-flagsize' + (big ? ' active' : '');
+    b.textContent = big ? '🔍 Smaller' : '🔍 Bigger';
+    b.title = big ? 'Back to more flags per row' : 'Fewer, larger flags';
+    b.addEventListener('click', () => {
+      this.flagSize = big ? 'normal' : 'large';
+      playClick();
+      this._renderRound();
+    });
+    return b;
   }
 
   // The running commentary: what the last pick was and where it actually ranked.
@@ -527,7 +628,9 @@ export class TopNGame {
   _renderGrid() {
     const r = this.round;
     const grid = document.createElement('div');
-    grid.className = 'topn-grid' + (r.style === 'flags' ? ' is-flags' : '');
+    const flagsOnly = r.style === 'flags';
+    grid.className = 'topn-grid' + (flagsOnly ? ' is-flags' : '') +
+      (flagsOnly && this.flagSize === 'large' ? ' is-big' : '');
 
     for (const e of r.options) {
       const seen = r.revealed.get(e.code);
@@ -536,7 +639,9 @@ export class TopNGame {
       card.dataset.code = e.code;
       card.disabled = !!seen;
 
-      const flag = `<img class="topn-flag" src="${flagUrl(e.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">`;
+      // Flags-only is the whole card and can be blown up past 100px, so it needs a
+      // source wider than the 40px thumbnail the text rows use.
+      const flag = `<img class="topn-flag" src="${flagUrl(e.code, flagsOnly ? 'w320' : 'w40')}" alt="" onerror="this.style.visibility='hidden'">`;
       if (r.style === 'flags' && !seen) {
         // Flags-only hides the name until you commit to the flag; revealing it on
         // the pick is what makes a wrong guess teach you something.
@@ -551,6 +656,30 @@ export class TopNGame {
       grid.appendChild(card);
     }
     return grid;
+  }
+
+  // Collapsed by default: it is reference, not part of the loop. The open state
+  // survives a re-render because the board is rebuilt on every single pick.
+  _renderUnranked() {
+    const r = this.round;
+    const el = document.createElement('details');
+    el.className = 'topn-unranked';
+    if (!r.unranked.length) { el.hidden = true; return el; }
+    el.open = !!this._unrankedOpen;
+    el.addEventListener('toggle', () => { this._unrankedOpen = el.open; });
+
+    const sum = document.createElement('summary');
+    sum.textContent = `${r.unranked.length} not in this round — no ${r.dataset.name} data`;
+
+    const body = document.createElement('div');
+    body.className = 'topn-unranked-list';
+    body.innerHTML = r.unranked.map((e) =>
+      '<span class="topn-unranked-chip">' +
+      `<img class="topn-flag" src="${flagUrl(e.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
+      `<span>${e.name}</span></span>`).join('');
+
+    el.append(sum, body);
+    return el;
   }
 
   _renderTypeInput() {
@@ -621,8 +750,10 @@ export class TopNGame {
       const rank = i + 1;
       const found = r.found.has(e.code);
       if (!found && !reveal) {
-        return `<div class="topn-row is-empty"><span class="topn-result-rank">${rank}</span>` +
-               '<span class="topn-blank"></span></div>';
+        // Same mark/rank columns as a filled row, so nothing shifts sideways when
+        // the slot fills — the height is held by `.topn-row` in CSS.
+        return '<div class="topn-row is-empty"><span class="topn-result-mark"></span>' +
+               `<span class="topn-result-rank">${rank}</span><span class="topn-blank"></span></div>`;
       }
       return this._rowHtml({
         cls: found ? 'is-hit' : 'is-miss',
@@ -681,7 +812,15 @@ export class TopNGame {
       || r.sorted.find((e) => normalizeName(e.name).startsWith(q));
 
     if (!match) {
-      r.lastPick = { note: `"${raw.trim()}" is not one of the ${r.eligible} countries in range — no life lost.` };
+      // A real country the metric has no figure for is a different thing from a
+      // typo, and saying so is the whole point of tracking the unranked roster.
+      const noData = r.unranked.find((e) => normalizeName(e.name) === q)
+        || r.unranked.find((e) => normalizeName(e.name).startsWith(q));
+      r.lastPick = {
+        note: noData
+          ? `${noData.name} has no ${r.dataset.name} data, so it is not in this round — no life lost.`
+          : `"${raw.trim()}" is not one of the ${r.eligible} countries in range — no life lost.`,
+      };
       playSkip();
       this._renderRound();
       return;

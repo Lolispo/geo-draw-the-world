@@ -1879,7 +1879,28 @@ canvas {
   width: 58px;
   flex-shrink: 0;
 }
+.topn-form-pair { gap: 6px; }
 .topn-form-pair .topn-select { flex: 1; }
+
+/* The roll lock beside each field. Square and narrow — it must not eat the width
+   the selects need at 390px. */
+.topn-lock {
+  width: 36px;
+  min-height: 40px;
+  padding: 0;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  line-height: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.topn-lock.is-locked {
+  background: var(--surface2);
+  border-color: var(--accent);
+}
+.topn-lock:disabled { opacity: 0.35; cursor: default; }
+.topn-roll-hint { text-align: center; }
 
 .topn-select {
   flex: 1;
@@ -1952,6 +1973,14 @@ canvas {
   font-size: 0.95rem;
 }
 .topn-lives { font-size: 1.05rem; letter-spacing: 2px; }
+/* Compact: the round head already wraps at 390px, and this must not push the
+   lives onto a second line. */
+.topn-flagsize {
+  padding: 4px 8px;
+  min-height: 30px;
+  font-size: 0.74rem;
+  white-space: nowrap;
+}
 .topn-lives .heart { color: var(--red); }
 .topn-lives .heart.lost { color: var(--border); }
 
@@ -2000,10 +2029,17 @@ canvas {
   flex: 1;
   padding-bottom: 4px;
 }
-/* Flags-only fits many more per row — the flag is the whole card */
+/* Flags-only fits more per row — the flag is the whole card. 58px columns fit a
+   38px flag, which is a smudge for anything with an emblem (Mexico, Sri Lanka,
+   most of the Caribbean), so the floor is 76px and 🔍 Bigger doubles it
+   (owner, 2026-09-12). */
 .topn-grid.is-flags {
-  grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
   gap: 6px;
+}
+.topn-grid.is-flags.is-big {
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 8px;
 }
 
 .topn-card {
@@ -2045,18 +2081,24 @@ canvas {
   color: var(--text-dim);
   flex-shrink: 0;
 }
+/* A fixed frame, not `height: auto`: Nepal's pennant and Switzerland's square are
+   not 3:2, and a taller flag would make its ladder row taller than the rest. */
 .topn-flag {
   width: 24px;
-  height: auto;
+  height: 16px;
+  object-fit: contain;
   border-radius: 2px;
   flex-shrink: 0;
 }
 .is-flags .topn-card {
   justify-content: center;
   padding: 6px 4px;
-  min-height: 44px;
+  min-height: 56px;
 }
-.is-flags .topn-flag { width: 38px; }
+.is-flags .topn-flag { width: 62px; height: 42px; }
+.is-flags.is-big .topn-card { min-height: 88px; }
+.is-flags.is-big .topn-flag { width: 108px; height: 72px; }
+.is-flags.is-big .topn-card-name { font-size: 0.72rem; }
 .is-flags .topn-card-name {
   display: none;
 }
@@ -2143,15 +2185,25 @@ canvas {
   padding: 4px 0 1px;
 }
 
-.topn-row.is-empty {
+/* Every ladder row is the same box — empty slot, hit, miss — so filling a slot in
+   never changes the list's height and the board stops jumping under you while you
+   answer (owner, 2026-09-12). */
+.topn-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 2px 10px;
-  min-height: 22px;
+  padding: 5px 10px;
+  min-height: 30px;
+  box-sizing: border-box;
+  /* Pinned, not inherited: the body's 1.3 makes the 1rem value text a 21px line
+     box, which pushes a filled row one pixel past an empty one. */
+  line-height: 1.2;
   border-radius: 6px;
+  border-left: 3px solid transparent;
+}
+.topn-row.is-empty {
   background: var(--surface);
-  border-left: 3px solid var(--border);
+  border-left-color: var(--border);
   opacity: 0.65;
 }
 .topn-row.is-empty .topn-result-rank { color: var(--text-dim); }
@@ -2159,6 +2211,49 @@ canvas {
   flex: 1;
   height: 1px;
   border-bottom: 1px dashed var(--border);
+}
+
+/* Countries the metric has no figure for. Reference, not part of the loop, so it
+   is a collapsed row until asked for. */
+.topn-unranked {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.topn-unranked > summary {
+  padding: 7px 10px;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+.topn-unranked > summary::before {
+  content: '▸';
+  margin-right: 7px;
+}
+.topn-unranked[open] > summary::before { content: '▾'; }
+.topn-unranked > summary::-webkit-details-marker { display: none; }
+.topn-unranked-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 10px 10px;
+  max-height: 132px;
+  overflow-y: auto;
+}
+.topn-unranked-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  font-size: 0.72rem;
 }
 
 /* --- results --- */
@@ -2186,13 +2281,7 @@ canvas {
   gap: 4px;
 }
 .topn-result-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
   background: var(--surface2);
-  border-radius: 6px;
-  border-left: 3px solid transparent;
   animation: fadeIn 0.3s ease-out both;
 }
 .topn-result-row.is-hit { border-left-color: var(--green); }
@@ -2213,7 +2302,16 @@ canvas {
   font-variant-numeric: tabular-nums;
   font-size: 0.85rem;
 }
-.topn-result-name { flex: 1; font-size: 0.9rem; }
+.topn-result-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+  /* "Saint Vincent and the Grenadines" wrapping would make its row twice as tall
+     as every other one — the exact jump this layout exists to prevent. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .topn-result-value {
   font-variant-numeric: tabular-nums;
   font-weight: 600;

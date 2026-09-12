@@ -256,6 +256,70 @@ Results name every correct answer with its value. Playable at 390px wide.
 
 ---
 
+## 39. Top 10 / Bottom 10: the data gap, a steady ladder, roll locks, readable flags
+
+**REVIEW:** play **Bottom 10 · Total exports · World** with the typing style. Type
+*Tuvalu* — it should say it has no exports data rather than calling it wrong, and the
+"25 not in this round" strip at the bottom should list it. Watch the ladder as you fill
+slots: nothing above or below should move. Then go back and try the 🔒/🎲 locks in the
+picker — lock the metric, roll, and check only the filter and end change. Finally switch
+Input to **Flags only** and see whether the default size is now readable, and whether
+🔍 Bigger is big enough.
+
+**✅ DONE 2026-09-12** — all four, verified with Playwright at 1440×900 and 390×844
+(26 checks, no page errors).
+
+**What the owner hit (2026-09-12):**
+
+1. **"I was doing bottom 10 for total exports and instantly wanted to write Tuvalu. But we
+   lacked data on Tuvalu — implying it was probably one of the lowest."** The metric's
+   coverage gap *is* the answer-shaped hole: the countries too small to report exports are
+   exactly the ones with the smallest exports. Being told "not one of the 188 countries in
+   range" reads as *wrong*, not as *we have no figure*.
+   - `TopNGame._unranked(datasetId, scope)` is the registry minus the dataset's own keys,
+     through `inCountryPool` and the scope filter. Stored on the round as `unranked`.
+   - `_renderUnranked()` renders it as a collapsed `<details>` under the round — reference,
+     not part of the loop. The open state lives on the instance because the board is rebuilt
+     on every single pick.
+   - A typed name that matches the roster now gets its own note: *"Tuvalu has no Total
+     exports data, so it is not in this round — no life lost."*
+   - Counts measured 2026-09-12 (territories off): 0 for population, 2 for GDP, 25 for
+     exports, 3 for independence year. With territories on, 3–63.
+   - **Not done, deliberately:** letting you *name* a country with no data. It cannot be
+     ranked, so it can be neither right nor wrong — the roster tells you the same thing
+     without pretending the pick means something.
+
+2. **"Have the height of the row not change when something pops in, so the list doesn't
+   jump around."** `.topn-row` is now one box for every state — empty slot, hit, miss —
+   at `min-height: 30px` with `line-height` pinned at 1.2 (the body's 1.3 made a filled
+   row's 1rem value text a 21px line box, one pixel taller than an empty row). The empty
+   slot also carries a mark spacer so the rank column does not shift sideways, `.topn-flag`
+   is a fixed 24×16 frame with `object-fit: contain` (Nepal's pennant and Switzerland's
+   square are not 3:2, and used to make their own rows taller), and `.topn-result-name`
+   ellipsises rather than wrapping to a second line.
+
+3. **"Allow locking some things and randoming from the rest."** Every picker field has a
+   lock beside it: 🔒 keeps it, 🎲 means the roll may change it. Difficulty and input style
+   start locked, because the roll never touched them before and one that silently drops you
+   into typing is a different game. `_rollCombos()` filters the valid-combination list by
+   the locks; style and difficulty are rolled separately since they never affect whether a
+   combination is playable. A line under the button says what the roll will change, and the
+   button disables itself when the locks leave nothing playable. The "repair a metric that
+   stopped being playable" rule in `showPicker()` now skips a **locked** metric — silently
+   swapping it is exactly what the lock exists to prevent.
+
+4. **"In flag mode the flags are very tiny at 100% zoom."** Flags-only columns went from
+   58px/38px flags to 76px/62px, with a 🔍 Bigger toggle for 124px/108px, and the cards now
+   load `w320` rather than the `w40` thumbnail the text rows use — at 38px the emblem-heavy
+   flags (Mexico, Sri Lanka, most of the Caribbean) were a smudge whatever the CSS said.
+
+**Also asked: Artsakh.** It is not in the data and never was — `docs/territories-candidates.md`
+dropped it when the other de-facto states (Abkhazia, N. Cyprus, S. Ossetia, Transnistria)
+landed, because it dissolved in 2024 and has neither geometry nor a flag asset. Asia's
+territory list holds the other three, which is what made its absence look like a bug.
+
+---
+
 ## 27. Export share of GDP (dataset expansion, wave 1)
 
 **REVIEW:** open Data Explorer → "Exports % of GDP". Check the top end reads sensibly
