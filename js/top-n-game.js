@@ -20,7 +20,7 @@ import {
 } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
-import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
+import { getIncludeTerritories, setIncludeTerritories, getHideAnswers, setHideAnswers } from './settings.js';
 
 // Rule 1 — N adapts to how many countries the filter actually has.
 //
@@ -79,6 +79,8 @@ const LOCKABLE = [
   { key: 'end', label: 'End' },
   { key: 'difficulty', label: 'Difficulty' },
   { key: 'input', label: 'Input' },
+  { key: 'territories', label: 'Territories' },
+  { key: 'force10', label: 'Force 10' },
 ];
 
 // Names are compared with diacritics stripped and case folded, so "Cote d'Ivoire"
@@ -107,7 +109,13 @@ export class TopNGame {
 
     // Difficulty and input start locked: the roll never touched them before locks
     // existed, and one that silently drops you into typing is a different game.
-    this.locks = { metric: false, scope: false, end: false, difficulty: true, input: true };
+    // Territories starts locked for a stronger reason — it is a global setting
+    // (js/settings.js) that Draw, Rank and the Explorer read too, so a free roll
+    // would reach outside this mode.
+    this.locks = {
+      metric: false, scope: false, end: false,
+      difficulty: true, input: true, territories: true, force10: false,
+    };
 
     this.round = null;
   }
@@ -287,7 +295,20 @@ export class TopNGame {
   }
 
   startRandom() {
-    const combos = this._rollCombos();
+    // Territories and Force 10 decide which combinations are playable at all, so
+    // they are rolled before the combo list is built. If the flip leaves nothing
+    // playable under the other locks they go back: a roll that never starts a round
+    // must not strand a changed setting — least of all the global territories one.
+    const before = { territories: getIncludeTerritories(), force10: this.force10 };
+    if (!this.locks.territories) setIncludeTerritories(Math.random() < 0.5);
+    if (!this.locks.force10) this.force10 = Math.random() < 0.5;
+
+    let combos = this._rollCombos();
+    if (!combos.length) {
+      setIncludeTerritories(before.territories);
+      this.force10 = before.force10;
+      combos = this._rollCombos();
+    }
     if (!combos.length) { this.showPicker(); return; }
     const pick = combos[Math.floor(Math.random() * combos.length)];
     // Style and difficulty are independent of whether a combination is playable,
@@ -368,6 +389,14 @@ export class TopNGame {
       const plan = this._plan(d.id, this.scope, this.higherFirst);
       return { id: d.id, label: plan.n ? d.name : `${d.name} — ${plan.reason}`, disabled: !plan.n };
     }), this.datasetId, (v) => { this.datasetId = v; this.showPicker(); }, 'metric'));
+
+    // Same reasoning as the difficulty hint further down: what "Electricity from
+    // renewables" measures is not guessable from the name, and a tooltip does not
+    // exist on a phone.
+    const metricHint = document.createElement('div');
+    metricHint.className = 'topn-hint topn-metric-hint';
+    metricHint.textContent = getDataset(this.datasetId)?.blurb || '';
+    form.appendChild(metricHint);
 
     form.appendChild(this._selectRow('Filter', this._scopes(), this.scope,
       (v) => { this.scope = v; this.showPicker(); }, 'scope'));
@@ -457,7 +486,6 @@ export class TopNGame {
         ? `Roll changes: ${open.map((f) => f.label.toLowerCase()).join(', ')}. Tap 🔒 to lock a field.`
         : 'Everything is locked — the roll would change nothing. Tap 🔒 to free a field.';
     rollBtn.title = rollHint.textContent;
-    panel.appendChild(rollHint);
 
     const opts = document.createElement('div');
     opts.className = 'topn-options';
@@ -472,8 +500,18 @@ export class TopNGame {
     force.textContent = this.force10 ? '🔟 Force 10: On' : '🔟 Force 10: Off';
     force.title = 'Always play 10, even where the filter is too small for it to be a fair question';
     force.addEventListener('click', () => { this.force10 = !this.force10; this.showPicker(); });
-    opts.append(terr, force);
+    const hideOn = getHideAnswers();
+    const hide = document.createElement('button');
+    hide.className = 'btn btn-tool' + (hideOn ? ' active' : '');
+    hide.textContent = hideOn ? '🙈 Hide answers: On' : '🙈 Hide answers: Off';
+    hide.title = 'Keep the countries you never found off the results screen';
+    hide.addEventListener('click', () => { setHideAnswers(!getHideAnswers()); this.showPicker(); });
+    opts.append(this._optionGroup(terr, 'territories'), this._optionGroup(force, 'force10'), hide);
     panel.appendChild(opts);
+
+    // Below the toggles, not above them: this text swaps between three sentences of
+    // very different length, and from here a reflow cannot push the buttons around.
+    panel.appendChild(rollHint);
 
     c.appendChild(panel);
   }
@@ -503,6 +541,15 @@ export class TopNGame {
     row.append(lab, this._select(options, value, onPick));
     if (lockKey) row.appendChild(this._lockBtn(lockKey));
     return row;
+  }
+
+  // A toggle and its lock as one unit, so they wrap together rather than the lock
+  // drifting onto the next line away from the button it belongs to.
+  _optionGroup(btn, lockKey) {
+    const g = document.createElement('div');
+    g.className = 'topn-option-group';
+    g.append(btn, this._lockBtn(lockKey));
+    return g;
   }
 
   // 🔒 = the roll keeps this, 🎲 = the roll may change it. The dice face is the
@@ -866,12 +913,21 @@ export class TopNGame {
   _showResults() {
     const r = this.round;
     playScoreReveal();
+    const key = this._scoreKey(r);
+    r.isNewBest = saveScore(key, r.found.size, r.found.size, r.n);
+    r.prevBest = getHighScore(key);
+    this._renderResults(!getHideAnswers());
+  }
 
+  // With Hide answers on, the slots you never filled stay blank and a Reveal button
+  // spoils them on purpose (TODOS #43) — so a round you could not finish is still
+  // a dead end you can open, and Play Again is still a question.
+  _renderResults(reveal) {
+    const r = this.round;
     const hits = r.found.size;
     const cleared = hits >= r.n;
-    const key = this._scoreKey(r);
-    const isNew = saveScore(key, hits, hits, r.n);
-    const prev = getHighScore(key);
+    const isNew = r.isNewBest;
+    const prev = r.prevBest;
 
     const pct = hits / r.n;
     let grade = 'Rough one';
@@ -881,7 +937,7 @@ export class TopNGame {
 
     // The same ladder the round was played on, with the slots you never filled
     // now revealed — so the results screen is the finished board, not a new one.
-    const answerRows = this._slotsHtml({ reveal: true, clickable: true });
+    const answerRows = this._slotsHtml({ reveal, clickable: true });
     const wrongRows = this._missesHtml({ clickable: true });
 
     const styleLabel = INPUT_STYLES.find((s) => s.id === r.style).label.split('—')[0].trim();
@@ -903,10 +959,13 @@ export class TopNGame {
           ? '<div class="high-score-note" style="display:block">New best for this round!</div>'
           : (prev ? `<div class="high-score-note" style="display:block">Best: ${prev.score}/${r.n}</div>` : '')}
       </div>
-      <div class="topn-results-subhead">The real ${this._directionWord(r.dataset.format, r.higherFirst).toLowerCase()} ${r.n}</div>
+      <div class="topn-results-subhead">${reveal
+        ? `The real ${this._directionWord(r.dataset.format, r.higherFirst).toLowerCase()} ${r.n}`
+        : `Your ${hits} of ${r.n} — ${r.n - hits} still hidden`}</div>
       <div class="topn-ladder is-final">${answerRows}${wrongRows}</div>
       <div class="results-actions">
         <button id="topn-again" class="btn btn-accent">Play Again</button>
+        ${reveal ? '' : '<button id="topn-reveal" class="btn btn-tool">👀 Reveal answers</button>'}
         <button id="topn-change" class="btn btn-tool">Change round</button>
         <button id="topn-menu" class="btn btn-tool">Menu</button>
       </div>
@@ -918,6 +977,7 @@ export class TopNGame {
       if (row) openCountryPanel(row.dataset.code);
     });
     panel.querySelector('#topn-again').addEventListener('click', () => this.start(r.dataset.id, r.scope, r.higherFirst));
+    panel.querySelector('#topn-reveal')?.addEventListener('click', () => { playScoreReveal(); this._renderResults(true); });
     panel.querySelector('#topn-change').addEventListener('click', () => this.showPicker());
     panel.querySelector('#topn-menu').addEventListener('click', () => this.onFinish(null));
   }

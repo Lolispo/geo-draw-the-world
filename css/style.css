@@ -1900,7 +1900,17 @@ canvas {
   border-color: var(--accent);
 }
 .topn-lock:disabled { opacity: 0.35; cursor: default; }
-.topn-roll-hint { text-align: center; }
+.topn-roll-hint {
+  text-align: center;
+  /* Reserved: the three roll messages are one, two and three lines at phone width,
+     and this sits directly above the toggles it used to shove around (TODOS #44). */
+  min-height: 3.1em;
+}
+.topn-option-group {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
 
 .topn-select {
   flex: 1;
@@ -2323,6 +2333,9 @@ canvas {
   color: var(--text-dim);
   padding-left: 68px;
 }
+/* Reserved: the blurbs run one line wide and two narrow, and this sits above the
+   rest of the form (TODOS #42). */
+.topn-metric-hint { min-height: 2.6em; }
 
 @media (max-width: 768px) {
   .topn-round-head h2 { font-size: 0.95rem; width: 100%; }
@@ -2392,7 +2405,9 @@ canvas {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  overflow-x: auto;
+  /* Only the coverage table is legitimately wider than the screen. Letting the rank
+     rows scroll sideways too is what let a long name push the value out of sight. */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -2417,7 +2432,7 @@ canvas {
   font-size: 0.85rem;
   flex-shrink: 0;
 }
-.explore-name { flex: 1; font-size: 0.95rem; }
+.explore-name { flex: 1; min-width: 0; font-size: 1rem; }
 .explore-value {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
@@ -2461,13 +2476,31 @@ canvas {
 .coverage-table tr.is-aggregate { background: #f8514920; }
 .coverage-table tr.is-aggregate .cov-type { color: var(--red); }
 .coverage-table .rank-flag { width: 24px; }
+.explore-list.is-coverage { overflow-x: auto; }
 .explore-view-toggle { margin-left: auto; }
 
 @media (max-width: 768px) {
   .explore-header h2 { font-size: 1.05rem; }
-  .explore-name { font-size: 0.88rem; }
   .explore-play { margin-left: 0; }
   .explore-select { flex: 1; }
+}
+
+/* Pinch-zoom magnifies, it does not reflow: on one line, a zoomed-in row puts the
+   flag and the value past opposite edges of the screen. Stacking the value under
+   the name keeps both within a screen-width of the left edge, and the larger type
+   means reaching for the zoom less often (TODOS #47). */
+@media (max-width: 480px) {
+  .explore-row {
+    flex-wrap: wrap;
+    row-gap: 2px;
+    padding: 10px 12px;
+  }
+  .explore-name { flex: 1 1 auto; }
+  .explore-value {
+    flex: 1 0 100%;
+    /* Under the name, not under the flag: rank (30px) + flag (26px) + two gaps. */
+    padding-left: calc(30px + 26px + 12px + 12px);
+  }
 }
 
 .cov-legend { font-size: 0.72rem; color: var(--text-dim); margin-top: -4px; }
@@ -2566,6 +2599,7 @@ canvas {
 
 .cp-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .cp-metric {
+  cursor: help;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -2575,6 +2609,15 @@ canvas {
   gap: 1px;
 }
 .cp-metric-name { color: var(--text-dim); font-size: 0.72rem; }
+.cp-metric-info { margin-left: 4px; opacity: 0.5; }
+.cp-metric-desc {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 4px;
+}
 .cp-metric-value { font-size: 1rem; font-weight: 600; }
 .cp-metric-rank { color: var(--accent); font-size: 0.72rem; }
 

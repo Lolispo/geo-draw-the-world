@@ -136,10 +136,26 @@ function render(code) {
     if (value == null) continue;
     anyMetric = true;
     const cell = el('div', 'cp-metric');
-    cell.appendChild(el('span', 'cp-metric-name', ds.name));
+    const name = el('span', 'cp-metric-name', ds.name);
+    name.appendChild(el('span', 'cp-metric-info', 'ⓘ'));
+    cell.appendChild(name);
     cell.appendChild(el('span', 'cp-metric-value', formatValue(ds.format, value)));
     const rank = getRank(ds.id, code);
     if (rank) cell.appendChild(el('span', 'cp-metric-rank', `#${rank.rank} of ${rank.total}`));
+    // Hover says what the metric measures on a desktop; tapping the tile says it on a
+    // phone, which has no hover at all (TODOS #42).
+    const desc = el('div', 'cp-metric-desc', ds.blurb);
+    desc.hidden = true;
+    cell.appendChild(desc);
+    cell.title = ds.blurb;
+    cell.tabIndex = 0;
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('aria-label', `${ds.name} — what this measures`);
+    const toggle = () => { desc.hidden = !desc.hidden; };
+    cell.addEventListener('click', toggle);
+    cell.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }
+    });
     metrics.appendChild(cell);
   }
   if (anyMetric) facts.appendChild(metrics);

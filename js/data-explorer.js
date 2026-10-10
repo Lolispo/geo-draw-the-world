@@ -41,7 +41,7 @@ export class DataExplorer {
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
-    this._listEl.className = 'explore-list';
+    this._listEl.className = 'explore-list' + (this.view === 'coverage' ? ' is-coverage' : '');
     c.appendChild(this._listEl);
     if (this.view === 'coverage') this._renderCoverage();
     else this._renderList();
