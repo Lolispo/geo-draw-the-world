@@ -1,0 +1,40 @@
+js/top-n-game.js
+  s_07a3d60f829d3a::t_f74fb4adf79297 82-83,112-118,298-311,512-515,546-552
+  s_07a3d60f829d3a::t_606944cba4f00a 393-400
+  s_07a3d60f829d3a::t_30da1146f87fe2 23,503-509,553,916-920,922-926,929-930,940,962-964,968,980
+  s_07a3d60f829d3a::t_145c9598b0470e 554
+js/country-panel.js
+  s_07a3d60f829d3a::t_606944cba4f00a 139-141,145-158
+js/data-explorer.js
+  s_07a3d60f829d3a::t_4a91c20a2d65f0 44
+css/style.css
+  s_07a3d60f829d3a::t_606944cba4f00a 2336-2337,2504,2612-2620
+  s_07a3d60f829d3a::t_b281e72294ccde 2338
+  s_07a3d60f829d3a::t_e47e85db7f5c27 2602
+  s_07a3d60f829d3a::t_e9ed494babaa26 2501-2502
+  s_07a3d60f829d3a::t_4a91c20a2d65f0 1903-1913,2408-2410,2435,2479,2488-2500,2503
+  s_07a3d60f829d3a::t_869a001b2c32e6 2505
+TODO.md
+  s_07a3d60f829d3a::t_19a6efc05651a6 980-1065,1081-1111,1124-1154,1167-1201,1210-1272,1286-1444
+  s_07a3d60f829d3a::t_5073d7747a16ec 1066-1080,1112-1123,1155-1166,1202-1209,1273-1285
+js/settings.js
+  s_07a3d60f829d3a::t_30da1146f87fe2 4,14-22
+index.html
+  s_07a3d60f829d3a::t_93449458819536 52,57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a710e79e46f8f728f7912f5ac2669e0480d3d9f3",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
