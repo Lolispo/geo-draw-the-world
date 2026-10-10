@@ -1,0 +1,33 @@
+js/scores-screen.js
+  s_07a3d60f829d3a::t_cef824b92dddb8 1-200
+index.html
+  s_07a3d60f829d3a::t_206f70c6f53a68 66-70,299-300
+  s_07a3d60f829d3a::t_013758b40d2c78 301-302
+js/main.js
+  s_07a3d60f829d3a::t_90b85c5fb7f159 23
+  s_07a3d60f829d3a::t_206f70c6f53a68 38-39,111-114,228,630-633
+  s_07a3d60f829d3a::t_33fb07d0bf2203 86-87,436
+  s_07a3d60f829d3a::t_8b5f95eaeba492 634-635
+js/high-scores.js
+  s_07a3d60f829d3a::t_206f70c6f53a68 34-38
+css/style.css
+  s_07a3d60f829d3a::t_90b85c5fb7f159 2527-2589
+TODO.md
+  s_07a3d60f829d3a::t_12ffafe4b6b431 1063-1087
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b776d91ab83246974f09473ba9b2b7fe0ef5a4f9",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
