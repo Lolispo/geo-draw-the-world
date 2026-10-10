@@ -15,6 +15,7 @@ mkdir -p dist
 rsync -a \
   --exclude '.git' --exclude '.github' \
   --exclude '.omc' --exclude '.gstack' --exclude '.claude' --exclude '.DS_Store' \
+  --exclude '.cache' \
   --exclude 'node_modules' --exclude 'dist' \
   --exclude 'scripts' --exclude 'docs' \
   --exclude '.gitignore' \

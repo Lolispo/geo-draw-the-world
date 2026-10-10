@@ -2,29 +2,45 @@
 // The world geometry (countries-*.json) squeezes everything into 1600x1100, so
 // microstates become sub-pixel blobs (Natural Earth also only has ~17 pts for San
 // Marino). This tier is sourced from geoBoundaries (OSM-derived, CC BY 4.0 — needs
-// attribution) which has ~929 pts for San Marino, with Natural Earth 1:10m as fallback.
+// attribution), whose full release carries 929 pts for San Marino, with Natural Earth
+// 1:10m as fallback.
 // Each country is normalized to its OWN ~1000px box + simplified at that scale, so it
 // keeps full detail. Used by the showcase panel / peek / compare (single-country views).
 //
 // Usage: node scripts/build-shapes.mjs [code...]   (codes = rebuild only those,
 // leaving every other file in data/shapes/ untouched; no args = full rebuild)
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { source } from './lib/sources.mjs';
 
 const NORM = 1000, DP_EPS = 0.35, CLIP_DEG = 15, CLIP_AREA_FRAC = 0.35, MIN_RING_FRAC = 0.0008;
 const CONCURRENCY = 12;
 // github.com/.../raw resolves Git LFS (raw.githubusercontent serves only LFS pointers).
 const GB = 'https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/gbOpen';
+// geoBoundaries publishes each boundary twice, and neither variant is right on its own.
+// `_simplified` is small but pre-thinned, and for a microstate it — not our own
+// Douglas-Peucker pass — decides the outcome: San Marino arrives with 52 vertices where
+// the full release has 929. The full release is the opposite problem: Norway is 54 MB and
+// yields 18 more points than the simplified one, because once DP is the binding
+// constraint a finer source changes nothing.
+// So take the cheap file first, and only re-fetch the full one when the local simplify
+// barely removed anything — the signature of a source too thin to simplify. Below that
+// retention, DP is already in charge and the big download would buy nothing.
+// REFETCH_UNDER is the backstop for a source thin enough that DP can still shave a third
+// off it and remain the lesser constraint (St Helena: 60 vertices in, 39 out). An outline
+// that small is not a detailed one by definition, and it is always a cheap file to check.
+const REFETCH_RETENTION = 0.8;
+const REFETCH_UNDER = 500;
 
 const entities = JSON.parse(readFileSync('data/entities.json', 'utf8')).entities;
-const ml = JSON.parse(readFileSync('/tmp/mledoze.json', 'utf8'));
+const ml = await source('mledoze.json');
 const iso3 = new Map(ml.filter((c) => c.cca2 && c.cca3).map((c) => [c.cca2.toLowerCase(), c.cca3]));
 iso3.set('xk', 'XKX'); // geoBoundaries uses XKX for Kosovo (mledoze says UNK)
-const ne10 = JSON.parse(readFileSync('/tmp/ne10.geojson', 'utf8'));
+const ne10 = await source('ne10.geojson');
 // Same two extra Natural Earth layers build-geometry.mjs uses: map units carry the
 // dependencies admin_0_countries folds into a parent, disputed areas carry the
 // de-facto states (TODOS #20).
-const neUnits = JSON.parse(readFileSync('/tmp/ne10_units.geojson', 'utf8'));
-const neDisputed = JSON.parse(readFileSync('/tmp/ne_10m_admin_0_disputed_areas.geojson', 'utf8'));
+const neUnits = await source('ne10_units.geojson');
+const neDisputed = await source('ne10_disputed.geojson');
 const unitByCode = new Map();
 for (const f of neUnits.features) {
   const c = (f.properties.ISO_A2_EH || f.properties.ISO_A2 || '').toLowerCase();
@@ -88,28 +104,46 @@ const codes = Object.keys(entities)
   .filter((c) => entities[c].type !== 'aggregate')
   .filter((c) => !ONLY.size || ONLY.has(c));
 const shapes = {};
-const src = { gb: 0, ne: 0, none: [] };
+const src = { 'gb-full': 0, 'gb-simplified': 0, ne: 0, none: [] };
+const count = (mp) => mp.reduce((t, r) => t + r.length, 0);
+const gbUrl = (i3, variant) => `${GB}/${i3}/ADM0/geoBoundaries-${i3}-ADM0${variant}.geojson`;
+const geomOf = async (url) => (await getJson(url))?.features?.[0]?.geometry ?? null;
+
+// Returns the better of the two geoBoundaries variants — see REFETCH_RETENTION above.
+async function fromGeoBoundaries(i3) {
+  const sg = await geomOf(gbUrl(i3, '_simplified'));
+  if (!sg) {
+    const fg = await geomOf(gbUrl(i3, ''));
+    return fg ? { out: processRings(ringsOf(fg)), from: 'gb-full' } : null;
+  }
+  const sRings = ringsOf(sg);
+  const sOut = processRings(sRings);
+  const simplified = { out: sOut, from: 'gb-simplified' };
+  const retained = count(sOut) / sRings.reduce((t, r) => t + r.length, 0);
+  if (retained < REFETCH_RETENTION && count(sOut) >= REFETCH_UNDER) return simplified;
+
+  const fg = await geomOf(gbUrl(i3, ''));
+  if (!fg) return simplified;
+  const fOut = processRings(ringsOf(fg));
+  // Never trade detail away. The full release can carry islands the simplified one
+  // drops, which moves the normalising bounding box and can shrink the main landmass.
+  return count(fOut) > count(sOut) ? { out: fOut, from: 'gb-full' } : simplified;
+}
+
 let next = 0;
 async function worker() {
   while (next < codes.length) {
     const code = codes[next++];
     const ent = entities[code];
-    let rings = null, from = null;
     const i3 = iso3.get(code);
-    if (i3) {
-      const url = `${GB}/${i3}/ADM0/geoBoundaries-${i3}-ADM0_simplified.geojson`;
-      const gj = await getJson(url);
-      const g = gj?.features?.[0]?.geometry;
-      if (g) { rings = ringsOf(g); from = 'gb'; }
-    }
-    if (!rings) {
+    let got = i3 ? await fromGeoBoundaries(i3) : null;
+    if (!got) {
       const f = neByCode.get(code) || neByName.get(norm(ent.name))
         || unitByCode.get(code) || disputedByBrk.get(DISPUTED_BRK[code]);
-      if (f) { rings = ringsOf(f.geometry); from = 'ne'; }
+      if (f) got = { out: processRings(ringsOf(f.geometry)), from: 'ne' };
     }
-    if (!rings) { src.none.push(code); continue; }
-    const out = processRings(rings);
-    if (out.length) { shapes[code] = out; src[from]++; }
+    if (!got) { src.none.push(code); continue; }
+    if (got.out.length) { shapes[code] = { polygons: got.out, src: got.from }; src[got.from]++; }
   }
 }
 await Promise.all(Array.from({ length: CONCURRENCY }, worker));
@@ -126,10 +160,15 @@ for (const region of ['africa','europe','asia','north-america','south-america','
 // country it shows (~a few KB) instead of one ~1.5 MB blob.
 if (!ONLY.size) rmSync('data/shapes', { recursive: true, force: true });
 mkdirSync('data/shapes', { recursive: true });
-for (const [code, polygons] of Object.entries(shapes)) {
-  writeFileSync(`data/shapes/${code}.json`, JSON.stringify({ color: colorByCode.get(code) || '#7EA6E0', polygons }));
+for (const [code, { polygons, src: from }] of Object.entries(shapes)) {
+  // `src` records which tier won, so the shipped data can be audited without
+  // re-running this build (data-map.html reads it).
+  writeFileSync(`data/shapes/${code}.json`,
+    JSON.stringify({ color: colorByCode.get(code) || '#7EA6E0', src: from, polygons }));
 }
-const pts = Object.values(shapes).reduce((s, mp) => s + mp.reduce((t, r) => t + r.length, 0), 0);
-console.log(`Wrote ${Object.keys(shapes).length} per-country files to data/shapes/ (${src.gb} geoBoundaries, ${src.ne} Natural Earth), ${pts.toLocaleString()} points`);
+const pts = Object.values(shapes).reduce((s, { polygons }) => s + count(polygons), 0);
+console.log(`Wrote ${Object.keys(shapes).length} per-country files to data/shapes/ ` +
+  `(${src['gb-full']} geoBoundaries full, ${src['gb-simplified']} geoBoundaries simplified, ` +
+  `${src.ne} Natural Earth), ${pts.toLocaleString()} points`);
 console.log(`No shape: ${src.none.join(' ') || 'none'}`);
-for (const c of ['sm','mc','sg','va','li','fr','jp']) if (shapes[c]) console.log(`  ${c}: ${shapes[c].reduce((t,r)=>t+r.length,0)} pts`);
+for (const c of ['sm','mc','sg','va','li','fr','jp']) if (shapes[c]) console.log(`  ${c}: ${count(shapes[c].polygons)} pts (${shapes[c].src})`);

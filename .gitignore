@@ -11,3 +11,6 @@ dist/
 
 # Local-only notes (not for the public repo)
 TODO.local.md
+
+# Cached upstream geometry downloads (scripts/lib/sources.mjs)
+.cache/

@@ -8,6 +8,7 @@
 //
 // Usage: node scripts/build-geometry.mjs [--write]   (default: dry report)
 import { readFileSync, writeFileSync } from 'node:fs';
+import { source } from './lib/sources.mjs';
 
 const WRITE = process.argv.includes('--write');
 // TODOS #24: conformal Mercator. x keeps its scale (4.4569 px/° → 255.36 px/rad); y is
@@ -31,13 +32,13 @@ const REGION_OF = {
 };
 
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const ne50 = read('/tmp/ne50.geojson');
-const ne10 = read('/tmp/ne10.geojson');
+const ne50 = await source('ne50.geojson');
+const ne10 = await source('ne10.geojson');
 // admin_0_countries folds dependencies like Svalbard and the French overseas
 // departements into their parent; admin_0_map_units carries them separately.
-const neUnits = read('/tmp/ne10_units.geojson');
+const neUnits = await source('ne10_units.geojson');
 // Breakaway/de-facto states have no ISO code and live only in this layer.
-const neDisputed = read('/tmp/ne_10m_admin_0_disputed_areas.geojson');
+const neDisputed = await source('ne10_disputed.geojson');
 const entities = read('data/entities.json').entities;
 
 // Index NE features by code and by normalized name
