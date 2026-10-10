@@ -1,0 +1,31 @@
+js/silhouette.js
+  s_07a3d60f829d3a::t_4234649c29b559 1-60
+js/country-panel.js
+  s_07a3d60f829d3a::t_d357ccc7a2f3da 10,116
+css/style.css
+  s_07a3d60f829d3a::t_510dc8f897652c 2461-2462,2468-2485
+  s_07a3d60f829d3a::t_111d0fe2cc477f 2463-2467,2527
+js/data-explorer.js
+  s_07a3d60f829d3a::t_510dc8f897652c 59-62,68-81,138,361
+  s_07a3d60f829d3a::t_f0a73a5a43f487 11-13,142-150,286-359
+  s_07a3d60f829d3a::t_60a0d0a71c9933 4,6,24-25,49-52,64,192-213,360
+  s_07a3d60f829d3a::t_33a207842faf30 151,362
+TODO.md
+  s_07a3d60f829d3a::t_8ba53bd0953eba 1469-1495
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2d41b938a677b9e13faf2b43cfbffd89f4de56f3",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
