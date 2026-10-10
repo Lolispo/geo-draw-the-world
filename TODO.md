@@ -1292,6 +1292,31 @@ not stall while it computes.
 
 ## 59. Top 10: flags on wrong picks, a reversible reveal, and a cheaper re-render
 
+**REVIEW:** play a Top 10 round — each pick's flag should now sit in the strip at the top
+beside the ✓/✗. On the results screen the button toggles both ways as often as you like, and
+the rows that stay put really do stay put.
+
+**✅ DONE 2026-10-10** — all three.
+
+**The flag.** `_rowHtml` already drew one, so the gap was the feedback strip: `lastPick` never
+carried the country code. It does now, for right and wrong picks alike, and for the "no data"
+note too — *Tuvalu has no Total exports data* reads better with Tuvalu's flag beside it.
+
+**The reveal is a toggle.** The results ladder is rendered with both halves of every missing
+answer present — the blank slot and the filled row — and showing or hiding flips one pair per
+slot. A cleared round keeps no button, because nothing is hidden.
+
+**Nothing else re-renders.** Toggling sets `hidden` on 2 × (missing answers) rows and rewrites
+one subhead. Proven rather than asserted: a found row tagged in the DOM before the toggle is
+still the same node after revealing and re-hiding. `.topn-row[hidden]` needed its own rule —
+`display: flex` on the class beats the user-agent rule for the attribute, which would have made
+the toggle silently do nothing.
+
+Verified with Playwright on both paths: with Hide answers **on**, results open at 9 blanks / 0
+answers and "Your 1 of 10 — 9 still hidden", reveal flips to 0/9 and "The real highest 10", and
+hiding returns to 9/0. With it **off**, results open revealed and the button offers to hide.
+Flags appear on hits and misses. No page errors.
+
 **What:** Three small things from the review, all in `js/top-n-game.js`.
 
 **Why:** Owner review (2026-10-10) of #36/#39/#43.

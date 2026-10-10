@@ -2205,6 +2205,9 @@ canvas {
 /* Every ladder row is the same box — empty slot, hit, miss — so filling a slot in
    never changes the list's height and the board stops jumping under you while you
    answer (owner, 2026-09-12). */
+/* `display: flex` below would otherwise beat the user-agent rule for [hidden], and the
+   results toggle flips exactly that attribute (TODOS #59). */
+.topn-row[hidden] { display: none; }
 .topn-row {
   display: flex;
   align-items: center;

@@ -655,12 +655,19 @@ export class TopNGame {
     }
     if (p.note) {
       strip.classList.add('is-note');
-      strip.textContent = p.note;
+      if (p.code) {
+        strip.innerHTML =
+          `<img class="topn-flag" src="${flagUrl(p.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
+          `<span>${p.note}</span>`;
+      } else {
+        strip.textContent = p.note;
+      }
       return strip;
     }
     strip.classList.add(p.correct ? 'is-hit' : 'is-miss');
     strip.innerHTML =
       `<span class="topn-feedback-mark">${p.correct ? '✓' : '✗'}</span>` +
+      `<img class="topn-flag" src="${flagUrl(p.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
       `<span class="topn-feedback-name">${p.name}</span>` +
       `<span class="topn-feedback-rank">#${p.rank}</span>` +
       `<span class="topn-feedback-value">${formatValue(r.dataset.format, p.value)}</span>`;
@@ -795,21 +802,31 @@ export class TopNGame {
   // and the results screen — the results screen is simply the ladder with every
   // slot revealed, so the end of a round looks like the finished version of the
   // thing you were filling in.
-  _slotsHtml({ reveal, clickable }) {
+  // `dual` emits both the blank slot and the filled row for every answer you never
+  // found, so the results screen can be hidden and shown again by flipping one pair
+  // per slot instead of rebuilding the ladder (TODOS #59).
+  _slotsHtml({ reveal, clickable, dual = false }) {
     const r = this.round;
     return r.answers.map((e, i) => {
       const rank = i + 1;
       const found = r.found.has(e.code);
-      if (!found && !reveal) {
-        // Same mark/rank columns as a filled row, so nothing shifts sideways when
-        // the slot fills — the height is held by `.topn-row` in CSS.
-        return '<div class="topn-row is-empty"><span class="topn-result-mark"></span>' +
-               `<span class="topn-result-rank">${rank}</span><span class="topn-blank"></span></div>`;
+      const delay = reveal ? Math.min(i, 20) * 0.03 : 0;
+      if (found) {
+        return this._rowHtml({ cls: 'is-hit', mark: '✓', rank, entry: e, clickable, delay });
       }
-      return this._rowHtml({
-        cls: found ? 'is-hit' : 'is-miss',
-        mark: found ? '✓' : '✗',
-        rank, entry: e, clickable, delay: reveal ? Math.min(i, 20) * 0.03 : 0,
+      // Same mark/rank columns as a filled row, so nothing shifts sideways when the
+      // slot fills — the height is held by `.topn-row` in CSS.
+      const blank = `<div class="topn-row is-empty" data-blank="${rank}"${dual && reveal ? ' hidden' : ''}>`
+        + '<span class="topn-result-mark"></span>'
+        + `<span class="topn-result-rank">${rank}</span><span class="topn-blank"></span></div>`;
+      if (!dual) {
+        return reveal
+          ? this._rowHtml({ cls: 'is-miss', mark: '✗', rank, entry: e, clickable, delay })
+          : blank;
+      }
+      return blank + this._rowHtml({
+        cls: 'is-miss', mark: '✗', rank, entry: e, clickable, delay,
+        hidden: !reveal, slot: rank,
       });
     }).join('');
   }
@@ -828,12 +845,18 @@ export class TopNGame {
     })).join('');
   }
 
-  _rowHtml({ cls, mark, rank, entry, clickable, delay = 0 }) {
+  _rowHtml({ cls, mark, rank, entry, clickable, delay = 0, hidden = false, slot = null }) {
     const r = this.round;
     // Only the results screen links out. Mid-round the country panel would show
     // every metric for that country, including the one being played.
-    const link = clickable ? ` is-clickable" data-code="${entry.code}" title="View ${entry.name}` : '';
-    return `<div class="topn-row topn-result-row ${cls}${link}" style="animation-delay:${delay}s">` +
+    const attrs = [
+      `class="topn-row topn-result-row ${cls}${clickable ? ' is-clickable' : ''}"`,
+      `style="animation-delay:${delay}s"`,
+    ];
+    if (clickable) attrs.push(`data-code="${entry.code}"`, `title="View ${entry.name}"`);
+    if (slot != null) attrs.push(`data-slot="${slot}"`);
+    if (hidden) attrs.push('hidden');
+    return `<div ${attrs.join(' ')}>` +
       `<span class="topn-result-mark">${mark}</span>` +
       `<span class="topn-result-rank">${rank}</span>` +
       `<img class="topn-flag" src="${flagUrl(entry.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
@@ -873,6 +896,7 @@ export class TopNGame {
         || (alias && r.unranked.find((e) => e.code === alias))
         || r.unranked.find((e) => normalizeName(e.name).startsWith(q));
       r.lastPick = {
+        code: noData ? noData.code : null,
         note: noData
           ? `${noData.name} has no ${r.dataset.name} data, so it is not in this round — no life lost.`
           : `"${raw.trim()}" is not one of the ${r.eligible} countries in range — no life lost.`,
@@ -899,7 +923,7 @@ export class TopNGame {
     const correct = r.answerCodes.has(code);
 
     r.revealed.set(code, { rank, value: entry.value, correct });
-    r.lastPick = { name: entry.name, rank, value: entry.value, correct };
+    r.lastPick = { code, name: entry.name, rank, value: entry.value, correct };
 
     if (correct) {
       r.found.add(code);
@@ -919,6 +943,28 @@ export class TopNGame {
 
   // ---- results ------------------------------------------------------------
 
+  _subhead(reveal) {
+    const r = this.round;
+    const hidden = r.n - r.found.size;
+    return reveal
+      ? `The real ${this._directionWord(r.dataset.format, r.higherFirst).toLowerCase()} ${r.n}`
+      : `Your ${r.found.size} of ${r.n} — ${hidden} still hidden`;
+  }
+
+  // Show or hide the answers you never found, by flipping the blank/filled pair for
+  // each slot. Nothing else in the ladder is touched, so a toggle costs one `hidden`
+  // per missing answer rather than a rebuilt results screen (TODOS #59).
+  _setReveal(reveal) {
+    const panel = this.container.querySelector('.topn-results');
+    if (!panel) return;
+    this._revealed = reveal;
+    for (const el of panel.querySelectorAll('.topn-row[data-blank]')) el.hidden = reveal;
+    for (const el of panel.querySelectorAll('.topn-row[data-slot]')) el.hidden = !reveal;
+    panel.querySelector('.topn-results-subhead').textContent = this._subhead(reveal);
+    const btn = panel.querySelector('#topn-reveal');
+    if (btn) btn.textContent = reveal ? '🙈 Hide answers' : '👀 Reveal answers';
+  }
+
   _showResults() {
     const r = this.round;
     playScoreReveal();
@@ -933,6 +979,7 @@ export class TopNGame {
   // a dead end you can open, and Play Again is still a question.
   _renderResults(reveal) {
     const r = this.round;
+    this._revealed = reveal;
     const hits = r.found.size;
     const cleared = hits >= r.n;
     const isNew = r.isNewBest;
@@ -946,7 +993,7 @@ export class TopNGame {
 
     // The same ladder the round was played on, with the slots you never filled
     // now revealed — so the results screen is the finished board, not a new one.
-    const answerRows = this._slotsHtml({ reveal, clickable: true });
+    const answerRows = this._slotsHtml({ reveal, clickable: true, dual: true });
     const wrongRows = this._missesHtml({ clickable: true });
 
     const styleLabel = INPUT_STYLES.find((s) => s.id === r.style).label.split('—')[0].trim();
@@ -968,13 +1015,11 @@ export class TopNGame {
           ? '<div class="high-score-note" style="display:block">New best for this round!</div>'
           : (prev ? `<div class="high-score-note" style="display:block">Best: ${prev.score}/${r.n}</div>` : '')}
       </div>
-      <div class="topn-results-subhead">${reveal
-        ? `The real ${this._directionWord(r.dataset.format, r.higherFirst).toLowerCase()} ${r.n}`
-        : `Your ${hits} of ${r.n} — ${r.n - hits} still hidden`}</div>
+      <div class="topn-results-subhead">${this._subhead(reveal)}</div>
       <div class="topn-ladder is-final">${answerRows}${wrongRows}</div>
       <div class="results-actions">
         <button id="topn-again" class="btn btn-accent">Play Again</button>
-        ${reveal ? '' : '<button id="topn-reveal" class="btn btn-tool">👀 Reveal answers</button>'}
+        ${hits >= r.n ? '' : `<button id="topn-reveal" class="btn btn-tool">${reveal ? '🙈 Hide answers' : '👀 Reveal answers'}</button>`}
         <button id="topn-change" class="btn btn-tool">Change round</button>
         <button id="topn-menu" class="btn btn-tool">Menu</button>
       </div>
@@ -986,7 +1031,10 @@ export class TopNGame {
       if (row) openCountryPanel(row.dataset.code);
     });
     panel.querySelector('#topn-again').addEventListener('click', () => this.start(r.dataset.id, r.scope, r.higherFirst));
-    panel.querySelector('#topn-reveal')?.addEventListener('click', () => { playScoreReveal(); this._renderResults(true); });
+    panel.querySelector('#topn-reveal')?.addEventListener('click', () => {
+      playScoreReveal();
+      this._setReveal(!this._revealed);
+    });
     panel.querySelector('#topn-change').addEventListener('click', () => this.showPicker());
     panel.querySelector('#topn-menu').addEventListener('click', () => this.onFinish(null));
   }
