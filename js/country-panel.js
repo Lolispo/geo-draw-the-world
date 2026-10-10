@@ -195,6 +195,20 @@ function buildBreakdown(label, items, { minPct = 5, colors = null, note = null }
   wrap.appendChild(el('div', 'cp-section-label', label));
   if (note) wrap.appendChild(el('div', 'cp-section-note', note));
 
+  // A row with no `pct` is a name the source gave without a number (TODOS #52) —
+  // San Marino is simply "Roman Catholic". There is no bar to draw and no share to
+  // fold into "Other", so list the names and say the breakdown is missing rather
+  // than inventing a denominator.
+  if (items.some((r) => r.pct == null)) {
+    wrap.appendChild(el('div', 'cp-section-note', 'no breakdown published'));
+    for (const r of items) {
+      const row = el('div', 'cp-rel-row cp-rel-row--nameonly');
+      row.appendChild(el('span', 'cp-rel-name', r.name));
+      wrap.appendChild(row);
+    }
+    return wrap;
+  }
+
   // Sort most→least, keep the significant ones, fold the small tail into "Other".
   const sorted = [...items].sort((a, b) => b.pct - a.pct);
   let major = sorted.filter((r) => r.pct >= minPct);

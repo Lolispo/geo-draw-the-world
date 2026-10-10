@@ -162,6 +162,24 @@ export function getSummableDatasets() {
   return getDatasetList().filter((d) => d.summable === true);
 }
 
+// `summable` says a dataset can be added across countries; this says a given *pair*
+// can be. They are different questions, and this is the one the flag cannot answer:
+// each value is individually correct while the sum counts people twice, because one
+// entity's territory is claimed by the other. Cyprus is the measurable case — the
+// World Bank's Cyprus population covers the whole island while Northern Cyprus ships
+// its own figure, which is also why its GDP per capita sits 40% above GDP ÷ population.
+//
+// Deliberately conservative: it refuses a pair where double-counting is *possible*,
+// rather than asserting which World Bank figures actually overlap. Whether a claimant's
+// statistics include a breakaway region varies per country and is not derivable from
+// the data we hold, so the cost of being wrong is one refused pair out of thousands —
+// against a visibly wrong answer the other way (TODOS #54).
+export function canCombine(codeA, codeB) {
+  if (codeA === codeB) return false;
+  const a = getEntity(codeA), b = getEntity(codeB);
+  return a?.claimedBy !== codeB && b?.claimedBy !== codeA;
+}
+
 export function getContinents() {
   return _data ? _data.continents : [];
 }

@@ -36,9 +36,28 @@ export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 1
   const ox = (size - w * scale) / 2 - minX * scale;
   const oy = (size - h * scale) / 2 - minY * scale;
 
+  // A scattered territory normalizes to the ocean between its islands: St Helena spans
+  // 32° of latitude, so at 150px each of its four islands is about a pixel and the
+  // canvas came out blank. Keep every island in its true position — that is what the
+  // country is — but give one too small to see a dot of its own, so an archipelago
+  // reads as an archipelago instead of as nothing (TODOS #53).
+  const MIN_ISLAND_PX = 3.5;
+  const specks = [];
   ctx.beginPath();
   for (const ring of country.polygons) {
-    traceRing(ctx, ring.map(([x, y]) => [x * scale + ox, y * scale + oy]), true);
+    const pts = ring.map(([x, y]) => [x * scale + ox, y * scale + oy]);
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const [x, y] of pts) {
+      if (x < x0) x0 = x; if (x > x1) x1 = x;
+      if (y < y0) y0 = y; if (y > y1) y1 = y;
+    }
+    if (Math.max(x1 - x0, y1 - y0) < MIN_ISLAND_PX) { specks.push([(x0 + x1) / 2, (y0 + y1) / 2]); continue; }
+    traceRing(ctx, pts, true);
+  }
+  // Added to the same path so they take the same fill and stroke as the real outlines.
+  for (const [cx, cy] of specks) {
+    ctx.moveTo(cx + MIN_ISLAND_PX / 2, cy);
+    ctx.arc(cx, cy, MIN_ISLAND_PX / 2, 0, Math.PI * 2);
   }
   ctx.fillStyle = country.color || '#7EA6E0';
   ctx.fill('nonzero');

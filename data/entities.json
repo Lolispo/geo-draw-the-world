@@ -9,6 +9,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "europe",
       "metrics": {
@@ -35,6 +36,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -61,6 +63,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -87,6 +90,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -113,6 +117,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -141,6 +146,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -167,6 +173,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -193,6 +200,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -219,6 +227,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -245,6 +254,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
@@ -273,6 +283,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -299,6 +310,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -325,6 +337,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "Netherlands",
@@ -353,6 +366,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Finland",
@@ -381,6 +395,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -407,6 +422,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -433,6 +449,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -459,6 +476,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -485,6 +503,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -511,6 +530,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -537,6 +557,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -563,6 +584,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -589,6 +611,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -615,6 +638,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -641,6 +665,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
@@ -669,6 +694,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -697,6 +723,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -723,6 +750,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -749,6 +777,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
@@ -777,6 +806,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -803,6 +833,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -829,6 +860,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -855,6 +887,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -881,6 +914,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -907,6 +941,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -933,6 +968,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -959,6 +995,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
@@ -987,6 +1024,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1013,6 +1051,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1039,6 +1078,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1065,6 +1105,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1091,6 +1132,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1117,6 +1159,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "New Zealand",
@@ -1145,6 +1188,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -1171,6 +1215,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1197,6 +1242,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -1223,6 +1269,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -1249,6 +1296,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -1275,6 +1323,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -1301,6 +1350,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1327,6 +1377,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
@@ -1355,6 +1406,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
@@ -1383,6 +1435,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1409,6 +1462,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1435,6 +1489,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1461,6 +1516,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1487,6 +1543,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1513,6 +1570,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -1539,6 +1597,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -1565,6 +1624,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1591,6 +1651,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -1617,6 +1678,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1643,6 +1705,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1669,6 +1732,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "region": "africa",
@@ -1695,7 +1759,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1722,6 +1787,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1748,6 +1814,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1774,6 +1841,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1800,6 +1868,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -1826,6 +1895,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -1854,6 +1924,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "oceania",
       "metrics": {
@@ -1880,6 +1951,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "Denmark",
@@ -1908,6 +1980,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1934,6 +2007,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -1960,6 +2034,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -1986,6 +2061,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -2012,6 +2088,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2038,6 +2115,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -2065,7 +2143,8 @@
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2094,6 +2173,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2120,6 +2200,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2147,7 +2228,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "Denmark",
@@ -2176,6 +2258,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2202,6 +2285,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2228,6 +2312,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -2256,6 +2341,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2282,6 +2368,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2308,6 +2395,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2336,6 +2424,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -2362,6 +2451,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
@@ -2390,6 +2480,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2416,6 +2507,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -2442,6 +2534,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "China",
@@ -2470,6 +2563,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -2496,6 +2590,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2522,6 +2617,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -2548,6 +2644,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2574,6 +2671,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2600,6 +2698,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2626,6 +2725,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2652,6 +2752,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2680,6 +2781,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2706,6 +2808,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2734,6 +2837,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2760,6 +2864,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2786,6 +2891,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2812,6 +2918,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -2838,6 +2945,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -2866,6 +2974,7 @@
       "hasFlagImage": false,
       "hasCapital": false,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "region": null,
       "metrics": {
@@ -2892,6 +3001,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -2918,6 +3028,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2944,6 +3055,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -2970,6 +3082,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -2996,6 +3109,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3022,6 +3136,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3048,6 +3163,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -3074,6 +3190,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3100,6 +3217,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -3125,7 +3243,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3152,6 +3271,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3178,6 +3298,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3204,6 +3325,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -3232,6 +3354,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3258,6 +3381,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3284,6 +3408,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3310,6 +3435,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -3336,6 +3462,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "europe",
       "metrics": {
@@ -3362,6 +3489,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3388,6 +3516,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3414,6 +3543,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3440,6 +3570,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3466,6 +3597,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3492,6 +3624,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3518,6 +3651,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3544,6 +3678,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3570,6 +3705,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "europe",
       "metrics": {
@@ -3596,6 +3732,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3622,6 +3759,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3647,7 +3785,8 @@
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
@@ -3676,6 +3815,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3702,6 +3842,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "oceania",
       "metrics": {
@@ -3728,6 +3869,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3754,6 +3896,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3780,6 +3923,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3806,6 +3950,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -3832,6 +3977,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "China",
@@ -3859,7 +4005,8 @@
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United States",
@@ -3888,6 +4035,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -3916,6 +4064,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -3942,6 +4091,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -3970,6 +4120,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -3996,6 +4147,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4021,7 +4173,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4048,6 +4201,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4074,6 +4228,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -4100,6 +4255,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4126,6 +4282,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4152,6 +4309,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4178,6 +4336,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -4206,6 +4365,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4232,6 +4392,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Australia",
@@ -4260,6 +4421,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -4286,6 +4448,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -4312,6 +4475,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4338,6 +4502,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4364,6 +4529,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4390,6 +4556,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -4416,6 +4583,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "New Zealand",
@@ -4444,6 +4612,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -4470,6 +4639,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4496,6 +4666,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -4522,6 +4693,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -4548,6 +4720,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -4576,6 +4749,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -4602,6 +4776,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4628,6 +4803,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4654,6 +4830,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4680,6 +4857,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -4708,6 +4886,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -4736,6 +4915,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
@@ -4764,6 +4944,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "region": "asia",
@@ -4791,6 +4972,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4817,6 +4999,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "oceania",
       "metrics": {
@@ -4843,6 +5026,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -4869,6 +5053,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -4895,6 +5080,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "France",
@@ -4923,6 +5109,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4949,6 +5136,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -4975,6 +5163,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -5001,6 +5190,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5026,7 +5216,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5053,6 +5244,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -5079,6 +5271,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5104,7 +5297,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5131,6 +5325,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -5157,6 +5352,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5183,6 +5379,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -5211,6 +5408,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -5237,6 +5435,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Norway",
@@ -5265,6 +5464,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -5291,6 +5491,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5316,7 +5517,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "region": "europe",
       "metrics": {
@@ -5343,6 +5545,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5369,6 +5572,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5395,6 +5599,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -5421,6 +5626,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5447,6 +5653,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5473,6 +5680,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -5499,6 +5707,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "Netherlands",
@@ -5527,6 +5736,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5553,6 +5763,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5579,6 +5790,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -5607,6 +5819,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5633,6 +5846,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
@@ -5661,6 +5875,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5687,6 +5902,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5713,6 +5929,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5739,6 +5956,7 @@
       "hasFlagImage": true,
       "hasCapital": false,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "New Zealand",
@@ -5767,6 +5985,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5793,6 +6012,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5819,6 +6039,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -5845,6 +6066,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -5871,6 +6093,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5897,6 +6120,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -5923,6 +6147,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "oceania",
       "metrics": {
@@ -5949,6 +6174,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -5975,6 +6201,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -6000,7 +6227,8 @@
       "hasFlag": true,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -6027,6 +6255,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -6053,6 +6282,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -6079,6 +6309,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -6105,6 +6336,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -6130,7 +6362,8 @@
       "hasFlag": false,
       "hasFlagImage": true,
       "hasCapital": true,
-      "hasReligion": false,
+      "hasReligion": true,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "region": "europe",
       "metrics": {
@@ -6157,6 +6390,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "north-america",
       "metrics": {
@@ -6183,6 +6417,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "south-america",
       "metrics": {
@@ -6209,6 +6444,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United Kingdom",
@@ -6237,6 +6473,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "optional": true,
       "sovereign": "United States",
@@ -6265,6 +6502,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -6291,6 +6529,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -6317,6 +6556,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
@@ -6345,6 +6585,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "oceania",
       "metrics": {
@@ -6371,8 +6612,10 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
+      "claimedBy": "ge",
       "disputed": "Self-governing; claimed by Georgia",
       "region": "asia",
       "metrics": {
@@ -6399,8 +6642,10 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
+      "claimedBy": "cy",
       "disputed": "Self-governing; claimed by Cyprus",
       "region": "asia",
       "metrics": {
@@ -6427,6 +6672,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "europe",
       "metrics": {
@@ -6453,8 +6699,10 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
+      "claimedBy": "ge",
       "disputed": "Self-governing; claimed by Georgia",
       "region": "asia",
       "metrics": {
@@ -6481,6 +6729,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": false,
       "region": "africa",
       "metrics": {
@@ -6507,8 +6756,10 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
+      "claimedBy": "md",
       "disputed": "Self-governing; claimed by Moldova",
       "region": "europe",
       "metrics": {
@@ -6535,6 +6786,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "asia",
       "metrics": {
@@ -6561,6 +6813,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": false,
+      "hasReligionPct": false,
       "hasElectricity": false,
       "optional": true,
       "sovereign": "France",
@@ -6589,6 +6842,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -6615,6 +6869,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {
@@ -6641,6 +6896,7 @@
       "hasFlagImage": true,
       "hasCapital": true,
       "hasReligion": true,
+      "hasReligionPct": true,
       "hasElectricity": true,
       "region": "africa",
       "metrics": {

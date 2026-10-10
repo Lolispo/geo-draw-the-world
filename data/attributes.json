@@ -1810,16 +1810,32 @@
       "independenceRaw": "28 February 1922 (from UK protectorate status; the military-led revolution that began on 23 July 1952 led to a republic being declared on 18 June 1953 and all British troops withdrawn on 18 June 1956)"
     },
     "eh": {
-      "capital": "El Aaiún",
       "religion": [
         {
           "name": "Muslim",
           "pct": 100
         }
-      ]
+      ],
+      "religionRaw": "Muslim",
+      "capital": "El Aaiún"
     },
     "er": {
       "capital": "Asmara",
+      "religion": [
+        {
+          "name": "Eritrean Orthodox"
+        },
+        {
+          "name": "Roman Catholic"
+        },
+        {
+          "name": "Evangelical Lutheran"
+        },
+        {
+          "name": "Sunni Muslim"
+        }
+      ],
+      "religionRaw": "Eritrean Orthodox, Roman Catholic, Evangelical Lutheran, Sunni Muslim",
       "independenceYear": 1993,
       "independenceRaw": "24 May 1993 (from Ethiopia)"
     },
@@ -2211,7 +2227,16 @@
       "capital": "Cayenne"
     },
     "gg": {
-      "capital": "Saint Peter Port"
+      "capital": "Saint Peter Port",
+      "religion": [
+        {
+          "name": "Protestant"
+        },
+        {
+          "name": "Roman Catholic"
+        }
+      ],
+      "religionRaw": "Protestant (Anglican, Presbyterian, Baptist, Congregational, Methodist), Roman Catholic"
     },
     "gh": {
       "capital": "Accra",
@@ -2284,7 +2309,16 @@
       "religionRaw": "Roman Catholic 72.1%, Church of England 7.7%, other Christian 3.8%, Muslim 3.6%, Jewish 2.4%, Hindu 2%, other 1.1%, none 7.1%, unspecified 0.1% (2012 est.)"
     },
     "gl": {
-      "capital": "Nuuk"
+      "capital": "Nuuk",
+      "religion": [
+        {
+          "name": "Evangelical Lutheran"
+        },
+        {
+          "name": "traditional Inuit spiritual beliefs"
+        }
+      ],
+      "religionRaw": "Evangelical Lutheran, traditional Inuit spiritual beliefs"
     },
     "gm": {
       "capital": "Banjul",
@@ -3200,6 +3234,15 @@
     },
     "kp": {
       "capital": "Pyongyang",
+      "religion": [
+        {
+          "name": "traditionally Buddhist and Confucian"
+        },
+        {
+          "name": "some Christian and syncretic Chondogyo"
+        }
+      ],
+      "religionRaw": "traditionally Buddhist and Confucian, some Christian and syncretic Chondogyo (Religion of the Heavenly Way)",
       "independenceYear": 1945,
       "independenceRaw": "15 August 1945 (from Japan)"
     },
@@ -3739,7 +3782,22 @@
       "independenceRaw": "3 June 2006 (from the State Union of Serbia and Montenegro); notable earlier dates: 13 March 1852 (Principality of Montenegro established); 13 July 1878 (Congress of Berlin recognizes Montenegrin independence); 28 August 1910 (Kingdom of Montenegro established)"
     },
     "mf": {
-      "capital": "Marigot"
+      "capital": "Marigot",
+      "religion": [
+        {
+          "name": "Roman Catholic"
+        },
+        {
+          "name": "Jehovah's Witness"
+        },
+        {
+          "name": "Protestant"
+        },
+        {
+          "name": "Hindu"
+        }
+      ],
+      "religionRaw": "Roman Catholic, Jehovah's Witness, Protestant, Hindu"
     },
     "mg": {
       "capital": "Antananarivo",
@@ -3952,7 +4010,13 @@
       "religionRaw": "folk religion 58.9%, Buddhist 17.3%, Christian 7.2%, other 1.2%, none 15.4% (2020 est.)"
     },
     "mp": {
-      "capital": "Saipan"
+      "capital": "Saipan",
+      "religion": [
+        {
+          "name": "Christian"
+        }
+      ],
+      "religionRaw": "Christian (Roman Catholic majority, although traditional beliefs and taboos may still be found)"
     },
     "mq": {
       "capital": "Fort-de-France"
@@ -4057,6 +4121,12 @@
     },
     "mv": {
       "capital": "Male",
+      "religion": [
+        {
+          "name": "Sunni Muslim"
+        }
+      ],
+      "religionRaw": "Sunni Muslim (official)",
       "independenceYear": 1965,
       "independenceRaw": "26 July 1965 (from the UK)"
     },
@@ -5064,6 +5134,15 @@
     },
     "sa": {
       "capital": "Riyadh",
+      "religion": [
+        {
+          "name": "Muslim"
+        },
+        {
+          "name": "other"
+        }
+      ],
+      "religionRaw": "Muslim (official; citizens are 85-90% Sunni and 10-12% Shia), other (includes Eastern Orthodox, Protestant, Roman Catholic, Jewish, Hindu, Buddhist, and Sikh) (2020 est.)",
       "independenceYear": 1932,
       "independenceRaw": "23 September 1932 (unification of the kingdom)"
     },
@@ -5137,6 +5216,15 @@
     },
     "sd": {
       "capital": "Khartoum",
+      "religion": [
+        {
+          "name": "Sunni Muslim"
+        },
+        {
+          "name": "small Christian minority"
+        }
+      ],
+      "religionRaw": "Sunni Muslim, small Christian minority",
       "independenceYear": 1956,
       "independenceRaw": "1 January 1956 (from Egypt and the UK)"
     },
@@ -5341,6 +5429,12 @@
     "sm": {
       "capital": "San Marino",
       "capitalNote": "San Marino (city)",
+      "religion": [
+        {
+          "name": "Roman Catholic"
+        }
+      ],
+      "religionRaw": "Roman Catholic",
       "independenceYear": 301,
       "independenceRaw": "3 September 301 (traditional founding date)"
     },
@@ -5974,6 +6068,27 @@
     "ua": {
       "capital": "Kyiv",
       "capitalNote": "Kyiv (Kiev is the transliteration from Russian)",
+      "religion": [
+        {
+          "name": "Orthodox"
+        },
+        {
+          "name": "Ukrainian Greek Catholic"
+        },
+        {
+          "name": "Roman Catholic"
+        },
+        {
+          "name": "Protestant"
+        },
+        {
+          "name": "Muslim"
+        },
+        {
+          "name": "Jewish"
+        }
+      ],
+      "religionRaw": "Orthodox (includes the Orthodox Church of Ukraine (OCU), Ukrainian Autocephalous Orthodox Church (UAOC), and the Ukrainian Orthodox - Moscow Patriarchate (UOC-MP)), Ukrainian Greek Catholic, Roman Catholic, Protestant, Muslim, Jewish (2013 est.)",
       "independenceYear": 1991,
       "independenceRaw": "24 August 1991 (from the Soviet Union); notable earlier dates: ca. 982 (VOLODYMYR I consolidates Kyivan Rus); 1199 (Principality (later Kingdom) of Ruthenia formed); 1648 (establishment of the Cossack Hetmanate); 22 January 1918 (from Soviet Russia)"
     },
@@ -6136,6 +6251,12 @@
     },
     "va": {
       "capital": "Vatican City",
+      "religion": [
+        {
+          "name": "Roman Catholic"
+        }
+      ],
+      "religionRaw": "Roman Catholic",
       "independenceYear": 1929,
       "independenceRaw": "11 February 1929"
     },
@@ -6621,6 +6742,7 @@
     "ug": "CIA World Factbook (public domain)",
     "bf": "CIA World Factbook (public domain)",
     "na": "CIA World Factbook (public domain)",
+    "eh": "CIA World Factbook (public domain)",
     "sz": "CIA World Factbook (public domain)",
     "zm": "CIA World Factbook (public domain)",
     "zw": "CIA World Factbook (public domain)",
@@ -6804,7 +6926,6 @@
     "mv": "CIA World Factbook (public domain)",
     "np": "CIA World Factbook (public domain)",
     "pk": "CIA World Factbook (public domain)",
-    "eh": "CIA World Factbook (Western Sahara) — Sunni Muslim",
     "xs": "Somaliland government (de-facto state) — Sunni Muslim",
     "ax": "Åland (autonomous region of Finland)",
     "gp": "Guadeloupe (French overseas département)",

@@ -143,6 +143,20 @@ function parseReligion(text) {
     const pct = m[3] != null ? Math.round(((lo + parseFloat(m[3])) / 2) * 10) / 10 : lo;
     if (name && name.length <= 40) list.push({ name, pct });
   }
+  // The Factbook names a religion without quantifying it for ~30 entities — San Marino
+  // is simply "Roman Catholic", Sudan "Sunni Muslim, small Christian minority". Writing
+  // nothing threw away a known answer along with the missing number, so fall back to the
+  // names alone. They carry no `pct`, which is what marks them unquantified: consumers
+  // branch on that rather than on a second field (TODOS #52).
+  if (!list.length) {
+    for (const seg of t.split(/[,;]/)) {
+      const name = seg.replace(/^[\s.]+|[\s.]+$/g, '').replace(/\s+/g, ' ');
+      // Letters and spaces only, so stray dates and fragments can't become a religion.
+      if (!name || name.length > 40 || !/^[A-Za-z][A-Za-z '\/&-]*$/.test(name)) continue;
+      if (!list.some((r) => r.name.toLowerCase() === name.toLowerCase())) list.push({ name });
+      if (list.length >= 6) break;
+    }
+  }
   return { list, raw };
 }
 
@@ -299,7 +313,10 @@ for (const [code, m] of Object.entries(MANUAL_ATTR)) {
   // Per-field gap-fill: only fill a field Factbook didn't already provide.
   if (m.capital && !entry.capital) entry.capital = m.capital;
   if (m.capitalNote && !entry.capitalNote) entry.capitalNote = m.capitalNote;
-  if (m.religion && !entry.religion) entry.religion = m.religion;
+  // Religion is gap-fill against a *quantified* breakdown, not against any breakdown:
+  // a curated percentage beats the bare name the Factbook fallback now recovers, so
+  // Western Sahara keeps "Muslim 100%" rather than losing it to "Muslim" (TODOS #52).
+  if (m.religion && !entry.religion?.some((r) => r.pct != null)) entry.religion = m.religion;
   if (!provenance[code]) provenance[code] = m.src;
   if (isNew) matched++;
 }

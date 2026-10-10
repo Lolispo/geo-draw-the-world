@@ -65,10 +65,15 @@ const EXTRA_ENTITIES = {
   // user-assigned XA-XZ range, the same convention as `xs` Somaliland. Geometry and
   // population come from NE's disputed-areas layer; `disputed` carries NE's neutral
   // claim note, which the country panel shows instead of a sovereign parent.
-  xc: { name: 'Northern Cyprus', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Cyprus' },
-  xa: { name: 'Abkhazia', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Georgia' },
-  xo: { name: 'South Ossetia', continent: 'Asia', region: 'asia', disputed: 'Self-governing; claimed by Georgia' },
-  xt: { name: 'Transnistria', continent: 'Europe', region: 'europe', disputed: 'Self-governing; claimed by Moldova' },
+  // `claimedBy` is the same claim as `disputed`, as a code instead of prose, so the
+  // summable guard can read it (TODOS #54). It does NOT assert that the claimant's
+  // World Bank figure includes these people — whether it does varies per country and
+  // is not derivable from the data. It records that double-counting is *possible*,
+  // which is all a conservative guard needs.
+  xc: { name: 'Northern Cyprus', continent: 'Asia', region: 'asia', claimedBy: 'cy', disputed: 'Self-governing; claimed by Cyprus' },
+  xa: { name: 'Abkhazia', continent: 'Asia', region: 'asia', claimedBy: 'ge', disputed: 'Self-governing; claimed by Georgia' },
+  xo: { name: 'South Ossetia', continent: 'Asia', region: 'asia', claimedBy: 'ge', disputed: 'Self-governing; claimed by Georgia' },
+  xt: { name: 'Transnistria', continent: 'Europe', region: 'europe', claimedBy: 'md', disputed: 'Self-governing; claimed by Moldova' },
 };
 
 // Sovereign/administering country for dependent territories (shown in the panel).
@@ -186,11 +191,17 @@ for (const code of [...allCodes].sort()) {
     hasFlagImage: flagCodes.has(code),       // flag IMAGE on flagcdn (probed below for the rest)
     hasCapital: !!attributes[code]?.capital,
     hasReligion: !!attributes[code]?.religion,
+    // Split, because the Factbook names a religion for ~12 entities without
+    // quantifying it (TODOS #52): hasReligion means "we can name one", the pct
+    // flag means "we can draw a breakdown". A single flag would overstate one
+    // or hide the other.
+    hasReligionPct: !!attributes[code]?.religion?.some((r) => r.pct != null),
     hasElectricity: !!electricity[code], // TODOS #29
     // TODOS #20: the Territories toggle gates ALL dependent territories (not just the
     // newly-added ones) so it behaves consistently in browse/rank/draw.
     ...(type === 'territory' || type === 'de-facto' ? { optional: true } : {}),
     ...(SOVEREIGN_OF[code] ? { sovereign: SOVEREIGN_OF[code] } : {}),
+    ...(extra?.claimedBy ? { claimedBy: extra.claimedBy } : {}),
     ...(extra?.disputed ? { disputed: extra.disputed } : {}),
     region: geom ? geom.region : (extra?.region || null),
     metrics,
