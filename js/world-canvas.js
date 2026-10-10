@@ -6,6 +6,9 @@
 // pinch zoom the view. One meaning per gesture — they never overlap.
 
 import { drawMultiPolygon, multiPolygonBoundingBox, fitBounds, OCEAN_LABELS } from './utils.js';
+
+// How far in the view may be zoomed, as a multiple of the fitted scale (TODOS #57).
+const MAX_ZOOM = 20;
 import { ShapeHandles } from './shape-handles.js';
 
 // Neutral drop size for a freshly drawn shape, as a fraction of the canvas's
@@ -21,6 +24,10 @@ export class WorldCanvas {
 
     this.viewOffset = [0, 0];
     this.viewScale = 1;
+    // Dragging pans the view only where there is no shape to drag — the results map.
+    // The placement screen keeps one finger for the shape (TODOS #35, #57).
+    this.panEnabled = false;
+    this.isPanning = false;
 
     this.worldWidth = 1600;
     this.worldHeight = 1100; // TODOS #24: conformal Mercator (was 900, squished)
@@ -88,21 +95,23 @@ export class WorldCanvas {
   get _cssW() { return this.canvas.width / (window.devicePixelRatio || 1); }
   get _cssH() { return this.canvas.height / (window.devicePixelRatio || 1); }
 
-  _fitView() {
+  // The view that frames the round: a region's bounds, or the whole world. It is both
+  // the starting view and the floor on zooming out (TODOS #57), so they cannot drift.
+  _fitTransform() {
     const cw = this._cssW, ch = this._cssH;
-    if (this.regionBounds) {
-      const { scale, ox, oy } = fitBounds(this.regionBounds, cw, ch, 20);
-      this.viewScale = scale;
-      this.viewOffset = [ox, oy];
-    } else {
-      const scaleX = cw / this.worldWidth;
-      const scaleY = ch / this.worldHeight;
-      this.viewScale = Math.min(scaleX, scaleY) * 0.92;
-      this.viewOffset = [
-        (cw - this.worldWidth * this.viewScale) / 2,
-        (ch - this.worldHeight * this.viewScale) / 2
-      ];
-    }
+    if (this.regionBounds) return fitBounds(this.regionBounds, cw, ch, 20);
+    const scale = Math.min(cw / this.worldWidth, ch / this.worldHeight) * 0.92;
+    return {
+      scale,
+      ox: (cw - this.worldWidth * scale) / 2,
+      oy: (ch - this.worldHeight * scale) / 2,
+    };
+  }
+
+  _fitView() {
+    const { scale, ox, oy } = this._fitTransform();
+    this.viewScale = scale;
+    this.viewOffset = [ox, oy];
   }
 
   _syncHandles() {
@@ -186,12 +195,24 @@ export class WorldCanvas {
       }
     }
 
-    // Panning disabled
+    if (this.panEnabled) {
+      this.isPanning = true;
+      this.panFrom = pos;
+      this.canvas.style.cursor = 'grabbing';
+    }
   }
 
   _onMouseMove(e) {
     const pos = this._getCanvasPos(e);
     this._syncHandles();
+
+    if (this.isPanning) {
+      this.viewOffset[0] += pos[0] - this.panFrom[0];
+      this.viewOffset[1] += pos[1] - this.panFrom[1];
+      this.panFrom = pos;
+      this.render();
+      return;
+    }
 
     if (this.handles.active && this.activeShape) {
       if (this.handles.drag(this.activeShape, pos)) this.render();
@@ -219,12 +240,13 @@ export class WorldCanvas {
           ? 'grab' : 'default';
       }
     } else {
-      this.canvas.style.cursor = 'default';
+      this.canvas.style.cursor = this.panEnabled ? 'grab' : 'default';
     }
   }
 
   _onMouseUp() {
     this.isDragging = false;
+    this.isPanning = false;
     this.handles.end();
     this.canvas.style.cursor = 'default';
   }
@@ -270,13 +292,12 @@ export class WorldCanvas {
       if (!this._pinch) this._pinch = this._pinchState(e);
       const now = this._pinchState(e);
       const prev = this._pinch;
-      const factor = now.dist / prev.dist;
-      // Zoom about the pinch midpoint, then follow the midpoint. The follow is
-      // what gives touch a way to pan at all — dragging pans nothing, because a
-      // one-finger drag belongs to the shape.
-      this.viewScale *= factor;
-      this.viewOffset[0] = now.center[0] - (prev.center[0] - this.viewOffset[0]) * factor;
-      this.viewOffset[1] = now.center[1] - (prev.center[1] - this.viewOffset[1]) * factor;
+      // Zoom about the pinch midpoint, then follow the midpoint. The follow is what
+      // gives touch a way to pan at all on the placement screen, where a one-finger
+      // drag belongs to the shape.
+      this._zoomAbout(now.dist / prev.dist, prev.center);
+      this.viewOffset[0] += now.center[0] - prev.center[0];
+      this.viewOffset[1] += now.center[1] - prev.center[1];
       this._pinch = now;
       this.render();
       return;
@@ -296,16 +317,31 @@ export class WorldCanvas {
     if (e.touches.length === 0) this._onMouseUp();
   }
 
+  // Zoom about an anchor point in canvas space, clamped both ways. Zooming out past
+  // the fitted view only adds ocean, and there was no clamp at all before (TODOS #57).
+  _zoomAbout(factor, anchor) {
+    const fit = this._fitTransform();
+    const next = Math.max(fit.scale, Math.min(fit.scale * MAX_ZOOM, this.viewScale * factor));
+    // All the way out *is* the starting view: the offset snaps back too, so zooming out
+    // doubles as "reset" and a pan can never strand the map with no way to recentre.
+    // Checked before the no-op guard, because the scale is already at the floor by then.
+    if (next === fit.scale) {
+      if (this.viewScale === fit.scale
+        && this.viewOffset[0] === fit.ox && this.viewOffset[1] === fit.oy) return;
+      this.viewScale = fit.scale;
+      this.viewOffset = [fit.ox, fit.oy];
+      return;
+    }
+    if (next === this.viewScale) return;
+    const ratio = next / this.viewScale;
+    this.viewOffset[0] = anchor[0] - (anchor[0] - this.viewOffset[0]) * ratio;
+    this.viewOffset[1] = anchor[1] - (anchor[1] - this.viewOffset[1]) * ratio;
+    this.viewScale = next;
+  }
+
   _onWheel(e) {
     e.preventDefault();
-    const pos = this._getCanvasPos(e);
-    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-    const newScale = this.viewScale * zoomFactor;
-
-    this.viewOffset[0] = pos[0] - (pos[0] - this.viewOffset[0]) * (newScale / this.viewScale);
-    this.viewOffset[1] = pos[1] - (pos[1] - this.viewOffset[1]) * (newScale / this.viewScale);
-    this.viewScale = newScale;
-
+    this._zoomAbout(e.deltaY > 0 ? 0.9 : 1.1, this._getCanvasPos(e));
     this.render();
   }
 

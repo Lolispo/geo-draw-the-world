@@ -1196,6 +1196,29 @@ and prints a paste-ready JSON block. It also checks the 199 existing entries aga
 
 ## 57. Placement & results maps: a floor on zoom-out, and a results map you can move
 
+**REVIEW:** place a shape, then on the results map drag it sideways — it should move. Spin the
+wheel out on both the placement and results maps: it should stop at the framing the round
+started with, and zooming out from a panned view should put it back where it was.
+
+**✅ DONE 2026-10-10** — `_onWheel` applied `× 0.9` / `× 1.1` with no clamp in either
+direction; wheel and pinch now share one `_zoomAbout()` that clamps to `[fit, fit × 20]`.
+`_fitTransform()` is the single definition of "the view that frames this round", used by both
+the starting view and the floor, so they cannot drift — and a region round's floor is its own
+region, not the globe.
+
+**Zooming out doubles as reset.** Reaching the floor snaps the offset back to the fitted
+framing too, so a pan can never strand the map off to one side with nothing to recentre it.
+That check runs *before* the no-op guard, since the scale is already at the floor by then.
+
+Panning is opt-in (`panEnabled`), set only on the results canvas: the placement screen keeps one
+finger for the shape (#35), and touch inherits both through the existing one-finger forwarding.
+The pinch path keeps its follow-the-midpoint behaviour — checked against the old expression over
+5,000 random pinches, max difference 2e-13.
+
+Verified with Playwright: from the fitted view, 15 wheel-outs change nothing; 3 wheel-ins do;
+25 more wheel-outs return the canvas to a pixel-identical fitted view; a placement drag still
+moves the shape; the results map pans on drag and recentres on zoom-out. No page errors.
+
 **What:** Stop the world shrinking into empty space, and let the results map be panned
 sideways. Two halves of the same fix, in the same file.
 

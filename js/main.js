@@ -1402,6 +1402,7 @@ class Game {
     this.resultsWorldCanvas.showGhosts = true;
     // Answers are already revealed here, so the basemap shows in every mode
     this.resultsWorldCanvas.basemap = getContinentPolygons();
+    this.resultsWorldCanvas.panEnabled = true;   // nothing to drag here but the view (TODOS #57)
     this.resultsWorldCanvas.setRegionBounds(this._regionBounds);
     this.resultsWorldCanvas.activate();
 
