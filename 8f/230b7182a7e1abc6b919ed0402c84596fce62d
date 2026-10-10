@@ -1,0 +1,38 @@
+js/geo-data.js
+  s_07a3d60f829d3a::t_2d2fcd7de62a8c 52-63
+css/style.css
+  s_07a3d60f829d3a::t_8840508d6db1ef 2461-2509
+  s_07a3d60f829d3a::t_f90ea9de55a012 2510-2518
+  s_4c4d447dce4af2::t_2ed38f16d53251 2792-2794
+js/data-explorer.js
+  s_07a3d60f829d3a::t_6b9e55efde6f17 7-8,26,55-56,61-63,71,75-140,176-177,271
+js/explorer-map.js
+  s_07a3d60f829d3a::t_4f6f23a5e13b6c 32-35,119-120,122-125,129-132,160-175,206,213
+  s_07a3d60f829d3a::t_35129badf0061e 1-31,36-118,121,126-128,133-159,176-205,207-212,214-238
+TODO.md
+  s_07a3d60f829d3a::t_7c7c37146e47c1 1368-1400
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8f230b7182a7e1abc6b919ed0402c84596fce62d",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    },
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
