@@ -14,150 +14,12 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
-## 52. Religion: keep the name when the Factbook gives no percentage
-
-**REVIEW:** open the country panel for San Marino, Sudan, Ukraine, Maldives and Saudi Arabia —
-each should name a religion under a "no breakdown published" line, with no bars and no invented
-percentage. Check a normal country (Sweden, Brazil) still draws its bars. Western Sahara should
-still read Muslim 100%.
-
-**✅ DONE 2026-10-10** — `parseReligion` falls back to the names alone when no percentage parses.
-No new field: those rows simply carry no `pct`, which *is* the statement that they are
-unquantified, and `buildBreakdown` in `js/country-panel.js` — the only consumer — branches on it
-to list names instead of drawing bars. 12 entities recovered (er, gg, gl, kp, mf, mp, mv, sa, sd,
-sm, ua, va). Saudi Arabia reads "Muslim" rather than deriving a national share from a
-parenthetical about citizens, which is the honest answer.
-
-`entities.json` splits the flag: `hasReligion` = "we can name one" (234), `hasReligionPct` = "we
-can draw a breakdown" (222). One ordering bug surfaced: Western Sahara's curated `Muslim 100%`
-backfill was displaced by the Factbook's bare "Muslim" once that started parsing, so `MANUAL_ATTR`
-is now gap-fill against a *quantified* breakdown. Regression-checked: no previously-quantified
-entry changed.
-
-**What:** 30 entities show no religion at all because the Factbook names the religion
-without quantifying it. Keep the name, and let the country panel render it without a bar.
-
-**Why:** Found in the data review (2026-10-10). `parseReligion` in
-`scripts/build-attributes.mjs` only writes the field when the parsed list is non-empty,
-and the list needs percentages — so a known answer is discarded along with the missing
-number. San Marino's Factbook entry is literally `"Roman Catholic"`; Sudan's is
-`"Sunni Muslim, small Christian minority"`; Ukraine lists denominations with no shares.
-
-**Approach / notes:**
-- Affected (`hasReligion: false`, 30): `ax bl bq er gf gg gl gp gs io jg kn kp mf mp mq
-  mv re sa sd sj sm tf ua va xa xc xo xt yt`. Not all are recoverable — Eritrea and North
-  Korea are genuinely thin at source — so the build should report what it recovered.
-- **Saudi Arabia is the awkward one.** Its only numbers live inside a parenthetical:
-  `"Muslim (official; citizens are 85-90% Sunni and 10-12% Shia)"`. Those are a split
-  *among citizens*, not a national share, so they must not be read as one. "Muslim", with
-  no number, is the honest answer.
-- **The blocker is the data shape, not the parse.** `js/country-panel.js` →
-  `buildBreakdown()` renders `[{name, pct}]` as proportional bars; a row with no `pct`
-  has no bar to draw and would divide by a wrong total. Decide between:
-  (a) a separate `religionNames: [...]` field the panel renders as plain text, or
-  (b) `pct: null` entries plus a `buildBreakdown` branch that lists rather than bars.
-  (a) keeps the existing consumer honest and is probably right.
-- `hasReligion` in `entities.json` then needs to mean "has *something*", or split into
-  `hasReligion` / `hasReligionPct` so the Coverage board and `data-map.html` stay truthful.
-
-**Acceptance:** San Marino, Sudan and Ukraine show a religion in the country panel. Saudi
-Arabia shows "Muslim" with no fabricated percentage. The live check on `data-map.html`
-still reports zero breakdowns over 105%.
 
 ---
 
----
-
-## 53. Shapes: scattered island territories normalise to the ocean between them
-
-**REVIEW:** open the country panel for St Helena, the Marshall Islands, Tuvalu and the Cook
-Islands. Each should show its islands as a recognisable scatter in true relative position —
-St Helena's panel used to be **completely blank**. Check a normal country's outline is unchanged.
-
-**✅ DONE 2026-10-10** — Owner's call was to keep every island together as one country rather
-than show only the principal one, so the fix is in `js/silhouette.js`, not the data. Each ring
-keeps its true position; a ring whose on-screen box is under 3.5px is drawn as a dot in the same
-path, so it takes the same fill and stroke. The Marshall Islands' 54 atolls now read as two
-chains.
-
-Deliberately *not* a geometry change: per-ring simplification would have preserved each island's
-true outline but nothing displays these at a size where that is visible, and it would have grown
-54 rings' worth of vertices for no gain. No shape file changed.
-
-**What:** St Helena ships a 39-point outline from either geoBoundaries release. Decide what
-a territory made of far-apart islands should show, and build that.
-
-**Why:** Found in the data review (2026-10-10), while fixing the outline tier — it is
-pre-existing and unrelated to that change. St Helena, Ascension, Tristan da Cunha and Gough
-are four comparably-sized islands spanning 32° of latitude. All four clear `CLIP_AREA_FRAC`
-in `scripts/build-shapes.mjs`, so the normalising bounding box is mostly open ocean, each
-island lands ~30px wide inside the 1000px box, and Douglas-Peucker flattens it. The full
-release has 7,677 vertices and none survive.
-
-**Approach / notes:**
-- Confirmed for `sh`. Check `ki` (309 pts), `mh` (362), `fm` (316), `pf`, `mv` — same shape
-  of problem, unverified.
-- The options are a product call, not a tuning one: show only the principal island (loses
-  the territory's real extent), keep the scatter but normalise per-island into a grid, or
-  accept it and let these entities fall back to a single island by area.
-- Whatever is chosen, `data/shapes/<code>.json` now records `src`, so the thin ones are
-  listable: see the outline check on `data-map.html`.
-- Do not solve it by loosening `CLIP_DEG` / `CLIP_AREA_FRAC` globally — those thresholds
-  are what keep overseas territories out of every other country's outline.
-
-**Acceptance:** St Helena's panel shows a recognisable island rather than a 39-point blob,
-and no other country's outline changes.
 
 ---
 
----
-
-## 54. Population double-counts where a de-facto state ships separately
-
-**REVIEW:** nothing player-visible yet — `canCombine()` has no consumer until #37 is built.
-Check the reasoning holds: `js/datasets.js` → `canCombine`, and `claimedBy` on xc/xa/xo/xt in
-`data/entities.json`.
-
-**✅ DONE 2026-10-10** — The de-facto entities carry `claimedBy` (the claim `disputed` already
-states in prose, as a code), and `canCombine(a, b)` in `js/datasets.js` refuses a pair where one
-claims the other. Four entities gain one field; the guard is six lines.
-
-**Deliberately conservative, and this is the point:** it refuses pairs where double-counting is
-*possible* rather than asserting which World Bank figures actually overlap. Whether a claimant's
-statistics include a breakaway region varies by country and is **not** derivable from the data we
-hold — Georgia excludes Abkhazia, where Cyprus appears to include the north (its GDP per capita
-sits 40% above GDP ÷ population because the Bank's Cyprus GDP covers only the government-controlled
-area). Asserting per-case overlap would have meant claiming things about World Bank methodology
-that cannot be checked from here. Cost of over-refusing: one unavailable pair out of thousands.
-
-**What:** `population` is declared `summable: true`, and some entities overlap. Decide which
-questions must exclude the overlap, and enforce it where the flag is consumed.
-
-**Why:** Found in the data review (2026-10-10). Cyprus's World Bank GDP per capita is 40%
-above GDP ÷ population, and both inputs are 2023 — not year mixing. The Bank's Cyprus *GDP*
-covers the government-controlled area (~958k people) while `SP.POP.TOTL` covers the whole
-island (1.34M). Northern Cyprus also ships as its own entity (`xc`) with its own population
-from Natural Earth, so "is A + B bigger than C?" (#37) can count the same people twice.
-
-**Approach / notes:**
-- The `summable` flag is declared in `scripts/build-datasets.mjs` and its contract is
-  documented there; this is the one failure mode the declaration cannot catch, because each
-  value is individually correct.
-- Check the other de-facto states against their parents the same way: `xa` Abkhazia /
-  Georgia, `xo` South Ossetia / Georgia, `xt` Transnistria / Moldova, `xs` Somaliland /
-  Somalia, `eh` Western Sahara / Morocco. Their populations come from Natural Earth
-  `POP_EST`; whether the parent's World Bank figure includes them has to be checked per case.
-- Cheapest honest fix is probably a `overlaps: ['cy']` field on the de-facto entity in
-  `entities.json`, and a rule in the combination-question builder that refuses a pair where
-  one overlaps the other.
-- The GDP-per-capita mismatch itself is the World Bank's and should be left alone — but it
-  is worth a note in the country panel rather than looking like our arithmetic error.
-
-**Acceptance:** A combination question can never pair an entity with one it overlaps. The
-live "GDP per capita ≈ GDP ÷ population" check on `data-map.html` explains Cyprus rather
-than just flagging it.
-
----
 
 ---
 
@@ -1156,40 +1018,6 @@ dressed as data.
 ---
 
 
-## 55. Flag colours: review the drafts and fill the 52 gaps
-
-**What:** 52 entities have no entry in `data/flags.json`, so they are silently absent from the
-Flag Color Quiz and the Flag Color Picker. The drafting is done; what is left is a review pass.
-
-**Why:** Found in the data review (2026-10-10). `flags.json` is hand-curated — no script writes
-it — so this has simply never been done for the territories. Most of them *do* have a flag image
-(47 of 48 colour-less entities), which is exactly the gap that confused the owner before: an
-entity can show a flag everywhere and still be missing from the colour quizzes.
-
-**Already done:** both colour quizzes filter by `inCountryPool()`, so territories only appear with
-the Territories toggle on — adding them is safe and needs no gating work. The **Flag colours**
-section of `data-map.html` reads each real flag image, drafts colours for all 52 that have none,
-and prints a paste-ready JSON block. It also checks the 199 existing entries against their images.
-
-**Approach / notes:**
-- Open `/data-map.html` → Flag colours. "No colours yet" (52) carries the drafts; the JSON block
-  under the table is ready to paste into `data/flags.json`.
-- **The drafts need eyes, not trust.** Calibrated against the 199 already curated, the reader
-  finds 80% of their colours and errs towards extra anti-aliasing shades rather than missing real
-  ones. So the review is mostly *deleting* shades that are not flag colours (look at Gibraltar's
-  near-black, or Bermuda's grey). Judge against the flag image in the same row.
-- Small devices and thin stripes fall under the 1.5% share threshold and get missed — Aruba's red
-  star is the clear example. Add those by hand.
-- "Curated, disagrees with image" (40) is a **worklist, not a defect list** — the same threshold
-  effect flags small emblems on flags whose curated colours are fine. Worth a skim for real errors.
-- `jg` Channel Islands is an aggregate with no flag at all. Leave it.
-- Colours are the *dominant* colours of the flag, 2–6 per entry. Getting these wrong is worse than
-  omitting them, because the colour quiz scores against them.
-
-**Acceptance:** `hasFlag` coverage rises from 199, the Flag colours board shows no remaining
-"draft" rows, and the colour quizzes still only offer entities the Territories toggle allows.
-
----
 
 ---
 
@@ -1446,3 +1274,7 @@ full write-ups are in git history.
 - **#56** Deep links: open any screen by URL — 2026-10-10
 - **#10** Push draw shape fidelity to Sporcle level — retired 2026-10-10, the same bar
   as #24, which the owner signed off on 2026-09-06
+- **#52** Religion: keep the name when the Factbook gives no percentage — 2026-10-10
+- **#53** Shapes: scattered island territories render as archipelagos — 2026-10-10
+- **#54** Guard summed pairs against de-facto/claimant double-counting — 2026-10-10
+- **#55** Flag colours for the 52 entities that had none — 2026-10-10

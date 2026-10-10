@@ -301,10 +301,11 @@ footer a { color: var(--accent); text-decoration: none; }
     <h2>Flag colours</h2>
     <p>
       <code>data/flags.json</code> is hand-curated and drives both colour quizzes, so a wrong
-      entry is scored against. This reads the actual flag image for every entity, checks whether
-      each curated colour appears in it, and drafts colours for the ones that have none.
-      <b>Nothing here is written to the repo</b> — the drafts are proposals to paste in once
-      you have looked at them.
+      entry is scored against. This reads the actual flag image for every entity and checks whether
+      each curated colour appears in it. The 52 entities that had no colours were drafted here and
+      landed after review, so "No colours yet" should now be empty — if an entry appears there, a
+      new entity has arrived without colours. <b>Nothing here writes to the repo</b>; drafts are
+      proposals to paste in.
     </p>
     <p>
       Calibrated against the 199 flags already curated, the reader finds 80% of their colours
@@ -1086,12 +1087,13 @@ const FINDINGS = [
       Myanmar, Jordan, Jamaica and Papua New Guinea. Checked against the API directly, the World Bank
       publishes nothing at all for <span class="mono">NE.EXP.GNFS.CD</span> for those countries in
       2015–2023 — there is no parse bug to fix and no backfill that would not be invented.</p>
-      <p>The one gap that <em>is</em> ours to close is flag colours: 53 of 252 entities have no entry
-      in <span class="mono">flags.json</span>, which is hand-curated, so they are silently absent from
-      both colour quizzes. Both games already gate entities behind the Territories toggle, so adding
-      them is safe. The Flag colours section above is now where that work happens: it reads each
-      real flag image, drafts colours for all 52 that have none, and flags curated entries whose
-      colours it cannot find. <b>TODOS #55</b> is a review pass now, not research.</p>`,
+      <p>The one gap that <em>was</em> ours — flag colours — is closed. 52 entities had no entry in
+      the hand-curated <span class="mono">flags.json</span> and were silently absent from both colour
+      quizzes; the board above drafted them from their real flag images and they landed after review.
+      Coverage is 251 of 252, the exception being <span class="mono">jg</span> Channel Islands, which
+      is an aggregate with no flag to curate. Standard play is unchanged: both quizzes filter by
+      <span class="mono">inCountryPool()</span>, so the pool is 197 with the Territories toggle off
+      and 251 with it on.</p>`,
   },
 ];
 
