@@ -1,0 +1,41 @@
+css/style.css
+  s_07a3d60f829d3a::t_ecfe5ceae371b2 2175-2176,2431,2437-2440,2442-2445
+  s_07a3d60f829d3a::t_49111de86f4e31 2170-2174,2412-2413,2441,2502,2521
+TODO.md
+  s_07a3d60f829d3a::t_39e281c00a8f86 982-1014
+  s_4c4d447dce4af2::t_fbcac1412ca150 1479-1602
+js/top-n-game.js
+  s_07a3d60f829d3a::t_ecfe5ceae371b2 762-765
+  s_07a3d60f829d3a::t_3cdd54dc5c3893 18-20,121,753-754,759-761,768-769,862-864,866,873
+data/aliases.json
+  s_07a3d60f829d3a::t_defc13286739f5 1-299
+js/datasets.js
+  s_07a3d60f829d3a::t_33d275b319cc69 10-11,34-88
+  s_07a3d60f829d3a::t_2b58e223a24dff 89
+js/data-explorer.js
+  s_07a3d60f829d3a::t_ecfe5ceae371b2 4,21-23,30,141-154,222-229
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6332e4dbf25a7db8fd32a7ab289d013d3eb9a99a",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    },
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
