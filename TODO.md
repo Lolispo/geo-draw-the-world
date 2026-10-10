@@ -1735,6 +1735,56 @@ and prints a paste-ready JSON block. It also checks the 199 existing entries aga
 
 ---
 
+## 56. Deep links: open any screen by URL
+
+**REVIEW:** every link below should land on exactly that screen, on a reload, from a paste, and
+with Back working:
+
+| URL | Lands on |
+|---|---|
+| `#/` | menu |
+| `#/draw` | Draw the World menu (#9's new hero) |
+| `#/draw/quick3` · `#/draw/africa` | straight into that round |
+| `#/top10` | Top 10 picker (#43, #44) |
+| `#/explore` | Data Explorer rankings (#47) |
+| `#/explore/map?metric=population` | world map (#48) |
+| `#/explore/shapes` | shapes table (#51) |
+| `#/explore?metric=gdp-nominal&continent=Africa` | rankings, filtered |
+| `#/scores` | Your Scores (#41) |
+| `#/country/se` | menu with Sweden's panel open (#42) |
+| `#/flags` · `#/flag-picker` · `#/rank` | the other three activities |
+
+**✅ DONE 2026-10-10** — `js/router.js` plus a `_applyRoute()` in the Game shell.
+
+**Hash, not path** (owner asked whether paths would be painful — they would). The site deploys
+as raw static files to S3/CloudFront through the shared `Lolispo/ci` workflow, so `/explore/map`
+would need a 404-to-index rewrite configured outside this repo. A hash needs nothing, behaves
+identically under `python3 -m http.server` and on the live site, and `history.replaceState`
+fires neither `hashchange` nor `popstate`, so the app writing its own URL cannot re-enter the
+router — no guard flag, no loop.
+
+Entry points own their URL, so clicking and routing agree, and the Explorer keeps its hash on
+whatever you are looking at (view, metric, continent) as you click around. An unknown route
+falls back to the menu rather than a blank screen; an unknown continent or view in the query
+falls back too. Routing away closes an open country panel, which a hash change would otherwise
+leave hanging over the new screen.
+
+**The duplication the owner flagged, measured and reduced.** `world-canvas.js` draws a
+*continent* basemap and the piece you are placing — no per-country geometry, no colour scale, no
+hit-testing — so the choropleth could not have reused it without welding a game canvas to a
+thematic map. What genuinely existed three times was the fit-a-world-box-into-a-canvas
+arithmetic; it is now `fitBounds()` in `js/utils.js`, used by the silhouette, the choropleth and
+the placement view. The substitution in `world-canvas._fitView` is algebraically the same
+expression — checked over 10,000 random bounds, max difference 7e-12.
+
+Verified in an isolated browser (the gstack `browse` server is shared, and another session kept
+navigating it mid-test — use Playwright directly for anything stateful): nine routes land
+correctly, Back returns to the previous route, the panel silhouette and shape thumbnails still
+paint, the map still hovers ("Canada — 40.0M" on population), and a full Africa round still
+reaches the placement screen correctly framed. No page errors.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

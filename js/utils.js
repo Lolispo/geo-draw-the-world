@@ -129,6 +129,20 @@ export function multiPolygonBoundingBox(polygons) {
   return { minX, minY, maxX, maxY, width: maxX - minX, height: maxY - minY };
 }
 
+// Scale and offset that centre a world-space box inside a w x h canvas, with `pad`
+// to spare on every side. The silhouette, the choropleth and the placement canvas were
+// each carrying their own copy of this arithmetic (TODOS #56).
+export function fitBounds(bounds, w, h, pad = 0) {
+  const bw = (bounds.maxX - bounds.minX) || 1;
+  const bh = (bounds.maxY - bounds.minY) || 1;
+  const scale = Math.min((w - pad * 2) / bw, (h - pad * 2) / bh);
+  return {
+    scale,
+    ox: (w - bw * scale) / 2 - bounds.minX * scale,
+    oy: (h - bh * scale) / 2 - bounds.minY * scale,
+  };
+}
+
 export function normalizePolygon(points, targetSize = 100) {
   const bb = boundingBox(points);
   const scale = targetSize / Math.max(bb.width, bb.height);

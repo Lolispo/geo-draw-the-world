@@ -14,10 +14,11 @@ import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 const THUMB_SIZE = 48;
 
 export class DataExplorer {
-  constructor(containerEl, onFinish, onPlayDataset) {
+  constructor(containerEl, onFinish, onPlayDataset, onState = null) {
     this.container = containerEl;
     this.onFinish = onFinish;             // back to menu
     this.onPlayDataset = onPlayDataset;   // start the line game for a dataset id
+    this.onState = onState;               // keep the URL on what is being looked at
     this._loaded = false;
 
     this.datasetId = 'gdp-nominal';
@@ -38,11 +39,12 @@ export class DataExplorer {
     this._loaded = true;
   }
 
-  start(datasetId = 'gdp-nominal') {
+  start(datasetId = 'gdp-nominal', { view = 'rank', continent = null } = {}) {
     this.datasetId = getDataset(datasetId) ? datasetId : getDatasetList()[0].id;
-    this.continent = null;
+    // A URL can name a continent that is not one (TODOS #56); fall back to all.
+    this.continent = getContinents().includes(continent) ? continent : null;
     this.higherFirst = getDataset(this.datasetId).higherFirst;
-    this.view = 'rank';
+    this.view = ['rank', 'map', 'shapes', 'coverage'].includes(view) ? view : 'rank';
     this._render();
   }
 
@@ -62,6 +64,7 @@ export class DataExplorer {
       + (this.view === 'coverage' ? ' is-coverage' : '')
       + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
+    this.onState?.({ view: this.view, metric: this.datasetId, continent: this.continent });
     this._renderBody();
   }
 

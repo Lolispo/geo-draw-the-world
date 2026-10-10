@@ -5,7 +5,7 @@
 // sizing screen is gone, so corner handles resize the shape while the wheel and
 // pinch zoom the view. One meaning per gesture — they never overlap.
 
-import { drawMultiPolygon, multiPolygonBoundingBox, OCEAN_LABELS } from './utils.js';
+import { drawMultiPolygon, multiPolygonBoundingBox, fitBounds, OCEAN_LABELS } from './utils.js';
 import { ShapeHandles } from './shape-handles.js';
 
 // Neutral drop size for a freshly drawn shape, as a fraction of the canvas's
@@ -91,17 +91,9 @@ export class WorldCanvas {
   _fitView() {
     const cw = this._cssW, ch = this._cssH;
     if (this.regionBounds) {
-      const b = this.regionBounds;
-      const pad = 20;
-      const rw = b.maxX - b.minX;
-      const rh = b.maxY - b.minY;
-      const scaleX = (cw - pad * 2) / rw;
-      const scaleY = (ch - pad * 2) / rh;
-      this.viewScale = Math.min(scaleX, scaleY);
-      this.viewOffset = [
-        cw / 2 - (b.minX + rw / 2) * this.viewScale,
-        ch / 2 - (b.minY + rh / 2) * this.viewScale
-      ];
+      const { scale, ox, oy } = fitBounds(this.regionBounds, cw, ch, 20);
+      this.viewScale = scale;
+      this.viewOffset = [ox, oy];
     } else {
       const scaleX = cw / this.worldWidth;
       const scaleY = ch / this.worldHeight;

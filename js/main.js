@@ -21,6 +21,20 @@ import { TopNGame } from './top-n-game.js';
 import { DataExplorer } from './data-explorer.js';
 import { FlagPickerGame } from './flag-picker-game.js';
 import { ScoresScreen } from './scores-screen.js';
+import { openCountryPanel, closeCountryPanel } from './country-panel.js';
+import { readRoute, writeRoute } from './router.js';
+
+// Every draw mode a URL can name (TODOS #56). Regions are added from
+// getCountryRegions() so the two lists cannot drift.
+const DRAW_ROUTES = {
+  daily: 'startDaily',
+  quick3: 'startQuick3',
+  famous5: 'startFamous5',
+  speed: 'startSpeedRound',
+  streak: 'startStreak',
+  continents: 'startContinents',
+  world: 'startWorld',
+};
 
 const STATES = {
   MENU: 'menu',
@@ -106,7 +120,10 @@ class Game {
     this.dataExplorer = new DataExplorer(
       document.getElementById('explore-container'),
       () => this.showScreen(STATES.MENU),
-      (datasetId) => this.startRankLine(datasetId)
+      (datasetId) => this.startRankLine(datasetId),
+      ({ view, metric, continent }) => this._route(
+        ['explore', view === 'rank' ? null : view], { metric, continent },
+      )
     );
     this.scoresScreen = new ScoresScreen(
       document.getElementById('scores-container'),
@@ -126,7 +143,51 @@ class Game {
     this._updateDevBadge();
     this._sizeCanvases();
     this._updateHighScoreDisplay();
-    this.showScreen(STATES.MENU);
+    // A typed or pasted hash, and Back/Forward, both re-enter the route. The app's own
+    // writes go through history.replaceState, which fires neither — so no guard needed.
+    window.addEventListener('hashchange', () => this._applyRoute());
+    window.addEventListener('popstate', () => this._applyRoute());
+    this._applyRoute();
+  }
+
+  // #/draw/quick3, #/explore/map?metric=population, #/country/se … anything unknown
+  // falls back to the menu rather than a blank screen.
+  _applyRoute() {
+    const { segments, params } = readRoute();
+    const [head, sub] = segments;
+    // A hash change is not a reload, so a panel opened on the old route would hang
+    // around over the new screen.
+    if (head !== 'country') closeCountryPanel();
+    switch (head) {
+      case 'draw':
+        if (!sub) { this.openDrawMenu(); return; }
+        if (DRAW_ROUTES[sub]) { this[DRAW_ROUTES[sub]](); return; }
+        if (getCountryRegions().some((r) => r.file === sub)) { this.startCountries(sub); return; }
+        this.openDrawMenu();
+        return;
+      case 'top10': this.startTopN(); return;
+      case 'rank': this.startRankLine(sub || null); return;
+      case 'flags': this.startFlagQuiz(); return;
+      case 'flag-picker': this.startFlagPicker(); return;
+      case 'scores': this.openScores(); return;
+      case 'explore':
+        this.startExplore(params.get('metric') || 'gdp-nominal', {
+          view: sub || 'rank',
+          continent: params.get('continent') || null,
+        });
+        return;
+      case 'country':
+        // showScreen(MENU) rewrites the hash to #/, so the country goes back on after.
+        this.showScreen(STATES.MENU);
+        if (sub) { openCountryPanel(sub); this._route(['country', sub]); }
+        return;
+      default:
+        this.showScreen(STATES.MENU);
+    }
+  }
+
+  _route(segments, params) {
+    writeRoute(segments, params);
   }
 
   _sizeCanvases() {
@@ -428,6 +489,7 @@ class Game {
   }
 
   showScreen(state) {
+    if (state === STATES.MENU) writeRoute([]);
     this.state = state;
     for (const [name, el] of Object.entries(this.screens)) {
       el.classList.toggle('active', name === state);
@@ -453,6 +515,7 @@ class Game {
   }
 
   async startContinents() {
+    this._route(['draw', 'continents']);
     this.gameMode = 'continents';
     this._currentRegion = null;
     this.itemOrder = getContinentOrder();
@@ -475,6 +538,7 @@ class Game {
   }
 
   async startCountries(regionFile) {
+    this._route(['draw', regionFile]);
     this.gameMode = `countries-${regionFile}`;
     this._currentRegion = regionFile;
 
@@ -490,6 +554,7 @@ class Game {
   }
 
   async startWorld() {
+    this._route(['draw', 'world']);
     this.gameMode = 'world';
     this._currentRegion = 'world';
 
@@ -505,6 +570,7 @@ class Game {
   }
 
   async startDaily() {
+    this._route(['draw', 'daily']);
     this.gameMode = 'daily';
     this._currentRegion = 'daily';
 
@@ -523,6 +589,7 @@ class Game {
   // them is a long sitting; Rank the World keeps its ten because the cost per item
   // there is a single tap.
   async startQuick3() {
+    this._route(['draw', 'quick3']);
     this.gameMode = 'quick3';
     this._currentRegion = 'quick3';
 
@@ -539,6 +606,7 @@ class Game {
   }
 
   async startSpeedRound() {
+    this._route(['draw', 'speed']);
     this.gameMode = 'speed';
     this._currentRegion = 'speed';
     this._speedActive = true;
@@ -557,6 +625,7 @@ class Game {
   }
 
   async startStreak() {
+    this._route(['draw', 'streak']);
     this.gameMode = 'streak';
     this._currentRegion = 'streak';
     this._streakActive = true;
@@ -575,6 +644,7 @@ class Game {
   }
 
   async startFamous5() {
+    this._route(['draw', 'famous5']);
     this.gameMode = 'famous5';
     this._currentRegion = 'famous5';
 
@@ -591,6 +661,7 @@ class Game {
   }
 
   async startFlagQuiz() {
+    this._route(['flags']);
     this.gameMode = 'flag-quiz';
     this._currentRegion = 'flag-quiz';
     await this.flagGame.loadData();
@@ -599,6 +670,7 @@ class Game {
   }
 
   async startFlagPicker() {
+    this._route(['flag-picker']);
     this.gameMode = 'flag-picker';
     this._currentRegion = 'flag-picker';
     await this.flagPickerGame.loadData();
@@ -607,6 +679,7 @@ class Game {
   }
 
   async startRankLine(datasetId = null) {
+    this._route(['rank', datasetId]);
     this.gameMode = 'rank-line';
     this._currentRegion = 'rank-line';
     await this.rankLineGame.loadData();
@@ -616,6 +689,7 @@ class Game {
   }
 
   async startTopN() {
+    this._route(['top10']);
     this.gameMode = 'top-n';
     this._currentRegion = 'top-n';
     await this.topNGame.loadData();
@@ -624,21 +698,23 @@ class Game {
   }
 
   openDrawMenu() {
+    this._route(['draw']);
     this.showScreen(STATES.DRAW_MENU);
   }
 
   async openScores() {
+    this._route(['scores']);
     await this.scoresScreen.loadData();
     this.showScreen(STATES.SCORES);
     this.scoresScreen.start();
   }
 
-  async startExplore(datasetId = 'gdp-nominal') {
+  async startExplore(datasetId = 'gdp-nominal', { view = 'rank', continent = null } = {}) {
     this.gameMode = 'explore';
     this._currentRegion = 'explore';
     await this.dataExplorer.loadData();
     this.showScreen(STATES.EXPLORE);
-    this.dataExplorer.start(datasetId);
+    this.dataExplorer.start(datasetId, { view, continent });
   }
 
   _replay() {

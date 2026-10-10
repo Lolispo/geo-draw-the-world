@@ -3,7 +3,7 @@
 // two copies of a bbox-and-scale loop is how they drift apart.
 
 import { getCountryByCode } from './geo-data.js';
-import { traceRing } from './utils.js';
+import { traceRing, multiPolygonBoundingBox, fitBounds } from './utils.js';
 
 // Normalizing to the bounding box means the canvas shows the *outline*, not the size:
 // Russia and Monaco both fill their box. Anything comparing countries by area has to
@@ -24,17 +24,7 @@ export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 1
     return false;
   }
 
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  for (const ring of country.polygons) {
-    for (const [x, y] of ring) {
-      if (x < minX) minX = x; if (x > maxX) maxX = x;
-      if (y < minY) minY = y; if (y > maxY) maxY = y;
-    }
-  }
-  const w = maxX - minX || 1, h = maxY - minY || 1;
-  const scale = Math.min((size - pad * 2) / w, (size - pad * 2) / h);
-  const ox = (size - w * scale) / 2 - minX * scale;
-  const oy = (size - h * scale) / 2 - minY * scale;
+  const { scale, ox, oy } = fitBounds(multiPolygonBoundingBox(country.polygons), size, size, pad);
 
   // A scattered territory normalizes to the ocean between its islands: St Helena spans
   // 32° of latitude, so at 150px each of its four islands is about a pixel and the

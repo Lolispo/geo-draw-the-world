@@ -4,7 +4,7 @@
 // Geometry is the same Mercator world the draw game plays on (data/countries-*.json,
 // 1600x1600 space) — no mapping library, no second projection to keep in step.
 
-import { traceRing, hidpiReset } from './utils.js';
+import { traceRing, hidpiReset, fitBounds, multiPolygonBoundingBox } from './utils.js';
 
 // Five equal-count bands, not five equal-width ones: GDP and population are so skewed
 // that a linear ramp paints the entire world the lowest colour and calls it a map.
@@ -81,24 +81,9 @@ export class ExplorerMap {
   // Fit the shaded set, so a continent filter zooms to that continent rather than
   // leaving it a smudge in the corner of an otherwise empty world.
   _fit(w, h) {
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     const subject = this.countries.filter((c) => this._inScope(c.code));
-    for (const c of (subject.length ? subject : this.countries)) {
-      for (const ring of c.polygons) {
-        for (const [x, y] of ring) {
-          if (x < minX) minX = x; if (x > maxX) maxX = x;
-          if (y < minY) minY = y; if (y > maxY) maxY = y;
-        }
-      }
-    }
-    const pad = 8;
-    const bw = maxX - minX || 1, bh = maxY - minY || 1;
-    const scale = Math.min((w - pad * 2) / bw, (h - pad * 2) / bh);
-    return {
-      scale,
-      ox: (w - bw * scale) / 2 - minX * scale,
-      oy: (h - bh * scale) / 2 - minY * scale,
-    };
+    const rings = (subject.length ? subject : this.countries).flatMap((c) => c.polygons);
+    return fitBounds(multiPolygonBoundingBox(rings), w, h, 8);
   }
 
   _fillColor(code) {
