@@ -1466,6 +1466,33 @@ dressed as data.
 
 ## 51. Browse the country shapes as a table
 
+**REVIEW:** Data Explorer → **✏️ Shapes**. Scroll the outlines, sort by largest first, filter
+to a continent, flip Territories on, and tap a row for the country panel. The thumbnails are
+normalised to their own box, so this is shape and not size — the area column is there to say
+what the picture cannot.
+
+**✅ DONE 2026-10-10** — a third Explorer view, and with it the segmented view control the
+entry said whichever of #48/#51 landed first would owe: Rankings / Shapes / Coverage, replacing
+the two-way toggle button. **#48 inherits it.**
+
+`drawSilhouette` was lifted out of `js/country-panel.js` into `js/silhouette.js` with a size
+option rather than copied — the panel draws at 150px, the table at 48px, and there is still one
+bbox-and-scale loop. 251 canvases are too many to paint up front, so each waits on an
+`IntersectionObserver` (300px margin) that is torn down whenever the view re-renders.
+
+Columns are outline, flag, name, continent (dropped under 480px) and land area with its rank.
+Sorts A→Z / largest first / by continent; the continent filter and the territories toggle both
+apply.
+
+Verified: 197 rows with territories off, 251 with them on, built in 12ms; thumbnails paint as
+they scroll; largest-first gives Russia, China, United States, Canada; a row opens the country
+panel; the stacked value lines up with the name at 390px; no horizontal overflow; Rankings and
+Coverage both still render; no console errors.
+
+**It also makes #53 browsable.** St Helena, Åland, American Samoa and the other scattered-island
+territories show up here as specks — exactly the symptom that entry describes, now something you
+can scroll rather than something you have to be told.
+
 **What:** A view listing every country's shape as a thumbnail beside its name, so the
 shapes can be studied and compared without starting a round.
 

@@ -2458,6 +2458,31 @@ canvas {
   color: var(--accent);
 }
 
+/* Shapes table (TODOS #51) */
+.explore-views { display: flex; gap: 4px; margin-left: auto; }
+.shape-row {
+  gap: 10px;
+  /* the thumbnail replaces the rank column, so the stacked value indents further */
+  --explore-indent: calc(48px + 30px + 10px + 10px);
+}
+.shape-thumb {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--surface);
+}
+.shape-continent {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  /* The continent is the one column worth dropping: the outline already says roughly
+     where you are, and the row is tall enough with the value stacked under the name. */
+  .shape-continent { display: none; }
+}
+
 /* Coverage / audit table */
 .coverage-table {
   width: max-content;
@@ -2496,10 +2521,10 @@ canvas {
 .coverage-table tr.is-aggregate .cov-type { color: var(--red); }
 .coverage-table .rank-flag { width: 24px; }
 .explore-list.is-coverage { overflow-x: auto; }
-.explore-view-toggle { margin-left: auto; }
 
 @media (max-width: 768px) {
   .explore-list { --explore-indent: calc(30px + 26px + 12px + 12px); }  /* smaller flag */
+  .shape-row { --explore-indent: calc(48px + 26px + 10px + 10px); }
   .explore-header h2 { font-size: 1.05rem; }
   .explore-play { margin-left: 0; }
   .explore-select { flex: 1; }

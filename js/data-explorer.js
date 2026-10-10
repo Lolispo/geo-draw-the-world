@@ -1,11 +1,15 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
+import { drawSilhouette } from './silhouette.js';
 import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
+
+// Big enough to tell Chile from Italy, small enough that 250 of them scroll.
+const THUMB_SIZE = 48;
 
 export class DataExplorer {
   constructor(containerEl, onFinish, onPlayDataset) {
@@ -17,7 +21,8 @@ export class DataExplorer {
     this.datasetId = 'gdp-nominal';
     this.continent = null;   // null = All
     this.higherFirst = true;
-    this.view = 'rank';      // 'rank' | 'coverage'
+    this.view = 'rank';      // 'rank' | 'coverage' | 'shapes'
+    this.shapeSort = 'name'; // 'name' | 'area' | 'continent'
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
     this.showAliases = false;
@@ -41,14 +46,37 @@ export class DataExplorer {
 
   _render() {
     const c = this.container;
+    // Thumbnails draw as they scroll into view; a re-render replaces every canvas the
+    // old observer was watching, so it has to go with them.
+    this._shapeObserver?.disconnect();
+    this._shapeObserver = null;
     c.innerHTML = '';
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
     this._listEl.className = 'explore-list' + (this.view === 'coverage' ? ' is-coverage' : '');
     c.appendChild(this._listEl);
+    this._renderBody();
+  }
+
+  _renderBody() {
     if (this.view === 'coverage') this._renderCoverage();
+    else if (this.view === 'shapes') this._renderShapes();
     else this._renderList();
+  }
+
+  _select(options, value, onPick) {
+    const sel = document.createElement('select');
+    sel.className = 'explore-select';
+    for (const opt of options) {
+      const o = document.createElement('option');
+      o.value = opt.id;
+      o.textContent = opt.label;
+      if (opt.id === value) o.selected = true;
+      sel.appendChild(o);
+    }
+    sel.addEventListener('change', () => onPick(sel.value));
+    return sel;
   }
 
   _renderHeader() {
@@ -107,10 +135,19 @@ export class DataExplorer {
     }
     contSelect.addEventListener('change', () => {
       this.continent = contSelect.value || null;
-      if (this.view === 'coverage') this._renderCoverage();
-      else this._renderList();
+      this._renderBody();
     });
     bar.appendChild(contSelect);
+
+    // Sort (shapes view only) — the rank view has its own High→Low toggle.
+    if (this.view === 'shapes') {
+      const sort = this._select([
+        { id: 'name', label: 'A → Z' },
+        { id: 'area', label: 'Largest first' },
+        { id: 'continent', label: 'By continent' },
+      ], this.shapeSort, (v) => { this.shapeSort = v; this._renderShapes(); });
+      bar.appendChild(sort);
+    }
 
     // Sort toggle (rank view only)
     if (rankView) {
@@ -152,16 +189,28 @@ export class DataExplorer {
       bar.appendChild(aliasBtn);
     }
 
-    // View toggle (both)
-    const viewBtn = document.createElement('button');
-    viewBtn.className = 'btn btn-tool explore-view-toggle';
-    viewBtn.textContent = rankView ? '📋 Coverage' : '↩ Rankings';
-    viewBtn.title = rankView ? 'Show data coverage across all entities' : 'Back to rankings';
-    viewBtn.addEventListener('click', () => {
-      this.view = rankView ? 'coverage' : 'rank';
-      this._render();
-    });
-    bar.appendChild(viewBtn);
+    // View switch. A two-way toggle button stopped working the moment there was a
+    // third view, so it is a segmented control.
+    const views = document.createElement('div');
+    views.className = 'explore-views';
+    for (const v of [
+      { id: 'rank', label: '📊 Rankings', title: 'Countries ranked by a dataset' },
+      { id: 'shapes', label: '✏️ Shapes', title: 'Every country outline, side by side' },
+      { id: 'coverage', label: '📋 Coverage', title: 'Show data coverage across all entities' },
+    ]) {
+      const b = document.createElement('button');
+      b.className = 'btn btn-tool' + (this.view === v.id ? ' active' : '');
+      b.textContent = v.label;
+      b.title = v.title;
+      b.setAttribute('aria-pressed', String(this.view === v.id));
+      b.addEventListener('click', () => {
+        if (this.view === v.id) return;
+        this.view = v.id;
+        this._render();
+      });
+      views.appendChild(b);
+    }
+    bar.appendChild(views);
 
     // Rank this → (rank view only)
     if (rankView) {
@@ -231,6 +280,83 @@ export class DataExplorer {
       row.title = `View ${e.name}`;
       row.addEventListener('click', () => openCountryPanel(e.code));
       list.appendChild(row);
+    }
+  }
+
+  // Every outline in one table (TODOS #51). Each thumbnail is normalized to its own
+  // bounding box, so Russia and Monaco are both legible — which means this teaches
+  // shape, not size, and the area column is there to say what the picture cannot.
+  _renderShapes() {
+    const list = this._listEl;
+    if (!list) return;
+    this._shapeObserver?.disconnect();
+    list.innerHTML = '';
+
+    const area = getDataset('land-area');
+    const rows = getEntitiesList()
+      .filter((e) => inCountryPool(e) && (!this.continent || e.continent === this.continent));
+    if (this.shapeSort === 'area') {
+      rows.sort((a, b) => (area?.values[b.code] ?? -1) - (area?.values[a.code] ?? -1));
+    } else if (this.shapeSort === 'continent') {
+      rows.sort((a, b) => (a.continent || '').localeCompare(b.continent || '')
+        || a.name.localeCompare(b.name));
+    } // getEntitiesList() is already name-sorted
+
+    const missing = rows.filter((e) => e.hasGeometry === false).length;
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb';
+    blurb.textContent = `${rows.length} outlines${this.continent ? ` · ${this.continent}` : ''}`
+      + (missing ? ` · ${missing} with no geometry` : '')
+      + ' · each drawn to fit its own box, so this is shape, not size';
+    list.appendChild(blurb);
+
+    // 250 canvases is too many to draw up front, so each one waits until it is nearly
+    // on screen. The observer is torn down by _render().
+    this._shapeObserver = new IntersectionObserver((entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        obs.unobserve(entry.target);
+        drawSilhouette(entry.target, entry.target.dataset.code, entry.target._entity,
+          { size: THUMB_SIZE, pad: 3 });
+      }
+    }, { root: list, rootMargin: '300px' });
+
+    for (const e of rows) {
+      const row = document.createElement('div');
+      row.className = 'explore-row shape-row is-clickable';
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'shape-thumb';
+      canvas.dataset.code = e.code;
+      canvas._entity = e;
+
+      const flag = document.createElement('img');
+      flag.className = 'rank-flag';
+      flag.src = flagUrl(e.code, 'w40');
+      flag.alt = '';
+      flag.loading = 'lazy';
+      flag.addEventListener('error', () => { flag.style.visibility = 'hidden'; });
+
+      const name = document.createElement('span');
+      name.className = 'explore-name';
+      name.textContent = e.name;
+
+      const cont = document.createElement('span');
+      cont.className = 'shape-continent';
+      cont.textContent = e.continent || '';
+
+      const value = document.createElement('span');
+      value.className = 'explore-value';
+      const km2 = area?.values[e.code];
+      const rank = km2 == null ? null : getRank('land-area', e.code);
+      value.textContent = km2 == null ? '—'
+        : `${formatValue(area.format, km2)}${rank ? ` · #${rank.rank}` : ''}`;
+
+      row.append(canvas, flag, name, cont, value);
+      row.title = `View ${e.name}`;
+      row.addEventListener('click', () => openCountryPanel(e.code));
+      list.appendChild(row);
+      this._shapeObserver.observe(canvas);
     }
   }
 

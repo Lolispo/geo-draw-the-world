@@ -6,9 +6,8 @@ import {
   loadDatasets, loadEntities, loadAttributes, loadElectricity,
   getEntity, getAttributes, getElectricity, getDatasetList, formatValue, getRank,
 } from './datasets.js';
-import { getCountryByCode } from './geo-data.js';
 import { flagUrl } from './flags.js';
-import { traceRing } from './utils.js';
+import { drawSilhouette } from './silhouette.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
 const ELECTRICITY_MIN_PCT = 3; // smaller generation sources fold into "Other"
@@ -114,7 +113,7 @@ function render(code) {
   canvas.className = 'cp-shape-canvas';
   shapeWrap.appendChild(canvas);
   body.appendChild(shapeWrap);
-  drawSilhouette(canvas, code, entity);
+  drawSilhouette(canvas, code, entity, { size: 150 });
 
   // Facts column
   const facts = el('div', 'cp-facts');
@@ -228,56 +227,6 @@ function buildBreakdown(label, items, { minPct = 5, colors = null, note = null }
   return wrap;
 }
 
-// Draw the country's multipolygon, normalized to fit the canvas.
-async function drawSilhouette(canvas, code, entity) {
-  const ctx = canvas.getContext('2d');
-  const cssSize = 150;
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = cssSize * dpr;
-  canvas.height = cssSize * dpr;
-  canvas.style.width = canvas.style.height = `${cssSize}px`;
-  ctx.scale(dpr, dpr);
-
-  if (entity && entity.hasGeometry === false) { shapeFallback(ctx, cssSize); return; }
-
-  const country = await getCountryByCode(code);
-  if (!country || !country.polygons || !country.polygons.length) { shapeFallback(ctx, cssSize); return; }
-
-  // bbox over all rings
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  for (const ring of country.polygons) {
-    for (const [x, y] of ring) {
-      if (x < minX) minX = x; if (x > maxX) maxX = x;
-      if (y < minY) minY = y; if (y > maxY) maxY = y;
-    }
-  }
-  const pad = 14;
-  const w = maxX - minX || 1, h = maxY - minY || 1;
-  const scale = Math.min((cssSize - pad * 2) / w, (cssSize - pad * 2) / h);
-  const ox = (cssSize - w * scale) / 2 - minX * scale;
-  const oy = (cssSize - h * scale) / 2 - minY * scale;
-
-  ctx.beginPath();
-  for (const ring of country.polygons) {
-    traceRing(ctx, ring.map(([x, y]) => [x * scale + ox, y * scale + oy]), true);
-  }
-  ctx.fillStyle = country.color || '#7EA6E0';
-  ctx.fill('nonzero');
-  ctx.lineJoin = 'round';
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-  ctx.stroke();
-}
-
-function shapeFallback(ctx, size) {
-  ctx.fillStyle = 'rgba(127,127,127,0.15)';
-  ctx.fillRect(0, 0, size, size);
-  ctx.fillStyle = 'rgba(127,127,127,0.6)';
-  ctx.font = '13px system-ui, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('no shape', size / 2, size / 2);
-}
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
