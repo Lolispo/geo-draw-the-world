@@ -592,79 +592,6 @@ rankables appear in Explorer + Rank.
 
 ---
 
-## 9. Draw the World: better default modes, disable the weak ones
-
-**REVIEW:** open Draw the World. **Quick 3** is now the big button at the top; Daily Challenge
-sits first in Special Modes. Play a round from each and check nothing about the swap feels
-backwards.
-
-**✅ DONE 2026-10-10** — the open half of this item was always a decision, and the owner made
-it: *promote Quick 3 to hero* (2026-10-10). A daily is a returning-player feature; someone
-opening the game for the first time wants to play. Quick 3 takes the hero slot, Daily Challenge
-takes Quick 3's place at the head of Special Modes, and `.btn-daily-mode` is renamed
-`.btn-hero-mode` — the treatment is now "whatever leads", not "the daily".
-
-The long modes were left where they are. World and Continents already sit below the special
-modes, under their own heading, and burying them further would make them hard to find for the
-one player who wants them.
-
-**#35 has landed** (2026-09-08) — sizing is merged into placement, so the weakest step in
-the draw loop is gone. That was half the reason the default played badly.
-
-**✅ Half done 2026-09-08 — Quick 3 shipped.** `Quick 10` is replaced outright (not
-supplemented) by `Quick 3`: `startQuick3()` / `btn-quick3`, three random countries, same
-loop. Replacing rather than adding was the read of "Quick 10 is too long for drawing" —
-keeping both would have left the slog as the prominent option. Rank the World is untouched.
-Note the high-score key moved from `quick10` to `quick3`, so any existing Quick 10 best is
-orphaned in localStorage rather than migrated; a best over ten items is not comparable to
-one over three.
-
-**❓ Still open — the "default", which needs an owner decision.** There is no auto-start
-default to change: Draw the World is a menu, so "the default" is really *what the menu
-puts forward*. Today the hero button is **Daily Challenge** (one country), with Quick 3,
-Famous 5, Speed Round and Streak below it, then Continents/World, then the six regions.
-With Quick 3 in place both prominent options are now short, which may be all this item
-needed. Decide one of:
-- leave it — Daily Challenge as hero is already a good first impression; close this item;
-- promote **Quick 3** to hero instead, on the grounds that a daily is a returning-player
-  feature and a first-time player wants to just play;
-- de-emphasise the long modes (World is ~197 items, Continents 7) by moving them below the
-  regions or behind a "more" disclosure.
-
-Nothing about the modes *dead-ends* — verified by playing Quick 3 end to end after the
-change, so the acceptance criterion below is met apart from the default question.
-
-**What:** Revisit which modes "Draw the World" offers and which is the default.
-Disable/hide the ones that play badly; make the default put the best foot forward.
-
-**Why:** Some draw modes are weak right now (placement especially — item 11), and
-the current default doesn't showcase the game well.
-
-**Decided (owner, 2026-09-06):**
-- **Quick 10 is too long for drawing.** Ten freehand countries is a slog when each one
-  is draw → size → place. Replace or supplement it with a **Quick 3** for Draw the
-  World (`btn-quick10` / `startQuick10()` in `js/main.js:516`, label in
-  `index.html:124`). Rank the World can keep 10 — the cost per item there is a tap.
-- Shape quality (#24) and placement (#11) both signed off as good enough on
-  2026-09-06, so the original "disable modes gated on weak placement" reasoning below
-  no longer applies. Re-scope this item to mode *length* and the default, not quality.
-
-**Decided (earlier):**
-- Disable the "bad" modes (candidate: anything gated on weak placement, e.g.
-  **Placement Only**) at least until items 10–11 land.
-- Change the default mode to a stronger one (e.g. the **Shape-Only** compare from
-  item 2, or a shape-focused Quick 10).
-
-**Approach / notes:**
-- Mode list + default live in `js/main.js` (mode toggles / `STATES`) and the hub in
-  `index.html`. Prefer a feature flag / commented-out entry over deletion so weak
-  modes are easy to re-enable once placement is fixed. Keep it reversible — it's a
-  stopgap tied to the placement/shape work.
-
-**Acceptance:** Draw the World opens on a good default; weak modes aren't selectable
-(or are clearly de-emphasized); nothing dead-ends.
-
----
 
 
 ## 13. New mode: Paint / Create-a-Flag
@@ -1112,315 +1039,11 @@ unplayable letter. Works at 390px wide.
 
 ---
 
-## 40. Country name aliases: "UK", "UAE", "DRC" count as the country
 
-**REVIEW:** Top 10 → Input: *Type the name*, play a round, and try `uk`, `uae`, `drc`,
-`holland`, `czechia`. Then Data Explorer → **🔤 Aliases: On** and read down the list for a
-country that should answer to something it doesn't — that column is the audit, and adding to
-`data/aliases.json` is a one-line edit.
 
-**✅ DONE 2026-10-10** — `data/aliases.json`: 82 countries, 131 aliases, validated as it was
-written against `data/entities.json` (every key is a real country; no alias is some *other*
-country's real name; no alias is claimed twice). `normalizeName` moved from `js/top-n-game.js`
-to `js/datasets.js`, where the names it compares live.
 
-**Stored as written, normalized at load** — the entry proposed storing them pre-normalized.
-Keeping "U.K." and "Côte d'Ivoire" as written makes the Explorer column read as names rather
-than as matcher keys, and normalization still happens in exactly one place. Each alias is
-indexed **twice, with and without its spaces**: "U.K." normalizes to `u k` and "uk" does not,
-and both have to work.
 
-Matching order in `_submitName` is exact name → exact alias → prefix of name, so an
-abbreviation outranks a two-letter prefix of some other country. The suggestion list matches on
-aliases too and names the one that found the country, so typing `uk` both scores and teaches.
 
-**Deliberate omission: "England" is not an alias for the United Kingdom.** Say the word and it
-goes in — losing a life to it is annoying — but a geography game teaching England = UK seemed
-the worse trade.
-
-Verified in the browser: `uk` → ✓ United Kingdom #6, no life lost; `uae` → ✗ United Arab
-Emirates #27, correctly treated as a real in-range country; `zzzz` → "not one of the 195
-countries in range — no life lost". Thirty-one probes resolve, including `U.K.`, `u k`, `DRC`,
-`PNG`, `czechia`, `cape verde`, `burma`, `swaziland`, `holland`, `east timor`, `dprk`, `rok`,
-`macedonia`, `persia`, `siam`, `ceylon`, `malvinas`, `holy see`, `bvi`, `usvi`, `eire`,
-`aotearoa`, `trnc`; `nope` resolves to nothing, and so does `ivory coast` — correctly, since
-that is already the country's real name. Explorer column: 195 rows, 133 of them blank, aligned
-under the name at 390px and 1440px, no horizontal overflow.
-
-**What:** A curated alias table so typed answers accept the shortenings people actually
-use — UK, UAE, USA, DRC, CAR, PNG, Holland, Burma, Ivory Coast, Czechia — plus a way to
-*see* the whole table, so gaps can be found without playing into them.
-
-**Why:** Owner request (2026-10-10). Sporcle accepts these and the game feels broken
-without them: typing `uk` today matches nothing and is told it "is not one of the N
-countries in range". The viewing half is not decoration — *"if i cant validate the data
-set in the list i cant see if it misses anything"*.
-
-**Decided (owner, 2026-10-10):**
-- **Typing acceptance is the feature.** The list view exists to audit the data behind it.
-- **Not its own screen.** It rides into the Data Explorer as an extra column behind a
-  toggle, the way Territories already does.
-
-**Approach / notes:**
-- New `data/aliases.json`, `{ "<code>": ["uk", "great britain", …] }`, hand-curated and
-  loaded by `js/datasets.js` beside the other optional layers. A failed fetch must leave
-  typing working on real names, exactly as `electricity.json` is kept separable.
-- **Store aliases already normalized** by the same rule as names (`normalizeName`,
-  `js/top-n-game.js:86`: diacritics stripped, case folded, punctuation to spaces). Then
-  `U.K.`, `UK` and `u k` collapse to one key for free and the file cannot drift from the
-  matcher.
-- Two consumers, both in the typing style today: the submit matcher (`_submitName`,
-  `js/top-n-game.js:808`) and the suggestion filter (`:707`) — typing `uae` must *offer*
-  United Arab Emirates, not merely accept it once typed in full. Put the lookup in
-  `js/datasets.js` so any future typed mode inherits it.
-- **Exact alias beats prefix-of-name.** `_submitName` falls back to `startsWith`; try the
-  alias map before that fallback or a short prefix can out-rank a deliberate abbreviation.
-- Aliases go through `inCountryPool()` like everything else — an alias must not drag a
-  territory into a round the toggle excluded.
-- Explorer column: a `🔤 Aliases: On/Off` button in `_renderControls()`
-  (`js/data-explorer.js`) adding an "also accepted" cell per row. Countries with none
-  render an empty cell — that blank *is* the audit signal.
-- Seed the list from the names that actually cost a life: the four-plus-word official
-  names, the two-word islands, and the handful with a competing common name
-  (Czechia/Czech Republic, Myanmar/Burma, Türkiye/Turkey, Eswatini/Swaziland,
-  Netherlands/Holland, Côte d'Ivoire/Ivory Coast, Cabo Verde/Cape Verde,
-  North Macedonia/Macedonia, East Timor/Timor-Leste).
-
-**Acceptance:** Typing `uk`, `uae`, `usa`, `drc` in a Top-N typing round scores the right
-country, and the suggestion list offers them mid-word. The Explorer can show every alias
-per country so the table can be read for gaps. A country with no alias is visibly blank
-rather than absent.
-
----
-
-## 41. "Your Scores": a record of every preset you have played
-
-**REVIEW:** menu → **🏅 Your Scores**. Everything you have ever finished should be listed
-under the activity it belongs to, newest first, with a best that reads correctly for that mode
-(a drawing round is out of 100, a streak is a count, Top 10 is hits out of N). Check nothing you
-recognise is missing or mislabelled — and that **Clear all scores** asks first.
-
-**✅ DONE 2026-10-10** — new `js/scores-screen.js` and a seventh hub card, read-only over
-`getAllHighScores()`. The only write added anywhere is `clearScores()`, behind a confirm, in the
-one place the whole store is visible.
-
-The work was the labels, as expected. Keys are minted in five places and two of them hold
-dashes inside dashes, so Top-N keys are read from the **right** — optional difficulty, style,
-N, direction — and the dataset is then matched against the live registry rather than guessed:
-`topn2-elec-renewable-pct-north-america-lo-5-type` resolves to *Bottom 5 · Electricity from
-renewables · North America · typing*. Orphans are kept, never dropped: `quick` still reads
-"Quick 10" though #9 retired it, and anything no current mode mints lands under **Older rounds**
-with its raw key.
-
-Verified against a seeded store holding all eleven key shapes: every row resolved, groups in
-order, newest first, per-mode formatting correct (82/100, 12 in a row, run of 14, 8/10, 850
-pts). Empty store shows an invitation; clear-all empties and re-renders; back returns to the
-menu; 390px has no overflow; no console errors.
-
-**Not built:** replaying a preset by tapping its row. That needs every key mapped back to a
-mode start, which is a bigger job than this screen — a natural follow-up if the screen earns it.
-
-**What:** A Seterra-style scores screen: every game preset you have actually played, with
-your best on it and when. Presets you have never touched do not appear.
-
-**Why:** Owner request (2026-10-10). The scores already exist — `js/high-scores.js` keeps
-one record per mode key — but they are only ever shown at the moment you finish, or on
-the six region buttons (`js/main.js:165`). There is nowhere to see what you have played
-and how you did, which is most of what makes Seterra sticky.
-
-**Decided (owner, 2026-10-10):** one screen in the hub. Not inline badges on every button.
-
-**Approach / notes:**
-- Read-only over the existing `geo-draw-high-scores` localStorage blob
-  (`getAllHighScores()`); no new store, no new write path, so nothing can regress scoring.
-- **The hard part is labels, not layout.** Keys are flat strings minted in five places:
-  `countries-<region>` and the draw mode names (`js/main.js:1379`), `rank-line-<id>`
-  (`js/rank-line-game.js:630`), the Top-N key (`_scoreKey`, `js/top-n-game.js`), and the
-  two flag games (`js/flag-game.js:517`, `js/flag-picker-game.js:419`). A resolver needs
-  to turn each back into something readable ("Top 10 · Total GDP · Europe · typing").
-- **Decide what happens to orphans** — keys from modes that were renamed or deleted
-  (Quick 10 became Quick 3 in #9; the `transform` screen died in #35). Showing a raw key
-  is ugly; hiding it silently loses a record. Suggest: group them under "Older rounds"
-  with the raw key, and never delete anything the player earned.
-- Records carry `{ score, counted, total, date }` only — no play count, no time, no
-  attempt history. Say what you can honestly say; do not invent a "times played".
-- Group by activity (Draw / Rank / Top-N / Flags), newest-played first inside each group.
-- Needs a **clear-scores** control with a confirm, since this is now the only place the
-  whole store is visible.
-
-**Acceptance:** Play two different presets, open the screen, and see exactly those two
-with correct bests and dates. A player with an empty store sees an invitation, not an
-empty table. Readable at 390px.
-
----
-
-## 42. Metric descriptions on hover and tap
-
-**REVIEW:** open a country panel (tap any row in the Data Explorer) and tap a metric tile
-— it should say what that metric measures; hovering does the same on a desktop. Then open the
-Top 10 picker and change the metric: the line under the dropdown follows it, and nothing below
-moves.
-
-**✅ DONE 2026-10-10** — the `blurb` is now surfaced in the two places that had only a bare
-name: a hint line under the Top-N metric dropdown (the pattern the difficulty hint already
-set), and the country panel's metric tiles, which get an ⓘ, a hover title, and tap- or
-keyboard-toggled text. Rank the World's cards and the Explorer header already showed it.
-Reserved height measured, not guessed: the longest blurb needs 30px at 320/390/1440, reserve
-is 31px, and the form below it does not move when the metric changes.
-
-**Still open:** `data/datasets.json` records no year per dataset, so "latest year" is as
-precise as the text can honestly be. Naming the year is a `scripts/build-*.mjs` change.
-
-**What:** Show what a metric actually measures wherever one is chosen — hover on desktop,
-an ⓘ tap on touch. *"Electricity from renewables"* should say which year, which source,
-and what counts as renewable.
-
-**Why:** Owner request (2026-10-10). The data is already written and already loaded:
-every dataset in `data/datasets.json` carries a `blurb`, and today it is rendered in
-exactly one place — the Data Explorer's list header (`js/data-explorer.js`,
-`.explore-blurb`). Every other metric picker shows a bare name.
-
-**Approach / notes:**
-- Surfaces: the Explorer's metric `<select>`, the Top-N picker's Metric row
-  (`_selectRow`, `js/top-n-game.js:497`), the Rank-the-World dataset cards
-  (`js/rank-line-game.js:95`), and the metric rows in the country panel.
-- A `<select>` cannot hold rich hover text per option in any portable way. Either put the
-  description under the control (it changes as you change metric) or keep `title` on the
-  option and accept that touch devices will never see it. **Under the control is the
-  honest choice** — and #44 has already established that a line of explanatory text below
-  a control needs reserved height so it cannot shift the layout when its length changes.
-- Touch has no hover: an ⓘ button beside the control toggling the same text is the whole
-  mobile story. Do not build a tooltip library.
-- **Audit the twelve blurbs as part of this.** They were written as a header suffix
-  ("Nominal GDP, latest year (World Bank)"), not as teaching text, and the three `elec-*`
-  ones are the ones that prompted this. Each should name the source and the year.
-
-**Acceptance:** Every metric picker in the app explains the selected metric without
-leaving the screen, on desktop and on a phone. No blurb reads as a column header.
-
----
-
-## 43. Top 10 / Bottom 10: a "hide results" toggle
-
-**REVIEW:** Top 10 picker → **🙈 Hide answers: On**, then play a round and lose it. The
-ladder should stay blank where you never answered, with **👀 Reveal answers** to spoil it
-deliberately. Check the toggle survives a reload, and that with it Off the results screen looks
-exactly as it always did.
-
-**✅ DONE 2026-10-10** — `getHideAnswers`/`setHideAnswers` in `js/settings.js`
-(`gdtw.hideAnswers`, default off). `_showResults()` split into the scoring half and
-`_renderResults(reveal)`, so Reveal redraws the ladder without re-saving the score or replaying
-the sound. Verified end to end: a hidden round shows 10 blank slots, the subhead reads "Your 0
-of 10 — 10 still hidden", the three wrong picks stay listed, and Reveal fills all ten and
-removes its own button. The default path renders identically to before.
-
-**What:** An option that stops the results screen from handing you the answers you never
-found. Persisted like the other toggles. A deliberate **Reveal answers** button is the
-escape hatch.
-
-**Why:** Owner request (2026-10-10): today the results ladder fills in every slot you
-missed, so Play Again is a formality — you have just been told the answer. Hiding them
-makes the replay the point.
-
-**Decided (owner, 2026-10-10):**
-- Unfound slots stay blank at results; a **Reveal answers** button spoils it on purpose.
-- Not "hidden until you replay" — a round you cannot finish must not become a dead end.
-- The score still saves exactly as it does now.
-
-**Approach / notes:**
-- `_showResults()` already builds the ladder through `_slotsHtml({ reveal })`
-  (`js/top-n-game.js:747`), which renders an empty-but-full-height row when `reveal` is
-  false. The hidden state is therefore already written and already layout-stable: pass
-  the setting through and re-render on Reveal.
-- Wrong picks (`_missesHtml`) stay visible either way — you typed them, they are yours.
-- The setting belongs in `js/settings.js` next to `getIncludeTerritories`, with a stable
-  key, and a button in the picker's options row beside Territories and Force 10.
-- The results subhead ("The real top 10") must not read as a promise when nothing is
-  shown — say how many are hidden.
-
-**Acceptance:** With the toggle on, finishing a round shows only what you found, plus a
-Reveal that fills the ladder in. With it off, behaviour is exactly as today. The setting
-survives a reload.
-
----
-
-## 44. Top-N picker: two more locks, and a roll hint that stops jumping
-
-**REVIEW:** Top 10 picker → Territories and Force 10 now each have a 🔒/🎲 beside them, and
-Territories starts locked. Free them and roll a few times. Then watch the row of toggles while
-you change metric or flip locks: it should not move.
-
-**✅ DONE 2026-10-10** — seven lockable fields. Territories and Force 10 are rolled *before*
-the combo list is built, since they change which combinations exist at all, and both are put
-back if the flip leaves nothing playable — a roll that never starts a round cannot strand the
-global territories setting. The roll hint moved below the toggles with 3.1em reserved (longest
-message measures 35px, reserve 37px). Verified at 320/390/1440: the toggle row holds the same
-y through every hint message and the longest metric blurb; three rolls with everything free
-started rounds with no console errors.
-
-**What:** Give **Territories** and **Force 10** the same 🔒/🎲 treatment the other picker
-fields have, and move the roll hint below the options row with its height reserved, so a
-longer message cannot shove the buttons around.
-
-**Why:** Owner request (2026-10-10). The lock row (#39) stops at Metric / Filter / End /
-Difficulty / Input, but the two toggles below it are just as much part of a preset. And
-the hint text swaps between three sentences of very different length — the layout moves
-under your finger as you tap.
-
-**Decided (owner, 2026-10-10):**
-- **Territories defaults to locked.** It is a *global* setting shared with Draw, Rank and
-  the Explorer (`js/settings.js`), so a roll that flips it changes other modes behind your
-  back. Force 10 is local to this picker and can start free.
-
-**Approach / notes:**
-- Add both to `LOCKABLE` (`js/top-n-game.js:75`) and to `this.locks`; `_lockBtn` already
-  handles rendering, `aria-pressed` and the title text, and `startRandom()` already has
-  the "roll only what is unlocked" shape.
-- **Rolling Territories changes the eligible pool**, so the combo list must be recomputed
-  after the roll flips it, not before — otherwise the roll can pick a filter that the new
-  pool cannot support (the adaptive-N table in #36 is what decides playability).
-- Force 10 interacts with the same table: rolling it on must not produce a round the
-  N rule would have refused for fairness. Roll it only where the plan stays valid.
-- The hint (`.topn-roll-hint`, `js/top-n-game.js:452`) moves below `.topn-options`, and
-  gets a `min-height` sized to its longest message at 390px — measure it, do not guess.
-
-**Acceptance:** All seven picker fields can be locked. A roll with Territories free can
-flip it and still produce a playable round. The options row does not move when the hint
-text changes length, at 390px or on desktop.
-
----
-
-## 45. Hub card icons: make them read as a guess, not a category
-
-**REVIEW:** look at the menu — Top 10 / Bottom 10 is now 🪜 (a
-ladder, which covers both ends of a ranking and matches what the code already calls the board).
-**Check it on your phone:** 🪜 is a 2020 addition, so an older device may draw a box. Say so
-and it gets swapped.
-
-**✅ DONE 2026-10-10** — Top 10 / Bottom 10 is 🪜. Rank the World was tried as 📏 and **put
-back to 🏦** (owner, 2026-10-10): at card size a ruler reads as a blank slab, and an icon you
-have to squint at is worse than one that is merely off-topic. Still the weakest of the six if
-a better idea turns up.
-
-**What:** An emoji pass over the six menu cards, Rank the World (🏦) and Top 10 (🔟)
-first.
-
-**Why:** Owner request (2026-10-10). 🏦 says "bank" where the card is about ranking
-countries by any of a dozen metrics, and 🔟 is the mode's own name repeated back. Neither
-suggests guessing, which is what the game is.
-
-**Approach / notes:**
-- Six icons in `index.html` (`.hub-icon`, lines 41-69). No JS, no CSS — unless a
-  replacement needs a size tweak, since emoji metrics differ wildly.
-- Keep them a **set**: one visual idea across all six, not six good individual picks.
-- Check every candidate at 390px and in the actual menu font — a few emoji render as flat
-  monochrome glyphs on some platforms, and the globe behind the cards eats low-contrast
-  ones.
-
-**Acceptance:** The six cards read as one family, and Rank the World and Top 10 no longer
-look like a bank and a numeral.
-
----
 
 ## 46. UNESCO World Heritage sites per country
 
@@ -1464,119 +1087,7 @@ The build either produces the real list or fails loudly.
 
 ---
 
-## 47. Data Explorer lists must be readable on a phone without zooming
 
-**REVIEW:** open the Data Explorer on your phone and read the list *without* zooming — then
-zoom in and check the flag, the name and the value are still together. The Coverage view should
-still scroll sideways as it did.
-
-**✅ DONE 2026-10-10** — three changes. The name is back to 1rem at every width (it dropped to
-0.88rem under 768px, which is what sent you to the zoom). At ≤480px the value stacks under the
-name on the same left edge — rank 30px + flag 26px + two 12px gaps — so a magnified row keeps
-both ends within a screen width. And the horizontal scroll is now scoped to the coverage table
-(`.explore-list.is-coverage`), so a long country name can no longer widen a rank row off-screen.
-Measured at 390px: no horizontal overflow on the list or the document, rows 64px tall (was ~40,
-the cost of the second line). Rank the World's rows were checked at the same width and do not
-share the fault, so they were left alone.
-
-**What:** Make the ranked rows legible at phone width as they are, and keep a row
-self-contained when the browser *is* zoomed — flag, name and value must not drift apart.
-
-**Why:** Owner report (2026-10-10): *"i try to read the list better by zooming in to see
-text. then i zoom in so i dont see flag on the left and value on the right."* The row is a
-single flex line (`.explore-row`) with the value pushed to the far right, so browser zoom
-widens it past the viewport and the two ends of the row stop being visible together. The
-mobile rule set is two font-size tweaks (`css/style.css` ~2465) and the list is also
-`overflow-x: auto`, which lets the row grow sideways rather than wrap.
-
-**Approach / notes:**
-- **Default type size is the actual bug.** `.explore-name` drops to 0.88rem under 768px
-  and the rank column to 0.85rem — the zooming is a symptom. Fix the readable size first,
-  then see whether the zoom problem remains.
-- Keep the value on the same visual row as the name **or** stack it under the name at
-  narrow widths — either is fine, as long as zooming cannot separate them. A stacked
-  two-line row at ≤480px is the simplest version and needs no horizontal scroll at all.
-- `overflow-x: auto` on `.explore-list` exists for the coverage table, which is genuinely
-  wide (`width: max-content`). Scope the horizontal scroll to the coverage view so the
-  rank list cannot scroll sideways at all.
-- Same shape appears in the Rank the World result rows and the Top-N ladder — check them
-  at the same widths and fix together if they share the fault.
-- Verify at 390px and at 200% browser zoom on a real phone viewport, not just a narrow
-  desktop window.
-
-**Acceptance:** At 390px the rank list is comfortable to read with no zoom. At 200% zoom
-the flag, name and value of a row are all still visible without scrolling sideways. The
-coverage table keeps its horizontal scroll.
-
----
-
-## 48. Data Explorer: a world map view
-
-**REVIEW:** Data Explorer → **🗺️ Map**. Change the metric and watch the world re-shade;
-hover a country for its figure; tap one for its panel; set the continent filter and check it
-zooms to that continent and re-bands *within* it. Read the legend — the bands are equal-count,
-so the edges are real values, not round numbers.
-
-**✅ DONE 2026-10-10** — a fourth Explorer view, on the segmented control #51 built.
-
-**Geometry is the draw game's own world** (`data/countries-*.json`, the 1600×1600
-Mercator-conformal space), via a new `loadWorldOutlines()` in `js/geo-data.js` that
-deliberately **ignores the pool rules**: the basemap draws every country so the world has no
-Greenland-shaped hole when the territories toggle is off, and only the *shading* goes through
-`inCountryPool()` and the continent filter. No mapping library, no second projection.
-
-**Five equal-count bands, said out loud in the legend.** GDP and population are skewed enough
-that an equal-width ramp paints the entire world the lowest colour and calls it a map, so the
-edges are quantiles and the legend prints them as real values ($50.5M – $7.6B … $400B – $27.81T).
-The ramp is viridis' bright half — its dark end disappears into this app's background, and a
-band you cannot see is not a band. Two distinct greys: *no data* (in scope, no figure) and *not
-in this filter*, which the hover label says in words.
-
-**Hit-testing is colour-index picking**, not point-in-polygon: every country is drawn a second
-time to an offscreen buffer in a colour that *is* its index, so a hover is one `getImageData` of
-one pixel rather than a walk over ~250k vertices. The shaded world is then cached as a bitmap
-and a hover only blits and strokes one outline — **ten hover moves went from 148ms to 14ms**.
-
-Verified: the world shades for Total GDP; hovering gives "Canada — $2.20T"; Greenland reads
-"not in this filter" with territories off; clicking opens Canada's panel; the Africa filter
-zooms and re-bands to $690M–$487B; independence-year re-bands to 301–2011; at 390px the map box
-takes the world's own proportions instead of letterboxing, with no horizontal overflow; all four
-views still render; no console errors.
-
-**Not in scope, as decided:** palettes, two-metric overlays and categorical layers.
-
-**What:** A third Explorer view: the world map, countries shaded by the selected metric,
-hover for the value and tap for the country panel.
-
-**Why:** Owner request (2026-10-10): *"we start looking at having a data explorer that
-looks at a world map so its easy to see high low, yes or no, or values."* A ranked list
-tells you the order; a map tells you where the pattern is.
-
-**Decided (owner, 2026-10-10):** baseline is **one metric at a time** — switch to map
-view, pick a metric, see it. Palettes, two-metric overlays and categorical (non-numeric)
-layers are not in scope for the first version.
-
-**Approach / notes:**
-- The geometry and the Mercator projection already exist (`js/geo-data.js`,
-  `data/countries-*.json`, `data/shapes/`), as does a canvas that draws and hit-tests
-  countries (`js/world-canvas.js`) with pinch-zoom. Reuse that path; do not introduce a
-  mapping library.
-- Shading: decide **quantile vs linear** deliberately and say which in the UI. GDP and
-  population are so skewed that a linear ramp paints the whole world one colour — a
-  quantile or log scale is almost certainly right, and a legend is not optional.
-- Countries with no value for the metric need a distinct "no data" fill that cannot be
-  mistaken for a low value.
-- Respect `inCountryPool()` for *what is shaded*, but the basemap can still draw
-  everything — an unplayable territory should not be a hole in the map.
-- **View switching:** `this.view` is a two-way cycle today, rendered as a single button
-  that flips between 📋 Coverage and ↩ Rankings (`js/data-explorer.js`). A third view
-  (and #51's fourth) needs a real segmented control. Whichever of #48/#51 lands first
-  owns that change.
-
-**Acceptance:** Explorer → Map → any metric paints the world, with a legend, a no-data
-colour, hover values on desktop and tap-to-panel everywhere. Works at 390px.
-
----
 
 ## 49. Civilization leaders by country
 
@@ -1644,59 +1155,6 @@ dressed as data.
 
 ---
 
-## 51. Browse the country shapes as a table
-
-**REVIEW:** Data Explorer → **✏️ Shapes**. Scroll the outlines, sort by largest first, filter
-to a continent, flip Territories on, and tap a row for the country panel. The thumbnails are
-normalised to their own box, so this is shape and not size — the area column is there to say
-what the picture cannot.
-
-**✅ DONE 2026-10-10** — a third Explorer view, and with it the segmented view control the
-entry said whichever of #48/#51 landed first would owe: Rankings / Shapes / Coverage, replacing
-the two-way toggle button. **#48 inherits it.**
-
-`drawSilhouette` was lifted out of `js/country-panel.js` into `js/silhouette.js` with a size
-option rather than copied — the panel draws at 150px, the table at 48px, and there is still one
-bbox-and-scale loop. 251 canvases are too many to paint up front, so each waits on an
-`IntersectionObserver` (300px margin) that is torn down whenever the view re-renders.
-
-Columns are outline, flag, name, continent (dropped under 480px) and land area with its rank.
-Sorts A→Z / largest first / by continent; the continent filter and the territories toggle both
-apply.
-
-Verified: 197 rows with territories off, 251 with them on, built in 12ms; thumbnails paint as
-they scroll; largest-first gives Russia, China, United States, Canada; a row opens the country
-panel; the stacked value lines up with the name at 390px; no horizontal overflow; Rankings and
-Coverage both still render; no console errors.
-
-**It also makes #53 browsable.** St Helena, Åland, American Samoa and the other scattered-island
-territories show up here as specks — exactly the symptom that entry describes, now something you
-can scroll rather than something you have to be told.
-
-**What:** A view listing every country's shape as a thumbnail beside its name, so the
-shapes can be studied and compared without starting a round.
-
-**Why:** Owner request (2026-10-10). The shapes are the heart of Draw the World and there
-is no way to look at them — you can only meet one at a time, under time pressure, in a
-round.
-
-**Approach / notes:**
-- The geometry exists per country in `data/shapes/<code>.json` (251 files) and the
-  renderer already knows how to draw one to a canvas (`js/shape.js`, `js/geo-data.js`).
-- Thumbnails: each shape drawn to its own small canvas, normalized to its bounding box so
-  Russia and Monaco are both legible — at which point the table teaches *outline*, not
-  size, and should say so. 251 canvases need lazy rendering (`IntersectionObserver`) or
-  the view will stall on open.
-- Columns worth having: shape, flag, name, continent, land area, and its rank in that
-  metric. Sortable by name/area/continent; tap a row for the country panel.
-- Respect `inCountryPool()` so the territories toggle behaves as everywhere else.
-- **View switching:** see #48 — the Explorer's two-way view button needs to become a real
-  segmented control before a fourth view lands.
-
-**Acceptance:** Open the view, scroll every country's outline, sort it, and tap through to
-a country panel. Opens without a visible stall at 390px.
-
----
 
 ## 55. Flag colours: review the drafts and fill the 52 gaps
 
@@ -1735,53 +1193,163 @@ and prints a paste-ready JSON block. It also checks the 199 existing entries aga
 
 ---
 
-## 56. Deep links: open any screen by URL
 
-**REVIEW:** every link below should land on exactly that screen, on a reload, from a paste, and
-with Back working:
+## 57. Placement & results maps: a floor on zoom-out, and a results map you can move
 
-| URL | Lands on |
-|---|---|
-| `#/` | menu |
-| `#/draw` | Draw the World menu (#9's new hero) |
-| `#/draw/quick3` · `#/draw/africa` | straight into that round |
-| `#/top10` | Top 10 picker (#43, #44) |
-| `#/explore` | Data Explorer rankings (#47) |
-| `#/explore/map?metric=population` | world map (#48) |
-| `#/explore/shapes` | shapes table (#51) |
-| `#/explore?metric=gdp-nominal&continent=Africa` | rankings, filtered |
-| `#/scores` | Your Scores (#41) |
-| `#/country/se` | menu with Sweden's panel open (#42) |
-| `#/flags` · `#/flag-picker` · `#/rank` | the other three activities |
+**What:** Stop the world shrinking into empty space, and let the results map be panned
+sideways. Two halves of the same fix, in the same file.
 
-**✅ DONE 2026-10-10** — `js/router.js` plus a `_applyRoute()` in the Game shell.
+**Why:** Owner review (2026-10-10) of the draw loop: *"don't allow to zoom out more than
+the world map"*, and the results map cannot be moved at all, so anything the view does not
+happen to frame is unreachable.
 
-**Hash, not path** (owner asked whether paths would be painful — they would). The site deploys
-as raw static files to S3/CloudFront through the shared `Lolispo/ci` workflow, so `/explore/map`
-would need a 404-to-index rewrite configured outside this repo. A hash needs nothing, behaves
-identically under `python3 -m http.server` and on the live site, and `history.replaceState`
-fires neither `hashchange` nor `popstate`, so the app writing its own URL cannot re-enter the
-router — no guard flag, no loop.
+**Approach / notes:**
+- `_onWheel` (`js/world-canvas.js:299`) applies `viewScale * 0.9` or `* 1.1` with **no clamp
+  in either direction** — that is the whole bug. The floor is already computable:
+  `fitBounds(worldBounds, cssW, cssH)` (`js/utils.js`, added by #56) returns exactly the scale
+  at which the world fills the view, which is the point past which zooming out is just adding
+  ocean. Clamp the floor to that, and give zoom-in a ceiling too while the clamp is being
+  written.
+- The same clamp has to apply to the **pinch** path (`_onTouchMove`), not only the wheel, or
+  phones keep the bug.
+- **Panning:** the results canvas is a full `WorldCanvas` with every handler bound
+  (`js/main.js:106`, `activate()`), but `_onMouseDown`/`_onMouseMove` only drag the *active
+  shape* — and on the results screen there isn't one, so a drag does nothing. Make a drag with
+  no active shape pan the view (and one-finger touch likewise), which is the behaviour the
+  placement screen deliberately does **not** want (#35: one finger belongs to the shape).
+- Region rounds set `regionBounds`, so "the world" for the floor means the *fitted* bounds for
+  that round, not the full 1600×1600 — otherwise an Africa round could zoom out to the globe.
 
-Entry points own their URL, so clicking and routing agree, and the Explorer keeps its hash on
-whatever you are looking at (view, metric, continent) as you click around. An unknown route
-falls back to the menu rather than a blank screen; an unknown continent or view in the query
-falls back too. Routing away closes an open country panel, which a hash change would otherwise
-leave hanging over the new screen.
+**Acceptance:** Wheel and pinch both stop at the point the round's map fills the view, on the
+placement screen and the results screen. The results map can be dragged to see a placement
+that is off to one side. Placement still drags the shape, not the view.
 
-**The duplication the owner flagged, measured and reduced.** `world-canvas.js` draws a
-*continent* basemap and the piece you are placing — no per-country geometry, no colour scale, no
-hit-testing — so the choropleth could not have reused it without welding a game canvas to a
-thematic map. What genuinely existed three times was the fit-a-world-box-into-a-canvas
-arithmetic; it is now `fitBounds()` in `js/utils.js`, used by the silhouette, the choropleth and
-the placement view. The substitution in `world-canvas._fitView` is algebraically the same
-expression — checked over 10,000 random bounds, max difference 7e-12.
+---
 
-Verified in an isolated browser (the gstack `browse` server is shared, and another session kept
-navigating it mid-test — use Playwright directly for anything stateful): nine routes land
-correctly, Back returns to the previous route, the panel silhouette and shape thumbnails still
-paint, the map still hovers ("Canada — 40.0M" on population), and a full Africa round still
-reaches the placement screen correctly framed. No page errors.
+## 58. Results: which countries your shape actually matched best
+
+**What:** On the results screen, for each country you drew, the **top 5 countries your shape
+scored highest against** — with the real score — and, when the country you were actually
+drawing is not in that five, its own placement underneath. A shape review panel down the left
+of the results map; press a country you drew to see its five.
+
+**Why:** Owner request (2026-10-10). *"if my swedish drawing actually scored more points to
+Tunisia it should show in the top 5 with the real score."* It turns a score you cannot argue
+with into something you can learn from: a bad score because the shape was wrong reads
+differently from a bad score because you drew a perfectly good Tunisia.
+
+**Decided (owner, 2026-10-10):**
+- **High-fidelity shapes**, not the world-scale geometry — `data/shapes/<code>.json`
+  (`getCountryByCode`), the same outlines the panel and the shapes table draw.
+- Not now; this is a sketched entry.
+
+**Approach / notes:**
+- **Shape only.** The comparison has to be of outlines normalised to their own box — your
+  placement and size cannot enter into it, or every answer is "the country you put it on".
+  `scoreShape()` (`js/scoring.js`) already rasterises an IoU; the shape term is the part to
+  reuse.
+- **Cost is the design problem.** One drawing against ~197 countries is 197 rasterised IoUs,
+  and a World round draws 197 shapes. Options, cheapest first: rasterise the player's shape
+  once and compare against **country masks rendered once per session** (or precomputed at build
+  time into a small bitmask file); cap the comparison pool with a cheap pre-filter (bounding-box
+  aspect ratio, vertex count, area share) and only rasterise the plausible ones; or compute
+  lazily when the panel is opened for that country rather than for every round.
+- Decide what "score" means in the list — the shape term alone (0-100) is the honest number,
+  and it will not match the round's headline score, which includes size and placement. Say so
+  in the UI rather than letting two different numbers look like a bug.
+- The panel is the natural home for a "you drew a better Tunisia" line, which is the joke the
+  feature exists for.
+
+**Acceptance:** Press a country on the results screen and see the five countries your drawing
+matched best, each with its score; if the real answer is not among them, it is shown below with
+its rank ("Sweden — 12th, 31"). Comparison uses the high-fidelity outlines. A World round does
+not stall while it computes.
+
+---
+
+## 59. Top 10: flags on wrong picks, a reversible reveal, and a cheaper re-render
+
+**What:** Three small things from the review, all in `js/top-n-game.js`.
+
+**Why:** Owner review (2026-10-10) of #36/#39/#43.
+
+**Decided (owner, 2026-10-10):**
+1. **Wrong picks need their flag.** The in-round list of wrong answers shows the name and the
+   rank but no flag, while the ladder above it does — so the one place you are looking when you
+   lose a life is the one place without the visual cue the mode is teaching.
+2. **Reveal must be reversible.** #43's results screen reveals on a button and then cannot go
+   back; it should be show/hide, both ways, as often as you like.
+3. **Toggling must only re-render what changed** — the rows being hidden or shown — not the
+   whole ladder. The flicker on a 10-row board is small and the fix is cheap; on a Force-10 or
+   a long results screen it is the difference between a toggle and a redraw.
+
+**Approach / notes:**
+- `_missesHtml()` builds the wrong-pick rows and `_rowHtml()` already knows how to put a flag
+  in a row — the ladder uses it. Check they end up sharing the same row builder rather than
+  growing a second one.
+- For (2) and (3): `_renderResults(reveal)` currently rebuilds the whole panel. Keep the rows in
+  the DOM and toggle a class or `hidden` on the slots that change — the empty-slot markup
+  already holds its own height (`.topn-row.is-empty`), so a swap in place will not move the
+  page. The button becomes "👀 Reveal answers" / "🙈 Hide answers" against the same state.
+
+**Acceptance:** A wrong pick shows its flag during the round. The results screen can be
+revealed and re-hidden any number of times, and doing so leaves every other row untouched in
+the DOM.
+
+---
+
+## 60. Data Explorer map: zoom and pan
+
+**What:** Let the choropleth be zoomed and dragged, so Europe and the Caribbean are readable
+without a continent filter.
+
+**Why:** Owner review (2026-10-10): *"looks pretty nice but would be nice to be able to zoom."*
+At world scale the small countries are a few pixels, which is exactly where the interesting
+values often are.
+
+**Approach / notes:**
+- `js/explorer-map.js` already keeps a single fit transform (`_fit` → `fitBounds`) and redraws
+  from a cached bitmap. Zoom/pan is one more transform on top: keep `view = { scale, ox, oy }`
+  applied after the fit, so the continent filter still frames the subject and zoom is relative
+  to it.
+- **The pick buffer has to be redrawn at the new transform**, or hit-testing drifts from what is
+  on screen. It is rebuilt in `render()` already — the thing to avoid is blitting the cached
+  bitmap at a new zoom while the pick buffer still holds the old one.
+- Zoom on wheel and pinch, drag to pan, clamp the floor at the fitted scale (same rule as #57 —
+  and if both land, the clamp maths belongs in one place).
+- A double-tap or a "reset view" affordance matters more here than in the game, since there is
+  no round to end.
+
+**Acceptance:** Wheel, pinch and drag all work on the map; hover and tap still hit the country
+under the cursor at any zoom; the view cannot be zoomed out past the fitted world; there is a
+way back to the default view.
+
+---
+
+## 61. Shapes: a nameless grid to test yourself against
+
+**What:** A second layout for the shapes view — just outlines in a grid, no names, optionally
+shuffled, with the country revealed only when you press one.
+
+**Why:** Owner review (2026-10-10): the table reads well, but *"would be nice if there is a
+version without showing the country names so its basically just a grid of all shapes"*. The
+table is for browsing; the grid is for testing yourself, which is the point of the app.
+
+**Approach / notes:**
+- Same rows, same thumbnails, same lazy `IntersectionObserver` — this is a layout toggle in
+  `_renderShapes()`, not a new view. A segmented list/grid control, or a 🔤 Names on/off button
+  beside the sort, both fit the controls bar that already exists.
+- Thumbnails want to be bigger in the grid than the 48px the table uses, since the outline is
+  now the only information on screen.
+- **Press reveals, press again opens.** First press puts the name under the tile; a second press
+  opens the country panel. That keeps a reveal cheap and keeps the panel reachable, but it is a
+  guess at what feels right — it may want to be reveal-only with the panel on a long press.
+- Shuffle needs a stable order per visit (re-sorting under a scroll is disorienting), and the
+  sort select should visibly become "Random" rather than silently lying about A→Z.
+- Revealed names should stay revealed while you scroll away and back.
+
+**Acceptance:** The shapes view can show a grid of outlines with no names, in shuffled order;
+pressing one names it; the table layout is still there and unchanged.
 
 ---
 
@@ -1817,5 +1385,16 @@ full write-ups are in git history.
 - **#11** Placement & results-map overhaul — 2026-09-06
 - **#24** Shape quality: iterate + owner approval — 2026-09-06
 - **#26** Sizing-screen footer overlap — retired 2026-09-08, the screen was deleted by #35
+- **#9** Draw the World: better default modes — Quick 3 now leads the menu — 2026-10-10
+- **#40** Country name aliases ("UK", "UAE", "DRC") + the Explorer audit column — 2026-10-10
+- **#41** "Your Scores": every preset you have played — 2026-10-10
+- **#42** Metric descriptions on hover and tap — 2026-10-10
+- **#43** Top 10 / Bottom 10: a "hide results" toggle — follow-ups in #59 — 2026-10-10
+- **#44** Top-N picker: two more locks, and a roll hint that stops jumping — 2026-10-10
+- **#45** Hub card icons — 🪜 for Top 10; Rank the World stayed 🏦 — 2026-10-10
+- **#47** Data Explorer lists readable on a phone without zooming — 2026-10-10
+- **#48** Data Explorer: a world map view — zoom and pan in #60 — 2026-10-10
+- **#51** Browse the country shapes as a table — nameless grid in #61 — 2026-10-10
+- **#56** Deep links: open any screen by URL — 2026-10-10
 - **#10** Push draw shape fidelity to Sporcle level — retired 2026-10-10, the same bar
   as #24, which the owner signed off on 2026-09-06
