@@ -16,6 +16,8 @@ const RAMP = ['#3b528b', '#21918c', '#35b779', '#90d743', '#fde725'];
 const NO_DATA = '#39414f';   // in scope, but the metric has no figure for it
 const OUT_OF_SCOPE = '#262c36'; // drawn so the world has no holes, never shaded
 const OCEAN = '#121720';
+// How far in the map may be zoomed, as a multiple of the fitted view (TODOS #60).
+const MAX_ZOOM = 12;
 const BORDER = 'rgba(0,0,0,0.45)';
 
 export class ExplorerMap {
@@ -35,12 +37,42 @@ export class ExplorerMap {
     this.baseCtx = this.base.getContext('2d');
     this.countries = [];
     this.hovered = null;
+    // Zoom/pan sits on top of the fit, so a continent filter still frames its subject
+    // and zoom is relative to that (TODOS #60). scale 1 == fitted == fully zoomed out.
+    this.view = { scale: 1, ox: 0, oy: 0 };
     this._bind();
   }
 
   setWorld(countries) {
     this.countries = countries;
     return this;
+  }
+
+  resetView() {
+    this.view = { scale: 1, ox: 0, oy: 0 };
+    this.render();
+    this.onViewChange?.(1);
+  }
+
+  // Panning past the edges would leave the map floating in the background, and at the
+  // floor the view is the fitted one by definition.
+  _clampView(w, h) {
+    if (this.view.scale <= 1) { this.view = { scale: 1, ox: 0, oy: 0 }; return; }
+    const s = this.view.scale;
+    this.view.ox = Math.min(0, Math.max(w * (1 - s), this.view.ox));
+    this.view.oy = Math.min(0, Math.max(h * (1 - s), this.view.oy));
+  }
+
+  _zoomAbout(factor, anchor) {
+    const [w, h] = this._size || [0, 0];
+    const next = Math.max(1, Math.min(MAX_ZOOM, this.view.scale * factor));
+    if (next === this.view.scale) return false;
+    const ratio = next / this.view.scale;
+    this.view.ox = anchor[0] - (anchor[0] - this.view.ox) * ratio;
+    this.view.oy = anchor[1] - (anchor[1] - this.view.oy) * ratio;
+    this.view.scale = next;
+    this._clampView(w, h);
+    return true;
   }
 
   // `values` is code -> number; `scope` decides what may be shaded at all.
@@ -108,7 +140,14 @@ export class ExplorerMap {
     this.canvas.width = w * dpr;
     this.canvas.height = h * dpr;
     hidpiReset(this.canvas, this.ctx);
-    const t = this._fit(w, h);
+    this._size = [w, h];
+    this._clampView(w, h);
+    const fit = this._fit(w, h);
+    const t = {
+      scale: fit.scale * this.view.scale,
+      ox: fit.ox * this.view.scale + this.view.ox,
+      oy: fit.oy * this.view.scale + this.view.oy,
+    };
     this._t = t;
 
     this.base.width = w * dpr;
@@ -142,7 +181,6 @@ export class ExplorerMap {
       this.pickCtx.fill('nonzero');
     });
 
-    this._size = [w, h];
     this._paint();
   }
 
@@ -172,6 +210,19 @@ export class ExplorerMap {
     return this._index.get(`rgb(${cr},${cg},${cb})`) || null;
   }
 
+  _touchPos(touch) {
+    const r = this.canvas.getBoundingClientRect();
+    return [touch.clientX - r.left, touch.clientY - r.top];
+  }
+
+  _pinchState(ev) {
+    const [a, b] = [this._touchPos(ev.touches[0]), this._touchPos(ev.touches[1])];
+    return {
+      dist: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1,
+      center: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
+    };
+  }
+
   // name + value for whatever is under the cursor, or null.
   hoverLabel() {
     if (!this.hovered) return null;
@@ -183,8 +234,22 @@ export class ExplorerMap {
     return `${this.hovered.name} — ${value}`;
   }
 
+  _canvasPos(ev) {
+    const r = this.canvas.getBoundingClientRect();
+    return [ev.clientX - r.left, ev.clientY - r.top];
+  }
+
   _bind() {
     const move = (ev) => {
+      if (this._panFrom) {
+        const pos = this._canvasPos(ev);
+        this.view.ox += pos[0] - this._panFrom[0];
+        this.view.oy += pos[1] - this._panFrom[1];
+        this._panFrom = pos;
+        this._moved = true;
+        this.render();
+        return;
+      }
       const hit = this._at(ev);
       if (hit === this.hovered) return;
       this.hovered = hit;
@@ -192,6 +257,60 @@ export class ExplorerMap {
       this.onHover?.(this.hoverLabel(), ev);
     };
     this.canvas.addEventListener('mousemove', move);
+
+    this.canvas.addEventListener('mousedown', (ev) => {
+      this._panFrom = this._canvasPos(ev);
+      this._moved = false;
+      this.canvas.style.cursor = 'grabbing';
+    });
+    const endPan = () => {
+      this._panFrom = null;
+      this.canvas.style.cursor = '';
+      this.onViewChange?.(this.view.scale);
+    };
+    window.addEventListener('mouseup', endPan);
+    this._unbind = () => window.removeEventListener('mouseup', endPan);
+
+    this.canvas.addEventListener('wheel', (ev) => {
+      ev.preventDefault();
+      if (this._zoomAbout(ev.deltaY > 0 ? 0.88 : 1.14, this._canvasPos(ev))) {
+        this.render();
+        this.onViewChange?.(this.view.scale);
+      }
+    }, { passive: false });
+
+    this.canvas.addEventListener('dblclick', () => this.resetView());
+
+    // Touch: one finger pans, two pinch — the same split the game canvas uses.
+    this.canvas.addEventListener('touchstart', (ev) => {
+      if (ev.touches.length === 1) this._panFrom = this._touchPos(ev.touches[0]);
+      else if (ev.touches.length >= 2) { this._panFrom = null; this._pinch = this._pinchState(ev); }
+    }, { passive: true });
+    this.canvas.addEventListener('touchmove', (ev) => {
+      if (ev.touches.length >= 2) {
+        ev.preventDefault();
+        const now = this._pinchState(ev);
+        const prev = this._pinch || now;
+        this._zoomAbout(now.dist / prev.dist, prev.center);
+        this.view.ox += now.center[0] - prev.center[0];
+        this.view.oy += now.center[1] - prev.center[1];
+        this._pinch = now;
+        this.render();
+        return;
+      }
+      if (ev.touches.length === 1 && this._panFrom) {
+        ev.preventDefault();
+        const pos = this._touchPos(ev.touches[0]);
+        this.view.ox += pos[0] - this._panFrom[0];
+        this.view.oy += pos[1] - this._panFrom[1];
+        this._panFrom = pos;
+        this._moved = true;
+        this.render();
+      }
+    }, { passive: false });
+    this.canvas.addEventListener('touchend', (ev) => {
+      if (ev.touches.length === 0) { this._panFrom = null; this._pinch = null; this.onViewChange?.(this.view.scale); }
+    }, { passive: true });
     this.canvas.addEventListener('mouseleave', () => {
       if (!this.hovered) return;
       this.hovered = null;
@@ -199,6 +318,7 @@ export class ExplorerMap {
       this.onHover?.(null);
     });
     this.canvas.addEventListener('click', (ev) => {
+      if (this._moved) { this._moved = false; return; }   // that was a pan, not a pick
       const hit = this._at(ev);
       if (hit) this.onPick(hit.code);
     });

@@ -10,8 +10,19 @@ import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
 
-// Big enough to tell Chile from Italy, small enough that 250 of them scroll.
+// Big enough to tell Chile from Italy, small enough that 250 of them scroll. The grid
+// gets more, because there the outline is the only thing on screen (TODOS #61).
 const THUMB_SIZE = 48;
+const GRID_THUMB_SIZE = 96;
+
+// Stable shuffle: order by a hash of the code and a per-shuffle seed, so a re-render
+// (a toggle, a resize) cannot reorder the grid under a scroll.
+function seededRank(code, seed) {
+  let h = 2166136261;
+  const str = `${code}:${seed}`;
+  for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
 
 export class DataExplorer {
   constructor(containerEl, onFinish, onPlayDataset, onState = null) {
@@ -25,7 +36,9 @@ export class DataExplorer {
     this.continent = null;   // null = All
     this.higherFirst = true;
     this.view = 'rank';      // 'rank' | 'map' | 'shapes' | 'coverage'
-    this.shapeSort = 'name'; // 'name' | 'area' | 'continent'
+    this.shapeSort = 'name';   // 'name' | 'area' | 'continent' | 'random'
+    this.shapeLayout = 'list'; // 'list' | 'grid' — the grid hides the names (TODOS #61)
+    this._shuffleSeed = 1;
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
     this.showAliases = false;
@@ -93,7 +106,13 @@ export class DataExplorer {
     tip.hidden = true;
     const legend = document.createElement('div');
     legend.className = 'explore-map-legend';
-    wrap.append(canvas, tip);
+    // Zooming out all the way resets the view, but a button says so out loud — there is
+    // no round to end here, so a map left zoomed in stays that way (TODOS #60).
+    const reset = document.createElement('button');
+    reset.className = 'btn btn-tool explore-map-reset';
+    reset.textContent = '⤢ Reset view';
+    reset.hidden = true;
+    wrap.append(canvas, tip, reset);
     list.append(wrap, legend);
 
     if (!this._world) this._world = await loadWorldOutlines();
@@ -103,6 +122,8 @@ export class DataExplorer {
       formatValue,
     });
     this._map = map;
+    reset.addEventListener('click', () => map.resetView());
+    map.onViewChange = (scale) => { reset.hidden = scale <= 1; };
     map.onHover = (label, ev) => {
       tip.hidden = !label;
       if (!label) return;
@@ -221,8 +242,27 @@ export class DataExplorer {
         { id: 'name', label: 'A → Z' },
         { id: 'area', label: 'Largest first' },
         { id: 'continent', label: 'By continent' },
-      ], this.shapeSort, (v) => { this.shapeSort = v; this._renderShapes(); });
+        { id: 'random', label: 'Random' },
+      ], this.shapeSort, (v) => {
+        // Picking Random again means "shuffle again", which is what anyone expects.
+        if (v === 'random') this._shuffleSeed = Math.floor(Math.random() * 1e9);
+        this.shapeSort = v;
+        this._renderShapes();
+      });
       bar.appendChild(sort);
+
+      const grid = this.shapeLayout === 'grid';
+      const layoutBtn = document.createElement('button');
+      layoutBtn.className = 'btn btn-tool' + (grid ? ' active' : '');
+      layoutBtn.textContent = grid ? '☰ List' : '▦ Grid';
+      layoutBtn.title = grid
+        ? 'Back to the table, with names and figures'
+        : 'Outlines only — hover to name one, press to open it';
+      layoutBtn.addEventListener('click', () => {
+        this.shapeLayout = grid ? 'list' : 'grid';
+        this._render();
+      });
+      bar.appendChild(layoutBtn);
     }
 
     // Sort toggle (rank view only)
@@ -377,14 +417,19 @@ export class DataExplorer {
     } else if (this.shapeSort === 'continent') {
       rows.sort((a, b) => (a.continent || '').localeCompare(b.continent || '')
         || a.name.localeCompare(b.name));
+    } else if (this.shapeSort === 'random') {
+      rows.sort((a, b) => seededRank(a.code, this._shuffleSeed) - seededRank(b.code, this._shuffleSeed));
     } // getEntitiesList() is already name-sorted
 
+    const grid = this.shapeLayout === 'grid';
+    const size = grid ? GRID_THUMB_SIZE : THUMB_SIZE;
     const missing = rows.filter((e) => e.hasGeometry === false).length;
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
     blurb.textContent = `${rows.length} outlines${this.continent ? ` · ${this.continent}` : ''}`
       + (missing ? ` · ${missing} with no geometry` : '')
-      + ' · each drawn to fit its own box, so this is shape, not size';
+      + (grid ? ' · hover to name one, press to open it'
+        : ' · each drawn to fit its own box, so this is shape, not size');
     list.appendChild(blurb);
 
     // 250 canvases is too many to draw up front, so each one waits until it is nearly
@@ -394,9 +439,40 @@ export class DataExplorer {
         if (!entry.isIntersecting) continue;
         obs.unobserve(entry.target);
         drawSilhouette(entry.target, entry.target.dataset.code, entry.target._entity,
-          { size: THUMB_SIZE, pad: 3 });
+          { size, pad: grid ? 6 : 3 });
       }
     }, { root: list, rootMargin: '300px' });
+
+    // The grid is the same rows with everything but the outline taken away: no name,
+    // no flag, no figure, revealed on hover and opened on press (TODOS #61).
+    if (grid) {
+      const wrap = document.createElement('div');
+      wrap.className = 'shape-grid';
+      for (const e of rows) {
+        const tile = document.createElement('div');
+        tile.className = 'shape-tile';
+        tile.tabIndex = 0;
+        tile.setAttribute('role', 'button');
+        tile.setAttribute('aria-label', e.name);
+        const canvas = document.createElement('canvas');
+        canvas.className = 'shape-thumb';
+        canvas.dataset.code = e.code;
+        canvas._entity = e;
+        const name = document.createElement('span');
+        name.className = 'shape-tile-name';
+        name.textContent = e.name;
+        tile.append(canvas, name);
+        const open = () => openCountryPanel(e.code);
+        tile.addEventListener('click', open);
+        tile.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
+        });
+        wrap.appendChild(tile);
+        this._shapeObserver.observe(canvas);
+      }
+      list.appendChild(wrap);
+      return;
+    }
 
     for (const e of rows) {
       const row = document.createElement('div');

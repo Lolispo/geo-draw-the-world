@@ -1176,6 +1176,27 @@ the DOM.
 
 ## 60. Data Explorer map: zoom and pan
 
+**REVIEW:** Explorer → Map. Wheel to zoom, drag to pan, double-click to reset; hovering must
+still name the country actually under the cursor once you are zoomed in. Zooming all the way
+out puts the view back, and a **⤢ Reset view** button appears whenever you are zoomed.
+
+**✅ DONE 2026-10-10** — zoom and pan compose *on top of* the fit, so a continent filter still
+frames its subject and zoom is relative to that. The floor is the fitted view (scale 1) and the
+ceiling is 12×.
+
+**Hit-testing cannot drift**, which was the trap this entry named: the drawing and the pick
+buffer are both rendered from the same composed transform in the same `render()`, so there is no
+state in which the bitmap is at one zoom and the picking at another. A drag that moved the view
+swallows the click that ends it, so panning never opens a country panel by accident.
+
+Touch gets the same split as the game canvas — one finger pans, two pinch — and
+`touch-action: none` keeps the browser from scrolling the page instead.
+
+Verified with Playwright: hover before zoom gives "Canada — $2.20T"; after zooming into the
+centre the same screen point correctly reports Spain; dragging changes the view without opening
+a panel; 20 wheel-outs return a pixel-identical fitted view; a plain click still opens Canada.
+No page errors.
+
 **What:** Let the choropleth be zoomed and dragged, so Europe and the Caribbean are readable
 without a continent filter.
 
@@ -1203,6 +1224,25 @@ way back to the default view.
 ---
 
 ## 61. Shapes: a nameless grid to test yourself against
+
+**REVIEW:** Explorer → Shapes → **▦ Grid**. A wall of outlines and nothing else; hover names
+one, pressing opens it. Set the sort to **Random** and pick Random again to reshuffle.
+
+**✅ DONE 2026-10-10** — the grid is the same rows with everything but the outline taken away:
+no name, no flag, no figure. Thumbnails double to 96px, since the outline is now the only thing
+on screen.
+
+**Press behaviour (owner, 2026-10-10): hover names it, press opens the country panel** — the
+entry had guessed at reveal-then-open, and this is better. On touch there is no hover, so the
+panel *is* the reveal; that is the honest answer rather than inventing a long-press.
+
+Sorting gains **Random**, and picking Random again reshuffles, which is what anyone expects.
+The order is a hash of the country code and a per-shuffle seed rather than a one-off sort, so a
+re-render — a resize, a toggle — cannot reorder the grid under your scroll.
+
+Verified with Playwright: 197 tiles with 197 names in the DOM at opacity 0; hovering the first
+tile raises it to 1 reading "Afghanistan"; pressing opens Afghanistan's panel; Random reorders
+and survives a viewport change unchanged; the list layout comes back intact. No page errors.
 
 **What:** A second layout for the shapes view — just outlines in a grid, no names, optionally
 shuffled, with the country revealed only when you press one.
