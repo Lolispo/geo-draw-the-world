@@ -76,6 +76,14 @@ board and country panel deliberately bypass it so they can show everything.
 - `aggregate` — World Bank statistical aggregate, not a country (`jg` Channel
   Islands = Jersey + Guernsey summed, so including it double-counts its members).
 
+De-facto entities also carry **`claimedBy`** — the claim `disputed` already states in prose,
+as a code — which `canCombine()` in `js/datasets.js` reads to refuse a summed pair that
+would count the same people twice (TODOS #54). It records that double-counting is *possible*;
+it does **not** assert that the claimant's World Bank figure includes those people, because
+that varies by country and is not derivable from the data here. Cyprus is the measurable
+case: its GDP per capita sits 40% above GDP ÷ population, because the Bank's Cyprus GDP
+covers the government-controlled area while `SP.POP.TOTL` covers the whole island.
+
 ## Manual data decisions (TODOS #6)
 
 **Flags added to the quiz** (`flags.json`): Greenland `gl`, New Caledonia `nc`,
@@ -125,8 +133,12 @@ fallback for the entities geoBoundaries lacks.
 - **Attribution (required by CC BY 4.0):** shown in the country panel footer
   ("Outlines © geoBoundaries (CC BY 4.0)").
 - Per-country files (not one blob) so the panel loads only the shown country (~a few KB).
-- **Known gap:** a territory made of far-apart islands normalizes to the ocean between
-  them and flattens — St Helena ships 39 points from either release. See TODOS #53.
+- A territory made of far-apart islands normalizes to the ocean between them and flattens —
+  St Helena ships 39 points from either release, across islands spanning 32° of latitude.
+  That is handled in the **drawing** rather than here (TODOS #53): `js/silhouette.js` keeps
+  every ring in its true position and draws any ring under 3.5px on screen as a dot, so an
+  archipelago reads as an archipelago. Per-ring simplification was considered and rejected —
+  nothing displays these at a size where the extra vertices would show.
 
 ## Metrics & attributes added (TODOS #16–17)
 
@@ -163,10 +175,16 @@ wiring is needed. `urbanization` uses the existing `percent` formatter.
   its entire majority). That last one only works because the note separator is matched as
   both `note:` and `note - ` — Morocco's "note - Jewish about 3,000-3,500" was otherwise
   left in the text to be misparsed.
-- The remaining gap is religions whose percentages live *entirely inside* a parenthetical
-  (Saudi Arabia "Muslim (official; citizens are 85–90% Sunni…)" — and those describe a
-  split among citizens, not a national share), and the 30 entities the Factbook names
-  without quantifying at all (San Marino is simply "Roman Catholic"). Both yield
-  `capital` but no `religion`. See TODOS #52.
+- **A religion named without a percentage is kept** (TODOS #52). The Factbook gives San
+  Marino as simply "Roman Catholic" and Sudan as "Sunni Muslim, small Christian minority";
+  Saudi Arabia's only numbers sit inside a parenthetical and describe a split among
+  citizens, not a national share. Those rows carry **no `pct`** — which *is* the statement
+  that they are unquantified — and `buildBreakdown` in `js/country-panel.js` branches on
+  that to list names instead of drawing bars. 12 entities recovered.
+  `entities.json` splits the coverage flag accordingly: `hasReligion` means "we can name
+  one" (234), `hasReligionPct` means "we can draw a breakdown" (222).
+- `MANUAL_ATTR` religion backfill is gap-fill against a **quantified** breakdown, not
+  against any breakdown — otherwise Western Sahara's curated `Muslim 100%` is displaced by
+  the Factbook's bare "Muslim" the moment that starts parsing.
 - A handful of multi-capital strings are cosmetically rough (e.g. Ivory Coast
   "Yamoussoukro , Abidjan"); `capitalNote` preserves the full Factbook text.
