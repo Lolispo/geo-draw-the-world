@@ -1257,13 +1257,15 @@ text changes length, at 390px or on desktop.
 
 ## 45. Hub card icons: make them read as a guess, not a category
 
-**REVIEW:** look at the menu — Rank the World is now 📏 and Top 10 / Bottom 10 is 🪜 (a
+**REVIEW:** look at the menu — Top 10 / Bottom 10 is now 🪜 (a
 ladder, which covers both ends of a ranking and matches what the code already calls the board).
-**Check them on your phone:** 🪜 is a 2020 addition, so an older device may draw a box. Say so
+**Check it on your phone:** 🪜 is a 2020 addition, so an older device may draw a box. Say so
 and it gets swapped.
 
-**✅ DONE 2026-10-10** — two icons changed in `index.html`. The other four were left alone;
-they already say what their card does.
+**✅ DONE 2026-10-10** — Top 10 / Bottom 10 is 🪜. Rank the World was tried as 📏 and **put
+back to 🏦** (owner, 2026-10-10): at card size a ruler reads as a blank slab, and an icon you
+have to squint at is worse than one that is merely off-topic. Still the weakest of the six if
+a better idea turns up.
 
 **What:** An emoji pass over the six menu cards, Rank the World (🏦) and Top 10 (🔟)
 first.
