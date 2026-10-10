@@ -2524,6 +2524,69 @@ canvas {
 
 .cov-legend { font-size: 0.72rem; color: var(--text-dim); margin-top: -4px; }
 
+/* ========== YOUR SCORES (TODOS #41) ========== */
+.scores-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 2px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.scores-group {
+  padding: 10px 8px 4px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-dim);
+}
+.scores-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border-radius: 8px;
+}
+.scores-name { font-size: 1rem; }
+.scores-detail { font-size: 0.78rem; color: var(--text-dim); }
+.scores-best {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.scores-when { font-size: 0.75rem; color: var(--text-dim); min-width: 72px; text-align: right; }
+.scores-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 4px 2px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.scores-empty {
+  padding: 24px 16px;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.5;
+}
+.scores-empty p + p { margin-top: 8px; font-size: 0.85rem; }
+
+/* The best and the date both drift away from a long name at phone width; keep the
+   score with the row rather than on a line of its own. */
+@media (max-width: 480px) {
+  .scores-name { flex: 1 1 100%; }
+  .scores-best { margin-left: 0; }
+  .scores-when { margin-left: auto; min-width: 0; }
+}
+
 /* ========== COUNTRY SHOWCASE PANEL (TODOS #18) ========== */
 .explore-row.is-clickable,
 .rank-row.is-clickable,

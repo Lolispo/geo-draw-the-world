@@ -1060,6 +1060,31 @@ rather than absent.
 
 ## 41. "Your Scores": a record of every preset you have played
 
+**REVIEW:** menu → **🏅 Your Scores**. Everything you have ever finished should be listed
+under the activity it belongs to, newest first, with a best that reads correctly for that mode
+(a drawing round is out of 100, a streak is a count, Top 10 is hits out of N). Check nothing you
+recognise is missing or mislabelled — and that **Clear all scores** asks first.
+
+**✅ DONE 2026-10-10** — new `js/scores-screen.js` and a seventh hub card, read-only over
+`getAllHighScores()`. The only write added anywhere is `clearScores()`, behind a confirm, in the
+one place the whole store is visible.
+
+The work was the labels, as expected. Keys are minted in five places and two of them hold
+dashes inside dashes, so Top-N keys are read from the **right** — optional difficulty, style,
+N, direction — and the dataset is then matched against the live registry rather than guessed:
+`topn2-elec-renewable-pct-north-america-lo-5-type` resolves to *Bottom 5 · Electricity from
+renewables · North America · typing*. Orphans are kept, never dropped: `quick` still reads
+"Quick 10" though #9 retired it, and anything no current mode mints lands under **Older rounds**
+with its raw key.
+
+Verified against a seeded store holding all eleven key shapes: every row resolved, groups in
+order, newest first, per-mode formatting correct (82/100, 12 in a row, run of 14, 8/10, 850
+pts). Empty store shows an invitation; clear-all empties and re-renders; back returns to the
+menu; 390px has no overflow; no console errors.
+
+**Not built:** replaying a preset by tapping its row. That needs every key mapped back to a
+mode start, which is a bigger job than this screen — a natural follow-up if the screen earns it.
+
 **What:** A Seterra-style scores screen: every game preset you have actually played, with
 your best on it and when. Presets you have never touched do not appear.
 

@@ -31,3 +31,8 @@ export function saveScore(mode, score, counted, total) {
 export function getAllHighScores() {
   return loadAll();
 }
+
+// Only the scores screen calls this, and only behind a confirm (TODOS #41).
+export function clearScores() {
+  localStorage.removeItem(STORAGE_KEY);
+}
