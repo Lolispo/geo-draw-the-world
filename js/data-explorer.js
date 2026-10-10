@@ -4,6 +4,8 @@
 import { loadDatasets, loadEntities, loadAliases, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
+import { ExplorerMap } from './explorer-map.js';
+import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
 
@@ -21,7 +23,7 @@ export class DataExplorer {
     this.datasetId = 'gdp-nominal';
     this.continent = null;   // null = All
     this.higherFirst = true;
-    this.view = 'rank';      // 'rank' | 'coverage' | 'shapes'
+    this.view = 'rank';      // 'rank' | 'map' | 'shapes' | 'coverage'
     this.shapeSort = 'name'; // 'name' | 'area' | 'continent'
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
@@ -50,11 +52,15 @@ export class DataExplorer {
     // old observer was watching, so it has to go with them.
     this._shapeObserver?.disconnect();
     this._shapeObserver = null;
+    this._mapResize?.disconnect();
+    this._mapResize = null;
     c.innerHTML = '';
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
-    this._listEl.className = 'explore-list' + (this.view === 'coverage' ? ' is-coverage' : '');
+    this._listEl.className = 'explore-list'
+      + (this.view === 'coverage' ? ' is-coverage' : '')
+      + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
     this._renderBody();
   }
@@ -62,7 +68,74 @@ export class DataExplorer {
   _renderBody() {
     if (this.view === 'coverage') this._renderCoverage();
     else if (this.view === 'shapes') this._renderShapes();
+    else if (this.view === 'map') this._renderMap();
     else this._renderList();
+  }
+
+  // The same metric as the rankings, shaded onto the world (TODOS #48). Geometry is
+  // loaded once and kept: it is ~1MB across the six region files.
+  async _renderMap() {
+    const list = this._listEl;
+    if (!list) return;
+    list.innerHTML = '';
+    list.classList.add('is-map');
+
+    const ds = getDataset(this.datasetId);
+    const wrap = document.createElement('div');
+    wrap.className = 'explore-map';
+    const canvas = document.createElement('canvas');
+    canvas.className = 'explore-map-canvas';
+    const tip = document.createElement('div');
+    tip.className = 'explore-map-tip';
+    tip.hidden = true;
+    const legend = document.createElement('div');
+    legend.className = 'explore-map-legend';
+    wrap.append(canvas, tip);
+    list.append(wrap, legend);
+
+    if (!this._world) this._world = await loadWorldOutlines();
+    // A re-render replaces the canvas, so the map is rebuilt around the new one.
+    const map = new ExplorerMap(canvas, {
+      onPick: (code) => openCountryPanel(code),
+      formatValue,
+    });
+    this._map = map;
+    map.onHover = (label, ev) => {
+      tip.hidden = !label;
+      if (!label) return;
+      tip.textContent = label;
+      const r = wrap.getBoundingClientRect();
+      tip.style.left = `${Math.min(ev.clientX - r.left + 12, r.width - tip.offsetWidth - 8)}px`;
+      tip.style.top = `${ev.clientY - r.top + 12}px`;
+    };
+
+    // Shaded = what the rankings would list: pool rules, plus the continent filter.
+    const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
+      .filter((e) => inCountryPool(e.code)).map((e) => e.code));
+    map.setWorld(this._world).setMetric({ values: ds.values, format: ds.format, scope });
+    map.render();
+
+    legend.innerHTML = '';
+    const head = document.createElement('div');
+    head.className = 'explore-map-legend-head';
+    head.textContent = `${ds.name} · five equal-count bands`;
+    legend.appendChild(head);
+    for (const row of map.legendRows()) {
+      const item = document.createElement('span');
+      item.className = 'explore-legend-item';
+      const sw = document.createElement('span');
+      sw.className = 'explore-legend-swatch';
+      sw.style.background = row.color;
+      const lab = document.createElement('span');
+      lab.textContent = row.label;
+      item.append(sw, lab);
+      legend.appendChild(item);
+    }
+
+    // Refit when the window changes shape, and only while this view is on screen.
+    this._mapResize?.disconnect();
+    this._mapResize = new ResizeObserver(() => map.render());
+    this._mapResize.observe(wrap);
   }
 
   _select(options, value, onPick) {
@@ -100,8 +173,8 @@ export class DataExplorer {
     bar.className = 'explore-controls';
     const rankView = this.view === 'rank';
 
-    // Dataset (rank view only)
-    if (rankView) {
+    // Dataset (rank and map views — both are a metric seen a different way)
+    if (rankView || this.view === 'map') {
       const dsSelect = document.createElement('select');
       dsSelect.className = 'explore-select';
       for (const d of getDatasetList()) {
@@ -195,6 +268,7 @@ export class DataExplorer {
     views.className = 'explore-views';
     for (const v of [
       { id: 'rank', label: '📊 Rankings', title: 'Countries ranked by a dataset' },
+      { id: 'map', label: '🗺️ Map', title: 'The selected metric, shaded onto the world' },
       { id: 'shapes', label: '✏️ Shapes', title: 'Every country outline, side by side' },
       { id: 'coverage', label: '📋 Coverage', title: 'Show data coverage across all entities' },
     ]) {

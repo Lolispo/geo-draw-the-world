@@ -1365,6 +1365,39 @@ coverage table keeps its horizontal scroll.
 
 ## 48. Data Explorer: a world map view
 
+**REVIEW:** Data Explorer → **🗺️ Map**. Change the metric and watch the world re-shade;
+hover a country for its figure; tap one for its panel; set the continent filter and check it
+zooms to that continent and re-bands *within* it. Read the legend — the bands are equal-count,
+so the edges are real values, not round numbers.
+
+**✅ DONE 2026-10-10** — a fourth Explorer view, on the segmented control #51 built.
+
+**Geometry is the draw game's own world** (`data/countries-*.json`, the 1600×1600
+Mercator-conformal space), via a new `loadWorldOutlines()` in `js/geo-data.js` that
+deliberately **ignores the pool rules**: the basemap draws every country so the world has no
+Greenland-shaped hole when the territories toggle is off, and only the *shading* goes through
+`inCountryPool()` and the continent filter. No mapping library, no second projection.
+
+**Five equal-count bands, said out loud in the legend.** GDP and population are skewed enough
+that an equal-width ramp paints the entire world the lowest colour and calls it a map, so the
+edges are quantiles and the legend prints them as real values ($50.5M – $7.6B … $400B – $27.81T).
+The ramp is viridis' bright half — its dark end disappears into this app's background, and a
+band you cannot see is not a band. Two distinct greys: *no data* (in scope, no figure) and *not
+in this filter*, which the hover label says in words.
+
+**Hit-testing is colour-index picking**, not point-in-polygon: every country is drawn a second
+time to an offscreen buffer in a colour that *is* its index, so a hover is one `getImageData` of
+one pixel rather than a walk over ~250k vertices. The shaded world is then cached as a bitmap
+and a hover only blits and strokes one outline — **ten hover moves went from 148ms to 14ms**.
+
+Verified: the world shades for Total GDP; hovering gives "Canada — $2.20T"; Greenland reads
+"not in this filter" with territories off; clicking opens Canada's panel; the Africa filter
+zooms and re-bands to $690M–$487B; independence-year re-bands to 301–2011; at 390px the map box
+takes the world's own proportions instead of letterboxing, with no horizontal overflow; all four
+views still render; no console errors.
+
+**Not in scope, as decided:** palettes, two-metric overlays and categorical layers.
+
 **What:** A third Explorer view: the world map, countries shaded by the selected metric,
 hover for the value and tap for the country panel.
 

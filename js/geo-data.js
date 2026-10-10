@@ -49,6 +49,18 @@ export async function loadAllCountries() {
   };
 }
 
+// Every country's world-space outline, pool rules ignored (TODOS #48). The choropleth
+// draws the whole world and only *shades* what is playable — filtering here instead
+// would leave a Greenland-shaped hole whenever the territories toggle is off.
+export async function loadWorldOutlines() {
+  const out = [];
+  for (const region of getCountryRegions()) {
+    const data = await loadCountryDataRaw(region.file);
+    for (const c of data.countries) out.push(c);
+  }
+  return out;
+}
+
 // Single country's outline for the showcase panel / peek / compare — loads the NATIVE
 // per-country tier on demand (data/shapes/{code}.json, TODOS #24), sourced from
 // geoBoundaries so microstates keep full detail instead of collapsing to a blob at
