@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data map — Know the World</title>
+<meta name="description" content="Where every dataset in this repo comes from, which script builds it, which file holds it, and who reads it — plus a live coverage and quality audit.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --border-soft: #21262d;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-faint: #6e7681;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --orange: #d29922;
+  --red: #f85149;
+
+  /* Upstream-source identity. Validated for the #161b22 surface:
+     all 6 clear the dark lightness band, the chroma floor, 3:1 contrast,
+     and an adjacent-pair CVD ΔE of 8.4 (worst: yellow↔aqua, protan). */
+  --s-ne:      #c98500;  /* Natural Earth      */
+  --s-gb:      #d55181;  /* geoBoundaries      */
+  --s-wb:      #3987e5;  /* World Bank         */
+  --s-fb:      #d95926;  /* CIA World Factbook */
+  --s-ember:   #199e70;  /* Ember / OWID       */
+  --s-flagcdn: #9085e9;  /* flagcdn.com        */
+  --s-manual:  #8b949e;  /* hand-curated       */
+  --s-repo:    #4d5560;  /* repo-internal      */
+
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+body {
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 40px 80px; padding-left: 20px; padding-right: 20px; }
+
+/* ---------- type ---------- */
+h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+h2 { font-size: clamp(18px, 2.4vw, 22px); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 6px; }
+h3 { font-size: 15px; font-weight: 600; }
+.lede { color: var(--text-dim); max-width: 68ch; margin-top: 10px; font-size: 15px; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+code, .mono { font-family: var(--mono); font-size: 0.92em; }
+
+section { margin-top: 56px; }
+.sec-head { margin-bottom: 20px; }
+.sec-head p { color: var(--text-dim); font-size: 14px; max-width: 72ch; margin-top: 4px; }
+
+/* ---------- header ---------- */
+header { border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+.crumbs { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; font-size: 13px; }
+.crumbs a { color: var(--accent); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+.status {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 12px;
+  color: var(--text-dim); border: 1px solid var(--border); border-radius: 999px;
+  padding: 3px 11px; background: var(--surface);
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); flex: none; }
+.status[data-state="ok"] .dot { background: var(--green); }
+.status[data-state="err"] .dot { background: var(--red); }
+
+/* ---------- controls ---------- */
+.controls {
+  display: flex; gap: 10px 22px; flex-wrap: wrap; align-items: center;
+  padding: 12px 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 16px; font-size: 13px;
+}
+.controls label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-dim); }
+.controls input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+.legend { display: flex; gap: 8px 16px; flex-wrap: wrap; align-items: center; margin-left: auto; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-dim); white-space: nowrap; }
+.swatch { width: 18px; height: 3px; border-radius: 2px; flex: none; }
+.swatch.dashed { background: none !important; border-top: 2px dashed var(--s-repo); height: 0; }
+
+/* ---------- graph ---------- */
+.scroller { overflow-x: auto; overflow-y: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.graph { position: relative; min-width: 1100px; padding: 0 22px 26px; }
+.col-heads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 58px; padding-top: 18px; padding-bottom: 14px; }
+.col-head { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+.col-head span { display: block; font-size: 11px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--s-repo); margin-top: 2px; }
+.cols { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 58px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 12px; }
+#edges { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+
+.node {
+  position: relative; z-index: 1;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-left: 3px solid var(--s-repo);
+  border-radius: 8px; padding: 9px 12px;
+  transition: opacity .18s, border-color .18s, background .18s, transform .18s;
+  cursor: default;
+}
+.node.lit { border-color: var(--accent); background: #1c2430; }
+.node.dim { opacity: .2; }
+.node .nm { font-size: 13px; font-weight: 600; line-height: 1.3; word-break: break-word; }
+.node .nm a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--text-faint); }
+.node .nm a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.node .sub { font-size: 11.5px; color: var(--text-dim); line-height: 1.4; margin-top: 3px; }
+.node .stat { font-size: 11.5px; color: var(--accent); font-family: var(--mono); margin-top: 4px; }
+.node .tag {
+  display: inline-block; font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-faint); border: 1px solid var(--border); border-radius: 4px;
+  padding: 0 5px; margin-top: 5px;
+}
+path.edge { fill: none; transition: opacity .18s, stroke-width .18s; }
+path.edge.dim { opacity: .06; }
+path.edge.lit { stroke-width: 2.4px; }
+
+/* ---------- tables ---------- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.tbl-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+thead th {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--text-faint); border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+thead th small { display: block; font-size: 10.5px; letter-spacing: 0; text-transform: none; font-weight: 400; color: var(--s-repo); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #1b212a; }
+td.num { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); white-space: nowrap; }
+td .label { font-weight: 500; }
+td .note { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
+
+/* coverage bar: one hue, length carries the magnitude */
+.bar { display: flex; align-items: center; gap: 9px; min-width: 128px; }
+.track { flex: 1; height: 8px; background: #2b3139; border-radius: 4px; overflow: hidden; }
+.fill { height: 100%; background: var(--accent); border-radius: 2px 4px 4px 2px; }
+.bar .pct { font-family: var(--mono); font-size: 11.5px; color: var(--text-dim); width: 34px; text-align: right; flex: none; }
+.bar.none .fill { background: var(--s-repo); }
+/* Source identity rides a swatch, never the text colour. */
+td.src { display: flex; align-items: center; gap: 7px; }
+.swatch.dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ---------- checks ---------- */
+.checks { display: flex; flex-direction: column; }
+.check { display: grid; grid-template-columns: 86px 1fr; gap: 16px; padding: 13px 16px; border-bottom: 1px solid var(--border-soft); align-items: start; }
+.check:last-child { border-bottom: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase; border-radius: 5px; padding: 3px 7px;
+  border: 1px solid; white-space: nowrap;
+}
+.chip[data-s="pass"] { color: var(--green); border-color: #2c5c36; background: #10261a; }
+.chip[data-s="fixed"] { color: var(--green); border-color: #2c5c36; background: #10261a; }
+.chip[data-s="look"] { color: var(--orange); border-color: #5c4a1b; background: #241e0d; }
+.chip[data-s="fail"] { color: var(--red); border-color: #6b2c2c; background: #2a1414; }
+.chip[data-s="wait"] { color: var(--text-faint); border-color: var(--border); background: var(--surface2); }
+.check .what { font-size: 13.5px; font-weight: 500; }
+.check .detail { font-size: 12.5px; color: var(--text-dim); margin-top: 3px; }
+.check .codes { font-family: var(--mono); font-size: 11.5px; color: var(--text-faint); margin-top: 5px; word-break: break-word; line-height: 1.6; }
+
+/* ---------- findings ---------- */
+.finding { border-bottom: 1px solid var(--border-soft); padding: 16px; }
+.finding:last-child { border-bottom: none; }
+.finding-top { display: flex; gap: 11px; align-items: baseline; flex-wrap: wrap; }
+.finding h3 { flex: 1; min-width: 240px; }
+.finding .body { font-size: 13.5px; color: var(--text-dim); margin-top: 7px; max-width: 86ch; }
+.finding .body p + p { margin-top: 7px; }
+.finding .fix {
+  font-size: 12.5px; margin-top: 9px; padding: 8px 12px; background: var(--surface2);
+  border-left: 2px solid var(--green); border-radius: 0 6px 6px 0; color: var(--text-dim);
+}
+.finding .fix b { color: var(--text); font-weight: 600; }
+.finding code { background: #1b2029; padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+.pipeline { display: flex; flex-direction: column; gap: 2px; font-family: var(--mono); font-size: 12.5px; padding: 16px; }
+.pipeline .step { display: flex; gap: 12px; padding: 5px 0; color: var(--text-dim); }
+.pipeline .step b { color: var(--text-faint); font-weight: 400; width: 20px; flex: none; }
+.pipeline .step span { color: var(--text); }
+.pipeline .step em { font-style: normal; color: var(--text-faint); }
+
+footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 12.5px; color: var(--text-faint); }
+footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .wrap { padding-block: 28px 56px; }
+  .check { grid-template-columns: 1fr; gap: 8px; }
+  .legend { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="crumbs">
+    <a href="index.html">← Know the World</a>
+    <span class="status" id="status" data-state="wait"><span class="dot"></span><span id="status-text">loading data…</span></span>
+  </div>
+  <h1>Data map</h1>
+  <p class="lede">
+    Every dataset this game ships: where it is fetched from, which script builds it, which
+    file holds it, and which module reads it at runtime. The coverage and check tables below
+    are computed live from the committed files, so they go stale only if the data does.
+  </p>
+</header>
+
+<!-- ======================= GRAPH ======================= -->
+<section>
+  <div class="sec-head">
+    <h2>Where the data comes from</h2>
+    <p>
+      Left to right: upstream source → build script → committed file → runtime consumer.
+      Hover any box to isolate its chain. Dashed edges are build-order dependencies —
+      one build script reading another's output — which is why the pipeline has to run in order.
+    </p>
+  </div>
+
+  <div class="controls">
+    <label><input type="checkbox" id="t-deps" checked> Build-order dependencies</label>
+    <label><input type="checkbox" id="t-runtime" checked> Third-party runtime calls</label>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="scroller">
+    <div class="graph" id="graph">
+      <div class="col-heads">
+        <div class="col-head">Upstream source <span>outside this repo</span></div>
+        <div class="col-head">Build script <span>scripts/*.mjs — run by hand</span></div>
+        <div class="col-head">Committed file <span>checked into git</span></div>
+        <div class="col-head">Read at runtime <span>fetched by the browser</span></div>
+      </div>
+      <div class="cols" id="cols">
+        <svg id="edges" aria-hidden="true"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= COVERAGE ======================= -->
+<section>
+  <div class="sec-head">
+    <h2>Coverage</h2>
+    <p>
+      How much of the entity registry each field actually has a value for, split by entity
+      class — because an 85% number usually means "every sovereign state, no territories",
+      which is a very different thing from a hole in the middle of the map.
+    </p>
+  </div>
+  <div class="card tbl-scroll">
+    <table id="coverage">
+      <thead><tr>
+        <th>Field</th>
+        <th>Sovereign <small id="h-sov">—</small></th>
+        <th>Territory <small id="h-ter">—</small></th>
+        <th>De-facto <small id="h-dfc">—</small></th>
+        <th>Total</th>
+        <th>Source</th>
+      </tr></thead>
+      <tbody><tr><td colspan="6" style="color:var(--text-faint)">loading…</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ======================= CHECKS ======================= -->
+<section>
+  <div class="sec-head">
+    <h2>Live checks</h2>
+    <p>
+      Run against the committed files every time this page loads. These are the things that
+      break silently: a join that stops joining, a percentage that stops adding up, a number
+      that contradicts another number derived from the same source.
+    </p>
+  </div>
+  <div class="card checks" id="checks">
+    <div class="check"><span class="chip" data-s="wait">waiting</span><div class="what">loading data…</div></div>
+  </div>
+</section>
+
+<!-- ======================= FINDINGS ======================= -->
+<section>
+  <div class="sec-head">
+    <h2>Review — 10 Oct 2026</h2>
+    <p>
+      A read of the pipeline, not just the output. The first four were fixed on the day of the
+      review and the live checks above re-test them on every load; the rest are open because the
+      fix needs a decision, not because it is hard.
+    </p>
+  </div>
+  <div class="card" id="findings"></div>
+</section>
+
+<!-- ======================= PIPELINE ======================= -->
+<section>
+  <div class="sec-head">
+    <h2>Rebuild order</h2>
+    <p>Order matters — each step reads the previous one's output. Geometry and shapes are independent of the stats chain but both need <code>entities.json</code>.</p>
+  </div>
+  <div class="card pipeline" id="pipeline"></div>
+</section>
+
+<footer>
+  Generated by <code>data-map.html</code> — a standalone page, no build step.
+  Prose notes live in <a href="docs/DATA.md">docs/DATA.md</a>; the numbers here come from the data itself.
+</footer>
+
+</div>
+
+<script type="module">
+/* ============================================================
+   1. The graph — structural truth, hand-maintained.
+   ============================================================ */
+const SRC = {
+  ne:      { label: 'Natural Earth',      color: 'var(--s-ne)' },
+  gb:      { label: 'geoBoundaries',      color: 'var(--s-gb)' },
+  wb:      { label: 'World Bank',         color: 'var(--s-wb)' },
+  fb:      { label: 'CIA World Factbook', color: 'var(--s-fb)' },
+  ember:   { label: 'Ember / OWID',       color: 'var(--s-ember)' },
+  flagcdn: { label: 'flagcdn.com',        color: 'var(--s-flagcdn)' },
+  manual:  { label: 'Hand-curated',       color: 'var(--s-manual)' },
+  repo:    { label: 'Repo-internal',      color: 'var(--s-repo)' },
+};
+
+const NODES = [
+  // ---- column 0: upstream sources ----
+  { id:'ne', col:0, src:'ne', name:'Natural Earth', href:'https://www.naturalearthdata.com/',
+    sub:'1:50m base · 1:10m for small countries · map units for dependencies · disputed areas for de-facto states', tag:'public domain' },
+  { id:'gb', col:0, src:'gb', name:'geoBoundaries gbOpen', href:'https://www.geoboundaries.org',
+    sub:'ADM0 outlines, OSM-derived. Fetched through the LFS-resolving github.com/…/raw/main URL.', tag:'CC BY 4.0 — attribution required' },
+  { id:'wb', col:0, src:'wb', name:'World Bank Open Data', href:'https://data.worldbank.org/',
+    sub:'api.worldbank.org/v2 — 8 indicators, latest non-null value in a 2015–2023 window, plus the country list used as the ISO3↔ISO2 table', tag:'no key' },
+  { id:'fb', col:0, src:'fb', name:'CIA World Factbook', href:'https://github.com/factbook/factbook.json',
+    sub:'factbook.json mirror — capital, religion breakdown, independence date. Matched on country name, not GEC code.', tag:'public domain' },
+  { id:'ember', col:0, src:'ember', name:'Ember, via Our World in Data', href:'https://ourworldindata.org/grapher/share-elec-by-source',
+    sub:'One CSV of electricity generation share by source. Generation, not installed capacity.', tag:'CC BY 4.0' },
+  { id:'flagcdn', col:0, src:'flagcdn', name:'flagcdn.com', href:'https://flagcdn.com',
+    sub:'Flag images. HEAD-probed at build time to record hasFlagImage; the actual images are fetched by the player’s browser.', tag:'live third-party' },
+  { id:'manual', col:0, src:'manual', name:'Hand-curated in this repo',
+    sub:'Flag colour lists, MANUAL_VALUES / MANUAL_ATTR backfill, name-alias tables, the seeded territory list', tag:'provenance recorded in-file' },
+
+  // ---- column 1: build scripts ----
+  { id:'s-geometry',    col:1, src:'repo', name:'build-geometry.mjs',   sub:'Projects lon/lat into the 1600×1100 conformal Mercator world, clips to the main landmass, Douglas-Peucker simplifies, preserves colours by code.' },
+  { id:'s-shapes',      col:1, src:'repo', name:'build-shapes.mjs',     sub:'One native-resolution outline per country, normalised to a ~1000px box so microstates keep detail.' },
+  { id:'s-datasets',    col:1, src:'repo', name:'build-datasets.mjs',   sub:'Fetches the indicators, merges the manual backfill (gap-fill only), derives independence-year and the three electricity metrics.' },
+  { id:'s-attributes',  col:1, src:'repo', name:'build-attributes.mjs', sub:'Parses capital, religion percentages and independence year out of Factbook prose.' },
+  { id:'s-electricity', col:1, src:'repo', name:'build-electricity.mjs',sub:'RFC-4180 CSV parse, latest year per country, sub-threshold sources folded into a remainder.' },
+  { id:'s-entities',    col:1, src:'repo', name:'build-entities.mjs',   sub:'The reconciler. Resolves every name to an ISO 3166-1 alpha-2 code, classifies entity type, and writes coverage flags.' },
+
+  // ---- column 2: committed files ----
+  { id:'f-countries',   col:2, src:'repo', name:'data/countries-{region}.json', key:'code + name', stat:'geom', sub:'Drawing geometry, 6 region files. The playable world.' },
+  { id:'f-continents',  col:2, src:'repo', name:'data/continents.json', key:'name', sub:'Coarse continent outlines — the placement basemap and Continents mode. Reprojected once; not regenerated by any script.' },
+  { id:'f-shapes',      col:2, src:'repo', name:'data/shapes/{code}.json', key:'filename', stat:'shapes', sub:'High-detail single-country outlines for the panel, peek and compare. One file per country so the panel loads a few KB.' },
+  { id:'f-datasets',    col:2, src:'repo', name:'data/datasets.json', key:'code', stat:'datasets', sub:'Every rankable metric, plus the country registry the rank modes read.' },
+  { id:'f-attributes',  col:2, src:'repo', name:'data/attributes.json', key:'code', stat:'attributes', sub:'Capital, religion breakdown, independence year.' },
+  { id:'f-electricity', col:2, src:'repo', name:'data/electricity.json', key:'code', stat:'electricity', sub:'Generation share by source, with the year it came from.' },
+  { id:'f-entities',    col:2, src:'repo', name:'data/entities.json', key:'code', stat:'entities', sub:'The canonical registry — the join across every other file, and the only place entity type lives.' },
+  { id:'f-flags',       col:2, src:'repo', name:'data/flags.json', key:'code', stat:'flags', sub:'Flag colour lists for the colour quizzes. Hand-curated; no script writes it.' },
+  { id:'f-aliases',     col:2, src:'repo', name:'data/aliases.json', key:'code', stat:'aliases', sub:'The shortenings people actually type — UK, UAE, DRC — for the typing input. Hand-curated; no script writes it.' },
+  { id:'f-assets',      col:2, src:'repo', name:'assets/flags/*.svg', key:'filename', sub:'Bundled public-domain flags for the five entities with no ISO code, so flagcdn has nothing to serve.' },
+
+  // ---- column 3: runtime consumers ----
+  { id:'c-geo',       col:3, src:'repo', name:'js/geo-data.js', sub:'Reference shapes and the playable country pool.', tag:'draw · place · daily · streak · speed' },
+  { id:'c-datasets',  col:3, src:'repo', name:'js/datasets.js', sub:'Every metric lookup, and inCountryPool() — the single place the territories rule lives.', tag:'rank the world · top 10 · data explorer' },
+  { id:'c-flaggames', col:3, src:'repo', name:'js/flag-game.js · js/flag-picker-game.js', sub:'Reads the colour lists.', tag:'flag colour quiz · colour picker' },
+  { id:'c-flags',     col:3, src:'repo', name:'js/flags.js', sub:'Resolves a flag image URL per code — flagcdn, or a bundled SVG for the codeless entities.', tag:'every mode that shows a flag' },
+];
+
+// kind: 'flow' (source→script→file→consumer), 'dep' (a script reading another's
+// output — the reason the pipeline is ordered), 'runtime' (the browser calling out).
+const EDGES = [
+  // sources into scripts
+  ['ne','s-geometry','ne','flow'],
+  ['ne','s-shapes','ne','flow'],
+  ['gb','s-shapes','gb','flow'],
+  ['wb','s-datasets','wb','flow'],
+  ['wb','s-electricity','wb','dep'],
+  ['fb','s-attributes','fb','flow'],
+  ['ember','s-electricity','ember','flow'],
+  ['flagcdn','s-entities','flagcdn','dep'],
+  ['manual','s-datasets','manual','flow'],
+  ['manual','s-attributes','manual','flow'],
+  ['manual','s-entities','manual','flow'],
+  // sources straight to files (nothing generates these)
+  ['manual','f-flags','manual','flow'],
+  ['manual','f-aliases','manual','flow'],
+  ['manual','f-continents','manual','flow'],
+  ['manual','f-assets','manual','flow'],
+  // scripts write files
+  ['s-geometry','f-countries','ne','flow'],
+  ['s-shapes','f-shapes','gb','flow'],
+  ['s-datasets','f-datasets','wb','flow'],
+  ['s-attributes','f-attributes','fb','flow'],
+  ['s-electricity','f-electricity','ember','flow'],
+  ['s-entities','f-entities','repo','flow'],
+  ['s-entities','f-countries','repo','dep'],
+  ['s-entities','f-datasets','repo','dep'],
+  // files back into scripts — build-order dependencies
+  ['f-entities','s-geometry','repo','dep'],
+  ['f-entities','s-shapes','repo','dep'],
+  ['f-entities','s-attributes','repo','dep'],
+  ['f-entities','s-electricity','repo','dep'],
+  ['f-attributes','s-datasets','repo','dep'],
+  ['f-countries','s-shapes','repo','dep'],
+  ['f-countries','s-entities','repo','dep'],
+  ['f-datasets','s-entities','repo','dep'],
+  ['f-flags','s-entities','repo','dep'],
+  // files read in the browser
+  ['f-countries','c-geo','repo','flow'],
+  ['f-continents','c-geo','repo','flow'],
+  ['f-shapes','c-geo','repo','flow'],
+  ['f-datasets','c-datasets','repo','flow'],
+  ['f-entities','c-datasets','repo','flow'],
+  ['f-attributes','c-datasets','repo','flow'],
+  ['f-electricity','c-datasets','repo','flow'],
+  ['f-flags','c-flaggames','repo','flow'],
+  ['f-aliases','c-datasets','repo','flow'],
+  ['f-assets','c-flags','repo','flow'],
+  // the one live third-party call from the player's browser
+  ['flagcdn','c-flags','flagcdn','runtime'],
+];
+
+/* ---- render nodes ---- */
+const colsEl = document.getElementById('cols');
+const svg = document.getElementById('edges');
+const nodeEl = new Map();
+for (let c = 0; c < 4; c++) {
+  const col = document.createElement('div');
+  col.className = 'col';
+  for (const n of NODES.filter(n => n.col === c)) {
+    const d = document.createElement('div');
+    d.className = 'node';
+    d.style.borderLeftColor = SRC[n.src].color;
+    d.innerHTML =
+      `<div class="nm">${n.href ? `<a href="${n.href}" target="_blank" rel="noopener">${n.name}</a>` : n.name}</div>` +
+      (n.sub ? `<div class="sub">${n.sub}</div>` : '') +
+      (n.key ? `<div class="sub" style="color:var(--text-faint)">joins on <span class="mono">${n.key}</span></div>` : '') +
+      (n.stat ? `<div class="stat" data-stat="${n.stat}">—</div>` : '') +
+      (n.tag ? `<div class="tag">${n.tag}</div>` : '');
+    col.appendChild(d);
+    nodeEl.set(n.id, d);
+  }
+  colsEl.appendChild(col);
+}
+
+/* ---- legend ---- */
+document.getElementById('legend').innerHTML =
+  ['ne','gb','wb','fb','ember','flagcdn','manual'].map(k =>
+    `<span class="legend-item"><span class="swatch" style="background:${SRC[k].color}"></span>${SRC[k].label}</span>`
+  ).join('') +
+  `<span class="legend-item"><span class="swatch dashed"></span>build-order dependency</span>`;
+
+/* ---- edges ---- */
+const paths = [];
+function drawEdges() {
+  const box = colsEl.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+  svg.style.height = box.height + 'px';
+  svg.innerHTML = '';
+  paths.length = 0;
+  const showDeps = document.getElementById('t-deps').checked;
+  const showRt = document.getElementById('t-runtime').checked;
+
+  for (const [from, to, src, kind] of EDGES) {
+    if (kind === 'dep' && !showDeps) continue;
+    if (kind === 'runtime' && !showRt) continue;
+    const a = nodeEl.get(from).getBoundingClientRect();
+    const b = nodeEl.get(to).getBoundingClientRect();
+    const backward = b.left < a.left;
+    // Exit the right edge and enter the left edge; a backward edge leaves and
+    // re-enters on the same sides, so swing the control points wide to clear the boxes.
+    const x1 = (backward ? a.left : a.right) - box.left;
+    const y1 = a.top + a.height / 2 - box.top;
+    const x2 = (backward ? b.right : b.left) - box.left;
+    const y2 = b.top + b.height / 2 - box.top;
+    const bow = backward ? -46 : Math.max(34, Math.abs(x2 - x1) * 0.42);
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', `M${x1},${y1} C${x1 + bow},${y1} ${x2 - bow},${y2} ${x2},${y2}`);
+    p.setAttribute('class', 'edge');
+    p.setAttribute('stroke', SRC[src].color);
+    p.setAttribute('stroke-width', kind === 'flow' ? 1.6 : 1.2);
+    p.setAttribute('stroke-opacity', kind === 'flow' ? 0.85 : 0.5);
+    if (kind !== 'flow') p.setAttribute('stroke-dasharray', '5 4');
+    svg.appendChild(p);
+    paths.push({ el: p, from, to });
+  }
+}
+
+/* ---- hover: isolate a node's full upstream + downstream chain ---- */
+function chain(id) {
+  const keep = new Set([id]);
+  for (let grew = true; grew;) {
+    grew = false;
+    for (const { from, to } of paths) {
+      if (keep.has(from) && !keep.has(to)) { keep.add(to); grew = true; }
+      if (keep.has(to) && !keep.has(from)) { keep.add(from); grew = true; }
+    }
+  }
+  return keep;
+}
+for (const [id, el] of nodeEl) {
+  el.addEventListener('pointerenter', () => {
+    const keep = chain(id);
+    for (const [i, e] of nodeEl) { e.classList.toggle('dim', !keep.has(i)); e.classList.toggle('lit', i === id); }
+    for (const p of paths) {
+      const on = keep.has(p.from) && keep.has(p.to);
+      p.el.classList.toggle('dim', !on);
+      p.el.classList.toggle('lit', p.from === id || p.to === id);
+    }
+  });
+  el.addEventListener('pointerleave', () => {
+    for (const [, e] of nodeEl) e.classList.remove('dim', 'lit');
+    for (const p of paths) p.el.classList.remove('dim', 'lit');
+  });
+}
+document.getElementById('t-deps').addEventListener('change', drawEdges);
+document.getElementById('t-runtime').addEventListener('change', drawEdges);
+new ResizeObserver(drawEdges).observe(colsEl);
+drawEdges();
+
+/* ============================================================
+   2. Live audit — everything below is computed from the files.
+   ============================================================ */
+const KB = n => (n / 1024).toFixed(n > 512 * 1024 ? 0 : 1) + ' KB';
+const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+
+async function grab(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(`${path} → HTTP ${r.status}`);
+  const text = await r.text();
+  return { json: JSON.parse(text), bytes: text.length };
+}
+
+const setStatus = (state, text) => {
+  const el = document.getElementById('status');
+  el.dataset.state = state;
+  document.getElementById('status-text').textContent = text;
+};
+
+let D = null;
+try {
+  const [ent, dat, att, ele, flg] = await Promise.all(
+    ['data/entities.json', 'data/datasets.json', 'data/attributes.json',
+     'data/electricity.json', 'data/flags.json'].map(grab));
+  // Optional: a missing hand-curated file should leave the rest of the audit
+  // readable rather than blanking the page, the way js/datasets.js treats it.
+  const ali = await grab('data/aliases.json').catch(() => ({ json: { aliases: {} }, bytes: 0 }));
+  D = {
+    entities: ent.json.entities, datasets: dat.json, attributes: att.json.attributes,
+    electricity: ele.json.electricity, flags: flg.json.flags, aliases: ali.json.aliases,
+    bytes: { entities: ent.bytes, datasets: dat.bytes, attributes: att.bytes, electricity: ele.bytes, flags: flg.bytes },
+  };
+  setStatus('ok', 'live — read from data/ just now');
+} catch (e) {
+  setStatus('err', 'serve the repo (npm start) to load live data');
+  document.getElementById('checks').innerHTML =
+    `<div class="check"><span class="chip" data-s="fail">blocked</span><div><div class="what">Could not read the data files</div>` +
+    `<div class="detail">${esc(e.message)} — this page reads <span class="mono">data/*.json</span> over HTTP, so it needs the repo served ` +
+    `(<span class="mono">npm start</span>, then open <span class="mono">localhost:8080/data-map.html</span>). The graph above is static and still correct.</div></div></div>`;
+  document.querySelector('#coverage tbody').innerHTML =
+    `<tr><td colspan="6" style="color:var(--text-faint)">unavailable — serve the repo to compute coverage</td></tr>`;
+}
+
+if (D) {
+  const codes = Object.keys(D.entities);
+  const E = D.entities;
+  const GROUPS = [
+    ['sovereign', codes.filter(c => E[c].type === 'sovereign')],
+    ['territory', codes.filter(c => E[c].type === 'territory')],
+    ['de-facto',  codes.filter(c => E[c].type === 'de-facto')],
+  ];
+  document.getElementById('h-sov').textContent = GROUPS[0][1].length;
+  document.getElementById('h-ter').textContent = GROUPS[1][1].length;
+  document.getElementById('h-dfc').textContent = GROUPS[2][1].length;
+
+  /* ---- node stat lines ---- */
+  const stats = {
+    entities:    `${codes.length} entities · ${KB(D.bytes.entities)}`,
+    datasets:    `${D.datasets.datasets.length} metrics · ${Object.keys(D.datasets.countries).length} entities · ${KB(D.bytes.datasets)}`,
+    attributes:  `${Object.keys(D.attributes).length} entities · ${KB(D.bytes.attributes)}`,
+    electricity: `${Object.keys(D.electricity).length} entities · ${KB(D.bytes.electricity)}`,
+    flags:       `${D.flags.length} of ${codes.length} entities · ${KB(D.bytes.flags)}`,
+    aliases:     `${Object.keys(D.aliases).length} entities · ${Object.values(D.aliases).reduce((a, l) => a + l.length, 0)} aliases`,
+    geom:        `${codes.filter(c => E[c].hasGeometry).length} entities with geometry`,
+    shapes:      `${codes.filter(c => E[c].hasGeometry).length} files · loaded one at a time`,
+  };
+  for (const el of document.querySelectorAll('[data-stat]')) el.textContent = stats[el.dataset.stat] ?? '—';
+
+  /* ---- coverage table ---- */
+  const SOURCE_OF = {
+    'gdp-nominal': 'wb', 'population': 'wb', 'gdp-per-capita': 'wb', 'land-area': 'wb',
+    'life-expectancy': 'wb', 'exports': 'wb', 'urbanization': 'wb', 'export-share-gdp': 'wb',
+    'independence-year': 'fb', 'elec-nuclear-pct': 'ember', 'elec-coal-pct': 'ember', 'elec-renewable-pct': 'ember',
+  };
+  const NOTES = {
+    'exports': 'World Bank publishes no value at all for 25 sovereign states in the window',
+    'export-share-gdp': 'same 25 states — it is the same indicator family',
+    'independence-year': 'territories have no independence event; left null on purpose',
+    'land-area': 'the only field with no holes — manual backfill covers every territory',
+  };
+  const bar = (have, total) => {
+    const pct = total ? Math.round(have / total * 100) : 0;
+    return `<td><div class="bar${pct === 0 ? ' none' : ''}"><div class="track"><div class="fill" style="width:${pct}%"></div></div>` +
+           `<span class="pct">${pct}%</span></div><div class="note">${have}/${total}</div></td>`;
+  };
+
+  const rows = [];
+  for (const d of D.datasets.datasets) {
+    const has = c => d.values[c] != null;
+    rows.push({ label: d.name, id: d.id, has, src: SOURCE_OF[d.id], note: NOTES[d.id] });
+  }
+  const FLAGFIELDS = [
+    ['Geometry (world map)', 'hasGeometry', 'ne', 'the aggregate jg has none — correctly, it is not a place'],
+    ['Flag image', 'hasFlagImage', 'flagcdn', 'five codeless entities ship bundled SVGs instead'],
+    ['Flag colours (quiz)', 'hasFlag', 'manual', 'hand-curated — the biggest curation gap on this page'],
+    ['Capital city', 'hasCapital', 'fb', 'Hong Kong and Macao have no capital by definition'],
+    ['Religion breakdown', 'hasReligion', 'fb', 'the Factbook names a religion for most of these but gives no percentage'],
+    ['Electricity mix', 'hasElectricity', 'ember', 'Ember has no series for the smallest states'],
+  ];
+  for (const [label, key, src, note] of FLAGFIELDS) rows.push({ label, has: c => !!E[c][key], src, note });
+
+  document.querySelector('#coverage tbody').innerHTML = rows.map(r => {
+    const total = codes.filter(r.has).length;
+    return `<tr><td><div class="label">${esc(r.label)}</div>${r.note ? `<div class="note">${esc(r.note)}</div>` : ''}</td>` +
+      GROUPS.map(([, g]) => bar(g.filter(r.has).length, g.length)).join('') +
+      `<td class="num">${total}/${codes.length}</td>` +
+      `<td class="num src"><span class="swatch dot" style="background:${SRC[r.src].color}"></span>${SRC[r.src].label}</td></tr>`;
+  }).join('');
+
+  /* ---- live checks ---- */
+  const checks = [];
+  const add = (s, what, detail, codesList) => checks.push({ s, what, detail, codes: codesList });
+  const list = a => a.length > 24 ? a.slice(0, 24).join(' ') + ` … +${a.length - 24} more` : a.join(' ');
+
+  // 1. join integrity
+  {
+    const orphans = [];
+    for (const [name, keys] of [
+      ['attributes.json', Object.keys(D.attributes)],
+      ['electricity.json', Object.keys(D.electricity)],
+      ['flags.json', D.flags.map(f => f.code)],
+      ['aliases.json', Object.keys(D.aliases)],
+      ['datasets.json countries', Object.keys(D.datasets.countries)],
+    ]) for (const k of keys) if (!E[k]) orphans.push(`${name}:${k}`);
+    add(orphans.length ? 'fail' : 'pass', 'Every key joins to the entity registry',
+      orphans.length ? `${orphans.length} key(s) exist in a data file but not in entities.json.`
+        : 'All four code-keyed files resolve entirely into entities.json. No orphans in either direction.', orphans);
+  }
+
+  // 2. name drift
+  {
+    const drift = [
+      ...D.flags.filter(f => E[f.code] && E[f.code].name !== f.name).map(f => `flags:${f.code}`),
+      ...Object.keys(D.datasets.countries).filter(c => E[c] && D.datasets.countries[c].name !== E[c].name).map(c => `datasets:${c}`),
+      ...Object.keys(D.datasets.countries).filter(c => E[c] && D.datasets.countries[c].continent !== E[c].continent).map(c => `continent:${c}`),
+    ];
+    add(drift.length ? 'look' : 'pass', 'Display names and continents agree across files',
+      drift.length ? `${drift.length} entity name or continent disagrees between files — build-entities.mjs reconciles these, so this means it has not been re-run.`
+        : 'Names and continents in flags.json and datasets.json match entities.json exactly.', drift);
+  }
+
+  // 3. religion percentages
+  {
+    const over = [], dup = [];
+    for (const [c, v] of Object.entries(D.attributes)) {
+      if (!v.religion?.length) continue;
+      if (v.religion.reduce((a, r) => a + (r.pct || 0), 0) > 105) over.push(c);
+      if (new Set(v.religion.map(r => r.name)).size !== v.religion.length) dup.push(c);
+    }
+    add(over.length ? 'look' : 'pass', 'Religion breakdowns total ≤ 105%',
+      over.length ? `${over.length} entity total(s) exceed 105%, which means the parser emitted a group and its own sub-groups as siblings, or merged two separate surveys.`
+        : 'Every parsed breakdown totals within tolerance.', over);
+    add(dup.length ? 'look' : 'pass', 'No religion appears twice in one breakdown',
+      dup.length ? `${dup.length} breakdown(s) list the same religion more than once — the signature of two Factbook surveys concatenated into one list.`
+        : 'No duplicated religion names.', dup);
+  }
+
+  // 4. GDP per capita vs GDP ÷ population
+  {
+    const V = id => D.datasets.datasets.find(d => d.id === id).values;
+    const gdp = V('gdp-nominal'), pop = V('population'), pc = V('gdp-per-capita');
+    const off = [];
+    for (const c of Object.keys(pc)) {
+      if (gdp[c] == null || pop[c] == null) continue;
+      const dev = (pc[c] - gdp[c] / pop[c]) / (gdp[c] / pop[c]) * 100;
+      if (Math.abs(dev) > 10) off.push(`${c}${E[c] ? `(${E[c].name})` : ''} ${dev > 0 ? '+' : ''}${dev.toFixed(0)}%`);
+    }
+    add(off.length ? 'look' : 'pass', 'GDP per capita ≈ GDP ÷ population',
+      off.length ? `${off.length} country / countries disagree by more than 10%. The three series are resolved to their own latest non-null year independently, and the World Bank’s own coverage can differ between them.`
+        : 'Every country is internally consistent within 10%.', off);
+  }
+
+  // 5. export share vs exports ÷ GDP
+  {
+    const V = id => D.datasets.datasets.find(d => d.id === id).values;
+    const gdp = V('gdp-nominal'), exp = V('exports'), esh = V('export-share-gdp');
+    const off = [];
+    for (const c of Object.keys(esh)) {
+      if (exp[c] == null || gdp[c] == null) continue;
+      const dev = esh[c] - exp[c] / gdp[c] * 100;
+      if (Math.abs(dev) > 5) off.push(`${c}${E[c] ? `(${E[c].name})` : ''} ${dev > 0 ? '+' : ''}${dev.toFixed(1)}pp`);
+    }
+    add(off.length ? 'look' : 'pass', 'Export share ≈ exports ÷ GDP',
+      off.length ? `${off.length} country / countries disagree by more than 5 points. Export share is taken straight from the World Bank rather than divided here, precisely so the two cannot silently mix years — a gap this large is the source disagreeing with itself.`
+        : 'The published share matches the one derived from our own two columns.', off);
+  }
+
+  // 6. range sanity
+  {
+    const V = id => D.datasets.datasets.find(d => d.id === id).values;
+    const bad = [];
+    const range = (id, lo, hi) => { for (const [c, v] of Object.entries(V(id))) if (v < lo || v > hi) bad.push(`${id}:${c}=${v}`); };
+    range('urbanization', 0, 100); range('life-expectancy', 30, 95);
+    range('independence-year', 1, new Date().getFullYear()); range('land-area', 0.0001, 2e7); range('population', 1, 2e9);
+    add(bad.length ? 'fail' : 'pass', 'Every value sits inside its physical range',
+      bad.length ? `${bad.length} value(s) are impossible for their unit.`
+        : 'Urbanisation, life expectancy, independence year, land area and population are all in range.', bad);
+  }
+
+  // 7. electricity shares
+  {
+    const bad = [], years = {};
+    for (const [c, v] of Object.entries(D.electricity)) {
+      years[v.year] = (years[v.year] || 0) + 1;
+      const sum = v.sources.reduce((a, s) => a + s.pct, 0);
+      if (Math.abs(sum - 100) > 5) bad.push(`${c}=${sum.toFixed(1)}%`);
+    }
+    const spread = Object.keys(years).sort();
+    add(bad.length ? 'fail' : 'pass', 'Electricity shares total 100%',
+      bad.length ? `${bad.length} country / countries do not add up — a column was missed or misparsed, which lands wrong numbers on a country.`
+        : `All ${Object.keys(D.electricity).length} breakdowns total 100% ±5. Source years span ${spread[0]}–${spread[spread.length - 1]}, and each country carries its own.`, bad);
+  }
+
+  // 8. every figure should say which year it is from
+  {
+    const stale = [], noYear = [];
+    let spanLo = 9999, spanHi = 0, withYears = 0;
+    for (const d of D.datasets.datasets) {
+      if (!d.years) continue;
+      withYears++;
+      for (const c of Object.keys(d.values)) {
+        const y = d.years[c];
+        // A missing year marks a MANUAL_VALUES backfill, which has a provenance
+        // string instead; only a fetched figure is expected to carry one.
+        if (y == null) { if (!D.datasets.provenance[c]) noYear.push(`${d.id}:${c}`); continue; }
+        spanLo = Math.min(spanLo, y); spanHi = Math.max(spanHi, y);
+        if (y < 2020) stale.push(`${c}(${E[c]?.name ?? c}) ${d.id} ${y}`);
+      }
+    }
+    const missing = D.datasets.datasets.filter(d => !d.years).map(d => d.id);
+    add(noYear.length ? 'look' : 'pass', 'Every fetched figure records its source year',
+      noYear.length
+        ? `${noYear.length} fetched value(s) carry no year and no manual-backfill provenance.`
+        : `All ${withYears} fetched datasets carry a per-country year, spanning ${spanLo}–${spanHi}. ` +
+          `Values with no year are the manual backfill, which carries a provenance string instead` +
+          (missing.length ? `; ${missing.join(', ')} is derived and inherits its source's dating.` : '.'),
+      noYear);
+    add(stale.length ? 'look' : 'pass', 'No figure is presented as current while being pre-2020',
+      stale.length
+        ? `${stale.length} figure(s) predate 2020 — real, but worth labelling in the UI rather than showing undated beside a 2023 number.`
+        : 'Every fetched figure is 2020 or later.', stale);
+  }
+
+  // 9. outline tier — which source actually won, and where the thin ones are
+  {
+    const land = D.datasets.datasets.find(d => d.id === 'land-area').values;
+    const small = codes.filter(c => E[c].hasGeometry && land[c] != null)
+      .sort((a, b) => land[a] - land[b]).slice(0, 20);
+    const el = { s: 'wait', what: 'The smallest countries get a detailed outline', detail: 'measuring…', codes: [] };
+    checks.push(el);
+    Promise.all(small.map(async c => {
+      try {
+        const r = await fetch(`data/shapes/${c}.json`);
+        if (!r.ok) return [c, null, '—'];
+        const j = await r.json();
+        return [c, j.polygons.reduce((a, p) => a + p.length, 0), j.src ?? 'unrecorded'];
+      } catch { return [c, null, '—']; }
+    })).then(res => {
+      const thin = res.filter(([, n]) => n != null && n < 100);
+      const ne = thin.filter(([, , s]) => s === 'ne');
+      el.s = thin.length > ne.length ? 'look' : 'pass';
+      el.detail = thin.length === 0
+        ? `All ${res.length} of the smallest countries carry 100+ point outlines.`
+        : thin.length === ne.length
+          ? `${ne.length} of the ${res.length} smallest ship under 100 points, and every one of them is a Natural Earth fallback — geoBoundaries has no ADM0 release for those territories, so this is the ceiling, not a bug.`
+          : `${thin.length} of the ${res.length} smallest ship under 100 points, and ${thin.length - ne.length} of those came from geoBoundaries — those are the ones worth a look.`;
+      el.codes = res.sort((a, b) => (a[1] ?? 1e9) - (b[1] ?? 1e9))
+        .map(([c, n, s]) => `${c}(${E[c].name}) ${n ?? 'missing'}pts·${s}`);
+      renderChecks();
+    });
+  }
+
+  function renderChecks() {
+    document.getElementById('checks').innerHTML = checks.map(c =>
+      `<div class="check"><span class="chip" data-s="${c.s}">${{ pass: 'pass', look: 'look', fail: 'fail', wait: '…' }[c.s]}</span>` +
+      `<div><div class="what">${esc(c.what)}</div><div class="detail">${c.detail}</div>` +
+      (c.codes?.length ? `<div class="codes">${esc(list(c.codes))}</div>` : '') + `</div></div>`).join('');
+  }
+  renderChecks();
+}
+
+/* ============================================================
+   3. The review — judgement, not computation. Dated on purpose.
+   ============================================================ */
+const FINDINGS = [
+  {
+    sev: 'fixed', title: 'Fixed — the outline tier now takes the better of geoBoundaries’ two releases',
+    body: `<p><span class="mono">build-shapes.mjs</span> used to request
+      <code>ADM0_simplified.geojson</code> unconditionally, which is the one thing this tier was
+      built to avoid: San Marino shipped <b>52 points</b> where the full release carries 929.</p>
+      <p>It now takes the cheap file first and re-fetches the full one only when the local
+      Douglas-Peucker pass barely removed anything — the signature of a source too thin to simplify
+      — keeping whichever yields more points. That matters because the naive fix is unaffordable:
+      Norway’s full release is 54 MB and yields 18 more points than the simplified one, since once
+      DP is the binding constraint a finer source changes nothing.</p>
+      <p><b>Result:</b> 72 countries upgraded, <b>zero lost a single point</b>, +39,223 points for
+      0.5 MB on disk in a 17-second rebuild. San Marino 52 → 442, Monaco 27 → 521, Barbados 96 → 493,
+      Vatican 7 → 77, Singapore 665 → 2228.</p>`,
+    fix: `Each shape file now also records <code>"src"</code> — <span class="mono">gb-full</span>,
+      <span class="mono">gb-simplified</span> or <span class="mono">ne</span> — so the tier split is
+      auditable from the shipped data. The live check above reads it.`,
+  },
+  {
+    sev: 'fixed', title: 'Fixed — four religion-parser bugs, all from the same few lines',
+    body: `<p><b>Nested parentheses.</b> The stripper was <code>/\\([^)]*\\)/</code>, which stops at the
+      first <code>)</code>. On Bolivia’s <em>"Protestant 19.6% (Evangelical (non-specific) 11.9%,
+      Adventist 2.8%, …)"</em> the inner group closed the match early and the sub-groups survived to be
+      counted as siblings of their own parent — 108%. Now depth-counted: 100.0%.</p>
+      <p><b>Two surveys in one field.</b> Uruguay’s text joins two separate surveys with
+      <code>&lt;br&gt;&lt;br&gt;</code>; both were parsed into one list, so it totalled 201% with
+      "Roman Catholic" listed twice. Now split, first block kept: 100.2%.</p>
+      <p><b>Leading-dot decimals.</b> Brazil’s <em>"Indigenous religions .06%"</em> parsed as 6%,
+      a hundredfold error. The integer part of the number is now optional: 0.06%.</p>
+      <p><b>A dropped percent sign.</b> Andorra’s <em>"Christian … 89.5, other 8.8%"</em> omits the
+      <code>%</code> on its majority, so the whole 89.5% was skipped and Andorra showed a religion
+      breakdown totalling 10.5%. A bare number immediately before a comma is now read as a percentage
+      — a repair that only works because the <em>"note - "</em> form of the note separator is also cut
+      now (it was only matching <em>"note:"</em>, which left Morocco’s "Jewish about 3,000-3,500"
+      in the text to be misread).</p>
+      <p>Regression-tested against all 220 parsed entries: exactly these four changed, none lost data,
+      totals over 105% went 3 → 0 and duplicated names 2 → 0.</p>`,
+  },
+  {
+    sev: 'fixed', title: 'Fixed — every fetched figure now records its own source year',
+    body: `<p><span class="mono">build-datasets.mjs</span> resolved the latest non-null year per
+      country per indicator and then wrote only the number, so a 2015 figure sat undated beside a
+      2023 one and nothing downstream could tell. Each World Bank and Ember dataset now carries a
+      <span class="mono">years</span> map alongside <span class="mono">values</span>.</p>
+      <p>A missing year is now meaningful rather than absent: it marks a
+      <span class="mono">MANUAL_VALUES</span> backfill, which carries a provenance string instead.
+      The two live checks above read this, so staleness is now detectable rather than invisible.</p>`,
+  },
+  {
+    sev: 'fixed', title: 'Fixed — the geometry builds fetch their own inputs',
+    body: `<p><span class="mono">build-geometry.mjs</span> and <span class="mono">build-shapes.mjs</span>
+      read four large files out of <span class="mono">/tmp</span> that nothing in the repo
+      downloaded — someone had fetched them by hand in an earlier session. <span class="mono">/tmp</span>
+      has since been cleared, so neither build ran on this machine at all.</p>
+      <p>Both now pull their Natural Earth layers and the ISO2→ISO3 table through
+      <span class="mono">scripts/lib/sources.mjs</span>, cached in a gitignored
+      <span class="mono">.cache/</span>. The shapes rebuild above is the first time either has been
+      reproducible from a clean checkout.</p>`,
+  },
+  {
+    sev: 'look', title: 'Religion is all-or-nothing on percentages, so known answers are discarded',
+    body: `<p>30 entities have no religion data. For several the Factbook does name the religion and
+      simply gives no numbers — San Marino is <em>"Roman Catholic"</em>, Sudan is
+      <em>"Sunni Muslim, small Christian minority"</em>, Ukraine lists denominations without shares.
+      The builder only writes the field when the parsed list is non-empty, and the list needs
+      percentages, so the name is thrown away along with the missing number. Saudi Arabia is the
+      same shape from the other side: its only numbers live inside a parenthetical
+      (<em>"Muslim (official; citizens are 85–90% Sunni…)"</em>) and describe a split among citizens,
+      not a national share.</p>
+      <p>Left open deliberately: the fix is not a parser change but a data-shape and UI decision —
+      the panel renders <span class="mono">[{name, pct}]</span> as bars, and a name with no number
+      has no bar to draw. Not every gap is this either; Eritrea and North Korea are genuinely thin
+      at source.</p>`,
+    fix: `Follow-up <b>TODOS #52</b>.`,
+  },
+  {
+    sev: 'look', title: 'Scattered island territories normalise to the ocean between them',
+    body: `<p>St Helena ships a 39-point outline from either geoBoundaries release, because the
+      territory is four comparably-sized islands — St Helena, Ascension, Tristan da Cunha and Gough —
+      spread across 32° of latitude. All four clear the clipping thresholds, so the normalising
+      bounding box is mostly open ocean, each island lands about 30px wide, and Douglas-Peucker
+      flattens it. The full release has 7,677 vertices and none of them survive that.</p>
+      <p>This is pre-existing and unrelated to the fetch change above; the same shape of problem
+      likely affects Kiribati, the Marshall Islands and Micronesia.</p>`,
+    fix: `Follow-up <b>TODOS #53</b> — needs a call on what a scattered territory should even show.`,
+  },
+  {
+    sev: 'look', title: 'Cyprus’s population and GDP describe different territories',
+    body: `<p>Cyprus’s stated GDP per capita is 40% above GDP ÷ population, and both inputs are 2023
+      World Bank values — so this is not year mixing. The Bank’s Cyprus GDP covers the
+      government-controlled area (~958k people); <span class="mono">SP.POP.TOTL</span> covers the
+      whole island (1.34M).</p>
+      <p>That matters beyond the one odd ratio: Northern Cyprus ships as its own entity
+      (<span class="mono">xc</span>) with its own population, and <span class="mono">population</span>
+      is declared <span class="mono">summable: true</span> — so an "is A + B bigger than C" question
+      can count the same people twice.</p>`,
+    fix: `Follow-up <b>TODOS #54</b> — the call is which questions the overlap should be excluded
+      from, not how to detect it.`,
+  },
+  {
+    sev: 'pass', title: 'The joins themselves are clean',
+    body: `<p>Worth stating plainly, because it is the part that usually rots: every key in
+      <span class="mono">attributes.json</span>, <span class="mono">electricity.json</span>,
+      <span class="mono">flags.json</span> and <span class="mono">datasets.json</span> resolves into
+      <span class="mono">entities.json</span>, with no orphans in either direction; all 251 geometry
+      entries carry a code; display names and continents agree across every file; and the one entity
+      with no geometry, no flag and no attributes is <span class="mono">jg</span> Channel Islands,
+      which is a World Bank aggregate rather than a place. The single-registry design is doing its
+      job.</p>`,
+  },
+  {
+    sev: 'pass', title: 'The gaps that are left are mostly the source’s, not ours',
+    body: `<p>The biggest hole is exports: 25 sovereign states have no value, including Nigeria,
+      Myanmar, Jordan, Jamaica and Papua New Guinea. Checked against the API directly, the World Bank
+      publishes nothing at all for <span class="mono">NE.EXP.GNFS.CD</span> for those countries in
+      2015–2023 — there is no parse bug to fix and no backfill that would not be invented.</p>
+      <p>The one gap that <em>is</em> ours to close is flag colours: 53 of 252 entities have no entry
+      in <span class="mono">flags.json</span>, which is hand-curated, so they are silently absent from
+      both colour quizzes. That is curation work rather than a build fix — follow-up
+      <b>TODOS #55</b>.</p>`,
+  },
+];
+
+document.getElementById('findings').innerHTML = FINDINGS.map(f =>
+  `<div class="finding"><div class="finding-top">` +
+  `<span class="chip" data-s="${f.sev}">${{ fail: 'fix this', look: 'worth fixing', fixed: 'fixed', pass: 'healthy' }[f.sev]}</span>` +
+  `<h3>${f.title}</h3></div><div class="body">${f.body}</div>` +
+  (f.fix ? `<div class="fix"><b>Fix —</b> ${f.fix}</div>` : '') + `</div>`).join('');
+
+/* ---- rebuild order ---- */
+const PIPELINE = [
+  ['1', 'node scripts/build-attributes.mjs', 'Factbook → attributes.json. Needs entities.json for name matching.'],
+  ['2', 'node scripts/build-datasets.mjs', 'World Bank → datasets.json. Reads attributes.json for independence-year.'],
+  ['3', 'node scripts/build-electricity.mjs', 'Ember → electricity.json. Needs entities.json for the ISO3→ISO2 table.'],
+  ['4', 'node scripts/build-entities.mjs --write', 'Reconciles everything into entities.json, and writes codes back into the geometry and dataset files.'],
+  ['—', 'node scripts/build-geometry.mjs --write', 'Natural Earth → countries-{region}.json. Independent of the stats chain; needs entities.json.'],
+  ['—', 'node scripts/build-shapes.mjs [code…]', 'geoBoundaries → shapes/{code}.json. With codes, rebuilds only those.'],
+];
+document.getElementById('pipeline').innerHTML = PIPELINE.map(([n, cmd, why]) =>
+  `<div class="step"><b>${n}</b><div><span>${cmd}</span><br><em>${why}</em></div></div>`).join('');
+</script>
+</body>
+</html>

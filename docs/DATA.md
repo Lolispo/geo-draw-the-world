@@ -2,6 +2,11 @@
 
 How the country data is structured and regenerated. Established by TODOS items 5–6.
 
+The same picture, drawn and kept honest: open `data-map.html` on the served site
+(`npm start`, then `/data-map.html`). It graphs source → script → file → consumer, and
+recomputes coverage and the cross-file consistency checks from the committed data on
+every load — so where this file and that page disagree, the page is right.
+
 ## Files
 
 | File | Purpose | Keyed by |
@@ -22,6 +27,10 @@ previously had names only; `code` was added to all 164 entries.
    `independence-year`, derived from `attributes.json`, so run 1b first for it), merges
    manual backfill (`MANUAL_VALUES`, gap-fill only), writes `data/datasets.json`
    with a `provenance` map for the manual values.
+   Each fetched dataset carries a **`years`** map beside `values`: the latest non-null
+   year is resolved per country *independently*, so the window is not uniform (GDP is
+   2023 for most of the table but 2015 for South Sudan). A missing year is meaningful —
+   it marks a `MANUAL_VALUES` backfill, which carries a `provenance` string instead.
 1b. `node scripts/build-attributes.mjs` — fetches capital + religion from the CIA
    World Factbook (public domain), name-matched to `entities.json` (alias table +
    manual backfill), writes `data/attributes.json`. Independent of the metric build.
@@ -30,6 +39,11 @@ previously had names only; `code` was added to all 164 entries.
    South Korea, Russia, …), and writes `data/entities.json`.
 
 `flags.json` is hand-curated (not generated).
+
+The two geometry builds download their own inputs — the Natural Earth layers and the
+ISO2→ISO3 table — through `scripts/lib/sources.mjs`, cached in a gitignored `.cache/`.
+They previously read these out of `/tmp`, which meant they only ran on a machine where
+someone had already fetched them by hand.
 
 **Geometry** (`data/countries-{region}.json`) is regenerated separately by
 `node scripts/build-geometry.mjs --write` from Natural Earth (1:50m base, 1:10m for
@@ -89,17 +103,30 @@ population for Western Sahara `eh`, Falklands `fk`, Somaliland `xs`.
 the showcase panel / draw reference / compare (single-country display). The world geometry
 (`countries-*.json`) squeezes everything into 1600×1100, so microstates become sub-pixel
 blobs — and Natural Earth 1:10m itself only has ~17 points for San Marino. This tier is
-sourced from **[geoBoundaries](https://www.geoboundaries.org) gbOpen (CC BY 4.0)**
-(San Marino ~929 pts), normalized to a ~1000px box and simplified there, so detail survives.
-Natural Earth is the fallback for the few entities geoBoundaries lacks.
+sourced from **[geoBoundaries](https://www.geoboundaries.org) gbOpen (CC BY 4.0)**,
+normalized to a ~1000px box and simplified there, so detail survives. Natural Earth is the
+fallback for the entities geoBoundaries lacks.
 
 - Build: `node scripts/build-shapes.mjs [code...]` — with codes, rebuilds only those
   files and leaves the rest alone; with none, wipes and rebuilds all of them.
   (fetches geoBoundaries via the LFS-resolving
   `github.com/.../raw/main` URL; ISO2→ISO3 via `mledoze/countries`).
+- **Which of geoBoundaries' two releases.** `ADM0_simplified` is small but pre-thinned,
+  and for a microstate it — not our own Douglas-Peucker pass — decides the result: San
+  Marino arrives with 52 vertices where the full release has 929. The full release is the
+  opposite problem; Norway's is 54 MB and yields 18 more points, because once DP is the
+  binding constraint a finer source changes nothing. So the build takes the simplified
+  file, and re-fetches the full one only when the local simplify barely removed anything
+  (`REFETCH_RETENTION`) or the result is tiny anyway (`REFETCH_UNDER`) — keeping whichever
+  yields more points, so it can never lose detail. Currently 72 full / 158 simplified /
+  21 Natural Earth; the rebuild takes about 17 seconds.
+- Each file records **`src`** (`gb-full` / `gb-simplified` / `ne`) so the tier split is
+  auditable from the shipped data without re-running the build. `data-map.html` reads it.
 - **Attribution (required by CC BY 4.0):** shown in the country panel footer
   ("Outlines © geoBoundaries (CC BY 4.0)").
 - Per-country files (not one blob) so the panel loads only the shown country (~a few KB).
+- **Known gap:** a territory made of far-apart islands normalizes to the ocean between
+  them and flattens — St Helena ships 39 points from either release. See TODOS #53.
 
 ## Metrics & attributes added (TODOS #16–17)
 
@@ -122,10 +149,24 @@ wiring is needed. `urbanization` uses the existing `percent` formatter.
 - Manual backfill (`MANUAL_ATTR` in `build-attributes.mjs`): Western Sahara `eh`,
   West Bank & Gaza `ps`, Somaliland `xs` — Factbook has no *conventional* name for
   these, so they're filled manually (capital + majority religion).
-- Religion **ranges** now parse to their midpoint (e.g. Greece "Greek Orthodox 81–90%"
-  → 85.5%), and parentheticals like "(official)" are stripped, so majorities are no
-  longer dropped. The only remaining gap is religions whose percentages live *entirely
-  inside* a parenthetical (e.g. Saudi Arabia "Muslim (official; citizens are 85–90%
-  Sunni…)") — those still yield `capital` but no `religion`.
+- Religion **ranges** parse to their midpoint (e.g. Greece "Greek Orthodox 81–90%"
+  → 85.5%), and parentheticals like "(official)" are stripped, so majorities are not
+  dropped. Parenthetical stripping counts **depth** — a flat `/\([^)]*\)/` stopped at the
+  first `)`, so on a nested entry (Bolivia's "Protestant 19.6% (Evangelical
+  (non-specific) 11.9%, …)") the sub-groups survived and were counted as siblings of
+  their own parent, totalling 108%.
+- Three other parser repairs, all found by the checks on `data-map.html`: an entry
+  holding **two surveys** joined by `<br><br>` keeps the first only (Uruguay totalled
+  201% with "Roman Catholic" listed twice); the integer part of a percentage is optional
+  so Brazil's ".06%" is six hundredths rather than six; and a bare number immediately
+  before a comma is read as a dropped `%` (Andorra's "Christian … 89.5, other 8.8%" lost
+  its entire majority). That last one only works because the note separator is matched as
+  both `note:` and `note - ` — Morocco's "note - Jewish about 3,000-3,500" was otherwise
+  left in the text to be misparsed.
+- The remaining gap is religions whose percentages live *entirely inside* a parenthetical
+  (Saudi Arabia "Muslim (official; citizens are 85–90% Sunni…)" — and those describe a
+  split among citizens, not a national share), and the 30 entities the Factbook names
+  without quantifying at all (San Marino is simply "Roman Catholic"). Both yield
+  `capital` but no `religion`. See TODOS #52.
 - A handful of multi-capital strings are cosmetically rough (e.g. Ivory Coast
   "Yamoussoukro , Abidjan"); `capitalNote` preserves the full Factbook text.
