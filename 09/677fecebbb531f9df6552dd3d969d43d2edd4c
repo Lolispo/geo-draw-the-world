@@ -1,0 +1,27 @@
+data/datasets.json
+  s_4c4d447dce4af2::t_f686a5357ad35b 1245-1459,1719-1937,2163-2377,2391-2392,2403,2411,2415,2434,2443,2448-2449,2452,2466-2467,2478,2482,2486,2490,2510-2511,2513,2515,2524,2527,2533,2537,2549,2551,2555-2556,2558,2568,2570-2571,2578,2583,2587-2588,2596,2599,2640-2857,3085-3303,3502-3691,3918-4136,4334-4523,4952-5166,5390-5604,5827-6041
+scripts/build-attributes.mjs
+  s_4c4d447dce4af2::t_3c439aaee2ed1b 104-118,122-128,131-134,137-138
+data/attributes.json
+  s_4c4d447dce4af2::t_55ae7793da421c 7-9,790-791
+  s_4c4d447dce4af2::t_ac2e6ed7552be2 6
+scripts/build-datasets.mjs
+  s_4c4d447dce4af2::t_71a41876ece7ab 157,160-166,172,174-175
+  s_4c4d447dce4af2::t_98eb68a2a94d05 243,249,252
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "09677fecebbb531f9df6552dd3d969d43d2edd4c",
+  "prompts": {},
+  "sessions": {
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
