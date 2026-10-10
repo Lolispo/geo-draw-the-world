@@ -238,7 +238,7 @@ body {
   flex: 1;
 }
 
-.btn-daily-mode {
+.btn-hero-mode {
   width: 100%;
   flex-direction: row;
   gap: 12px;
@@ -247,13 +247,13 @@ body {
   border: 1px solid var(--orange);
   color: var(--text);
 }
-.btn-daily-mode:hover {
+.btn-hero-mode:hover {
   background: linear-gradient(135deg, #1e3a5f, #1a2d44);
   box-shadow: 0 0 20px #d2992244;
 }
-.btn-daily-mode .mode-icon { font-size: 2rem; }
-.btn-daily-mode .mode-label { font-size: 1.1rem; font-weight: 600; }
-.btn-daily-mode .mode-desc { font-size: 0.75rem; color: var(--text-dim); }
+.btn-hero-mode .mode-icon { font-size: 2rem; }
+.btn-hero-mode .mode-label { display: block; font-size: 1.1rem; font-weight: 600; }
+.btn-hero-mode .mode-desc { font-size: 0.75rem; color: var(--text-dim); }
 
 .btn-tool {
   padding: 8px 18px;
@@ -1225,7 +1225,7 @@ canvas {
     font-size: 0.85rem;
   }
 
-  .btn-daily-mode,
+  .btn-hero-mode,
   .btn-continent-mode {
     padding: 10px 14px;
   }

@@ -447,6 +447,20 @@ rankables appear in Explorer + Rank.
 
 ## 9. Draw the World: better default modes, disable the weak ones
 
+**REVIEW:** open Draw the World. **Quick 3** is now the big button at the top; Daily Challenge
+sits first in Special Modes. Play a round from each and check nothing about the swap feels
+backwards.
+
+**✅ DONE 2026-10-10** — the open half of this item was always a decision, and the owner made
+it: *promote Quick 3 to hero* (2026-10-10). A daily is a returning-player feature; someone
+opening the game for the first time wants to play. Quick 3 takes the hero slot, Daily Challenge
+takes Quick 3's place at the head of Special Modes, and `.btn-daily-mode` is renamed
+`.btn-hero-mode` — the treatment is now "whatever leads", not "the daily".
+
+The long modes were left where they are. World and Continents already sit below the special
+modes, under their own heading, and burying them further would make them hard to find for the
+one player who wants them.
+
 **#35 has landed** (2026-09-08) — sizing is merged into placement, so the weakest step in
 the draw loop is gone. That was half the reason the default played badly.
 
@@ -505,32 +519,6 @@ the current default doesn't showcase the game well.
 
 ---
 
-## 10. Push draw shape fidelity to Sporcle level
-
-**⚠️ Probably closable** — this is the same bar as #24, which the owner signed off as
-"good enough for now" on 2026-09-06. Kept only because it was not named explicitly.
-Delete it unless there is a fidelity concern #24's sign-off did not cover.
-
-**What:** Drawn/reference shapes still look rough compared to Sporcle and similar
-apps. Improve outline quality further (item 1 regenerated geometry from Natural
-Earth; this is the next quality pass).
-
-**Why:** Shape quality is still the game's weakest visual; owner benchmarks against
-Sporcle.
-
-**Approach / notes:**
-- Re-audit reference-shape creation in `js/geo-data.js` and the simplification in
-  `scripts/build-geometry.mjs` (DP epsilon, small-country handling). Consider a
-  higher vertex budget for the sizes actually rendered, or smoother display-time
-  rendering (curve interpolation) rather than more raw points.
-- Compare side-by-side against a Sporcle map screenshot at the same on-screen size.
-- Interim lever: since placement is also weak, **start by disabling placement**
-  (item 9) so shapes are judged on their own via Shape-Only (item 2).
-
-**Acceptance:** Outlines read as crisp/recognizable at peek/transform/compare sizes,
-comparable to reference apps; no load-time regression.
-
----
 
 ## 13. New mode: Paint / Create-a-Flag
 
@@ -1659,3 +1647,5 @@ full write-ups are in git history.
 - **#11** Placement & results-map overhaul — 2026-09-06
 - **#24** Shape quality: iterate + owner approval — 2026-09-06
 - **#26** Sizing-screen footer overlap — retired 2026-09-08, the screen was deleted by #35
+- **#10** Push draw shape fidelity to Sporcle level — retired 2026-10-10, the same bar
+  as #24, which the owner signed off on 2026-09-06
