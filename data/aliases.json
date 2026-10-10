@@ -1,0 +1,299 @@
+{
+  "aliases": {
+    "ae": [
+      "UAE",
+      "Emirates"
+    ],
+    "ag": [
+      "Antigua"
+    ],
+    "ax": [
+      "Aland Islands",
+      "Aland"
+    ],
+    "ba": [
+      "Bosnia",
+      "BiH"
+    ],
+    "bf": [
+      "Upper Volta"
+    ],
+    "bj": [
+      "Dahomey"
+    ],
+    "bl": [
+      "Saint Barthelemy",
+      "St Barts"
+    ],
+    "bn": [
+      "Brunei Darussalam"
+    ],
+    "bo": [
+      "Plurinational State of Bolivia"
+    ],
+    "bs": [
+      "The Bahamas"
+    ],
+    "cc": [
+      "Cocos Islands",
+      "Keeling Islands"
+    ],
+    "cd": [
+      "DRC",
+      "Democratic Republic of the Congo",
+      "Congo-Kinshasa",
+      "Zaire"
+    ],
+    "cf": [
+      "CAR"
+    ],
+    "cg": [
+      "Republic of the Congo",
+      "Congo-Brazzaville"
+    ],
+    "ch": [
+      "Swiss Confederation",
+      "Swiss"
+    ],
+    "ci": [
+      "Côte d'Ivoire",
+      "Cote d'Ivoire"
+    ],
+    "cn": [
+      "PRC",
+      "People's Republic of China"
+    ],
+    "cv": [
+      "Cape Verde"
+    ],
+    "cw": [
+      "Curaçao"
+    ],
+    "cz": [
+      "Czechia"
+    ],
+    "de": [
+      "Deutschland",
+      "FRG"
+    ],
+    "eg": [
+      "Arab Republic of Egypt"
+    ],
+    "eh": [
+      "Sahrawi Republic",
+      "SADR"
+    ],
+    "et": [
+      "Abyssinia"
+    ],
+    "fk": [
+      "Malvinas"
+    ],
+    "fm": [
+      "FSM",
+      "Federated States of Micronesia"
+    ],
+    "gb": [
+      "UK",
+      "GB",
+      "Great Britain",
+      "Britain"
+    ],
+    "gm": [
+      "The Gambia"
+    ],
+    "gq": [
+      "Eq Guinea"
+    ],
+    "gw": [
+      "Bissau"
+    ],
+    "hk": [
+      "Hong Kong",
+      "HK"
+    ],
+    "ie": [
+      "Republic of Ireland",
+      "Eire"
+    ],
+    "ir": [
+      "Islamic Republic of Iran",
+      "Persia"
+    ],
+    "kg": [
+      "Kyrgyz Republic"
+    ],
+    "kh": [
+      "Kampuchea"
+    ],
+    "kn": [
+      "St Kitts and Nevis",
+      "St Kitts"
+    ],
+    "kp": [
+      "DPRK",
+      "Democratic People's Republic of Korea",
+      "N Korea"
+    ],
+    "kr": [
+      "Republic of Korea",
+      "ROK",
+      "S Korea"
+    ],
+    "la": [
+      "Lao PDR",
+      "Lao"
+    ],
+    "lc": [
+      "St Lucia"
+    ],
+    "lk": [
+      "Ceylon"
+    ],
+    "md": [
+      "Republic of Moldova"
+    ],
+    "mf": [
+      "Saint Martin",
+      "St Martin"
+    ],
+    "mh": [
+      "RMI"
+    ],
+    "mk": [
+      "Macedonia",
+      "FYROM"
+    ],
+    "mm": [
+      "Burma"
+    ],
+    "mo": [
+      "Macau",
+      "Macao"
+    ],
+    "nl": [
+      "Holland",
+      "NL"
+    ],
+    "nz": [
+      "NZ",
+      "Aotearoa"
+    ],
+    "pg": [
+      "PNG"
+    ],
+    "ph": [
+      "The Philippines"
+    ],
+    "pm": [
+      "St Pierre and Miquelon"
+    ],
+    "ps": [
+      "Palestine",
+      "Palestinian Territories",
+      "West Bank",
+      "Gaza"
+    ],
+    "re": [
+      "Reunion"
+    ],
+    "ru": [
+      "Russian Federation"
+    ],
+    "sa": [
+      "KSA"
+    ],
+    "sb": [
+      "Solomons"
+    ],
+    "sh": [
+      "St Helena"
+    ],
+    "sk": [
+      "Slovak Republic"
+    ],
+    "st": [
+      "Sao Tome",
+      "São Tomé and Príncipe"
+    ],
+    "sx": [
+      "Sint Maarten",
+      "St Maarten"
+    ],
+    "sy": [
+      "Syrian Arab Republic"
+    ],
+    "sz": [
+      "Swaziland"
+    ],
+    "tc": [
+      "Turks and Caicos",
+      "TCI"
+    ],
+    "th": [
+      "Siam"
+    ],
+    "tl": [
+      "East Timor"
+    ],
+    "tr": [
+      "Türkiye",
+      "Turkiye"
+    ],
+    "tt": [
+      "Trinidad",
+      "T&T"
+    ],
+    "tw": [
+      "Chinese Taipei",
+      "Formosa"
+    ],
+    "tz": [
+      "United Republic of Tanzania"
+    ],
+    "us": [
+      "USA",
+      "US",
+      "United States of America",
+      "America"
+    ],
+    "va": [
+      "Holy See",
+      "Vatican"
+    ],
+    "vc": [
+      "St Vincent",
+      "Saint Vincent and the Grenadines",
+      "St Vincent and the Grenadines"
+    ],
+    "ve": [
+      "Bolivarian Republic of Venezuela"
+    ],
+    "vg": [
+      "BVI"
+    ],
+    "vi": [
+      "US Virgin Islands",
+      "USVI"
+    ],
+    "vn": [
+      "Viet Nam"
+    ],
+    "xc": [
+      "North Cyprus",
+      "TRNC"
+    ],
+    "xk": [
+      "Republic of Kosovo"
+    ],
+    "xs": [
+      "Republic of Somaliland"
+    ],
+    "za": [
+      "RSA"
+    ],
+    "zw": [
+      "Rhodesia"
+    ]
+  }
+}

@@ -979,6 +979,39 @@ unplayable letter. Works at 390px wide.
 
 ## 40. Country name aliases: "UK", "UAE", "DRC" count as the country
 
+**REVIEW:** Top 10 → Input: *Type the name*, play a round, and try `uk`, `uae`, `drc`,
+`holland`, `czechia`. Then Data Explorer → **🔤 Aliases: On** and read down the list for a
+country that should answer to something it doesn't — that column is the audit, and adding to
+`data/aliases.json` is a one-line edit.
+
+**✅ DONE 2026-10-10** — `data/aliases.json`: 82 countries, 131 aliases, validated as it was
+written against `data/entities.json` (every key is a real country; no alias is some *other*
+country's real name; no alias is claimed twice). `normalizeName` moved from `js/top-n-game.js`
+to `js/datasets.js`, where the names it compares live.
+
+**Stored as written, normalized at load** — the entry proposed storing them pre-normalized.
+Keeping "U.K." and "Côte d'Ivoire" as written makes the Explorer column read as names rather
+than as matcher keys, and normalization still happens in exactly one place. Each alias is
+indexed **twice, with and without its spaces**: "U.K." normalizes to `u k` and "uk" does not,
+and both have to work.
+
+Matching order in `_submitName` is exact name → exact alias → prefix of name, so an
+abbreviation outranks a two-letter prefix of some other country. The suggestion list matches on
+aliases too and names the one that found the country, so typing `uk` both scores and teaches.
+
+**Deliberate omission: "England" is not an alias for the United Kingdom.** Say the word and it
+goes in — losing a life to it is annoying — but a geography game teaching England = UK seemed
+the worse trade.
+
+Verified in the browser: `uk` → ✓ United Kingdom #6, no life lost; `uae` → ✗ United Arab
+Emirates #27, correctly treated as a real in-range country; `zzzz` → "not one of the 195
+countries in range — no life lost". Thirty-one probes resolve, including `U.K.`, `u k`, `DRC`,
+`PNG`, `czechia`, `cape verde`, `burma`, `swaziland`, `holland`, `east timor`, `dprk`, `rok`,
+`macedonia`, `persia`, `siam`, `ceylon`, `malvinas`, `holy see`, `bvi`, `usvi`, `eire`,
+`aotearoa`, `trnc`; `nope` resolves to nothing, and so does `ivory coast` — correctly, since
+that is already the country's real name. Explorer column: 195 rows, 133 of them blank, aligned
+under the name at 390px and 1440px, no horizontal overflow.
+
 **What:** A curated alias table so typed answers accept the shortenings people actually
 use — UK, UAE, USA, DRC, CAR, PNG, Holland, Burma, Ivory Coast, Czechia — plus a way to
 *see* the whole table, so gaps can be found without playing into them.
@@ -1440,6 +1473,130 @@ round.
 
 **Acceptance:** Open the view, scroll every country's outline, sort it, and tap through to
 a country panel. Opens without a visible stall at 390px.
+
+---
+
+## 52. Religion: keep the name when the Factbook gives no percentage
+
+**What:** 30 entities show no religion at all because the Factbook names the religion
+without quantifying it. Keep the name, and let the country panel render it without a bar.
+
+**Why:** Found in the data review (2026-10-10). `parseReligion` in
+`scripts/build-attributes.mjs` only writes the field when the parsed list is non-empty,
+and the list needs percentages — so a known answer is discarded along with the missing
+number. San Marino's Factbook entry is literally `"Roman Catholic"`; Sudan's is
+`"Sunni Muslim, small Christian minority"`; Ukraine lists denominations with no shares.
+
+**Approach / notes:**
+- Affected (`hasReligion: false`, 30): `ax bl bq er gf gg gl gp gs io jg kn kp mf mp mq
+  mv re sa sd sj sm tf ua va xa xc xo xt yt`. Not all are recoverable — Eritrea and North
+  Korea are genuinely thin at source — so the build should report what it recovered.
+- **Saudi Arabia is the awkward one.** Its only numbers live inside a parenthetical:
+  `"Muslim (official; citizens are 85-90% Sunni and 10-12% Shia)"`. Those are a split
+  *among citizens*, not a national share, so they must not be read as one. "Muslim", with
+  no number, is the honest answer.
+- **The blocker is the data shape, not the parse.** `js/country-panel.js` →
+  `buildBreakdown()` renders `[{name, pct}]` as proportional bars; a row with no `pct`
+  has no bar to draw and would divide by a wrong total. Decide between:
+  (a) a separate `religionNames: [...]` field the panel renders as plain text, or
+  (b) `pct: null` entries plus a `buildBreakdown` branch that lists rather than bars.
+  (a) keeps the existing consumer honest and is probably right.
+- `hasReligion` in `entities.json` then needs to mean "has *something*", or split into
+  `hasReligion` / `hasReligionPct` so the Coverage board and `data-map.html` stay truthful.
+
+**Acceptance:** San Marino, Sudan and Ukraine show a religion in the country panel. Saudi
+Arabia shows "Muslim" with no fabricated percentage. The live check on `data-map.html`
+still reports zero breakdowns over 105%.
+
+---
+
+## 53. Shapes: scattered island territories normalise to the ocean between them
+
+**What:** St Helena ships a 39-point outline from either geoBoundaries release. Decide what
+a territory made of far-apart islands should show, and build that.
+
+**Why:** Found in the data review (2026-10-10), while fixing the outline tier — it is
+pre-existing and unrelated to that change. St Helena, Ascension, Tristan da Cunha and Gough
+are four comparably-sized islands spanning 32° of latitude. All four clear `CLIP_AREA_FRAC`
+in `scripts/build-shapes.mjs`, so the normalising bounding box is mostly open ocean, each
+island lands ~30px wide inside the 1000px box, and Douglas-Peucker flattens it. The full
+release has 7,677 vertices and none survive.
+
+**Approach / notes:**
+- Confirmed for `sh`. Check `ki` (309 pts), `mh` (362), `fm` (316), `pf`, `mv` — same shape
+  of problem, unverified.
+- The options are a product call, not a tuning one: show only the principal island (loses
+  the territory's real extent), keep the scatter but normalise per-island into a grid, or
+  accept it and let these entities fall back to a single island by area.
+- Whatever is chosen, `data/shapes/<code>.json` now records `src`, so the thin ones are
+  listable: see the outline check on `data-map.html`.
+- Do not solve it by loosening `CLIP_DEG` / `CLIP_AREA_FRAC` globally — those thresholds
+  are what keep overseas territories out of every other country's outline.
+
+**Acceptance:** St Helena's panel shows a recognisable island rather than a 39-point blob,
+and no other country's outline changes.
+
+---
+
+## 54. Population double-counts where a de-facto state ships separately
+
+**What:** `population` is declared `summable: true`, and some entities overlap. Decide which
+questions must exclude the overlap, and enforce it where the flag is consumed.
+
+**Why:** Found in the data review (2026-10-10). Cyprus's World Bank GDP per capita is 40%
+above GDP ÷ population, and both inputs are 2023 — not year mixing. The Bank's Cyprus *GDP*
+covers the government-controlled area (~958k people) while `SP.POP.TOTL` covers the whole
+island (1.34M). Northern Cyprus also ships as its own entity (`xc`) with its own population
+from Natural Earth, so "is A + B bigger than C?" (#37) can count the same people twice.
+
+**Approach / notes:**
+- The `summable` flag is declared in `scripts/build-datasets.mjs` and its contract is
+  documented there; this is the one failure mode the declaration cannot catch, because each
+  value is individually correct.
+- Check the other de-facto states against their parents the same way: `xa` Abkhazia /
+  Georgia, `xo` South Ossetia / Georgia, `xt` Transnistria / Moldova, `xs` Somaliland /
+  Somalia, `eh` Western Sahara / Morocco. Their populations come from Natural Earth
+  `POP_EST`; whether the parent's World Bank figure includes them has to be checked per case.
+- Cheapest honest fix is probably a `overlaps: ['cy']` field on the de-facto entity in
+  `entities.json`, and a rule in the combination-question builder that refuses a pair where
+  one overlaps the other.
+- The GDP-per-capita mismatch itself is the World Bank's and should be left alone — but it
+  is worth a note in the country panel rather than looking like our arithmetic error.
+
+**Acceptance:** A combination question can never pair an entity with one it overlaps. The
+live "GDP per capita ≈ GDP ÷ population" check on `data-map.html` explains Cyprus rather
+than just flagging it.
+
+---
+
+## 55. Flag colours for the 53 entities that have none
+
+**What:** 53 of 252 entities have no entry in `data/flags.json`, so they are silently absent
+from the Flag Color Quiz and the Flag Color Picker.
+
+**Why:** Found in the data review (2026-10-10). `flags.json` is hand-curated — no script
+writes it — so this is curation work that has simply never been done for the territories.
+Most of them *do* have a flag image (the build's flagcdn probe finds 47 of 48 colour-less
+entities have one), which is exactly the gap that confused the owner before: an entity can
+show a flag everywhere and still be missing from the colour quizzes.
+
+**Approach / notes:**
+- The list is `entities.json` where `hasFlag: false` — the Coverage board and
+  `data-map.html` both show it, and `hasFlagImage` tells you which have an image to work
+  from.
+- `jg` Channel Islands is an aggregate and has no flag at all. Leave it.
+- The four de-facto states and `xs` Somaliland have no ISO code and ship bundled SVGs in
+  `assets/flags/`; colours can be read off those.
+- Colours are the *dominant* colours of the flag, 2–6 per entry — see any existing entry.
+  Getting these wrong is worse than omitting them, because the colour quiz scores against
+  them.
+- Worth deciding whether the colour quizzes should respect `inCountryPool()` so territories
+  only appear with the Territories toggle on, before adding 50 territories to the pool.
+
+**Acceptance:** `hasFlag` coverage on `data-map.html` rises, and the colour quizzes still
+only offer entities the territories toggle allows.
+
+---
 
 ---
 

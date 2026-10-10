@@ -7,6 +7,8 @@ let _data = null;
 let _entities = null;
 let _attributes = null;
 let _electricity = null;
+let _aliases = null;
+let _aliasIndex = null;
 
 export async function loadDatasets() {
   if (_data) return _data;
@@ -27,6 +29,62 @@ export async function loadAttributes() {
   const resp = await fetch('data/attributes.json');
   _attributes = (await resp.json()).attributes;
   return _attributes;
+}
+
+// Names are compared with diacritics stripped and case folded, so "Cote d'Ivoire"
+// matches "Côte d'Ivoire" and nobody loses a life to a keyboard layout.
+export function normalizeName(s) {
+  return s.normalize('NFD').replace(/\p{Diacritic}/gu, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+// TODOS #40. The shortenings people actually type — UK, UAE, DRC. Curated by hand in
+// data/aliases.json and normalized here, so the file stays readable and cannot drift
+// from the matcher. Each alias is indexed twice, with and without its spaces, because
+// "U.K.", "UK" and "u k" all normalize differently and all mean the same country.
+// A failed fetch leaves typing working on real names rather than breaking the round.
+export async function loadAliases() {
+  if (_aliases) return _aliases;
+  try {
+    const resp = await fetch('data/aliases.json');
+    _aliases = (await resp.json()).aliases;
+  } catch {
+    _aliases = {};
+  }
+  _aliasIndex = new Map();
+  for (const [code, list] of Object.entries(_aliases)) {
+    for (const a of list) {
+      const n = normalizeName(a);
+      if (!n) continue;
+      if (!_aliasIndex.has(n)) _aliasIndex.set(n, code);
+      const tight = n.replace(/ /g, '');
+      if (!_aliasIndex.has(tight)) _aliasIndex.set(tight, code);
+    }
+  }
+  return _aliases;
+}
+
+export function getAliases(code) {
+  return (_aliases && _aliases[code]) || [];
+}
+
+// The country a typed name is an alias for, or null. Exact only — a prefix of an
+// abbreviation is not an abbreviation.
+export function codeForAlias(raw) {
+  if (!_aliasIndex) return null;
+  const n = normalizeName(raw);
+  if (!n) return null;
+  return _aliasIndex.get(n) || _aliasIndex.get(n.replace(/ /g, '')) || null;
+}
+
+// Does this country answer to what is being typed, by name or by alias? Used to
+// suggest "United Kingdom" while the player is still typing "uk".
+export function aliasMatches(code, normalizedQuery) {
+  if (!normalizedQuery) return false;
+  return getAliases(code).some((a) => {
+    const n = normalizeName(a);
+    return n.includes(normalizedQuery) || n.replace(/ /g, '').includes(normalizedQuery);
+  });
 }
 
 export function getEntity(code) {

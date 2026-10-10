@@ -2167,6 +2167,13 @@ canvas {
   border-radius: 8px;
 }
 .topn-suggest-item:hover { border-color: var(--accent); }
+/* The shortening that found this country, named so typing "uk" teaches as well as
+   scores (TODOS #40). */
+.topn-suggest-alias {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
 
 /* The running board: slots 1..N plus the misses under them. Capped so the pool
    below it stays usable on a phone; it scrolls once a round fills up. */
@@ -2402,6 +2409,8 @@ canvas {
   padding: 2px 4px 6px;
 }
 .explore-list {
+  /* rank column + flag + the two gaps: what a line stacked under the name must clear */
+  --explore-indent: calc(30px + 30px + 12px + 12px);
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -2419,11 +2428,21 @@ canvas {
 .explore-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 8px 12px;
   background: var(--surface2);
   border-radius: 8px;
 }
+/* Its own line under the name, at every width: this is an audit view, and the list
+   of accepted names is longer than any value (TODOS #40). */
+.explore-aliases {
+  flex: 1 0 100%;
+  padding-left: var(--explore-indent);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.explore-aliases.is-empty { opacity: 0.45; font-style: italic; }
 .explore-rank {
   width: 30px;
   text-align: right;
@@ -2480,6 +2499,7 @@ canvas {
 .explore-view-toggle { margin-left: auto; }
 
 @media (max-width: 768px) {
+  .explore-list { --explore-indent: calc(30px + 26px + 12px + 12px); }  /* smaller flag */
   .explore-header h2 { font-size: 1.05rem; }
   .explore-play { margin-left: 0; }
   .explore-select { flex: 1; }
@@ -2498,8 +2518,7 @@ canvas {
   .explore-name { flex: 1 1 auto; }
   .explore-value {
     flex: 1 0 100%;
-    /* Under the name, not under the flag: rank (30px) + flag (26px) + two gaps. */
-    padding-left: calc(30px + 26px + 12px + 12px);
+    padding-left: var(--explore-indent);
   }
 }
 

@@ -15,8 +15,9 @@
 import { playPlace, playSkip, playScoreReveal, playClick, playNav } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import {
-  loadDatasets, loadEntities, inCountryPool, getDataset, getDatasetList,
-  getEntries, getEntitiesList, getContinents, formatValue
+  loadDatasets, loadEntities, loadAliases, inCountryPool, getDataset, getDatasetList,
+  getEntries, getEntitiesList, getContinents, formatValue,
+  normalizeName, codeForAlias, aliasMatches, getAliases
 } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
@@ -83,13 +84,6 @@ const LOCKABLE = [
   { key: 'force10', label: 'Force 10' },
 ];
 
-// Names are compared with diacritics stripped and case folded, so "Cote d'Ivoire"
-// matches "Côte d'Ivoire" and nobody loses a life to a keyboard layout.
-function normalizeName(s) {
-  return s.normalize('NFD').replace(/\p{Diacritic}/gu, '')
-    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-}
-
 export class TopNGame {
   constructor(containerEl, onFinish) {
     this.container = containerEl;
@@ -124,6 +118,7 @@ export class TopNGame {
     if (this._loaded) return;
     await loadDatasets();
     await loadEntities(); // the country pool gate needs the registry
+    await loadAliases();  // "uk" has to score before the first round, not after
     this._loaded = true;
   }
 
@@ -755,14 +750,23 @@ export class TopNGame {
       list.innerHTML = '';
       if (!q) return;
       const matches = r.sorted
-        .filter((e) => !r.revealed.has(e.code) && normalizeName(e.name).includes(q))
+        .filter((e) => !r.revealed.has(e.code)
+          && (normalizeName(e.name).includes(q) || aliasMatches(e.code, q)))
         .slice(0, MAX_SUGGESTIONS);
       for (const m of matches) {
         const b = document.createElement('button');
         b.className = 'btn topn-suggest-item';
+        // The alias that pulled a country into the list is named, so typing "uk" both
+        // works and teaches whose shortening it is. It goes in its own span: Enter
+        // submits the first span's text, which must stay the plain country name.
+        const via = normalizeName(m.name).includes(q) ? '' : getAliases(m.code).find((a) => {
+          const n = normalizeName(a);
+          return n.includes(q) || n.replace(/ /g, '').includes(q.replace(/ /g, ''));
+        });
         b.innerHTML =
           `<img class="topn-flag" src="${flagUrl(m.code, 'w40')}" alt="" onerror="this.style.visibility='hidden'">` +
-          `<span>${m.name}</span>`;
+          `<span>${m.name}</span>` +
+          (via ? `<span class="topn-suggest-alias">${via}</span>` : '');
         b.addEventListener('click', () => submit(m.name));
         list.appendChild(b);
       }
@@ -855,13 +859,18 @@ export class TopNGame {
     const q = normalizeName(raw);
     if (!q) return;
 
+    // Exact name, then exact alias, then prefix-of-name. An abbreviation is a
+    // deliberate answer and must outrank a two-letter prefix of some other country.
+    const alias = codeForAlias(raw);
     const match = r.sorted.find((e) => normalizeName(e.name) === q)
+      || (alias && r.sorted.find((e) => e.code === alias))
       || r.sorted.find((e) => normalizeName(e.name).startsWith(q));
 
     if (!match) {
       // A real country the metric has no figure for is a different thing from a
       // typo, and saying so is the whole point of tracking the unranked roster.
       const noData = r.unranked.find((e) => normalizeName(e.name) === q)
+        || (alias && r.unranked.find((e) => e.code === alias))
         || r.unranked.find((e) => normalizeName(e.name).startsWith(q));
       r.lastPick = {
         note: noData

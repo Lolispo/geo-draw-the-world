@@ -1,7 +1,7 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
 import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
@@ -18,12 +18,16 @@ export class DataExplorer {
     this.continent = null;   // null = All
     this.higherFirst = true;
     this.view = 'rank';      // 'rank' | 'coverage'
+    // Off by default: the extra line is for auditing the alias table (TODOS #40),
+    // not for reading a ranking.
+    this.showAliases = false;
   }
 
   async loadData() {
     if (this._loaded) return;
     await loadDatasets();
     await loadEntities();
+    await loadAliases();
     this._loaded = true;
   }
 
@@ -134,6 +138,20 @@ export class DataExplorer {
     });
     bar.appendChild(terrBtn);
 
+    // Aliases column (rank view only) — the only place the whole table is visible,
+    // which is the point: a country with no alias shows a blank you can spot.
+    if (rankView) {
+      const aliasBtn = document.createElement('button');
+      aliasBtn.className = 'btn btn-tool' + (this.showAliases ? ' active' : '');
+      aliasBtn.textContent = this.showAliases ? '🔤 Aliases: On' : '🔤 Aliases: Off';
+      aliasBtn.title = 'Show the other names each country is accepted under when typing';
+      aliasBtn.addEventListener('click', () => {
+        this.showAliases = !this.showAliases;
+        this._render();
+      });
+      bar.appendChild(aliasBtn);
+    }
+
     // View toggle (both)
     const viewBtn = document.createElement('button');
     viewBtn.className = 'btn btn-tool explore-view-toggle';
@@ -201,6 +219,14 @@ export class DataExplorer {
       val.textContent = formatValue(ds.format, e.value);
 
       row.append(rank, img, name, val);
+
+      if (this.showAliases) {
+        const aliases = getAliases(e.code);
+        const also = document.createElement('span');
+        also.className = 'explore-aliases' + (aliases.length ? '' : ' is-empty');
+        also.textContent = aliases.length ? `also: ${aliases.join(', ')}` : 'no aliases';
+        row.appendChild(also);
+      }
       row.classList.add('is-clickable');
       row.title = `View ${e.name}`;
       row.addEventListener('click', () => openCountryPanel(e.code));
