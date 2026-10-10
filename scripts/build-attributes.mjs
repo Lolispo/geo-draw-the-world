@@ -101,16 +101,41 @@ const NAME_ALIAS = {
 
 // ---- religion parsing ----------------------------------------------------
 // "Roman Catholic 47%, Muslim 4%, ... none 33%, unspecified 9% (2021 est.)"
+
+// Drop parentheticals, counting depth. A flat /\([^)]*\)/ stops at the first ')',
+// so on a nested entry — Bolivia's "Protestant 19.6% (Evangelical (non-specific)
+// 11.9%, Adventist 2.8%, ...)" — the inner group closed the match early and left the
+// sub-groups behind, to be read as siblings of their own parent. Bolivia totalled 108%.
+function stripParens(s) {
+  let out = '', depth = 0;
+  for (const ch of s) {
+    if (ch === '(') depth++;
+    else if (ch === ')') { if (depth > 0) { depth--; out += ' '; continue; } }
+    else if (depth === 0) out += ch;
+  }
+  return out;
+}
+
 function parseReligion(text) {
   if (!text) return { list: [], raw: '' };
   const raw = text.trim();
-  let t = text.split(/\bnote:/i)[0];
+  // The note is written both "note:" and "note - "; only the first was being cut, so
+  // Morocco's "note - Jewish about 3,000-3,500" stayed in the text to be parsed.
+  let t = text.split(/\bnote\s*[-:]/i)[0];
+  // A few entries carry two surveys joined by <br><br>. Keep the first — the Factbook
+  // leads with the one it considers current, and parsing both produced a single list
+  // that counted every religion twice (Uruguay totalled 201%).
+  t = t.split(/<br\s*\/?>/i)[0];
   // Drop parentheticals: "(official)", "(2021 est.)", "(predominantly Sunni)", etc.
   // This is why the majority used to vanish for e.g. Greece "Greek Orthodox (official) 81-90%".
-  t = t.replace(/\([^)]*\)/g, ' ');
+  t = stripParens(t);
+  // A bare number right before a comma is a '%' the source dropped — Andorra's
+  // "Christian ... 89.5, other 8.8%" lost its majority to this.
+  t = t.replace(/(\d)\s*(?=,)/g, '$1%');
   const list = [];
   // name  low[-high]%  — a range becomes its midpoint; "<1%" keeps its number.
-  const re = /([A-Za-z][A-Za-z .'\/&-]*?)\s*(?:<\s*)?(\d+(?:\.\d+)?)\s*(?:[-–]\s*(\d+(?:\.\d+)?))?\s*%/g;
+  // The integer part is optional, so Brazil's ".06%" is six hundredths, not six.
+  const re = /([A-Za-z][A-Za-z .'\/&-]*?)\s*(?:<\s*)?(\d*\.?\d+)\s*(?:[-–]\s*(\d*\.?\d+))?\s*%/g;
   let m;
   while ((m = re.exec(t)) !== null) {
     const name = m[1].replace(/^[\s,;/]+|[\s,;/]+$/g, '').replace(/\s+/g, ' ');

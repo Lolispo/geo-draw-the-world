@@ -154,17 +154,25 @@ const datasets = [];
 const usedCodes = new Set();
 for (const ind of INDICATORS) {
   const best = await fetchIndicator(ind.wb);
-  const values = {};
+  const values = {}, years = {};
   for (const [iso2, v] of best) {
     values[iso2] = (ind.format === 'years' || ind.format === 'percent') ? Math.round(v.value * 10) / 10 : Math.round(v.value);
+    // Which year this country's figure is actually from. fetchIndicator resolves the
+    // latest non-null year per country independently, so the window is not uniform —
+    // South Sudan's GDP is 2015 where most of the table is 2023. Without this the
+    // staleness is unknowable from the data and nothing downstream can label or
+    // detect it; MANUAL_VALUES deliberately get no year, and their absence here is
+    // what marks a figure as backfilled rather than fetched.
+    years[iso2] = v.year;
     usedCodes.add(iso2);
   }
   datasets.push({
     id: ind.id, name: ind.name, blurb: ind.blurb, format: ind.format, higherFirst: true,
     ...(ind.summable ? { summable: true } : {}),
-    values,
+    values, years,
   });
-  console.log(`${ind.name}: ${Object.keys(values).length} countries`);
+  const span = [...new Set(Object.values(years))].sort();
+  console.log(`${ind.name}: ${Object.keys(values).length} countries (${span[0]}–${span[span.length - 1]})`);
 }
 
 // Merge manual backfill (gap-fill only; never overrides World Bank)
@@ -232,15 +240,16 @@ async function readJsonIfPresent(path) {
         blurb: 'Share from hydro, wind, solar, bioenergy & other renewables (Ember)' },
     ];
     for (const slice of SLICES) {
-      const values = {};
+      const values = {}, years = {};
       for (const [code, entry] of Object.entries(elec)) {
         const pct = entry.sources.filter((s) => slice.match(s.name)).reduce((sum, s) => sum + s.pct, 0);
         // Summing already-rounded component shares can overshoot (an all-renewable
         // grid totalling 100.1%). It's a share of generation, so clamp at 100.
         values[code] = Math.min(100, Math.round(pct * 10) / 10);
+        years[code] = entry.year;
         usedCodes.add(code);
       }
-      datasets.push({ id: slice.id, name: slice.name, blurb: slice.blurb, format: 'percent', higherFirst: true, values });
+      datasets.push({ id: slice.id, name: slice.name, blurb: slice.blurb, format: 'percent', higherFirst: true, values, years });
       console.log(`${slice.name}: ${Object.keys(values).length} countries (derived)`);
     }
   }
