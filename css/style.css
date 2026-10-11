@@ -2661,6 +2661,28 @@ canvas {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+/* Coverage health strip: the integrity checks, collapsed unless something wants
+   attention — a wall of green ticks only pushes the table off the screen. */
+.cov-health { margin: 0 0 10px; }
+.cov-health-head {
+  background: none; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-dim); font: inherit; font-size: 0.74rem; padding: 5px 11px;
+  cursor: pointer; text-align: left; width: 100%;
+}
+.cov-health-head:hover { color: var(--text); border-color: var(--accent); }
+.cov-check { display: grid; grid-template-columns: 54px 1fr; gap: 10px; padding: 8px 4px; border-bottom: 1px solid var(--surface2); align-items: start; }
+.cov-check:last-child { border-bottom: none; }
+.cov-check-chip {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  border-radius: 4px; padding: 2px 5px; text-align: center; border: 1px solid;
+}
+.cov-check-chip[data-state="pass"] { color: var(--green); border-color: #2c5c36; }
+.cov-check-chip[data-state="look"] { color: var(--orange); border-color: #5c4a1b; }
+.cov-check-chip[data-state="fail"] { color: var(--red); border-color: #6b2c2c; }
+.cov-check-what { font-size: 0.78rem; color: var(--text); }
+.cov-check-detail { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+.cov-check-codes { font-family: ui-monospace, Menlo, monospace; font-size: 0.66rem; color: var(--text-dim); opacity: .7; margin-top: 3px; word-break: break-word; }
+
 /* A gap the source explains. Muted and dashed rather than a red cross: the figure is
    missing, that is understood, and nobody needs to act on it. */
 .cov-explained { color: var(--text-dim); opacity: 0.45; cursor: help; }

@@ -8,6 +8,7 @@ let _entities = null;
 let _attributes = null;
 let _electricity = null;
 let _flagColors = null;
+let _flagsRaw = null;
 let _aliases = null;
 let _aliasIndex = null;
 
@@ -121,8 +122,10 @@ export async function loadFlagColors() {
   if (_flagColors) return _flagColors;
   try {
     const resp = await fetch('data/flags.json');
-    _flagColors = new Map((await resp.json()).flags.map((f) => [f.code, f.colors]));
+    _flagsRaw = (await resp.json()).flags;
+    _flagColors = new Map(_flagsRaw.map((f) => [f.code, f.colors]));
   } catch {
+    _flagsRaw = [];
     _flagColors = new Map();
   }
   return _flagColors;
@@ -211,6 +214,14 @@ export function canCombine(codeA, codeB) {
 // It means unavailable from the configured source, which is not the same as
 // unobtainable: Taiwan's figures are absent from the World Bank and present in the
 // manual backfill. So it marks a gap as explained, never as closed.
+// The whole loaded blobs, for the integrity checks (js/data-health.js) — they ask
+// cross-file questions ("does every key in flags.json resolve?") that the per-code
+// getters above cannot express. Nothing else should need this.
+export function getRawData() {
+  return { datasets: _data, entities: _entities, attributes: _attributes, electricity: _electricity,
+    flags: _flagsRaw || [], aliases: _aliases || {} };
+}
+
 export function getKnownGap(metricId, code) {
   return _data?.knownGaps?.[metricId]?.[code] || null;
 }

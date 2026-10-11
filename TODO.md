@@ -54,16 +54,16 @@ exactly, same 13 entities.
 review and the rebuild order — the things that are about the repo rather than about
 countries.
 
-**Still open, and now unblocked:** the 11 integrity checks are *entity*-level and were meant
-to move in-app too. The owner's condition was "when we have done some view improvements"
-(2026-10-11) — #70 did those, so the condition is met. They are still on `data-map.html`;
-nothing is lost meanwhile.
+**✅ Integrity checks moved too, 2026-10-11.** All 11 now run in the app, in a collapsed
+health strip above the Coverage table — one line unless something wants attention, because a
+wall of green ticks only pushes the table off screen. They are a different shape from the
+flag colours ("religion totals ≤ 105%" is a statement about the dataset, not about one
+entity), which is why a strip rather than a column.
 
-Note they are a different kind of thing from the flag colours. "Religion totals ≤ 105%" is a
-statement about the dataset, not about one entity, so it does not fit a per-row column the
-way Colors did — a health strip above the Coverage table is the likely shape. Several are
-already per-entity enough to become columns instead (`GDP per capita ≈ GDP ÷ population`,
-`source year present`), and those probably should.
+The logic lives in `js/data-health.js` and is gone from `data-map.html`, so there is one
+implementation rather than two that drift. Same verdicts as before the move: 8 pass, 3 to
+look at (the World Bank disagreeing with itself about Cyprus and Cuba, and 12 pre-2020
+figures shown undated).
 
 ---
 

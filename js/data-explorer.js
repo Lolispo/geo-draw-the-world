@@ -1,8 +1,9 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap, getRawData, loadAttributes, loadElectricity, loadFlagColors as _lfc } from './datasets.js';
 import { readFlagColors, missingFromImage } from './flag-colors.js';
+import { runDataChecks } from './data-health.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
@@ -81,6 +82,7 @@ export class DataExplorer {
     // for is a tenth of the table, and the other nine tenths are in the way (TODOS #70).
     this.gapsOnly = false;
     this.covSort = null;     // { key, dir } — null means by name
+    this.healthOpen = false;
   }
 
   async loadData() {
@@ -89,6 +91,9 @@ export class DataExplorer {
     await loadEntities();
     await loadAliases();
     await loadFlagColors();
+    // The Coverage health strip asks cross-file questions, so it needs the files the
+    // rank views never touch.
+    await Promise.all([loadAttributes(), loadElectricity()]);
     this._loaded = true;
   }
 
@@ -600,6 +605,61 @@ export class DataExplorer {
     return td;
   }
 
+  // Integrity checks, above the table rather than on a page outside the app (owner,
+  // 2026-10-11). These are whole-dataset questions — "does every key in flags.json
+  // resolve", "do the religion percentages add up" — so they do not fit a per-row column
+  // the way the flag colours did, and they belong where someone is already looking at
+  // the data rather than somewhere they have to remember to go (TODOS #71).
+  //
+  // Collapsed to a single line unless something wants attention, because a wall of green
+  // ticks above the table is noise that pushes the table off the screen.
+  _healthStrip() {
+    const wrap = document.createElement('div');
+    wrap.className = 'cov-health';
+    let checks;
+    try {
+      checks = runDataChecks(getRawData());
+    } catch (err) {
+      wrap.textContent = `Integrity checks could not run: ${err.message}`;
+      return wrap;
+    }
+    const bad = checks.filter((c) => c.state !== 'pass');
+
+    const head = document.createElement('button');
+    head.className = 'cov-health-head';
+    head.textContent = bad.length
+      ? `\u26a0 ${checks.length - bad.length} of ${checks.length} integrity checks pass \u2014 ${bad.length} to look at`
+      : `\u2713 all ${checks.length} integrity checks pass`;
+    head.setAttribute('aria-expanded', String(this.healthOpen));
+    head.addEventListener('click', () => { this.healthOpen = !this.healthOpen; this._render(); });
+    wrap.appendChild(head);
+
+    if (!this.healthOpen) return wrap;
+
+    for (const c of checks) {
+      const row = document.createElement('div');
+      row.className = 'cov-check';
+      const chip = document.createElement('span');
+      chip.className = 'cov-check-chip';
+      chip.dataset.state = c.state;
+      chip.textContent = { pass: 'pass', look: 'look', fail: 'fail' }[c.state];
+      const body = document.createElement('div');
+      const mk = (cls, text) => {
+        const d = document.createElement('div');
+        d.className = cls; d.textContent = text; return d;
+      };
+      body.appendChild(mk('cov-check-what', c.what));
+      body.appendChild(mk('cov-check-detail', c.detail));
+      if (c.codes?.length) {
+        const list = c.codes.length > 20 ? `${c.codes.slice(0, 20).join(' \u00b7 ')} … +${c.codes.length - 20} more` : c.codes.join(' \u00b7 ');
+        body.appendChild(mk('cov-check-codes', list));
+      }
+      row.append(chip, body);
+      wrap.appendChild(row);
+    }
+    return wrap;
+  }
+
   _renderCoverage() {
     const list = this._listEl;
     if (!list) return;
@@ -666,6 +726,8 @@ export class DataExplorer {
       : `Coverage${this.continent ? ` · ${this.continent}` : ''} · ${totalRows} entities · `
         + `${complete} complete · ${totalRows - complete} incomplete · ${aggregates} aggregate`;
     list.appendChild(blurb);
+
+    list.appendChild(this._healthStrip());
 
     const legend = document.createElement('div');
     legend.className = 'explore-blurb cov-legend';

@@ -199,10 +199,12 @@ footer a { color: var(--accent); text-decoration: none; }
   <h1>Data map</h1>
   <p class="lede">
     Every dataset this game ships: where it is fetched from, which script builds it, which
-    file holds it, and which module reads it at runtime. The checks below are computed live
-    from the committed files, so they go stale only if the data does.
-    Per-entity coverage lives in the app, under
-    <a href="index.html#/explore/coverage">Data Explorer → Coverage</a>.
+    file holds it, and which module reads it at runtime — the shape of the pipeline, which is
+    about this repo rather than about countries.
+    Everything per-entity lives in the app instead: coverage, the flag-colour check and the
+    cross-file integrity checks are all under
+    <a href="index.html#/explore/coverage">Data Explorer → Coverage</a>, computed live from
+    the committed files.
   </p>
 </header>
 
@@ -238,28 +240,14 @@ footer a { color: var(--accent); text-decoration: none; }
   </div>
 </section>
 
-<!-- ======================= CHECKS ======================= -->
-<section>
-  <div class="sec-head">
-    <h2>Live checks</h2>
-    <p>
-      Run against the committed files every time this page loads. These are the things that
-      break silently: a join that stops joining, a percentage that stops adding up, a number
-      that contradicts another number derived from the same source.
-    </p>
-  </div>
-  <div class="card checks" id="checks">
-    <div class="check"><span class="chip" data-s="wait">waiting</span><div class="what">loading data…</div></div>
-  </div>
-</section>
-
 <!-- ======================= FINDINGS ======================= -->
 <section>
   <div class="sec-head">
     <h2>Review — 10 Oct 2026</h2>
     <p>
       A read of the pipeline, not just the output. The first four were fixed on the day of the
-      review. Everything the checks above can re-test, they re-test on every load.
+      review. Everything that can be re-tested is re-tested on every load of
+      <a href="index.html#/explore/coverage">Coverage</a>, which is where the checks now live.
     </p>
   </div>
   <div class="card" id="findings"></div>
@@ -527,10 +515,6 @@ try {
   setStatus('ok', 'live — read from data/ just now');
 } catch (e) {
   setStatus('err', 'serve the repo (npm start) to load live data');
-  document.getElementById('checks').innerHTML =
-    `<div class="check"><span class="chip" data-s="fail">blocked</span><div><div class="what">Could not read the data files</div>` +
-    `<div class="detail">${esc(e.message)} — this page reads <span class="mono">data/*.json</span> over HTTP, so it needs the repo served ` +
-    `(<span class="mono">npm start</span>, then open <span class="mono">localhost:8080/data-map.html</span>). The graph above is static and still correct.</div></div></div>`;
 }
 
 if (D) {
@@ -549,177 +533,6 @@ if (D) {
     shapes:      `${codes.filter(c => E[c].hasGeometry).length} files · loaded one at a time`,
   };
   for (const el of document.querySelectorAll('[data-stat]')) el.textContent = stats[el.dataset.stat] ?? '—';
-
-  /* ---- live checks ---- */
-  const checks = [];
-  const add = (s, what, detail, codesList) => checks.push({ s, what, detail, codes: codesList });
-  const list = a => a.length > 24 ? a.slice(0, 24).join(' ') + ` … +${a.length - 24} more` : a.join(' ');
-
-  // 1. join integrity
-  {
-    const orphans = [];
-    for (const [name, keys] of [
-      ['attributes.json', Object.keys(D.attributes)],
-      ['electricity.json', Object.keys(D.electricity)],
-      ['flags.json', D.flags.map(f => f.code)],
-      ['aliases.json', Object.keys(D.aliases)],
-      ['datasets.json countries', Object.keys(D.datasets.countries)],
-    ]) for (const k of keys) if (!E[k]) orphans.push(`${name}:${k}`);
-    add(orphans.length ? 'fail' : 'pass', 'Every key joins to the entity registry',
-      orphans.length ? `${orphans.length} key(s) exist in a data file but not in entities.json.`
-        : 'All four code-keyed files resolve entirely into entities.json. No orphans in either direction.', orphans);
-  }
-
-  // 2. name drift
-  {
-    const drift = [
-      ...D.flags.filter(f => E[f.code] && E[f.code].name !== f.name).map(f => `flags:${f.code}`),
-      ...Object.keys(D.datasets.countries).filter(c => E[c] && D.datasets.countries[c].name !== E[c].name).map(c => `datasets:${c}`),
-      ...Object.keys(D.datasets.countries).filter(c => E[c] && D.datasets.countries[c].continent !== E[c].continent).map(c => `continent:${c}`),
-    ];
-    add(drift.length ? 'look' : 'pass', 'Display names and continents agree across files',
-      drift.length ? `${drift.length} entity name or continent disagrees between files — build-entities.mjs reconciles these, so this means it has not been re-run.`
-        : 'Names and continents in flags.json and datasets.json match entities.json exactly.', drift);
-  }
-
-  // 3. religion percentages
-  {
-    const over = [], dup = [];
-    for (const [c, v] of Object.entries(D.attributes)) {
-      if (!v.religion?.length) continue;
-      if (v.religion.reduce((a, r) => a + (r.pct || 0), 0) > 105) over.push(c);
-      if (new Set(v.religion.map(r => r.name)).size !== v.religion.length) dup.push(c);
-    }
-    add(over.length ? 'look' : 'pass', 'Religion breakdowns total ≤ 105%',
-      over.length ? `${over.length} entity total(s) exceed 105%, which means the parser emitted a group and its own sub-groups as siblings, or merged two separate surveys.`
-        : 'Every parsed breakdown totals within tolerance.', over);
-    add(dup.length ? 'look' : 'pass', 'No religion appears twice in one breakdown',
-      dup.length ? `${dup.length} breakdown(s) list the same religion more than once — the signature of two Factbook surveys concatenated into one list.`
-        : 'No duplicated religion names.', dup);
-  }
-
-  // 4. GDP per capita vs GDP ÷ population
-  {
-    const V = id => D.datasets.datasets.find(d => d.id === id).values;
-    const gdp = V('gdp-nominal'), pop = V('population'), pc = V('gdp-per-capita');
-    const off = [];
-    for (const c of Object.keys(pc)) {
-      if (gdp[c] == null || pop[c] == null) continue;
-      const dev = (pc[c] - gdp[c] / pop[c]) / (gdp[c] / pop[c]) * 100;
-      if (Math.abs(dev) > 10) off.push(`${c}${E[c] ? `(${E[c].name})` : ''} ${dev > 0 ? '+' : ''}${dev.toFixed(0)}%`);
-    }
-    add(off.length ? 'look' : 'pass', 'GDP per capita ≈ GDP ÷ population',
-      off.length ? `${off.length} country / countries disagree by more than 10%. The three series are resolved to their own latest non-null year independently, and the World Bank’s own coverage can differ between them.`
-        : 'Every country is internally consistent within 10%.', off);
-  }
-
-  // 5. export share vs exports ÷ GDP
-  {
-    const V = id => D.datasets.datasets.find(d => d.id === id).values;
-    const gdp = V('gdp-nominal'), exp = V('exports'), esh = V('export-share-gdp');
-    const off = [];
-    for (const c of Object.keys(esh)) {
-      if (exp[c] == null || gdp[c] == null) continue;
-      const dev = esh[c] - exp[c] / gdp[c] * 100;
-      if (Math.abs(dev) > 5) off.push(`${c}${E[c] ? `(${E[c].name})` : ''} ${dev > 0 ? '+' : ''}${dev.toFixed(1)}pp`);
-    }
-    add(off.length ? 'look' : 'pass', 'Export share ≈ exports ÷ GDP',
-      off.length ? `${off.length} country / countries disagree by more than 5 points. Export share is taken straight from the World Bank rather than divided here, precisely so the two cannot silently mix years — a gap this large is the source disagreeing with itself.`
-        : 'The published share matches the one derived from our own two columns.', off);
-  }
-
-  // 6. range sanity
-  {
-    const V = id => D.datasets.datasets.find(d => d.id === id).values;
-    const bad = [];
-    const range = (id, lo, hi) => { for (const [c, v] of Object.entries(V(id))) if (v < lo || v > hi) bad.push(`${id}:${c}=${v}`); };
-    range('urbanization', 0, 100); range('life-expectancy', 30, 95);
-    range('independence-year', 1, new Date().getFullYear()); range('land-area', 0.0001, 2e7); range('population', 1, 2e9);
-    add(bad.length ? 'fail' : 'pass', 'Every value sits inside its physical range',
-      bad.length ? `${bad.length} value(s) are impossible for their unit.`
-        : 'Urbanisation, life expectancy, independence year, land area and population are all in range.', bad);
-  }
-
-  // 7. electricity shares
-  {
-    const bad = [], years = {};
-    for (const [c, v] of Object.entries(D.electricity)) {
-      years[v.year] = (years[v.year] || 0) + 1;
-      const sum = v.sources.reduce((a, s) => a + s.pct, 0);
-      if (Math.abs(sum - 100) > 5) bad.push(`${c}=${sum.toFixed(1)}%`);
-    }
-    const spread = Object.keys(years).sort();
-    add(bad.length ? 'fail' : 'pass', 'Electricity shares total 100%',
-      bad.length ? `${bad.length} country / countries do not add up — a column was missed or misparsed, which lands wrong numbers on a country.`
-        : `All ${Object.keys(D.electricity).length} breakdowns total 100% ±5. Source years span ${spread[0]}–${spread[spread.length - 1]}, and each country carries its own.`, bad);
-  }
-
-  // 8. every figure should say which year it is from
-  {
-    const stale = [], noYear = [];
-    let spanLo = 9999, spanHi = 0, withYears = 0;
-    for (const d of D.datasets.datasets) {
-      if (!d.years) continue;
-      withYears++;
-      for (const c of Object.keys(d.values)) {
-        const y = d.years[c];
-        // A missing year marks a MANUAL_VALUES backfill, which has a provenance
-        // string instead; only a fetched figure is expected to carry one.
-        if (y == null) { if (!D.datasets.provenance[c]) noYear.push(`${d.id}:${c}`); continue; }
-        spanLo = Math.min(spanLo, y); spanHi = Math.max(spanHi, y);
-        if (y < 2020) stale.push(`${c}(${E[c]?.name ?? c}) ${d.id} ${y}`);
-      }
-    }
-    const missing = D.datasets.datasets.filter(d => !d.years).map(d => d.id);
-    add(noYear.length ? 'look' : 'pass', 'Every fetched figure records its source year',
-      noYear.length
-        ? `${noYear.length} fetched value(s) carry no year and no manual-backfill provenance.`
-        : `All ${withYears} fetched datasets carry a per-country year, spanning ${spanLo}–${spanHi}. ` +
-          `Values with no year are the manual backfill, which carries a provenance string instead` +
-          (missing.length ? `; ${missing.join(', ')} is derived and inherits its source's dating.` : '.'),
-      noYear);
-    add(stale.length ? 'look' : 'pass', 'No figure is presented as current while being pre-2020',
-      stale.length
-        ? `${stale.length} figure(s) predate 2020 — real, but worth labelling in the UI rather than showing undated beside a 2023 number.`
-        : 'Every fetched figure is 2020 or later.', stale);
-  }
-
-  // 9. outline tier — which source actually won, and where the thin ones are
-  {
-    const land = D.datasets.datasets.find(d => d.id === 'land-area').values;
-    const small = codes.filter(c => E[c].hasGeometry && land[c] != null)
-      .sort((a, b) => land[a] - land[b]).slice(0, 20);
-    const el = { s: 'wait', what: 'The smallest countries get a detailed outline', detail: 'measuring…', codes: [] };
-    checks.push(el);
-    Promise.all(small.map(async c => {
-      try {
-        const r = await fetch(`data/shapes/${c}.json`);
-        if (!r.ok) return [c, null, '—'];
-        const j = await r.json();
-        return [c, j.polygons.reduce((a, p) => a + p.length, 0), j.src ?? 'unrecorded'];
-      } catch { return [c, null, '—']; }
-    })).then(res => {
-      const thin = res.filter(([, n]) => n != null && n < 100);
-      const ne = thin.filter(([, , s]) => s === 'ne');
-      el.s = thin.length > ne.length ? 'look' : 'pass';
-      el.detail = thin.length === 0
-        ? `All ${res.length} of the smallest countries carry 100+ point outlines.`
-        : thin.length === ne.length
-          ? `${ne.length} of the ${res.length} smallest ship under 100 points, and every one of them is a Natural Earth fallback — geoBoundaries has no ADM0 release for those territories, so this is the ceiling, not a bug.`
-          : `${thin.length} of the ${res.length} smallest ship under 100 points, and ${thin.length - ne.length} of those came from geoBoundaries — those are the ones worth a look.`;
-      el.codes = res.sort((a, b) => (a[1] ?? 1e9) - (b[1] ?? 1e9))
-        .map(([c, n, s]) => `${c}(${E[c].name}) ${n ?? 'missing'}pts·${s}`);
-      renderChecks();
-    });
-  }
-
-  function renderChecks() {
-    document.getElementById('checks').innerHTML = checks.map(c =>
-      `<div class="check"><span class="chip" data-s="${c.s}">${{ pass: 'pass', look: 'look', fail: 'fail', wait: '…' }[c.s]}</span>` +
-      `<div><div class="what">${esc(c.what)}</div><div class="detail">${c.detail}</div>` +
-      (c.codes?.length ? `<div class="codes">${esc(list(c.codes))}</div>` : '') + `</div></div>`).join('');
-  }
-  renderChecks();
 }
 
 /* ============================================================
@@ -741,7 +554,7 @@ const FINDINGS = [
       Vatican 7 → 77, Singapore 665 → 2228.</p>`,
     fix: `Each shape file now also records <code>"src"</code> — <span class="mono">gb-full</span>,
       <span class="mono">gb-simplified</span> or <span class="mono">ne</span> — so the tier split is
-      auditable from the shipped data. The live check above reads it.`,
+      auditable from the shipped data. The outline check in Coverage reads it.`,
   },
   {
     sev: 'fixed', title: 'Fixed — four religion-parser bugs, all from the same few lines',
@@ -771,7 +584,8 @@ const FINDINGS = [
       <span class="mono">years</span> map alongside <span class="mono">values</span>.</p>
       <p>A missing year is now meaningful rather than absent: it marks a
       <span class="mono">MANUAL_VALUES</span> backfill, which carries a provenance string instead.
-      The two live checks above read this, so staleness is now detectable rather than invisible.</p>`,
+      Two of the integrity checks in Coverage read this, so staleness is detectable rather than
+      invisible.</p>`,
   },
   {
     sev: 'fixed', title: 'Fixed — the geometry builds fetch their own inputs',
