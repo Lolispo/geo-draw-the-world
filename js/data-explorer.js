@@ -1,7 +1,7 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap } from './datasets.js';
 import { readFlagColors, missingFromImage } from './flag-colors.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
@@ -620,6 +620,10 @@ export class DataExplorer {
       { key: 'hasReligion', label: 'Rel', has: (e) => e.hasReligion },
       ...metrics.map((m) => ({
         key: m.id, label: shortLabel[m.id] || m.name, has: (e) => !!e.metrics[m.id],
+        // A gap the source explains is not a gap anyone can act on, so it does not
+        // count as one — otherwise the gap view fills with 439 rows of "the World Bank
+        // does not publish this" and stops being worth opening (TODOS #70).
+        explained: (e) => (e.metrics[m.id] ? null : getKnownGap(m.id, e.code)),
       })),
     ];
 
@@ -627,7 +631,8 @@ export class DataExplorer {
     if (!getExploreTerritories()) ents = ents.filter((e) => !e.optional);
     if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
 
-    const missingCount = (e) => COLS.reduce((n, c) => n + (c.has(e) ? 0 : 1), 0);
+    const open = (c, e) => !c.has(e) && !c.explained?.(e);
+    const missingCount = (e) => COLS.reduce((n, c) => n + (open(c, e) ? 1 : 0), 0);
     const aggregates = ents.filter((e) => e.type === 'aggregate').length;
     const totalRows = ents.length;
     const complete = ents.filter((e) => missingCount(e) === 0).length;
@@ -642,12 +647,13 @@ export class DataExplorer {
       // because it is not a place — counting that as a gap kept three complete columns
       // on screen for one row nobody can act on.
       ents = ents.filter((e) => e.type !== 'aggregate' && missingCount(e) > 0);
-      cols = COLS.filter((c) => ents.some((e) => !c.has(e)));
+      cols = COLS.filter((c) => ents.some((e) => open(c, e)));
     }
 
     const sorted = this.covSort && cols.find((c) => c.key === this.covSort.key);
     if (sorted) {
-      ents = [...ents].sort((a, b) => ((sorted.has(a) ? 1 : 0) - (sorted.has(b) ? 1 : 0)) * this.covSort.dir
+      const rank = (e) => (open(sorted, e) ? 0 : sorted.has(e) ? 2 : 1);   // open, explained, present
+      ents = [...ents].sort((a, b) => (rank(a) - rank(b)) * this.covSort.dir
         || a.name.localeCompare(b.name));
     }
 
@@ -663,7 +669,8 @@ export class DataExplorer {
 
     const legend = document.createElement('div');
     legend.className = 'explore-blurb cov-legend';
-    legend.textContent = 'Click a column heading to sort its gaps to the top · '
+    legend.textContent = '– = the source publishes no value, reason on hover — not counted as a gap · '
+      + 'Click a column heading to sort its gaps to the top · '
       + 'Colors = the curated colors the color quizzes score against, checked against each '
       + 'flag image as you scroll — ⚠ means a color was not found in it';
     list.appendChild(legend);
@@ -735,7 +742,17 @@ export class DataExplorer {
       typeTd.className = 'cov-type';
       typeTd.textContent = e.type;
 
-      tr.append(flagTd, nameTd, typeTd, ...cols.map((c) => (c.cell ? c.cell(e) : cell(c.has(e)))));
+      tr.append(flagTd, nameTd, typeTd, ...cols.map((c) => {
+        if (c.cell) return c.cell(e);
+        const why = c.has(e) ? null : c.explained?.(e);
+        if (!why) return cell(c.has(e));
+        // Muted dash, not a cross: the figure is missing and that is understood.
+        const td = document.createElement('td');
+        td.className = 'cov-cell cov-explained';
+        td.textContent = '\u2013';
+        td.title = why;
+        return td;
+      }));
       tbody.appendChild(tr);
     }
     table.appendChild(tbody);

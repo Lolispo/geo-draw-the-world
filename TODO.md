@@ -26,7 +26,7 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
-## 69. Flag-colour review moves into Coverage; data-map becomes pipeline-only
+## 71. Flag-colour review moves into Coverage; data-map becomes pipeline-only
 
 **REVIEW:** `#/explore/coverage` — the **Colors** column now shows the curated colours
 themselves instead of a tick, and checks each against that entity's own flag image as the

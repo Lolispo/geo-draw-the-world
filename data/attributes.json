@@ -124,7 +124,8 @@
           "pct": 4.5
         }
       ],
-      "religionRaw": "Protestant 73.2% (includes Anglican 22.7%, Methodist 19.4%, Pentecostal 10.5%, Seventh Day Adventist 8.3%, Baptist 7.1%, Church of God 4.9%, Presbyterian 0.2%, Brethren 0.1%), Roman Catholic 6.8%, Jehovah's Witness 1.1%, other Christian 10.9%, other 3.2%, unspecified 0.3%, none 4.5% (2011 est.)"
+      "religionRaw": "Protestant 73.2% (includes Anglican 22.7%, Methodist 19.4%, Pentecostal 10.5%, Seventh Day Adventist 8.3%, Baptist 7.1%, Church of God 4.9%, Presbyterian 0.2%, Brethren 0.1%), Roman Catholic 6.8%, Jehovah's Witness 1.1%, other Christian 10.9%, other 3.2%, unspecified 0.3%, none 4.5% (2011 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "al": {
       "capital": "Tirana",
@@ -243,7 +244,8 @@
           "pct": 98.3
         }
       ],
-      "religionRaw": "Christian 98.3%, other &lt;1%, unaffiliated &lt;1% (2020 est.)"
+      "religionRaw": "Christian 98.3%, other &lt;1%, unaffiliated &lt;1% (2020 est.)",
+      "independenceRaw": "none (territory of the US)"
     },
     "at": {
       "capital": "Vienna",
@@ -357,7 +359,8 @@
           "pct": 0.5
         }
       ],
-      "religionRaw": "Roman Catholic 75.3%, Protestant 4.9% (includes Methodist 0.9%, Adventist 0.9%, Anglican 0.4%, other Protestant 2.7%), Jehovah's Witness 1.7%, other 12%, none 5.5%, unspecified 0.5% (2010 est.)"
+      "religionRaw": "Roman Catholic 75.3%, Protestant 4.9% (includes Methodist 0.9%, Adventist 0.9%, Anglican 0.4%, other Protestant 2.7%), Jehovah's Witness 1.7%, other 12%, none 5.5%, unspecified 0.5% (2010 est.)",
+      "independenceRaw": "none (part of the Kingdom of the Netherlands)"
     },
     "ax": {
       "capital": "Mariehamn"
@@ -646,7 +649,8 @@
       "independenceRaw": "1 August 1960 (from France)"
     },
     "bl": {
-      "capital": "Gustavia"
+      "capital": "Gustavia",
+      "independenceRaw": "none (overseas collectivity of France)"
     },
     "bm": {
       "capital": "Hamilton",
@@ -684,7 +688,8 @@
           "pct": 6.2
         }
       ],
-      "religionRaw": "Protestant 46.2% (includes Anglican 15.8%, African Methodist Episcopal 8.6%, Seventh Day Adventist 6.7%, Pentecostal 3.5%, Methodist 2.7%, Presbyterian 2.0%, Church of God 1.6%, Baptist 1.2%, Salvation Army 1.1%, Brethren 1.0%, other Protestant 2.0%), Roman Catholic 14.5%, Jehovah's Witness 1.3%, other Christian 9.1%, Muslim 1%, other 3.9%, none 17.8%, unspecified 6.2% (2010 est.)"
+      "religionRaw": "Protestant 46.2% (includes Anglican 15.8%, African Methodist Episcopal 8.6%, Seventh Day Adventist 6.7%, Pentecostal 3.5%, Methodist 2.7%, Presbyterian 2.0%, Church of God 1.6%, Baptist 1.2%, Salvation Army 1.1%, Brethren 1.0%, other Protestant 2.0%), Roman Catholic 14.5%, Jehovah's Witness 1.3%, other Christian 9.1%, Muslim 1%, other 3.9%, none 17.8%, unspecified 6.2% (2010 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "bn": {
       "capital": "Bandar Seri Begawan",
@@ -999,7 +1004,8 @@
           "pct": 6.3
         }
       ],
-      "religionRaw": "Muslim (predominantly Sunni) 75%, Anglican 3.5%, Roman Catholic 2.2%, none 12.9%, unspecified 6.3% (2016 est.)"
+      "religionRaw": "Muslim (predominantly Sunni) 75%, Anglican 3.5%, Roman Catholic 2.2%, none 12.9%, unspecified 6.3% (2016 est.)",
+      "independenceRaw": "none (territory of Australia)"
     },
     "cd": {
       "capital": "Kinshasa",
@@ -1495,7 +1501,8 @@
           "pct": 0.6
         }
       ],
-      "religionRaw": "Roman Catholic 72.8%, Pentecostal 6.6%, Protestant 3.2%, Adventist 3%, Jehovah's Witness 2%, Evangelical 1.9%, other 3.8%, none 6%, unspecified 0.6% (2011 est.)"
+      "religionRaw": "Roman Catholic 72.8%, Pentecostal 6.6%, Protestant 3.2%, Adventist 3%, Jehovah's Witness 2%, Evangelical 1.9%, other 3.8%, none 6%, unspecified 0.6% (2011 est.)",
+      "independenceRaw": "none (part of the Kingdom of the Netherlands)"
     },
     "cx": {
       "capital": "The Settlement",
@@ -1534,7 +1541,8 @@
           "pct": 27.7
         }
       ],
-      "religionRaw": "Muslim 19.4%, Buddhist 18.3%, Roman Catholic 8.8%, Protestant 6.5% (includes Anglican 3.6%, Uniting Church 1.2%, other 1.7%), other Christian 3.3%, other 0.6%, none 15.3%, unspecified 27.7% (2016 est.)"
+      "religionRaw": "Muslim 19.4%, Buddhist 18.3%, Roman Catholic 8.8%, Protestant 6.5% (includes Anglican 3.6%, Uniting Church 1.2%, other 1.7%), other Christian 3.3%, other 0.6%, none 15.3%, unspecified 27.7% (2016 est.)",
+      "independenceRaw": "none (territory of Australia)"
     },
     "cy": {
       "capital": "Nicosia",
@@ -1987,7 +1995,8 @@
           "pct": 6
         }
       ],
-      "religionRaw": "Christian 57.1%, other 1.6%, none 35.4%, unspecified 6% (2016 est.)"
+      "religionRaw": "Christian 57.1%, other 1.6%, none 35.4%, unspecified 6% (2016 est.)",
+      "independenceRaw": "none (overseas territory of the UK; also claimed by Argentina)"
     },
     "fm": {
       "capital": "Palikir",
@@ -2041,7 +2050,8 @@
           "pct": 8.9
         }
       ],
-      "religionRaw": "Christian 87% (predominantly Evangelical Lutheran), other 0.9%, none 3.7%, unspecified 8.9% (2011 est.)"
+      "religionRaw": "Christian 87% (predominantly Evangelical Lutheran), other 0.9%, none 3.7%, unspecified 8.9% (2011 est.)",
+      "independenceRaw": "none (self-governing overseas administrative division of Denmark)"
     },
     "fr": {
       "capital": "Paris",
@@ -2236,7 +2246,8 @@
           "name": "Roman Catholic"
         }
       ],
-      "religionRaw": "Protestant (Anglican, Presbyterian, Baptist, Congregational, Methodist), Roman Catholic"
+      "religionRaw": "Protestant (Anglican, Presbyterian, Baptist, Congregational, Methodist), Roman Catholic",
+      "independenceRaw": "none (British Crown dependency)"
     },
     "gh": {
       "capital": "Accra",
@@ -2306,7 +2317,8 @@
           "pct": 0.1
         }
       ],
-      "religionRaw": "Roman Catholic 72.1%, Church of England 7.7%, other Christian 3.8%, Muslim 3.6%, Jewish 2.4%, Hindu 2%, other 1.1%, none 7.1%, unspecified 0.1% (2012 est.)"
+      "religionRaw": "Roman Catholic 72.1%, Church of England 7.7%, other Christian 3.8%, Muslim 3.6%, Jewish 2.4%, Hindu 2%, other 1.1%, none 7.1%, unspecified 0.1% (2012 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "gl": {
       "capital": "Nuuk",
@@ -2318,7 +2330,8 @@
           "name": "traditional Inuit spiritual beliefs"
         }
       ],
-      "religionRaw": "Evangelical Lutheran, traditional Inuit spiritual beliefs"
+      "religionRaw": "Evangelical Lutheran, traditional Inuit spiritual beliefs",
+      "independenceRaw": "none (extensive self-rule as part of the Kingdom of Denmark)"
     },
     "gm": {
       "capital": "Banjul",
@@ -2472,7 +2485,8 @@
           "pct": 1.7
         }
       ],
-      "religionRaw": "Christian (predominantly Roman Catholic) 94.2%, folk religions 1.5%, Buddhist 1.1%, other 1.6%, unaffiliated 1.7% (2020 est.)"
+      "religionRaw": "Christian (predominantly Roman Catholic) 94.2%, folk religions 1.5%, Buddhist 1.1%, other 1.6%, unaffiliated 1.7% (2020 est.)",
+      "independenceRaw": "none (territory of the US)"
     },
     "gw": {
       "capital": "Bissau",
@@ -2573,7 +2587,8 @@
           "pct": 54.3
         }
       ],
-      "religionRaw": "Buddhist or Taoist 27.9%, Protestant 6.7%, Roman Catholic 5.3%, Muslim 4.2%, Hindu 1.4%, Sikh 0.2%, other or none 54.3% (2016 est.)"
+      "religionRaw": "Buddhist or Taoist 27.9%, Protestant 6.7%, Roman Catholic 5.3%, Muslim 4.2%, Hindu 1.4%, Sikh 0.2%, other or none 54.3% (2016 est.)",
+      "independenceRaw": "none (special administrative region of China)"
     },
     "hn": {
       "capital": "Tegucigalpa",
@@ -2835,7 +2850,8 @@
           "pct": 43.8
         }
       ],
-      "religionRaw": "Christian 54.7%, Muslim 0.5%, Buddhist 0.5%, Hindu 0.4%, Jewish 0.2%, none 43.8% (2021 est.)"
+      "religionRaw": "Christian 54.7%, Muslim 0.5%, Buddhist 0.5%, Hindu 0.4%, Jewish 0.2%, none 43.8% (2021 est.)",
+      "independenceRaw": "none (British Crown dependency)"
     },
     "in": {
       "capital": "New Delhi",
@@ -3009,7 +3025,8 @@
           "pct": 13.1
         }
       ],
-      "religionRaw": "Christian 85.2%, Baha'i 0.3%, Hindu 0.1%, Jewish 0.1%, Muslim 0.1%, atheist 1.1%, agnostic 13.1% (2020 est.)"
+      "religionRaw": "Christian 85.2%, Baha'i 0.3%, Hindu 0.1%, Jewish 0.1%, Muslim 0.1%, atheist 1.1%, agnostic 13.1% (2020 est.)",
+      "independenceRaw": "none (British Crown dependency)"
     },
     "jm": {
       "capital": "Kingston",
@@ -3323,7 +3340,8 @@
           "pct": 1.4
         }
       ],
-      "religionRaw": "Protestant 60.8% (includes Church of God 19.5%, Seventh Day Adventist 8.7%, non-denominational 8.3%, Baptist 6.9%, Pentecostal 6.8%, Presbyterian/United Church 5.7%, Anglican 2.8%, Wesleyan Holiness 1.5%, Methodist 0.5%), Roman Catholic 13.6%, Hindu 1.7%, Jehovah's Witness 0.9%, other 4.8%, none 16.7%, unspecified 1.4% (2021 est.)"
+      "religionRaw": "Protestant 60.8% (includes Church of God 19.5%, Seventh Day Adventist 8.7%, non-denominational 8.3%, Baptist 6.9%, Pentecostal 6.8%, Presbyterian/United Church 5.7%, Anglican 2.8%, Wesleyan Holiness 1.5%, Methodist 0.5%), Roman Catholic 13.6%, Hindu 1.7%, Jehovah's Witness 0.9%, other 4.8%, none 16.7%, unspecified 1.4% (2021 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "kz": {
       "capital": "Astana",
@@ -3797,7 +3815,8 @@
           "name": "Hindu"
         }
       ],
-      "religionRaw": "Roman Catholic, Jehovah's Witness, Protestant, Hindu"
+      "religionRaw": "Roman Catholic, Jehovah's Witness, Protestant, Hindu",
+      "independenceRaw": "none (overseas collectivity of France)"
     },
     "mg": {
       "capital": "Antananarivo",
@@ -4007,7 +4026,8 @@
           "pct": 15.4
         }
       ],
-      "religionRaw": "folk religion 58.9%, Buddhist 17.3%, Christian 7.2%, other 1.2%, none 15.4% (2020 est.)"
+      "religionRaw": "folk religion 58.9%, Buddhist 17.3%, Christian 7.2%, other 1.2%, none 15.4% (2020 est.)",
+      "independenceRaw": "none (special administrative region of China)"
     },
     "mp": {
       "capital": "Saipan",
@@ -4016,7 +4036,8 @@
           "name": "Christian"
         }
       ],
-      "religionRaw": "Christian (Roman Catholic majority, although traditional beliefs and taboos may still be found)"
+      "religionRaw": "Christian (Roman Catholic majority, although traditional beliefs and taboos may still be found)",
+      "independenceRaw": "none (commonwealth in political union with the US)"
     },
     "mq": {
       "capital": "Fort-de-France"
@@ -4069,7 +4090,8 @@
           "pct": 7.9
         }
       ],
-      "religionRaw": "Protestant 71.4% (includes Anglican 17.7%, Pentecostal/Full Gospel 16.1%, Seventh Day Adventist 15%, Methodist 13.9%, Church of God 6.7%, other Protestant 2%), Roman Catholic 11.4%, Rastafarian 1.4%, Hindu 1.2%, Jehovah's Witness 1%, Muslim 0.4%, other/not stated 5.1%, none 7.9% (2018 est.)"
+      "religionRaw": "Protestant 71.4% (includes Anglican 17.7%, Pentecostal/Full Gospel 16.1%, Seventh Day Adventist 15%, Methodist 13.9%, Church of God 6.7%, other Protestant 2%), Roman Catholic 11.4%, Rastafarian 1.4%, Hindu 1.2%, Jehovah's Witness 1%, Muslim 0.4%, other/not stated 5.1%, none 7.9% (2018 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "mt": {
       "capital": "Valletta",
@@ -4303,7 +4325,8 @@
           "pct": 10.4
         }
       ],
-      "religionRaw": "Christian 85.2%, Muslim 2.8%, other 1.6%, unaffiliated 10.4% (2020 est.)"
+      "religionRaw": "Christian 85.2%, Muslim 2.8%, other 1.6%, unaffiliated 10.4% (2020 est.)",
+      "independenceRaw": "none (overseas collectivity of France)"
     },
     "ne": {
       "capital": "Niamey",
@@ -4357,7 +4380,8 @@
           "pct": 9.5
         }
       ],
-      "religionRaw": "Protestant 46.8% (Anglican 29.2%, Uniting Church in Australia 9.8%, Presbyterian 2.9%, Seventh Day Adventist 2.7%, other 2.2%), Roman Catholic 12.6%, other Christian 2.9%, other 1.4%, none 26.7%, unspecified 9.5% (2016 est.)"
+      "religionRaw": "Protestant 46.8% (Anglican 29.2%, Uniting Church in Australia 9.8%, Presbyterian 2.9%, Seventh Day Adventist 2.7%, other 2.2%), Roman Catholic 12.6%, other Christian 2.9%, other 1.4%, none 26.7%, unspecified 9.5% (2016 est.)",
+      "independenceRaw": "none (territory of Australia)"
     },
     "ng": {
       "capital": "Abuja",
@@ -4709,7 +4733,8 @@
           "pct": 6
         }
       ],
-      "religionRaw": "Protestant 54%, Roman Catholic 30%, other 10%, no religion 6%"
+      "religionRaw": "Protestant 54%, Roman Catholic 30%, other 10%, no religion 6%",
+      "independenceRaw": "none (overseas land of France)"
     },
     "pg": {
       "capital": "Port Moresby",
@@ -4823,7 +4848,8 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Roman Catholic 99%, other 1%"
+      "religionRaw": "Roman Catholic 99%, other 1%",
+      "independenceRaw": "none (overseas collectivity collectivity of France; has been under French control since 1763)"
     },
     "pn": {
       "capital": "Adamstown",
@@ -4833,7 +4859,8 @@
           "pct": 100
         }
       ],
-      "religionRaw": "Seventh Day Adventist 100%"
+      "religionRaw": "Seventh Day Adventist 100%",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "pr": {
       "capital": "San Juan",
@@ -4859,7 +4886,8 @@
           "pct": 7
         }
       ],
-      "religionRaw": "Roman Catholic 56%, Protestant 33% (largely Pentecostal), other 2%, atheist 1%, none 7% (2014 est.)"
+      "religionRaw": "Roman Catholic 56%, Protestant 33% (largely Pentecostal), other 2%, atheist 1%, none 7% (2014 est.)",
+      "independenceRaw": "none (territory of the US with commonwealth status)"
     },
     "ps": {
       "religion": [
@@ -5332,7 +5360,8 @@
           "pct": 1.1
         }
       ],
-      "religionRaw": "Anglican 63.2%, unspecified 11.4%, no religion 9%, Jehovah's Witness 3.8%, Baptist 2.3%, Salvation Army 2%, Roman Catholic 2.2%, Seventh Day Adventist 1.9%, New Apostolic 1.6%, other Christian 1.4%, other 1.1% (2021 est.)"
+      "religionRaw": "Anglican 63.2%, unspecified 11.4%, no religion 9%, Jehovah's Witness 3.8%, Baptist 2.3%, Salvation Army 2%, Roman Catholic 2.2%, Seventh Day Adventist 1.9%, New Apostolic 1.6%, other Christian 1.4%, other 1.1% (2021 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "si": {
       "capital": "Ljubljana",
@@ -5654,7 +5683,8 @@
           "pct": 2.4
         }
       ],
-      "religionRaw": "Protestant 41.9% (Pentecostal 14.7%, Methodist 10.0%, Seventh Day Adventist 6.6%, Baptist 4.7%, Anglican 3.1%, other Protestant 2.8%), Roman Catholic 33.1%, Hindu 5.2%, Christian 4.1%, Jehovah's Witness 1.7%, Evangelical 1.4%, Muslim/Jewish 1.1%, other 1.3% (includes Buddhist, Sikh, Rastafarian), none 7.9%, no response 2.4% (2011 est.)"
+      "religionRaw": "Protestant 41.9% (Pentecostal 14.7%, Methodist 10.0%, Seventh Day Adventist 6.6%, Baptist 4.7%, Anglican 3.1%, other Protestant 2.8%), Roman Catholic 33.1%, Hindu 5.2%, Christian 4.1%, Jehovah's Witness 1.7%, Evangelical 1.4%, Muslim/Jewish 1.1%, other 1.3% (includes Buddhist, Sikh, Rastafarian), none 7.9%, no response 2.4% (2011 est.)",
+      "independenceRaw": "none (part of the Kingdom of the Netherlands)"
     },
     "sy": {
       "capital": "Damascus",
@@ -5718,7 +5748,8 @@
           "pct": 14
         }
       ],
-      "religionRaw": "Protestant 72.8% (Baptist 35.8%, Church of God 11.7%, Anglican 10%, Methodist 9.3%, Seventh Day Adventist 6%), Roman Catholic 11.4%, Jehovah's Witness 1.8%, other 14% (2006 est.)"
+      "religionRaw": "Protestant 72.8% (Baptist 35.8%, Church of God 11.7%, Anglican 10%, Methodist 9.3%, Seventh Day Adventist 6%), Roman Catholic 11.4%, Jehovah's Witness 1.8%, other 14% (2006 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "td": {
       "capital": "N'Djamena",
@@ -5844,6 +5875,7 @@
         }
       ],
       "religionRaw": "Congregational Christian Church 50.4%, Roman Catholic 38.7%, Presbyterian 5.9%, other Christian 4.2%, unspecified 0.8% (2016 est.)",
+      "independenceRaw": "none (territory of New Zealand)",
       "capitalNote": "No capital; each of the three atolls has its own administrative centre"
     },
     "tl": {
@@ -6372,7 +6404,8 @@
           "pct": 2.4
         }
       ],
-      "religionRaw": "Protestant 70.2% (Methodist 17.6%, Church of God 10.4%, Anglican 9.5%, Seventh Day Adventist 9.0%, Pentecostal 8.2%, Baptist 7.4%, New Testament Church of God 6.9%, other Protestant 1.2%), Roman Catholic 8.9%, Jehovah's Witness 2.5%, Hindu 1.9%, other 6.2%, none 7.9%, unspecified 2.4% (2010 est.)"
+      "religionRaw": "Protestant 70.2% (Methodist 17.6%, Church of God 10.4%, Anglican 9.5%, Seventh Day Adventist 9.0%, Pentecostal 8.2%, Baptist 7.4%, New Testament Church of God 6.9%, other Protestant 1.2%), Roman Catholic 8.9%, Jehovah's Witness 2.5%, Hindu 1.9%, other 6.2%, none 7.9%, unspecified 2.4% (2010 est.)",
+      "independenceRaw": "none (overseas territory of the UK)"
     },
     "vi": {
       "capital": "Charlotte Amalie",
@@ -6398,7 +6431,8 @@
           "pct": 3.7
         }
       ],
-      "religionRaw": "Protestant 65.5%, Roman Catholic 27.1%, other Christians 2.2%, other 1.5%, none 3.7% (2010 est.)"
+      "religionRaw": "Protestant 65.5%, Roman Catholic 27.1%, other Christians 2.2%, other 1.5%, none 3.7% (2010 est.)",
+      "independenceRaw": "none (territory of the US)"
     },
     "vn": {
       "capital": "Hanoi",
@@ -6483,7 +6517,8 @@
           "pct": 1
         }
       ],
-      "religionRaw": "Roman Catholic 99%, other 1%"
+      "religionRaw": "Roman Catholic 99%, other 1%",
+      "independenceRaw": "none (overseas collectivity of France)"
     },
     "ws": {
       "capital": "Apia",

@@ -173,9 +173,11 @@ function parseReligion(text) {
 function parseIndependence(text) {
   if (!text) return null;
   const raw = decodeEnt(text).trim();
-  // Territories and dependencies: "none (overseas department of France)". Not a
-  // parse failure — there is genuinely no date, so don't report it as unparsed.
-  if (/^none\b/i.test(raw)) return null;
+  // Territories and dependencies: "none (overseas department of France)". Not a parse
+  // failure — there is genuinely no date — but it is still an *answer*, and dropping it
+  // left 53 entities looking like nobody had got round to them. Kept, flagged, and not
+  // reported as unparsed (TODOS #70).
+  if (/^none\b/i.test(raw)) return { year: null, text: raw, none: true };
   const outside = raw.replace(/\([^)]*\)/g, ' ');
   const m = outside.match(/\b(\d{3,4})\b/);
   if (!m) return { year: null, text: raw };
@@ -256,7 +258,7 @@ for (const f of files) {
     // does — an unparsed entry should be visible, not invisible.
     if (indep.year != null) entry.independenceYear = indep.year;
     entry.independenceRaw = indep.text;
-    if (indep.year == null) unparsedIndependence.push(`${code} ${fbName}: ${indep.text.slice(0, 80)}`);
+    if (indep.year == null && !indep.none) unparsedIndependence.push(`${code} ${fbName}: ${indep.text.slice(0, 80)}`);
   }
   if (Object.keys(entry).length) {
     attributes[code] = entry;

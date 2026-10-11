@@ -152,8 +152,13 @@ for (const code of Object.keys(MANUAL_VALUES)) {
 
 const datasets = [];
 const usedCodes = new Set();
+// Which codes the World Bank actually returned a figure for, per indicator. A code we
+// carry that is absent here is a gap at the *source*, not a gap we forgot to fill —
+// which is a different thing and should not read the same (TODOS #70).
+const wbReported = new Map();
 for (const ind of INDICATORS) {
   const best = await fetchIndicator(ind.wb);
+  wbReported.set(ind.id, new Set(best.keys()));
   const values = {}, years = {};
   for (const [iso2, v] of best) {
     values[iso2] = (ind.format === 'years' || ind.format === 'percent') ? Math.round(v.value * 10) / 10 : Math.round(v.value);
@@ -297,8 +302,67 @@ for (const code of [...usedCodes].sort()) {
   countries[code] = entry;
 }
 
+// ---- known gaps -----------------------------------------------------------
+// A missing value is not self-explanatory: "nobody has entered it" and "the source
+// publishes nothing" look identical in the data and are completely different jobs.
+// Only the build knows which, because only the build saw the source's answer — so it
+// records the reason here rather than leaving the app to guess (TODOS #70).
+//
+// This says a figure is *unavailable from its source*, which is not the same as
+// unobtainable: Taiwan's metrics are absent from the World Bank and present in
+// MANUAL_VALUES. So the reason names the source and what it did, and stops there.
+// A gap whose reason is known but not visible to the build. Kept tiny and named — a
+// rule would have to over-reach to cover one country, and over-reaching here means
+// silently writing off work that is actually doable.
+const MANUAL_GAPS = {
+  'independence-year': {
+    et: 'Never colonised, so there is no independence event to record \u2014 the World Factbook '
+      + 'gives prose ("oldest independent country in Africa") rather than a date. Belongs in the '
+      + 'curated oldest-statehood dataset instead (TODOS #33)',
+  },
+};
+
+const knownGaps = {};
+const entities = (await readJsonIfPresent('data/entities.json'))?.entities;
+if (!entities) {
+  console.log('\n! data/entities.json missing — skipping known gaps. Run build-entities.mjs, then re-run this.');
+} else {
+  const attrs = (await readJsonIfPresent('data/attributes.json'))?.attributes || {};
+  const elec = (await readJsonIfPresent('data/electricity.json'))?.electricity || {};
+  const codes = Object.keys(entities).filter((c) => entities[c].type !== 'aggregate');
+  for (const ds of datasets) {
+    const reasons = {};
+    for (const code of codes) {
+      if (ds.values[code] != null) continue;
+      const name = entities[code].name;
+      let why = null;
+      if (wbReported.has(ds.id)) {
+        why = nameByIso2.has(code)
+          ? `The World Bank reports this indicator but publishes no value for ${name} in 2015-2023`
+          : `${name} is not a World Bank reporting economy`;
+      } else if (ds.id === 'independence-year') {
+        const raw = attrs[code]?.independenceRaw;
+        if (raw && /^none\b/i.test(raw)) why = `The World Factbook records no independence event for ${name}`;
+        // No Independence field at all: the Factbook folds the entity into its parent
+        // (the French overseas departements, Svalbard, Aland) or does not cover it as a
+        // state (the de-facto ones). We looked; there is nothing to parse.
+        else if (!raw) why = `The World Factbook has no independence entry for ${name}`;
+      } else if (ds.id.startsWith('elec-')) {
+        if (!elec[code]) why = `Ember publishes no electricity generation data for ${name}`;
+      }
+      why = MANUAL_GAPS[ds.id]?.[code] || why;
+      if (why) reasons[code] = why;
+    }
+    if (Object.keys(reasons).length) knownGaps[ds.id] = reasons;
+  }
+  const n = Object.values(knownGaps).reduce((a, r) => a + Object.keys(r).length, 0);
+  const total = datasets.reduce((a, ds) => a + codes.filter((c) => ds.values[c] == null).length, 0);
+  console.log(`\nKnown gaps: ${n} of ${total} missing values explained by their source`);
+  for (const [id, r] of Object.entries(knownGaps)) console.log(`  ${id}: ${Object.keys(r).length}`);
+}
+
 const continents = Object.keys(CONTINENTS);
-const out = { continents, countries, datasets, provenance: PROVENANCE };
+const out = { continents, countries, datasets, provenance: PROVENANCE, knownGaps };
 await writeFile(OUT, JSON.stringify(out, null, 2) + '\n');
 
 console.log(`\nWrote ${Object.keys(countries).length} countries, ${datasets.length} datasets to ${OUT}`);

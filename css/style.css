@@ -2661,6 +2661,10 @@ canvas {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+/* A gap the source explains. Muted and dashed rather than a red cross: the figure is
+   missing, that is understood, and nobody needs to act on it. */
+.cov-explained { color: var(--text-dim); opacity: 0.45; cursor: help; }
+
 /* Coverage: sortable headings. The gaps are what you are looking for, so the first
    click on a column brings them up rather than pushing them down. */
 .coverage-table th.is-sortable { cursor: pointer; user-select: none; white-space: nowrap; }

@@ -203,6 +203,18 @@ export function canCombine(codeA, codeB) {
   return a?.claimedBy !== codeB && b?.claimedBy !== codeA;
 }
 
+// Why a metric has no value for this entity, or null if nobody has said. Written by
+// build-datasets.mjs, which is the only place that saw what the source answered — "the
+// World Bank publishes nothing for Anguilla" and "nobody has filled this in" look
+// identical in the data and are completely different jobs (TODOS #70).
+//
+// It means unavailable from the configured source, which is not the same as
+// unobtainable: Taiwan's figures are absent from the World Bank and present in the
+// manual backfill. So it marks a gap as explained, never as closed.
+export function getKnownGap(metricId, code) {
+  return _data?.knownGaps?.[metricId]?.[code] || null;
+}
+
 export function getContinents() {
   return _data ? _data.continents : [];
 }
