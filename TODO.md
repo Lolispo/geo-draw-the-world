@@ -26,6 +26,40 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
+## 66. Flag-colour review moves into Coverage; data-map becomes pipeline-only
+
+**REVIEW:** `#/explore/coverage` — the **Colors** column now shows the curated colours
+themselves instead of a tick, and checks each against that entity's own flag image as the
+row scrolls into view. Turn **Territories: On** to see all 251. Scan the column beside the
+flag thumbnail: 13 entities carry a ⚠ (Azerbaijan, Belize, Comoros, Dominica, Honduras,
+Mauritania, Palau, Panama, Saint Vincent, Slovenia, Solomon Islands, South Sudan,
+Uzbekistan), with the colour the image lacks ringed in red. Hover the ⚠ for what was not
+found. Then open `/data-map.html` and check it still reads as a page about the *pipeline* —
+the coverage table and flag board are gone from it.
+
+**✅ DONE 2026-10-11** — Owner's call: this is in-app information, not something that
+belongs on a page outside the app. Filling the last 52 colour gaps had left Coverage's
+Colors column reading ✓ for all 251, so it had stopped carrying information; the question
+had moved from "are there any" to "are they right".
+
+The reader lives in `js/flag-colors.js` rather than being copied out of `data-map.html`,
+with its thresholds and the evidence for them beside the code. Checks run through an
+`IntersectionObserver` as rows scroll in, so the table renders as fast as before and an
+unchecked row simply shows its swatches — absence of a warning is never a claim.
+`datasets.js` gains `loadFlagColors`/`getFlagColors` so the quizzes and the board share one
+loader. Verified against all 251: the in-app check reproduces the old board's worklist
+exactly, same 13 entities.
+
+`data-map.html` keeps the provenance graph, the cross-file integrity checks, the dated
+review and the rebuild order — the things that are about the repo rather than about
+countries.
+
+**Still open:** the 11 integrity checks are *entity*-level and were meant to move in-app
+too (owner, 2026-10-11). They are still on `data-map.html`, because they need a home in the
+app first — probably a health strip above the Coverage table. Nothing is lost meanwhile.
+
+---
+
 ## 35. Draw the World: merge the sizing stage into placement
 
 **REVIEW:** play a few rounds of Draw the World (any region). After you finish a drawing you
