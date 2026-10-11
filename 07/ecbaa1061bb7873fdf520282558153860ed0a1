@@ -1,0 +1,24 @@
+js/explorer-map.js
+  s_07a3d60f829d3a::t_4f133b59026a58 43-47,89-96,105-114,125-126,128-130
+js/data-explorer.js
+  s_07a3d60f829d3a::t_4f133b59026a58 142,252-253,270-272,274,320-321,377-382
+  s_07a3d60f829d3a::t_521d707ccf8227 278-283,302-306,309
+TODO.md
+  s_07a3d60f829d3a::t_f10171a583007b 1602-1612,1621-1655
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "07ecbaa1061bb7873fdf520282558153860ed0a1",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
