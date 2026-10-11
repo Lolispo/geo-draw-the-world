@@ -1,0 +1,27 @@
+js/shape-handles.js
+  s_07a3d60f829d3a::t_4843215ba92959 24-28,51-59,69,77
+  s_07a3d60f829d3a::t_83baf7c2e352a6 17-23,29,60-68,78-86,111-112
+  s_07a3d60f829d3a::t_79ae50c587bd82 70
+js/main.js
+  s_07a3d60f829d3a::t_fc6ca150710a08 197-198,306
+js/world-canvas.js
+  s_07a3d60f829d3a::t_4843215ba92959 475-477
+TODO.md
+  s_07a3d60f829d3a::t_17eef990ae7b98 1656-1687
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3476d6012e4ab965ff8ea2c77a1362c9e94c16d5",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
