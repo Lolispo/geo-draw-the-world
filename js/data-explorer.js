@@ -69,14 +69,16 @@ export class DataExplorer {
     this.view = 'rank';      // one of VIEWS
     this.order = 'hi';       // one of ORDERS, shared by the rows views
     this.showOutlines = false;  // the outline column, which is what the old Shapes table was
-    this.bandScale = 'auto';    // 'auto' | 'rank' | 'log' — how the map cuts its bands
+    // Natural by default: it groups where the data has gaps, which is what a reader
+    // is looking for. The others are there to compare against (owner, 2026-10-11).
+    this.bandScale = 'natural';   // 'natural' | 'rank' | 'log'
     this._shuffleSeed = 1;
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
     this.showAliases = false;
     // Coverage only. `gapsOnly` hides both the entities with nothing missing and the
     // columns with nothing missing — at 251 rows x 17 columns the thing you are looking
-    // for is a tenth of the table, and the other nine tenths are in the way (TODOS #67).
+    // for is a tenth of the table, and the other nine tenths are in the way (TODOS #70).
     this.gapsOnly = false;
     this.covSort = null;     // { key, dir } — null means by name
   }
@@ -172,16 +174,6 @@ export class DataExplorer {
     return b;
   }
 
-  // Auto picks by the shape of the data: three orders of magnitude or more is a long
-  // tail, where equal-count bands put every rich country in one colour — Sweden and
-  // Germany came out identical on Total GDP (owner, 2026-10-11).
-  _mapScale(ds) {
-    if (this.bandScale !== 'auto') return this.bandScale;
-    const vals = Object.values(ds.values).filter((v) => v != null && v > 0);
-    if (vals.length < 10) return 'rank';
-    return Math.max(...vals) / Math.min(...vals) >= 1000 ? 'log' : 'rank';
-  }
-
   // Everything in this view answers to the Explorer's own territories setting.
   _pool() {
     return { territories: getExploreTerritories() };
@@ -247,7 +239,7 @@ export class DataExplorer {
     const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
       .filter((e) => inCountryPool(e.code, this._pool())).map((e) => e.code));
     map.setWorld(this._world).setMetric({
-      values: ds.values, format: ds.format, scope, scale: this._mapScale(ds),
+      values: ds.values, format: ds.format, scope, scale: this.bandScale,
     });
     map.render();
 
@@ -337,9 +329,9 @@ export class DataExplorer {
 
     if (this.view === 'map') {
       bar.appendChild(this._select([
-        { id: 'auto', label: 'Bands: auto' },
-        { id: 'rank', label: 'Bands: by rank' },
-        { id: 'log', label: 'Bands: by value' },
+        { id: 'natural', label: 'Bands: natural groups' },
+        { id: 'rank', label: 'Bands: equal count' },
+        { id: 'log', label: 'Bands: log scale' },
       ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
     }
 
@@ -377,7 +369,7 @@ export class DataExplorer {
     }
 
     // Coverage only: the whole point of this view is finding what is missing, and at
-    // 251 rows x 17 columns that is about a tenth of the table (TODOS #67).
+    // 251 rows x 17 columns that is about a tenth of the table (TODOS #70).
     if (this.view === 'coverage') {
       bar.appendChild(this._pill('🕳️ Gaps only', this.gapsOnly,
         'Hide the entities with nothing missing, and the columns with no gaps at all',

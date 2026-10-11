@@ -26,7 +26,7 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
-## 66. Flag-colour review moves into Coverage; data-map becomes pipeline-only
+## 69. Flag-colour review moves into Coverage; data-map becomes pipeline-only
 
 **REVIEW:** `#/explore/coverage` — the **Colors** column now shows the curated colours
 themselves instead of a tick, and checks each against that entity's own flag image as the
@@ -54,13 +54,20 @@ exactly, same 13 entities.
 review and the rebuild order — the things that are about the repo rather than about
 countries.
 
-**Still open:** the 11 integrity checks are *entity*-level and were meant to move in-app
-too (owner, 2026-10-11). They are still on `data-map.html`, because they need a home in the
-app first — probably a health strip above the Coverage table. Nothing is lost meanwhile.
+**Still open, and now unblocked:** the 11 integrity checks are *entity*-level and were meant
+to move in-app too. The owner's condition was "when we have done some view improvements"
+(2026-10-11) — #70 did those, so the condition is met. They are still on `data-map.html`;
+nothing is lost meanwhile.
+
+Note they are a different kind of thing from the flag colours. "Religion totals ≤ 105%" is a
+statement about the dataset, not about one entity, so it does not fit a per-row column the
+way Colors did — a health strip above the Coverage table is the likely shape. Several are
+already per-entity enough to become columns instead (`GDP per capita ≈ GDP ÷ population`,
+`source year present`), and those probably should.
 
 ---
 
-## 67. Coverage: sortable columns and a gaps-only view
+## 70. Coverage: sortable columns and a gaps-only view
 
 **REVIEW:** `#/explore/coverage?gaps=1&sort=exports` — opens straight into gap mode sorted
 by exports. Toggle **Gaps only** off and on: 251×17 becomes 84×13 with Territories on,
