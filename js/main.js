@@ -23,6 +23,7 @@ import { FlagPickerGame } from './flag-picker-game.js';
 import { ScoresScreen } from './scores-screen.js';
 import { openCountryPanel, closeCountryPanel } from './country-panel.js';
 import { readRoute, writeRoute } from './router.js';
+import { createShapeMatchPanel } from './shape-match-panel.js';
 
 // Every draw mode a URL can name (TODOS #56). Regions are added from
 // getCountryRegions() so the two lists cannot drift.
@@ -34,6 +35,7 @@ const DRAW_ROUTES = {
   streak: 'startStreak',
   continents: 'startContinents',
   world: 'startWorld',
+  freestyle: 'startFreestyle',
 };
 
 const STATES = {
@@ -44,6 +46,7 @@ const STATES = {
   DRAWING: 'drawing',
   PLACING: 'placing',
   RESULTS: 'results',
+  FREESTYLE: 'freestyle',
   COMPARE: 'compare',
   FLAG_QUIZ: 'flag-quiz',
   FLAG_PICKER: 'flag-picker',
@@ -69,6 +72,9 @@ class Game {
     this.scores = [];
     this.playerShapes = [];
     this.referenceShapes = [];
+    this._matchPanel = null;      // built on first use — the rail is not cheap to ignore
+    this._matchable = [];         // score indices that have a drawing to compare
+    this._matchAt = 0;
     this.devMode = false;
     this._allRefShapes = [];
     this._currentRegion = null;
@@ -92,6 +98,7 @@ class Game {
       drawing: document.getElementById('screen-drawing'),
       placing: document.getElementById('screen-placing'),
       results: document.getElementById('screen-results'),
+      freestyle: document.getElementById('screen-freestyle'),
       compare: document.getElementById('screen-compare'),
       'flag-quiz': document.getElementById('screen-flag-quiz'),
       'flag-picker': document.getElementById('screen-flag-picker'),
@@ -264,6 +271,7 @@ class Game {
       { id: 'btn-world', key: 'world' },
       { id: 'btn-quick3', key: 'quick3' },
       { id: 'btn-famous5', key: 'famous5' },
+      { id: 'btn-freestyle', key: 'freestyle' },
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
       { id: 'btn-flag-quiz', key: 'flag-quiz-10' },
@@ -294,6 +302,9 @@ class Game {
     document.getElementById('btn-speed').addEventListener('click', () => this.startSpeedRound());
     document.getElementById('btn-streak').addEventListener('click', () => this.startStreak());
     document.getElementById('btn-famous5').addEventListener('click', () => this.startFamous5());
+    document.getElementById('btn-freestyle').addEventListener('click', () => this.startFreestyle());
+    document.getElementById('btn-freestyle-again').addEventListener('click', () => this.startFreestyle());
+    document.getElementById('btn-freestyle-menu').addEventListener('click', () => this.openDrawMenu());
     // Hub activity cards
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
@@ -615,6 +626,42 @@ class Game {
     this._startGame();
   }
 
+  // Freestyle (TODOS #72): no country to draw, so no prompt, no map and no placement —
+  // draw a shape and the match panel says what it looks like. The mode toggles are all
+  // about a country you were given, so none of them apply here.
+  startFreestyle() {
+    this._route(['draw', 'freestyle']);
+    this.gameMode = 'freestyle';
+    this._currentRegion = 'freestyle';
+    this._speedActive = false;
+    this._streakActive = false;
+    this._stopTimer();
+    this._hideStreakCounter();
+    this.currentIndex = 0;
+    this.itemData = [];
+    this.scores = [];
+    this.playerShapes = [];
+    this.referenceShapes = [];
+    this.currentShape = null;
+    this._freestylePanel?.clear();
+
+    document.getElementById('drawing-label').textContent = 'Draw any country';
+    document.getElementById('btn-done-drawing').disabled = true;
+    document.getElementById('btn-skip').style.display = 'none';
+    this.showScreen(STATES.DRAWING);
+    this.drawingCanvas.activate();
+  }
+
+  _showFreestyleResult(polygons) {
+    if (!this._freestylePanel) {
+      this._freestylePanel = createShapeMatchPanel();
+      document.getElementById('freestyle-host').appendChild(this._freestylePanel.el);
+    }
+    this.showScreen(STATES.FREESTYLE);
+    playScoreReveal();
+    this._freestylePanel.show(polygons, { title: 'Your shape looks most like' });
+  }
+
   async startSpeedRound() {
     this._route(['draw', 'speed']);
     this.gameMode = 'speed';
@@ -734,6 +781,7 @@ class Game {
     else if (this.gameMode === 'daily') this.startDaily();
     else if (this.gameMode === 'quick3') this.startQuick3();
     else if (this.gameMode === 'famous5') this.startFamous5();
+    else if (this.gameMode === 'freestyle') this.startFreestyle();
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
     else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
@@ -791,7 +839,7 @@ class Game {
     this.playerShapes.push(playerShape);
     this.worldCanvas.placedShapes.push(playerShape);
 
-    this.scores.push({ name: entry.name, shape: 100, size: 100, placement: 100, total: 100, freebie: true });
+    this.scores.push({ name: entry.name, code: entry.code, drawn: playerShape, shape: 100, size: 100, placement: 100, total: 100, freebie: true });
     this.currentIndex = 1;
   }
 
@@ -921,7 +969,7 @@ class Game {
   onSkip() {
     // In streak mode, skipping ends the streak
     if (this._streakActive) {
-      this.scores.push({ name: this.itemData[this.currentIndex]?.name || '?', shape: 0, size: 0, placement: 0, total: 0, skipped: true });
+      this.scores.push({ name: this.itemData[this.currentIndex]?.name || '?', code: this.itemData[this.currentIndex]?.code || null, shape: 0, size: 0, placement: 0, total: 0, skipped: true });
       if (this.state === STATES.PEEK && this._peekCountdown) {
         clearInterval(this._peekCountdown);
         this._peekCountdown = null;
@@ -935,7 +983,7 @@ class Game {
     const entry = this.itemData[this.currentIndex];
     const refShape = createReferenceShape(entry);
     this.referenceShapes.push(refShape);
-    this.scores.push({ name: entry.name, shape: 0, size: 0, placement: 0, total: 0, skipped: true });
+    this.scores.push({ name: entry.name, code: entry.code, shape: 0, size: 0, placement: 0, total: 0, skipped: true });
 
     if (this.state === STATES.PEEK && this._peekCountdown) {
       clearInterval(this._peekCountdown);
@@ -954,6 +1002,11 @@ class Game {
     if (polygons.length === 0) return;
 
     this.drawingCanvas.deactivate();
+
+    if (this.gameMode === 'freestyle') {
+      this._showFreestyleResult(polygons);
+      return;
+    }
 
     const entry = this.itemData[this.currentIndex];
     this.currentShape = new Shape(polygons, entry.name, entry.color);
@@ -996,7 +1049,8 @@ class Game {
     const full = scoreShape(this.currentShape, refShape);
     const shapeScore = full.shape;
     this._pendingScore = {
-      name: entry.name, shape: shapeScore, size: null, placement: null,
+      name: entry.name, code: entry.code, drawn: this.currentShape,
+      shape: shapeScore, size: null, placement: null,
       total: shapeScore, shapeOnly: true,
     };
 
@@ -1091,7 +1145,7 @@ class Game {
     const score = this.puzzleMode
       ? this._scorePuzzle(this.currentShape, refShape)
       : scoreShape(this.currentShape, refShape);
-    this.scores.push({ name: entry.name, ...score });
+    this.scores.push({ name: entry.name, code: entry.code, drawn: this.currentShape, ...score });
 
     this._flashScore(score.total);
     this.worldCanvas.deactivate();
@@ -1279,7 +1333,7 @@ class Game {
       const score = this.puzzleMode
         ? this._scorePuzzle(shape, refShape)
         : scoreShape(shape, refShape);
-      return { name: entry.name, ...score };
+      return { name: entry.name, code: entry.code, drawn: shape, ...score };
     });
 
     this.showResults();
@@ -1401,6 +1455,74 @@ class Game {
     setTimeout(() => toast.classList.remove('show'), 2500);
   }
 
+  // --- Shape-match rail (TODOS #58) ---
+
+  // Which countries each of your drawings actually looks most like. Driven off
+  // `score.drawn` rather than an index into playerShapes, because a skipped item pushes
+  // a score and no shape and the two lists stop lining up from there on.
+  _setupMatchRail() {
+    const rail = document.getElementById('results-match-rail');
+    if (!rail) return;
+
+    this._matchable = this.scores
+      .map((s, i) => (s.drawn ? i : -1))
+      .filter((i) => i >= 0);
+
+    // Placement-only never draws anything, so there is nothing to compare.
+    if (!this._matchable.length || this.puzzleMode) {
+      rail.style.display = 'none';
+      this._matchPanel?.clear();
+      return;
+    }
+    rail.style.display = '';
+
+    if (!this._matchPanel) {
+      this._matchPanel = createShapeMatchPanel();
+      document.getElementById('match-rail-host').appendChild(this._matchPanel.el);
+      document.getElementById('btn-match-prev').addEventListener('click', () => this._stepMatch(-1));
+      document.getElementById('btn-match-next').addEventListener('click', () => this._stepMatch(1));
+    }
+
+    this._matchAt = 0;
+    this._showMatch();
+  }
+
+  _stepMatch(dir) {
+    if (!this._matchable.length) return;
+    this._matchAt = (this._matchAt + dir + this._matchable.length) % this._matchable.length;
+    this._showMatch();
+    playClick();
+  }
+
+  _showMatch() {
+    const scoreIndex = this._matchable[this._matchAt];
+    const score = this.scores[scoreIndex];
+    if (!score?.drawn) return;
+
+    const which = document.getElementById('match-rail-which');
+    if (which) {
+      which.textContent = this._matchable.length > 1
+        ? `Your ${score.name} (${this._matchAt + 1}/${this._matchable.length})`
+        : `Your ${score.name}`;
+    }
+    const solo = this._matchable.length < 2;
+    document.getElementById('btn-match-prev').disabled = solo;
+    document.getElementById('btn-match-next').disabled = solo;
+
+    for (const tr of document.querySelectorAll('#score-body tr')) {
+      tr.classList.toggle('match-selected', Number(tr.dataset.scoreIndex) === scoreIndex);
+    }
+
+    this._matchPanel.show(score.drawn.getTransformedPolygons(), { pinCode: score.code || null });
+  }
+
+  _selectMatchByScoreIndex(scoreIndex) {
+    const at = this._matchable.indexOf(scoreIndex);
+    if (at < 0) return;
+    this._matchAt = at;
+    this._showMatch();
+  }
+
   showResults() {
     // Make sure special mode overlays are hidden
     this._stopTimer();
@@ -1441,6 +1563,11 @@ class Game {
         <td>${s.skipped || s.placement == null ? '—' : s.placement}</td>
         <td class="${totalClass}"><strong>${label}</strong></td>
       `;
+      tr.dataset.scoreIndex = si;
+      if (s.drawn) {
+        tr.classList.add('match-pickable');
+        tr.addEventListener('click', () => this._selectMatchByScoreIndex(si));
+      }
       tbody.appendChild(tr);
       if (!s.skipped && !s.freebie) {
         totalScore += s.total;
@@ -1515,6 +1642,8 @@ class Game {
         counted >= 10 ? 'Quick hands!' :
         counted >= 5 ? 'Getting there!' : 'Take your time... wait';
     }
+
+    this._setupMatchRail();
 
     const modeLabel = document.getElementById('results-mode');
     if (modeLabel) {

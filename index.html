@@ -149,6 +149,11 @@
             <span class="mode-label">Streak</span>
             <span class="mode-desc">Score 25+ or out</span>
           </button>
+          <button id="btn-freestyle" class="btn btn-mode btn-special-mode">
+            <span class="mode-icon">🎨</span>
+            <span class="mode-label">Freestyle</span>
+            <span class="mode-desc">Draw anything — find out what it is</span>
+          </button>
         </div>
         <div class="menu-section-label">Classic Modes</div>
         <div class="menu-row">
@@ -245,6 +250,14 @@
   <!-- RESULTS -->
   <div id="screen-results" class="screen">
     <div class="results-layout">
+      <aside id="results-match-rail" class="results-match-rail">
+        <div class="match-rail-head">
+          <button id="btn-match-prev" class="match-rail-arrow" type="button" aria-label="Previous drawing">&lsaquo;</button>
+          <span id="match-rail-which" class="match-rail-which"></span>
+          <button id="btn-match-next" class="match-rail-arrow" type="button" aria-label="Next drawing">&rsaquo;</button>
+        </div>
+        <div id="match-rail-host" class="match-rail-host"></div>
+      </aside>
       <div class="results-map-area">
         <canvas id="canvas-results"></canvas>
       </div>
@@ -277,6 +290,20 @@
           <button id="btn-share-text" class="btn btn-tool">Share Text</button>
           <button id="btn-share" class="btn btn-tool">Share Image</button>
           <button id="btn-menu" class="btn btn-tool">Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FREESTYLE RESULT (TODOS #72) -->
+  <div id="screen-freestyle" class="screen">
+    <div class="freestyle-layout">
+      <div class="freestyle-card">
+        <h2>What did you draw?</h2>
+        <div id="freestyle-host"></div>
+        <div class="results-actions">
+          <button id="btn-freestyle-again" class="btn btn-accent">Draw Again</button>
+          <button id="btn-freestyle-menu" class="btn btn-tool">Menu</button>
         </div>
       </div>
     </div>

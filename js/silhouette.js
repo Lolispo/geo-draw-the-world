@@ -4,6 +4,7 @@
 
 import { getCountryByCode } from './geo-data.js';
 import { traceRing, multiPolygonBoundingBox, fitBounds } from './utils.js';
+import { GRID, normalizeMultiPolygon } from './raster.js';
 
 // Normalizing to the bounding box means the canvas shows the *outline*, not the size:
 // Russia and Monaco both fill their box. Anything comparing countries by area has to
@@ -66,4 +67,45 @@ export function shapeFallback(ctx, size) {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('no shape', size / 2, size / 2);
+}
+
+// Your drawing laid over a country, in the frame the match was scored in (TODOS #58).
+// A number saying 44 does not show you *why*; the overlap does. Both outlines go
+// through js/raster.js's normalisation, so what you see is exactly the pair of masks
+// that produced the score — not a prettier approximation of it.
+export function drawShapeOverlay(canvas, playerPolygons, countryPolygons, { size = 86, color = '#7EA6E0' } = {}) {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.height = size * dpr;
+  canvas.style.width = canvas.style.height = `${size}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, size, size);
+
+  // The comparison frame is -GRID/2..GRID/2 in both axes, y already downward.
+  const k = size / GRID;
+  const place = (polys) => normalizeMultiPolygon(polys)
+    .map((ring) => ring.map(([x, y]) => [(x + GRID / 2) * k, (y + GRID / 2) * k]));
+
+  // countryPolygons null draws the drawing on its own — the "your shape" thumbnail.
+  if (countryPolygons) {
+    ctx.beginPath();
+    for (const ring of place(countryPolygons)) traceRing(ctx, ring, true);
+    ctx.fillStyle = color + '55';
+    ctx.fill('nonzero');
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  for (const ring of place(playerPolygons)) traceRing(ctx, ring, true);
+  ctx.lineJoin = 'round';
+  // Haloed, because a pale line over a pale country fill loses its edge exactly where
+  // the overlap is the thing you are trying to see.
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = 'rgba(0,0,0,0.55)';
+  ctx.stroke();
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = '#e6edf3';
+  ctx.stroke();
 }

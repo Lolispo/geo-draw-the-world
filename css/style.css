@@ -1294,6 +1294,16 @@ canvas {
     gap: 10px;
   }
 
+  /* Stacked, the table is what you read first; the rail follows it. */
+  .results-map-area { order: 1; }
+  .score-panel { order: 2; }
+  .results-match-rail {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+
   .big-score {
     font-size: 2rem;
   }
@@ -2964,3 +2974,225 @@ canvas {
   .cp-facts { width: 100%; }
   .cp-metrics { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ========== SHAPE MATCH (TODOS #58, #72) ========== */
+.match-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.match-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.match-yours {
+  flex: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+.match-head-text { min-width: 0; }
+.match-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.match-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+.match-status {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  padding: 8px 0;
+}
+
+.match-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 24px 52px 26px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  background: var(--surface2);
+  cursor: pointer;
+}
+.match-row:hover { background: var(--border); }
+.match-rank {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-align: center;
+}
+.match-rank-long { font-size: 0.68rem; }
+.match-thumb {
+  background: var(--bg);
+  border-radius: 6px;
+}
+.match-flag {
+  width: 26px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.match-name {
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.match-name em { color: var(--text-dim); font-style: normal; }
+.match-score {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.match-good { color: var(--green); }
+.match-ok { color: var(--orange); }
+.match-bad { color: var(--red); }
+
+.match-pin { border-top: 1px dashed var(--border); padding-top: 8px; }
+.match-pin-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.match-pin-hit {
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  color: var(--green);
+}
+
+.match-search { position: relative; }
+.match-search-input {
+  width: 100%;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.match-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.match-search-results {
+  list-style: none;
+  margin-top: 4px;
+  max-height: 170px;
+  overflow-y: auto;
+}
+.match-search-hit {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.match-search-hit:hover { background: var(--surface2); }
+.match-hit-rank {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+.match-search-empty {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  padding: 5px 8px;
+}
+
+/* The shape-review rail down the left of the results map (TODOS #58) */
+.results-match-rail {
+  width: 310px;
+  min-width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+.match-rail-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.match-rail-which {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.match-rail-arrow {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.match-rail-arrow:hover:not(:disabled) { background: var(--border); }
+.match-rail-arrow:disabled { opacity: 0.3; cursor: default; }
+.match-rail-host {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+}
+/* The score table doubles as the picker for this rail */
+.score-table tbody tr.match-selected td { background: var(--surface2); }
+.score-table tbody tr.match-pickable { cursor: pointer; }
+
+/* Freestyle result (TODOS #72) — no map, so the panel gets the middle of the screen */
+.freestyle-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow-y: auto;
+}
+.freestyle-card {
+  width: 100%;
+  max-width: 460px;
+  max-height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+.freestyle-card h2 { font-size: 1.2rem; font-weight: 600; }
+#freestyle-host { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
