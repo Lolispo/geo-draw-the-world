@@ -194,11 +194,8 @@ class Game {
 
   _applyGhosts() {
     this.worldCanvas.showGhosts = this.devMode;
-    this.resultsWorldCanvas.showGhosts = this.devMode;
-    for (const id of ['btn-ghosts-placing', 'btn-ghosts-results']) {
-      const b = document.getElementById(id);
-      if (b) b.classList.toggle('active', this.devMode);
-    }
+    const b = document.getElementById('btn-ghosts-placing');
+    if (b) b.classList.toggle('active', this.devMode);
   }
 
   _toggleGhosts() {
@@ -206,7 +203,6 @@ class Game {
     setGhosts(this.devMode);
     this._applyGhosts();
     this.worldCanvas.render();
-    this.resultsWorldCanvas.render();
   }
 
   _route(segments, params) {
@@ -307,9 +303,7 @@ class Game {
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
     document.getElementById('btn-activity-scores').addEventListener('click', () => this.openScores());
     document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
-    for (const id of ['btn-ghosts-placing', 'btn-ghosts-results']) {
-      document.getElementById(id).addEventListener('click', () => this._toggleGhosts());
-    }
+    document.getElementById('btn-ghosts-placing').addEventListener('click', () => this._toggleGhosts());
 
     // Country region buttons
     for (const region of getCountryRegions()) {

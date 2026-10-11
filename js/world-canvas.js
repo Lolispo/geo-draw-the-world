@@ -472,6 +472,9 @@ export class WorldCanvas {
   // phone widths (TODOS #26), and the zoom readout sits at the right edge.
   _gestureHint() {
     if (!this.activeShape) return null;
+    if (this.enableScaling && !this.handles.cornersUsable(this.activeShape)) {
+      return 'Drag to move · zoom in to resize';
+    }
     if (this.enableScaling && this.enableRotation) return 'Drag to move · corners resize · orange rotates';
     if (this.enableRotation) return 'Drag to move, orange handle to rotate';
     if (this.enableScaling) return 'Drag to move, corners to resize';

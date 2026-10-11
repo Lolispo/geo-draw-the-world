@@ -1653,6 +1653,38 @@ off it still reads as Portugal.
 
 ---
 
+## 71. Placement: a small shape could be resized but never grabbed
+
+**REVIEW:** `#/draw/daily` — draw, press Done, zoom the map out, then shrink the shape with a
+corner. Pressing anywhere in the middle of it should move it, every time, however small it is.
+The hint line says *zoom in to resize* once the shape is too small for corners.
+
+**✅ DONE 2026-10-11** — owner: *"when zoomed out it's very hard to get the hand to grab when
+you just resized it… the corners of the shape is like all you see"*. The loop really is resize,
+move, resize, move, and half of it was broken.
+
+Three changes, because no single one covered the whole size range:
+
+- **The corner handles moved outside the box.** They sat exactly on the bounding box, so their
+  hit circles (23px across) ate into the shape itself. They now sit 7px beyond the corner.
+- **The middle of the shape is always a move.** A reserved core, 42% of the box, is checked
+  before any handle. Measured at 30/50/80/150px on screen: the handles' reach never touches it.
+- **Below 44px on screen the corners withdraw entirely.** Four 23px targets around a 14px shape
+  leave nothing to grab at all, and a corner that small is not a resize anyone can aim — so at
+  that size the shape is pure move, and the hint says *zoom in to resize*. The floor is relative
+  to the current zoom, so zooming in restores the handles: nothing is permanently un-resizable.
+
+Verified with Playwright at 42×80 on screen: the cursor reads `grab` at the centre, dragging
+moves the shape by exactly the drag delta, and its size is unchanged. The same drag before this
+change moved nothing at all.
+
+**Also:** the ghosts toggle is gone from the results screen (owner, 2026-10-11) — and that
+removal fixed a bug it had introduced: the results map sets `showGhosts = true` itself, because
+*"dashed outlines = real shapes"* is part of the result, so a toggle reaching into it could have
+switched off something that is not optional there.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

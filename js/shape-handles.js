@@ -14,6 +14,19 @@ const ROTATE_HANDLE_RADIUS = 9;
 // touch target, over the 28px floor the mobile pass (TODOS #25) asked for.
 const HIT_SLOP = 12;
 
+// Corner handles sit this far *outside* the bounding box. Zoomed out, a shape can be
+// smaller than the handles themselves, and four hit circles on its corners then cover
+// the whole thing — you could resize it but never grab it to move, which is painful
+// because the loop is resize, move, resize, move (owner, 2026-10-11).
+const HANDLE_OUT = 7;
+// However small the shape gets, this share of it down the middle always means "move".
+const CORE_FRAC = 0.42;
+// Below this on-screen span the corner handles are withdrawn altogether. Four 23px hit
+// circles around a 14px shape leave nothing to grab, and dragging a corner that small
+// is not a resize anyone can aim anyway — at that size the job is "move it roughly
+// there", and resizing wants a zoom first (owner, 2026-10-11).
+const MIN_HANDLE_SPAN = 44;
+
 const MIN_SCALE = 0.005;
 const MAX_SCALE = 40;
 
@@ -35,17 +48,42 @@ export class ShapeHandles {
     return this.showCorners || this.showRotate;
   }
 
+  // Is the shape big enough on screen for corner handles to be worth having?
+  cornersUsable(shape) {
+    if (!shape) return false;
+    const bb = shape.getBoundingBox();
+    const a = this.worldToScreen(bb.minX, bb.minY);
+    const b = this.worldToScreen(bb.maxX, bb.maxY);
+    return Math.min(Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1])) >= MIN_HANDLE_SPAN;
+  }
+
+  // Is the point in the shape's middle — the part reserved for dragging it?
+  _inCore(shape, pos) {
+    const bb = shape.getBoundingBox();
+    const a = this.worldToScreen(bb.minX, bb.minY);
+    const b = this.worldToScreen(bb.maxX, bb.maxY);
+    const cx = (a[0] + b[0]) / 2, cy = (a[1] + b[1]) / 2;
+    const halfW = (Math.abs(b[0] - a[0]) / 2) * CORE_FRAC;
+    const halfH = (Math.abs(b[1] - a[1]) / 2) * CORE_FRAC;
+    return Math.abs(pos[0] - cx) <= halfW && Math.abs(pos[1] - cy) <= halfH;
+  }
+
   // Screen-space positions, keyed by handle name. Empty when nothing is shown.
   positions(shape) {
     if (!shape || !this.enabled) return {};
     const bb = shape.getBoundingBox();
     const out = {};
 
-    if (this.showCorners) {
-      out.topLeft = this.worldToScreen(bb.minX, bb.minY);
-      out.topRight = this.worldToScreen(bb.maxX, bb.minY);
-      out.bottomLeft = this.worldToScreen(bb.minX, bb.maxY);
-      out.bottomRight = this.worldToScreen(bb.maxX, bb.maxY);
+    if (this.showCorners && this.cornersUsable(shape)) {
+      // Pushed out along the diagonal, so the shape's own area stays grabbable.
+      const tl = this.worldToScreen(bb.minX, bb.minY);
+      const br = this.worldToScreen(bb.maxX, bb.maxY);
+      const xs = [Math.min(tl[0], br[0]), Math.max(tl[0], br[0])];
+      const ys = [Math.min(tl[1], br[1]), Math.max(tl[1], br[1])];
+      out.topLeft = [xs[0] - HANDLE_OUT, ys[0] - HANDLE_OUT];
+      out.topRight = [xs[1] + HANDLE_OUT, ys[0] - HANDLE_OUT];
+      out.bottomLeft = [xs[0] - HANDLE_OUT, ys[1] + HANDLE_OUT];
+      out.bottomRight = [xs[1] + HANDLE_OUT, ys[1] + HANDLE_OUT];
     }
     if (this.showRotate) {
       out.rotate = this._rotateGeometry(bb).handle;
@@ -70,6 +108,8 @@ export class ShapeHandles {
   // box, so overlap only happens on a shape too small for the corners to matter.
   hitTest(shape, pos) {
     const handles = this.positions(shape);
+    // The middle of the shape is always a move, whatever the handles would claim.
+    if (this.showCorners && this._inCore(shape, pos)) return null;
     const radius = HANDLE_SIZE / 2 + HIT_SLOP;
     let best = null;
     let bestDist = radius * radius;
