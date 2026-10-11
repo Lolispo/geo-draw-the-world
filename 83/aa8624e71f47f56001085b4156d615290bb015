@@ -1,0 +1,33 @@
+css/style.css
+  s_07a3d60f829d3a::t_30a255d173551c 2210-2219
+js/main.js
+  s_07a3d60f829d3a::t_7f40203164a414 403,1011
+  s_07a3d60f829d3a::t_3ba431f32955a2 397-402,404
+js/world-canvas.js
+  s_07a3d60f829d3a::t_3ba431f32955a2 342-353
+js/top-n-game.js
+  s_07a3d60f829d3a::t_30a255d173551c 581-583,587,590,876-887
+js/explorer-map.js
+  s_07a3d60f829d3a::t_9ff50ad2b9b2da 21-22
+  s_07a3d60f829d3a::t_9d575ba14b5390 13-20,23-25
+js/data-explorer.js
+  s_07a3d60f829d3a::t_9ff50ad2b9b2da 145
+TODO.md
+  s_07a3d60f829d3a::t_064633f478e1be 1276-1338
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "83aa8624e71f47f56001085b4156d615290bb015",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
