@@ -1599,11 +1599,57 @@ which dropped the focus before the map had used it.
 
 **4. A label on each column glyph.** ✏️ and 🔤 say *Shapes* and *Aliases* on hover.
 
+**Follow-ups, same day, from the next review round:**
+- **The frame now holds the whole country.** Sweden, Algeria and New Zealand were clipped
+  against the top edge: the focus was applied before the legend had taken its share of the
+  height, so the frame it aimed at was ~20px taller than the one the reader sees. It is applied
+  after the legend now, and again on resize. Measured by probing the on-screen extent: every
+  country tested sits inside the frame with margin, filling about 70% of it.
+- **A microstate no longer zooms to street level.** The frame stops shrinking at about Austria's
+  span, so San Marino arrives with northern Italy around it.
+- **The zoom survives the Territories toggle**, and every other control that rebuilds the map.
+- **Each band mode explains itself** on hover, in the dropdown and on the control.
+
 **Known gap — sub-national islands.** Madeira, the Azores and the Canaries are not entities;
 they are rings inside Portugal's and Spain's geometry. They therefore read as their sovereign
 whatever the Territories toggle says, and cannot be hovered as themselves. Making them
 hoverable means adding them to the registry with their own geometry — the #20 kind of data
 work, not a map change.
+
+---
+
+## 70. Sub-national islands are not on the map as themselves
+
+**What:** Madeira, the Azores, the Canaries and their like are rings inside their sovereign's
+geometry, not entities. On the Explorer map they therefore read as *Portugal* or *Spain* whatever
+the Territories toggle says, and cannot be hovered, shaded or opened as themselves.
+
+**Why:** Owner request (2026-10-11): *"if i hover Madeira with territories off, i want it to show
+as Portugal. if i toggle it with territories on i want it to show as Madeira."* The first half
+works today — it is the second half that has nowhere to come from.
+
+**Approach / notes:**
+- This is **registry work, not map work** (#5, #20). Each island group needs an entity with a
+  code, a name, a `sovereign`, `optional: true`, and its own geometry split out of the parent's
+  rings — the map, the pool rule and the hover label then all work with no further changes,
+  because `inCountryPool()` and the sovereign fallback (#69) already handle exactly this shape.
+- **ISO 3166-2 subdivision codes** are the obvious key (`PT-30` Madeira, `PT-20` Azores,
+  `ES-CN` Canaries), but the registry is keyed on ISO 3166-1 alpha-2 and every dataset joins on
+  it. Decide deliberately whether these get real codes in the same namespace or a prefixed one,
+  and what `inCountryPool()` should do with them by default.
+- **The data mostly does not exist for them.** World Bank figures are national; Madeira has no
+  GDP row. So they would be shaded "no data" in every metric unless regional statistics are
+  added, which is a much bigger job. The honest first version is: hoverable, nameable,
+  openable — and explicitly without figures.
+- Splitting the geometry means deciding which rings belong to which island group, per sovereign.
+  Doable by bounding box for the obvious ones (Madeira, Azores, Canaries are far from the
+  mainland) but it is hand-checked work, not a script that can be trusted blind.
+- **Scope check first:** list every sovereign whose geometry contains rings more than N degrees
+  from its mainland, and see how long the real list is before committing to it.
+
+**Acceptance:** With Territories on, hovering Madeira on the map says Madeira, and pressing it
+opens a panel for Madeira that is honest about having no figures of its own. With Territories
+off it still reads as Portugal.
 
 ---
 

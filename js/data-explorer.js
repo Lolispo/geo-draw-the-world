@@ -139,6 +139,7 @@ export class DataExplorer {
   }
 
   _renderBody() {
+    if (this.view !== 'map') this._mapView = null;   // leaving the map forgets its zoom
     if (this.view === 'coverage') this._renderCoverage();
     else if (this.view === 'shapes') this._renderShapes();
     else if (this.view === 'map') this._renderMap();
@@ -248,7 +249,8 @@ export class DataExplorer {
     reset.addEventListener('click', () => map.resetView());
     map.onViewChange = (scale) => {
       reset.hidden = scale <= 1;
-      this._focus = null;   // the reader has taken over; stop re-framing
+      this._focus = null;        // the reader has taken over; stop re-framing
+      this._mapView = map.getView();
     };
     map.onHover = (label, ev) => {
       tip.hidden = !label;
@@ -265,11 +267,20 @@ export class DataExplorer {
     map.setWorld(this._world).setMetric({
       values: ds.values, format: ds.format, scope, scale: this.bandScale,
     });
+    // Every control rebuilds the map, and throwing the reader's zoom away each time
+    // made the territories toggle unusable while zoomed in (owner, 2026-10-11).
+    map.setView(this._mapView);
     map.render();
+    reset.hidden = map.getView().scale <= 1;
     // Arriving at #/explore/map?focus=se frames Sweden. Every render builds a fresh
     // map, so the focus is re-applied until the reader moves the map themselves —
     // clearing it on the first render lost it whenever anything re-rendered.
-    if (this._focus && map.focusOn(this._focus)) reset.hidden = false;
+    const applyFocus = () => {
+      if (this._focus && map.focusOn(this._focus)) {
+        reset.hidden = false;
+        this._mapView = map.getView();
+      }
+    };
 
     legend.innerHTML = '';
     const head = document.createElement('div');
@@ -288,9 +299,14 @@ export class DataExplorer {
       legend.appendChild(item);
     }
 
+    // The legend has only just taken its share of the height, so the frame is only
+    // now the size the reader will see — focusing before this clipped Sweden and
+    // Algeria against the top edge (owner, 2026-10-11).
+    applyFocus();
+
     // Refit when the window changes shape, and only while this view is on screen.
     this._mapResize?.disconnect();
-    this._mapResize = new ResizeObserver(() => map.render());
+    this._mapResize = new ResizeObserver(() => { map.render(); applyFocus(); });
     this._mapResize.observe(wrap);
   }
 
@@ -301,7 +317,8 @@ export class DataExplorer {
       const o = document.createElement('option');
       o.value = opt.id;
       o.textContent = opt.label;
-      if (opt.id === value) o.selected = true;
+      if (opt.hint) o.title = opt.hint;          // shown in the open dropdown
+      if (opt.id === value) { o.selected = true; sel.title = opt.hint || ''; }
       sel.appendChild(o);
     }
     sel.addEventListener('change', () => onPick(sel.value));
@@ -357,9 +374,12 @@ export class DataExplorer {
 
     if (this.view === 'map') {
       bar.appendChild(this._select([
-        { id: 'natural', label: 'Bands: natural groups' },
-        { id: 'rank', label: 'Bands: equal count' },
-        { id: 'log', label: 'Bands: log scale' },
+        { id: 'natural', label: 'Bands: natural groups',
+          hint: 'Cut where the data has gaps, so countries that really stand out get their own colour. On Total GDP the US and China end up alone at the top.' },
+        { id: 'rank', label: 'Bands: equal count',
+          hint: 'The same number of countries in every colour. Good for "where does this place", but it can give every rich country one colour.' },
+        { id: 'log', label: 'Bands: log scale',
+          hint: 'Equal steps in orders of magnitude — each band is roughly the same multiple of the one below. Good for "how many times bigger".' },
       ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
     }
 

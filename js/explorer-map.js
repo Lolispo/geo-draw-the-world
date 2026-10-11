@@ -40,6 +40,11 @@ const MAX_ZOOM = 12;
 // not merely hard to hit, it is not drawn at all (owner, 2026-10-11).
 const MIN_MARK = 4;
 const HOVER_MARK = 11;
+
+// Framing one country (TODOS #69): how much of the frame it should take, and the
+// smallest span the frame will shrink to — in world units, about Austria across.
+const FOCUS_FILL = 0.7;
+const FOCUS_MIN_SPAN = 26;
 const BORDER = 'rgba(0,0,0,0.45)';
 
 export class ExplorerMap {
@@ -81,15 +86,30 @@ export class ExplorerMap {
     const b = this._boxes[i];
     const [w, h] = this._size;
     const fit = this._fit(w, h);
-    const bw = Math.max(b.maxX - b.minX, 1e-6) * fit.scale;
-    const bh = Math.max(b.maxY - b.minY, 1e-6) * fit.scale;
-    const scale = Math.max(1, Math.min(MAX_ZOOM, Math.min((w * 0.6) / bw, (h * 0.6) / bh)));
+    // The *whole* country has to fit, with room around it — Sweden and Algeria were
+    // cut off — and a microstate must not zoom to street level: below FOCUS_MIN_SPAN
+    // the frame stops shrinking, so San Marino arrives at about Austria's scale with
+    // its neighbours visible (owner, 2026-10-11).
+    const spanX = Math.max(b.maxX - b.minX, FOCUS_MIN_SPAN) * fit.scale;
+    const spanY = Math.max(b.maxY - b.minY, FOCUS_MIN_SPAN) * fit.scale;
+    const scale = Math.max(1, Math.min(MAX_ZOOM,
+      Math.min((w * FOCUS_FILL) / spanX, (h * FOCUS_FILL) / spanY)));
     const cx = ((b.minX + b.maxX) / 2) * fit.scale + fit.ox;
     const cy = ((b.minY + b.maxY) / 2) * fit.scale + fit.oy;
     this.view = { scale, ox: w / 2 - cx * scale, oy: h / 2 - cy * scale };
     this._clampView(w, h);
     this.render();
     return true;   // deliberately not onViewChange: this was not the reader panning
+  }
+
+  getView() {
+    return { ...this.view };
+  }
+
+  setView(view) {
+    if (!view) return;
+    this.view = { ...view };
+    if (this._size) this._clampView(this._size[0], this._size[1]);
   }
 
   resetView() {
@@ -102,9 +122,12 @@ export class ExplorerMap {
   // floor the view is the fitted one by definition.
   _clampView(w, h) {
     if (this.view.scale <= 1) { this.view = { scale: 1, ox: 0, oy: 0 }; return; }
+    // A quarter-viewport of slack, so a country at the edge of the map — Iceland,
+    // New Zealand — can still be centred rather than jammed against the side.
     const s = this.view.scale;
-    this.view.ox = Math.min(0, Math.max(w * (1 - s), this.view.ox));
-    this.view.oy = Math.min(0, Math.max(h * (1 - s), this.view.oy));
+    const slackX = w * 0.25, slackY = h * 0.25;
+    this.view.ox = Math.min(slackX, Math.max(w * (1 - s) - slackX, this.view.ox));
+    this.view.oy = Math.min(slackY, Math.max(h * (1 - s) - slackY, this.view.oy));
   }
 
   _zoomAbout(factor, anchor) {
