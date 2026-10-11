@@ -3,7 +3,7 @@
 How the country data is structured and regenerated. Established by TODOS items 5–6.
 
 The same picture, drawn and kept honest: open `data-map.html` on the served site
-(see `CLAUDE.md` for the port — not `npm start`). It graphs source → script → file →
+(`npm start`, then `/data-map.html`). It graphs source → script → file →
 consumer and recomputes the cross-file integrity checks from the committed data on
 every load, so where this file and that page disagree, the page is right.
 
@@ -92,6 +92,15 @@ covers the government-controlled area while `SP.POP.TOTL` covers the whole islan
 
 **Flags added to the quiz** (`flags.json`): Greenland `gl`, New Caledonia `nc`,
 Kosovo `xk`, Western Sahara `eh`, Falkland Islands `fk`.
+
+**Flag colours are curated to match the rendered flag, not the official specification.**
+The colour quizzes show the player a flagcdn image and ask them to match a swatch to it,
+so a swatch that is spec-accurate but not the colour on screen makes the question unfair —
+the flag the player sees is the ground truth here. Where the two disagree, take the
+rendered one. Measuring it: flags are flat fills, so the *modal exact pixel value* within a
+hue family is the fill colour, and is immune to both anti-aliasing and to region-averaging
+(which pulls towards borders and reads too dark). Coverage flags the disagreements; see
+`js/flag-colors.js` for the thresholds and why each is set where it is.
 
 **Stats backfilled** (`MANUAL_VALUES` in `build-datasets.mjs`, with `provenance`):
 Taiwan `tw` (all 5 metrics), Kosovo `xk` (land area), Eritrea `er` (GDP, GDP/cap),
