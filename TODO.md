@@ -17,12 +17,103 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
+## 58. Results: which countries your shape actually matched best
+
+**REVIEW:** `#/draw/daily` — play a round through to the results screen. A rail down the left
+names the five countries your drawing matched best, each with your outline drawn over theirs,
+and pins the country you were actually drawing underneath with its rank. Type a name into the
+box to score against any country. In a multi-country round (`#/draw/quick3`) the arrows and the
+score-table rows both switch which drawing you are looking at.
+
+**✅ DONE 2026-10-11.**
+
+**What:** On the results screen, for each country you drew, the **top 5 countries your shape
+scored highest against** — with the real score — and, when the country you were actually
+drawing is not in that five, its own placement underneath. A shape review panel down the left
+of the results map; press a country you drew to see its five.
+
+**Why:** Owner request (2026-10-10). *"if my swedish drawing actually scored more points to
+Tunisia it should show in the top 5 with the real score."* It turns a score you cannot argue
+with into something you can learn from: a bad score because the shape was wrong reads
+differently from a bad score because you drew a perfectly good Tunisia.
+
+**Decided (owner, 2026-10-10):**
+- **High-fidelity shapes**, not the world-scale geometry — `data/shapes/<code>.json`
+  (`getCountryByCode`), the same outlines the panel and the shapes table draw.
+
+**How it came out:**
+- **The cost problem dissolved.** The entry assumed 197 rasterised IoUs per drawing. But
+  `computeIoU` normalises to a frame that depends only on the shape — centroid-centred, long
+  side scaled to 64, rasterised on a fixed 80×80 grid — so every country's raster is a
+  build-time constant. `scripts/build-shape-masks.mjs` precomputes all 251 into
+  `data/shape-masks.json` (264 KB, **39 KB gzipped**, fetched only when a panel first opens),
+  and a match becomes 200 words of bitwise AND/OR per country. No pre-filter, no laziness, no
+  stall — a World round ranks every drawing against the whole world in about a millisecond.
+- The rasteriser moved out of `js/scoring.js` into **`js/raster.js`**, imported by both the live
+  score and the build script, so the masks cannot quietly stop meaning what a score means.
+  `scripts/check-shape-masks.mjs` asserts all three properties that would catch a drift: the
+  bitmask IoU equals the Set-based one it replaced (55 real country pairs), every built mask
+  equals a live rasterisation of the same outline (all 251), and a country scores 100 against
+  itself.
+- **Scores are linked to drawings through `score.drawn`, not an index.** A skipped item pushes
+  a score and no shape, so `scores[i]` and `playerShapes[i]` stop lining up from the first skip
+  onward. Each score now carries its `code` and the `Shape` it came from. (The pre-existing
+  tweak-mode rescore at `_onTweakDone` still assumes positional alignment — untouched here, but
+  it is wrong in the same way and worth its own entry.)
+- Rotation is deliberately **not** normalised away: the round scored the shape as you left it,
+  and a panel that quietly rotated it would disagree with the score beside it.
+
+**The two numbers, measured.** The panel's score is not the round's **Shape** column, and the
+header says so. A round scores against the world-scale geometry, where France is 17 rings from
+Guiana to Réunion; the panel scores against `data/shapes`, where it is the mainland and Corsica
+(`build-shapes.mjs` clips far-flung rings). Over 251 countries × 5 test shapes the two agree
+exactly 52.8% of the time and within 1 point 76.7%, and 214 of 251 countries never differ by
+more than 5 — but the ~37 with overseas territories, and microstates that are sub-pixel at
+world scale, diverge by tens (France 65, Netherlands 57, Vatican City 67, where world-scale
+scores 0 against a shape the hi-fi outline scores 67). The main landmass is the right outline
+for a drawing game; naming the difference is the fix, not hiding it.
+
+**Acceptance:** ✅ Press a country on the results screen and see the five countries your drawing
+matched best, each with its score; if the real answer is not among them, it is shown below with
+its rank ("Sweden — 12th, 31"). Comparison uses the high-fidelity outlines. A World round does
+not stall while it computes.
 
 ---
 
+## 72. Freestyle: draw anything, find out what it is
 
----
+**REVIEW:** `#/draw/freestyle` — a new card in the Draw menu's Special Modes. No country is
+named: draw whatever you like, press Done, and the same panel from #58 ranks it against every
+country with no target pinned underneath. Type a name into the box to ask about one in
+particular. Draw Again starts from a clean canvas.
 
+**✅ DONE 2026-10-11.**
+
+**What:** A Draw mode with no prompt and no map — you free-style a country, and the shape-match
+panel tells you what it looks like. The search box is the point: draw a Sweden, see that it
+scored higher against five other countries, then type "Sweden" to find out what it actually got.
+
+**Why:** Owner request (2026-10-11), alongside #58. *"a version of draw mode where you free
+style a country (you are not given a specific country to draw) then it scores how good your
+country is… so if i try to do sweden, and i get highest score towards 5 other countries, i see
+those shapes, and then i can search sweden to see that specific score."*
+
+**Decided (owner, 2026-10-11):**
+- **Pure shape, no map.** No placement and no sizing stage, so the flow is
+  `MENU → DRAWING → FREESTYLE`. Shape-only is the only honest number when there is no target.
+- **The pool follows the territories toggle**, like every other pool in the app.
+- No high score is saved — there is no comparable number to rank, and it is a sandbox.
+
+**How it came out:**
+- The whole mode is `startFreestyle()`, one branch at the top of `onDrawingDone()`, and a screen
+  holding a second instance of the #58 panel. Nothing in the scoring, placing or results path
+  needed to know about it.
+- The mode toggles (blind, explorer, hard, placement-only, tweak) are all about a country you
+  were given, so none apply; the Skip button is hidden for the same reason.
+
+**Acceptance:** ✅ `#/draw/freestyle` opens straight into a drawing canvas with no country named;
+Done ranks the drawing against the whole pool with nothing pinned; searching a name shows that
+country's score and rank; Draw Again clears the canvas and re-ranks.
 
 ---
 
@@ -1110,514 +1201,19 @@ dressed as data.
 ---
 
 
-## 57. Placement & results maps: a floor on zoom-out, and a results map you can move
 
-**REVIEW:** `#/draw/daily` — play the round through to the results map (a route reaches a
-screen, not a state mid-round). Place a shape, then on the results map drag it sideways — it should move. Spin the
-wheel out on both the placement and results maps: it should stop at the framing the round
-started with, and zooming out from a panned view should put it back where it was.
 
-**✅ DONE 2026-10-10** — `_onWheel` applied `× 0.9` / `× 1.1` with no clamp in either
-direction; wheel and pinch now share one `_zoomAbout()` that clamps to `[fit, fit × 20]`.
-`_fitTransform()` is the single definition of "the view that frames this round", used by both
-the starting view and the floor, so they cannot drift — and a region round's floor is its own
-region, not the globe.
 
-**Zooming out doubles as reset.** Reaching the floor snaps the offset back to the fitted
-framing too, so a pan can never strand the map off to one side with nothing to recentre it.
-That check runs *before* the no-op guard, since the scale is already at the floor by then.
 
-Panning is opt-in (`panEnabled`), set only on the results canvas: the placement screen keeps one
-finger for the shape (#35), and touch inherits both through the existing one-finger forwarding.
-The pinch path keeps its follow-the-midpoint behaviour — checked against the old expression over
-5,000 random pinches, max difference 2e-13.
 
-Verified with Playwright: from the fitted view, 15 wheel-outs change nothing; 3 wheel-ins do;
-25 more wheel-outs return the canvas to a pixel-identical fitted view; a placement drag still
-moves the shape; the results map pans on drag and recentres on zoom-out. No page errors.
 
-**What:** Stop the world shrinking into empty space, and let the results map be panned
-sideways. Two halves of the same fix, in the same file.
 
-**Why:** Owner review (2026-10-10) of the draw loop: *"don't allow to zoom out more than
-the world map"*, and the results map cannot be moved at all, so anything the view does not
-happen to frame is unreachable.
 
-**Approach / notes:**
-- `_onWheel` (`js/world-canvas.js:299`) applies `viewScale * 0.9` or `* 1.1` with **no clamp
-  in either direction** — that is the whole bug. The floor is already computable:
-  `fitBounds(worldBounds, cssW, cssH)` (`js/utils.js`, added by #56) returns exactly the scale
-  at which the world fills the view, which is the point past which zooming out is just adding
-  ocean. Clamp the floor to that, and give zoom-in a ceiling too while the clamp is being
-  written.
-- The same clamp has to apply to the **pinch** path (`_onTouchMove`), not only the wheel, or
-  phones keep the bug.
-- **Panning:** the results canvas is a full `WorldCanvas` with every handler bound
-  (`js/main.js:106`, `activate()`), but `_onMouseDown`/`_onMouseMove` only drag the *active
-  shape* — and on the results screen there isn't one, so a drag does nothing. Make a drag with
-  no active shape pan the view (and one-finger touch likewise), which is the behaviour the
-  placement screen deliberately does **not** want (#35: one finger belongs to the shape).
-- Region rounds set `regionBounds`, so "the world" for the floor means the *fitted* bounds for
-  that round, not the full 1600×1600 — otherwise an Africa round could zoom out to the globe.
 
-**Acceptance:** Wheel and pinch both stop at the point the round's map fills the view, on the
-placement screen and the results screen. The results map can be dragged to see a placement
-that is off to one side. Placement still drags the shape, not the view.
 
----
 
-## 58. Results: which countries your shape actually matched best
 
-**What:** On the results screen, for each country you drew, the **top 5 countries your shape
-scored highest against** — with the real score — and, when the country you were actually
-drawing is not in that five, its own placement underneath. A shape review panel down the left
-of the results map; press a country you drew to see its five.
-
-**Why:** Owner request (2026-10-10). *"if my swedish drawing actually scored more points to
-Tunisia it should show in the top 5 with the real score."* It turns a score you cannot argue
-with into something you can learn from: a bad score because the shape was wrong reads
-differently from a bad score because you drew a perfectly good Tunisia.
-
-**Decided (owner, 2026-10-10):**
-- **High-fidelity shapes**, not the world-scale geometry — `data/shapes/<code>.json`
-  (`getCountryByCode`), the same outlines the panel and the shapes table draw.
-- Not now; this is a sketched entry.
-
-**Approach / notes:**
-- **Shape only.** The comparison has to be of outlines normalised to their own box — your
-  placement and size cannot enter into it, or every answer is "the country you put it on".
-  `scoreShape()` (`js/scoring.js`) already rasterises an IoU; the shape term is the part to
-  reuse.
-- **Cost is the design problem.** One drawing against ~197 countries is 197 rasterised IoUs,
-  and a World round draws 197 shapes. Options, cheapest first: rasterise the player's shape
-  once and compare against **country masks rendered once per session** (or precomputed at build
-  time into a small bitmask file); cap the comparison pool with a cheap pre-filter (bounding-box
-  aspect ratio, vertex count, area share) and only rasterise the plausible ones; or compute
-  lazily when the panel is opened for that country rather than for every round.
-- Decide what "score" means in the list — the shape term alone (0-100) is the honest number,
-  and it will not match the round's headline score, which includes size and placement. Say so
-  in the UI rather than letting two different numbers look like a bug.
-- The panel is the natural home for a "you drew a better Tunisia" line, which is the joke the
-  feature exists for.
-
-**Acceptance:** Press a country on the results screen and see the five countries your drawing
-matched best, each with its score; if the real answer is not among them, it is shown below with
-its rank ("Sweden — 12th, 31"). Comparison uses the high-fidelity outlines. A World round does
-not stall while it computes.
-
----
-
-## 59. Top 10: flags on wrong picks, a reversible reveal, and a cheaper re-render
-
-**REVIEW:** `#/top10` — play a round. Each pick's flag should now sit in the strip at the top
-beside the ✓/✗. On the results screen the button toggles both ways as often as you like, and
-the rows that stay put really do stay put.
-
-**✅ DONE 2026-10-10** — all three.
-
-**The flag.** `_rowHtml` already drew one, so the gap was the feedback strip: `lastPick` never
-carried the country code. It does now, for right and wrong picks alike, and for the "no data"
-note too — *Tuvalu has no Total exports data* reads better with Tuvalu's flag beside it.
-
-**The reveal is a toggle.** The results ladder is rendered with both halves of every missing
-answer present — the blank slot and the filled row — and showing or hiding flips one pair per
-slot. A cleared round keeps no button, because nothing is hidden.
-
-**Nothing else re-renders.** Toggling sets `hidden` on 2 × (missing answers) rows and rewrites
-one subhead. Proven rather than asserted: a found row tagged in the DOM before the toggle is
-still the same node after revealing and re-hiding. `.topn-row[hidden]` needed its own rule —
-`display: flex` on the class beats the user-agent rule for the attribute, which would have made
-the toggle silently do nothing.
-
-Verified with Playwright on both paths: with Hide answers **on**, results open at 9 blanks / 0
-answers and "Your 1 of 10 — 9 still hidden", reveal flips to 0/9 and "The real highest 10", and
-hiding returns to 9/0. With it **off**, results open revealed and the button offers to hide.
-Flags appear on hits and misses. No page errors.
-
-**What:** Three small things from the review, all in `js/top-n-game.js`.
-
-**Why:** Owner review (2026-10-10) of #36/#39/#43.
-
-**Decided (owner, 2026-10-10):**
-1. **Wrong picks need their flag.** The in-round list of wrong answers shows the name and the
-   rank but no flag, while the ladder above it does — so the one place you are looking when you
-   lose a life is the one place without the visual cue the mode is teaching.
-2. **Reveal must be reversible.** #43's results screen reveals on a button and then cannot go
-   back; it should be show/hide, both ways, as often as you like.
-3. **Toggling must only re-render what changed** — the rows being hidden or shown — not the
-   whole ladder. The flicker on a 10-row board is small and the fix is cheap; on a Force-10 or
-   a long results screen it is the difference between a toggle and a redraw.
-
-**Approach / notes:**
-- `_missesHtml()` builds the wrong-pick rows and `_rowHtml()` already knows how to put a flag
-  in a row — the ladder uses it. Check they end up sharing the same row builder rather than
-  growing a second one.
-- For (2) and (3): `_renderResults(reveal)` currently rebuilds the whole panel. Keep the rows in
-  the DOM and toggle a class or `hidden` on the slots that change — the empty-slot markup
-  already holds its own height (`.topn-row.is-empty`), so a swap in place will not move the
-  page. The button becomes "👀 Reveal answers" / "🙈 Hide answers" against the same state.
-
-**Acceptance:** A wrong pick shows its flag during the round. The results screen can be
-revealed and re-hidden any number of times, and doing so leaves every other row untouched in
-the DOM.
-
----
-
-## 60. Data Explorer map: zoom and pan
-
-**REVIEW:** `#/explore/map?metric=gdp-nominal` — wheel to zoom, drag to pan, double-click to reset; hovering must
-still name the country actually under the cursor once you are zoomed in. Zooming all the way
-out puts the view back, and a **⤢ Reset view** button appears whenever you are zoomed.
-
-**✅ DONE 2026-10-10** — zoom and pan compose *on top of* the fit, so a continent filter still
-frames its subject and zoom is relative to that. The floor is the fitted view (scale 1) and the
-ceiling is 12×.
-
-**Hit-testing cannot drift**, which was the trap this entry named: the drawing and the pick
-buffer are both rendered from the same composed transform in the same `render()`, so there is no
-state in which the bitmap is at one zoom and the picking at another. A drag that moved the view
-swallows the click that ends it, so panning never opens a country panel by accident.
-
-Touch gets the same split as the game canvas — one finger pans, two pinch — and
-`touch-action: none` keeps the browser from scrolling the page instead.
-
-Verified with Playwright: hover before zoom gives "Canada — $2.20T"; after zooming into the
-centre the same screen point correctly reports Spain; dragging changes the view without opening
-a panel; 20 wheel-outs return a pixel-identical fitted view; a plain click still opens Canada.
-No page errors.
-
-**What:** Let the choropleth be zoomed and dragged, so Europe and the Caribbean are readable
-without a continent filter.
-
-**Why:** Owner review (2026-10-10): *"looks pretty nice but would be nice to be able to zoom."*
-At world scale the small countries are a few pixels, which is exactly where the interesting
-values often are.
-
-**Approach / notes:**
-- `js/explorer-map.js` already keeps a single fit transform (`_fit` → `fitBounds`) and redraws
-  from a cached bitmap. Zoom/pan is one more transform on top: keep `view = { scale, ox, oy }`
-  applied after the fit, so the continent filter still frames the subject and zoom is relative
-  to it.
-- **The pick buffer has to be redrawn at the new transform**, or hit-testing drifts from what is
-  on screen. It is rebuilt in `render()` already — the thing to avoid is blitting the cached
-  bitmap at a new zoom while the pick buffer still holds the old one.
-- Zoom on wheel and pinch, drag to pan, clamp the floor at the fitted scale (same rule as #57 —
-  and if both land, the clamp maths belongs in one place).
-- A double-tap or a "reset view" affordance matters more here than in the game, since there is
-  no round to end.
-
-**Acceptance:** Wheel, pinch and drag all work on the map; hover and tap still hit the country
-under the cursor at any zoom; the view cannot be zoomed out past the fitted world; there is a
-way back to the default view.
-
----
-
-## 61. Shapes: a nameless grid to test yourself against
-
-**REVIEW:** `#/explore/shapes` → **▦ Grid**. A wall of outlines and nothing else; hover names
-one, pressing opens it. Set the sort to **Random** and pick Random again to reshuffle.
-
-**✅ DONE 2026-10-10** — the grid is the same rows with everything but the outline taken away:
-no name, no flag, no figure. Thumbnails double to 96px, since the outline is now the only thing
-on screen.
-
-**Press behaviour (owner, 2026-10-10): hover names it, press opens the country panel** — the
-entry had guessed at reveal-then-open, and this is better. On touch there is no hover, so the
-panel *is* the reveal; that is the honest answer rather than inventing a long-press.
-
-Sorting gains **Random**, and picking Random again reshuffles, which is what anyone expects.
-The order is a hash of the country code and a per-shuffle seed rather than a one-off sort, so a
-re-render — a resize, a toggle — cannot reorder the grid under your scroll.
-
-Verified with Playwright: 197 tiles with 197 names in the DOM at opacity 0; hovering the first
-tile raises it to 1 reading "Afghanistan"; pressing opens Afghanistan's panel; Random reorders
-and survives a viewport change unchanged; the list layout comes back intact. No page errors.
-
-**What:** A second layout for the shapes view — just outlines in a grid, no names, optionally
-shuffled, with the country revealed only when you press one.
-
-**Why:** Owner review (2026-10-10): the table reads well, but *"would be nice if there is a
-version without showing the country names so its basically just a grid of all shapes"*. The
-table is for browsing; the grid is for testing yourself, which is the point of the app.
-
-**Approach / notes:**
-- Same rows, same thumbnails, same lazy `IntersectionObserver` — this is a layout toggle in
-  `_renderShapes()`, not a new view. A segmented list/grid control, or a 🔤 Names on/off button
-  beside the sort, both fit the controls bar that already exists.
-- Thumbnails want to be bigger in the grid than the 48px the table uses, since the outline is
-  now the only information on screen.
-- **Press reveals, press again opens.** First press puts the name under the tile; a second press
-  opens the country panel. That keeps a reveal cheap and keeps the panel reachable, but it is a
-  guess at what feels right — it may want to be reveal-only with the panel on a long press.
-- Shuffle needs a stable order per visit (re-sorting under a scroll is disorienting), and the
-  sort select should visibly become "Random" rather than silently lying about A→Z.
-- Revealed names should stay revealed while you scroll away and back.
-
-**Acceptance:** The shapes view can show a grid of outlines with no names, in shuffled order;
-pressing one names it; the table layout is still there and unchanged.
-
----
-
-## 62. Resizing the window blanked every canvas
-
-**REVIEW:** `#/draw/daily` — play into the placement screen, resize the Chrome window, and the
-map should still be there. Same on the results screen and mid-drawing.
-
-**✅ DONE 2026-10-11** — `window.resize` called `_sizeCanvases()`, which sets `canvas.width`.
-Assigning that *clears the canvas*, and nothing redrew it, so the map was black until a zoom
-happened to trigger a render (owner, 2026-10-11).
-
-The resize handler now redraws what is on screen: the drawing canvas, both world canvases, and
-the compare canvas (whose last arguments are stashed for exactly this). `WorldCanvas.handleResize()`
-refits a view that was still at the fitted framing and re-clamps one the player had zoomed, so a
-resize neither throws away their zoom nor leaves it at an impossible scale for the new size.
-
-Verified with Playwright: placement and results canvases both still painted after shrinking and
-re-growing the window twice. No page errors.
-
----
-
-## 63. One miss list for every input style
-
-**REVIEW:** `#/top10` with the cards or flags style — miss once and the **MISSED** row should be
-right there under the board, as it already was when typing.
-
-**✅ DONE 2026-10-11** — the misses were being rendered *inside* the ladder, which is a scroll
-box: below slot 10, off the bottom, invisible in the two card styles where the grid squeezes the
-ladder (owner, 2026-10-11: *"the missed section only shows the latest miss"*). The list was
-always complete in the DOM — measured at 1, 2, 3 after three wrong picks in both styles — it
-simply was not on screen.
-
-They are now their own block between the board and the input, bounded by lives so it never needs
-to scroll, built by the same `_missesHtml()` the results screen uses.
-
-**On the wider worry** — *"I'm worried the 3 input modes have different implementations of
-output"* — the board, the misses and the feedback strip already come from one builder each and
-are rendered by all three styles; this bug was a *layout* difference, not a second
-implementation. What legitimately differs is the input (a card grid vs a text box) and where it
-sits: typing keeps its box at the top so a phone keyboard cannot cover it. That is now said in
-the code rather than left to be rediscovered.
-
-**Still worth doing, not done here:** the card grid shows a pick's outcome a second time, in its
-own visual language (`.topn-card.is-hit/.is-miss` plus a rank chip). It is the input surface, so
-some difference is right, but a guard that each style renders the same output components would
-stop a future fix landing in one mode only.
-
----
-
-## 64. Map colours: one hue, so higher and lower read without the legend
-
-**REVIEW:** `#/explore/map?metric=gdp-per-capita` — the pattern should be obvious before you
-read a single number.
-
-**✅ DONE 2026-10-11** — the ramp was viridis' bright half (blue → teal → green → yellow), which
-nobody can order without reading the legend first (owner, 2026-10-11: *"not very intuitive"*).
-A sequential scale is **one hue**, and on a dark surface the anchor flips: low recedes toward the
-background, high is bright. Five steps of a validated blue ramp, luminance strictly increasing.
-
-The two neutrals were re-picked against the new dark end, because "no figure" must never read as
-"lowest band": lowest band vs no-data measures 2.12, out-of-scope vs ocean 1.21. The legend now
-says the direction out loud — *darker = lower, brighter = higher*.
-
----
-
-## 65. Data Explorer controls: one grammar, and territories that stays here
-
-**REVIEW:** `#/explore` — the bar should read as two things now: a row of dropdowns (each picks
-one of several) and a row of pills (each is on or off), with the one accent button being the
-only control that leaves the screen. Check `#/explore/grid` is its own view, and that flipping
-🏝️ Territories here does **not** change it in Draw the World or Top 10.
-
-**✅ DONE 2026-10-11** — the bar had grown to four kinds of control with nothing to tell them
-apart (owner, 2026-10-11: *"its very inconsistent which option does what"*).
-
-**Decided (owner, 2026-10-11):**
-- **Everything that picks one of several is a dropdown**, including the view itself — the
-  segmented switch is gone. Shape carries meaning: rectangular select = choose, pill = on/off,
-  accent = leaves the screen.
-- **The grid is its own view**, beside Rankings / Map / Shapes / Coverage, instead of a toggle
-  inside Shapes. Both decided presentation; now one control does. `#/explore/grid` routes to it.
-- **Territories is no longer shared with the games.** *"One is understanding data and one is
-  playing game"* — so the Explorer keeps `gdtw.exploreTerritories` and the games keep
-  `gdtw.includeTerritories`. `inCountryPool()` takes the caller's answer when it has one
-  (`{ territories }`) and otherwise means the playing pool, so nothing had to be guessed at a
-  distance.
-
-Each view now shows only what it needs: Rankings has view/metric/continent/direction plus the
-aliases and territories pills and *Rank this →*; Map drops the direction and aliases; Shapes and
-Grid swap the metric for a sort; Coverage keeps view, continent and territories. The rank view
-is the only one that still takes two rows inside the 720px column — but they are now *meaningful*
-rows, choices then state, rather than an arbitrary wrap.
-
-Verified with Playwright across all five views: controls are exactly the expected set in each,
-`#/explore/grid` lands on 197 tiles, and flipping the Explorer's pill left the games' key at `0`
-while its own went to `1`. No page errors.
-
----
-
-## 66. The map was naming the wrong country, and painting the wrong band
-
-**REVIEW:** `#/explore/map?metric=elec-nuclear-pct` — countries that generate no nuclear
-electricity at all should be the *darkest*, not the brightest. Then
-`#/explore/map?metric=gdp-per-capita` and hover around: Europe should no longer be one flat
-colour, and hovering a microstate should never name a different country.
-
-**✅ DONE 2026-10-11** — the owner reported hovering Andorra and getting San Marino's data.
-Two separate defects came out of chasing it.
-
-**1. Colour-index picking fabricates countries.** Every country was drawn a second time to an
-offscreen buffer in a colour that *was* its index, and a hover read that pixel. Canvas
-antialiasing blends two neighbours' index colours — and a blend of two valid indices is a third
-*valid index*. Proved in isolation: two shapes drawn as index 5 and index 200, sharing one
-edge, produced **16 other valid indices** along it. Every border pixel could name a country that
-is not there, and a sub-pixel country like Andorra (0.7px wide at world zoom) is *all* border.
-
-Replaced with bounding-box filtering plus `pointInMultiPolygon`, which is exact: an audit of
-1,194 sampled pixels against the geometry went from **185 mismatches to 0**, and it is *faster* —
-0.1ms per hover against 1.4ms, because it no longer redraws 251 countries into a second buffer.
-Andorra at world zoom now reports France, which is the truth: the pixel really is France.
-
-**2. Ties put the floor in the top band.** 181 of 213 countries generate no nuclear electricity,
-so all four quantile edges came out `0`, and `value >= edge` sent every one of them to the
-*highest* band — the map painted "no nuclear" the same colour as France at 68.8%. Edges equal to
-the minimum are now dropped and deduped, and when that collapses the bands they are rebuilt over
-the values above the floor, so the pile gets the bottom band and the rest spread honestly:
-`[181, 5, 5, 6, 5, 5, 6]`.
-
-**3. Five bands hid the question.** Measured across every dataset: at five bands Europe spanned
-3 of them on GDP per capita, with 39 countries in the top one. At seven it spans 5. Seven is now
-the default, and the legend reports the band count it actually used rather than a hardcoded
-"five".
-
-**4. The ramp rises in chroma, not just brightness.** The owner's instinct is "more colour =
-higher"; the old ramp did the opposite, losing saturation exactly where the values were highest
-(0.84 at the bottom, 0.18 at the top). On a dark surface brightness still has to carry the
-ordering — a ramp that darkens as values rise makes the highest countries vanish — so the new one
-rises in both and ends vivid rather than washed white (chroma 0.22 → 0.78 → 0.46, luminance
-strictly increasing). The neutrals now separate from the bands by chroma rather than lightness.
-
-**Closed by #68:** microstates smaller than a pixel are drawn as dots and hit within them, so
-Monaco, San Marino, Andorra and Liechtenstein are hoverable at world zoom.
-
----
-
-## 67. Four views, one order list, and columns behind a glyph
-
-**REVIEW:** `#/explore` — turn on ✏️ and 🔤. The outline column plus *Largest first* on land
-area is the old Shapes table, which is why that view is gone; aliases now sit dim beside the
-name without changing the row height. `#/explore/shapes` is the nameless grid, and every rows
-view offers the same five orderings. `#/explore/grid` still works.
-
-**✅ DONE 2026-10-11** — owner review: *"the shapes view is basically rankings land area"*.
-
-**Decided (owner, 2026-10-11):**
-- **The Shapes table is gone.** Rankings grew an **outline column**, so the table is reproducible
-  from it; the nameless grid took the name *Shapes* and the 🧩 icon (the old ▦ was a geometric
-  character, not an emoji, which is why it sized differently from its neighbours). Four views.
-- **One order list everywhere**: High → Low, Low → High, A → Z, By continent, Random. *By
-  continent* and *Random* were never specific to the grid. High/Low follow the selected metric,
-  which is why Shapes now has a metric dropdown too — outlines ordered by population is a real
-  question.
-- **Aliases inline, not on their own line**: dim, beside the name, and nothing at all for a
-  country that has none. Measured: row height is 37px with the column off and 37px with it on.
-- **Column toggles are a single glyph** — ✏️ and 🔤 — because they turn a column on rather than
-  changing what the table contains, and two "X: Off" pills ate the bar. Grouped so a wrap cannot
-  separate them.
-
-`#/explore/grid` redirects to `#/explore/shapes` rather than breaking a link that was handed out
-a day earlier.
-
-Verified with Playwright: the legacy link lands on 197 tiles, both rows views expose the same
-five orderings, Shapes by *High → Low* on GDP gives us, cn, de, jp, the outline column paints,
-and the alias column leaves the row height alone. No page errors.
-
----
-
-## 68. Microstates you can hover, bands that fit the data, and a DEV button nobody pressed
-
-**REVIEW:** `#/explore/map?metric=gdp-nominal` — Sweden and Germany should no longer be the
-same colour, and the legend says *by value, log scale*. Hover Monaco, San Marino, Andorra,
-Liechtenstein: each is a dot that swells under the cursor and names itself. Try **Bands: by
-rank** to see the old cut. Then `#/explore` — ✏️ and 🔤 are visibly off until you press them,
-and they only appear on Rankings. The DEV button is gone from the corner.
-
-**✅ DONE 2026-10-11** — five things from the review.
-
-**1. How the bands are cut, since the question was asked.** They were *by rank*: sort the
-countries, cut into seven equal-count groups. That answers "where does this place" and is why
-Sweden ($579B) and Germany ($4.56T) shared a colour — both are in the top 31, and the top band
-runs from $517B to $27.8T. They now cut **by value on a log axis** where the data has a long
-tail, which answers "how big is it": Sweden lands in $96.3B–$637B and Germany in $637B–$4.21T.
-The choice is automatic (a spread of 1000× or more picks log) and overridable — **Bands: auto /
-by rank / by value** sits in the map's bar, and the legend always says which was used.
-
-**2. Microstates are dots, and the dot wins the hit test.** Monaco is 0.1px wide at world zoom,
-so it was neither drawn nor hittable. Anything under 4px on screen is now drawn as a dot of its
-own band colour, swelling under the cursor. The dot is checked *before* containment,
-deliberately: the pixel over Monaco is also inside France, so containment alone handed you
-France every time. Where no dot is involved, the **smallest** containing country wins, so an
-enclave is never swallowed by its host.
-
-**3. Column toggles read as on or off.** They were the same glyph either way; off is now
-greyscale at 45%, on is full colour with an accent ring.
-
-**4. The toggles live with the table only.** The grid has no columns — outlines are the view and
-hidden names are the point.
-
-**5. Two removals.** `#/explore/grid` no longer redirects (the name never shipped), and the
-on-screen **DEV** button is gone. Reference-shape ghosts still exist behind `?dev=1`:
-`index.html?dev=1#/draw/daily`.
-
----
-
-## 69. Natural bands, territories that name their owner, and Show on map
-
-**REVIEW:** `#/explore/map?metric=gdp-nominal` — the United States and China should be alone
-in the top band. Switch **Bands** between *natural groups*, *equal count* and *log scale* to
-compare. Hover Greenland, Bermuda, Aruba with Territories off: each reads as its sovereign.
-Then open any country in the Rankings list and press **🗺️ Show on map**.
-
-**✅ DONE 2026-10-11** — four things.
-
-**1. Bands by natural groups, with the comparison the owner asked for.** Equal-count bands
-answer "where does this place", which is why Sweden and Germany matched on Total GDP. Natural
-groups (1-D k-means, seeded on quantiles so it is deterministic) cut where the data itself has
-gaps: on Total GDP that puts the US and China alone at the top, Germany one band below, Sweden
-four below — *"it should be super clear that us and china are by far higher"*. It is the default;
-**equal count** and **log scale** are in the bar to compare against, and the legend names the
-one in use.
-
-**2. A territory outside the filter reads as its sovereign.** `entities.json` already names one
-for 48 entities, so with Territories off, Greenland reads *"Denmark — $405B · Greenland"* rather
-than "not in this filter". Where there is no sovereign to fall back on it says "no data".
-
-**3. Show on map.** The country panel gets a button that opens the map framed on that country,
-and the frame is part of the URL (`#/explore/map?focus=se`) so it survives a reload and can be
-sent to someone. It had to ride in the URL: the Explorer rewrites its own hash on every render,
-which dropped the focus before the map had used it.
-
-**4. A label on each column glyph.** ✏️ and 🔤 say *Shapes* and *Aliases* on hover.
-
-**Follow-ups, same day, from the next review round:**
-- **The frame now holds the whole country.** Sweden, Algeria and New Zealand were clipped
-  against the top edge: the focus was applied before the legend had taken its share of the
-  height, so the frame it aimed at was ~20px taller than the one the reader sees. It is applied
-  after the legend now, and again on resize. Measured by probing the on-screen extent: every
-  country tested sits inside the frame with margin, filling about 70% of it.
-- **A microstate no longer zooms to street level.** The frame stops shrinking at about Austria's
-  span, so San Marino arrives with northern Italy around it.
-- **The zoom survives the Territories toggle**, and every other control that rebuilds the map.
-- **Each band mode explains itself** on hover, in the dropdown and on the control.
-
-**Known gap — sub-national islands.** Madeira, the Azores and the Canaries are not entities;
-they are rings inside Portugal's and Spain's geometry. They therefore read as their sovereign
-whatever the Territories toggle says, and cannot be hovered as themselves. Making them
-hoverable means adding them to the registry with their own geometry — the #20 kind of data
-work, not a map change.
-
----
-
-## 70. Sub-national islands are not on the map as themselves
+## 74. Sub-national islands are not on the map as themselves
 
 **What:** Madeira, the Azores, the Canaries and their like are rings inside their sovereign's
 geometry, not entities. On the Explorer map they therefore read as *Portugal* or *Spain* whatever
@@ -1652,38 +1248,23 @@ off it still reads as Portugal.
 
 ---
 
-## 71. Placement: a small shape could be resized but never grabbed
 
-**REVIEW:** `#/draw/daily` — draw, press Done, zoom the map out, then shrink the shape with a
-corner. Pressing anywhere in the middle of it should move it, every time, however small it is.
-The hint line says *zoom in to resize* once the shape is too small for corners.
+## 75. Top 10: no guard that the three input styles stay in step
 
-**✅ DONE 2026-10-11** — owner: *"when zoomed out it's very hard to get the hand to grab when
-you just resized it… the corners of the shape is like all you see"*. The loop really is resize,
-move, resize, move, and half of it was broken.
+**What:** The card grid renders a pick's outcome in its own visual language (`.topn-card.is-hit`
+/ `.is-miss` plus a rank chip), separate from the row component the board and the miss list
+share. Nothing stops a future change landing in one input style and not the others.
 
-Three changes, because no single one covered the whole size range:
+**Why:** Owner review (2026-10-11), kept when the rest of that work was signed off. The three
+output pieces — board, misses, feedback strip — already come from one builder each, so this is
+insurance rather than a defect; the cost of it going wrong is a fix that silently only works in
+one of three modes.
 
-- **The corner handles moved outside the box.** They sat exactly on the bounding box, so their
-  hit circles (23px across) ate into the shape itself. They now sit 7px beyond the corner.
-- **The middle of the shape is always a move.** A reserved core, 42% of the box, is checked
-  before any handle. Measured at 30/50/80/150px on screen: the handles' reach never touches it.
-- **Below 44px on screen the corners withdraw entirely.** Four 23px targets around a 14px shape
-  leave nothing to grab at all, and a corner that small is not a resize anyone can aim — so at
-  that size the shape is pure move, and the hint says *zoom in to resize*. The floor is relative
-  to the current zoom, so zooming in restores the handles: nothing is permanently un-resizable.
-
-Verified with Playwright at 42×80 on screen: the cursor reads `grab` at the centre, dragging
-moves the shape by exactly the drag delta, and its size is unchanged. The same drag before this
-change moved nothing at all.
-
-**Also:** the ghosts toggle is gone from the results screen (owner, 2026-10-11) — and that
-removal fixed a bug it had introduced: the results map sets `showGhosts = true` itself, because
-*"dashed outlines = real shapes"* is part of the result, so a toggle reaching into it could have
-switched off something that is not optional there.
+**Approach / notes:** the repo has no test framework, which is the whole reason this is a note
+and not a test. If one ever lands, the assertion is: for each of cards / flags / typing, a round
+renders the same set of output components.
 
 ---
-
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`
@@ -1727,6 +1308,19 @@ full write-ups are in git history.
 - **#48** Data Explorer: a world map view — zoom and pan in #60 — 2026-10-10
 - **#51** Browse the country shapes as a table — nameless grid in #61 — 2026-10-10
 - **#56** Deep links: open any screen by URL — 2026-10-10
+- **#57** Placement & results maps: a floor on zoom-out, and a pannable results map — 2026-10-11
+- **#59** Top 10: flags on every pick, a reversible reveal, a cheaper re-render — 2026-10-11
+- **#60** Data Explorer map: zoom, pan and reset — 2026-10-11
+- **#61** Shapes: a nameless grid to test yourself against — 2026-10-11
+- **#62** Resizing the window blanked every canvas — 2026-10-11
+- **#63** One miss list for every input style — the guard is now #75 — 2026-10-11
+- **#64** Map colours: one hue, so higher and lower read without the legend — 2026-10-11
+- **#65** Data Explorer controls: one grammar, and its own territories setting — 2026-10-11
+- **#66** The map was naming the wrong country, and painting the wrong band — 2026-10-11
+- **#67** Four views, one order list, and columns behind a glyph — 2026-10-11
+- **#68** Microstates you can hover, bands that fit the data, DEV button removed — 2026-10-11
+- **#69** Natural bands, territories that name their owner, and Show on map — 2026-10-11
+- **#76** Placement: a small shape can always be grabbed to move — 2026-10-11 (written as #71; that number belongs to the Coverage entry the code cites)
 - **#10** Push draw shape fidelity to Sporcle level — retired 2026-10-10, the same bar
   as #24, which the owner signed off on 2026-09-06
 - **#52** Religion: keep the name when the Factbook gives no percentage — 2026-10-10
