@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Data map — Know the World</title>
-<meta name="description" content="Where every dataset in this repo comes from, which script builds it, which file holds it, and who reads it — plus a live coverage and quality audit.">
+<meta name="description" content="Where every dataset in this repo comes from, which script builds it, which file holds it, and who reads it — plus the integrity checks that say whether it holds up.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -140,25 +140,6 @@ td.num { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); wh
 td .label { font-weight: 500; }
 td .note { font-size: 11.5px; color: var(--text-faint); margin-top: 2px; }
 
-/* coverage bar: one hue, length carries the magnitude */
-.bar { display: flex; align-items: center; gap: 9px; min-width: 128px; }
-.track { flex: 1; height: 8px; background: #2b3139; border-radius: 4px; overflow: hidden; }
-.fill { height: 100%; background: var(--accent); border-radius: 2px 4px 4px 2px; }
-.bar .pct { font-family: var(--mono); font-size: 11.5px; color: var(--text-dim); width: 34px; text-align: right; flex: none; }
-.bar.none .fill { background: var(--s-repo); }
-/* Source identity rides a swatch, never the text colour. */
-td.src { display: flex; align-items: center; gap: 7px; }
-.swatch.dot { width: 8px; height: 8px; border-radius: 50%; }
-
-/* ---------- flag colours ---------- */
-.fc-img { width: 52px; height: 35px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); background: var(--surface2); display: block; }
-.chips { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
-.chip-c { width: 17px; height: 17px; border-radius: 4px; border: 1px solid rgba(255,255,255,.22); flex: none; }
-.chip-c.miss { outline: 2px solid var(--red); outline-offset: 1px; }
-.fc-hex { font-family: var(--mono); font-size: 10.5px; color: var(--text-faint); letter-spacing: -.02em; }
-#fc-export pre { font-family: var(--mono); font-size: 11.5px; color: var(--text-dim); padding: 14px; overflow-x: auto; white-space: pre; line-height: 1.5; }
-#fc-export .hd { font-size: 12.5px; color: var(--text-dim); padding: 12px 14px 0; }
-
 /* ---------- checks ---------- */
 .checks { display: flex; flex-direction: column; }
 .check { display: grid; grid-template-columns: 86px 1fr; gap: 16px; padding: 13px 16px; border-bottom: 1px solid var(--border-soft); align-items: start; }
@@ -218,8 +199,10 @@ footer a { color: var(--accent); text-decoration: none; }
   <h1>Data map</h1>
   <p class="lede">
     Every dataset this game ships: where it is fetched from, which script builds it, which
-    file holds it, and which module reads it at runtime. The coverage and check tables below
-    are computed live from the committed files, so they go stale only if the data does.
+    file holds it, and which module reads it at runtime. The checks below are computed live
+    from the committed files, so they go stale only if the data does.
+    Per-entity coverage lives in the app, under
+    <a href="index.html#/explore/coverage">Data Explorer → Coverage</a>.
   </p>
 </header>
 
@@ -255,31 +238,6 @@ footer a { color: var(--accent); text-decoration: none; }
   </div>
 </section>
 
-<!-- ======================= COVERAGE ======================= -->
-<section>
-  <div class="sec-head">
-    <h2>Coverage</h2>
-    <p>
-      How much of the entity registry each field actually has a value for, split by entity
-      class — because an 85% number usually means "every sovereign state, no territories",
-      which is a very different thing from a hole in the middle of the map.
-    </p>
-  </div>
-  <div class="card tbl-scroll">
-    <table id="coverage">
-      <thead><tr>
-        <th>Field</th>
-        <th>Sovereign <small id="h-sov">—</small></th>
-        <th>Territory <small id="h-ter">—</small></th>
-        <th>De-facto <small id="h-dfc">—</small></th>
-        <th>Total</th>
-        <th>Source</th>
-      </tr></thead>
-      <tbody><tr><td colspan="6" style="color:var(--text-faint)">loading…</td></tr></tbody>
-    </table>
-  </div>
-</section>
-
 <!-- ======================= CHECKS ======================= -->
 <section>
   <div class="sec-head">
@@ -293,42 +251,6 @@ footer a { color: var(--accent); text-decoration: none; }
   <div class="card checks" id="checks">
     <div class="check"><span class="chip" data-s="wait">waiting</span><div class="what">loading data…</div></div>
   </div>
-</section>
-
-<!-- ======================= FLAG COLOURS ======================= -->
-<section>
-  <div class="sec-head">
-    <h2>Flag colours</h2>
-    <p>
-      <code>data/flags.json</code> is hand-curated and drives both colour quizzes, so a wrong
-      entry is scored against. This reads the actual flag image for every entity and checks whether
-      each curated colour appears in it. The 52 entities that had no colours were drafted here and
-      landed after review, so "No colours yet" should now be empty — if an entry appears there, a
-      new entity has arrived without colours. <b>Nothing here writes to the repo</b>; drafts are
-      proposals to paste in.
-    </p>
-    <p>
-      Calibrated against the 199 flags already curated, the reader finds 80% of their colours
-      and errs towards extra anti-aliasing shades rather than missing real ones. So "disagrees"
-      means <em>worth looking at</em>, not <em>wrong</em>: a small device or a thin stripe can
-      fall under the threshold. Read it as a worklist, and trust the flag beside it over the
-      swatches.
-    </p>
-  </div>
-  <div class="controls">
-    <label><input type="radio" name="fcf" value="all"> All</label>
-    <label><input type="radio" name="fcf" value="missing" checked> No colours yet</label>
-    <label><input type="radio" name="fcf" value="check"> Curated, disagrees with image</label>
-    <label><input type="radio" name="fcf" value="ok"> Curated, agrees</label>
-    <span class="legend-item" id="fc-count" style="margin-left:auto"></span>
-  </div>
-  <div class="card tbl-scroll">
-    <table id="flagcolours">
-      <thead><tr><th>Flag</th><th>Entity</th><th>Curated</th><th>Found in the image</th><th>Verdict</th></tr></thead>
-      <tbody><tr><td colspan="5" style="color:var(--text-faint)">loading…</td></tr></tbody>
-    </table>
-  </div>
-  <div class="card" id="fc-export" style="margin-top:14px; display:none"></div>
 </section>
 
 <!-- ======================= FINDINGS ======================= -->
@@ -609,21 +531,11 @@ try {
     `<div class="check"><span class="chip" data-s="fail">blocked</span><div><div class="what">Could not read the data files</div>` +
     `<div class="detail">${esc(e.message)} — this page reads <span class="mono">data/*.json</span> over HTTP, so it needs the repo served ` +
     `(<span class="mono">npm start</span>, then open <span class="mono">localhost:8080/data-map.html</span>). The graph above is static and still correct.</div></div></div>`;
-  document.querySelector('#coverage tbody').innerHTML =
-    `<tr><td colspan="6" style="color:var(--text-faint)">unavailable — serve the repo to compute coverage</td></tr>`;
 }
 
 if (D) {
   const codes = Object.keys(D.entities);
   const E = D.entities;
-  const GROUPS = [
-    ['sovereign', codes.filter(c => E[c].type === 'sovereign')],
-    ['territory', codes.filter(c => E[c].type === 'territory')],
-    ['de-facto',  codes.filter(c => E[c].type === 'de-facto')],
-  ];
-  document.getElementById('h-sov').textContent = GROUPS[0][1].length;
-  document.getElementById('h-ter').textContent = GROUPS[1][1].length;
-  document.getElementById('h-dfc').textContent = GROUPS[2][1].length;
 
   /* ---- node stat lines ---- */
   const stats = {
@@ -637,47 +549,6 @@ if (D) {
     shapes:      `${codes.filter(c => E[c].hasGeometry).length} files · loaded one at a time`,
   };
   for (const el of document.querySelectorAll('[data-stat]')) el.textContent = stats[el.dataset.stat] ?? '—';
-
-  /* ---- coverage table ---- */
-  const SOURCE_OF = {
-    'gdp-nominal': 'wb', 'population': 'wb', 'gdp-per-capita': 'wb', 'land-area': 'wb',
-    'life-expectancy': 'wb', 'exports': 'wb', 'urbanization': 'wb', 'export-share-gdp': 'wb',
-    'independence-year': 'fb', 'elec-nuclear-pct': 'ember', 'elec-coal-pct': 'ember', 'elec-renewable-pct': 'ember',
-  };
-  const NOTES = {
-    'exports': 'World Bank publishes no value at all for 25 sovereign states in the window',
-    'export-share-gdp': 'same 25 states — it is the same indicator family',
-    'independence-year': 'territories have no independence event; left null on purpose',
-    'land-area': 'the only field with no holes — manual backfill covers every territory',
-  };
-  const bar = (have, total) => {
-    const pct = total ? Math.round(have / total * 100) : 0;
-    return `<td><div class="bar${pct === 0 ? ' none' : ''}"><div class="track"><div class="fill" style="width:${pct}%"></div></div>` +
-           `<span class="pct">${pct}%</span></div><div class="note">${have}/${total}</div></td>`;
-  };
-
-  const rows = [];
-  for (const d of D.datasets.datasets) {
-    const has = c => d.values[c] != null;
-    rows.push({ label: d.name, id: d.id, has, src: SOURCE_OF[d.id], note: NOTES[d.id] });
-  }
-  const FLAGFIELDS = [
-    ['Geometry (world map)', 'hasGeometry', 'ne', 'the aggregate jg has none — correctly, it is not a place'],
-    ['Flag image', 'hasFlagImage', 'flagcdn', 'five codeless entities ship bundled SVGs instead'],
-    ['Flag colours (quiz)', 'hasFlag', 'manual', 'hand-curated — the biggest curation gap on this page'],
-    ['Capital city', 'hasCapital', 'fb', 'Hong Kong and Macao have no capital by definition'],
-    ['Religion breakdown', 'hasReligion', 'fb', 'the Factbook names a religion for most of these but gives no percentage'],
-    ['Electricity mix', 'hasElectricity', 'ember', 'Ember has no series for the smallest states'],
-  ];
-  for (const [label, key, src, note] of FLAGFIELDS) rows.push({ label, has: c => !!E[c][key], src, note });
-
-  document.querySelector('#coverage tbody').innerHTML = rows.map(r => {
-    const total = codes.filter(r.has).length;
-    return `<tr><td><div class="label">${esc(r.label)}</div>${r.note ? `<div class="note">${esc(r.note)}</div>` : ''}</td>` +
-      GROUPS.map(([, g]) => bar(g.filter(r.has).length, g.length)).join('') +
-      `<td class="num">${total}/${codes.length}</td>` +
-      `<td class="num src"><span class="swatch dot" style="background:${SRC[r.src].color}"></span>${SRC[r.src].label}</td></tr>`;
-  }).join('');
 
   /* ---- live checks ---- */
   const checks = [];
@@ -849,127 +720,6 @@ if (D) {
       (c.codes?.length ? `<div class="codes">${esc(list(c.codes))}</div>` : '') + `</div></div>`).join('');
   }
   renderChecks();
-}
-
-/* ============================================================
-   2b. Flag-colour review — reads the real image for every entity.
-   ============================================================ */
-if (D) {
-  const E = D.entities, codes = Object.keys(E);
-  const BUNDLED = new Set(['xa', 'xc', 'xo', 'xs', 'xt']);   // mirrors js/flags.js
-  const flagUrl = c => BUNDLED.has(c) ? `assets/flags/${c}.svg` : `https://flagcdn.com/w320/${c}.png`;
-  const curated = new Map(D.flags.map(f => [f.code, f.colors]));
-  const rgb = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
-  const hex = c => '#' + c.map(v => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
-  const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-
-  // Dominant colours of the rendered flag. Tuned against the 199 already curated: it
-  // finds 80% of their colours, and errs towards extra anti-aliasing shades rather than
-  // missing real ones — the right way round when a person is reviewing the result.
-  // MIN_SHARE_DRAFT keeps a proposed colour list short and dominant; the *matching*
-  // pass uses everything down to MIN_SHARE_SEEN, because a flag's white crescent or
-  // gold sun can be a fraction of a percent and its absence from the reader's list is
-  // not evidence that the curated colour is wrong (Libya, Maldives, Samoa, Argentina).
-  // MATCH is a presence test with tolerance, not an identity test: curated values are
-  // official specification colours and the rendered PNG drifts from them — France's
-  // #002395 renders as #002654 (65 apart), Norway 61, Indonesia 64, all of which were
-  // being reported as errors at 60. 75 clears that drift and still sits below the
-  // distance between two genuinely different colours inside one flag, which across the
-  // curated set is almost never under ~68.
-  const MERGE = 56, MIN_SHARE_SEEN = 0.004, MIN_SHARE_DRAFT = 0.015, MATCH = 75;
-  async function dominant(code) {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = flagUrl(code);
-    await new Promise((ok, no) => { img.onload = ok; img.onerror = () => no(new Error('no image')); });
-    const w = 160, h = Math.max(1, Math.round((img.height || 2) * w / (img.width || 3)));
-    const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-    const cx = cv.getContext('2d', { willReadFrequently: true });
-    cx.drawImage(img, 0, 0, w, h);
-    const d = cx.getImageData(0, 0, w, h).data;
-    const buckets = new Map();
-    for (let i = 0; i < d.length; i += 4) {
-      if (d[i + 3] < 128) continue;
-      const k = [d[i], d[i + 1], d[i + 2]].map(v => Math.round(v / 16) * 16).join(',');
-      const e = buckets.get(k) || { n: 0, r: 0, g: 0, b: 0 };
-      e.n++; e.r += d[i]; e.g += d[i + 1]; e.b += d[i + 2]; buckets.set(k, e);
-    }
-    const merged = [];
-    for (const e of [...buckets.values()].map(e => ({ n: e.n, c: [e.r / e.n, e.g / e.n, e.b / e.n] })).sort((a, b) => b.n - a.n)) {
-      const near = merged.find(m => dist(m.c, e.c) < MERGE);
-      if (near) { const t = near.n + e.n; near.c = near.c.map((v, i) => (v * near.n + e.c[i] * e.n) / t); near.n = t; }
-      else merged.push({ ...e });
-    }
-    const total = merged.reduce((a, m) => a + m.n, 0) || 1;
-    return merged.filter(m => m.n / total >= MIN_SHARE_SEEN).sort((a, b) => b.n - a.n)
-      .map(m => ({ hex: hex(m.c), share: m.n / total }));
-  }
-
-  const chips = (list, missing = []) => `<div class="chips">` + (list.length
-    ? list.map(c => `<span class="chip-c${missing.includes(c) ? ' miss' : ''}" style="background:${c}" title="${c}"></span>`).join('')
-    : `<span class="fc-hex">none</span>`) + `</div>` +
-    (list.length ? `<div class="fc-hex">${list.join(' ')}</div>` : '');
-
-  const rows = codes.filter(c => E[c].hasFlagImage).map(c => ({ code: c, state: 'wait' }));
-  const tbody = document.querySelector('#flagcolours tbody');
-  const drafts = new Map();
-
-  function paint() {
-    const mode = document.querySelector('input[name=fcf]:checked').value;
-    const shown = rows.filter(r => mode === 'all' || r.state === mode || (mode !== 'all' && r.state === 'wait' && r.want === mode));
-    document.getElementById('fc-count').textContent =
-      `${rows.filter(r => r.state === 'missing').length} with no colours · ` +
-      `${rows.filter(r => r.state === 'check').length} disagree · ${rows.filter(r => r.state === 'ok').length} agree`;
-    tbody.innerHTML = shown.length ? shown.map(r => {
-      const cur = curated.get(r.code) || [];
-      const verdict = { wait: ['wait', 'reading…'], missing: ['look', 'draft'], check: ['fail', 'check it'], ok: ['pass', 'agrees'] }[r.state];
-      return `<tr><td><img class="fc-img" loading="lazy" src="${flagUrl(r.code)}" alt=""></td>` +
-        `<td><div class="label">${esc(E[r.code].name)}</div><div class="note mono">${r.code} · ${E[r.code].type}</div></td>` +
-        `<td>${chips(cur, r.missing || [])}</td>` +
-        `<td>${chips(r.got || [])}</td>` +
-        `<td><span class="chip" data-s="${verdict[0]}">${verdict[1]}</span>${r.note ? `<div class="note">${r.note}</div>` : ''}</td></tr>`;
-    }).join('') : `<tr><td colspan="5" style="color:var(--text-faint)">nothing in this view</td></tr>`;
-
-    const box = document.getElementById('fc-export');
-    const d = [...drafts.entries()];
-    if (mode === 'missing' && d.length) {
-      box.style.display = '';
-      box.innerHTML = `<div class="hd">Drafts for <span class="mono">data/flags.json</span> — review the swatches above against each flag first, delete the shades that are anti-aliasing rather than flag colours, then paste in.</div>` +
-        `<pre>${esc(d.sort((a, b) => a[0].localeCompare(b[0])).map(([c, cols]) =>
-          `{ "code": "${c}", "name": ${JSON.stringify(E[c].name)}, "colors": ${JSON.stringify(cols)} },`).join('\n'))}</pre>`;
-    } else box.style.display = 'none';
-  }
-
-  for (const el of document.querySelectorAll('input[name=fcf]')) el.addEventListener('change', paint);
-  // ?fc=check lands straight on the worklist, so this board can be handed over as a
-  // link to the thing being reviewed rather than a page plus instructions.
-  const want = new URLSearchParams(location.search).get('fc');
-  const pick = want && document.querySelector(`input[name=fcf][value="${CSS.escape(want)}"]`);
-  if (pick) { pick.checked = true; document.getElementById('flagcolours').scrollIntoView(); }
-  paint();
-
-  // Sequential rather than parallel: 250 flags at once stalls the tab, and nothing here
-  // is urgent enough to be worth that.
-  (async () => {
-    for (const r of rows) {
-      try {
-        const got = await dominant(r.code);
-        r.got = got.map(g => g.hex);
-        const cur = curated.get(r.code);
-        if (!cur) {
-          r.state = 'missing';
-          drafts.set(r.code, got.filter(g => g.share >= MIN_SHARE_DRAFT).slice(0, 5).map(g => g.hex));
-        } else {
-          const missing = cur.filter(c => !got.some(g => dist(rgb(g.hex), rgb(c)) < MATCH));
-          r.missing = missing;
-          r.state = missing.length ? 'check' : 'ok';
-          if (missing.length) r.note = `${missing.length} curated colour${missing.length > 1 ? 's' : ''} not found in the image`;
-        }
-      } catch { r.state = curated.get(r.code) ? 'ok' : 'missing'; r.note = 'image would not load'; r.got = []; }
-      if (rows.indexOf(r) % 12 === 0) paint();
-    }
-    paint();
-  })();
 }
 
 /* ============================================================

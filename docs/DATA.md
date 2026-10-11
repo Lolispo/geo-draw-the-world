@@ -3,9 +3,13 @@
 How the country data is structured and regenerated. Established by TODOS items 5–6.
 
 The same picture, drawn and kept honest: open `data-map.html` on the served site
-(`npm start`, then `/data-map.html`). It graphs source → script → file → consumer, and
-recomputes coverage and the cross-file consistency checks from the committed data on
-every load — so where this file and that page disagree, the page is right.
+(see `CLAUDE.md` for the port — not `npm start`). It graphs source → script → file →
+consumer and recomputes the cross-file integrity checks from the committed data on
+every load, so where this file and that page disagree, the page is right.
+
+Per-entity coverage is in the app rather than on that page: **Data Explorer →
+Coverage** (`#/explore/coverage`) lists every entity against every field, and its
+Colors column checks each curated flag colour against the flag's own image (TODOS #55).
 
 ## Files
 

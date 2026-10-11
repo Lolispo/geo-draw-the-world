@@ -52,9 +52,11 @@ python3 -m http.server 8080
 - **Country stats** — [World Bank Open Data](https://data.worldbank.org/).
 - All datasets join on the **ISO 3166-1 alpha-2** country code. See
   [`docs/DATA.md`](docs/DATA.md) for the regeneration pipeline.
-- **`data-map.html`** — open it on the served site for the whole picture: which source
-  feeds which script feeds which file feeds which module, plus coverage and consistency
-  checks computed live from the committed data.
+- **`data-map.html`** — the pipeline, on the served site: which source feeds which
+  script feeds which file feeds which module, plus the cross-file integrity checks,
+  computed live from the committed data. Per-entity coverage lives in the app instead,
+  under **Data Explorer → Coverage** (`#/explore/coverage`), where the Colors column
+  checks each curated flag colour against the flag's own image.
 
 ## Project layout
 
