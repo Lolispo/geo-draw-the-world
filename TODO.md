@@ -1451,6 +1451,38 @@ make Andorra, Monaco and Liechtenstein reachable without zooming.
 
 ---
 
+## 67. Four views, one order list, and columns behind a glyph
+
+**REVIEW:** `#/explore` — turn on ✏️ and 🔤. The outline column plus *Largest first* on land
+area is the old Shapes table, which is why that view is gone; aliases now sit dim beside the
+name without changing the row height. `#/explore/shapes` is the nameless grid, and every rows
+view offers the same five orderings. `#/explore/grid` still works.
+
+**✅ DONE 2026-10-11** — owner review: *"the shapes view is basically rankings land area"*.
+
+**Decided (owner, 2026-10-11):**
+- **The Shapes table is gone.** Rankings grew an **outline column**, so the table is reproducible
+  from it; the nameless grid took the name *Shapes* and the 🧩 icon (the old ▦ was a geometric
+  character, not an emoji, which is why it sized differently from its neighbours). Four views.
+- **One order list everywhere**: High → Low, Low → High, A → Z, By continent, Random. *By
+  continent* and *Random* were never specific to the grid. High/Low follow the selected metric,
+  which is why Shapes now has a metric dropdown too — outlines ordered by population is a real
+  question.
+- **Aliases inline, not on their own line**: dim, beside the name, and nothing at all for a
+  country that has none. Measured: row height is 37px with the column off and 37px with it on.
+- **Column toggles are a single glyph** — ✏️ and 🔤 — because they turn a column on rather than
+  changing what the table contains, and two "X: Off" pills ate the bar. Grouped so a wrap cannot
+  separate them.
+
+`#/explore/grid` redirects to `#/explore/shapes` rather than breaking a link that was handed out
+a day earlier.
+
+Verified with Playwright: the legacy link lands on 197 tiles, both rows views expose the same
+five orderings, Shapes by *High → Low* on GDP gives us, cn, de, jp, the outline column paints,
+and the alias column leaves the row height alone. No page errors.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

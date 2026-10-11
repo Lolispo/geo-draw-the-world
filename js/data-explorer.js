@@ -1,7 +1,7 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity } from './datasets.js';
 import { readFlagColors, missingFromImage } from './flag-colors.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
@@ -31,14 +31,17 @@ function seededRank(code, seed) {
 const VIEWS = [
   { id: 'rank', label: '📊 Rankings' },
   { id: 'map', label: '🗺️ Map' },
-  { id: 'shapes', label: '✏️ Shapes' },
-  { id: 'grid', label: '▦ Grid' },
+  { id: 'shapes', label: '🧩 Shapes' },
   { id: 'coverage', label: '📋 Coverage' },
 ];
 
-const SHAPE_SORTS = [
+// One order list for every view that has rows. The table view used to own "by
+// continent" and "random" for no reason anyone could name (owner, 2026-10-11), and
+// High/Low simply follow whichever metric is selected.
+const ORDERS = [
+  { id: 'hi', label: 'High → Low' },
+  { id: 'lo', label: 'Low → High' },
   { id: 'name', label: 'A → Z' },
-  { id: 'area', label: 'Largest first' },
   { id: 'continent', label: 'By continent' },
   { id: 'random', label: 'Random' },
 ];
@@ -64,7 +67,8 @@ export class DataExplorer {
     this.continent = null;   // null = All
     this.higherFirst = true;
     this.view = 'rank';      // one of VIEWS
-    this.shapeSort = 'name';   // 'name' | 'area' | 'continent' | 'random'
+    this.order = 'hi';       // one of ORDERS, shared by the rows views
+    this.showOutlines = false;  // the outline column, which is what the old Shapes table was
     this._shuffleSeed = 1;
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
@@ -85,7 +89,10 @@ export class DataExplorer {
     // A URL can name a continent that is not one (TODOS #56); fall back to all.
     this.continent = getContinents().includes(continent) ? continent : null;
     this.higherFirst = getDataset(this.datasetId).higherFirst;
-    this.view = VIEWS.some((v) => v.id === view) ? view : 'rank';
+    // "grid" was this view's name for a day; keep the link working.
+    const wanted = view === 'grid' ? 'shapes' : view;
+    this.view = VIEWS.some((v) => v.id === wanted) ? wanted : 'rank';
+    this.order = this.view === 'shapes' ? 'name' : (this.higherFirst ? 'hi' : 'lo');
     this._render();
   }
 
@@ -111,9 +118,47 @@ export class DataExplorer {
 
   _renderBody() {
     if (this.view === 'coverage') this._renderCoverage();
-    else if (this.view === 'shapes' || this.view === 'grid') this._renderShapes();
+    else if (this.view === 'shapes') this._renderShapes();
     else if (this.view === 'map') this._renderMap();
     else this._renderList();
+  }
+
+  // The one ordering every rows view uses. High/Low read the selected metric; the
+  // rest are metric-independent, which is why they belong everywhere rather than in
+  // whichever view happened to grow them first.
+  _ordered(rows, valueOf) {
+    const by = this.order;
+    if (by === 'hi' || by === 'lo') {
+      const dir = by === 'hi' ? -1 : 1;
+      return [...rows].sort((a, b) => {
+        const [x, y] = [valueOf(a), valueOf(b)];
+        if (x == null && y == null) return a.name.localeCompare(b.name);
+        if (x == null) return 1;      // no figure sorts last either way
+        if (y == null) return -1;
+        return (x - y) * dir;
+      });
+    }
+    if (by === 'continent') {
+      return [...rows].sort((a, b) => (a.continent || '').localeCompare(b.continent || '')
+        || a.name.localeCompare(b.name));
+    }
+    if (by === 'random') {
+      return [...rows].sort((a, b) => seededRank(a.code, this._shuffleSeed) - seededRank(b.code, this._shuffleSeed));
+    }
+    return [...rows].sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  // A column toggle is one glyph: these turn a column on, they are not scope, and a
+  // row of "X: Off" pills ate the bar (owner, 2026-10-11).
+  _glyph(glyph, on, title, onToggle) {
+    const b = document.createElement('button');
+    b.className = 'btn btn-tool explore-glyph' + (on ? ' active' : '');
+    b.textContent = glyph;
+    b.title = title;
+    b.setAttribute('aria-pressed', String(on));
+    b.setAttribute('aria-label', title);
+    b.addEventListener('click', onToggle);
+    return b;
   }
 
   // Everything in this view answers to the Explorer's own territories setting.
@@ -244,17 +289,24 @@ export class DataExplorer {
     const bar = document.createElement('div');
     bar.className = 'explore-controls';
     const rankView = this.view === 'rank';
-    const shapeView = this.view === 'shapes' || this.view === 'grid';
+    const shapeView = this.view === 'shapes';
+    const hasRows = rankView || shapeView;
 
-    bar.appendChild(this._select(VIEWS, this.view, (v) => { this.view = v; this._render(); }));
+    bar.appendChild(this._select(VIEWS, this.view, (v) => {
+      this.view = v;
+      // A view with no metric has nothing to call High or Low.
+      if (v === 'shapes' && (this.order === 'hi' || this.order === 'lo')) this.order = this.order;
+      this._render();
+    }));
 
-    if (rankView || this.view === 'map') {
+    if (hasRows || this.view === 'map') {
       bar.appendChild(this._select(
         getDatasetList().map((d) => ({ id: d.id, label: d.name })),
         this.datasetId,
         (v) => {
           this.datasetId = v;
           this.higherFirst = getDataset(v).higherFirst;   // reset to natural order
+          if (this.order === 'hi' || this.order === 'lo') this.order = this.higherFirst ? 'hi' : 'lo';
           this._render();
         },
       ));
@@ -266,27 +318,27 @@ export class DataExplorer {
       (v) => { this.continent = v || null; this._renderBody(); },
     ));
 
-    if (rankView) {
-      bar.appendChild(this._select(
-        [{ id: 'hi', label: 'High → Low' }, { id: 'lo', label: 'Low → High' }],
-        this.higherFirst ? 'hi' : 'lo',
-        (v) => { this.higherFirst = v === 'hi'; this._renderList(); },
-      ));
-    }
-
-    if (shapeView) {
-      bar.appendChild(this._select(SHAPE_SORTS, this.shapeSort, (v) => {
+    if (hasRows) {
+      bar.appendChild(this._select(ORDERS, this.order, (v) => {
         // Picking Random again means "shuffle again", which is what anyone expects.
         if (v === 'random') this._shuffleSeed = Math.floor(Math.random() * 1e9);
-        this.shapeSort = v;
-        this._renderShapes();
+        this.order = v;
+        if (v === 'hi' || v === 'lo') this.higherFirst = v === 'hi';
+        this._renderBody();
       }));
-    }
 
-    if (rankView) {
-      bar.appendChild(this._pill('🔤 Aliases', this.showAliases,
-        'Show the other names each country is accepted under when typing',
-        () => { this.showAliases = !this.showAliases; this._render(); }));
+      // Grouped, so a wrap cannot put one column toggle on each row.
+      const glyphs = document.createElement('div');
+      glyphs.className = 'explore-glyphs';
+      glyphs.append(
+        this._glyph('✏️', this.showOutlines,
+          'Show each country\'s outline beside its name',
+          () => { this.showOutlines = !this.showOutlines; this._render(); }),
+        this._glyph('🔤', this.showAliases,
+          'Show the other names each country is accepted under when typing',
+          () => { this.showAliases = !this.showAliases; this._render(); }),
+      );
+      bar.appendChild(glyphs);
     }
 
     bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
@@ -305,28 +357,39 @@ export class DataExplorer {
     return bar;
   }
 
+  // Rankings. With the outline column on and the order set to a land-area metric this
+  // *is* the old Shapes table, which is why that view no longer exists (owner,
+  // 2026-10-11).
   _renderList() {
     const list = this._listEl;
     if (!list) return;
+    this._shapeObserver?.disconnect();
     list.innerHTML = '';
 
     const ds = getDataset(this.datasetId);
-    const entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst })
-      .filter((e) => inCountryPool(e.code, this._pool()));
+    const rows = this._ordered(
+      getEntries(this.datasetId, { continent: this.continent })
+        .filter((e) => inCountryPool(e.code, this._pool())),
+      (e) => e.value,
+    );
 
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
-    blurb.textContent = `${ds.name} — ${ds.blurb}${this.continent ? ` · ${this.continent}` : ''} · ${entries.length} countries`;
+    blurb.textContent = `${ds.name} — ${ds.blurb}${this.continent ? ` · ${this.continent}` : ''} · ${rows.length} countries`;
     list.appendChild(blurb);
 
-    for (let i = 0; i < entries.length; i++) {
-      const e = entries[i];
+    if (this.showOutlines) this._shapeObserver = this._outlineObserver(list, THUMB_SIZE);
+
+    rows.forEach((e, i) => {
       const row = document.createElement('div');
-      row.className = 'explore-row';
+      row.className = 'explore-row is-clickable' + (this.showOutlines ? ' has-outline' : '');
 
       const rank = document.createElement('span');
       rank.className = 'explore-rank';
       rank.textContent = i + 1;
+      row.appendChild(rank);
+
+      if (this.showOutlines) row.appendChild(this._outlineCanvas(e.code, THUMB_SIZE));
 
       const img = document.createElement('img');
       img.className = 'rank-flag';
@@ -338,185 +401,98 @@ export class DataExplorer {
       const name = document.createElement('span');
       name.className = 'explore-name';
       name.textContent = e.name;
+      // Beside the name, dim, on the same line: an extra row per country turned a
+      // ranking into a wall, and a country with none simply says nothing.
+      if (this.showAliases) {
+        const aliases = getAliases(e.code);
+        if (aliases.length) {
+          const also = document.createElement('span');
+          also.className = 'explore-aliases';
+          also.textContent = aliases.join(', ');
+          name.appendChild(also);
+        }
+      }
 
       const val = document.createElement('span');
       val.className = 'explore-value';
-      val.textContent = formatValue(ds.format, e.value);
+      val.textContent = e.value == null ? '—' : formatValue(ds.format, e.value);
 
-      row.append(rank, img, name, val);
-
-      if (this.showAliases) {
-        const aliases = getAliases(e.code);
-        const also = document.createElement('span');
-        also.className = 'explore-aliases' + (aliases.length ? '' : ' is-empty');
-        also.textContent = aliases.length ? `also: ${aliases.join(', ')}` : 'no aliases';
-        row.appendChild(also);
-      }
-      row.classList.add('is-clickable');
+      row.append(img, name, val);
       row.title = `View ${e.name}`;
       row.addEventListener('click', () => openCountryPanel(e.code));
       list.appendChild(row);
-    }
+    });
   }
 
-  // Every outline in one table (TODOS #51). Each thumbnail is normalized to its own
-  // bounding box, so Russia and Monaco are both legible — which means this teaches
-  // shape, not size, and the area column is there to say what the picture cannot.
+  // 250 canvases are too many to draw up front, so each waits until it is nearly on
+  // screen. Torn down by _render().
+  _outlineObserver(root, size) {
+    return new IntersectionObserver((entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        obs.unobserve(entry.target);
+        drawSilhouette(entry.target, entry.target.dataset.code, entry.target._entity,
+          { size, pad: size > 60 ? 6 : 3 });
+      }
+    }, { root, rootMargin: '300px' });
+  }
+
+  _outlineCanvas(code, size) {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'shape-thumb';
+    canvas.dataset.code = code;
+    canvas._entity = getEntity(code);
+    this._shapeObserver?.observe(canvas);
+    return canvas;
+  }
+
+  // Outlines and nothing else: no name, no flag, no figure. Hover names one, press
+  // opens it (TODOS #61). Ordering is the same list every other view offers.
   _renderShapes() {
     const list = this._listEl;
     if (!list) return;
     this._shapeObserver?.disconnect();
     list.innerHTML = '';
 
-    const area = getDataset('land-area');
-    const rows = getEntitiesList()
-      .filter((e) => inCountryPool(e, this._pool()) && (!this.continent || e.continent === this.continent));
-    if (this.shapeSort === 'area') {
-      rows.sort((a, b) => (area?.values[b.code] ?? -1) - (area?.values[a.code] ?? -1));
-    } else if (this.shapeSort === 'continent') {
-      rows.sort((a, b) => (a.continent || '').localeCompare(b.continent || '')
-        || a.name.localeCompare(b.name));
-    } else if (this.shapeSort === 'random') {
-      rows.sort((a, b) => seededRank(a.code, this._shuffleSeed) - seededRank(b.code, this._shuffleSeed));
-    } // getEntitiesList() is already name-sorted
+    const ds = getDataset(this.datasetId);
+    const rows = this._ordered(
+      getEntitiesList().filter((e) => inCountryPool(e, this._pool())
+        && (!this.continent || e.continent === this.continent)),
+      (e) => ds?.values[e.code] ?? null,
+    );
 
-    const grid = this.view === 'grid';
-    const size = grid ? GRID_THUMB_SIZE : THUMB_SIZE;
     const missing = rows.filter((e) => e.hasGeometry === false).length;
+    const orderLabel = ORDERS.find((o) => o.id === this.order).label;
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
     blurb.textContent = `${rows.length} outlines${this.continent ? ` · ${this.continent}` : ''}`
       + (missing ? ` · ${missing} with no geometry` : '')
-      + (grid ? ' · hover to name one, press to open it'
-        : ' · each drawn to fit its own box, so this is shape, not size');
+      + ` · ${this.order === 'hi' || this.order === 'lo' ? `${ds.name}, ${orderLabel}` : orderLabel}`
+      + ' · hover to name one, press to open it';
     list.appendChild(blurb);
 
-    // 250 canvases is too many to draw up front, so each one waits until it is nearly
-    // on screen. The observer is torn down by _render().
-    this._shapeObserver = new IntersectionObserver((entries, obs) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        obs.unobserve(entry.target);
-        drawSilhouette(entry.target, entry.target.dataset.code, entry.target._entity,
-          { size, pad: grid ? 6 : 3 });
-      }
-    }, { root: list, rootMargin: '300px' });
+    this._shapeObserver = this._outlineObserver(list, GRID_THUMB_SIZE);
 
-    // The grid is the same rows with everything but the outline taken away: no name,
-    // no flag, no figure, revealed on hover and opened on press (TODOS #61).
-    if (grid) {
-      const wrap = document.createElement('div');
-      wrap.className = 'shape-grid';
-      for (const e of rows) {
-        const tile = document.createElement('div');
-        tile.className = 'shape-tile';
-        tile.tabIndex = 0;
-        tile.setAttribute('role', 'button');
-        tile.setAttribute('aria-label', e.name);
-        const canvas = document.createElement('canvas');
-        canvas.className = 'shape-thumb';
-        canvas.dataset.code = e.code;
-        canvas._entity = e;
-        const name = document.createElement('span');
-        name.className = 'shape-tile-name';
-        name.textContent = e.name;
-        tile.append(canvas, name);
-        const open = () => openCountryPanel(e.code);
-        tile.addEventListener('click', open);
-        tile.addEventListener('keydown', (ev) => {
-          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
-        });
-        wrap.appendChild(tile);
-        this._shapeObserver.observe(canvas);
-      }
-      list.appendChild(wrap);
-      return;
-    }
-
+    const wrap = document.createElement('div');
+    wrap.className = 'shape-grid';
     for (const e of rows) {
-      const row = document.createElement('div');
-      row.className = 'explore-row shape-row is-clickable';
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'shape-thumb';
-      canvas.dataset.code = e.code;
-      canvas._entity = e;
-
-      const flag = document.createElement('img');
-      flag.className = 'rank-flag';
-      flag.src = flagUrl(e.code, 'w40');
-      flag.alt = '';
-      flag.loading = 'lazy';
-      flag.addEventListener('error', () => { flag.style.visibility = 'hidden'; });
-
+      const tile = document.createElement('div');
+      tile.className = 'shape-tile';
+      tile.tabIndex = 0;
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('aria-label', e.name);
       const name = document.createElement('span');
-      name.className = 'explore-name';
+      name.className = 'shape-tile-name';
       name.textContent = e.name;
-
-      const cont = document.createElement('span');
-      cont.className = 'shape-continent';
-      cont.textContent = e.continent || '';
-
-      const value = document.createElement('span');
-      value.className = 'explore-value';
-      const km2 = area?.values[e.code];
-      const rank = km2 == null ? null : getRank('land-area', e.code);
-      value.textContent = km2 == null ? '—'
-        : `${formatValue(area.format, km2)}${rank ? ` · #${rank.rank}` : ''}`;
-
-      row.append(canvas, flag, name, cont, value);
-      row.title = `View ${e.name}`;
-      row.addEventListener('click', () => openCountryPanel(e.code));
-      list.appendChild(row);
-      this._shapeObserver.observe(canvas);
+      tile.append(this._outlineCanvas(e.code, GRID_THUMB_SIZE), name);
+      const open = () => openCountryPanel(e.code);
+      tile.addEventListener('click', open);
+      tile.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); }
+      });
+      wrap.appendChild(tile);
     }
-  }
-
-  // The Colors column used to be a tick, which stopped meaning anything once every
-  // entity had colours (TODOS #55). It now shows the curated colours themselves, and
-  // checks them against the entity's own flag image — the question worth asking is no
-  // longer "are there any" but "are they right", and a wrong one is scored against in
-  // both colour quizzes.
-  //
-  // The check reads the image, so it runs only when the row is actually on screen and
-  // never blocks the table. A row that has not been checked yet simply shows its
-  // swatches; absence of a warning is not a claim.
-  _colorsCell(e) {
-    const td = document.createElement('td');
-    td.className = 'cov-cell cov-colors';
-    const colors = getFlagColors(e.code);
-    if (!colors || !colors.length) {
-      td.classList.add('no');
-      td.textContent = '\u2717';
-      return td;
-    }
-    for (const c of colors) {
-      const sw = document.createElement('span');
-      sw.className = 'cov-swatch';
-      sw.style.background = c;
-      sw.title = c;
-      td.appendChild(sw);
-    }
-    this._colorChecks.observe(td);
-    td._checkColors = async () => {
-      let found;
-      try { found = await readFlagColors(flagUrl(e.code, 'w320')); }
-      catch { return; }   // no image to check against: say nothing rather than warn
-      const missing = missingFromImage(colors, found);
-      if (!missing.length) return;
-      for (const sw of td.querySelectorAll('.cov-swatch')) {
-        if (missing.includes(sw.title)) sw.classList.add('cov-swatch--missing');
-      }
-      const warn = document.createElement('span');
-      warn.className = 'cov-colors-warn';
-      // Say which colour and why, rather than leaving a glyph to be decoded by hover.
-      warn.textContent = `\u26a0 ${missing.length === 1 ? 'not in flag' : missing.length + ' not in flag'}`;
-      warn.title = `${missing.join(', ')} ${missing.length === 1 ? 'is' : 'are'} not in this flag's image. `
-        + 'The ringed swatch is the one in question. Either the curated value is wrong, or it is a '
-        + 'detail too small for the reader to see — judge against the flag, which is what players see.';
-      td.appendChild(warn);
-    };
-    return td;
+    list.appendChild(wrap);
   }
 
   _renderCoverage() {

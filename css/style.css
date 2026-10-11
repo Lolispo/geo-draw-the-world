@@ -2447,15 +2447,14 @@ canvas {
   background: var(--surface2);
   border-radius: 8px;
 }
-/* Its own line under the name, at every width: this is an audit view, and the list
-   of accepted names is longer than any value (TODOS #40). */
+/* Beside the name, not under it: a line per country turned a ranking into a wall,
+   and the height must not change when the column is switched on (TODOS #67). */
 .explore-aliases {
-  flex: 1 0 100%;
-  padding-left: var(--explore-indent);
+  margin-left: 6px;
   font-size: 0.78rem;
   color: var(--text-dim);
+  white-space: nowrap;
 }
-.explore-aliases.is-empty { opacity: 0.45; font-style: italic; }
 .explore-rank {
   width: 30px;
   text-align: right;
@@ -2573,18 +2572,24 @@ canvas {
 .shape-tile:focus-visible .shape-tile-name { opacity: 1; }
 
 /* Shapes table (TODOS #51) */
+/* A column toggle is one glyph — square, no label — because these turn a column on
+   rather than changing what is in the table (TODOS #67). */
+.explore-glyphs { display: flex; gap: 4px; }
+.explore-glyph {
+  border-radius: 999px;
+  padding: 0;
+  width: 38px;
+  text-align: center;
+}
+
 /* A pill is on/off; the rectangular selects beside it are pick-one. The shapes are
    the signal, so the kind of control reads before the label does (TODOS #65). */
-.explore-pill {
-  border-radius: 999px;
-  margin-left: 0;
-}
-.explore-controls .explore-pill:first-of-type { margin-left: auto; }
-.shape-row {
-  gap: 10px;
-  /* the thumbnail replaces the rank column, so the stacked value indents further */
-  --explore-indent: calc(48px + 30px + 10px + 10px);
-}
+.explore-pill { border-radius: 999px; }
+/* Only the action floats right; the toggles stay with the controls they belong to. */
+.explore-controls .explore-play { margin-left: auto; }
+/* With the outline column on there is one more thing before the name, so the value
+   stacked under it on a phone has further to clear. */
+.explore-row.has-outline { --explore-indent: calc(30px + 48px + 30px + 36px); }
 .shape-thumb {
   width: 48px;
   height: 48px;
@@ -2592,17 +2597,6 @@ canvas {
   border-radius: 6px;
   background: var(--surface);
 }
-.shape-continent {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-@media (max-width: 480px) {
-  /* The continent is the one column worth dropping: the outline already says roughly
-     where you are, and the row is tall enough with the value stacked under the name. */
-  .shape-continent { display: none; }
-}
-
 /* Coverage / audit table */
 .coverage-table {
   width: max-content;
@@ -2654,7 +2648,7 @@ canvas {
 
 @media (max-width: 768px) {
   .explore-list { --explore-indent: calc(30px + 26px + 12px + 12px); }  /* smaller flag */
-  .shape-row { --explore-indent: calc(48px + 26px + 10px + 10px); }
+  .explore-row.has-outline { --explore-indent: calc(30px + 48px + 26px + 36px); }
   .explore-header h2 { font-size: 1.05rem; }
   .explore-play { margin-left: 0; }
   .explore-select { flex: 1; }
