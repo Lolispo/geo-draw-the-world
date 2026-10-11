@@ -3,14 +3,9 @@
 // particular. One component, two hosts — the Draw results rail and Freestyle — because
 // the question is the same in both and only the thing being pinned underneath differs.
 //
-// The scores here are not the round's Shape column, and the note in the header says so.
-// A round scores against the world-scale geometry, where France is 17 rings spread from
-// Guiana to Réunion; this panel scores against data/shapes, where it is the mainland and
-// Corsica. Measured over 251 countries, the two agree exactly half the time and are
-// within 1 point for three quarters — but for the ~37 countries with far-flung
-// territories, and for microstates that are sub-pixel at world scale, they diverge by
-// tens of points. The main landmass is the right outline for a drawing game; the honest
-// fix for the mismatch is to name it, not to hide it.
+// A score here is the round's Shape column exactly, not an approximation of it: since
+// TODOS #73 the round's shape term scores against these same prerasterised outlines, so
+// the pinned country's number and the table's agree by construction.
 
 import { matchShape, searchRanked, matchedVia } from './shape-match.js';
 import { getCountryByCode } from './geo-data.js';
@@ -30,8 +25,7 @@ export function createShapeMatchPanel({ limit = TOP_N } = {}) {
       <canvas class="match-yours" aria-label="your drawing"></canvas>
       <div class="match-head-text">
         <h3 class="match-title">Looks most like</h3>
-        <p class="match-note">Shape only — your size and where you put it are ignored. Each
-          country here is its main landmass, so these can differ from the round's Shape score.</p>
+        <p class="match-note">Shape only — your size and where you put it are ignored.</p>
       </div>
     </div>
     <div class="match-status">Comparing…</div>

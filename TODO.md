@@ -63,15 +63,11 @@ differently from a bad score because you drew a perfectly good Tunisia.
 - Rotation is deliberately **not** normalised away: the round scored the shape as you left it,
   and a panel that quietly rotated it would disagree with the score beside it.
 
-**The two numbers, measured.** The panel's score is not the round's **Shape** column, and the
-header says so. A round scores against the world-scale geometry, where France is 17 rings from
-Guiana to Réunion; the panel scores against `data/shapes`, where it is the mainland and Corsica
-(`build-shapes.mjs` clips far-flung rings). Over 251 countries × 5 test shapes the two agree
-exactly 52.8% of the time and within 1 point 76.7%, and 214 of 251 countries never differ by
-more than 5 — but the ~37 with overseas territories, and microstates that are sub-pixel at
-world scale, diverge by tens (France 65, Netherlands 57, Vatican City 67, where world-scale
-scores 0 against a shape the hi-fi outline scores 67). The main landmass is the right outline
-for a drawing game; naming the difference is the fix, not hiding it.
+**The two numbers now agree.** This shipped with the panel's score differing from the round's
+**Shape** column — the round scored against the world-scale geometry, the panel against
+`data/shapes`. Investigating that gap found a real scoring bug and became **#73**, which moved
+the round's shape term onto these same prerasterised outlines. The two numbers are now equal by
+construction, and the caveat that was in the panel header is gone.
 
 **Acceptance:** ✅ Press a country on the results screen and see the five countries your drawing
 matched best, each with its score; if the real answer is not among them, it is shown below with
@@ -114,6 +110,83 @@ those shapes, and then i can search sweden to see that specific score."*
 **Acceptance:** ✅ `#/draw/freestyle` opens straight into a drawing canvas with no country named;
 Done ranks the drawing against the whole pool with nothing pinned; searching a name shows that
 country's score and rank; Draw Again clears the canvas and re-ranks.
+
+---
+
+## 73. Scoring: a perfect drawing could score zero
+
+**REVIEW:** `#/draw/daily` — play a round and check the numbers still look sane. The real test
+is a country with far-flung parts: play `#/draw/world` or Quick 3 until you get one (France,
+the Netherlands, Norway, South Africa, the USA), or search one in the match panel. Also try a
+microstate and an atoll nation — Monaco, San Marino, the Maldives, Tuvalu — which used to be
+unscorable and are not any more. The panel's pinned score should now be *exactly* the Shape
+column.
+
+**✅ DONE 2026-10-11.**
+
+**What:** The round's shape term now scores against the detailed `data/shapes` outline instead
+of the world-scale geometry; the rasteriser gives a sub-pixel island a dot of its own; and
+placement is measured to the main landmass rather than to the area-weighted centroid of every
+ring.
+
+**Why:** Owner question off the back of #58 (2026-10-11): *"would be nice to assess how a
+perfect drawing of the high fidelity shapes score now… see if we need to iterate on and improve
+the scoring system."* Measuring that found three defects, with the measurement being the thing
+that made them visible at all — none of them show up as an error, only as a low score that
+looks like the player's fault.
+
+**What was wrong, measured over 197 sovereign countries.** Draw the true detailed outline, size
+it exactly right, place it exactly right — the ceiling:
+
+- **The normalisation frame was hostage to the most remote speck.** `normalizeMultiPolygon`
+  scales by the raw bounding box, so one islet thousands of km away shrank the recognisable
+  country into a corner of the 80×80 grid. The Netherlands' bbox is **16×** its main landmass
+  (Caribbean islands, 4% of its area), France's **8.2×**, the Maldives' **61×**. A perfect
+  drawing of the Netherlands scored **shape 0** — total 60; France scored shape 2. 37 countries
+  had a blow-up ≥1.5×, 21 ≥3×. Area and placement were unaffected, which is why it stayed
+  invisible.
+- **Sub-pixel islands rasterised to nothing.** The detailed tier carries the Maldives as **518
+  rings** spanning the whole frame; on the 80×80 grid they filled **one cell of 6400**.
+  Micronesia and Tuvalu filled zero — an empty mask nothing can score against. The data was
+  never missing; the rasteriser erased it.
+- **Three reference centroids were not on the country.** Placement measured to the area-weighted
+  centroid of all rings put the USA's centre **114** world units off its main landmass, Norway's
+  104, Canada's 86. Placement reaches zero at 300, so centring on the landmass you can see cost
+  38, 35 and 29 points before any mistake of your own.
+
+**Rejected:** framing on the rings holding 98% of the area. It rescues 20 countries but breaks 8
+(Seychelles 25→0, Tonga 20→0, Fiji 35→11) and still leaves France at 4 and Norway at 3, because
+Guiana and Svalbard are *big* as well as far — no area threshold separates them. Distance does,
+which is the rule `build-shapes.mjs` already applies to build `data/shapes`. Rather than add a
+second distance threshold, the shape term moved onto the outline that rule already produces.
+
+**How it came out:**
+- `scoreShape()` takes `refMask` and `refCenter`. The mask is the country's prerasterised
+  detailed outline from `data/shape-masks.json` (#58), so this cost nothing to add — the file
+  already existed and is already loaded. Size and placement still come from the world-scale
+  reference, because those are questions about the real map you placed the shape on.
+- No mask (continents, or any entry without a code) falls back to the old comparison, verified
+  to still score a perfect continent 100/100/100.
+- `MIN_SPECK_CELLS` in `js/raster.js` gives a ring smaller than 2 cells a dot of its own — the
+  same fix `js/silhouette.js` already makes for the same reason (`MIN_ISLAND_PX`, #53). Maldives
+  1 cell → 272, Marshall Islands 1 → 108, Micronesia 0 → 78, Tuvalu 0 → 27.
+- `mainLandmassCentroid()` in `js/utils.js` for placement. For a country whose parts are all in
+  one place it is the same point, so only the handful with far-flung parts move.
+
+**Result: 196 of 197 sovereign countries now have a ceiling of 100**, up from 162 in the 90-100
+band with a tail down to 30. Netherlands 0→100 on the shape term, South Africa 29→100, Spain
+35→100, France 2→100, Norway 3→100, and the seven atoll nations go from unscorable to scorable.
+
+**The one left is Vatican City (30).** Not a scoring problem: its world-scale polygon in
+`data/countries-europe.json` is seven points at the same coordinate — `[[855.56,553.95]]` ×7,
+**area exactly 0** — so the size term can never be satisfied and its map ghost is a degenerate
+point. Monaco, San Marino and Liechtenstein are all fine at 100. Fixing it means a minimum
+footprint in `build-geometry.mjs` (which would also change how it draws on the map) or dropping
+it from the draw pool. Left for the owner to decide.
+
+**Acceptance:** ✅ A perfect drawing of the detailed outline scores 100 for every sovereign
+country but Vatican City; `npm run check:masks` asserts the ceiling for all 251 and that no
+country rasterises to an empty mask; the match panel's score equals the round's Shape column.
 
 ---
 

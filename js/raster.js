@@ -27,19 +27,55 @@ export function normalizeMultiPolygon(polygons, targetSize = GRID * 0.8) {
   );
 }
 
+// An island smaller than this across gets a dot of its own instead of disappearing
+// (TODOS #73). The Maldives arrive as 518 atolls spanning the whole frame and rasterised
+// honestly fill ONE cell of 6400, so every drawing of them scored zero against an empty
+// mask. This is the same fix js/silhouette.js already makes for the same reason
+// (MIN_ISLAND_PX, TODOS #53): an archipelago should read as an archipelago, not as
+// nothing. Kept small — it must not fatten a country that was never specks.
+const MIN_SPECK_CELLS = 2;
+
 // Normalise, then rasterise onto the fixed -GRID/2..GRID/2 frame as a bitmask.
 export function rasterizeToMask(polygons) {
   const norm = normalizeMultiPolygon(polygons);
   const mask = new Uint32Array(MASK_WORDS);
   const half = GRID / 2;
+  const set = (gx, gy) => {
+    if (gx < 0 || gy < 0 || gx >= GRID || gy >= GRID) return;
+    const bit = gy * GRID + gx;
+    mask[bit >>> 5] |= 1 << (bit & 31);
+  };
 
-  for (let gy = 0; gy < GRID; gy++) {
-    const y = -half + gy + 0.5;
-    for (let gx = 0; gx < GRID; gx++) {
-      const x = -half + gx + 0.5;
-      if (pointInMultiPolygon(x, y, norm)) {
-        const bit = gy * GRID + gx;
-        mask[bit >>> 5] |= 1 << (bit & 31);
+  // Rings big enough to rasterise go through point-in-polygon together, so nonzero
+  // winding still cuts holes (Lesotho out of South Africa). The rest become specks.
+  const solid = [];
+  const specks = [];
+  for (const ring of norm) {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const [x, y] of ring) {
+      if (x < x0) x0 = x; if (x > x1) x1 = x;
+      if (y < y0) y0 = y; if (y > y1) y1 = y;
+    }
+    if (Math.max(x1 - x0, y1 - y0) < MIN_SPECK_CELLS) specks.push([(x0 + x1) / 2, (y0 + y1) / 2]);
+    else solid.push(ring);
+  }
+
+  if (solid.length) {
+    for (let gy = 0; gy < GRID; gy++) {
+      const y = -half + gy + 0.5;
+      for (let gx = 0; gx < GRID; gx++) {
+        const x = -half + gx + 0.5;
+        if (pointInMultiPolygon(x, y, solid)) set(gx, gy);
+      }
+    }
+  }
+
+  const r = MIN_SPECK_CELLS / 2;
+  for (const [cx, cy] of specks) {
+    const gx = cx + half - 0.5, gy = cy + half - 0.5;
+    for (let dy = Math.floor(gy - r); dy <= Math.ceil(gy + r); dy++) {
+      for (let dx = Math.floor(gx - r); dx <= Math.ceil(gx + r); dx++) {
+        if ((dx - gx) ** 2 + (dy - gy) ** 2 <= r * r) set(dx, dy);
       }
     }
   }

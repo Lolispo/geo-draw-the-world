@@ -9,7 +9,7 @@ import {
 import { DrawingCanvas } from './drawing-canvas.js';
 import { WorldCanvas } from './world-canvas.js';
 import { Shape } from './shape.js';
-import { multiPolygonCentroid, multiPolygonBoundingBox, hidpiReset } from './utils.js';
+import { multiPolygonCentroid, multiPolygonBoundingBox, mainLandmassCentroid, hidpiReset } from './utils.js';
 import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { getIncludeTerritories, setIncludeTerritories, getGhosts, setGhosts } from './settings.js';
@@ -24,6 +24,7 @@ import { ScoresScreen } from './scores-screen.js';
 import { openCountryPanel, closeCountryPanel } from './country-panel.js';
 import { readRoute, writeRoute } from './router.js';
 import { createShapeMatchPanel } from './shape-match-panel.js';
+import { loadShapeMasks, getShapeMask } from './shape-match.js';
 
 // Every draw mode a URL can name (TODOS #56). Regions are added from
 // getCountryRegions() so the two lists cannot drift.
@@ -791,7 +792,21 @@ class Game {
     else this.startCountries(this._currentRegion);
   }
 
-  _startGame() {
+  // Shape against the detailed outline, placement against the landmass you can see
+  // (TODOS #73). `entry` is a country from countries-*.json, or a continent, which has
+  // no code and no detailed outline and so falls back to the old comparison.
+  _scoringRefs(entry) {
+    return {
+      refMask: entry?.code ? getShapeMask(entry.code) : null,
+      refCenter: entry?.polygons ? mainLandmassCentroid(entry.polygons) : null,
+    };
+  }
+
+  async _startGame() {
+    // Scoring needs the masks, so wait for them here rather than letting the first
+    // placement of a round score by the fallback path and the rest by the real one.
+    await loadShapeMasks().catch((err) => console.error('shape masks failed to load', err));
+
     this.currentIndex = 0;
     this.scores = [];
     this.playerShapes = [];
@@ -1046,7 +1061,7 @@ class Game {
   _enterCompare() {
     const entry = this.itemData[this.currentIndex];
     const refShape = createReferenceShape(entry);
-    const full = scoreShape(this.currentShape, refShape);
+    const full = scoreShape(this.currentShape, refShape, this._scoringRefs(entry));
     const shapeScore = full.shape;
     this._pendingScore = {
       name: entry.name, code: entry.code, drawn: this.currentShape,
@@ -1143,8 +1158,8 @@ class Game {
     this.referenceShapes.push(refShape);
 
     const score = this.puzzleMode
-      ? this._scorePuzzle(this.currentShape, refShape)
-      : scoreShape(this.currentShape, refShape);
+      ? this._scorePuzzle(this.currentShape, refShape, entry)
+      : scoreShape(this.currentShape, refShape, this._scoringRefs(entry));
     this.scores.push({ name: entry.name, code: entry.code, drawn: this.currentShape, ...score });
 
     this._flashScore(score.total);
@@ -1175,8 +1190,8 @@ class Game {
     this.promptNext();
   }
 
-  _scorePuzzle(playerShape, refShape) {
-    const score = scoreShape(playerShape, refShape);
+  _scorePuzzle(playerShape, refShape, entry) {
+    const score = scoreShape(playerShape, refShape, this._scoringRefs(entry));
     score.shape = 100;
     score.size = 100;
     score.total = Math.round(100 * 0.4 + 100 * 0.3 + score.placement * 0.3);
@@ -1331,8 +1346,8 @@ class Game {
       if (!refShape) return this.scores[i];
       if (this.scores[i]?.skipped) return this.scores[i];
       const score = this.puzzleMode
-        ? this._scorePuzzle(shape, refShape)
-        : scoreShape(shape, refShape);
+        ? this._scorePuzzle(shape, refShape, entry)
+        : scoreShape(shape, refShape, this._scoringRefs(entry));
       return { name: entry.name, code: entry.code, drawn: shape, ...score };
     });
 

@@ -1,15 +1,19 @@
-// Checks the shape-match engine against the arithmetic it replaced and against the
-// masks the build produced (TODOS #58). Run: node scripts/check-shape-masks.mjs
+// Checks the shape-match engine (TODOS #58, #72, #73).
+// Run: node scripts/check-shape-masks.mjs
 //
-// Three properties, each of which would actually fail if something drifted:
-//   1. the bitmask IoU equals the Set-of-keys IoU scoring.js used before the refactor
-//   2. a build-time mask equals the mask rasterised live from the same outline
-//   3. a country scores exactly 100 against itself
-import { readFileSync, existsSync } from 'node:fs';
-import { GRID, MASK_WORDS, normalizeMultiPolygon, rasterizeToMask, maskIoU } from '../js/raster.js';
-import { pointInMultiPolygon } from '../js/utils.js';
+// Five properties, each of which would actually fail if something drifted:
+//   1. where no ring is small enough to become a speck, the bitmask IoU still equals the
+//      Set-of-keys IoU scoring.js used before the rasteriser was extracted
+//   2. scattered archipelagos rasterise to something rather than to nothing
+//   3. every built mask equals a live rasterisation of the same outline
+//   4. a country scores 100 against itself
+//   5. the ceiling: a perfect drawing of the detailed outline scores 100 on the shape
+//      term for every country, since that is now what the round compares against
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { GRID, MASK_WORDS, normalizeMultiPolygon, rasterizeToMask, maskIoU, maskCount } from '../js/raster.js';
+import { pointInMultiPolygon, multiPolygonBoundingBox } from '../js/utils.js';
 
-// The pre-refactor implementation, verbatim, as the oracle.
+// The pre-speck implementation, verbatim, as the oracle for property 1.
 function legacyRasterize(polygons, bb, gridSize) {
   const filled = new Set();
   const scaleX = gridSize / (bb.width || 1);
@@ -36,39 +40,63 @@ function legacyIoU(polys1, polys2) {
 }
 
 const shape = (code) => JSON.parse(readFileSync(`data/shapes/${code}.json`, 'utf8')).polygons;
+// A shape the speck rule does not touch: every ring is big enough to rasterise on its own.
+const hasNoSpecks = (polys) => normalizeMultiPolygon(polys).every((ring) => {
+  const bb = multiPolygonBoundingBox([ring]);
+  return Math.max(bb.width, bb.height) >= 2;
+});
 
 let failures = 0;
 const fail = (msg) => { console.error(`  FAIL ${msg}`); failures++; };
 
-// 1. bitmask IoU == legacy IoU, over a spread of real pairs
-const codes = ['se', 'no', 'tn', 'cl', 'ru', 'sm', 'id', 'it', 'us', 'nz'];
-console.log('1. bitmask IoU matches the pre-refactor Set implementation');
+console.log('1. speck-free shapes still match the pre-speck Set implementation');
+const plain = ['tn', 'cl', 'ru', 'sm', 'mc', 'va', 'nr', 'ca', 'pl', 'mn'].filter((c) => hasNoSpecks(shape(c)));
 let pairs = 0;
-for (let i = 0; i < codes.length; i++) {
-  for (let j = i; j < codes.length; j++) {
-    const a = shape(codes[i]), b = shape(codes[j]);
+for (let i = 0; i < plain.length; i++) {
+  for (let j = i; j < plain.length; j++) {
+    const a = shape(plain[i]), b = shape(plain[j]);
     const got = maskIoU(rasterizeToMask(a), rasterizeToMask(b));
     const want = legacyIoU(a, b);
-    if (Math.abs(got - want) > 1e-12) fail(`${codes[i]} vs ${codes[j]}: ${got} != ${want}`);
+    if (Math.abs(got - want) > 1e-12) fail(`${plain[i]} vs ${plain[j]}: ${got} != ${want}`);
     pairs++;
   }
 }
-console.log(`   ${pairs} pairs compared`);
+console.log(`   ${pairs} pairs over ${plain.length} speck-free countries`);
 
-// 3. self-match is a perfect 100 (checked before 2 so it runs without a built file)
-console.log('3. every country scores 100 against itself');
-for (const c of codes) {
+console.log('2. scattered archipelagos rasterise to something, not nothing');
+// Each of these filled 0 or 1 cell of 6400 before the speck rule, so every drawing of
+// them scored zero against an empty mask.
+for (const code of ['mv', 'mh', 'fm', 'tv', 'pw', 'sc', 'to', 'ki']) {
+  const cells = maskCount(rasterizeToMask(shape(code)));
+  if (cells < 20) fail(`${code} rasterises to only ${cells} cells of ${GRID * GRID}`);
+}
+console.log('   8 archipelago nations checked');
+
+console.log('4. every country scores 100 against itself');
+const selfCodes = ['se', 'no', 'tn', 'cl', 'ru', 'sm', 'id', 'it', 'us', 'nz', 'mv', 'tv'];
+for (const c of selfCodes) {
   const s = Math.round(maskIoU(rasterizeToMask(shape(c)), rasterizeToMask(shape(c))) * 100);
   if (s !== 100) fail(`${c} vs itself scored ${s}`);
 }
-console.log(`   ${codes.length} countries checked`);
+console.log(`   ${selfCodes.length} countries checked`);
 
-// 2. the built masks are what this code produces right now
+console.log('5. ceiling: a perfect detailed drawing scores 100 on the shape term');
+const allCodes = readdirSync('data/shapes').filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5));
+let worst = { code: null, score: 101 };
+for (const code of allCodes) {
+  const m = rasterizeToMask(shape(code));
+  if (maskCount(m) === 0) { fail(`${code} rasterises to an empty mask — nothing can score against it`); continue; }
+  const s = Math.round(maskIoU(m, m) * 100);
+  if (s < worst.score) worst = { code, score: s };
+  if (s !== 100) fail(`${code} ceiling is ${s}, not 100`);
+}
+console.log(`   ${allCodes.length} countries, worst ceiling ${worst.score} (${worst.code})`);
+
 const MASKS = 'data/shape-masks.json';
 if (!existsSync(MASKS)) {
-  console.log(`2. SKIPPED — ${MASKS} not built yet (run npm run build:masks)`);
+  console.log(`3. SKIPPED — ${MASKS} not built yet (run npm run build:masks)`);
 } else {
-  console.log('2. built masks match a live rasterisation of the same outlines');
+  console.log('3. built masks match a live rasterisation of the same outlines');
   const built = JSON.parse(readFileSync(MASKS, 'utf8'));
   if (built.grid !== GRID) fail(`built grid ${built.grid} != ${GRID}`);
   if (built.words !== MASK_WORDS) fail(`built words ${built.words} != ${MASK_WORDS}`);
@@ -78,7 +106,7 @@ if (!existsSync(MASKS)) {
     const stored = new Uint32Array(bytes.buffer, bytes.byteOffset, bytes.byteLength / 4);
     if (stored.length !== live.length) { fail(`${code}: ${stored.length} words, expected ${live.length}`); continue; }
     for (let i = 0; i < live.length; i++) {
-      if (stored[i] !== live[i]) { fail(`${code}: word ${i} differs`); break; }
+      if (stored[i] !== live[i]) { fail(`${code}: word ${i} differs — rebuild with npm run build:masks`); break; }
     }
   }
   console.log(`   ${Object.keys(built.masks).length} masks checked`);

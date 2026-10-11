@@ -42,6 +42,13 @@ export async function loadShapeMasks() {
   return _loading;
 }
 
+// One country's prerasterised outline, or null if the masks are not loaded yet. Sync,
+// because scoring runs in the middle of a placement and cannot wait on a fetch; callers
+// preload with loadShapeMasks() and fall back gracefully when it has not arrived.
+export function getShapeMask(code) {
+  return (_masks && _masks.get(code)) || null;
+}
+
 // polygons: the player's drawing, in any coordinate space — normalisation removes its
 // position and size. Rotation is deliberately NOT normalised away: the round scored the
 // shape as the player left it, and a panel that quietly rotated it would disagree with

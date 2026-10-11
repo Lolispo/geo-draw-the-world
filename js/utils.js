@@ -101,6 +101,21 @@ export function pointInMultiPolygon(x, y, polygons) {
   return false;
 }
 
+// The centre of the dominant landmass, for scoring placement (TODOS #73). The
+// area-weighted centroid of EVERY ring puts the United States' centre 114 world units
+// out into the Pacific, Norway's 104 and Canada's 86 — so centring on the landmass you
+// are looking at cost you a third of the placement term before any mistake of your own.
+// For a country whose parts are all in one place the two points are the same.
+export function mainLandmassCentroid(polygons) {
+  if (!polygons || polygons.length === 0) return [0, 0];
+  let best = polygons[0], bestArea = -1;
+  for (const ring of polygons) {
+    const a = Math.abs(polygonArea(ring));
+    if (a > bestArea) { bestArea = a; best = ring; }
+  }
+  return polygonCentroid(best);
+}
+
 export function distance(p1, p2) {
   return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);
 }
