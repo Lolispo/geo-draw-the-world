@@ -4,6 +4,9 @@ Backlog for Geo Draw the World. Each item is self-contained so it can be picked
 up cold in a future session. Decisions already made with the owner are recorded
 under **Decided**.
 
+Every entry under **Needs review** carries a URL in its `**REVIEW:**` line. Serve the repo and
+open them one tab per item — see `CLAUDE.md` for the protocol and the full route list.
+
 ---
 
 ## Needs review
@@ -1024,7 +1027,8 @@ dressed as data.
 
 ## 57. Placement & results maps: a floor on zoom-out, and a results map you can move
 
-**REVIEW:** place a shape, then on the results map drag it sideways — it should move. Spin the
+**REVIEW:** `#/draw/daily` — play the round through to the results map (a route reaches a
+screen, not a state mid-round). Place a shape, then on the results map drag it sideways — it should move. Spin the
 wheel out on both the placement and results maps: it should stop at the framing the round
 started with, and zooming out from a panned view should put it back where it was.
 
@@ -1120,7 +1124,7 @@ not stall while it computes.
 
 ## 59. Top 10: flags on wrong picks, a reversible reveal, and a cheaper re-render
 
-**REVIEW:** play a Top 10 round — each pick's flag should now sit in the strip at the top
+**REVIEW:** `#/top10` — play a round. Each pick's flag should now sit in the strip at the top
 beside the ✓/✗. On the results screen the button toggles both ways as often as you like, and
 the rows that stay put really do stay put.
 
@@ -1176,7 +1180,7 @@ the DOM.
 
 ## 60. Data Explorer map: zoom and pan
 
-**REVIEW:** Explorer → Map. Wheel to zoom, drag to pan, double-click to reset; hovering must
+**REVIEW:** `#/explore/map?metric=gdp-nominal` — wheel to zoom, drag to pan, double-click to reset; hovering must
 still name the country actually under the cursor once you are zoomed in. Zooming all the way
 out puts the view back, and a **⤢ Reset view** button appears whenever you are zoomed.
 
@@ -1225,7 +1229,7 @@ way back to the default view.
 
 ## 61. Shapes: a nameless grid to test yourself against
 
-**REVIEW:** Explorer → Shapes → **▦ Grid**. A wall of outlines and nothing else; hover names
+**REVIEW:** `#/explore/shapes` → **▦ Grid**. A wall of outlines and nothing else; hover names
 one, pressing opens it. Set the sort to **Random** and pick Random again to reshuffle.
 
 **✅ DONE 2026-10-10** — the grid is the same rows with everything but the outline taken away:
