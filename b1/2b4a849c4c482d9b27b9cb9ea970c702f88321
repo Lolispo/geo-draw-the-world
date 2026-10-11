@@ -1,0 +1,59 @@
+index.html
+  s_38dc4cd5c4cbf5::t_86f9f28e25bbe7 152-156,298-306
+  s_38dc4cd5c4cbf5::t_636942071e3687 253-260,307
+  s_38dc4cd5c4cbf5::t_fc13aaa3a0b029 308-311
+js/silhouette.js
+  s_38dc4cd5c4cbf5::t_9f411e6f2d0ec2 103-108
+  s_38dc4cd5c4cbf5::t_af378a34673ac9 7,71-88,99-102,109-110
+  s_38dc4cd5c4cbf5::t_afbdb12c4ef3c3 89-98
+  s_38dc4cd5c4cbf5::t_f0e9d30ef7c95f 111
+js/main.js
+  s_38dc4cd5c4cbf5::t_e15cadf6dc7c8c 842,972,986,1052-1053,1148,1336
+  s_38dc4cd5c4cbf5::t_553ce5bc2fc2b7 307
+  s_38dc4cd5c4cbf5::t_eff22fc08850f6 26,75-77
+  s_38dc4cd5c4cbf5::t_0bb5a829f12ede 38,49,101,274,305-306,629-664,784,1006-1009
+  s_38dc4cd5c4cbf5::t_00715e926e3bea 1458-1525,1566-1570,1646
+  s_38dc4cd5c4cbf5::t_544219b3d10011 1010,1647
+js/shape-match.js
+  s_38dc4cd5c4cbf5::t_33ce873e043687 1-101
+js/raster.js
+  s_38dc4cd5c4cbf5::t_67aa58edb855e8 1-72
+js/shape-match-panel.js
+  s_38dc4cd5c4cbf5::t_9f411e6f2d0ec2 66,75
+  s_38dc4cd5c4cbf5::t_2cfcc281f4ca08 5-13,33-34
+  s_38dc4cd5c4cbf5::t_ec579cdca70d78 1-4,14-32,35-65,67-74,76-201
+js/scoring.js
+  s_38dc4cd5c4cbf5::t_1f91d1380023db 3-5,7-8
+scripts/build-shape-masks.mjs
+  s_38dc4cd5c4cbf5::t_6c5cd7fe9b00a6 19-22,26-27,29,32-33,36,41
+  s_38dc4cd5c4cbf5::t_e60370c6547cb3 1-18,23-25,28,30-31,34-35,37-40,42-43
+package.json
+  s_38dc4cd5c4cbf5::t_f53c977f1c72f2 5,23-24
+data/shape-masks.json
+  s_38dc4cd5c4cbf5::t_6c5cd7fe9b00a6 1
+css/style.css
+  s_38dc4cd5c4cbf5::t_71043a633a08bb 2977-3025,3027-3119,3169
+  s_38dc4cd5c4cbf5::t_41a7c8cd8f5be6 1297-1306,3120-3168,3170-3171
+  s_38dc4cd5c4cbf5::t_9f411e6f2d0ec2 3026
+  s_38dc4cd5c4cbf5::t_86f9f28e25bbe7 3173-3198
+  s_38dc4cd5c4cbf5::t_aea9730f17944a 3172
+scripts/check-shape-masks.mjs
+  s_38dc4cd5c4cbf5::t_4507879ef0da1b 1-74,80,82-83,85-88
+  s_38dc4cd5c4cbf5::t_025934cee0512e 75-79,81,84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b12b4a849c4c482d9b27b9cb9ea970c702f88321",
+  "prompts": {},
+  "sessions": {
+    "s_38dc4cd5c4cbf5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f0973d8-a92b-4e21-919f-c9d746273b23",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
