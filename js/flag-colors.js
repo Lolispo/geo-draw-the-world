@@ -15,7 +15,7 @@
 //    #002395 renders as #002654, 65 apart; Norway 61; Indonesia 64. It still sits below
 //    the distance between two genuinely different colours inside one flag, which across
 //    the curated set is almost never under 68.
-const MERGE = 56, MIN_SHARE_SEEN = 0.004, MIN_SHARE_DRAFT = 0.015, MATCH = 75;
+const MERGE = 56, MIN_SHARE_SEEN = 0.0025, MIN_SHARE_DRAFT = 0.015, MATCH = 75;
 
 const hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
 const rgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];

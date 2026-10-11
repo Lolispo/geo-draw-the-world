@@ -2641,7 +2641,8 @@ canvas {
   border: 1px solid rgba(255, 255, 255, 0.25); margin-right: 2px; vertical-align: middle;
 }
 .cov-swatch--missing { outline: 2px solid var(--red); outline-offset: 1px; }
-.cov-colors-warn { color: var(--orange); font-size: 0.78rem; margin-left: 3px; vertical-align: middle; cursor: help; }
+.cov-colors-warn { color: var(--orange); font-size: 0.66rem; margin-left: 5px; vertical-align: middle;
+  cursor: help; white-space: nowrap; border-bottom: 1px dotted var(--orange); }
 
 .cov-cell.ok { color: var(--green); }
 .cov-cell.no { color: var(--red); opacity: 0.8; }

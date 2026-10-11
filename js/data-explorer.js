@@ -509,10 +509,11 @@ export class DataExplorer {
       }
       const warn = document.createElement('span');
       warn.className = 'cov-colors-warn';
-      warn.textContent = '\u26a0';
-      warn.title = `${missing.join(', ')} not found in the flag image. `
-        + 'Often the curated value is an official spec colour the render drifts from, '
-        + 'or a detail too small to read — check against the flag before changing it.';
+      // Say which colour and why, rather than leaving a glyph to be decoded by hover.
+      warn.textContent = `\u26a0 ${missing.length === 1 ? 'not in flag' : missing.length + ' not in flag'}`;
+      warn.title = `${missing.join(', ')} ${missing.length === 1 ? 'is' : 'are'} not in this flag's image. `
+        + 'The ringed swatch is the one in question. Either the curated value is wrong, or it is a '
+        + 'detail too small for the reader to see — judge against the flag, which is what players see.';
       td.appendChild(warn);
     };
     return td;
