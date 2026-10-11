@@ -204,3 +204,51 @@ export async function checkOutlineDetail({ entities, datasets }, fetchShape) {
       .map((r) => `${r.code} ${entities[r.code].name} ${r.pts ?? 'missing'}pts·${r.src}`),
   };
 }
+
+// Scoring health (TODOS #73). The defects this catches do not throw and do not look
+// wrong in a round — they look like the player drew badly. A perfect drawing of the
+// Netherlands scored 0 for months because one Caribbean islet blew up the comparison
+// frame, and nothing anywhere said so. These run the real scoreShape over every country,
+// so a future change to the scoring that breaks one shows up here as a number.
+//
+// `ceilings` comes from scoreCeilings() in js/score-health.js — kept there because it
+// needs the geometry and the masks, which this file deliberately does not import.
+export function runScoringChecks(ceilings) {
+  const out = [];
+  const add = (state, what, detail, codes = []) => out.push({ state, what, detail, codes });
+  if (!ceilings || !ceilings.length) {
+    add('look', 'Scoring checks could not run', 'The country masks or outlines did not load.');
+    return out;
+  }
+
+  // 1. Is there anything on the comparison grid at all? This is the Maldives failure:
+  // 518 atolls that each rasterised to nothing, leaving an empty mask that no drawing
+  // could score against. Only zero is a failure — Mauritius covers 8 cells of 6400 and
+  // still reaches 100, so flagging thin-but-workable outlines would be crying wolf.
+  {
+    const empty = ceilings.filter((c) => c.ink === 0);
+    const thin = [...ceilings].sort((a, b) => a.ink - b.ink).slice(0, 3);
+    add(empty.length ? 'fail' : 'pass', 'Every country has an outline you can score against',
+      empty.length
+        ? `${empty.length} outline(s) cover none of the 6400 comparison cells, so nothing drawn can score against them.`
+        : `All ${ceilings.length} outlines put something on the comparison grid. Thinnest: `
+          + `${thin.map((c) => `${c.name} ${c.ink}`).join(', ')} cells of 6400.`,
+      empty.map((c) => c.code));
+  }
+
+  // 2. The verdict. Everything that can go wrong with scoring shows up here as a number
+  // below 100, whichever term it came from — the hover on the Draw column says which.
+  {
+    const short = ceilings.filter((c) => c.total < 100).sort((a, b) => a.total - b.total);
+    add(short.length ? 'fail' : 'pass', 'A perfect drawing scores 100',
+      short.length
+        ? `${short.length} of ${ceilings.length} cannot reach 100 even drawn, placed and sized exactly right: `
+          + `${short.slice(0, 6).map((c) => `${c.name} ${c.total} (shape ${c.shape}, size ${c.size}, place ${c.placement})`).join('; ')}`
+          + `${short.length > 6 ? ', …' : ''}.`
+        : `All ${ceilings.length} countries reach 100 — drawn, placed and sized exactly right, `
+          + 'the real scoreShape returns 100/100/100.',
+      short.map((c) => c.code));
+  }
+
+  return out;
+}

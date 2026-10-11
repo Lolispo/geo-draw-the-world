@@ -115,12 +115,16 @@ country's score and rank; Draw Again clears the canvas and re-ranks.
 
 ## 73. Scoring: a perfect drawing could score zero
 
-**REVIEW:** `#/draw/daily` — play a round and check the numbers still look sane. The real test
-is a country with far-flung parts: play `#/draw/world` or Quick 3 until you get one (France,
-the Netherlands, Norway, South Africa, the USA), or search one in the match panel. Also try a
-microstate and an atoll nation — Monaco, San Marino, the Maldives, Tuvalu — which used to be
-unscorable and are not any more. The panel's pinned score should now be *exactly* the Shape
-column.
+**REVIEW:** `#/explore/coverage` — click the **Draw** column heading. That column is what a
+perfect drawing of each country scores, run through the real `scoreShape`. Sorting brings the
+failures to the top: there should be exactly one, Vatican City at 30, above 250 rows of 100.
+Hover any number for the shape/size/placement breakdown. The integrity strip above the table
+carries the same verdict in words.
+
+The first version of this entry asked the reviewer to play rounds and compare remembered
+scores, which is not a review anyone can do (owner, 2026-10-11: *"6 review points that are all
+paragraphs of text that is hard to spot is tricky"*). A number being wrong is invisible; a
+column of them is not.
 
 **✅ DONE 2026-10-11.**
 
@@ -184,9 +188,20 @@ point. Monaco, San Marino and Liechtenstein are all fine at 100. Fixing it means
 footprint in `build-geometry.mjs` (which would also change how it draws on the map) or dropping
 it from the draw pool. Left for the owner to decide.
 
+**Visible where it can be checked.** `js/score-health.js` runs the real `scoreShape` over every
+country as a perfect player would and the Coverage board shows the result: a sortable **Draw**
+column, and two checks in the integrity strip — *every country has an outline you can score
+against* (the Maldives failure: an empty mask) and *a perfect drawing scores 100* (the verdict,
+naming any country that falls short and which term it lost). Computed on first sight of
+Coverage rather than in `loadData()`, which otherwise made Rankings, Map and Shapes wait ~5s
+for a column none of them draw; the table is on screen in ~190ms and the column fills behind a
+`…`. Thin-but-workable outlines are deliberately not flagged — Mauritius covers 8 cells of 6400
+and still reaches 100, and a check that cries wolf gets ignored.
+
 **Acceptance:** ✅ A perfect drawing of the detailed outline scores 100 for every sovereign
 country but Vatican City; `npm run check:masks` asserts the ceiling for all 251 and that no
-country rasterises to an empty mask; the match panel's score equals the round's Shape column.
+country rasterises to an empty mask; the Coverage board shows the same verdict per country;
+the match panel's score equals the round's Shape column.
 
 ---
 

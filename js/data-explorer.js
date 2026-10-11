@@ -3,7 +3,8 @@
 
 import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap, getRawData, loadAttributes, loadElectricity, loadFlagColors as _lfc } from './datasets.js';
 import { readFlagColors, missingFromImage } from './flag-colors.js';
-import { runDataChecks } from './data-health.js';
+import { runDataChecks, runScoringChecks } from './data-health.js';
+import { scoreCeilings, ceilingByCode } from './score-health.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
@@ -591,6 +592,32 @@ export class DataExplorer {
   // The check reads the image, so it runs only when the row is actually on screen and
   // never blocks the table. A row that has not been checked yet simply shows its
   // swatches: absence of a warning is not a claim.
+  // The score a perfect drawing of this country gets. 100 is the only right answer; the
+  // breakdown on hover says which term fell short (TODOS #73).
+  _ceilingCell(e) {
+    const td = document.createElement('td');
+    td.className = 'cov-cell cov-ceiling';
+    if (this._ceilings === undefined) {
+      td.classList.add('cov-explained');
+      td.textContent = '…';
+      td.title = 'Still working out what a perfect drawing scores.';
+      return td;
+    }
+    const c = ceilingByCode(this._ceilings, e.code);
+    if (!c) {
+      td.classList.add('cov-explained');
+      td.textContent = '–';
+      td.title = 'No detailed outline, so this country is not scored against one.';
+      return td;
+    }
+    td.textContent = String(c.total);
+    td.classList.add(c.total >= 100 ? 'ok' : 'no');
+    td.title = `A perfect drawing of ${c.name} scores ${c.total}: `
+      + `shape ${c.shape}, size ${c.size}, placement ${c.placement}. `
+      + `Its outline covers ${c.ink} of the 6400 comparison cells.`;
+    return td;
+  }
+
   _colorsCell(e) {
     const td = document.createElement('td');
     td.className = 'cov-cell cov-colors';
@@ -647,6 +674,9 @@ export class DataExplorer {
       wrap.textContent = `Integrity checks could not run: ${err.message}`;
       return wrap;
     }
+    // Skipped while the ceilings are still computing, rather than briefly reporting
+    // a failure to run that is really just a fetch in flight.
+    if (this._ceilings !== undefined) checks = [...checks, ...runScoringChecks(this._ceilings)];
     const bad = checks.filter((c) => c.state !== 'pass');
 
     const head = document.createElement('button');
@@ -684,9 +714,27 @@ export class DataExplorer {
     return wrap;
   }
 
+  // What a perfect drawing scores, per country (TODOS #73). Only Coverage shows it, and
+  // it reads every country's detailed outline — so it is fetched on first sight of this
+  // board rather than in loadData(), where it made Rankings, Map and Shapes wait for
+  // something none of them draw. The board renders immediately and redraws when it
+  // lands; a failure leaves the checks saying they could not run.
+  _ensureCeilings() {
+    if (this._ceilings !== undefined || this._ceilingsPending) return;
+    this._ceilingsPending = true;
+    scoreCeilings()
+      .catch((err) => { console.error('score ceilings failed', err); return null; })
+      .then((rows) => {
+        this._ceilings = rows;
+        this._ceilingsPending = false;
+        if (this.view === 'coverage') this._render();
+      });
+  }
+
   _renderCoverage() {
     const list = this._listEl;
     if (!list) return;
+    this._ensureCeilings();
     list.innerHTML = '';
 
     const metrics = getMetricMeta();
@@ -702,6 +750,13 @@ export class DataExplorer {
       { key: 'hasFlag', label: 'Colors', has: (e) => e.hasFlag, cell: (e) => this._colorsCell(e) },
       { key: 'hasCapital', label: 'Cap', has: (e) => e.hasCapital },
       { key: 'hasReligion', label: 'Rel', has: (e) => e.hasReligion },
+      {
+        key: 'drawCeiling', label: 'Draw',
+        has: (e) => !this._ceilings || (ceilingByCode(this._ceilings, e.code)?.total ?? 100) >= 100,
+        explained: (e) => (this._ceilings && !ceilingByCode(this._ceilings, e.code)
+          ? 'no detailed outline, so it is not drawn against one' : null),
+        cell: (e) => this._ceilingCell(e),
+      },
       ...metrics.map((m) => ({
         key: m.id, label: shortLabel[m.id] || m.name, has: (e) => !!e.metrics[m.id],
         // A gap the source explains is not a gap anyone can act on, so it does not
@@ -758,7 +813,9 @@ export class DataExplorer {
     legend.textContent = '– = the source publishes no value, reason on hover — not counted as a gap · '
       + 'Click a column heading to sort its gaps to the top · '
       + 'Colors = the curated colors the color quizzes score against, checked against each '
-      + 'flag image as you scroll — ⚠ means a color was not found in it';
+      + 'flag image as you scroll — ⚠ means a color was not found in it · '
+      + 'Draw = what a perfect drawing scores, run through the real scoring code — '
+      + 'every country should read 100, and hovering one says which term fell short';
     list.appendChild(legend);
 
     if (!ents.length) {

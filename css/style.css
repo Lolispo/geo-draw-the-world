@@ -3196,3 +3196,5 @@ canvas {
 }
 .freestyle-card h2 { font-size: 1.2rem; font-weight: 600; }
 #freestyle-host { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
+.cov-cell.cov-ceiling { font-variant-numeric: tabular-nums; font-weight: 600; cursor: help; }
+.cov-cell.cov-ceiling.no { font-weight: 700; }
