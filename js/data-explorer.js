@@ -1,7 +1,8 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank } from './datasets.js';
+import { readFlagColors, missingFromImage } from './flag-colors.js';
 import { openCountryPanel } from './country-panel.js';
 import { drawSilhouette } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
@@ -49,6 +50,15 @@ export class DataExplorer {
     this.onPlayDataset = onPlayDataset;   // start the line game for a dataset id
     this.onState = onState;               // keep the URL on what is being looked at
     this._loaded = false;
+    // Checking a flag's colours means decoding its image, so rows are checked as they
+    // come into view rather than all 251 up front.
+    this._colorChecks = new IntersectionObserver((entries, obs) => {
+      for (const en of entries) {
+        if (!en.isIntersecting) continue;
+        obs.unobserve(en.target);
+        en.target._checkColors?.();
+      }
+    }, { rootMargin: '150px' });
 
     this.datasetId = 'gdp-nominal';
     this.continent = null;   // null = All
@@ -66,6 +76,7 @@ export class DataExplorer {
     await loadDatasets();
     await loadEntities();
     await loadAliases();
+    await loadFlagColors();
     this._loaded = true;
   }
 
@@ -461,6 +472,52 @@ export class DataExplorer {
     }
   }
 
+  // The Colors column used to be a tick, which stopped meaning anything once every
+  // entity had colours (TODOS #55). It now shows the curated colours themselves, and
+  // checks them against the entity's own flag image — the question worth asking is no
+  // longer "are there any" but "are they right", and a wrong one is scored against in
+  // both colour quizzes.
+  //
+  // The check reads the image, so it runs only when the row is actually on screen and
+  // never blocks the table. A row that has not been checked yet simply shows its
+  // swatches; absence of a warning is not a claim.
+  _colorsCell(e) {
+    const td = document.createElement('td');
+    td.className = 'cov-cell cov-colors';
+    const colors = getFlagColors(e.code);
+    if (!colors || !colors.length) {
+      td.classList.add('no');
+      td.textContent = '\u2717';
+      return td;
+    }
+    for (const c of colors) {
+      const sw = document.createElement('span');
+      sw.className = 'cov-swatch';
+      sw.style.background = c;
+      sw.title = c;
+      td.appendChild(sw);
+    }
+    this._colorChecks.observe(td);
+    td._checkColors = async () => {
+      let found;
+      try { found = await readFlagColors(flagUrl(e.code, 'w320')); }
+      catch { return; }   // no image to check against: say nothing rather than warn
+      const missing = missingFromImage(colors, found);
+      if (!missing.length) return;
+      for (const sw of td.querySelectorAll('.cov-swatch')) {
+        if (missing.includes(sw.title)) sw.classList.add('cov-swatch--missing');
+      }
+      const warn = document.createElement('span');
+      warn.className = 'cov-colors-warn';
+      warn.textContent = '\u26a0';
+      warn.title = `${missing.join(', ')} not found in the flag image. `
+        + 'Often the curated value is an official spec colour the render drifts from, '
+        + 'or a detail too small to read — check against the flag before changing it.';
+      td.appendChild(warn);
+    };
+    return td;
+  }
+
   _renderCoverage() {
     const list = this._listEl;
     if (!list) return;
@@ -488,7 +545,7 @@ export class DataExplorer {
 
     const legend = document.createElement('div');
     legend.className = 'explore-blurb cov-legend';
-    legend.textContent = 'Flag = image (flagcdn) · Colors = flag colors for the color quizzes · Cap = capital · Rel = religion';
+    legend.textContent = 'Flag = image (flagcdn) \u00b7 Colors = the curated colors the color quizzes score against, checked against each flag image as you scroll \u2014 \u26a0 means a color was not found in it \u00b7 Cap = capital \u00b7 Rel = religion';
     list.appendChild(legend);
 
     const table = document.createElement('table');
@@ -534,7 +591,7 @@ export class DataExplorer {
       typeTd.className = 'cov-type';
       typeTd.textContent = e.type;
 
-      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlagImage), cell(e.hasFlag), cell(e.hasCapital), cell(e.hasReligion), ...metrics.map((m) => cell(e.metrics[m.id])));
+      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlagImage), this._colorsCell(e), cell(e.hasCapital), cell(e.hasReligion), ...metrics.map((m) => cell(e.metrics[m.id])));
       tbody.appendChild(tr);
     }
     table.appendChild(tbody);

@@ -7,6 +7,7 @@ let _data = null;
 let _entities = null;
 let _attributes = null;
 let _electricity = null;
+let _flagColors = null;
 let _aliases = null;
 let _aliasIndex = null;
 
@@ -110,6 +111,25 @@ export function inCountryPool(codeOrEntity, { territories } = {}) {
 
 export function getAttributes(code) {
   return _attributes ? _attributes[code] || null : null;
+}
+
+// Flag colour lists. Hand-curated in data/flags.json and read by both colour quizzes;
+// the Coverage board reads them too, to show what is curated rather than merely that
+// something is (TODOS #55). A failed fetch leaves the board without swatches rather
+// than without rows.
+export async function loadFlagColors() {
+  if (_flagColors) return _flagColors;
+  try {
+    const resp = await fetch('data/flags.json');
+    _flagColors = new Map((await resp.json()).flags.map((f) => [f.code, f.colors]));
+  } catch {
+    _flagColors = new Map();
+  }
+  return _flagColors;
+}
+
+export function getFlagColors(code) {
+  return (_flagColors && _flagColors.get(code)) || null;
 }
 
 // TODOS #29. Separate file from attributes.json because a different build script owns

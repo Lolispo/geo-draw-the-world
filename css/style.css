@@ -2634,6 +2634,15 @@ canvas {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+/* Coverage: curated flag colours, and the warning when one is not in the image. */
+.cov-colors { white-space: nowrap; line-height: 1; }
+.cov-swatch {
+  display: inline-block; width: 11px; height: 11px; border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.25); margin-right: 2px; vertical-align: middle;
+}
+.cov-swatch--missing { outline: 2px solid var(--red); outline-offset: 1px; }
+.cov-colors-warn { color: var(--orange); font-size: 0.78rem; margin-left: 3px; vertical-align: middle; cursor: help; }
+
 .cov-cell.ok { color: var(--green); }
 .cov-cell.no { color: var(--red); opacity: 0.8; }
 .coverage-table tr.incomplete { background: #d2992212; }
