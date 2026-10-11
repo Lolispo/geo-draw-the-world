@@ -121,8 +121,8 @@ class Game {
       document.getElementById('explore-container'),
       () => this.showScreen(STATES.MENU),
       (datasetId) => this.startRankLine(datasetId),
-      ({ view, metric, continent, gaps, sort }) => this._route(
-        ['explore', view === 'rank' ? null : view], { metric, continent, gaps, sort },
+      ({ view, metric, continent, gaps, sort, focus }) => this._route(
+        ['explore', view === 'rank' ? null : view], { metric, continent, gaps, sort, focus },
       )
     );
     this.scoresScreen = new ScoresScreen(
@@ -175,6 +175,7 @@ class Game {
         this.startExplore(params.get('metric') || 'gdp-nominal', {
           view: sub || 'rank',
           continent: params.get('continent') || null,
+          focus: params.get('focus') || null,
           gaps: params.get('gaps') === '1',
           sort: params.get('sort') || null,
         });
@@ -702,12 +703,12 @@ class Game {
     this.scoresScreen.start();
   }
 
-  async startExplore(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null } = {}) {
+  async startExplore(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null, focus = null } = {}) {
     this.gameMode = 'explore';
     this._currentRegion = 'explore';
     await this.dataExplorer.loadData();
     this.showScreen(STATES.EXPLORE);
-    this.dataExplorer.start(datasetId, { view, continent, gaps, sort });
+    this.dataExplorer.start(datasetId, { view, continent, gaps, sort, focus });
   }
 
   _replay() {

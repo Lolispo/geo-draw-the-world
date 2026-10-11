@@ -11,8 +11,8 @@
   "license": "MIT",
   "author": "Petter Andersson",
   "scripts": {
-    "start": "python3 -m http.server 8080",
-    "serve": "python3 -m http.server 8080",
+    "start": "python3 scripts/serve.py 8129",
+    "serve": "python3 scripts/serve.py 8129",
     "build": "bash scripts/build-static.sh",
     "build:geometry": "node scripts/build-geometry.mjs",
     "build:datasets": "node scripts/build-datasets.mjs",

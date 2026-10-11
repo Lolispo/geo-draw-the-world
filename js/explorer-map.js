@@ -43,10 +43,11 @@ const HOVER_MARK = 11;
 const BORDER = 'rgba(0,0,0,0.45)';
 
 export class ExplorerMap {
-  constructor(canvas, { onPick, formatValue }) {
+  constructor(canvas, { onPick, formatValue, sovereignOf = () => null }) {
     this.canvas = canvas;
     this.onPick = onPick;
     this.formatValue = formatValue;
+    this.sovereignOf = sovereignOf;
     this.ctx = canvas.getContext('2d');
     // Hit-testing is point-in-polygon against the countries whose bounding box holds
     // the cursor — usually one or two. It replaced colour-index picking, which was
@@ -70,6 +71,25 @@ export class ExplorerMap {
     // World-space boxes, computed once: the geometry never moves, only the view does.
     this._boxes = countries.map((c) => multiPolygonBoundingBox(c.polygons));
     return this;
+  }
+
+  // Frame one country: the view scale that makes its box about 60% of the canvas,
+  // centred on it. Used by "Show on map" from the country panel (TODOS #69).
+  focusOn(code) {
+    const i = this.countries.findIndex((c) => c.code === code);
+    if (i < 0 || !this._size) return false;
+    const b = this._boxes[i];
+    const [w, h] = this._size;
+    const fit = this._fit(w, h);
+    const bw = Math.max(b.maxX - b.minX, 1e-6) * fit.scale;
+    const bh = Math.max(b.maxY - b.minY, 1e-6) * fit.scale;
+    const scale = Math.max(1, Math.min(MAX_ZOOM, Math.min((w * 0.6) / bw, (h * 0.6) / bh)));
+    const cx = ((b.minX + b.maxX) / 2) * fit.scale + fit.ox;
+    const cy = ((b.minY + b.maxY) / 2) * fit.scale + fit.oy;
+    this.view = { scale, ox: w / 2 - cx * scale, oy: h / 2 - cy * scale };
+    this._clampView(w, h);
+    this.render();
+    return true;   // deliberately not onViewChange: this was not the reader panning
   }
 
   resetView() {
@@ -101,7 +121,7 @@ export class ExplorerMap {
 
   // `values` is code -> number; `scope` decides what may be shaded at all; `scale` is
   // how the bands are cut — by rank (equal count) or by value on a log axis.
-  setMetric({ values, format, scope, scale = 'rank' }) {
+  setMetric({ values, format, scope, scale = 'natural' }) {
     this.values = values || {};
     this.format = format;
     this.scope = scope;   // Set of codes, or null for every country
@@ -112,11 +132,18 @@ export class ExplorerMap {
 
   // Band edges from the values actually on screen. Fewer distinct values than bands
   // (a thin continent filter) collapses to as many bands as there are.
-  // Rank bands answer "where does this country place"; log bands answer "how big is
-  // it". On a long tail the two disagree sharply and the question decides which is
-  // right: by rank, every economy from Sweden ($579B) to the United States ($27.8T)
-  // shares the top band, because they are the top 31 either way (owner, 2026-10-11).
+  // Three ways to cut the same data, because they answer different questions and the
+  // owner wants to compare them (2026-10-11):
+  //   natural — group where the data itself has gaps, so the United States and China
+  //             end up alone at the top of Total GDP, which is the truth about it
+  //   rank    — equal count per band: "where does this country place"
+  //   log     — equal width on a log axis: "how many times bigger"
   _computeBands() {
+    if (this.scale === 'natural') {
+      const vals = this._scopedValues();
+      const nat = this._naturalBreaks(vals);
+      if (nat) return { ...nat, min: vals[0], max: vals[vals.length - 1], scale: 'natural' };
+    }
     if (this.scale === 'log') {
       const vals = this._scopedValues();
       if (vals.length) {
@@ -130,6 +157,35 @@ export class ExplorerMap {
       }
     }
     return { ...this._quantiles(), scale: 'rank' };
+  }
+
+  // 1-D k-means, seeded on quantiles so it is deterministic: the same data always
+  // gives the same bands, and a re-render cannot reshuffle the colours.
+  _naturalBreaks(vals) {
+    const k = BANDS;
+    if (vals.length <= k || vals[0] === vals[vals.length - 1]) return null;
+    let centres = [];
+    for (let i = 0; i < k; i++) centres.push(vals[Math.floor(((i + 0.5) / k) * vals.length)]);
+    let groups = [];
+    for (let iter = 0; iter < 40; iter++) {
+      groups = Array.from({ length: k }, () => []);
+      for (const v of vals) {
+        let best = 0, bestD = Infinity;
+        for (let i = 0; i < k; i++) {
+          const d = Math.abs(v - centres[i]);
+          if (d < bestD) { bestD = d; best = i; }
+        }
+        groups[best].push(v);
+      }
+      const next = groups.map((g, i) => (g.length ? g.reduce((a, b) => a + b, 0) / g.length : centres[i]));
+      if (next.every((c, i) => c === centres[i])) break;
+      centres = next;
+    }
+    const edges = [];
+    for (let i = 1; i < k; i++) {
+      if (groups[i - 1].length && groups[i].length) edges.push(groups[i][0]);
+    }
+    return edges.length ? { edges, n: edges.length + 1 } : null;
   }
 
   _scopedValues() {
@@ -325,12 +381,20 @@ export class ExplorerMap {
   // name + value for whatever is under the cursor, or null.
   hoverLabel() {
     if (!this.hovered) return null;
-    const v = this.values[this.hovered.code];
-    const inScope = this._inScope(this.hovered.code);
-    const value = !inScope ? 'not in this filter'
-      : v == null ? 'no data'
-        : this.formatValue(this.format, v);
-    return `${this.hovered.name} — ${value}`;
+    const code = this.hovered.code;
+    const say = (v) => (v == null ? 'no data' : this.formatValue(this.format, v));
+
+    if (!this._inScope(code)) {
+      // A territory the filter excludes is still *somebody's* land, and the figure the
+      // map is showing for it is its sovereign's. Say whose, rather than "not in this
+      // filter", which tells a reader nothing (owner, 2026-10-11).
+      const owner = this.sovereignOf(code);
+      if (owner && this._inScope(owner.code)) {
+        return `${owner.name} — ${say(this.values[owner.code])} · ${this.hovered.name}`;
+      }
+      return `${this.hovered.name} — no data`;
+    }
+    return `${this.hovered.name} — ${say(this.values[code])}`;
   }
 
   _canvasPos(ev) {
@@ -433,7 +497,7 @@ export class ExplorerMap {
 
   // Said in the legend, because the two answer different questions.
   bandBasis() {
-    return this._bands?.scale === 'log' ? 'by value, log scale' : 'by rank';
+    return { natural: 'natural groups', log: 'by value, log scale' }[this._bands?.scale] || 'equal count';
   }
 
   legendRows() {

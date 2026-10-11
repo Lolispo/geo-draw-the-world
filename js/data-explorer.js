@@ -92,7 +92,8 @@ export class DataExplorer {
     this._loaded = true;
   }
 
-  start(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null } = {}) {
+  start(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null, focus = null } = {}) {
+    this._focus = focus;     // one-shot: frame this country when the map first draws
     this.gapsOnly = !!gaps;
     this.covSort = sort ? { key: sort.replace(/^-/, ''), dir: sort.startsWith('-') ? -1 : 1 } : null;
     this.datasetId = getDataset(datasetId) ? datasetId : getDatasetList()[0].id;
@@ -121,6 +122,9 @@ export class DataExplorer {
       + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
     this.onState?.({
+      // focus rides along, or the URL rewrite below would drop it before the map has
+      // framed the country the reader asked for (TODOS #69).
+      focus: this._focus,
       view: this.view, metric: this.datasetId, continent: this.continent,
       gaps: this.view === 'coverage' && this.gapsOnly ? '1' : null,
       sort: this.view === 'coverage' && this.covSort
@@ -163,15 +167,26 @@ export class DataExplorer {
 
   // A column toggle is one glyph: these turn a column on, they are not scope, and a
   // row of "X: Off" pills ate the bar (owner, 2026-10-11).
-  _glyph(glyph, on, title, onToggle) {
+  _glyph(glyph, label, on, title, onToggle) {
     const b = document.createElement('button');
     b.className = 'btn btn-tool explore-glyph' + (on ? ' active' : '');
     b.textContent = glyph;
+    b.dataset.label = label;
     b.title = title;
     b.setAttribute('aria-pressed', String(on));
     b.setAttribute('aria-label', title);
     b.addEventListener('click', onToggle);
     return b;
+  }
+
+  // entities.json names a territory's sovereign rather than coding it, so this maps
+  // the name back to the entity once and keeps it.
+  _sovereignOf(code) {
+    if (!this._byName) {
+      this._byName = new Map(getEntitiesList().map((e) => [e.name, e]));
+    }
+    const name = getEntity(code)?.sovereign;
+    return name ? this._byName.get(name) || null : null;
   }
 
   // Everything in this view answers to the Explorer's own territories setting.
@@ -222,10 +237,14 @@ export class DataExplorer {
     const map = new ExplorerMap(canvas, {
       onPick: (code) => openCountryPanel(code),
       formatValue,
+      sovereignOf: (code) => this._sovereignOf(code),
     });
     this._map = map;
     reset.addEventListener('click', () => map.resetView());
-    map.onViewChange = (scale) => { reset.hidden = scale <= 1; };
+    map.onViewChange = (scale) => {
+      reset.hidden = scale <= 1;
+      this._focus = null;   // the reader has taken over; stop re-framing
+    };
     map.onHover = (label, ev) => {
       tip.hidden = !label;
       if (!label) return;
@@ -242,6 +261,10 @@ export class DataExplorer {
       values: ds.values, format: ds.format, scope, scale: this.bandScale,
     });
     map.render();
+    // Arriving at #/explore/map?focus=se frames Sweden. Every render builds a fresh
+    // map, so the focus is re-applied until the reader moves the map themselves —
+    // clearing it on the first render lost it whenever anything re-rendered.
+    if (this._focus && map.focusOn(this._focus)) reset.hidden = false;
 
     legend.innerHTML = '';
     const head = document.createElement('div');
@@ -358,10 +381,10 @@ export class DataExplorer {
       const glyphs = document.createElement('div');
       glyphs.className = 'explore-glyphs';   // grouped, so a wrap cannot split them
       glyphs.append(
-        this._glyph('✏️', this.showOutlines,
+        this._glyph('✏️', 'Shapes', this.showOutlines,
           'Show each country\'s outline beside its name',
           () => { this.showOutlines = !this.showOutlines; this._render(); }),
-        this._glyph('🔤', this.showAliases,
+        this._glyph('🔤', 'Aliases', this.showAliases,
           'Show the other names each country is accepted under when typing',
           () => { this.showAliases = !this.showAliases; this._render(); }),
       );

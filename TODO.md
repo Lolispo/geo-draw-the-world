@@ -1562,6 +1562,42 @@ on-screen **DEV** button is gone. Reference-shape ghosts still exist behind `?de
 
 ---
 
+## 69. Natural bands, territories that name their owner, and Show on map
+
+**REVIEW:** `#/explore/map?metric=gdp-nominal` — the United States and China should be alone
+in the top band. Switch **Bands** between *natural groups*, *equal count* and *log scale* to
+compare. Hover Greenland, Bermuda, Aruba with Territories off: each reads as its sovereign.
+Then open any country in the Rankings list and press **🗺️ Show on map**.
+
+**✅ DONE 2026-10-11** — four things.
+
+**1. Bands by natural groups, with the comparison the owner asked for.** Equal-count bands
+answer "where does this place", which is why Sweden and Germany matched on Total GDP. Natural
+groups (1-D k-means, seeded on quantiles so it is deterministic) cut where the data itself has
+gaps: on Total GDP that puts the US and China alone at the top, Germany one band below, Sweden
+four below — *"it should be super clear that us and china are by far higher"*. It is the default;
+**equal count** and **log scale** are in the bar to compare against, and the legend names the
+one in use.
+
+**2. A territory outside the filter reads as its sovereign.** `entities.json` already names one
+for 48 entities, so with Territories off, Greenland reads *"Denmark — $405B · Greenland"* rather
+than "not in this filter". Where there is no sovereign to fall back on it says "no data".
+
+**3. Show on map.** The country panel gets a button that opens the map framed on that country,
+and the frame is part of the URL (`#/explore/map?focus=se`) so it survives a reload and can be
+sent to someone. It had to ride in the URL: the Explorer rewrites its own hash on every render,
+which dropped the focus before the map had used it.
+
+**4. A label on each column glyph.** ✏️ and 🔤 say *Shapes* and *Aliases* on hover.
+
+**Known gap — sub-national islands.** Madeira, the Azores and the Canaries are not entities;
+they are rings inside Portugal's and Spain's geometry. They therefore read as their sovereign
+whatever the Territories toggle says, and cannot be hovered as themselves. Making them
+hoverable means adding them to the registry with their own geometry — the #20 kind of data
+work, not a map change.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

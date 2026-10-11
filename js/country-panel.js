@@ -84,6 +84,19 @@ function render(code) {
   close.addEventListener('click', closeCountryPanel);
   cardEl.appendChild(close);
 
+  // Straight to this country on the map, zoomed in — the panel is where you are when
+  // you want that (owner, 2026-10-11). Routing by hash keeps the panel free of any
+  // dependency on the app shell.
+  if (entity && entity.hasGeometry !== false) {
+    const toMap = el('button', 'btn btn-tool cp-show-map', '🗺️ Show on map');
+    toMap.title = 'Open the Data Explorer map, zoomed to this country';
+    toMap.addEventListener('click', () => {
+      closeCountryPanel();
+      window.location.hash = `#/explore/map?focus=${encodeURIComponent(code)}`;
+    });
+    cardEl.appendChild(toMap);
+  }
+
   // Header: flag + name + type/continent
   const header = el('div', 'cp-header');
   const flag = document.createElement('img');
