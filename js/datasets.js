@@ -278,8 +278,8 @@ const FORMATTERS = {
   // TODOS #28/#33. A year is not a quantity: no thousands separator ("1,523" is wrong).
   // Negative = BC, for the curated statehood dates that reach back before year 1.
   'year': (v) => (v < 0 ? `${Math.abs(Math.round(v))} BC` : `${Math.round(v)}`),
-  'number': (v) => v.toLocaleString(),
-  'percent': (v) => `${v}%`,
+  'number': (v) => (Math.round(v * 100) / 100).toLocaleString(),
+  'percent': (v) => `${Math.round(v * 100) / 100}%`,
 };
 
 export function formatValue(format, value) {

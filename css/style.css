@@ -2738,6 +2738,20 @@ canvas {
 
 .cov-legend { font-size: 0.72rem; color: var(--text-dim); margin-top: -4px; }
 
+/* The ghosts toggle sits on the map it affects, in the corner nothing else uses. */
+.map-wrap { position: relative; display: flex; justify-content: center; }
+.results-map-area { position: relative; }
+.map-ghost-toggle {
+  position: absolute;
+  left: 10px;
+  top: 10px;        /* bottom-left is the gesture hint, bottom-right the zoom % */
+  font-size: 0.72rem;
+  opacity: 0.5;
+  z-index: 2;
+}
+.map-ghost-toggle:hover { opacity: 1; }
+.map-ghost-toggle.active { opacity: 1; border-color: var(--accent); }
+
 /* ========== YOUR SCORES (TODOS #41) ========== */
 .scores-list {
   flex: 1;

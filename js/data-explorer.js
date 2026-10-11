@@ -264,8 +264,12 @@ export class DataExplorer {
     // Shaded = what the rankings would list: pool rules, plus the continent filter.
     const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
       .filter((e) => inCountryPool(e.code, this._pool())).map((e) => e.code));
+    // Framed by the continent filter alone, never by the territories toggle.
+    const frame = this.continent
+      ? new Set(getEntitiesList().filter((e) => e.continent === this.continent).map((e) => e.code))
+      : null;
     map.setWorld(this._world).setMetric({
-      values: ds.values, format: ds.format, scope, scale: this.bandScale,
+      values: ds.values, format: ds.format, scope, frame, scale: this.bandScale,
     });
     // Every control rebuilds the map, and throwing the reader's zoom away each time
     // made the territories toggle unusable while zoomed in (owner, 2026-10-11).
@@ -375,11 +379,11 @@ export class DataExplorer {
     if (this.view === 'map') {
       bar.appendChild(this._select([
         { id: 'natural', label: 'Bands: natural groups',
-          hint: 'Cut where the data has gaps, so countries that really stand out get their own colour. On Total GDP the US and China end up alone at the top.' },
+          hint: 'Cut where the data itself has gaps, so a country that really stands apart gets a colour of its own. Where values are bunched, fewer colours.' },
         { id: 'rank', label: 'Bands: equal count',
-          hint: 'The same number of countries in every colour. Good for "where does this place", but it can give every rich country one colour.' },
+          hint: 'The same number of countries in every colour. Answers "where does this place", but a spread-out top end can end up sharing one colour.' },
         { id: 'log', label: 'Bands: log scale',
-          hint: 'Equal steps in orders of magnitude — each band is roughly the same multiple of the one below. Good for "how many times bigger".' },
+          hint: 'Equal steps in orders of magnitude: each band is about the same multiple of the one below. Answers "how many times bigger".' },
       ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
     }
 

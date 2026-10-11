@@ -3,6 +3,7 @@
 const KEY_TERRITORIES = 'gdtw.includeTerritories';
 const KEY_EXPLORE_TERRITORIES = 'gdtw.exploreTerritories';
 const KEY_HIDE_ANSWERS = 'gdtw.hideAnswers';
+const KEY_GHOSTS = 'gdtw.ghosts';
 
 // Include optional/dependent territories (TODOS #20) in the playable pools.
 // Default OFF: standard play is sovereign countries + the usual dependencies.
@@ -11,6 +12,16 @@ export function getIncludeTerritories() {
 }
 export function setIncludeTerritories(on) {
   localStorage.setItem(KEY_TERRITORIES, on ? '1' : '0');
+}
+
+// Draw the real country outline over the placement and results maps, so a placement
+// can be judged against the answer instead of against arithmetic. Lives on the map it
+// affects (owner, 2026-10-11); ?dev=1 still turns it on for a session.
+export function getGhosts() {
+  return localStorage.getItem(KEY_GHOSTS) === '1';
+}
+export function setGhosts(on) {
+  localStorage.setItem(KEY_GHOSTS, on ? '1' : '0');
 }
 
 // The Data Explorer keeps its own (TODOS #65). Reading the data and playing with it

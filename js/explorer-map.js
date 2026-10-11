@@ -144,10 +144,14 @@ export class ExplorerMap {
 
   // `values` is code -> number; `scope` decides what may be shaded at all; `scale` is
   // how the bands are cut — by rank (equal count) or by value on a log axis.
-  setMetric({ values, format, scope, scale = 'natural' }) {
+  // `scope` is what may be shaded; `frame` is what the view is fitted to. They are
+  // deliberately different: toggling Territories changes the shading, and if it also
+  // changed the frame the whole map jumped under the reader (owner, 2026-10-11).
+  setMetric({ values, format, scope, frame = null, scale = 'natural' }) {
     this.values = values || {};
     this.format = format;
     this.scope = scope;   // Set of codes, or null for every country
+    this.frame = frame;   // Set of codes to fit the view to, or null for the world
     this.scale = scale;
     this._bands = this._computeBands();
     return this;
@@ -258,7 +262,9 @@ export class ExplorerMap {
   // Fit the shaded set, so a continent filter zooms to that continent rather than
   // leaving it a smudge in the corner of an otherwise empty world.
   _fit(w, h) {
-    const subject = this.countries.filter((c) => this._inScope(c.code));
+    const subject = this.frame
+      ? this.countries.filter((c) => this.frame.has(c.code))
+      : this.countries;
     const rings = (subject.length ? subject : this.countries).flatMap((c) => c.polygons);
     return fitBounds(multiPolygonBoundingBox(rings), w, h, 8);
   }

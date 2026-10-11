@@ -12,7 +12,7 @@ import { Shape } from './shape.js';
 import { multiPolygonCentroid, multiPolygonBoundingBox, hidpiReset } from './utils.js';
 import { scoreShape } from './scoring.js';
 import { getHighScore, saveScore } from './high-scores.js';
-import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
+import { getIncludeTerritories, setIncludeTerritories, getGhosts, setGhosts } from './settings.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
@@ -103,6 +103,7 @@ class Game {
 
     this.drawingCanvas = new DrawingCanvas(document.getElementById('canvas-drawing'));
     this.worldCanvas = new WorldCanvas(document.getElementById('canvas-world'));
+    this.worldCanvas.panEnabled = true;   // drag off the shape to move the view
     this.resultsWorldCanvas = new WorldCanvas(document.getElementById('canvas-results'));
     this.menuGlobe = new MenuGlobe(document.getElementById('menu-globe-canvas'));
     this.flagGame = new FlagGame(
@@ -139,9 +140,10 @@ class Game {
 
   async init() {
     await loadContinentData();
-    // Reference-shape ghosts on the placement and results maps. No on-screen control
-    // any more (owner, 2026-10-11) — add ?dev=1 to the URL: index.html?dev=1#/draw/daily
-    this.devMode = new URLSearchParams(window.location.search).has('dev');
+    // Reference-shape ghosts on the placement and results maps, toggled on the map
+    // itself. ?dev=1 still forces them on for a session.
+    this.devMode = getGhosts() || new URLSearchParams(window.location.search).has('dev');
+    this._applyGhosts();
     this._sizeCanvases();
     this._updateHighScoreDisplay();
     // A typed or pasted hash, and Back/Forward, both re-enter the route. The app's own
@@ -188,6 +190,23 @@ class Game {
       default:
         this.showScreen(STATES.MENU);
     }
+  }
+
+  _applyGhosts() {
+    this.worldCanvas.showGhosts = this.devMode;
+    this.resultsWorldCanvas.showGhosts = this.devMode;
+    for (const id of ['btn-ghosts-placing', 'btn-ghosts-results']) {
+      const b = document.getElementById(id);
+      if (b) b.classList.toggle('active', this.devMode);
+    }
+  }
+
+  _toggleGhosts() {
+    this.devMode = !this.devMode;
+    setGhosts(this.devMode);
+    this._applyGhosts();
+    this.worldCanvas.render();
+    this.resultsWorldCanvas.render();
   }
 
   _route(segments, params) {
@@ -288,6 +307,9 @@ class Game {
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
     document.getElementById('btn-activity-scores').addEventListener('click', () => this.openScores());
     document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
+    for (const id of ['btn-ghosts-placing', 'btn-ghosts-results']) {
+      document.getElementById(id).addEventListener('click', () => this._toggleGhosts());
+    }
 
     // Country region buttons
     for (const region of getCountryRegions()) {

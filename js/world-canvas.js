@@ -236,8 +236,10 @@ export class WorldCanvas {
         this.canvas.style.cursor = this.handles.cursorFor(handle);
       } else {
         const worldPos = this._canvasToWorld(pos[0], pos[1]);
+        // Off the shape the map itself can be dragged, so the cursor says so — it is
+        // the only hint that panning exists on this screen.
         this.canvas.style.cursor = this.activeShape.containsPoint(worldPos[0], worldPos[1])
-          ? 'grab' : 'default';
+          ? 'grab' : (this.panEnabled ? 'grab' : 'default');
       }
     } else {
       this.canvas.style.cursor = this.panEnabled ? 'grab' : 'default';

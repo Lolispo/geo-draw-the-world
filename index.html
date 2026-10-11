@@ -235,7 +235,10 @@
         <button id="btn-place" class="btn btn-accent">Place Here</button>
       </div>
     </div>
-    <canvas id="canvas-world"></canvas>
+    <div class="map-wrap">
+      <canvas id="canvas-world"></canvas>
+      <button id="btn-ghosts-placing" class="btn btn-tool map-ghost-toggle">👻 Ghosts</button>
+    </div>
     <div id="score-flash" class="score-flash"></div>
   </div>
 
@@ -244,6 +247,7 @@
     <div class="results-layout">
       <div class="results-map-area">
         <canvas id="canvas-results"></canvas>
+        <button id="btn-ghosts-results" class="btn btn-tool map-ghost-toggle">👻 Ghosts</button>
       </div>
       <div class="score-panel">
         <h2>Results <span id="results-mode" class="results-mode-label"></span></h2>
