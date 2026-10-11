@@ -941,6 +941,11 @@ if (D) {
   }
 
   for (const el of document.querySelectorAll('input[name=fcf]')) el.addEventListener('change', paint);
+  // ?fc=check lands straight on the worklist, so this board can be handed over as a
+  // link to the thing being reviewed rather than a page plus instructions.
+  const want = new URLSearchParams(location.search).get('fc');
+  const pick = want && document.querySelector(`input[name=fcf][value="${CSS.escape(want)}"]`);
+  if (pick) { pick.checked = true; document.getElementById('flagcolours').scrollIntoView(); }
   paint();
 
   // Sequential rather than parallel: 250 flags at once stalls the tab, and nothing here
