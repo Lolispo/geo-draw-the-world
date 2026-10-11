@@ -866,7 +866,17 @@ if (D) {
   // Dominant colours of the rendered flag. Tuned against the 199 already curated: it
   // finds 80% of their colours, and errs towards extra anti-aliasing shades rather than
   // missing real ones — the right way round when a person is reviewing the result.
-  const MERGE = 56, MIN_SHARE = 0.015, MATCH = 60;
+  // MIN_SHARE_DRAFT keeps a proposed colour list short and dominant; the *matching*
+  // pass uses everything down to MIN_SHARE_SEEN, because a flag's white crescent or
+  // gold sun can be a fraction of a percent and its absence from the reader's list is
+  // not evidence that the curated colour is wrong (Libya, Maldives, Samoa, Argentina).
+  // MATCH is a presence test with tolerance, not an identity test: curated values are
+  // official specification colours and the rendered PNG drifts from them — France's
+  // #002395 renders as #002654 (65 apart), Norway 61, Indonesia 64, all of which were
+  // being reported as errors at 60. 75 clears that drift and still sits below the
+  // distance between two genuinely different colours inside one flag, which across the
+  // curated set is almost never under ~68.
+  const MERGE = 56, MIN_SHARE_SEEN = 0.004, MIN_SHARE_DRAFT = 0.015, MATCH = 75;
   async function dominant(code) {
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -891,7 +901,8 @@ if (D) {
       else merged.push({ ...e });
     }
     const total = merged.reduce((a, m) => a + m.n, 0) || 1;
-    return merged.filter(m => m.n / total >= MIN_SHARE).sort((a, b) => b.n - a.n).map(m => hex(m.c));
+    return merged.filter(m => m.n / total >= MIN_SHARE_SEEN).sort((a, b) => b.n - a.n)
+      .map(m => ({ hex: hex(m.c), share: m.n / total }));
   }
 
   const chips = (list, missing = []) => `<div class="chips">` + (list.length
@@ -938,11 +949,13 @@ if (D) {
     for (const r of rows) {
       try {
         const got = await dominant(r.code);
-        r.got = got;
+        r.got = got.map(g => g.hex);
         const cur = curated.get(r.code);
-        if (!cur) { r.state = 'missing'; drafts.set(r.code, got.slice(0, 5)); }
-        else {
-          const missing = cur.filter(c => !got.some(g => dist(rgb(g), rgb(c)) < MATCH));
+        if (!cur) {
+          r.state = 'missing';
+          drafts.set(r.code, got.filter(g => g.share >= MIN_SHARE_DRAFT).slice(0, 5).map(g => g.hex));
+        } else {
+          const missing = cur.filter(c => !got.some(g => dist(rgb(g.hex), rgb(c)) < MATCH));
           r.missing = missing;
           r.state = missing.length ? 'check' : 'ok';
           if (missing.length) r.note = `${missing.length} curated colour${missing.length > 1 ? 's' : ''} not found in the image`;
