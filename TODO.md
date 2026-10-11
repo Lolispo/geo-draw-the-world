@@ -1483,6 +1483,43 @@ and the alias column leaves the row height alone. No page errors.
 
 ---
 
+## 68. Microstates you can hover, bands that fit the data, and a DEV button nobody pressed
+
+**REVIEW:** `#/explore/map?metric=gdp-nominal` — Sweden and Germany should no longer be the
+same colour, and the legend says *by value, log scale*. Hover Monaco, San Marino, Andorra,
+Liechtenstein: each is a dot that swells under the cursor and names itself. Try **Bands: by
+rank** to see the old cut. Then `#/explore` — ✏️ and 🔤 are visibly off until you press them,
+and they only appear on Rankings. The DEV button is gone from the corner.
+
+**✅ DONE 2026-10-11** — five things from the review.
+
+**1. How the bands are cut, since the question was asked.** They were *by rank*: sort the
+countries, cut into seven equal-count groups. That answers "where does this place" and is why
+Sweden ($579B) and Germany ($4.56T) shared a colour — both are in the top 31, and the top band
+runs from $517B to $27.8T. They now cut **by value on a log axis** where the data has a long
+tail, which answers "how big is it": Sweden lands in $96.3B–$637B and Germany in $637B–$4.21T.
+The choice is automatic (a spread of 1000× or more picks log) and overridable — **Bands: auto /
+by rank / by value** sits in the map's bar, and the legend always says which was used.
+
+**2. Microstates are dots, and the dot wins the hit test.** Monaco is 0.1px wide at world zoom,
+so it was neither drawn nor hittable. Anything under 4px on screen is now drawn as a dot of its
+own band colour, swelling under the cursor. The dot is checked *before* containment,
+deliberately: the pixel over Monaco is also inside France, so containment alone handed you
+France every time. Where no dot is involved, the **smallest** containing country wins, so an
+enclave is never swallowed by its host.
+
+**3. Column toggles read as on or off.** They were the same glyph either way; off is now
+greyscale at 45%, on is full colour with an accent ring.
+
+**4. The toggles live with the table only.** The grid has no columns — outlines are the view and
+hidden names are the point.
+
+**5. Two removals.** `#/explore/grid` no longer redirects (the name never shipped), and the
+on-screen **DEV** button is gone. Reference-shape ghosts still exist behind `?dev=1`:
+`index.html?dev=1#/draw/daily`.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

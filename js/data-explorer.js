@@ -69,10 +69,16 @@ export class DataExplorer {
     this.view = 'rank';      // one of VIEWS
     this.order = 'hi';       // one of ORDERS, shared by the rows views
     this.showOutlines = false;  // the outline column, which is what the old Shapes table was
+    this.bandScale = 'auto';    // 'auto' | 'rank' | 'log' — how the map cuts its bands
     this._shuffleSeed = 1;
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
     this.showAliases = false;
+    // Coverage only. `gapsOnly` hides both the entities with nothing missing and the
+    // columns with nothing missing — at 251 rows x 17 columns the thing you are looking
+    // for is a tenth of the table, and the other nine tenths are in the way (TODOS #67).
+    this.gapsOnly = false;
+    this.covSort = null;     // { key, dir } — null means by name
   }
 
   async loadData() {
@@ -84,14 +90,14 @@ export class DataExplorer {
     this._loaded = true;
   }
 
-  start(datasetId = 'gdp-nominal', { view = 'rank', continent = null } = {}) {
+  start(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null } = {}) {
+    this.gapsOnly = !!gaps;
+    this.covSort = sort ? { key: sort.replace(/^-/, ''), dir: sort.startsWith('-') ? -1 : 1 } : null;
     this.datasetId = getDataset(datasetId) ? datasetId : getDatasetList()[0].id;
     // A URL can name a continent that is not one (TODOS #56); fall back to all.
     this.continent = getContinents().includes(continent) ? continent : null;
     this.higherFirst = getDataset(this.datasetId).higherFirst;
-    // "grid" was this view's name for a day; keep the link working.
-    const wanted = view === 'grid' ? 'shapes' : view;
-    this.view = VIEWS.some((v) => v.id === wanted) ? wanted : 'rank';
+    this.view = VIEWS.some((v) => v.id === view) ? view : 'rank';
     this.order = this.view === 'shapes' ? 'name' : (this.higherFirst ? 'hi' : 'lo');
     this._render();
   }
@@ -112,7 +118,12 @@ export class DataExplorer {
       + (this.view === 'coverage' ? ' is-coverage' : '')
       + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
-    this.onState?.({ view: this.view, metric: this.datasetId, continent: this.continent });
+    this.onState?.({
+      view: this.view, metric: this.datasetId, continent: this.continent,
+      gaps: this.view === 'coverage' && this.gapsOnly ? '1' : null,
+      sort: this.view === 'coverage' && this.covSort
+        ? (this.covSort.dir < 0 ? '-' : '') + this.covSort.key : null,
+    });
     this._renderBody();
   }
 
@@ -159,6 +170,16 @@ export class DataExplorer {
     b.setAttribute('aria-label', title);
     b.addEventListener('click', onToggle);
     return b;
+  }
+
+  // Auto picks by the shape of the data: three orders of magnitude or more is a long
+  // tail, where equal-count bands put every rich country in one colour — Sweden and
+  // Germany came out identical on Total GDP (owner, 2026-10-11).
+  _mapScale(ds) {
+    if (this.bandScale !== 'auto') return this.bandScale;
+    const vals = Object.values(ds.values).filter((v) => v != null && v > 0);
+    if (vals.length < 10) return 'rank';
+    return Math.max(...vals) / Math.min(...vals) >= 1000 ? 'log' : 'rank';
   }
 
   // Everything in this view answers to the Explorer's own territories setting.
@@ -225,13 +246,15 @@ export class DataExplorer {
     // Shaded = what the rankings would list: pool rules, plus the continent filter.
     const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
       .filter((e) => inCountryPool(e.code, this._pool())).map((e) => e.code));
-    map.setWorld(this._world).setMetric({ values: ds.values, format: ds.format, scope });
+    map.setWorld(this._world).setMetric({
+      values: ds.values, format: ds.format, scope, scale: this._mapScale(ds),
+    });
     map.render();
 
     legend.innerHTML = '';
     const head = document.createElement('div');
     head.className = 'explore-map-legend-head';
-    head.textContent = `${ds.name} · ${map.bandCount()} bands by rank · darker = lower, brighter = higher`;
+    head.textContent = `${ds.name} · ${map.bandCount()} bands ${map.bandBasis()} · darker = lower, brighter = higher`;
     legend.appendChild(head);
     for (const row of map.legendRows()) {
       const item = document.createElement('span');
@@ -312,6 +335,14 @@ export class DataExplorer {
       ));
     }
 
+    if (this.view === 'map') {
+      bar.appendChild(this._select([
+        { id: 'auto', label: 'Bands: auto' },
+        { id: 'rank', label: 'Bands: by rank' },
+        { id: 'log', label: 'Bands: by value' },
+      ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
+    }
+
     bar.appendChild(this._select(
       [{ id: '', label: 'All continents' }, ...getContinents().map((c) => ({ id: c, label: c }))],
       this.continent || '',
@@ -327,9 +358,13 @@ export class DataExplorer {
         this._renderBody();
       }));
 
-      // Grouped, so a wrap cannot put one column toggle on each row.
+    }
+
+    // Columns of the table, so they live with the table. The grid has no columns —
+    // it is outlines, and names are the thing it deliberately hides (owner, 2026-10-11).
+    if (rankView) {
       const glyphs = document.createElement('div');
-      glyphs.className = 'explore-glyphs';
+      glyphs.className = 'explore-glyphs';   // grouped, so a wrap cannot split them
       glyphs.append(
         this._glyph('✏️', this.showOutlines,
           'Show each country\'s outline beside its name',

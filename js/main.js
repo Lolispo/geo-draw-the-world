@@ -121,8 +121,8 @@ class Game {
       document.getElementById('explore-container'),
       () => this.showScreen(STATES.MENU),
       (datasetId) => this.startRankLine(datasetId),
-      ({ view, metric, continent }) => this._route(
-        ['explore', view === 'rank' ? null : view], { metric, continent },
+      ({ view, metric, continent, gaps, sort }) => this._route(
+        ['explore', view === 'rank' ? null : view], { metric, continent, gaps, sort },
       )
     );
     this.scoresScreen = new ScoresScreen(
@@ -139,8 +139,9 @@ class Game {
 
   async init() {
     await loadContinentData();
+    // Reference-shape ghosts on the placement and results maps. No on-screen control
+    // any more (owner, 2026-10-11) — add ?dev=1 to the URL: index.html?dev=1#/draw/daily
     this.devMode = new URLSearchParams(window.location.search).has('dev');
-    this._updateDevBadge();
     this._sizeCanvases();
     this._updateHighScoreDisplay();
     // A typed or pasted hash, and Back/Forward, both re-enter the route. The app's own
@@ -174,6 +175,8 @@ class Game {
         this.startExplore(params.get('metric') || 'gdp-nominal', {
           view: sub || 'rank',
           continent: params.get('continent') || null,
+          gaps: params.get('gaps') === '1',
+          sort: params.get('sort') || null,
         });
         return;
       case 'country':
@@ -220,10 +223,6 @@ class Game {
     const resultsW = isMobile ? vw - pad : Math.min(vw - 400, 1100);
     const resultsH = isMobile ? Math.min(vh * 0.4, 400) : Math.min(vh - 40, 800);
     setSize('canvas-results', resultsW, resultsH);
-  }
-
-  _updateDevBadge() {
-    document.getElementById('dev-badge').style.display = this.devMode ? 'inline-block' : 'none';
   }
 
   _updateHighScoreDisplay() {
@@ -376,19 +375,6 @@ class Game {
     });
     document.getElementById('btn-share').addEventListener('click', () => this._shareImage());
     document.getElementById('btn-share-text').addEventListener('click', () => this._shareText());
-
-    // Dev toggle
-    document.getElementById('btn-dev-toggle').addEventListener('click', () => {
-      this.devMode = !this.devMode;
-      this._updateDevBadge();
-      const url = new URL(window.location);
-      if (this.devMode) url.searchParams.set('dev', '1');
-      else url.searchParams.delete('dev');
-      window.history.replaceState({}, '', url);
-      this.worldCanvas.showGhosts = this.devMode;
-      this.worldCanvas.render();
-      this.resultsWorldCanvas.render();
-    });
 
     // Keyboard shortcuts
     window.addEventListener('keydown', (e) => this._onKeyDown(e));
@@ -716,12 +702,12 @@ class Game {
     this.scoresScreen.start();
   }
 
-  async startExplore(datasetId = 'gdp-nominal', { view = 'rank', continent = null } = {}) {
+  async startExplore(datasetId = 'gdp-nominal', { view = 'rank', continent = null, gaps = false, sort = null } = {}) {
     this.gameMode = 'explore';
     this._currentRegion = 'explore';
     await this.dataExplorer.loadData();
     this.showScreen(STATES.EXPLORE);
-    this.dataExplorer.start(datasetId, { view, continent });
+    this.dataExplorer.start(datasetId, { view, continent, gaps, sort });
   }
 
   _replay() {

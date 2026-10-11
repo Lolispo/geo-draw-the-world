@@ -34,6 +34,12 @@ const OUT_OF_SCOPE = '#23272f'; // drawn so the world has no holes, never shaded
 const OCEAN = '#0b0e13';
 // How far in the map may be zoomed, as a multiple of the fitted view (TODOS #60).
 const MAX_ZOOM = 12;
+
+// A country thinner than this on screen is drawn as a dot of this size instead, and
+// can be hovered within it. Monaco is 0.1px wide at world zoom: without a floor it is
+// not merely hard to hit, it is not drawn at all (owner, 2026-10-11).
+const MIN_MARK = 4;
+const HOVER_MARK = 11;
 const BORDER = 'rgba(0,0,0,0.45)';
 
 export class ExplorerMap {
@@ -93,23 +99,49 @@ export class ExplorerMap {
     return true;
   }
 
-  // `values` is code -> number; `scope` decides what may be shaded at all.
-  setMetric({ values, format, scope }) {
+  // `values` is code -> number; `scope` decides what may be shaded at all; `scale` is
+  // how the bands are cut — by rank (equal count) or by value on a log axis.
+  setMetric({ values, format, scope, scale = 'rank' }) {
     this.values = values || {};
     this.format = format;
     this.scope = scope;   // Set of codes, or null for every country
-    this._bands = this._quantiles();
+    this.scale = scale;
+    this._bands = this._computeBands();
     return this;
   }
 
   // Band edges from the values actually on screen. Fewer distinct values than bands
   // (a thin continent filter) collapses to as many bands as there are.
-  _quantiles() {
-    const vals = this.countries
+  // Rank bands answer "where does this country place"; log bands answer "how big is
+  // it". On a long tail the two disagree sharply and the question decides which is
+  // right: by rank, every economy from Sweden ($579B) to the United States ($27.8T)
+  // shares the top band, because they are the top 31 either way (owner, 2026-10-11).
+  _computeBands() {
+    if (this.scale === 'log') {
+      const vals = this._scopedValues();
+      if (vals.length) {
+        const min = vals[0], max = vals[vals.length - 1];
+        if (min > 0 && max > min) {
+          const lo = Math.log10(min), hi = Math.log10(max);
+          const edges = [];
+          for (let i = 1; i < BANDS; i++) edges.push(10 ** (lo + ((hi - lo) * i) / BANDS));
+          return { edges, min, max, n: BANDS, scale: 'log' };
+        }
+      }
+    }
+    return { ...this._quantiles(), scale: 'rank' };
+  }
+
+  _scopedValues() {
+    return this.countries
       .filter((c) => this._inScope(c.code) && this.values[c.code] != null)
       .map((c) => this.values[c.code])
       .sort((a, b) => a - b);
-    if (!vals.length) return [];
+  }
+
+  _quantiles() {
+    const vals = this._scopedValues();
+    if (!vals.length) return {};
     const min = vals[0], max = vals[vals.length - 1];
     const cut = (arr, n) => {
       const out = [];
@@ -191,14 +223,28 @@ export class ExplorerMap {
     ctx.fillStyle = OCEAN;
     ctx.fillRect(0, 0, w, h);
 
-    for (const c of this.countries) {
-      this._path(ctx, c, t);
+    this._marks = new Map();   // code -> [x, y] for the ones drawn as a dot
+    this.countries.forEach((c, i) => {
+      const b = this._boxes[i];
+      const w2 = (b.maxX - b.minX) * t.scale, h2 = (b.maxY - b.minY) * t.scale;
       ctx.fillStyle = this._fillColor(c.code);
+      if (Math.max(w2, h2) < MIN_MARK) {
+        // Below a few pixels an outline is a smudge or nothing at all, so the country
+        // becomes a dot of its own colour — visible, and something you can aim at.
+        const cx = ((b.minX + b.maxX) / 2) * t.scale + t.ox;
+        const cy = ((b.minY + b.maxY) / 2) * t.scale + t.oy;
+        this._marks.set(c.code, [cx, cy]);
+        ctx.beginPath();
+        ctx.arc(cx, cy, MIN_MARK / 2, 0, Math.PI * 2);
+        ctx.fill();
+        return;   // inside forEach: this country is a dot, not an outline
+      }
+      this._path(ctx, c, t);
       ctx.fill('nonzero');
       ctx.lineWidth = 0.5;
       ctx.strokeStyle = BORDER;
       ctx.stroke();
-    }
+    });
 
     this._paint();
   }
@@ -211,6 +257,19 @@ export class ExplorerMap {
     ctx.clearRect(0, 0, w, h);
     ctx.drawImage(this.base, 0, 0, w, h);
     if (!this.hovered) return;
+    const dot = this._marks?.get(this.hovered.code);
+    if (dot) {
+      // A dot you are hovering swells, because the point of hovering a microstate is
+      // to see that you found it (owner, 2026-10-11).
+      ctx.beginPath();
+      ctx.arc(dot[0], dot[1], HOVER_MARK / 2, 0, Math.PI * 2);
+      ctx.fillStyle = this._fillColor(this.hovered.code);
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+      return;
+    }
     this._path(ctx, this.hovered, this._t);
     ctx.lineWidth = 2;
     ctx.strokeStyle = '#ffffff';
@@ -224,11 +283,28 @@ export class ExplorerMap {
     const [px, py] = this._canvasPos(ev);
     const wx = (px - this._t.ox) / this._t.scale;
     const wy = (py - this._t.oy) / this._t.scale;
-    let hit = null;
+    // Dots first, and deliberately: a microstate is 0.1px wide at world zoom, so the
+    // pixel you are on is *also* inside the country that surrounds it. Containment
+    // would hand you France every time you aimed at Monaco. The small thing wins
+    // inside its own mark; everywhere else the geometry decides (owner, 2026-10-11).
+    let best = null, bestD = (HOVER_MARK / 2) ** 2;
+    for (const [code, [mx, my]] of this._marks || []) {
+      const d = (mx - px) ** 2 + (my - py) ** 2;
+      if (d <= bestD) { bestD = d; best = code; }
+    }
+    if (best) return this.countries.find((c) => c.code === best);
+
+    // Smallest match wins, so an enclave is never swallowed by its host.
+    let hit = null, hitArea = Infinity;
     for (let i = 0; i < this.countries.length; i++) {
       const b = this._boxes[i];
       if (wx < b.minX || wx > b.maxX || wy < b.minY || wy > b.maxY) continue;
-      if (pointInMultiPolygon(wx, wy, this.countries[i].polygons)) hit = this.countries[i];
+      const area = (b.maxX - b.minX) * (b.maxY - b.minY);
+      if (area >= hitArea) continue;
+      if (pointInMultiPolygon(wx, wy, this.countries[i].polygons)) {
+        hit = this.countries[i];
+        hitArea = area;
+      }
     }
     return hit;
   }
@@ -353,6 +429,11 @@ export class ExplorerMap {
   // collapse them (TODOS #66).
   bandCount() {
     return this._bands && this._bands.n ? this._bands.n : 0;
+  }
+
+  // Said in the legend, because the two answer different questions.
+  bandBasis() {
+    return this._bands?.scale === 'log' ? 'by value, log scale' : 'by rank';
   }
 
   legendRows() {

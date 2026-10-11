@@ -2580,6 +2580,16 @@ canvas {
   padding: 0;
   width: 38px;
   text-align: center;
+  /* Off is visibly off: a glyph at full strength either way left no way to tell
+     whether the column was on (owner, 2026-10-11). */
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+.explore-glyph.active {
+  opacity: 1;
+  filter: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 /* A pill is on/off; the rectangular selects beside it are pick-one. The shapes are
