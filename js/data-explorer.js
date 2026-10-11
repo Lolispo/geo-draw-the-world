@@ -186,7 +186,7 @@ export class DataExplorer {
     legend.innerHTML = '';
     const head = document.createElement('div');
     head.className = 'explore-map-legend-head';
-    head.textContent = `${ds.name} · five equal-count bands · darker = lower, brighter = higher`;
+    head.textContent = `${ds.name} · ${map.bandCount()} bands by rank · darker = lower, brighter = higher`;
     legend.appendChild(head);
     for (const row of map.legendRows()) {
       const item = document.createElement('span');

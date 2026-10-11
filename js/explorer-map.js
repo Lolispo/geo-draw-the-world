@@ -4,24 +4,33 @@
 // Geometry is the same Mercator world the draw game plays on (data/countries-*.json,
 // 1600x1600 space) — no mapping library, no second projection to keep in step.
 
-import { traceRing, hidpiReset, fitBounds, multiPolygonBoundingBox } from './utils.js';
+import {
+  traceRing, hidpiReset, fitBounds, multiPolygonBoundingBox, pointInMultiPolygon,
+} from './utils.js';
 
-// Five equal-count bands, not five equal-width ones: GDP and population are so skewed
-// that a linear ramp paints the entire world the lowest colour and calls it a map.
-const BANDS = 5;
+// Equal-count bands, not equal-width ones: GDP and population are so skewed that a
+// linear ramp paints the entire world the lowest colour and calls it a map. Seven
+// rather than five, because five put every rich country in one band — at five, Europe
+// spanned 3 bands on GDP per capita; at seven it spans 5 (owner review, 2026-10-11).
+const BANDS = 7;
 
 // One hue, light to dark — the rule for a sequential scale. The old ramp ran
 // blue → teal → green → yellow, which nobody can order without reading the legend
 // first (owner, 2026-10-11); a single hue carries "more" in the colour itself. The
 // anchor flips on a dark surface: low recedes toward the background, high is bright.
 // Steps are a validated blue ramp (100–700), luminance strictly increasing.
-const RAMP = ['#256abf', '#3987e5', '#6da7ec', '#9ec5f4', '#cde2fb'];
-// Both neutrals are deliberately off-hue and spaced against the ramp's dark end:
-// "no figure" must never read as "lowest band". Measured contrast — lowest band vs
-// no-data 2.12, out-of-scope vs ocean 1.21; the two neutrals sit at 1.39 of each
-// other, which is close, but neither carries a value so they cannot be misread as one.
-const NO_DATA = '#333a45';      // in scope, but the metric has no figure for it
-const OUT_OF_SCOPE = '#1d222b'; // drawn so the world has no holes, never shaded
+// "More colour = higher" is the instinct (owner, 2026-10-11), and on a dark surface
+// that can only go so far: brightness has to carry the ordering, because a ramp that
+// gets darker as values rise makes the highest countries vanish into the background.
+// So this one rises in brightness *and* in chroma until near the top, ending vivid
+// rather than washed white — the old ramp lost saturation exactly where the values
+// were highest (0.84 at the bottom, 0.18 at the top; this one 0.22 → 0.78 → 0.46).
+const RAMP = ['#17324f', '#17497a', '#1563a8', '#0f80d6', '#2f9ceb', '#58b9f7', '#8ad4ff'];
+// The neutrals separate from the ramp by *chroma*, not lightness: a grey of 0.06
+// chroma cannot be mistaken for a band of 0.22–0.78 however close its brightness.
+// "No figure" must never read as "lowest band".
+const NO_DATA = '#4a5159';      // in scope, but the metric has no figure for it
+const OUT_OF_SCOPE = '#23272f'; // drawn so the world has no holes, never shaded
 const OCEAN = '#0b0e13';
 // How far in the map may be zoomed, as a multiple of the fitted view (TODOS #60).
 const MAX_ZOOM = 12;
@@ -33,13 +42,13 @@ export class ExplorerMap {
     this.onPick = onPick;
     this.formatValue = formatValue;
     this.ctx = canvas.getContext('2d');
-    // Colour-index picking: every country is also drawn to an offscreen buffer in a
-    // colour that *is* its index, so hit-testing is one getImageData of one pixel
-    // rather than point-in-polygon against a quarter of a million vertices.
-    this.pick = document.createElement('canvas');
-    this.pickCtx = this.pick.getContext('2d', { willReadFrequently: true });
-    // The shaded world is also kept as a bitmap. Moving the mouse changes one outline,
-    // and redrawing 251 countries to restyle one of them costs 15ms a move.
+    // Hit-testing is point-in-polygon against the countries whose bounding box holds
+    // the cursor — usually one or two. It replaced colour-index picking, which was
+    // fast but *wrong*: canvas antialiasing blends two neighbours' index colours into
+    // a third valid index, so every border pixel could name a country that is not
+    // there, and a sub-pixel country is all border. Measured on a 40px test: two
+    // neighbours drawn as 5 and 200 produced 16 other valid indices along one edge,
+    // which is how hovering Andorra reported San Marino (owner, 2026-10-11).
     this.base = document.createElement('canvas');
     this.baseCtx = this.base.getContext('2d');
     this.countries = [];
@@ -52,6 +61,8 @@ export class ExplorerMap {
 
   setWorld(countries) {
     this.countries = countries;
+    // World-space boxes, computed once: the geometry never moves, only the view does.
+    this._boxes = countries.map((c) => multiPolygonBoundingBox(c.polygons));
     return this;
   }
 
@@ -99,11 +110,27 @@ export class ExplorerMap {
       .map((c) => this.values[c.code])
       .sort((a, b) => a - b);
     if (!vals.length) return [];
-    const distinct = new Set(vals).size;
-    const n = Math.min(BANDS, distinct);
-    const edges = [];
-    for (let i = 1; i < n; i++) edges.push(vals[Math.floor((i / n) * vals.length)]);
-    return { edges, min: vals[0], max: vals[vals.length - 1], n };
+    const min = vals[0], max = vals[vals.length - 1];
+    const cut = (arr, n) => {
+      const out = [];
+      for (let i = 1; i < n; i++) out.push(arr[Math.floor((i / n) * arr.length)]);
+      return out;
+    };
+    // Edges equal to the minimum carry no information, and repeated ones are worse
+    // than useless: 181 of 213 countries generate no nuclear electricity at all, so
+    // every edge came out 0 and `value >= edge` put all of them in the *top* band —
+    // the map painted "no nuclear" the same colour as France at 68.8% (found while
+    // reviewing the bands, 2026-10-11).
+    const clean = (es) => [...new Set(es)].filter((e) => e > min).sort((a, b) => a - b);
+
+    let edges = clean(cut(vals, BANDS));
+    const above = vals.filter((v) => v > min);
+    // A pile at the minimum swallows the edges; give the pile the bottom band and
+    // spread the remaining bands over what is actually above it.
+    if (edges.length < BANDS - 1 && above.length) {
+      edges = clean([above[0], ...cut(above, BANDS - 1)]);
+    }
+    return { edges, min, max, n: edges.length + 1 };
   }
 
   _inScope(code) {
@@ -164,29 +191,14 @@ export class ExplorerMap {
     ctx.fillStyle = OCEAN;
     ctx.fillRect(0, 0, w, h);
 
-    // Pick buffer at CSS pixels: one device pixel of slop at a border is not worth
-    // the memory of a HiDPI copy.
-    this.pick.width = w;
-    this.pick.height = h;
-    this.pickCtx.setTransform(1, 0, 0, 1, 0, 0);
-    this.pickCtx.clearRect(0, 0, w, h);
-    this._index = new Map();
-
-    this.countries.forEach((c, i) => {
+    for (const c of this.countries) {
       this._path(ctx, c, t);
       ctx.fillStyle = this._fillColor(c.code);
       ctx.fill('nonzero');
       ctx.lineWidth = 0.5;
       ctx.strokeStyle = BORDER;
       ctx.stroke();
-
-      const key = i + 1;
-      const rgb = `rgb(${(key >> 16) & 255},${(key >> 8) & 255},${key & 255})`;
-      this._index.set(rgb, c);
-      this._path(this.pickCtx, c, t);
-      this.pickCtx.fillStyle = rgb;
-      this.pickCtx.fill('nonzero');
-    });
+    }
 
     this._paint();
   }
@@ -205,16 +217,20 @@ export class ExplorerMap {
     ctx.stroke();
   }
 
+  // Canvas point -> the country actually under it. Boxes first, so a hover tests one
+  // or two polygons rather than all 251; last match wins, matching the paint order.
   _at(ev) {
-    if (!this._index) return null;
-    const r = this.canvas.getBoundingClientRect();
-    const x = Math.round(ev.clientX - r.left), y = Math.round(ev.clientY - r.top);
-    if (x < 0 || y < 0 || x >= this.pick.width || y >= this.pick.height) return null;
-    const [cr, cg, cb, ca] = this.pickCtx.getImageData(x, y, 1, 1).data;
-    if (!ca) return null;
-    // An antialiased border pixel blends two indices into a colour that is neither, so
-    // it simply misses — a one-pixel dead line along coastlines, which nobody aims at.
-    return this._index.get(`rgb(${cr},${cg},${cb})`) || null;
+    if (!this._t || !this._boxes) return null;
+    const [px, py] = this._canvasPos(ev);
+    const wx = (px - this._t.ox) / this._t.scale;
+    const wy = (py - this._t.oy) / this._t.scale;
+    let hit = null;
+    for (let i = 0; i < this.countries.length; i++) {
+      const b = this._boxes[i];
+      if (wx < b.minX || wx > b.maxX || wy < b.minY || wy > b.maxY) continue;
+      if (pointInMultiPolygon(wx, wy, this.countries[i].polygons)) hit = this.countries[i];
+    }
+    return hit;
   }
 
   _touchPos(touch) {
@@ -333,6 +349,12 @@ export class ExplorerMap {
 
   // Swatches with the real value ranges behind them — a ramp with no numbers is
   // decoration.
+  // How many bands the data actually supports — not the constant, since ties can
+  // collapse them (TODOS #66).
+  bandCount() {
+    return this._bands && this._bands.n ? this._bands.n : 0;
+  }
+
   legendRows() {
     if (!this._bands || !this._bands.n) return [];
     const { edges, min, max, n } = this._bands;

@@ -1404,6 +1404,53 @@ while its own went to `1`. No page errors.
 
 ---
 
+## 66. The map was naming the wrong country, and painting the wrong band
+
+**REVIEW:** `#/explore/map?metric=elec-nuclear-pct` — countries that generate no nuclear
+electricity at all should be the *darkest*, not the brightest. Then
+`#/explore/map?metric=gdp-per-capita` and hover around: Europe should no longer be one flat
+colour, and hovering a microstate should never name a different country.
+
+**✅ DONE 2026-10-11** — the owner reported hovering Andorra and getting San Marino's data.
+Two separate defects came out of chasing it.
+
+**1. Colour-index picking fabricates countries.** Every country was drawn a second time to an
+offscreen buffer in a colour that *was* its index, and a hover read that pixel. Canvas
+antialiasing blends two neighbours' index colours — and a blend of two valid indices is a third
+*valid index*. Proved in isolation: two shapes drawn as index 5 and index 200, sharing one
+edge, produced **16 other valid indices** along it. Every border pixel could name a country that
+is not there, and a sub-pixel country like Andorra (0.7px wide at world zoom) is *all* border.
+
+Replaced with bounding-box filtering plus `pointInMultiPolygon`, which is exact: an audit of
+1,194 sampled pixels against the geometry went from **185 mismatches to 0**, and it is *faster* —
+0.1ms per hover against 1.4ms, because it no longer redraws 251 countries into a second buffer.
+Andorra at world zoom now reports France, which is the truth: the pixel really is France.
+
+**2. Ties put the floor in the top band.** 181 of 213 countries generate no nuclear electricity,
+so all four quantile edges came out `0`, and `value >= edge` sent every one of them to the
+*highest* band — the map painted "no nuclear" the same colour as France at 68.8%. Edges equal to
+the minimum are now dropped and deduped, and when that collapses the bands they are rebuilt over
+the values above the floor, so the pile gets the bottom band and the rest spread honestly:
+`[181, 5, 5, 6, 5, 5, 6]`.
+
+**3. Five bands hid the question.** Measured across every dataset: at five bands Europe spanned
+3 of them on GDP per capita, with 39 countries in the top one. At seven it spans 5. Seven is now
+the default, and the legend reports the band count it actually used rather than a hardcoded
+"five".
+
+**4. The ramp rises in chroma, not just brightness.** The owner's instinct is "more colour =
+higher"; the old ramp did the opposite, losing saturation exactly where the values were highest
+(0.84 at the bottom, 0.18 at the top). On a dark surface brightness still has to carry the
+ordering — a ramp that darkens as values rise makes the highest countries vanish — so the new one
+rises in both and ends vivid rather than washed white (chroma 0.22 → 0.78 → 0.46, luminance
+strictly increasing). The neutrals now separate from the bands by chroma rather than lightness.
+
+**Still open:** a microstate smaller than a pixel cannot be hovered at world zoom (honest, where
+the old behaviour was confidently wrong). A nearest-country-within-a-few-pixels fallback would
+make Andorra, Monaco and Liechtenstein reachable without zooming.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`
