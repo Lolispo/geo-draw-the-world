@@ -1,0 +1,28 @@
+js/flag-colors.js
+  s_4c4d447dce4af2::t_2e946d2d36506c 1-79
+js/datasets.js
+  s_4c4d447dce4af2::t_19ef07afb03e7a 10,116-133
+  s_4c4d447dce4af2::t_ddd2174f9da4ab 134
+js/data-explorer.js
+  s_4c4d447dce4af2::t_84cb5012765d8b 4-5,79,594
+  s_4c4d447dce4af2::t_e6536fb165d50f 53-61,475-518
+  s_4c4d447dce4af2::t_ab7f84105d6073 519-520,548
+css/style.css
+  s_4c4d447dce4af2::t_94b424002c44a3 2637-2645
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2237939cf9fb605bedf52884c90d36b56da27342",
+  "prompts": {},
+  "sessions": {
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
