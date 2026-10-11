@@ -1336,6 +1336,40 @@ says the direction out loud — *darker = lower, brighter = higher*.
 
 ---
 
+## 65. Data Explorer controls: one grammar, and territories that stays here
+
+**REVIEW:** `#/explore` — the bar should read as two things now: a row of dropdowns (each picks
+one of several) and a row of pills (each is on or off), with the one accent button being the
+only control that leaves the screen. Check `#/explore/grid` is its own view, and that flipping
+🏝️ Territories here does **not** change it in Draw the World or Top 10.
+
+**✅ DONE 2026-10-11** — the bar had grown to four kinds of control with nothing to tell them
+apart (owner, 2026-10-11: *"its very inconsistent which option does what"*).
+
+**Decided (owner, 2026-10-11):**
+- **Everything that picks one of several is a dropdown**, including the view itself — the
+  segmented switch is gone. Shape carries meaning: rectangular select = choose, pill = on/off,
+  accent = leaves the screen.
+- **The grid is its own view**, beside Rankings / Map / Shapes / Coverage, instead of a toggle
+  inside Shapes. Both decided presentation; now one control does. `#/explore/grid` routes to it.
+- **Territories is no longer shared with the games.** *"One is understanding data and one is
+  playing game"* — so the Explorer keeps `gdtw.exploreTerritories` and the games keep
+  `gdtw.includeTerritories`. `inCountryPool()` takes the caller's answer when it has one
+  (`{ territories }`) and otherwise means the playing pool, so nothing had to be guessed at a
+  distance.
+
+Each view now shows only what it needs: Rankings has view/metric/continent/direction plus the
+aliases and territories pills and *Rank this →*; Map drops the direction and aliases; Shapes and
+Grid swap the metric for a sort; Coverage keeps view, continent and territories. The rank view
+is the only one that still takes two rows inside the 720px column — but they are now *meaningful*
+rows, choices then state, rather than an arbitrary wrap.
+
+Verified with Playwright across all five views: controls are exactly the expected set in each,
+`#/explore/grid` lands on 197 tiles, and flipping the Explorer's pill left the games' key at `0`
+while its own went to `1`. No page errors.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

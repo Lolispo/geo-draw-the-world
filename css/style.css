@@ -2573,7 +2573,13 @@ canvas {
 .shape-tile:focus-visible .shape-tile-name { opacity: 1; }
 
 /* Shapes table (TODOS #51) */
-.explore-views { display: flex; gap: 4px; margin-left: auto; }
+/* A pill is on/off; the rectangular selects beside it are pick-one. The shapes are
+   the signal, so the kind of control reads before the label does (TODOS #65). */
+.explore-pill {
+  border-radius: 999px;
+  margin-left: 0;
+}
+.explore-controls .explore-pill:first-of-type { margin-left: auto; }
 .shape-row {
   gap: 10px;
   /* the thumbnail replaces the rank column, so the stacked value indents further */

@@ -98,11 +98,14 @@ export function getEntity(code) {
 // Views that deliberately show everything (the Coverage audit board, the country
 // panel) read the registry directly instead of going through this.
 // Unknown codes pass: a registry that failed to load must not empty a quiz.
-export function inCountryPool(codeOrEntity) {
+// `territories` lets a caller answer the toggle question for itself; the Data Explorer
+// has its own setting (TODOS #65). Omitted, it means the playing pool.
+export function inCountryPool(codeOrEntity, { territories } = {}) {
   const e = typeof codeOrEntity === 'string' ? getEntity(codeOrEntity) : codeOrEntity;
   if (!e) return true;
   if (e.type === 'aggregate') return false;
-  return !e.optional || getIncludeTerritories();
+  const allow = territories === undefined ? getIncludeTerritories() : territories;
+  return !e.optional || allow;
 }
 
 export function getAttributes(code) {

@@ -7,7 +7,7 @@ import { drawSilhouette } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
 import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
-import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
+import { getExploreTerritories, setExploreTerritories } from './settings.js';
 
 
 // Big enough to tell Chile from Italy, small enough that 250 of them scroll. The grid
@@ -24,6 +24,24 @@ function seededRank(code, seed) {
   return h >>> 0;
 }
 
+// Picking a view is picking one of several, so it is a dropdown like every other
+// choice in the bar (owner, 2026-10-11). The grid is a view in its own right rather
+// than a toggle inside Shapes: both decide presentation, so both belong in one place.
+const VIEWS = [
+  { id: 'rank', label: '📊 Rankings' },
+  { id: 'map', label: '🗺️ Map' },
+  { id: 'shapes', label: '✏️ Shapes' },
+  { id: 'grid', label: '▦ Grid' },
+  { id: 'coverage', label: '📋 Coverage' },
+];
+
+const SHAPE_SORTS = [
+  { id: 'name', label: 'A → Z' },
+  { id: 'area', label: 'Largest first' },
+  { id: 'continent', label: 'By continent' },
+  { id: 'random', label: 'Random' },
+];
+
 export class DataExplorer {
   constructor(containerEl, onFinish, onPlayDataset, onState = null) {
     this.container = containerEl;
@@ -35,9 +53,8 @@ export class DataExplorer {
     this.datasetId = 'gdp-nominal';
     this.continent = null;   // null = All
     this.higherFirst = true;
-    this.view = 'rank';      // 'rank' | 'map' | 'shapes' | 'coverage'
+    this.view = 'rank';      // one of VIEWS
     this.shapeSort = 'name';   // 'name' | 'area' | 'continent' | 'random'
-    this.shapeLayout = 'list'; // 'list' | 'grid' — the grid hides the names (TODOS #61)
     this._shuffleSeed = 1;
     // Off by default: the extra line is for auditing the alias table (TODOS #40),
     // not for reading a ranking.
@@ -57,7 +74,7 @@ export class DataExplorer {
     // A URL can name a continent that is not one (TODOS #56); fall back to all.
     this.continent = getContinents().includes(continent) ? continent : null;
     this.higherFirst = getDataset(this.datasetId).higherFirst;
-    this.view = ['rank', 'map', 'shapes', 'coverage'].includes(view) ? view : 'rank';
+    this.view = VIEWS.some((v) => v.id === view) ? view : 'rank';
     this._render();
   }
 
@@ -83,9 +100,25 @@ export class DataExplorer {
 
   _renderBody() {
     if (this.view === 'coverage') this._renderCoverage();
-    else if (this.view === 'shapes') this._renderShapes();
+    else if (this.view === 'shapes' || this.view === 'grid') this._renderShapes();
     else if (this.view === 'map') this._renderMap();
     else this._renderList();
+  }
+
+  // Everything in this view answers to the Explorer's own territories setting.
+  _pool() {
+    return { territories: getExploreTerritories() };
+  }
+
+  // On or off, so it is a pill — visibly not one of the dropdowns beside it.
+  _pill(label, on, title, onToggle) {
+    const b = document.createElement('button');
+    b.className = 'btn btn-tool explore-pill' + (on ? ' active' : '');
+    b.textContent = `${label}: ${on ? 'On' : 'Off'}`;
+    b.title = title;
+    b.setAttribute('aria-pressed', String(on));
+    b.addEventListener('click', onToggle);
+    return b;
   }
 
   // The same metric as the rankings, shaded onto the world (TODOS #48). Geometry is
@@ -135,7 +168,7 @@ export class DataExplorer {
 
     // Shaded = what the rankings would list: pool rules, plus the continent filter.
     const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
-      .filter((e) => inCountryPool(e.code)).map((e) => e.code));
+      .filter((e) => inCountryPool(e.code, this._pool())).map((e) => e.code));
     map.setWorld(this._world).setMetric({ values: ds.values, format: ds.format, scope });
     map.render();
 
@@ -192,144 +225,63 @@ export class DataExplorer {
     return header;
   }
 
+  // One grammar, so the kind of control is visible before you read the label: a
+  // dropdown picks one of several, a pill is on or off, and the single accent button
+  // is the only thing that leaves the screen. The bar had grown into four kinds of
+  // control with nothing to tell them apart (owner, 2026-10-11).
   _renderControls() {
     const bar = document.createElement('div');
     bar.className = 'explore-controls';
     const rankView = this.view === 'rank';
+    const shapeView = this.view === 'shapes' || this.view === 'grid';
 
-    // Dataset (rank and map views — both are a metric seen a different way)
+    bar.appendChild(this._select(VIEWS, this.view, (v) => { this.view = v; this._render(); }));
+
     if (rankView || this.view === 'map') {
-      const dsSelect = document.createElement('select');
-      dsSelect.className = 'explore-select';
-      for (const d of getDatasetList()) {
-        const opt = document.createElement('option');
-        opt.value = d.id;
-        opt.textContent = d.name;
-        if (d.id === this.datasetId) opt.selected = true;
-        dsSelect.appendChild(opt);
-      }
-      dsSelect.addEventListener('change', () => {
-        this.datasetId = dsSelect.value;
-        this.higherFirst = getDataset(this.datasetId).higherFirst; // reset to natural order
-        this._render();
-      });
-      bar.appendChild(dsSelect);
+      bar.appendChild(this._select(
+        getDatasetList().map((d) => ({ id: d.id, label: d.name })),
+        this.datasetId,
+        (v) => {
+          this.datasetId = v;
+          this.higherFirst = getDataset(v).higherFirst;   // reset to natural order
+          this._render();
+        },
+      ));
     }
 
-    // Continent (both views)
-    const contSelect = document.createElement('select');
-    contSelect.className = 'explore-select';
-    const allOpt = document.createElement('option');
-    allOpt.value = '';
-    allOpt.textContent = 'All continents';
-    contSelect.appendChild(allOpt);
-    for (const cont of getContinents()) {
-      const opt = document.createElement('option');
-      opt.value = cont;
-      opt.textContent = cont;
-      if (cont === this.continent) opt.selected = true;
-      contSelect.appendChild(opt);
-    }
-    contSelect.addEventListener('change', () => {
-      this.continent = contSelect.value || null;
-      this._renderBody();
-    });
-    bar.appendChild(contSelect);
+    bar.appendChild(this._select(
+      [{ id: '', label: 'All continents' }, ...getContinents().map((c) => ({ id: c, label: c }))],
+      this.continent || '',
+      (v) => { this.continent = v || null; this._renderBody(); },
+    ));
 
-    // Sort (shapes view only) — the rank view has its own High→Low toggle.
-    if (this.view === 'shapes') {
-      const sort = this._select([
-        { id: 'name', label: 'A → Z' },
-        { id: 'area', label: 'Largest first' },
-        { id: 'continent', label: 'By continent' },
-        { id: 'random', label: 'Random' },
-      ], this.shapeSort, (v) => {
+    if (rankView) {
+      bar.appendChild(this._select(
+        [{ id: 'hi', label: 'High → Low' }, { id: 'lo', label: 'Low → High' }],
+        this.higherFirst ? 'hi' : 'lo',
+        (v) => { this.higherFirst = v === 'hi'; this._renderList(); },
+      ));
+    }
+
+    if (shapeView) {
+      bar.appendChild(this._select(SHAPE_SORTS, this.shapeSort, (v) => {
         // Picking Random again means "shuffle again", which is what anyone expects.
         if (v === 'random') this._shuffleSeed = Math.floor(Math.random() * 1e9);
         this.shapeSort = v;
         this._renderShapes();
-      });
-      bar.appendChild(sort);
-
-      const grid = this.shapeLayout === 'grid';
-      const layoutBtn = document.createElement('button');
-      layoutBtn.className = 'btn btn-tool' + (grid ? ' active' : '');
-      layoutBtn.textContent = grid ? '☰ List' : '▦ Grid';
-      layoutBtn.title = grid
-        ? 'Back to the table, with names and figures'
-        : 'Outlines only — hover to name one, press to open it';
-      layoutBtn.addEventListener('click', () => {
-        this.shapeLayout = grid ? 'list' : 'grid';
-        this._render();
-      });
-      bar.appendChild(layoutBtn);
+      }));
     }
 
-    // Sort toggle (rank view only)
     if (rankView) {
-      const sortBtn = document.createElement('button');
-      sortBtn.className = 'btn btn-tool';
-      this._sortBtn = sortBtn;
-      this._updateSortLabel();
-      sortBtn.addEventListener('click', () => {
-        this.higherFirst = !this.higherFirst;
-        this._updateSortLabel();
-        this._renderList();
-      });
-      bar.appendChild(sortBtn);
+      bar.appendChild(this._pill('🔤 Aliases', this.showAliases,
+        'Show the other names each country is accepted under when typing',
+        () => { this.showAliases = !this.showAliases; this._render(); }));
     }
 
-    // Territories toggle (both views) — shared with the draw menu (TODOS #20)
-    const terrBtn = document.createElement('button');
-    const terrOn = getIncludeTerritories();
-    terrBtn.className = 'btn btn-tool' + (terrOn ? ' active' : '');
-    terrBtn.textContent = terrOn ? '🏝️ Territories: On' : '🏝️ Territories: Off';
-    terrBtn.title = 'Include small dependent/autonomous territories';
-    terrBtn.addEventListener('click', () => {
-      setIncludeTerritories(!getIncludeTerritories());
-      this._render();
-    });
-    bar.appendChild(terrBtn);
+    bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
+      'Include small dependent/autonomous territories here. The games keep their own setting.',
+      () => { setExploreTerritories(!getExploreTerritories()); this._render(); }));
 
-    // Aliases column (rank view only) — the only place the whole table is visible,
-    // which is the point: a country with no alias shows a blank you can spot.
-    if (rankView) {
-      const aliasBtn = document.createElement('button');
-      aliasBtn.className = 'btn btn-tool' + (this.showAliases ? ' active' : '');
-      aliasBtn.textContent = this.showAliases ? '🔤 Aliases: On' : '🔤 Aliases: Off';
-      aliasBtn.title = 'Show the other names each country is accepted under when typing';
-      aliasBtn.addEventListener('click', () => {
-        this.showAliases = !this.showAliases;
-        this._render();
-      });
-      bar.appendChild(aliasBtn);
-    }
-
-    // View switch. A two-way toggle button stopped working the moment there was a
-    // third view, so it is a segmented control.
-    const views = document.createElement('div');
-    views.className = 'explore-views';
-    for (const v of [
-      { id: 'rank', label: '📊 Rankings', title: 'Countries ranked by a dataset' },
-      { id: 'map', label: '🗺️ Map', title: 'The selected metric, shaded onto the world' },
-      { id: 'shapes', label: '✏️ Shapes', title: 'Every country outline, side by side' },
-      { id: 'coverage', label: '📋 Coverage', title: 'Show data coverage across all entities' },
-    ]) {
-      const b = document.createElement('button');
-      b.className = 'btn btn-tool' + (this.view === v.id ? ' active' : '');
-      b.textContent = v.label;
-      b.title = v.title;
-      b.setAttribute('aria-pressed', String(this.view === v.id));
-      b.addEventListener('click', () => {
-        if (this.view === v.id) return;
-        this.view = v.id;
-        this._render();
-      });
-      views.appendChild(b);
-    }
-    bar.appendChild(views);
-
-    // Rank this → (rank view only)
     if (rankView) {
       const playBtn = document.createElement('button');
       playBtn.className = 'btn btn-accent explore-play';
@@ -342,10 +294,6 @@ export class DataExplorer {
     return bar;
   }
 
-  _updateSortLabel() {
-    if (this._sortBtn) this._sortBtn.textContent = this.higherFirst ? '↓ High–Low' : '↑ Low–High';
-  }
-
   _renderList() {
     const list = this._listEl;
     if (!list) return;
@@ -353,7 +301,7 @@ export class DataExplorer {
 
     const ds = getDataset(this.datasetId);
     const entries = getEntries(this.datasetId, { continent: this.continent, higherFirst: this.higherFirst })
-      .filter((e) => inCountryPool(e.code));
+      .filter((e) => inCountryPool(e.code, this._pool()));
 
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
@@ -411,7 +359,7 @@ export class DataExplorer {
 
     const area = getDataset('land-area');
     const rows = getEntitiesList()
-      .filter((e) => inCountryPool(e) && (!this.continent || e.continent === this.continent));
+      .filter((e) => inCountryPool(e, this._pool()) && (!this.continent || e.continent === this.continent));
     if (this.shapeSort === 'area') {
       rows.sort((a, b) => (area?.values[b.code] ?? -1) - (area?.values[a.code] ?? -1));
     } else if (this.shapeSort === 'continent') {
@@ -421,7 +369,7 @@ export class DataExplorer {
       rows.sort((a, b) => seededRank(a.code, this._shuffleSeed) - seededRank(b.code, this._shuffleSeed));
     } // getEntitiesList() is already name-sorted
 
-    const grid = this.shapeLayout === 'grid';
+    const grid = this.view === 'grid';
     const size = grid ? GRID_THUMB_SIZE : THUMB_SIZE;
     const missing = rows.filter((e) => e.hasGeometry === false).length;
     const blurb = document.createElement('div');
@@ -524,7 +472,7 @@ export class DataExplorer {
       'land-area': 'Area', 'life-expectancy': 'Life', 'exports': 'Exp', 'urbanization': 'Urb',
     };
     let ents = getEntitiesList();
-    if (!getIncludeTerritories()) ents = ents.filter((e) => !e.optional);
+    if (!getExploreTerritories()) ents = ents.filter((e) => !e.optional);
     if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
 
     // "Complete" = the hard, playable data (shape + flag image + every metric).
