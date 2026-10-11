@@ -1,0 +1,44 @@
+scripts/serve.py
+  s_07a3d60f829d3a::t_a313de66a113dc 1-30
+js/main.js
+  s_07a3d60f829d3a::t_eebe2f059347cb 124-125
+  s_07a3d60f829d3a::t_58d7f6cc031532 706
+  s_07a3d60f829d3a::t_8f921c7dc6e711 711
+  s_07a3d60f829d3a::t_8a9790849b1107 178
+js/data-explorer.js
+  s_07a3d60f829d3a::t_864c47ecc25bf7 125-127
+  s_07a3d60f829d3a::t_fed7cdca5f6898 244-247,264-267
+  s_07a3d60f829d3a::t_d8022c81c2f657 95-96
+  s_07a3d60f829d3a::t_09647608d39d3b 170,174,182-191,240,384,387
+css/style.css
+  s_07a3d60f829d3a::t_09647608d39d3b 2588-2610
+  s_07a3d60f829d3a::t_fed7cdca5f6898 2779-2791
+js/explorer-map.js
+  s_07a3d60f829d3a::t_2cc06ec06426f6 76-91,93-94,189
+  s_07a3d60f829d3a::t_fed7cdca5f6898 92
+  s_07a3d60f829d3a::t_c596a92100e1ff 124,135-140,142-146,162-188,500
+  s_07a3d60f829d3a::t_09647608d39d3b 46,50,384-397
+  s_07a3d60f829d3a::t_53d131ef2deccc 190
+js/country-panel.js
+  s_07a3d60f829d3a::t_d8022c81c2f657 87-99
+package.json
+  s_07a3d60f829d3a::t_a313de66a113dc 14-15
+TODO.md
+  s_07a3d60f829d3a::t_18827a1f03e97d 1565-1600
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6c883b1819ec3860736a6b34888a3aa26f8c7adc",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
