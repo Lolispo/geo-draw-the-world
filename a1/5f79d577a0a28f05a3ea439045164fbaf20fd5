@@ -1,0 +1,19 @@
+docs/DATA.md
+  s_4c4d447dce4af2::t_b3a9c3212afc92 6,96-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a15f79d577a0a28f05a3ea439045164fbaf20fd5",
+  "prompts": {},
+  "sessions": {
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
