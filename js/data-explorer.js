@@ -376,6 +376,14 @@ export class DataExplorer {
       bar.appendChild(glyphs);
     }
 
+    // Coverage only: the whole point of this view is finding what is missing, and at
+    // 251 rows x 17 columns that is about a tenth of the table (TODOS #67).
+    if (this.view === 'coverage') {
+      bar.appendChild(this._pill('🕳️ Gaps only', this.gapsOnly,
+        'Hide the entities with nothing missing, and the columns with no gaps at all',
+        () => { this.gapsOnly = !this.gapsOnly; this._render(); }));
+    }
+
     bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
       'Include small dependent/autonomous territories here. The games keep their own setting.',
       () => { setExploreTerritories(!getExploreTerritories()); this._render(); }));
@@ -530,6 +538,53 @@ export class DataExplorer {
     list.appendChild(wrap);
   }
 
+  // The Colors column used to be a tick, which stopped meaning anything once every
+  // entity had colours (TODOS #55). It shows the curated colours themselves now, and
+  // checks them against the entity's own flag image — the question worth asking is no
+  // longer "are there any" but "are they right", and a wrong one is scored against in
+  // both colour quizzes.
+  //
+  // The check reads the image, so it runs only when the row is actually on screen and
+  // never blocks the table. A row that has not been checked yet simply shows its
+  // swatches: absence of a warning is not a claim.
+  _colorsCell(e) {
+    const td = document.createElement('td');
+    td.className = 'cov-cell cov-colors';
+    const colors = getFlagColors(e.code);
+    if (!colors || !colors.length) {
+      td.classList.add('no');
+      td.textContent = '✗';
+      return td;
+    }
+    for (const c of colors) {
+      const sw = document.createElement('span');
+      sw.className = 'cov-swatch';
+      sw.style.background = c;
+      sw.title = c;
+      td.appendChild(sw);
+    }
+    this._colorChecks.observe(td);
+    td._checkColors = async () => {
+      let found;
+      try { found = await readFlagColors(flagUrl(e.code, 'w320')); }
+      catch { return; }   // no image to check against: say nothing rather than warn
+      const missing = missingFromImage(colors, found);
+      if (!missing.length) return;
+      for (const sw of td.querySelectorAll('.cov-swatch')) {
+        if (missing.includes(sw.title)) sw.classList.add('cov-swatch--missing');
+      }
+      const warn = document.createElement('span');
+      warn.className = 'cov-colors-warn';
+      // Say which colour and why, rather than leaving a glyph to be decoded by hover.
+      warn.textContent = `⚠ ${missing.length === 1 ? 'not in flag' : missing.length + ' not in flag'}`;
+      warn.title = `${missing.join(', ')} ${missing.length === 1 ? 'is' : 'are'} not in this flag's image. `
+        + 'The ringed swatch is the one in question. Either the curated value is wrong, or it is a '
+        + 'detail too small for the reader to see — judge against the flag, which is what players see.';
+      td.appendChild(warn);
+    };
+    return td;
+  }
+
   _renderCoverage() {
     const list = this._listEl;
     if (!list) return;
@@ -540,33 +595,95 @@ export class DataExplorer {
       'gdp-nominal': 'GDP', 'population': 'Pop', 'gdp-per-capita': 'GDP/cap',
       'land-area': 'Area', 'life-expectancy': 'Life', 'exports': 'Exp', 'urbanization': 'Urb',
     };
+    // One description per column, so the header, the completeness maths and the cell all
+    // read the same definition instead of three parallel lists drifting apart.
+    const COLS = [
+      { key: 'hasGeometry', label: 'Geo', has: (e) => e.hasGeometry },
+      { key: 'hasFlagImage', label: 'Flag', has: (e) => e.hasFlagImage },
+      { key: 'hasFlag', label: 'Colors', has: (e) => e.hasFlag, cell: (e) => this._colorsCell(e) },
+      { key: 'hasCapital', label: 'Cap', has: (e) => e.hasCapital },
+      { key: 'hasReligion', label: 'Rel', has: (e) => e.hasReligion },
+      ...metrics.map((m) => ({
+        key: m.id, label: shortLabel[m.id] || m.name, has: (e) => !!e.metrics[m.id],
+      })),
+    ];
+
     let ents = getEntitiesList();
     if (!getExploreTerritories()) ents = ents.filter((e) => !e.optional);
     if (this.continent) ents = ents.filter((e) => e.continent === this.continent);
 
-    // "Complete" = the hard, playable data (shape + flag image + every metric).
-    // Colors / Capital / Religion are shown as extra columns but don't gate completeness.
-    const isComplete = (e) => e.hasGeometry && e.hasFlagImage && metrics.every((m) => e.metrics[m.id]);
-    const complete = ents.filter(isComplete).length;
+    const missingCount = (e) => COLS.reduce((n, c) => n + (c.has(e) ? 0 : 1), 0);
     const aggregates = ents.filter((e) => e.type === 'aggregate').length;
+    const totalRows = ents.length;
+    const complete = ents.filter((e) => missingCount(e) === 0).length;
+
+    // Gap mode drops what has nothing to say: entities with no gaps, and columns with no
+    // gap anywhere in the current selection. Both are measured over the rows actually in
+    // view, so narrowing by continent narrows the columns with it.
+    let cols = COLS;
+    if (this.gapsOnly) {
+      // Aggregates go first. `jg` Channel Islands is Jersey + Guernsey summed, already
+      // excluded from every pool in the app, and it has no geometry, flag or colours
+      // because it is not a place — counting that as a gap kept three complete columns
+      // on screen for one row nobody can act on.
+      ents = ents.filter((e) => e.type !== 'aggregate' && missingCount(e) > 0);
+      cols = COLS.filter((c) => ents.some((e) => !c.has(e)));
+    }
+
+    const sorted = this.covSort && cols.find((c) => c.key === this.covSort.key);
+    if (sorted) {
+      ents = [...ents].sort((a, b) => ((sorted.has(a) ? 1 : 0) - (sorted.has(b) ? 1 : 0)) * this.covSort.dir
+        || a.name.localeCompare(b.name));
+    }
 
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
-    blurb.textContent = `Coverage${this.continent ? ` · ${this.continent}` : ''} · ${ents.length} entities · ${complete} complete · ${ents.length - complete} incomplete · ${aggregates} aggregate`;
+    blurb.textContent = this.gapsOnly
+      ? `Gaps only${this.continent ? ` · ${this.continent}` : ''} · `
+        + `${ents.length} of ${totalRows} entities · ${cols.length} of ${COLS.length} columns · `
+        + `${complete} complete and ${aggregates} aggregate hidden`
+      : `Coverage${this.continent ? ` · ${this.continent}` : ''} · ${totalRows} entities · `
+        + `${complete} complete · ${totalRows - complete} incomplete · ${aggregates} aggregate`;
     list.appendChild(blurb);
 
     const legend = document.createElement('div');
     legend.className = 'explore-blurb cov-legend';
-    legend.textContent = 'Flag = image (flagcdn) \u00b7 Colors = the curated colors the color quizzes score against, checked against each flag image as you scroll \u2014 \u26a0 means a color was not found in it \u00b7 Cap = capital \u00b7 Rel = religion';
+    legend.textContent = 'Click a column heading to sort its gaps to the top · '
+      + 'Colors = the curated colors the color quizzes score against, checked against each '
+      + 'flag image as you scroll — ⚠ means a color was not found in it';
     list.appendChild(legend);
+
+    if (!ents.length) {
+      const none = document.createElement('div');
+      none.className = 'explore-blurb';
+      none.textContent = 'Nothing missing here — every entity in this selection is complete.';
+      list.appendChild(none);
+      return;
+    }
 
     const table = document.createElement('table');
     table.className = 'coverage-table';
 
-    const headCols = ['', 'Entity', 'Type', 'Geo', 'Flag', 'Colors', 'Cap', 'Rel', ...metrics.map((m) => shortLabel[m.id] || m.name)];
     const thead = document.createElement('thead');
     const htr = document.createElement('tr');
-    for (const h of headCols) { const th = document.createElement('th'); th.textContent = h; htr.appendChild(th); }
+    for (const h of ['', 'Entity', 'Type']) {
+      const th = document.createElement('th');
+      th.textContent = h;
+      htr.appendChild(th);
+    }
+    for (const col of cols) {
+      const th = document.createElement('th');
+      const active = this.covSort?.key === col.key;
+      th.textContent = active ? `${col.label} ${this.covSort.dir === 1 ? '▲' : '▼'}` : col.label;
+      th.className = 'is-sortable' + (active ? ' is-sorted' : '');
+      th.title = `Sort by ${col.label} — gaps first`;
+      th.addEventListener('click', () => {
+        // First click brings the gaps up, which is what the click is nearly always for.
+        this.covSort = { key: col.key, dir: active && this.covSort.dir === 1 ? -1 : 1 };
+        this._render();
+      });
+      htr.appendChild(th);
+    }
     thead.appendChild(htr);
     table.appendChild(thead);
 
@@ -580,7 +697,7 @@ export class DataExplorer {
     const tbody = document.createElement('tbody');
     for (const e of ents) {
       const tr = document.createElement('tr');
-      if (!isComplete(e)) tr.classList.add('incomplete');
+      if (missingCount(e) > 0) tr.classList.add('incomplete');
       if (e.type === 'aggregate') tr.classList.add('is-aggregate');
       tr.classList.add('is-clickable');
       tr.title = `View ${e.name}`;
@@ -603,7 +720,7 @@ export class DataExplorer {
       typeTd.className = 'cov-type';
       typeTd.textContent = e.type;
 
-      tr.append(flagTd, nameTd, typeTd, cell(e.hasGeometry), cell(e.hasFlagImage), this._colorsCell(e), cell(e.hasCapital), cell(e.hasReligion), ...metrics.map((m) => cell(e.metrics[m.id])));
+      tr.append(flagTd, nameTd, typeTd, ...cols.map((c) => (c.cell ? c.cell(e) : cell(c.has(e)))));
       tbody.appendChild(tr);
     }
     table.appendChild(tbody);

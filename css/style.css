@@ -2638,6 +2638,12 @@ canvas {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+/* Coverage: sortable headings. The gaps are what you are looking for, so the first
+   click on a column brings them up rather than pushing them down. */
+.coverage-table th.is-sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+.coverage-table th.is-sortable:hover { color: var(--accent); }
+.coverage-table th.is-sorted { color: var(--accent); }
+
 /* Coverage: curated flag colours, and the warning when one is not in the image. */
 .cov-colors { white-space: nowrap; line-height: 1; }
 .cov-swatch {
