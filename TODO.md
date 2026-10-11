@@ -60,6 +60,41 @@ app first — probably a health strip above the Coverage table. Nothing is lost 
 
 ---
 
+## 67. Coverage: sortable columns and a gaps-only view
+
+**REVIEW:** `#/explore/coverage?gaps=1&sort=exports` — opens straight into gap mode sorted
+by exports. Toggle **Gaps only** off and on: 251×17 becomes 84×13 with Territories on,
+30×11 with them off. Click any heading to pull that column's ✗ to the top, click again to
+reverse. Check the URL updates and that reloading it restores the same view. Also
+`#/explore/coverage` plain, to confirm the full board still reads as before.
+
+**✅ DONE 2026-10-11** — Measured first: 4,267 cells, 460 missing, 167 entities with
+nothing missing, 4 columns with no gap anywhere. So gap mode hides both — rows and
+columns — and the reduction is about three quarters.
+
+Aggregates drop out of gap mode before anything is measured: `jg` alone was keeping Geo,
+Flag and Colors on screen, because it has none of them, because it is not a place.
+
+Columns come from one table that the heading, the completeness maths and the cell all
+read, so a new column cannot be added to one and forgotten in the others.
+
+**Still open — the thing that decides whether this view stays useful.** Most of those 460
+gaps are probably *expected*: 55 missing independence years are mostly territories with no
+independence event, and 63 missing exports are states the World Bank does not publish at
+all (verified directly against the API for Nigeria, Jamaica, Jordan, Myanmar and PNG). If
+they never clear, the view becomes noise people stop opening.
+
+The owner's call (2026-10-11) was to ship the view first and classify afterwards, since
+nobody can say which gaps are expected before seeing them. When that happens, the design
+discussed was `data/known-gaps.json`: a few broad rules (`independence-year` is expected
+absent for `type: territory`) plus per-cell exceptions carrying their own reason, with
+`build-entities` warning when a declared gap has since been filled so the file cannot rot
+into a lie. Expected gaps would then render as a muted – with the reason on hover, and
+stop counting as incomplete — so a row that is only expected-missing leaves the gap view
+entirely.
+
+---
+
 ## 35. Draw the World: merge the sizing stage into placement
 
 **REVIEW:** play a few rounds of Draw the World (any region). After you finish a drawing you
