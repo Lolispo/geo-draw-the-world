@@ -1496,9 +1496,8 @@ ordering — a ramp that darkens as values rise makes the highest countries vani
 rises in both and ends vivid rather than washed white (chroma 0.22 → 0.78 → 0.46, luminance
 strictly increasing). The neutrals now separate from the bands by chroma rather than lightness.
 
-**Still open:** a microstate smaller than a pixel cannot be hovered at world zoom (honest, where
-the old behaviour was confidently wrong). A nearest-country-within-a-few-pixels fallback would
-make Andorra, Monaco and Liechtenstein reachable without zooming.
+**Closed by #68:** microstates smaller than a pixel are drawn as dots and hit within them, so
+Monaco, San Marino, Andorra and Liechtenstein are hoverable at world zoom.
 
 ---
 
