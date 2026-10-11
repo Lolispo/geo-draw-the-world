@@ -2207,6 +2207,16 @@ canvas {
    answer (owner, 2026-09-12). */
 /* `display: flex` below would otherwise beat the user-agent rule for [hidden], and the
    results toggle flips exactly that attribute (TODOS #59). */
+/* The misses sit outside the ladder's scroll box so they are visible in every input
+   style, not just the one whose layout happens to leave the ladder room. */
+.topn-misses {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.topn-misses:empty { display: none; }
+
 .topn-row[hidden] { display: none; }
 .topn-row {
   display: flex;

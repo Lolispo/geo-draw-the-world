@@ -339,6 +339,18 @@ export class WorldCanvas {
     this.viewScale = next;
   }
 
+  // The backing store is resized by the page (main.js `_sizeCanvases`), which clears
+  // the canvas — so without a redraw the map is simply black until something else
+  // triggers one (owner, 2026-10-11). A view that was still at the fitted framing
+  // refits to the new shape; one the player had zoomed keeps its zoom, re-clamped.
+  handleResize() {
+    if (this.canvas.style.display === 'none') return;
+    const fitted = Math.abs(this.viewScale - this._fitTransform().scale) < 1e-6;
+    if (fitted) this._fitView();
+    else this._zoomAbout(1, [this._cssW / 2, this._cssH / 2]);
+    this.render();
+  }
+
   _onWheel(e) {
     e.preventDefault();
     this._zoomAbout(e.deltaY > 0 ? 0.9 : 1.1, this._getCanvasPos(e));

@@ -10,12 +10,19 @@ import { traceRing, hidpiReset, fitBounds, multiPolygonBoundingBox } from './uti
 // that a linear ramp paints the entire world the lowest colour and calls it a map.
 const BANDS = 5;
 
-// Viridis' bright half. The dark end of the full ramp disappears into this app's
-// background, and a band you cannot see is not a band.
-const RAMP = ['#3b528b', '#21918c', '#35b779', '#90d743', '#fde725'];
-const NO_DATA = '#39414f';   // in scope, but the metric has no figure for it
-const OUT_OF_SCOPE = '#262c36'; // drawn so the world has no holes, never shaded
-const OCEAN = '#121720';
+// One hue, light to dark — the rule for a sequential scale. The old ramp ran
+// blue → teal → green → yellow, which nobody can order without reading the legend
+// first (owner, 2026-10-11); a single hue carries "more" in the colour itself. The
+// anchor flips on a dark surface: low recedes toward the background, high is bright.
+// Steps are a validated blue ramp (100–700), luminance strictly increasing.
+const RAMP = ['#256abf', '#3987e5', '#6da7ec', '#9ec5f4', '#cde2fb'];
+// Both neutrals are deliberately off-hue and spaced against the ramp's dark end:
+// "no figure" must never read as "lowest band". Measured contrast — lowest band vs
+// no-data 2.12, out-of-scope vs ocean 1.21; the two neutrals sit at 1.39 of each
+// other, which is close, but neither carries a value so they cannot be misread as one.
+const NO_DATA = '#333a45';      // in scope, but the metric has no figure for it
+const OUT_OF_SCOPE = '#1d222b'; // drawn so the world has no holes, never shaded
+const OCEAN = '#0b0e13';
 // How far in the map may be zoomed, as a multiple of the fitted view (TODOS #60).
 const MAX_ZOOM = 12;
 const BORDER = 'rgba(0,0,0,0.45)';

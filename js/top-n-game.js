@@ -578,11 +578,16 @@ export class TopNGame {
 
     // The ladder sits above whatever you pick with, in every style — it is the
     // running record of the round, and the pool below it is only the input.
+    // Same output in every style — board, then the misses — so a change to how a round
+    // reads lands in all three at once. Only the *input* differs, and only in where it
+    // sits: typing keeps its box at the top, where a phone keyboard cannot cover it.
     if (r.style === 'type') {
       panel.appendChild(this._renderTypeInput());
       panel.appendChild(this._renderLadder());
+      panel.appendChild(this._renderMisses());
     } else {
       panel.appendChild(this._renderLadder());
+      panel.appendChild(this._renderMisses());
       panel.appendChild(this._renderGrid());
     }
     panel.appendChild(this._renderUnranked());
@@ -868,8 +873,18 @@ export class TopNGame {
   _renderLadder() {
     const el = document.createElement('div');
     el.className = 'topn-ladder';
-    el.innerHTML = this._slotsHtml({ reveal: false, clickable: false }) +
-                   this._missesHtml({ clickable: false });
+    el.innerHTML = this._slotsHtml({ reveal: false, clickable: false });
+    return el;
+  }
+
+  // Its own block, outside the ladder's scroll box. Inside it, the misses sat below
+  // slot N and were never on screen in the card styles, where the grid squeezes the
+  // ladder — so the one list that shows every wrong answer was invisible exactly where
+  // you needed it (owner, 2026-10-11). Bounded by lives, so it never needs to scroll.
+  _renderMisses() {
+    const el = document.createElement('div');
+    el.className = 'topn-misses';
+    el.innerHTML = this._missesHtml({ clickable: false });
     return el;
   }
 

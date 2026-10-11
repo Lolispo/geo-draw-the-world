@@ -1273,6 +1273,69 @@ pressing one names it; the table layout is still there and unchanged.
 
 ---
 
+## 62. Resizing the window blanked every canvas
+
+**REVIEW:** `#/draw/daily` — play into the placement screen, resize the Chrome window, and the
+map should still be there. Same on the results screen and mid-drawing.
+
+**✅ DONE 2026-10-11** — `window.resize` called `_sizeCanvases()`, which sets `canvas.width`.
+Assigning that *clears the canvas*, and nothing redrew it, so the map was black until a zoom
+happened to trigger a render (owner, 2026-10-11).
+
+The resize handler now redraws what is on screen: the drawing canvas, both world canvases, and
+the compare canvas (whose last arguments are stashed for exactly this). `WorldCanvas.handleResize()`
+refits a view that was still at the fitted framing and re-clamps one the player had zoomed, so a
+resize neither throws away their zoom nor leaves it at an impossible scale for the new size.
+
+Verified with Playwright: placement and results canvases both still painted after shrinking and
+re-growing the window twice. No page errors.
+
+---
+
+## 63. One miss list for every input style
+
+**REVIEW:** `#/top10` with the cards or flags style — miss once and the **MISSED** row should be
+right there under the board, as it already was when typing.
+
+**✅ DONE 2026-10-11** — the misses were being rendered *inside* the ladder, which is a scroll
+box: below slot 10, off the bottom, invisible in the two card styles where the grid squeezes the
+ladder (owner, 2026-10-11: *"the missed section only shows the latest miss"*). The list was
+always complete in the DOM — measured at 1, 2, 3 after three wrong picks in both styles — it
+simply was not on screen.
+
+They are now their own block between the board and the input, bounded by lives so it never needs
+to scroll, built by the same `_missesHtml()` the results screen uses.
+
+**On the wider worry** — *"I'm worried the 3 input modes have different implementations of
+output"* — the board, the misses and the feedback strip already come from one builder each and
+are rendered by all three styles; this bug was a *layout* difference, not a second
+implementation. What legitimately differs is the input (a card grid vs a text box) and where it
+sits: typing keeps its box at the top so a phone keyboard cannot cover it. That is now said in
+the code rather than left to be rediscovered.
+
+**Still worth doing, not done here:** the card grid shows a pick's outcome a second time, in its
+own visual language (`.topn-card.is-hit/.is-miss` plus a rank chip). It is the input surface, so
+some difference is right, but a guard that each style renders the same output components would
+stop a future fix landing in one mode only.
+
+---
+
+## 64. Map colours: one hue, so higher and lower read without the legend
+
+**REVIEW:** `#/explore/map?metric=gdp-per-capita` — the pattern should be obvious before you
+read a single number.
+
+**✅ DONE 2026-10-11** — the ramp was viridis' bright half (blue → teal → green → yellow), which
+nobody can order without reading the legend first (owner, 2026-10-11: *"not very intuitive"*).
+A sequential scale is **one hue**, and on a dark surface the anchor flips: low recedes toward the
+background, high is bright. Five steps of a validated blue ramp, luminance strictly increasing.
+
+The two neutrals were re-picked against the new dark end, because "no figure" must never read as
+"lowest band": lowest band vs no-data measures 2.12, out-of-scope vs ocean 1.21. The legend now
+says the direction out loud — *darker = lower, brighter = higher*.
+
+---
+
 ### Related context
 - Multi-dataset / line-game design: `docs/superpowers/specs/2026-06-20-learning-explore-multidataset-design.md`
 - Rank line design: `docs/superpowers/specs/2026-06-20-rank-line-mode-design.md`

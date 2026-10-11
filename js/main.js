@@ -394,7 +394,14 @@ class Game {
     window.addEventListener('keydown', (e) => this._onKeyDown(e));
 
     // Resize canvases on window resize / orientation change
-    window.addEventListener('resize', () => this._sizeCanvases());
+    window.addEventListener('resize', () => {
+      this._sizeCanvases();
+      // Resizing the backing store clears it; whatever is on screen has to be redrawn.
+      this.drawingCanvas.render();
+      this.worldCanvas.handleResize();
+      this.resultsWorldCanvas.handleResize();
+      if (this.state === STATES.COMPARE && this._lastCompare) this._renderCompare(...this._lastCompare);
+    });
   }
 
   _onKeyDown(e) {
@@ -1001,6 +1008,7 @@ class Game {
   }
 
   _renderCompare(playerShape, refShape) {
+    this._lastCompare = [playerShape, refShape];   // so a resize can redraw it
     const canvas = document.getElementById('canvas-compare');
     const ctx = canvas.getContext('2d');
     const [w, h] = hidpiReset(canvas, ctx);
