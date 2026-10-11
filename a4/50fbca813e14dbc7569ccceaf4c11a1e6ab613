@@ -1,0 +1,44 @@
+js/data-explorer.js
+  s_07a3d60f829d3a::t_579332f817a4e4 72,175-184,249-251,257,338-343
+  s_4c4d447dce4af2::t_f4e70b9e08cbb0 77-81,93-95,121-126
+  s_07a3d60f829d3a::t_1e3dc8e88daa1a 100,344,361-365,367
+  s_4c4d447dce4af2::t_413aa3f4cd7302 345
+css/style.css
+  s_07a3d60f829d3a::t_1e3dc8e88daa1a 2583-2592
+js/main.js
+  s_07a3d60f829d3a::t_1e3dc8e88daa1a 142-143
+  s_4c4d447dce4af2::t_9c6ddf708fe614 705,710
+  s_4c4d447dce4af2::t_f4e70b9e08cbb0 124-125,178-179
+js/explorer-map.js
+  s_07a3d60f829d3a::t_f389beb0e7bdc1 286-289,294-298,302-307
+  s_07a3d60f829d3a::t_1fe150a8030f78 226-229,231-239,241-242,247,260-272,290-293
+  s_07a3d60f829d3a::t_d90d08dd5a7d50 240
+  s_07a3d60f829d3a::t_01ac543901b18c 37-42,102-104,108-109,115-136,140-144,434-437
+  s_07a3d60f829d3a::t_7cb9bcd5eeda09 438
+TODO.md
+  s_07a3d60f829d3a::t_c5cbba5ee0d94d 1486-1522
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a450fbca813e14dbc7569ccceaf4c11a1e6ab613",
+  "prompts": {},
+  "sessions": {
+    "s_07a3d60f829d3a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efda63ee-72a5-43de-b6b4-90472903c4cc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    },
+    "s_4c4d447dce4af2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e865185b-054f-4cab-b3fb-adf0b5ac9b82",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
