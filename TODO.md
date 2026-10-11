@@ -85,21 +85,30 @@ Flag and Colors on screen, because it has none of them, because it is not a plac
 Columns come from one table that the heading, the completeness maths and the cell all
 read, so a new column cannot be added to one and forgotten in the others.
 
-**Still open — the thing that decides whether this view stays useful.** Most of those 460
-gaps are probably *expected*: 55 missing independence years are mostly territories with no
-independence event, and 63 missing exports are states the World Bank does not publish at
-all (verified directly against the API for Nigeria, Jamaica, Jordan, Myanmar and PNG). If
-they never clear, the view becomes noise people stop opening.
+**✅ Expected gaps separated, 2026-10-11.** `build-datasets.mjs` records *why* each missing
+metric value is missing, because only the build saw what the source answered — "nobody has
+entered this" and "the source publishes nothing" are identical in the data and completely
+different jobs. **439 of 439 missing metric values turn out to be explained by their source.**
 
-The owner's call (2026-10-11) was to ship the view first and classify afterwards, since
-nobody can say which gaps are expected before seeing them. When that happens, the design
-discussed was `data/known-gaps.json`: a few broad rules (`independence-year` is expected
-absent for `type: territory`) plus per-cell exceptions carrying their own reason, with
-`build-entities` warning when a declared gap has since been filled so the file cannot rot
-into a lie. Expected gaps would then render as a muted – with the reason on hover, and
-stop counting as incomplete — so a row that is only expected-missing leaves the gap view
-entirely.
+The gap view therefore went from 84×13 to **20 rows × 2 columns** with territories on, and to
+a single row with them off: Saint Kitts and Nevis, missing a religion breakdown. That is the
+whole actionable gap in the standard country set.
 
+Explained gaps render as a muted `–` with the reason on hover and do not count as gaps for
+hiding or sorting; they stay visible on the full board so the write-offs can be audited. The
+reasons are evidence, not assumption — each names the source and what it did, and says
+*unavailable from the configured source*, never *unobtainable*: Taiwan's figures are absent
+from the World Bank and present in the manual backfill, and that distinction is the point.
+
+Getting there needed one fix of the same class as #52's: `parseIndependence` threw away
+"none (overseas department of France)", so 53 territories looked like nobody had got round to
+them when the Factbook had in fact answered. Ethiopia keeps a named exception — never
+colonised, so there is no event to record — because a rule would have to over-reach to cover
+one country, and over-reaching means silently writing off work that is doable.
+
+**What to watch:** everything being explained is the expected result today, not a permanent
+one. A new metric, or a source dropping a country, puts rows back. The reasons are rebuilt
+from scratch on every `build-datasets` run, so they cannot rot into a lie.
 ---
 
 ## 35. Draw the World: merge the sizing stage into placement
