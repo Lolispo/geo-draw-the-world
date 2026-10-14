@@ -290,6 +290,30 @@ one. A new metric, or a source dropping a country, puts rows back. The reasons a
 from scratch on every `build-datasets` run, so they cannot rot into a lie.
 ---
 
+## 76. Tweak mode loses scores after a skip
+
+**What:** Finishing Tweak mode rescores by position — `js/main.js:1342`,
+`this.scores = this.playerShapes.map((shape, i) => …)` reading `itemData[i]` and
+`referenceShapes[i]`. A skipped item pushes a score and a reference shape but **no** player
+shape, so from the first skip onward `playerShapes[i]` is a different country's drawing than
+`itemData[i]`. Two consequences: every drawing after the skip is rescored against the wrong
+country, and `this.scores` is replaced by an array as short as `playerShapes`, so the skipped
+row and the tail of the results table vanish.
+
+**Repro:** any mode with the Skip button and **Tweak mode** on — `#/draw/quick3`, draw item 1,
+skip item 2, draw item 3, then Finish out of the tweak stage.
+
+**Why it is still here:** pre-existing, found while building #58 and deliberately left alone
+there — #58 needed the drawing that belongs to a score, which it now carries as `score.drawn`,
+and that is the fix for this too. Rescoring should walk `this.scores`, use each row's own
+`drawn` shape and `code`, and leave a row without one untouched; `referenceShapes` can then be
+indexed by the score row rather than by the shape.
+
+**Acceptance:** with Tweak mode on and a skip in the middle, finishing the tweak stage leaves
+every row scored against its own country and the results table keeps every row it had before.
+
+---
+
 ## 35. Draw the World: merge the sizing stage into placement
 
 **REVIEW:** play a few rounds of Draw the World (any region). After you finish a drawing you
