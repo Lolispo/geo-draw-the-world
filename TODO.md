@@ -182,10 +182,40 @@ list of unfamiliar regions.
 wall, the country-panel section, and the Commons photo hotlinking. Only the data source
 changes.
 
-**Sourcing is the open question.** Wikidata has candidate signals — `tourist attraction`,
-`landmark`, and the sitelink-count fame measure #46 already uses — but "famous landmark" is
-not a property, so this needs a spike before a design: what defines the set, and how many per
-country.
+**Parked (owner, 2026-10-18)** after the sourcing spike below came back without a cheap
+answer. The UNESCO wall stays as the browsable thing until there is appetite for this.
+
+**Sourcing spike, 2026-10-18 — measured, so none of it needs repeating:**
+
+1. **No Wikidata class captures "landmark".** Checked the obvious ones: the Eiffel Tower is a
+   *lattice tower*, the Taj Mahal a *mausoleum*, Hagia Sophia a *mosque*, Big Ben a *belfry*,
+   Petra an *ancient city*, Mount Fuji a *stratovolcano*, the Golden Gate a *road bridge*.
+   `tourist attraction` (Q570116) has **115** members with a country — far too narrow.
+2. **`architectural landmark` (Q2319498, 70,896 members) has the right quality and useless
+   coverage.** At 45+ sitelinks it yields Eiffel Tower, Burj Khalifa, St Peter's, Al-Masjid
+   Al-Haram, Persepolis, Sydney Opera House, Brandenburg Gate, CN Tower, St Basil's — but only
+   **17 countries, 234 with none**, skewed to Russia 15 and Iran 7. France gets the Eiffel
+   Tower alone; no Notre-Dame, Louvre or Versailles. The class is applied inconsistently.
+3. **Fame separates landmarks cleanly** — Wikipedia language count is 88-191 for the landmarks
+   above and 2-5 for an ordinary church — **but fame alone returns the wrong things.** France's
+   most-linked items with coordinates are France, Paris, German, French, the Mediterranean,
+   Dutch, Swahili, Lyon…; the Eiffel Tower is **17th**. Any fame-first route needs exclusions
+   for settlements, administrative areas, languages, bodies of water and people.
+4. **The query service is the binding constraint.** WDQS 504s on: a global fame scan
+   (`sitelinks >= 90` + coordinates), any `P31/P279*` class walk, the `P297` ISO join over a
+   large set, and even a single-country query once a third pattern is added. It answers
+   two-pattern queries reliably and nothing more, so every route has to assemble results
+   locally from narrow queries — the same shape #46 ended up with.
+
+**The three routes, if this is picked up:** fame-per-country minus the non-places (~500 narrow
+queries, class-agnostic so nothing is missed for being filed oddly, exclusion list is the
+tuning knob, and a landmark that is also a settlement like Petra needs care); a union of 25-40
+concrete classes (predictable, but coverage follows Wikidata's uneven tagging — see 2); or a
+curated ~2,000 rows of bare QIDs, so only the *choice* is hand-made and name, photo and fame
+still come from Wikidata.
+
+**What is already built and waiting:** `js/heritage.js`'s `siteCard`, the `#/explore/heritage`
+wall, the country-panel section, and Commons photo hotlinking. Only the data source changes.
 
 ---
 
