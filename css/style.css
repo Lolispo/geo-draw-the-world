@@ -1789,6 +1789,12 @@ canvas {
   flex-direction: column;
   gap: 12px;
   align-items: stretch;
+  /* Inside a height:100% overflow:hidden screen, a list longer than the window is cut
+     off with no way to reach the end — the thirteenth dataset sat 187px below the fold
+     at every size (owner, 2026-10-18). min-height:0 lets the list below actually
+     shrink, which is what makes its own overflow take effect. */
+  flex: 1;
+  min-height: 0;
 }
 .rank-picker-head { display: flex; align-items: center; }
 .rank-picker h2 { text-align: center; font-size: 1.4rem; }
@@ -1801,6 +1807,10 @@ canvas {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: auto;
+  min-height: 0;
+  /* Clear of the scrollbar, so a long name is not underlined by it. */
+  padding-right: 2px;
 }
 .rank-picker-item {
   display: flex;
@@ -1845,6 +1855,8 @@ canvas {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-height: 0;
+  overflow-y: auto;
 }
 .topn-picker-head {
   display: flex;

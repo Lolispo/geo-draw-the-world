@@ -24,8 +24,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "ae": {
@@ -52,8 +51,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "af": {
@@ -80,8 +78,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ag": {
@@ -108,8 +105,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ai": {
@@ -138,8 +134,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "al": {
@@ -166,8 +161,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "am": {
@@ -194,8 +188,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ao": {
@@ -222,8 +215,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ar": {
@@ -250,8 +242,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "as": {
@@ -280,8 +271,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "at": {
@@ -308,8 +298,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "au": {
@@ -336,8 +325,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "aw": {
@@ -366,8 +354,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ax": {
@@ -396,8 +383,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "az": {
@@ -424,8 +410,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ba": {
@@ -452,8 +437,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bb": {
@@ -480,8 +464,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bd": {
@@ -508,8 +491,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "be": {
@@ -536,8 +518,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bf": {
@@ -564,8 +545,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bg": {
@@ -592,8 +572,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bh": {
@@ -620,8 +599,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bi": {
@@ -648,8 +626,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bj": {
@@ -676,8 +653,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bl": {
@@ -706,8 +682,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "bm": {
@@ -736,8 +711,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bn": {
@@ -764,8 +738,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bo": {
@@ -792,8 +765,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bq": {
@@ -822,8 +794,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "br": {
@@ -850,8 +821,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bs": {
@@ -878,8 +848,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bt": {
@@ -906,8 +875,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bw": {
@@ -934,8 +902,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "by": {
@@ -962,8 +929,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "bz": {
@@ -990,8 +956,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ca": {
@@ -1018,8 +983,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cc": {
@@ -1048,8 +1012,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "cd": {
@@ -1076,8 +1039,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cf": {
@@ -1104,8 +1066,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cg": {
@@ -1132,8 +1093,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ch": {
@@ -1160,8 +1120,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ci": {
@@ -1188,8 +1147,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ck": {
@@ -1218,8 +1176,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cl": {
@@ -1246,8 +1203,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cm": {
@@ -1274,8 +1230,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cn": {
@@ -1302,8 +1257,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "co": {
@@ -1330,8 +1284,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cr": {
@@ -1358,8 +1311,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cu": {
@@ -1386,8 +1338,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cv": {
@@ -1414,8 +1365,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cw": {
@@ -1444,8 +1394,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "cx": {
@@ -1474,8 +1423,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "cy": {
@@ -1502,8 +1450,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "cz": {
@@ -1530,8 +1477,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "de": {
@@ -1558,8 +1504,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "dj": {
@@ -1586,8 +1531,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "dk": {
@@ -1614,8 +1558,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "dm": {
@@ -1642,8 +1585,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "do": {
@@ -1670,8 +1612,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "dz": {
@@ -1698,8 +1639,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ec": {
@@ -1726,8 +1666,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ee": {
@@ -1754,8 +1693,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "eg": {
@@ -1782,8 +1720,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "eh": {
@@ -1811,8 +1748,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "er": {
@@ -1839,8 +1775,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "es": {
@@ -1867,8 +1802,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "et": {
@@ -1895,8 +1829,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "fi": {
@@ -1923,8 +1856,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "fj": {
@@ -1951,8 +1883,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "fk": {
@@ -1981,8 +1912,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "fm": {
@@ -2009,8 +1939,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "fo": {
@@ -2039,8 +1968,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "fr": {
@@ -2067,8 +1995,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ga": {
@@ -2095,8 +2022,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gb": {
@@ -2123,8 +2049,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gd": {
@@ -2151,8 +2076,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ge": {
@@ -2179,8 +2103,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gf": {
@@ -2209,8 +2132,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gg": {
@@ -2239,8 +2161,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "gh": {
@@ -2267,8 +2188,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gi": {
@@ -2297,8 +2217,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gl": {
@@ -2327,8 +2246,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gm": {
@@ -2355,8 +2273,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gn": {
@@ -2383,8 +2300,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gp": {
@@ -2413,8 +2329,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gq": {
@@ -2441,8 +2356,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gr": {
@@ -2469,8 +2383,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gs": {
@@ -2499,8 +2412,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "gt": {
@@ -2527,8 +2439,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gu": {
@@ -2557,8 +2468,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gw": {
@@ -2585,8 +2495,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "gy": {
@@ -2613,8 +2522,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "hk": {
@@ -2643,8 +2551,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "hn": {
@@ -2671,8 +2578,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "hr": {
@@ -2699,8 +2605,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ht": {
@@ -2727,8 +2632,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "hu": {
@@ -2755,8 +2659,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "id": {
@@ -2783,8 +2686,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ie": {
@@ -2811,8 +2713,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "il": {
@@ -2839,8 +2740,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "im": {
@@ -2869,8 +2769,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "in": {
@@ -2897,8 +2796,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "io": {
@@ -2927,8 +2825,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "iq": {
@@ -2955,8 +2852,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ir": {
@@ -2983,8 +2879,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "is": {
@@ -3011,8 +2906,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "it": {
@@ -3039,8 +2933,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "je": {
@@ -3069,8 +2962,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "jg": {
@@ -3097,8 +2989,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": false
+        "elec-renewable-pct": false
       }
     },
     "jm": {
@@ -3125,8 +3016,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "jo": {
@@ -3153,8 +3043,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "jp": {
@@ -3181,8 +3070,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ke": {
@@ -3209,8 +3097,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kg": {
@@ -3237,8 +3124,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kh": {
@@ -3265,8 +3151,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ki": {
@@ -3293,8 +3178,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "km": {
@@ -3321,8 +3205,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kn": {
@@ -3349,8 +3232,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kp": {
@@ -3377,8 +3259,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kr": {
@@ -3405,8 +3286,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kw": {
@@ -3433,8 +3313,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ky": {
@@ -3463,8 +3342,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "kz": {
@@ -3491,8 +3369,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "la": {
@@ -3519,8 +3396,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lb": {
@@ -3547,8 +3423,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lc": {
@@ -3575,8 +3450,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "li": {
@@ -3603,8 +3477,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "lk": {
@@ -3631,8 +3504,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lr": {
@@ -3659,8 +3531,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ls": {
@@ -3687,8 +3558,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lt": {
@@ -3715,8 +3585,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lu": {
@@ -3743,8 +3612,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "lv": {
@@ -3771,8 +3639,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ly": {
@@ -3799,8 +3666,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ma": {
@@ -3827,8 +3693,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mc": {
@@ -3855,8 +3720,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "md": {
@@ -3883,8 +3747,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "me": {
@@ -3911,8 +3774,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mf": {
@@ -3941,8 +3803,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "mg": {
@@ -3969,8 +3830,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mh": {
@@ -3997,8 +3857,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "mk": {
@@ -4025,8 +3884,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ml": {
@@ -4053,8 +3911,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mm": {
@@ -4081,8 +3938,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mn": {
@@ -4109,8 +3965,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mo": {
@@ -4139,8 +3994,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mp": {
@@ -4169,8 +4023,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "mq": {
@@ -4199,8 +4052,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mr": {
@@ -4227,8 +4079,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ms": {
@@ -4257,8 +4108,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mt": {
@@ -4285,8 +4135,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mu": {
@@ -4313,8 +4162,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mv": {
@@ -4341,8 +4189,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mw": {
@@ -4369,8 +4216,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mx": {
@@ -4397,8 +4243,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "my": {
@@ -4425,8 +4270,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "mz": {
@@ -4453,8 +4297,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "na": {
@@ -4481,8 +4324,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "nc": {
@@ -4511,8 +4353,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ne": {
@@ -4539,8 +4380,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "nf": {
@@ -4569,8 +4409,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "ng": {
@@ -4597,8 +4436,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ni": {
@@ -4625,8 +4463,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "nl": {
@@ -4653,8 +4490,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "no": {
@@ -4681,8 +4517,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "np": {
@@ -4709,8 +4544,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "nr": {
@@ -4737,8 +4571,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "nu": {
@@ -4767,8 +4600,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "nz": {
@@ -4795,8 +4627,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "om": {
@@ -4823,8 +4654,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pa": {
@@ -4851,8 +4681,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pe": {
@@ -4879,8 +4708,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pf": {
@@ -4909,8 +4737,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pg": {
@@ -4937,8 +4764,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ph": {
@@ -4965,8 +4791,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pk": {
@@ -4993,8 +4818,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pl": {
@@ -5021,8 +4845,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pm": {
@@ -5051,8 +4874,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pn": {
@@ -5081,8 +4903,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "pr": {
@@ -5111,8 +4932,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ps": {
@@ -5140,8 +4960,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pt": {
@@ -5168,8 +4987,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "pw": {
@@ -5196,8 +5014,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "py": {
@@ -5224,8 +5041,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "qa": {
@@ -5252,8 +5068,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "re": {
@@ -5282,8 +5097,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ro": {
@@ -5310,8 +5124,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "rs": {
@@ -5338,8 +5151,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ru": {
@@ -5366,8 +5178,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "rw": {
@@ -5394,8 +5205,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sa": {
@@ -5422,8 +5232,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sb": {
@@ -5450,8 +5259,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sc": {
@@ -5478,8 +5286,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sd": {
@@ -5506,8 +5313,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "se": {
@@ -5534,8 +5340,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sg": {
@@ -5562,8 +5367,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sh": {
@@ -5592,8 +5396,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "si": {
@@ -5620,8 +5423,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sj": {
@@ -5650,8 +5452,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "sk": {
@@ -5678,8 +5479,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sl": {
@@ -5706,8 +5506,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sm": {
@@ -5734,8 +5533,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "sn": {
@@ -5762,8 +5560,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "so": {
@@ -5790,8 +5587,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sr": {
@@ -5818,8 +5614,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ss": {
@@ -5846,8 +5641,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "st": {
@@ -5874,8 +5668,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sv": {
@@ -5902,8 +5695,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sx": {
@@ -5932,8 +5724,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "sy": {
@@ -5960,8 +5751,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "sz": {
@@ -5988,8 +5778,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tc": {
@@ -6018,8 +5807,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "td": {
@@ -6046,8 +5834,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tf": {
@@ -6076,8 +5863,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "tg": {
@@ -6104,8 +5890,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "th": {
@@ -6132,8 +5917,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tj": {
@@ -6160,8 +5944,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tk": {
@@ -6190,8 +5973,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "tl": {
@@ -6218,8 +6000,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tm": {
@@ -6246,8 +6027,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tn": {
@@ -6274,8 +6054,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "to": {
@@ -6302,8 +6081,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tr": {
@@ -6330,8 +6108,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tt": {
@@ -6358,8 +6135,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tv": {
@@ -6386,8 +6162,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "tw": {
@@ -6414,8 +6189,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "tz": {
@@ -6442,8 +6216,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ua": {
@@ -6470,8 +6243,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ug": {
@@ -6498,8 +6270,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "us": {
@@ -6526,8 +6297,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "uy": {
@@ -6554,8 +6324,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "uz": {
@@ -6582,8 +6351,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "va": {
@@ -6610,8 +6378,7 @@
         "independence-year": true,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "vc": {
@@ -6638,8 +6405,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "ve": {
@@ -6666,8 +6432,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "vg": {
@@ -6696,8 +6461,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "vi": {
@@ -6726,8 +6490,7 @@
         "independence-year": false,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "vn": {
@@ -6754,8 +6517,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "vu": {
@@ -6782,8 +6544,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "wf": {
@@ -6812,8 +6573,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "ws": {
@@ -6840,8 +6600,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "xa": {
@@ -6871,8 +6630,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "xc": {
@@ -6902,8 +6660,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "xk": {
@@ -6930,8 +6687,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "xo": {
@@ -6961,8 +6717,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "xs": {
@@ -6989,8 +6744,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "xt": {
@@ -7020,8 +6774,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "ye": {
@@ -7048,8 +6801,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "yt": {
@@ -7078,8 +6830,7 @@
         "independence-year": false,
         "elec-nuclear-pct": false,
         "elec-coal-pct": false,
-        "elec-renewable-pct": false,
-        "heritage-sites": true
+        "elec-renewable-pct": false
       }
     },
     "za": {
@@ -7106,8 +6857,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "zm": {
@@ -7134,8 +6884,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     },
     "zw": {
@@ -7162,8 +6911,7 @@
         "independence-year": true,
         "elec-nuclear-pct": true,
         "elec-coal-pct": true,
-        "elec-renewable-pct": true,
-        "heritage-sites": true
+        "elec-renewable-pct": true
       }
     }
   }

@@ -142,13 +142,50 @@ Territories: On, and one, the Old City of Jerusalem, carries no ISO code in UNES
   exist — it dates Machu Picchu to **1981**. A blank beats a confident wrong year. The
   inscription year stays in the data, unrendered, for anything later that wants it.
 
-**Still deferred:** anything quiz-shaped — "which country is this site in" — now that the
-data to build it exists.
+**The count was then cut (owner, 2026-10-18):** *"world heritage sites amount need
+cleansing, we dont want that feature."* A tally of sites is not something anyone wants to
+rank countries by, and it padded every dataset picker to thirteen. `heritage-sites` is gone
+from the Explorer metric list, the Map, Rank the World, Top 10, the Coverage column and the
+country panel's stat grid. The **sites themselves stay** — the wall and the panel section —
+because they may be repointed at landmark data (#78).
+
+**Still deferred:** anything quiz-shaped — "which country is this site in".
 
 **Acceptance:** ✅ Sites-per-country is selectable in the Data Explorer and playable in Rank
 the World and Top 10 (both verified; the dataset pipeline picked them up with no extra
 work). The top ten match UNESCO's published figures. The build either produces the real
 list or fails loudly.
+
+---
+
+## 78. Famous landmarks, not World Heritage sites
+
+**What:** A landmarks dataset to replace UNESCO sites as the thing you browse per country —
+the Eiffel Tower, the Colosseum, Christ the Redeemer — reusing the wall, the site card and
+the country-panel section that #46 already built.
+
+**Why:** Owner, 2026-10-18, after browsing the UNESCO wall: *"im more interesting in
+landmarks than unesco sites probably. I suggest this is the next one we look at fixing."*
+
+**The concrete reason UNESCO cannot be it.** UNESCO inscribes *areas*, not landmarks, so
+roughly half of what a person pictures is not in the list under its own name. Checked:
+
+| Not an entry of its own | Is an entry |
+|---|---|
+| Eiffel Tower, Colosseum, Pyramids, Hagia Sophia, Christ the Redeemer, Sagrada Família, Big Ben, Mount Fuji, Niagara, Golden Gate, Burj Khalifa | Stonehenge, Taj Mahal, Petra, Acropolis, Great Wall, Machu Picchu, Statue of Liberty |
+
+The Eiffel Tower is inside *Paris, Banks of the Seine*; the Colosseum inside *Historic Centre
+of Rome*; Hagia Sophia inside *Historic Areas of Istanbul*. That is why the wall reads as a
+list of unfamiliar regions.
+
+**What carries over, unchanged:** `js/heritage.js`'s `siteCard`, the `#/explore/heritage`
+wall, the country-panel section, and the Commons photo hotlinking. Only the data source
+changes.
+
+**Sourcing is the open question.** Wikidata has candidate signals — `tourist attraction`,
+`landmark`, and the sitelink-count fame measure #46 already uses — but "famous landmark" is
+not a property, so this needs a spike before a design: what defines the set, and how many per
+country.
 
 ---
 
