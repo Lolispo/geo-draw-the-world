@@ -16,7 +16,9 @@ him. What is specific to this repo:
 ```
 #/                                        menu
 #/draw                                    Draw the World menu
-#/draw/<daily|quick3|famous5|speed|streak|continents|world|africa|…>
+#/draw/<daily|quick3|famous5|speed|streak|continents|world|freestyle|africa|…>
+#/draw/country/<code>[,<code>…]           draw exactly these, in this order
+#/draw/…?puzzle|shapeonly|tweak|blind|explorer|hard|territories=1|0
 #/top10                                   Top 10 / Bottom 10 picker
 #/rank[/<datasetId>]                      Rank the World
 #/flags  #/flag-picker                    the two flag games
@@ -24,6 +26,13 @@ him. What is specific to this repo:
 #/scores                                  Your Scores
 #/country/<code>                          menu with that country's panel open
 ```
+
+`#/draw/country/` takes any code in `data/shapes/`, territories included — naming a code is
+the request, so the pool rule does not apply. Unknown codes drop out of the list and out of the
+address bar; if none resolve you get the draw menu. The toggle parameters do exactly what the
+menu buttons do, including persisting Territories, and a draw URL is rewritten to carry whatever
+toggles are on — so a toggle left on from an earlier link follows you until something turns it
+off. Spell out `=0` in a link that needs one off.
 
 Unknown routes, views and continents fall back rather than rendering blank. The app writes its
 own URL with `history.replaceState`, which fires neither `hashchange` nor `popstate` — so there

@@ -1,7 +1,7 @@
 // Main game controller
 
 import {
-  loadContinentData, loadCountryData, loadAllCountries, getDailyCountry,
+  loadContinentData, loadCountryData, loadAllCountries, loadWorldOutlines, getDailyCountry,
   getContinentOrder, getContinentByName, getContinentPolygons,
   createReferenceShape, createAllReferenceShapes, createCountryReferenceShapes,
   getCountryRegions, shuffleArray, getLargestCountries
@@ -37,6 +37,34 @@ const DRAW_ROUTES = {
   continents: 'startContinents',
   world: 'startWorld',
   freestyle: 'startFreestyle',
+};
+
+// Every draw toggle, in one place, so the menu button and the URL parameter cannot come
+// to mean different things (TODOS #77). `clears` is the toggle this one switches off:
+// Placement Only and Shape Only are alternatives, not a pair you can have both of.
+// The share text and the results header both name the mode; two copies of the same list
+// is how they end up disagreeing.
+const MODE_LABELS = {
+  continents: 'Continents',
+  world: 'World',
+  daily: 'Daily',
+  quick3: 'Quick 3',
+  famous5: 'Famous 5',
+  speed: 'Speed Round',
+  streak: 'Streak',
+  freestyle: 'Freestyle',
+};
+
+const DRAW_TOGGLES = {
+  puzzle: { prop: 'puzzleMode', badge: '_updatePuzzleBadge', clears: 'shapeonly' },
+  shapeonly: { prop: 'shapeOnlyMode', badge: '_updateShapeOnlyBadge', clears: 'puzzle' },
+  tweak: { prop: 'tweakMode', badge: '_updateTweakBadge' },
+  blind: { prop: 'blindMode', badge: '_updateBlindBadge' },
+  explorer: { prop: 'explorerMode', badge: '_updateExplorerBadge' },
+  hard: { prop: 'hardMode', badge: '_updateHardBadge' },
+  // Persisted, unlike the rest — so a link carrying it changes the saved setting, which
+  // is what the owner asked for (2026-10-18) over a one-shot override.
+  territories: { setting: true, badge: '_updateTerritoriesBadge' },
 };
 
 const STATES = {
@@ -172,6 +200,13 @@ class Game {
     switch (head) {
       case 'draw':
         if (!sub) { this.openDrawMenu(); return; }
+        // Before the mode starts: _startGame() reads these.
+        this._applyToggleParams(params);
+        if (sub === 'country') {
+          if (segments[2]) { this.startCountryList(segments[2]); return; }
+          this.openDrawMenu();
+          return;
+        }
         if (DRAW_ROUTES[sub]) { this[DRAW_ROUTES[sub]](); return; }
         if (getCountryRegions().some((r) => r.file === sub)) { this.startCountries(sub); return; }
         this.openDrawMenu();
@@ -200,6 +235,46 @@ class Game {
     }
   }
 
+  _drawToggle(key) {
+    const t = DRAW_TOGGLES[key];
+    return t.setting ? getIncludeTerritories() : !!this[t.prop];
+  }
+
+  _setDrawToggle(key, on) {
+    const t = DRAW_TOGGLES[key];
+    if (!t) return;
+    if (t.setting) setIncludeTerritories(on);
+    else this[t.prop] = on;
+    if (on && t.clears) {
+      const other = DRAW_TOGGLES[t.clears];
+      this[other.prop] = false;
+      this[other.badge]();
+    }
+    this[t.badge]();
+  }
+
+  // Toggles named in a draw URL are applied as if the button had been pressed — the
+  // review link for a bug that only happens in Tweak mode has to be able to turn Tweak
+  // mode on, or it is not a link to the bug (TODOS #77). Absent parameters are left
+  // alone; `=0` turns one off.
+  _applyToggleParams(params) {
+    for (const key of Object.keys(DRAW_TOGGLES)) {
+      const raw = params.get(key);
+      if (raw === null) continue;
+      this._setDrawToggle(key, raw !== '0' && raw !== 'false');
+    }
+  }
+
+  _modeLabel() {
+    if (this.gameMode === 'country-list') {
+      return this.itemData.length === 1
+        ? this.itemData[0].name
+        : `${this.itemData.length} chosen countries`;
+    }
+    return MODE_LABELS[this.gameMode]
+      || this.gameMode.replace('countries-', '').replace(/-/g, ' ');
+  }
+
   _applyGhosts() {
     this.worldCanvas.showGhosts = this.devMode;
     const b = document.getElementById('btn-ghosts-placing');
@@ -213,8 +288,24 @@ class Game {
     this.worldCanvas.render();
   }
 
+  // Every draw URL carries the toggles that are on, because a mode writes its own route
+  // as it starts and would otherwise erase the ones the link just set — the address bar
+  // would then describe a round that is not the one being played, and a reload would
+  // quietly drop them (TODOS #77).
+  //
+  // Territories is left out: it is persisted, so it survives a reload on its own, and
+  // stamping it onto every draw URL is noise. A link carrying it is still honoured.
   _route(segments, params) {
-    writeRoute(segments, params);
+    const extra = segments[0] === 'draw' ? this._activeToggleParams() : null;
+    writeRoute(segments, extra ? { ...extra, ...params } : params);
+  }
+
+  _activeToggleParams() {
+    const out = {};
+    for (const [key, t] of Object.entries(DRAW_TOGGLES)) {
+      if (!t.setting && this[t.prop]) out[key] = '1';
+    }
+    return out;
   }
 
   _sizeCanvases() {
@@ -323,49 +414,10 @@ class Game {
       if (btn) btn.addEventListener('click', () => this.startCountries(region.file));
     }
 
-    // Puzzle mode toggle
-    document.getElementById('btn-puzzle-toggle').addEventListener('click', () => {
-      this.puzzleMode = !this.puzzleMode;
-      if (this.puzzleMode) { this.shapeOnlyMode = false; this._updateShapeOnlyBadge(); }
-      this._updatePuzzleBadge();
-    });
-
-    // Shape-only mode toggle (skip sizing & placement; score shape alone)
-    document.getElementById('btn-shapeonly-toggle').addEventListener('click', () => {
-      this.shapeOnlyMode = !this.shapeOnlyMode;
-      if (this.shapeOnlyMode) { this.puzzleMode = false; this._updatePuzzleBadge(); }
-      this._updateShapeOnlyBadge();
-    });
-
-    // Tweak mode toggle
-    document.getElementById('btn-tweak-toggle').addEventListener('click', () => {
-      this.tweakMode = !this.tweakMode;
-      this._updateTweakBadge();
-    });
-
-    // Blind mode toggle
-    document.getElementById('btn-blind-toggle').addEventListener('click', () => {
-      this.blindMode = !this.blindMode;
-      this._updateBlindBadge();
-    });
-
-    // Explorer mode toggle
-    document.getElementById('btn-explorer-toggle').addEventListener('click', () => {
-      this.explorerMode = !this.explorerMode;
-      this._updateExplorerBadge();
-    });
-
-    // Hard mode toggle
-    document.getElementById('btn-hard-toggle').addEventListener('click', () => {
-      this.hardMode = !this.hardMode;
-      this._updateHardBadge();
-    });
-
-    // Territories toggle (TODOS #20) — persisted; affects the country pool on next start
-    document.getElementById('btn-territories-toggle').addEventListener('click', () => {
-      setIncludeTerritories(!getIncludeTerritories());
-      this._updateTerritoriesBadge();
-    });
+    for (const key of Object.keys(DRAW_TOGGLES)) {
+      const btn = document.getElementById(`btn-${key}-toggle`);
+      if (btn) btn.addEventListener('click', () => this._setDrawToggle(key, !this._drawToggle(key)));
+    }
     this._updateTerritoriesBadge();
 
     // Drawing
@@ -663,6 +715,35 @@ class Game {
     this._freestylePanel.show(polygons, { title: 'Your shape looks most like' });
   }
 
+  // Draw exactly these countries, in this order (TODOS #77). The point is reaching a
+  // country you otherwise cannot: Vatican City or the Maldives are one row of 197 in
+  // World, so checking how they score meant skipping past two hundred others. An
+  // explicit list ignores the territories pool rule — naming a code IS the request.
+  async startCountryList(raw) {
+    const codes = String(raw).split(',').map((c) => c.trim().toLowerCase()).filter(Boolean);
+    this.gameMode = 'country-list';
+    this._currentRegion = 'country-list';
+
+    document.getElementById('prompt-name').textContent = 'Loading...';
+    this.showScreen(STATES.PROMPT);
+
+    const all = await loadWorldOutlines();
+    const byCode = new Map(all.map((c) => [c.code, c]));
+    const picked = codes.map((c) => byCode.get(c)).filter(Boolean);
+    if (!picked.length) { this.openDrawMenu(); return; }
+
+    // The URL is rewritten from what actually resolved, so a typo'd code drops out of
+    // the address bar rather than sitting there looking like it played.
+    this._countryList = picked.map((c) => c.code).join(',');
+    this._route(['draw', 'country', this._countryList]);
+
+    this._regionBounds = null;
+    this.itemData = picked;                       // not shuffled: the URL gives the order
+    this.itemOrder = picked.map((c) => c.name);
+    this._allRefShapes = all.map((c) => createReferenceShape(c));
+    this._startGame();
+  }
+
   async startSpeedRound() {
     this._route(['draw', 'speed']);
     this.gameMode = 'speed';
@@ -783,6 +864,7 @@ class Game {
     else if (this.gameMode === 'quick3') this.startQuick3();
     else if (this.gameMode === 'famous5') this.startFamous5();
     else if (this.gameMode === 'freestyle') this.startFreestyle();
+    else if (this.gameMode === 'country-list') this.startCountryList(this._countryList);
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
     else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
@@ -1405,15 +1487,7 @@ class Game {
       return '🟥';
     };
 
-    const modeName = {
-      'continents': 'Continents',
-      'world': 'World',
-      'daily': 'Daily',
-      'quick3': 'Quick 3',
-      'famous5': 'Famous 5',
-      'speed': 'Speed Round',
-      'streak': 'Streak',
-    }[this.gameMode] || this.gameMode.replace('countries-', '').replace(/-/g, ' ');
+    const modeName = this._modeLabel();
 
     let lines = [`Know the World — ${modeName}`];
 
@@ -1666,16 +1740,7 @@ class Game {
       const blindSuffix = this.blindMode ? ' (Blind)' : '';
       const hardSuffix = this.hardMode ? ' (Hard)' : '';
       const explorerSuffix = this.explorerMode ? ' (Explorer)' : '';
-      const modeName = {
-        'continents': 'Continents',
-        'world': 'World',
-        'daily': 'Daily',
-        'quick3': 'Quick 3',
-        'famous5': 'Famous 5',
-        'speed': 'Speed Round',
-        'streak': 'Streak',
-      }[this.gameMode] || this.gameMode.replace('countries-', '').replace(/-/g, ' ');
-      modeLabel.textContent = modeName + suffix + blindSuffix + hardSuffix + explorerSuffix;
+      modeLabel.textContent = this._modeLabel() + suffix + blindSuffix + hardSuffix + explorerSuffix;
     }
   }
 }

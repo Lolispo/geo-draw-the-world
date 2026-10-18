@@ -17,6 +17,56 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
+## 77. Reach any country, and any toggle, from a URL
+
+**REVIEW:** `#/draw/country/va` — Vatican City, straight into a round, no skipping past 196
+others. `#/draw/country/mv,ki,mh,fm,pw,tv,sc` plays the seven atoll nations from #73 in order.
+`#/draw/quick3?tweak=1` starts Quick 3 with Tweak mode already on — which is what #76 needs to
+be reproducible. Check the address bar keeps the toggles as you play, and that a reload
+reproduces the same round.
+
+**✅ DONE 2026-10-18.**
+
+**What:** `#/draw/country/<code>[,<code>…]` plays exactly those countries in that order, and any
+draw route takes `puzzle`, `shapeonly`, `tweak`, `blind`, `explorer`, `hard` and `territories`
+as `=1`/`=0` parameters.
+
+**Why:** Owner, 2026-10-18: *"is there some query params lacking / game mode missing that would
+help with specific reviews? like drawing vatican, are we lacking ability to draw a specific
+country from url?"* Yes, on both counts. Reviewing #73 meant asking whether the Maldives and
+Vatican City score properly, and both are one row of 197 in World — unreachable in practice. And
+#76 only happens in Tweak mode, which no URL could switch on, so the entry had no link that
+reproduced it.
+
+**Decided (owner, 2026-10-18):** toggle parameters do exactly what pressing the menu button
+does, **including persisting Territories** — chosen over a one-shot override that restores your
+settings afterwards. The consequence is that a review link carrying `territories=1` rewrites the
+saved setting, and a toggle left on by one link follows you to the next; a link that needs one
+off has to say `=0`.
+
+**How it came out:**
+- The seven near-identical toggle handlers collapsed into one `DRAW_TOGGLES` table with
+  `_setDrawToggle()`, so the button and the parameter cannot come to mean different things.
+  Placement Only and Shape Only still clear each other, in one place rather than two.
+- **A draw route now carries its active toggles.** Each mode writes its own URL as it starts,
+  which erased the parameters the link had just set: the game was in Tweak mode while the
+  address bar said plain `#/draw/quick3`, and a reload silently dropped it. Caught by a test
+  that reloaded the page — the first version looked fine without that step.
+- Commas survive `formatRoute` (`js/router.js`): `%2Cki%2Cmh` is not a URL anyone can edit.
+- An explicit list reads `loadWorldOutlines()`, so it ignores the territories pool rule —
+  `#/draw/country/gi` gives Gibraltar whether or not the toggle is on. Verified.
+- Territories is deliberately **not** stamped onto every draw URL: it is persisted, so it
+  survives a reload by itself, and writing it everywhere is noise.
+
+**What it immediately showed.** `#/draw/country/va` scores 71 shape / 0 size / 81 placement =
+53, which is #73's Vatican diagnosis made visible in one click instead of taken on trust.
+
+**Acceptance:** ✅ A named country or list of countries plays from a URL in the order given;
+toggles apply from the URL and stay in the address bar across a round and a reload; unknown
+codes fall back to the draw menu rather than a blank screen.
+
+---
+
 ## 58. Results: which countries your shape actually matched best
 
 **REVIEW:** `#/draw/daily` — play a round through to the results screen. A rail down the left

@@ -15,11 +15,16 @@ export function readRoute() {
   };
 }
 
+// Commas survive encoding: a comma is a legal sub-delimiter in a path segment, and
+// "#/draw/country/mv,tv,sc" is a URL someone can type or edit by hand, which
+// "%2Ctv%2Csc" is not (TODOS #77).
+const encodeSegment = (s) => encodeURIComponent(s).replace(/%2C/g, ',');
+
 export function formatRoute(segments, params = {}) {
   const q = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v != null && v !== ''),
   ).toString();
-  return `#/${segments.filter(Boolean).map(encodeURIComponent).join('/')}${q ? `?${q}` : ''}`;
+  return `#/${segments.filter(Boolean).map(encodeSegment).join('/')}${q ? `?${q}` : ''}`;
 }
 
 // Replaces rather than pushes by default: switching the Explorer's view is not a page
