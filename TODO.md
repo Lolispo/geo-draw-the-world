@@ -55,12 +55,12 @@ layout shift when it's missing; no non-free emblem bundled into the repo.
 
 ## 46. UNESCO World Heritage sites per country
 
-**REVIEW:** `#/explore/rank?metric=heritage-sites` — the ranking. Top should read Italy 62,
-China 61, France 56, Germany 55, Spain 50, India 45, Mexico 36, UK 35. Check a few against
-UNESCO's own figures. Then `#/rank/heritage-sites` to play a round of Rank the World on it,
-and `#/top10` where it is now one of the datasets. On `#/explore/coverage` the **World
-Heritage sites** column should be ticked for everyone including countries with none — a zero
-is a real zero.
+**REVIEW:** `#/explore/heritage` — a wall of 1266 site photographs, most-written-about first.
+`#/country/gb` — the United Kingdom's panel now lists Stonehenge, Bath and the Tower of London
+with photos, five shown and 35 behind one press. `#/explore/rank?metric=heritage-sites` for
+the count as a ranking (Italy 62, China 61, Spain 50, UK 35), playable at `#/rank/heritage-sites`
+and in `#/top10`. On `#/explore/coverage` the **World Heritage sites** column is ticked for
+everyone including the 78 countries with none — a zero is a real zero.
 
 **✅ DONE 2026-10-18.**
 
@@ -104,9 +104,32 @@ about really are dead:**
   exactly, and everything else sits +1 to +3, which is the 2025 and 2026 inscriptions this
   list includes.
 
-**Phase 2 (deferred, unchanged):** the famous sites themselves — a curated ~20-50 with a
-name and the country, shown in the country panel, and the seed for a "which country is
-this site in" round.
+**Phase 2 landed the same day, because the count alone was not worth having.** Owner on
+seeing it (2026-10-18): *"how i browse the unesco sites? just a number? … i expect to
+basically have like 'stone henge' in UK when i press preview."* Right — a rankable integer is
+not something you can browse. So the data now carries **every site by name**, not a curated
+subset:
+- `data/heritage.json` holds all 1273 sites per country with name, category, year, and a
+  Commons photo for **1265 of 1378** country-site entries (91%).
+- **UNESCO's own photographs were unusable** — they live on `whc.unesco.org/document/NNNN`,
+  behind the same Cloudflare wall as the XML, 403 to everything. Wikidata P18, keyed on the
+  UNESCO site id, supplies Commons-hosted ones that hotlink like the flags and emblems do.
+- **Famous first**, by how many Wikipedia languages cover the site (`wikibase:sitelinks`).
+  That is what makes pressing the United Kingdom show *Stonehenge* rather than *The Flow
+  Country*, which was inscribed most recently. Venice leads Italy, the Alhambra is second for
+  Spain. It is a proxy and an imperfect one — it puts Ibiza first for Spain — but it gets the
+  top of each list right, which is the job.
+- **Decided (owner, 2026-10-18):** both surfaces. A section in the country panel, five shown
+  with the rest behind one press (Italy has 62), **and** `#/explore/heritage`, a wall of every
+  site as a photo tile, filterable by continent, where pressing a tile opens its country. Both
+  draw with one `siteCard` in `js/heritage.js` so they cannot drift apart.
+
+**Counting notes:** the wall shows 1266 of 1273 — six are Palestine's and appear with
+Territories: On, and one, the Old City of Jerusalem, carries no ISO code in UNESCO's own data
+("Site proposed by Jordan") and so belongs to no country here.
+
+**Still deferred:** anything quiz-shaped — "which country is this site in" — now that the
+data to build it exists.
 
 **Acceptance:** ✅ Sites-per-country is selectable in the Data Explorer and playable in Rank
 the World and Top 10 (both verified; the dataset pipeline picked them up with no extra

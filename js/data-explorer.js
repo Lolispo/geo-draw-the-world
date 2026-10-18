@@ -11,6 +11,7 @@ import { ExplorerMap } from './explorer-map.js';
 import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl, emblemFile } from './emblems.js';
+import { loadHeritage, allSites, siteCard } from './heritage.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
 
 
@@ -35,6 +36,7 @@ const VIEWS = [
   { id: 'rank', label: '📊 Rankings' },
   { id: 'map', label: '🗺️ Map' },
   { id: 'shapes', label: '🧩 Shapes' },
+  { id: 'heritage', label: '🏛️ Heritage' },
   { id: 'coverage', label: '📋 Coverage' },
 ];
 
@@ -95,7 +97,7 @@ export class DataExplorer {
     await loadFlagColors();
     // The Coverage health strip asks cross-file questions, so it needs the files the
     // rank views never touch.
-    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems()]);
+    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage()]);
     this._loaded = true;
   }
 
@@ -121,6 +123,8 @@ export class DataExplorer {
     this._mapResize?.disconnect();
     this._mapResize = null;
     c.innerHTML = '';
+    // A wall of photographs wants the screen; 720px of it is three tiles across.
+    c.classList.toggle('is-wide', this.view === 'heritage');
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
@@ -143,6 +147,7 @@ export class DataExplorer {
   _renderBody() {
     if (this.view !== 'map') this._mapView = null;   // leaving the map forgets its zoom
     if (this.view === 'coverage') this._renderCoverage();
+    else if (this.view === 'heritage') this._renderHeritage();
     else if (this.view === 'shapes') this._renderShapes();
     else if (this.view === 'map') this._renderMap();
     else this._renderList();
@@ -756,6 +761,41 @@ export class DataExplorer {
         this._ceilingsPending = false;
         if (this.view === 'coverage') this._render();
       });
+  }
+
+  // Every World Heritage site as a photo tile, famous first (TODOS #46). The continent
+  // filter the other views use applies here too; a transboundary site is shown once,
+  // under no single owner, so the wall is 1273 sites rather than 1378 country entries.
+  _renderHeritage() {
+    const list = this._listEl;
+    if (!list) return;
+    list.innerHTML = '';
+
+    let sites = allSites();
+    if (!getExploreTerritories()) sites = sites.filter((s) => !getEntity(s.code)?.optional);
+    if (this.continent) sites = sites.filter((s) => getEntity(s.code)?.continent === this.continent);
+
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb';
+    blurb.textContent = `${sites.length} UNESCO World Heritage sites`
+      + `${this.continent ? ` in ${this.continent}` : ''} · most written-about first · `
+      + 'press one for its country';
+    list.appendChild(blurb);
+
+    if (!sites.length) {
+      list.appendChild(Object.assign(document.createElement('div'),
+        { className: 'explore-blurb', textContent: 'No sites in this selection.' }));
+      return;
+    }
+
+    const wall = document.createElement('div');
+    wall.className = 'whs-wall';
+    for (const site of sites) {
+      const tile = siteCard(site, { tile: true, flag: getEntity(site.code)?.name });
+      tile.addEventListener('click', () => openCountryPanel(site.code));
+      wall.appendChild(tile);
+    }
+    list.appendChild(wall);
   }
 
   _renderCoverage() {

@@ -8,6 +8,7 @@ import {
 } from './datasets.js';
 import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl } from './emblems.js';
+import { loadHeritage, sitesFor, siteCard } from './heritage.js';
 import { drawSilhouette } from './silhouette.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
@@ -36,7 +37,7 @@ let escHandler = null;
 
 function ensureData() {
   if (!dataPromise) {
-    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems()]);
+    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage()]);
   }
   return dataPromise;
 }
@@ -211,6 +212,35 @@ function render(code) {
 
   body.appendChild(facts);
   cardEl.appendChild(body);
+
+  // World Heritage sites (TODOS #46). Five, famous first, the rest behind one press —
+  // Italy has 62 and a panel that opened on all of them would bury everything below it.
+  const sites = sitesFor(code);
+  if (sites.length) {
+    const SHOWN = 5;
+    const sec = el('div', 'cp-heritage');
+    sec.appendChild(el('h3', 'cp-heritage-head', `World Heritage sites (${sites.length})`));
+    const list = document.createElement('ul');
+    list.className = 'whs-list';
+    const draw = (n) => {
+      list.innerHTML = '';
+      for (const site of sites.slice(0, n)) list.appendChild(siteCard(site));
+    };
+    draw(SHOWN);
+    sec.appendChild(list);
+    if (sites.length > SHOWN) {
+      const more = document.createElement('button');
+      more.className = 'btn btn-tool cp-heritage-more';
+      more.textContent = `Show all ${sites.length}`;
+      more.addEventListener('click', () => {
+        const open = list.children.length > SHOWN;
+        draw(open ? SHOWN : sites.length);
+        more.textContent = open ? `Show all ${sites.length}` : 'Show fewer';
+      });
+      sec.appendChild(more);
+    }
+    cardEl.appendChild(sec);
+  }
 
   // Attribution — most outlines are geoBoundaries (CC BY 4.0); the entities it lacks
   // (dependencies, de-facto states) fall back to Natural Earth, which is public domain.

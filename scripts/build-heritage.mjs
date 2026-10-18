@@ -18,6 +18,15 @@
 // is UNESCO's own convention — it is why the per-country figures sum to more than the
 // number of sites (1378 vs 1273) — and it means "Hungary has 9" agrees with UNESCO.
 //
+// The per-site list carries a Commons photo and a fame score, neither of which UNESCO
+// can give us: its own images sit on the same Cloudflare-blocked host (whc.unesco.org
+// /document/NNNN answers 403 to everything). Wikidata supplies both, keyed on the
+// UNESCO site ID (P757) — P18 for the image, sitelink count for fame. 91% of sites get
+// a photo. Fame orders each country's list so pressing the United Kingdom shows
+// Stonehenge first rather than whatever was inscribed most recently; it is a proxy and
+// an imperfect one (it puts Ibiza above the Alhambra), but it gets the top of each
+// country's list right, which is the whole job.
+//
 // Usage: node scripts/build-heritage.mjs [outPath]
 import { readFileSync, writeFileSync } from 'node:fs';
 
@@ -32,7 +41,26 @@ const MIN_SITES = 900;
 
 const entities = JSON.parse(readFileSync('data/entities.json', 'utf8')).entities;
 
-const resp = await fetch(URL, { headers: { 'User-Agent': 'geo-draw-the-world/1.0 (hobby project)' } });
+const UA = 'geo-draw-the-world/1.0 (hobby project)';
+
+// Wikidata, keyed on the UNESCO site id. A component of a serial site carries the
+// parent's id with a -NNN suffix, so the prefix is the site; the first value wins and
+// the max sitelink count across components stands for the whole.
+async function wikidata(select, where) {
+  const q = `SELECT ${select} WHERE { ?s wdt:P757 ?id . ${where} }`;
+  const r = await fetch('https://query.wikidata.org/sparql', {
+    method: 'POST',
+    headers: { 'User-Agent': UA, Accept: 'text/csv', 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ query: q }),
+  });
+  if (!r.ok) throw new Error(`Wikidata: HTTP ${r.status}`);
+  return (await r.text()).trim().split('\n').slice(1).map((l) => {
+    const i = l.indexOf(',');
+    return [l.slice(0, i).split('-')[0].trim(), l.slice(i + 1).trim()];
+  });
+}
+
+const resp = await fetch(URL, { headers: { 'User-Agent': UA } });
 if (!resp.ok) throw new Error(`UNESCO data portal: HTTP ${resp.status}`);
 const text = await resp.text();
 
@@ -46,6 +74,17 @@ const rows = lines.slice(1).map((line) => {
 
 if (rows.length < MIN_SITES) throw new Error(`only ${rows.length} sites parsed — refusing to ship that`);
 
+const photos = new Map();
+for (const [id, url] of await wikidata('?id ?img', '?s wdt:P18 ?img .')) {
+  const file = decodeURIComponent(url.split('/Special:FilePath/')[1] || '');
+  if (file && !photos.has(id)) photos.set(id, file);
+}
+const fame = new Map();
+for (const [id, n] of await wikidata('?id ?links', '?s wikibase:sitelinks ?links .')) {
+  fame.set(id, Math.max(fame.get(id) || 0, Number(n) || 0));
+}
+console.log(`  wikidata: ${photos.size} site photos, ${fame.size} fame scores`);
+
 const CATEGORY = { Cultural: 'cultural', Natural: 'natural', Mixed: 'mixed' };
 const per = new Map();
 const unknown = new Set();
@@ -56,12 +95,21 @@ for (const r of rows) {
   const codes = r.iso_codes.split(',').map((c) => c.trim().toLowerCase()).filter(Boolean);
   for (const code of codes) {
     if (!entities[code]) { unknown.add(`${code} (${r.states_names})`); continue; }
-    if (!per.has(code)) per.set(code, { total: 0, cultural: 0, natural: 0, mixed: 0, danger: 0 });
+    if (!per.has(code)) per.set(code, { total: 0, cultural: 0, natural: 0, mixed: 0, danger: 0, sites: [] });
     const e = per.get(code);
     e.total++;
     const cat = CATEGORY[r.category];
     if (cat) e[cat]++;
     if (r.danger === 'True') e.danger++;
+    e.sites.push({
+      id: r.id_no,
+      name: r.name_en,
+      cat: cat || 'cultural',
+      year: Number(r.date_inscribed) || null,
+      ...(photos.has(r.id_no) ? { img: photos.get(r.id_no) } : {}),
+      ...(fame.has(r.id_no) ? { fame: fame.get(r.id_no) } : {}),
+      ...(r.danger === 'True' ? { danger: true } : {}),
+    });
   }
 }
 
@@ -72,7 +120,11 @@ for (const r of rows) {
 const heritage = {};
 for (const code of Object.keys(entities).sort()) {
   if (entities[code].type === 'aggregate') continue;
-  heritage[code] = per.get(code) || { total: 0, cultural: 0, natural: 0, mixed: 0, danger: 0 };
+  const e = per.get(code) || { total: 0, cultural: 0, natural: 0, mixed: 0, danger: 0, sites: [] };
+  // Famous first, so the panel opens on Stonehenge and not on whatever was inscribed
+  // last year. Ties and the unscored fall back to newest, then to a stable name order.
+  e.sites.sort((a, b) => (b.fame || 0) - (a.fame || 0) || (b.year || 0) - (a.year || 0) || a.name.localeCompare(b.name));
+  heritage[code] = e;
 }
 
 writeFileSync(OUT, `${JSON.stringify({
@@ -88,4 +140,10 @@ const top = Object.entries(heritage).sort((a, b) => b[1].total - a[1].total).sli
 console.log(`${OUT} — ${rows.length} sites (${transboundary} transboundary, counted for each state party)`);
 console.log(`  ${withSites} countries hold at least one; ${Object.keys(heritage).length - withSites} have a true zero`);
 console.log(`  top: ${top.map(([c, h]) => `${entities[c].name} ${h.total}`).join(', ')}`);
+const withPhoto = Object.values(heritage).flatMap((h) => h.sites).filter((s2) => s2.img).length;
+const allSites = Object.values(heritage).reduce((n, h) => n + h.sites.length, 0);
+console.log(`  ${withPhoto} of ${allSites} country-site entries carry a photo`);
+for (const c of ['gb', 'it', 'se']) {
+  console.log(`  ${entities[c].name} leads with: ${heritage[c].sites.slice(0, 3).map((x) => x.name.split(',')[0]).join(' / ')}`);
+}
 if (unknown.size) console.log(`  ignored ${unknown.size} state(s) not in the registry: ${[...unknown].join(', ')}`);

@@ -22,7 +22,7 @@ him. What is specific to this repo:
 #/top10                                   Top 10 / Bottom 10 picker
 #/rank[/<datasetId>]                      Rank the World
 #/flags  #/flag-picker                    the two flag games
-#/explore[/map|/shapes|/coverage]?metric=<id>&continent=<name>
+#/explore[/map|/shapes|/heritage|/coverage]?metric=<id>&continent=<name>
 #/scores                                  Your Scores
 #/country/<code>                          menu with that country's panel open
 ```
