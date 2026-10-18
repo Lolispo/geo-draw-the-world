@@ -15,7 +15,103 @@ Work that has shipped but the owner has not signed off on. Each entry keeps its 
 text; the **REVIEW** line says exactly what to look at. Clear it by either deleting the
 entry (add a line to `## Shipped`) or moving it back into the queue with what's missing.
 
-*Empty — everything shipped has been signed off (2026-10-18).*
+---
+
+## 31. Country emblems / coats of arms (dataset expansion, wave 3)
+
+**REVIEW:** `#/explore/coverage` — the **Arms** column shows each entity's coat of arms,
+hotlinked from Commons. Scan it: every row should be that country's actual arms, and hovering
+one gives the Commons filename. Turn **Territories: On** for all 251. Then `#/country/se` (or
+any country) to see it beside the flag in the panel, and `#/country/tr` — Turkey has no
+official arms, and the header must look normal rather than leaving a hole.
+
+**✅ DONE 2026-10-18.**
+
+**What:** Show the country's coat of arms / state emblem in the country panel
+alongside the flag.
+
+**Why:** Owner request (2026-09-06).
+
+**How it came out:**
+- `scripts/build-emblems.mjs` → `data/emblems.json` (10 KB), one SPARQL query against
+  Wikidata P94 joined to our codes through P297, as the entry planned. **239 of 252
+  entities** have one; the only sovereign states without are **Turkey**, which has no
+  official coat of arms at all, and **Somaliland**.
+- Only the filename is stored and the image is hotlinked through
+  `Special:FilePath/<file>?width=N`, which redirects to a thumbnail and rasterises SVG on
+  the way. Verified across a 16-country sample: all 200, all `image/png`, including
+  non-Latin filenames (China's is `中華人民共和國國徽.svg`).
+- **The licensing caveat resolved itself.** Commons does not host non-free files, so a
+  country whose emblem is legally restricted simply has no P94 value and lands in the gap
+  list — nothing non-free can reach the repo, because nothing reaches the repo at all.
+- The panel appends the emblem only once it loads, so a country without one costs no
+  layout. Height-matched to the flag rather than width-matched: arms are portrait and
+  flags landscape, so equal widths would tower.
+
+**Acceptance:** ✅ Emblem shows in the panel where available, invisible where not; no
+layout shift when it's missing; no non-free emblem bundled into the repo.
+
+---
+
+## 46. UNESCO World Heritage sites per country
+
+**REVIEW:** `#/explore/rank?metric=heritage-sites` — the ranking. Top should read Italy 62,
+China 61, France 56, Germany 55, Spain 50, India 45, Mexico 36, UK 35. Check a few against
+UNESCO's own figures. Then `#/rank/heritage-sites` to play a round of Rank the World on it,
+and `#/top10` where it is now one of the datasets. On `#/explore/coverage` the **World
+Heritage sites** column should be ticked for everyone including countries with none — a zero
+is a real zero.
+
+**✅ DONE 2026-10-18.**
+
+**What:** Sites per country as a rankable dataset, joining the Explorer, Rank the World
+and Top 10 like every other metric. Named sites, and anything quiz-shaped, come later.
+
+**Why:** Owner request (2026-10-10). It is a genuinely different axis from the economic
+metrics — Italy and Spain at the top, with small countries scoring far above their size.
+
+**Decided (owner, 2026-10-10):** data layer first. A curated famous-sites list is
+explicitly a phase 2, not a reason to delay the count.
+
+**Sourcing — the entry was right that this was the hard part, and both routes it warned
+about really are dead:**
+- `whc.unesco.org/en/list/xml/` is still behind a Cloudflare challenge: 403 and "Just a
+  moment..." to `curl` **and** to a real headless browser. Not worth engineering around.
+- Wikidata over-counts, as predicted. Counting `P1435 = World Heritage Site` gives **3429**
+  items against ~1223 real sites, because every component of a serial site carries the
+  property. De-componenting by the `P757` site ID prefix (a component is `1234-001`) gets
+  much closer but still lands at **1432**, with only **3 of 16** spot-checked countries
+  within 2 of their published figure. Abandoned.
+- **What works, and is official: UNESCO's own open-data portal.**
+  `data.unesco.org/api/explore/v2.1/catalog/datasets/whc001/exports/csv`, no challenge,
+  semicolon-separated. `?select=` trims it from 17 MB (descriptions in six languages) to
+  about 100 KB. 1273 sites, matching published per-country figures exactly.
+
+**How it came out:**
+- `scripts/build-heritage.mjs` → `data/heritage.json` (total plus cultural/natural/mixed
+  and a danger-list count per country), folded into `datasets.json` as a derived dataset
+  the way independence year and the electricity slices already are, so `datasets.json`
+  keeps one owner.
+- **Transboundary rule, decided:** a shared site counts for **each** state party. That is
+  UNESCO's own convention — it is why the per-country figures sum to 1378 against 1273
+  sites — so "Hungary has 9" agrees with UNESCO rather than with an internally tidy number.
+- Zero is a real zero: 78 countries hold no site and get `0`, not an omission. The registry
+  stores metric presence with `!= null`, so Coverage reads those as present rather than as
+  a gap. Verified on Tuvalu.
+- The build refuses to write anything if it parses fewer than 900 sites, so the failure
+  mode the entry warned about — silently shipping an empty dataset — cannot happen quietly.
+- Spot-checked against published 2024 figures: Spain 50, UK 35, Sweden 15 and Norway 8 land
+  exactly, and everything else sits +1 to +3, which is the 2025 and 2026 inscriptions this
+  list includes.
+
+**Phase 2 (deferred, unchanged):** the famous sites themselves — a curated ~20-50 with a
+name and the country, shown in the country panel, and the seed for a "which country is
+this site in" round.
+
+**Acceptance:** ✅ Sites-per-country is selectable in the Data Explorer and playable in Rank
+the World and Top 10 (both verified; the dataset pipeline picked them up with no extra
+work). The top ten match UNESCO's published figures. The build either produces the real
+list or fails loudly.
 
 ---
 
@@ -134,31 +230,6 @@ percentage shares, shown in the country panel as clickable rows.
 
 **Acceptance:** Panel lists top export partners with flag + name + %; clicking one
 opens that country; unmatched partner names are reported at build time, not dropped.
-
----
-
-## 31. Country emblems / coats of arms (dataset expansion, wave 3)
-
-**What:** Show the country's coat of arms / state emblem in the country panel
-alongside the flag.
-
-**Why:** Owner request (2026-09-06).
-
-**Approach / notes:**
-- Source: Wikidata property `P94` (coat of arms image) → a Wikimedia Commons filename.
-  Verified: Sweden (Q34) → `Great coat of arms of Sweden.svg`.
-- **Hotlink Commons**, exactly as flags hotlink flagcdn — no repo weight, same
-  `onerror`-hides-the-element degradation. Use `Special:FilePath/<file>?width=240`,
-  which redirects to the right thumbnail and handles SVG rasterization.
-- New `scripts/build-emblems.mjs` → `data/emblems.json` (code → filename). Resolve
-  ISO2 → Wikidata QID via `P297`, ideally in one SPARQL query rather than 200 calls.
-- **Licensing caveat:** many state emblems are legally restricted rather than freely
-  licensed, even where the flag is public domain. Skip those rather than bundling
-  them; the coverage board will show the holes. *(Owner didn't rule on hotlink vs
-  bundle — hotlinking assumed, reversible.)*
-
-**Acceptance:** Emblem shows in the panel where available, invisible where not; no
-layout shift when it's missing; no non-free emblem bundled into the repo.
 
 ---
 
@@ -421,48 +492,6 @@ below before building.
 the count shown up front ("S — 27 countries"). Letters with too few countries for the
 chosen mode are visibly unavailable and unreachable. Random-letter roll never lands on an
 unplayable letter. Works at 390px wide.
-
----
-
-## 46. UNESCO World Heritage sites per country
-
-**What:** Sites per country as a rankable dataset, joining the Explorer, Rank the World
-and Top 10 like every other metric. Named sites, and anything quiz-shaped, come later.
-
-**Why:** Owner request (2026-10-10). It is a genuinely different axis from the economic
-metrics — Italy and Spain at the top, with small countries scoring far above their size.
-
-**Decided (owner, 2026-10-10):** data layer first. *"if we could start doing 'world top
-20' ones and just focus data layer, we could add quizzes and things to it later"* — so a
-curated famous-sites list is explicitly a phase 2, not a reason to delay the count.
-
-**Sourcing is the first task, and it is harder than it looks (measured 2026-10-10):**
-- **UNESCO's own list XML (`whc.unesco.org/en/list/xml/`) is behind a Cloudflare
-  challenge.** A `curl` from a build script gets a "Just a moment..." HTML page, not data.
-  Plan on a manual download committed to the repo, or a mirror — do not write a script
-  that silently ships an empty dataset.
-- **Wikidata is not a drop-in substitute.** Counting items that carry the World Heritage
-  Site ID property and grouping by country gives **Spain 1241, Germany 424, France 355,
-  UK 299, Italy 285** against real figures around 50-60 — the IDs sit on every *component*
-  of a serial site. Any Wikidata route needs a de-component pass first and must be
-  spot-checked against a handful of known country totals before it is trusted.
-
-**Approach / notes:**
-- Follow the existing dataset pipeline: a `scripts/build-*.mjs` writing into
-  `data/datasets.json` with `name`, `blurb`, `format`, `higherFirst` and an honest
-  `summable` (site counts *are* summable — see #37).
-- Join on the canonical registry by ISO code (#5). Transboundary sites are shared between
-  countries and will double-count if handled naively; decide and record the rule.
-- A country with zero sites is a real zero, not missing data. The coverage board must not
-  show it as a gap.
-
-**Phase 2 (deferred, sketched):** the famous sites themselves — a curated ~20-50 with a
-name and the country, shown in the country panel, and the seed for a "which country is
-this site in" round.
-
-**Acceptance:** Sites-per-country is selectable in the Data Explorer and playable in Rank
-the World and Top 10. The top ten match UNESCO's published figures when checked by hand.
-The build either produces the real list or fails loudly.
 
 ---
 

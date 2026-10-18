@@ -260,6 +260,35 @@ async function readJsonIfPresent(path) {
   }
 }
 
+{
+  // TODOS #46 — UNESCO World Heritage sites, counted by build-heritage.mjs from
+  // UNESCO's own open-data portal. Summable: site counts really do add up, and a
+  // combined total is a meaningful number (see #37).
+  // Zero is a real zero. Most of the world has no World Heritage site, and omitting
+  // those countries would make "Tuvalu: no data" out of "Tuvalu: none" — the same
+  // distinction the electricity block above keeps.
+  const her = (await readJsonIfPresent('data/heritage.json'))?.heritage;
+  if (!her) {
+    console.log('! data/heritage.json missing — skipping heritage-sites. Run build-heritage.mjs, then re-run this.');
+  } else {
+    const values = {};
+    for (const [code, h] of Object.entries(her)) {
+      values[code] = h.total;
+      usedCodes.add(code);
+    }
+    datasets.push({
+      id: 'heritage-sites',
+      name: 'World Heritage sites',
+      blurb: 'UNESCO World Heritage sites, counted for each state party (UNESCO)',
+      format: 'number',
+      higherFirst: true,
+      summable: true,
+      values,
+    });
+    console.log(`World Heritage sites: ${Object.keys(values).length} countries (derived)`);
+  }
+}
+
 // Guard the summable flag against the mistake it exists to prevent. This catches the
 // intensive *formats*; it cannot catch an intensive quantity wearing an extensive
 // format — GDP per capita is currency, same as total GDP — so those stay a matter of

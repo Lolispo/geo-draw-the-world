@@ -1,0 +1,1765 @@
+{
+ "source": "UNESCO World Heritage Centre, via data.unesco.org (whc001)",
+ "retrieved": "2026-10-18",
+ "sites": 1273,
+ "transboundary": 51,
+ "heritage": {
+  "ad": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ae": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "af": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ag": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ai": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "al": {
+   "total": 4,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "am": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ao": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ar": {
+   "total": 12,
+   "cultural": 7,
+   "natural": 5,
+   "mixed": 0,
+   "danger": 0
+  },
+  "as": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "at": {
+   "total": 12,
+   "cultural": 11,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "au": {
+   "total": 21,
+   "cultural": 5,
+   "natural": 12,
+   "mixed": 4,
+   "danger": 0
+  },
+  "aw": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ax": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "az": {
+   "total": 5,
+   "cultural": 4,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ba": {
+   "total": 5,
+   "cultural": 3,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bb": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bd": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "be": {
+   "total": 16,
+   "cultural": 15,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bf": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bg": {
+   "total": 10,
+   "cultural": 7,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bh": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bi": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bj": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bl": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bm": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bn": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bo": {
+   "total": 7,
+   "cultural": 6,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bq": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "br": {
+   "total": 26,
+   "cultural": 16,
+   "natural": 9,
+   "mixed": 1,
+   "danger": 0
+  },
+  "bs": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bt": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bw": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "by": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "bz": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ca": {
+   "total": 22,
+   "cultural": 10,
+   "natural": 11,
+   "mixed": 1,
+   "danger": 0
+  },
+  "cc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cd": {
+   "total": 5,
+   "cultural": 0,
+   "natural": 5,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cf": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cg": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ch": {
+   "total": 13,
+   "cultural": 9,
+   "natural": 4,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ci": {
+   "total": 5,
+   "cultural": 2,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ck": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cl": {
+   "total": 7,
+   "cultural": 7,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cm": {
+   "total": 3,
+   "cultural": 1,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cn": {
+   "total": 61,
+   "cultural": 42,
+   "natural": 15,
+   "mixed": 4,
+   "danger": 0
+  },
+  "co": {
+   "total": 9,
+   "cultural": 6,
+   "natural": 2,
+   "mixed": 1,
+   "danger": 0
+  },
+  "cr": {
+   "total": 4,
+   "cultural": 1,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cu": {
+   "total": 9,
+   "cultural": 7,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cv": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cw": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cx": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cy": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "cz": {
+   "total": 17,
+   "cultural": 16,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "de": {
+   "total": 55,
+   "cultural": 52,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "dj": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "dk": {
+   "total": 13,
+   "cultural": 8,
+   "natural": 5,
+   "mixed": 0,
+   "danger": 0
+  },
+  "dm": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "do": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "dz": {
+   "total": 7,
+   "cultural": 6,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "ec": {
+   "total": 5,
+   "cultural": 3,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ee": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "eg": {
+   "total": 7,
+   "cultural": 6,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "eh": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "er": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "es": {
+   "total": 50,
+   "cultural": 44,
+   "natural": 4,
+   "mixed": 2,
+   "danger": 0
+  },
+  "et": {
+   "total": 12,
+   "cultural": 10,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fi": {
+   "total": 8,
+   "cultural": 7,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fj": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fk": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fm": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fo": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "fr": {
+   "total": 56,
+   "cultural": 47,
+   "natural": 7,
+   "mixed": 2,
+   "danger": 0
+  },
+  "ga": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "gb": {
+   "total": 35,
+   "cultural": 29,
+   "natural": 5,
+   "mixed": 1,
+   "danger": 0
+  },
+  "gd": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ge": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gg": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gh": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gi": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gl": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gm": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gn": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gp": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gq": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gr": {
+   "total": 21,
+   "cultural": 18,
+   "natural": 0,
+   "mixed": 3,
+   "danger": 0
+  },
+  "gs": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gt": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "gu": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gw": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "gy": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "hk": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "hn": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "hr": {
+   "total": 10,
+   "cultural": 8,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ht": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "hu": {
+   "total": 8,
+   "cultural": 7,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "id": {
+   "total": 10,
+   "cultural": 6,
+   "natural": 4,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ie": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "il": {
+   "total": 9,
+   "cultural": 9,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "im": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "in": {
+   "total": 45,
+   "cultural": 37,
+   "natural": 7,
+   "mixed": 1,
+   "danger": 0
+  },
+  "io": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "iq": {
+   "total": 6,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "ir": {
+   "total": 30,
+   "cultural": 28,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "is": {
+   "total": 3,
+   "cultural": 1,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "it": {
+   "total": 62,
+   "cultural": 56,
+   "natural": 6,
+   "mixed": 0,
+   "danger": 0
+  },
+  "je": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "jm": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "jo": {
+   "total": 8,
+   "cultural": 6,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "jp": {
+   "total": 27,
+   "cultural": 22,
+   "natural": 5,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ke": {
+   "total": 8,
+   "cultural": 5,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kg": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kh": {
+   "total": 5,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ki": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "km": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kn": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kp": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "kr": {
+   "total": 17,
+   "cultural": 15,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kw": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ky": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "kz": {
+   "total": 7,
+   "cultural": 4,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "la": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lb": {
+   "total": 7,
+   "cultural": 7,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lc": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "li": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lk": {
+   "total": 8,
+   "cultural": 6,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lr": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ls": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "lt": {
+   "total": 5,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lu": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "lv": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ly": {
+   "total": 5,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ma": {
+   "total": 9,
+   "cultural": 9,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "md": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "me": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mg": {
+   "total": 3,
+   "cultural": 1,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mh": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mk": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "ml": {
+   "total": 4,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "mm": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mn": {
+   "total": 7,
+   "cultural": 5,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mo": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mp": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mq": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mr": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ms": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mt": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mu": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mv": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mw": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mx": {
+   "total": 36,
+   "cultural": 28,
+   "natural": 6,
+   "mixed": 2,
+   "danger": 0
+  },
+  "my": {
+   "total": 6,
+   "cultural": 4,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "mz": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "na": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ne": {
+   "total": 3,
+   "cultural": 1,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ng": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ni": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nl": {
+   "total": 13,
+   "cultural": 12,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "no": {
+   "total": 8,
+   "cultural": 7,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "np": {
+   "total": 4,
+   "cultural": 2,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nr": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nu": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "nz": {
+   "total": 3,
+   "cultural": 0,
+   "natural": 2,
+   "mixed": 1,
+   "danger": 0
+  },
+  "om": {
+   "total": 5,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pa": {
+   "total": 5,
+   "cultural": 2,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pe": {
+   "total": 13,
+   "cultural": 9,
+   "natural": 2,
+   "mixed": 2,
+   "danger": 0
+  },
+  "pf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pg": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ph": {
+   "total": 6,
+   "cultural": 3,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pk": {
+   "total": 6,
+   "cultural": 6,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pl": {
+   "total": 18,
+   "cultural": 16,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pm": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pn": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pr": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ps": {
+   "total": 6,
+   "cultural": 6,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pt": {
+   "total": 17,
+   "cultural": 16,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "pw": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 1,
+   "danger": 0
+  },
+  "py": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "qa": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "re": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ro": {
+   "total": 11,
+   "cultural": 9,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "rs": {
+   "total": 5,
+   "cultural": 5,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ru": {
+   "total": 33,
+   "cultural": 22,
+   "natural": 11,
+   "mixed": 0,
+   "danger": 0
+  },
+  "rw": {
+   "total": 2,
+   "cultural": 1,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sa": {
+   "total": 8,
+   "cultural": 7,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sb": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sc": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sd": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "se": {
+   "total": 15,
+   "cultural": 13,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "sg": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sh": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "si": {
+   "total": 5,
+   "cultural": 3,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sj": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sk": {
+   "total": 8,
+   "cultural": 6,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sl": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sm": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sn": {
+   "total": 7,
+   "cultural": 5,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "so": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sr": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ss": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "st": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sv": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sx": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sy": {
+   "total": 6,
+   "cultural": 6,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "sz": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "td": {
+   "total": 2,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 1,
+   "danger": 0
+  },
+  "tf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tg": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "th": {
+   "total": 9,
+   "cultural": 6,
+   "natural": 3,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tj": {
+   "total": 5,
+   "cultural": 3,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tk": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tl": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tm": {
+   "total": 5,
+   "cultural": 4,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tn": {
+   "total": 10,
+   "cultural": 9,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "to": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tr": {
+   "total": 22,
+   "cultural": 20,
+   "natural": 0,
+   "mixed": 2,
+   "danger": 0
+  },
+  "tt": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tv": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tw": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "tz": {
+   "total": 7,
+   "cultural": 3,
+   "natural": 3,
+   "mixed": 1,
+   "danger": 0
+  },
+  "ua": {
+   "total": 8,
+   "cultural": 7,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ug": {
+   "total": 3,
+   "cultural": 1,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "us": {
+   "total": 27,
+   "cultural": 13,
+   "natural": 13,
+   "mixed": 1,
+   "danger": 0
+  },
+  "uy": {
+   "total": 3,
+   "cultural": 3,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "uz": {
+   "total": 8,
+   "cultural": 6,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  },
+  "va": {
+   "total": 2,
+   "cultural": 2,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "vc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ve": {
+   "total": 3,
+   "cultural": 2,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "vg": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "vi": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "vn": {
+   "total": 9,
+   "cultural": 6,
+   "natural": 2,
+   "mixed": 1,
+   "danger": 0
+  },
+  "vu": {
+   "total": 1,
+   "cultural": 1,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "wf": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ws": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xa": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xc": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xk": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xo": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xs": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "xt": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "ye": {
+   "total": 5,
+   "cultural": 4,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "yt": {
+   "total": 0,
+   "cultural": 0,
+   "natural": 0,
+   "mixed": 0,
+   "danger": 0
+  },
+  "za": {
+   "total": 12,
+   "cultural": 7,
+   "natural": 4,
+   "mixed": 1,
+   "danger": 0
+  },
+  "zm": {
+   "total": 1,
+   "cultural": 0,
+   "natural": 1,
+   "mixed": 0,
+   "danger": 0
+  },
+  "zw": {
+   "total": 5,
+   "cultural": 3,
+   "natural": 2,
+   "mixed": 0,
+   "danger": 0
+  }
+ }
+}

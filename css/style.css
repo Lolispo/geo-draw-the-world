@@ -2906,6 +2906,17 @@ canvas {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
 }
+/* Coat of arms beside the flag (TODOS #31). Height-matched to the flag rather than
+   width-matched: arms are portrait and flags landscape, so equal widths would tower. */
+.cp-emblem {
+  height: 72px;
+  width: auto;
+  max-width: 96px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
 .cp-name { font-size: 1.4rem; margin: 0; line-height: 1.15; }
 .cp-sub { color: var(--text-dim); font-size: 0.85rem; margin-top: 3px; }
 
@@ -3198,3 +3209,5 @@ canvas {
 #freestyle-host { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
 .cov-cell.cov-ceiling { font-variant-numeric: tabular-nums; font-weight: 600; cursor: help; }
 .cov-cell.cov-ceiling.no { font-weight: 700; }
+.cov-cell.cov-emblem { text-align: center; }
+.cov-cell.cov-emblem img { height: 34px; width: auto; max-width: 48px; object-fit: contain; vertical-align: middle; }

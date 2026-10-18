@@ -10,6 +10,7 @@ import { drawSilhouette } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
 import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
+import { loadEmblems, emblemUrl, emblemFile } from './emblems.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
 
 
@@ -94,7 +95,7 @@ export class DataExplorer {
     await loadFlagColors();
     // The Coverage health strip asks cross-file questions, so it needs the files the
     // rank views never touch.
-    await Promise.all([loadAttributes(), loadElectricity()]);
+    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems()]);
     this._loaded = true;
   }
 
@@ -618,6 +619,32 @@ export class DataExplorer {
     return td;
   }
 
+  // The emblem itself, not a tick — the point of the column is seeing whether the
+  // image Wikidata named is actually this country's arms (TODOS #31).
+  _emblemCell(e) {
+    const td = document.createElement('td');
+    td.className = 'cov-cell cov-emblem';
+    const url = emblemUrl(e.code, 80);
+    if (!url) {
+      td.classList.add('no');
+      td.textContent = '\u2717';
+      td.title = 'Wikidata has no coat of arms (P94) for this entity.';
+      return td;
+    }
+    const img = document.createElement('img');
+    img.src = url;
+    img.loading = 'lazy';
+    img.alt = '';
+    img.title = emblemFile(e.code);
+    img.addEventListener('error', () => {
+      td.classList.add('no');
+      td.textContent = '\u26a0';
+      td.title = `Commons has no file called ${emblemFile(e.code)}`;
+    });
+    td.appendChild(img);
+    return td;
+  }
+
   _colorsCell(e) {
     const td = document.createElement('td');
     td.className = 'cov-cell cov-colors';
@@ -748,6 +775,10 @@ export class DataExplorer {
       { key: 'hasGeometry', label: 'Geo', has: (e) => e.hasGeometry },
       { key: 'hasFlagImage', label: 'Flag', has: (e) => e.hasFlagImage },
       { key: 'hasFlag', label: 'Colors', has: (e) => e.hasFlag, cell: (e) => this._colorsCell(e) },
+      {
+        key: 'hasEmblem', label: 'Arms', has: (e) => !!emblemFile(e.code),
+        cell: (e) => this._emblemCell(e),
+      },
       { key: 'hasCapital', label: 'Cap', has: (e) => e.hasCapital },
       { key: 'hasReligion', label: 'Rel', has: (e) => e.hasReligion },
       {
@@ -815,7 +846,9 @@ export class DataExplorer {
       + 'Colors = the curated colors the color quizzes score against, checked against each '
       + 'flag image as you scroll — ⚠ means a color was not found in it · '
       + 'Draw = what a perfect drawing scores, run through the real scoring code — '
-      + 'every country should read 100, and hovering one says which term fell short';
+      + 'every country should read 100, and hovering one says which term fell short · '
+      + 'Arms = the coat of arms Wikidata names for this entity, hotlinked from Commons; '
+      + 'hover for the filename, \u26a0 means Commons has no such file';
     list.appendChild(legend);
 
     if (!ents.length) {

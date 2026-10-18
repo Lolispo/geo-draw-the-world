@@ -22,7 +22,9 @@
     "build:shapes": "node scripts/build-shapes.mjs",
     "build:masks": "node scripts/build-shape-masks.mjs",
     "check:masks": "node scripts/check-shape-masks.mjs",
-    "build:entities": "node scripts/build-entities.mjs"
+    "build:entities": "node scripts/build-entities.mjs",
+    "build:emblems": "node scripts/build-emblems.mjs",
+    "build:heritage": "node scripts/build-heritage.mjs"
   },
   "keywords": [
     "geography",

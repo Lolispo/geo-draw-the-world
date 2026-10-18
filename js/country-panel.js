@@ -7,6 +7,7 @@ import {
   getEntity, getAttributes, getElectricity, getDatasetList, formatValue, getRank,
 } from './datasets.js';
 import { flagUrl } from './flags.js';
+import { loadEmblems, emblemUrl } from './emblems.js';
 import { drawSilhouette } from './silhouette.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
@@ -35,7 +36,7 @@ let escHandler = null;
 
 function ensureData() {
   if (!dataPromise) {
-    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity()]);
+    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems()]);
   }
   return dataPromise;
 }
@@ -104,6 +105,21 @@ function render(code) {
   flag.src = flagUrl(code, 'w320');
   flag.alt = `Flag of ${name}`;
   flag.addEventListener('error', () => { flag.style.display = 'none'; });
+
+  // The emblem sits beside the flag where there is one (TODOS #31). Countries without
+  // one are common enough — Turkey has no official arms at all — that its absence has
+  // to cost no layout, so it is only appended once it loads.
+  const arms = emblemUrl(code, 160);
+  let emblem = null;
+  if (arms) {
+    emblem = document.createElement('img');
+    emblem.className = 'cp-emblem';
+    emblem.src = arms;
+    emblem.alt = `Coat of arms of ${name}`;
+    emblem.loading = 'lazy';
+    emblem.addEventListener('error', () => { emblem.remove(); });
+  }
+
   const titleWrap = el('div', 'cp-title-wrap');
   titleWrap.appendChild(el('h2', 'cp-name', name));
   const sub = [];
@@ -115,6 +131,7 @@ function render(code) {
   else if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type[0].toUpperCase() + entity.type.slice(1));
   if (sub.length) titleWrap.appendChild(el('div', 'cp-sub', sub.join(' · ')));
   header.append(flag, titleWrap);
+  if (emblem) header.appendChild(emblem);
   cardEl.appendChild(header);
 
   // Body: silhouette + facts

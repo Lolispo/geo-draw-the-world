@@ -15,7 +15,8 @@ const REGION_CONTINENT = {
 };
 const METRIC_IDS = ['gdp-nominal', 'population', 'gdp-per-capita', 'land-area', 'life-expectancy', 'exports', 'urbanization',
   'export-share-gdp', 'independence-year', // TODOS #27, #28
-  'elec-nuclear-pct', 'elec-coal-pct', 'elec-renewable-pct']; // TODOS #29
+  'elec-nuclear-pct', 'elec-coal-pct', 'elec-renewable-pct', // TODOS #29
+  'heritage-sites']; // TODOS #46 — zero sites is a real value, and `!= null` below keeps it
 
 // Geometry names that don't normalize-match a flag/stat name → explicit ISO code.
 const NAME_OVERRIDE = {
