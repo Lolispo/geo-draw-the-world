@@ -17,244 +17,6 @@ entry (add a line to `## Shipped`) or moving it back into the queue with what's 
 
 ---
 
-## 77. Reach any country, and any toggle, from a URL
-
-**REVIEW:** `#/draw/country/va` — Vatican City, straight into a round, no skipping past 196
-others. `#/draw/country/mv,ki,mh,fm,pw,tv,sc` plays the seven atoll nations from #73 in order.
-`#/draw/quick3?tweak=1` starts Quick 3 with Tweak mode already on — which is what #76 needs to
-be reproducible. Check the address bar keeps the toggles as you play, and that a reload
-reproduces the same round.
-
-**✅ DONE 2026-10-18.**
-
-**What:** `#/draw/country/<code>[,<code>…]` plays exactly those countries in that order, and any
-draw route takes `puzzle`, `shapeonly`, `tweak`, `blind`, `explorer`, `hard` and `territories`
-as `=1`/`=0` parameters.
-
-**Why:** Owner, 2026-10-18: *"is there some query params lacking / game mode missing that would
-help with specific reviews? like drawing vatican, are we lacking ability to draw a specific
-country from url?"* Yes, on both counts. Reviewing #73 meant asking whether the Maldives and
-Vatican City score properly, and both are one row of 197 in World — unreachable in practice. And
-#76 only happens in Tweak mode, which no URL could switch on, so the entry had no link that
-reproduced it.
-
-**Decided (owner, 2026-10-18):** toggle parameters do exactly what pressing the menu button
-does, **including persisting Territories** — chosen over a one-shot override that restores your
-settings afterwards. The consequence is that a review link carrying `territories=1` rewrites the
-saved setting, and a toggle left on by one link follows you to the next; a link that needs one
-off has to say `=0`.
-
-**How it came out:**
-- The seven near-identical toggle handlers collapsed into one `DRAW_TOGGLES` table with
-  `_setDrawToggle()`, so the button and the parameter cannot come to mean different things.
-  Placement Only and Shape Only still clear each other, in one place rather than two.
-- **A draw route now carries its active toggles.** Each mode writes its own URL as it starts,
-  which erased the parameters the link had just set: the game was in Tweak mode while the
-  address bar said plain `#/draw/quick3`, and a reload silently dropped it. Caught by a test
-  that reloaded the page — the first version looked fine without that step.
-- Commas survive `formatRoute` (`js/router.js`): `%2Cki%2Cmh` is not a URL anyone can edit.
-- An explicit list reads `loadWorldOutlines()`, so it ignores the territories pool rule —
-  `#/draw/country/gi` gives Gibraltar whether or not the toggle is on. Verified.
-- Territories is deliberately **not** stamped onto every draw URL: it is persisted, so it
-  survives a reload by itself, and writing it everywhere is noise.
-
-**What it immediately showed.** `#/draw/country/va` scores 71 shape / 0 size / 81 placement =
-53, which is #73's Vatican diagnosis made visible in one click instead of taken on trust.
-
-**Acceptance:** ✅ A named country or list of countries plays from a URL in the order given;
-toggles apply from the URL and stay in the address bar across a round and a reload; unknown
-codes fall back to the draw menu rather than a blank screen.
-
----
-
-## 58. Results: which countries your shape actually matched best
-
-**REVIEW:** `#/draw/daily` — play a round through to the results screen. A rail down the left
-names the five countries your drawing matched best, each with your outline drawn over theirs,
-and pins the country you were actually drawing underneath with its rank. Type a name into the
-box to score against any country. In a multi-country round (`#/draw/quick3`) the arrows and the
-score-table rows both switch which drawing you are looking at.
-
-**✅ DONE 2026-10-11.**
-
-**What:** On the results screen, for each country you drew, the **top 5 countries your shape
-scored highest against** — with the real score — and, when the country you were actually
-drawing is not in that five, its own placement underneath. A shape review panel down the left
-of the results map; press a country you drew to see its five.
-
-**Why:** Owner request (2026-10-10). *"if my swedish drawing actually scored more points to
-Tunisia it should show in the top 5 with the real score."* It turns a score you cannot argue
-with into something you can learn from: a bad score because the shape was wrong reads
-differently from a bad score because you drew a perfectly good Tunisia.
-
-**Decided (owner, 2026-10-10):**
-- **High-fidelity shapes**, not the world-scale geometry — `data/shapes/<code>.json`
-  (`getCountryByCode`), the same outlines the panel and the shapes table draw.
-
-**How it came out:**
-- **The cost problem dissolved.** The entry assumed 197 rasterised IoUs per drawing. But
-  `computeIoU` normalises to a frame that depends only on the shape — centroid-centred, long
-  side scaled to 64, rasterised on a fixed 80×80 grid — so every country's raster is a
-  build-time constant. `scripts/build-shape-masks.mjs` precomputes all 251 into
-  `data/shape-masks.json` (264 KB, **39 KB gzipped**, fetched only when a panel first opens),
-  and a match becomes 200 words of bitwise AND/OR per country. No pre-filter, no laziness, no
-  stall — a World round ranks every drawing against the whole world in about a millisecond.
-- The rasteriser moved out of `js/scoring.js` into **`js/raster.js`**, imported by both the live
-  score and the build script, so the masks cannot quietly stop meaning what a score means.
-  `scripts/check-shape-masks.mjs` asserts all three properties that would catch a drift: the
-  bitmask IoU equals the Set-based one it replaced (55 real country pairs), every built mask
-  equals a live rasterisation of the same outline (all 251), and a country scores 100 against
-  itself.
-- **Scores are linked to drawings through `score.drawn`, not an index.** A skipped item pushes
-  a score and no shape, so `scores[i]` and `playerShapes[i]` stop lining up from the first skip
-  onward. Each score now carries its `code` and the `Shape` it came from. (The pre-existing
-  tweak-mode rescore at `_onTweakDone` still assumes positional alignment — untouched here, but
-  it is wrong in the same way and worth its own entry.)
-- Rotation is deliberately **not** normalised away: the round scored the shape as you left it,
-  and a panel that quietly rotated it would disagree with the score beside it.
-
-**The two numbers now agree.** This shipped with the panel's score differing from the round's
-**Shape** column — the round scored against the world-scale geometry, the panel against
-`data/shapes`. Investigating that gap found a real scoring bug and became **#73**, which moved
-the round's shape term onto these same prerasterised outlines. The two numbers are now equal by
-construction, and the caveat that was in the panel header is gone.
-
-**Acceptance:** ✅ Press a country on the results screen and see the five countries your drawing
-matched best, each with its score; if the real answer is not among them, it is shown below with
-its rank ("Sweden — 12th, 31"). Comparison uses the high-fidelity outlines. A World round does
-not stall while it computes.
-
----
-
-## 72. Freestyle: draw anything, find out what it is
-
-**REVIEW:** `#/draw/freestyle` — a new card in the Draw menu's Special Modes. No country is
-named: draw whatever you like, press Done, and the same panel from #58 ranks it against every
-country with no target pinned underneath. Type a name into the box to ask about one in
-particular. Draw Again starts from a clean canvas.
-
-**✅ DONE 2026-10-11.**
-
-**What:** A Draw mode with no prompt and no map — you free-style a country, and the shape-match
-panel tells you what it looks like. The search box is the point: draw a Sweden, see that it
-scored higher against five other countries, then type "Sweden" to find out what it actually got.
-
-**Why:** Owner request (2026-10-11), alongside #58. *"a version of draw mode where you free
-style a country (you are not given a specific country to draw) then it scores how good your
-country is… so if i try to do sweden, and i get highest score towards 5 other countries, i see
-those shapes, and then i can search sweden to see that specific score."*
-
-**Decided (owner, 2026-10-11):**
-- **Pure shape, no map.** No placement and no sizing stage, so the flow is
-  `MENU → DRAWING → FREESTYLE`. Shape-only is the only honest number when there is no target.
-- **The pool follows the territories toggle**, like every other pool in the app.
-- No high score is saved — there is no comparable number to rank, and it is a sandbox.
-
-**How it came out:**
-- The whole mode is `startFreestyle()`, one branch at the top of `onDrawingDone()`, and a screen
-  holding a second instance of the #58 panel. Nothing in the scoring, placing or results path
-  needed to know about it.
-- The mode toggles (blind, explorer, hard, placement-only, tweak) are all about a country you
-  were given, so none apply; the Skip button is hidden for the same reason.
-
-**Acceptance:** ✅ `#/draw/freestyle` opens straight into a drawing canvas with no country named;
-Done ranks the drawing against the whole pool with nothing pinned; searching a name shows that
-country's score and rank; Draw Again clears the canvas and re-ranks.
-
----
-
-## 73. Scoring: a perfect drawing could score zero
-
-**REVIEW:** `#/explore/coverage` — click the **Draw** column heading. That column is what a
-perfect drawing of each country scores, run through the real `scoreShape`. Sorting brings the
-failures to the top: there should be exactly one, Vatican City at 30, above 250 rows of 100.
-Hover any number for the shape/size/placement breakdown. The integrity strip above the table
-carries the same verdict in words.
-
-The first version of this entry asked the reviewer to play rounds and compare remembered
-scores, which is not a review anyone can do (owner, 2026-10-11: *"6 review points that are all
-paragraphs of text that is hard to spot is tricky"*). A number being wrong is invisible; a
-column of them is not.
-
-**✅ DONE 2026-10-11.**
-
-**What:** The round's shape term now scores against the detailed `data/shapes` outline instead
-of the world-scale geometry; the rasteriser gives a sub-pixel island a dot of its own; and
-placement is measured to the main landmass rather than to the area-weighted centroid of every
-ring.
-
-**Why:** Owner question off the back of #58 (2026-10-11): *"would be nice to assess how a
-perfect drawing of the high fidelity shapes score now… see if we need to iterate on and improve
-the scoring system."* Measuring that found three defects, with the measurement being the thing
-that made them visible at all — none of them show up as an error, only as a low score that
-looks like the player's fault.
-
-**What was wrong, measured over 197 sovereign countries.** Draw the true detailed outline, size
-it exactly right, place it exactly right — the ceiling:
-
-- **The normalisation frame was hostage to the most remote speck.** `normalizeMultiPolygon`
-  scales by the raw bounding box, so one islet thousands of km away shrank the recognisable
-  country into a corner of the 80×80 grid. The Netherlands' bbox is **16×** its main landmass
-  (Caribbean islands, 4% of its area), France's **8.2×**, the Maldives' **61×**. A perfect
-  drawing of the Netherlands scored **shape 0** — total 60; France scored shape 2. 37 countries
-  had a blow-up ≥1.5×, 21 ≥3×. Area and placement were unaffected, which is why it stayed
-  invisible.
-- **Sub-pixel islands rasterised to nothing.** The detailed tier carries the Maldives as **518
-  rings** spanning the whole frame; on the 80×80 grid they filled **one cell of 6400**.
-  Micronesia and Tuvalu filled zero — an empty mask nothing can score against. The data was
-  never missing; the rasteriser erased it.
-- **Three reference centroids were not on the country.** Placement measured to the area-weighted
-  centroid of all rings put the USA's centre **114** world units off its main landmass, Norway's
-  104, Canada's 86. Placement reaches zero at 300, so centring on the landmass you can see cost
-  38, 35 and 29 points before any mistake of your own.
-
-**Rejected:** framing on the rings holding 98% of the area. It rescues 20 countries but breaks 8
-(Seychelles 25→0, Tonga 20→0, Fiji 35→11) and still leaves France at 4 and Norway at 3, because
-Guiana and Svalbard are *big* as well as far — no area threshold separates them. Distance does,
-which is the rule `build-shapes.mjs` already applies to build `data/shapes`. Rather than add a
-second distance threshold, the shape term moved onto the outline that rule already produces.
-
-**How it came out:**
-- `scoreShape()` takes `refMask` and `refCenter`. The mask is the country's prerasterised
-  detailed outline from `data/shape-masks.json` (#58), so this cost nothing to add — the file
-  already existed and is already loaded. Size and placement still come from the world-scale
-  reference, because those are questions about the real map you placed the shape on.
-- No mask (continents, or any entry without a code) falls back to the old comparison, verified
-  to still score a perfect continent 100/100/100.
-- `MIN_SPECK_CELLS` in `js/raster.js` gives a ring smaller than 2 cells a dot of its own — the
-  same fix `js/silhouette.js` already makes for the same reason (`MIN_ISLAND_PX`, #53). Maldives
-  1 cell → 272, Marshall Islands 1 → 108, Micronesia 0 → 78, Tuvalu 0 → 27.
-- `mainLandmassCentroid()` in `js/utils.js` for placement. For a country whose parts are all in
-  one place it is the same point, so only the handful with far-flung parts move.
-
-**Result: 196 of 197 sovereign countries now have a ceiling of 100**, up from 162 in the 90-100
-band with a tail down to 30. Netherlands 0→100 on the shape term, South Africa 29→100, Spain
-35→100, France 2→100, Norway 3→100, and the seven atoll nations go from unscorable to scorable.
-
-**The one left is Vatican City (30).** Not a scoring problem: its world-scale polygon in
-`data/countries-europe.json` is seven points at the same coordinate — `[[855.56,553.95]]` ×7,
-**area exactly 0** — so the size term can never be satisfied and its map ghost is a degenerate
-point. Monaco, San Marino and Liechtenstein are all fine at 100. Fixing it means a minimum
-footprint in `build-geometry.mjs` (which would also change how it draws on the map) or dropping
-it from the draw pool. Left for the owner to decide.
-
-**Visible where it can be checked.** `js/score-health.js` runs the real `scoreShape` over every
-country as a perfect player would and the Coverage board shows the result: a sortable **Draw**
-column, and two checks in the integrity strip — *every country has an outline you can score
-against* (the Maldives failure: an empty mask) and *a perfect drawing scores 100* (the verdict,
-naming any country that falls short and which term it lost). Computed on first sight of
-Coverage rather than in `loadData()`, which otherwise made Rankings, Map and Shapes wait ~5s
-for a column none of them draw; the table is on screen in ~190ms and the column fills behind a
-`…`. Thin-but-workable outlines are deliberately not flagged — Mauritius covers 8 cells of 6400
-and still reaches 100, and a check that cries wolf gets ignored.
-
-**Acceptance:** ✅ A perfect drawing of the detailed outline scores 100 for every sovereign
-country but Vatican City; `npm run check:masks` asserts the ceiling for all 251 and that no
-country rasterises to an empty mask; the Coverage board shows the same verdict per country;
-the match panel's score equals the round's Shape column.
-
----
-
 ## 71. Flag-colour review moves into Coverage; data-map becomes pipeline-only
 
 **REVIEW:** `#/explore/coverage` — the **Colors** column now shows the curated colours
@@ -340,7 +102,23 @@ one. A new metric, or a source dropping a country, puts rows back. The reasons a
 from scratch on every `build-datasets` run, so they cannot rot into a lie.
 ---
 
-## 76. Tweak mode loses scores after a skip
+## 79. Vatican City cannot be scored on size
+
+**What:** Its world-scale polygon in `data/countries-europe.json` is seven points at one
+coordinate — `[855.56, 553.95]` x7, area exactly 0 — so the size term can never be satisfied
+and its map ghost is a degenerate point. `#/draw/country/va` scores 71 shape / 0 size / 81
+placement = 53. Every other microstate is fine: Monaco, San Marino and Liechtenstein all reach
+100.
+
+**Why it is still here:** found measuring #73, which fixed everything else. One country of 197,
+so it is not urgent — but it is the only row that is not 100 in Coverage's Draw column.
+
+**Fix:** a minimum footprint in `build-geometry.mjs`, which also changes how it draws on the
+world map, or drop it from the draw pool. Owner's call, not taken yet.
+
+---
+
+## 78. Tweak mode loses scores after a skip
 
 **What:** Finishing Tweak mode rescores by position — `js/main.js:1342`,
 `this.scores = this.playerShapes.map((shape, i) => …)` reading `itemData[i]` and
@@ -358,6 +136,11 @@ there — #58 needed the drawing that belongs to a score, which it now carries a
 and that is the fix for this too. Rescoring should walk `this.scores`, use each row's own
 `drawn` shape and `code`, and leave a row without one untouched; `referenceShapes` can then be
 indexed by the score row rather than by the shape.
+
+**Not being fixed (owner, 2026-10-18):** *"we don't have to fix things here i never touched
+tweak mode."* Kept because the diagnosis is the expensive part and nobody rediscovers this on
+purpose — it reaches a reviewer as missing rows, not as an error. Pick it up only if Tweak mode
+starts getting used.
 
 **Acceptance:** with Tweak mode on and a skip in the middle, finishing the tweak stage leaves
 every row scored against its own country and the results table keeps every row it had before.
@@ -1489,3 +1272,7 @@ full write-ups are in git history.
 - **#53** Shapes: scattered island territories render as archipelagos — 2026-10-10
 - **#54** Guard summed pairs against de-facto/claimant double-counting — 2026-10-10
 - **#55** Flag colours for the 52 entities that had none — 2026-10-10
+- **#58** Results: the five countries your drawing matched best — 2026-10-18
+- **#72** Freestyle: draw anything, find out what it is — 2026-10-18
+- **#73** Scoring: a perfect drawing could score zero (bbox framing, sub-pixel islands, placement centroid) — 2026-10-18
+- **#77** Reach any country, and any toggle, from a URL — 2026-10-18
