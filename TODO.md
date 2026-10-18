@@ -15,91 +15,8 @@ Work that has shipped but the owner has not signed off on. Each entry keeps its 
 text; the **REVIEW** line says exactly what to look at. Clear it by either deleting the
 entry (add a line to `## Shipped`) or moving it back into the queue with what's missing.
 
----
+*Empty — everything shipped has been signed off (2026-10-18).*
 
-## 71. Flag-colour review moves into Coverage; data-map becomes pipeline-only
-
-**REVIEW:** `#/explore/coverage` — the **Colors** column now shows the curated colours
-themselves instead of a tick, and checks each against that entity's own flag image as the
-row scrolls into view. Turn **Territories: On** to see all 251. Scan the column beside the
-flag thumbnail: 13 entities carry a ⚠ (Azerbaijan, Belize, Comoros, Dominica, Honduras,
-Mauritania, Palau, Panama, Saint Vincent, Slovenia, Solomon Islands, South Sudan,
-Uzbekistan), with the colour the image lacks ringed in red. Hover the ⚠ for what was not
-found. Then open `/data-map.html` and check it still reads as a page about the *pipeline* —
-the coverage table and flag board are gone from it.
-
-**✅ DONE 2026-10-11** — Owner's call: this is in-app information, not something that
-belongs on a page outside the app. Filling the last 52 colour gaps had left Coverage's
-Colors column reading ✓ for all 251, so it had stopped carrying information; the question
-had moved from "are there any" to "are they right".
-
-The reader lives in `js/flag-colors.js` rather than being copied out of `data-map.html`,
-with its thresholds and the evidence for them beside the code. Checks run through an
-`IntersectionObserver` as rows scroll in, so the table renders as fast as before and an
-unchecked row simply shows its swatches — absence of a warning is never a claim.
-`datasets.js` gains `loadFlagColors`/`getFlagColors` so the quizzes and the board share one
-loader. Verified against all 251: the in-app check reproduces the old board's worklist
-exactly, same 13 entities.
-
-`data-map.html` keeps the provenance graph, the cross-file integrity checks, the dated
-review and the rebuild order — the things that are about the repo rather than about
-countries.
-
-**✅ Integrity checks moved too, 2026-10-11.** All 11 now run in the app, in a collapsed
-health strip above the Coverage table — one line unless something wants attention, because a
-wall of green ticks only pushes the table off screen. They are a different shape from the
-flag colours ("religion totals ≤ 105%" is a statement about the dataset, not about one
-entity), which is why a strip rather than a column.
-
-The logic lives in `js/data-health.js` and is gone from `data-map.html`, so there is one
-implementation rather than two that drift. Same verdicts as before the move: 8 pass, 3 to
-look at (the World Bank disagreeing with itself about Cyprus and Cuba, and 12 pre-2020
-figures shown undated).
-
----
-
-## 70. Coverage: sortable columns and a gaps-only view
-
-**REVIEW:** `#/explore/coverage?gaps=1&sort=exports` — opens straight into gap mode sorted
-by exports. Toggle **Gaps only** off and on: 251×17 becomes 84×13 with Territories on,
-30×11 with them off. Click any heading to pull that column's ✗ to the top, click again to
-reverse. Check the URL updates and that reloading it restores the same view. Also
-`#/explore/coverage` plain, to confirm the full board still reads as before.
-
-**✅ DONE 2026-10-11** — Measured first: 4,267 cells, 460 missing, 167 entities with
-nothing missing, 4 columns with no gap anywhere. So gap mode hides both — rows and
-columns — and the reduction is about three quarters.
-
-Aggregates drop out of gap mode before anything is measured: `jg` alone was keeping Geo,
-Flag and Colors on screen, because it has none of them, because it is not a place.
-
-Columns come from one table that the heading, the completeness maths and the cell all
-read, so a new column cannot be added to one and forgotten in the others.
-
-**✅ Expected gaps separated, 2026-10-11.** `build-datasets.mjs` records *why* each missing
-metric value is missing, because only the build saw what the source answered — "nobody has
-entered this" and "the source publishes nothing" are identical in the data and completely
-different jobs. **439 of 439 missing metric values turn out to be explained by their source.**
-
-The gap view therefore went from 84×13 to **20 rows × 2 columns** with territories on, and to
-a single row with them off: Saint Kitts and Nevis, missing a religion breakdown. That is the
-whole actionable gap in the standard country set.
-
-Explained gaps render as a muted `–` with the reason on hover and do not count as gaps for
-hiding or sorting; they stay visible on the full board so the write-offs can be audited. The
-reasons are evidence, not assumption — each names the source and what it did, and says
-*unavailable from the configured source*, never *unobtainable*: Taiwan's figures are absent
-from the World Bank and present in the manual backfill, and that distinction is the point.
-
-Getting there needed one fix of the same class as #52's: `parseIndependence` threw away
-"none (overseas department of France)", so 53 territories looked like nobody had got round to
-them when the Factbook had in fact answered. Ethiopia keeps a named exception — never
-colonised, so there is no event to record — because a rule would have to over-reach to cover
-one country, and over-reaching means silently writing off work that is doable.
-
-**What to watch:** everything being explained is the expected result today, not a permanent
-one. A new metric, or a source dropping a country, puts rows back. The reasons are rebuilt
-from scratch on every `build-datasets` run, so they cannot rot into a lie.
 ---
 
 ## 79. Vatican City cannot be scored on size
@@ -1276,3 +1193,5 @@ full write-ups are in git history.
 - **#72** Freestyle: draw anything, find out what it is — 2026-10-18
 - **#73** Scoring: a perfect drawing could score zero (bbox framing, sub-pixel islands, placement centroid) — 2026-10-18
 - **#77** Reach any country, and any toggle, from a URL — 2026-10-18
+- **#70** Coverage: sortable columns and a gaps-only view — 2026-10-18
+- **#71** Flag-colour review moves into Coverage; data-map becomes pipeline-only — 2026-10-18
