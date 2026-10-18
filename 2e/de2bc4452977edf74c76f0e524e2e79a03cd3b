@@ -1,0 +1,19 @@
+TODO.md
+  s_38dc4cd5c4cbf5::t_d68b95e7cea4b2 185-218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2ede2bc4452977edf74c76f0e524e2e79a03cd3b",
+  "prompts": {},
+  "sessions": {
+    "s_38dc4cd5c4cbf5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7f0973d8-a92b-4e21-919f-c9d746273b23",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
