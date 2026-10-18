@@ -127,6 +127,26 @@ for (const code of Object.keys(entities).sort()) {
   heritage[code] = e;
 }
 
+// One global position per site, so "#3" means the same thing in the wall and in a
+// country's panel rather than being a different number in each. UNESCO does not rank
+// its sites — this is our most-written-about ordering, and the UI has to say so.
+{
+  const order = [];
+  const seen = new Set();
+  for (const h of Object.values(heritage)) {
+    for (const site of h.sites) {
+      if (seen.has(site.id)) continue;
+      seen.add(site.id);
+      order.push(site);
+    }
+  }
+  order.sort((a, b) => (b.fame || 0) - (a.fame || 0) || a.name.localeCompare(b.name));
+  const rankById = new Map(order.map((site, i) => [site.id, i + 1]));
+  for (const h of Object.values(heritage)) {
+    for (const site of h.sites) site.rank = rankById.get(site.id);
+  }
+}
+
 writeFileSync(OUT, `${JSON.stringify({
   source: 'UNESCO World Heritage Centre, via data.unesco.org (whc001)',
   retrieved: new Date().toISOString().slice(0, 10),

@@ -778,7 +778,8 @@ export class DataExplorer {
     const blurb = document.createElement('div');
     blurb.className = 'explore-blurb';
     blurb.textContent = `${sites.length} UNESCO World Heritage sites`
-      + `${this.continent ? ` in ${this.continent}` : ''} · most written-about first · `
+      + `${this.continent ? ` in ${this.continent}` : ''} · ordered by how many Wikipedia `
+      + 'languages cover them, and #N is that position — UNESCO does not rank its sites · '
       + 'press one for its country';
     list.appendChild(blurb);
 

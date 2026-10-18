@@ -128,6 +128,20 @@ subset:
 Territories: On, and one, the Old City of Jerusalem, carries no ISO code in UNESCO's own data
 ("Site proposed by Jordan") and so belongs to no country here.
 
+**Owner review (2026-10-18), both acted on:**
+- *"show the index in the unesco list of the site as well (like is lake baikal number 3 or
+  87)."* Each site now carries a **global position** — a badge on the tile, `#18 · Cultural`
+  on a panel row — so the number means the same thing wherever you meet it. Lake Baikal is
+  **#6 of 1272**, Stonehenge #18, Venice #2. UNESCO does not rank its sites, so the blurb and
+  the badge's tooltip both say the order is ours and what it is based on.
+- *"year thing is obviously not interesting. 1986 whatever stonehenge."* Correct — it was the
+  year UNESCO added the site, which says nothing about the site, and "Stonehenge · 1986"
+  invites reading 1986 as a date about Stonehenge. **Dropped from the card.** A construction
+  date would have been the interesting number and Wikidata's inception property was tried
+  first: **41% coverage**, nothing for natural sites by definition, and wrong where it does
+  exist — it dates Machu Picchu to **1981**. A blank beats a confident wrong year. The
+  inscription year stays in the data, unrendered, for anything later that wants it.
+
 **Still deferred:** anything quiz-shaped — "which country is this site in" — now that the
 data to build it exists.
 

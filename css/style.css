@@ -3278,3 +3278,17 @@ canvas {
   .whs-wall { grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); }
 }
 .explore-container.is-wide { max-width: 1180px; }
+.whs-shot { position: relative; }
+.whs-rank {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  background: rgba(13, 17, 23, 0.78);
+  border-radius: 5px;
+  padding: 1px 5px;
+  cursor: help;
+}

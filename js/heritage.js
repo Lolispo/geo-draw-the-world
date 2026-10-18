@@ -55,6 +55,14 @@ const CAT_LABEL = { cultural: 'Cultural', natural: 'Natural', mixed: 'Mixed' };
 
 // One site, as a row (panel) or a tile (wall). `flag` adds the country, which the wall
 // needs and a country's own panel does not.
+//
+// The inscription year is deliberately NOT shown. It is the year UNESCO added the site,
+// which says nothing about the site — "Stonehenge · 1986" invites you to read 1986 as a
+// date about Stonehenge (owner, 2026-10-18). A construction date would be the
+// interesting number, and Wikidata's inception property was tried: 41% coverage, no
+// natural sites by definition, and wrong where it does exist — it dates Machu Picchu to
+// 1981. A blank is better than a confident wrong year, so the field is carried in the
+// data and left out of the card.
 export function siteCard(site, { tile = false, flag = null } = {}) {
   const el = document.createElement(tile ? 'div' : 'li');
   el.className = tile ? 'whs-tile' : 'whs-row';
@@ -82,7 +90,7 @@ export function siteCard(site, { tile = false, flag = null } = {}) {
   name.textContent = site.name;
   const meta = document.createElement('div');
   meta.className = 'whs-meta';
-  meta.textContent = [flag || null, CAT_LABEL[site.cat] || site.cat, site.year]
+  meta.textContent = [tile ? null : rankLabel(site), flag || null, CAT_LABEL[site.cat] || site.cat]
     .filter(Boolean).join(' · ');
   body.append(name, meta);
 
@@ -93,6 +101,24 @@ export function siteCard(site, { tile = false, flag = null } = {}) {
     body.appendChild(d);
   }
 
+  // On a tile the position goes on the photograph, where it survives the name wrapping
+  // to two lines.
+  if (tile && site.rank) {
+    const badge = document.createElement('span');
+    badge.className = 'whs-rank';
+    badge.textContent = `#${site.rank}`;
+    badge.title = RANK_TITLE;
+    shot.appendChild(badge);
+  }
+
   el.append(shot, body);
   return el;
+}
+
+// UNESCO does not rank its sites, so this must never read as though it does.
+const RANK_TITLE = 'Position in this app\u2019s most-written-about order '
+  + '(how many Wikipedia languages cover the site). UNESCO does not rank its sites.';
+
+function rankLabel(site) {
+  return site.rank ? `#${site.rank}` : null;
 }
