@@ -411,7 +411,7 @@ export class ExplorerMap {
   hoverLabel() {
     if (!this.hovered) return null;
     const code = this.hovered.code;
-    const say = (v) => (v == null ? 'no data' : this.formatValue(this.format, v));
+    const say = (v) => (v == null ? 'No data' : this.formatValue(this.format, v));
 
     if (!this._inScope(code)) {
       // A territory the filter excludes is still *somebody's* land, and the figure the
@@ -421,7 +421,7 @@ export class ExplorerMap {
       if (owner && this._inScope(owner.code)) {
         return `${owner.name} — ${say(this.values[owner.code])} · ${this.hovered.name}`;
       }
-      return `${this.hovered.name} — no data`;
+      return `${this.hovered.name} — No data`;
     }
     return `${this.hovered.name} — ${say(this.values[code])}`;
   }
@@ -540,7 +540,7 @@ export class ExplorerMap {
         label: `${this.formatValue(this.format, bounds[i])} – ${this.formatValue(this.format, bounds[i + 1])}`,
       });
     }
-    rows.push({ color: NO_DATA, label: 'no data' });
+    rows.push({ color: NO_DATA, label: 'No data' });
     return rows;
   }
 }

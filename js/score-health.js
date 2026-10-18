@@ -1,20 +1,30 @@
 // What a perfect drawing scores, per country (TODOS #73).
 //
-// A perfect player draws the country's own detailed outline, sizes it to the real area
-// and centres it on the landmass. Run that through the real scoreShape and the answer
-// should be 100/100/100 for everyone. Where it is not, the scoring cannot be satisfied —
-// which is invisible in a round, because a ceiling of 60 looks exactly like a bad
-// drawing. Surfaced as a column and three checks on the Coverage board.
+// Each term's ceiling is decided by one fact, so this needs no geometry beyond the
+// prerasterised masks the match panel has already loaded:
 //
-// Separate from js/data-health.js because this needs the geometry and the masks; that
-// file answers questions about the shipped data files alone and does not import either.
+//   shape      can reach 100 only if the country has something on the comparison grid.
+//              An empty mask — the Maldives failure, 518 atolls that each rasterised to
+//              nothing — makes every drawing score zero against it.
+//   size       can reach 100 only if the country has area on the world map. Vatican
+//              City's world-scale polygon is seven points at one coordinate, area
+//              exactly 0, so no drawing can ever match it.
+//   placement  can always reach 100; you can place a shape exactly.
+//
+// An earlier version built a simulated perfect player from each country's detailed
+// outline and ran the real scoreShape over it. That agreed with this for 250 of 251
+// countries, cost 251 extra file fetches and 5.5 MB, and was *wrong* on the one it
+// disagreed about: scaling the simulated player to match a zero-area reference collapsed
+// it to a point, reporting Vatican City's shape ceiling as 0 when its outline is
+// perfectly drawable and a real round scores it around 71.
+//
+// The end-to-end verification still exists where it costs nothing to a reader:
+// `npm run check:masks` runs the real rasteriser over all 251 countries at build time.
 
-import { Shape } from './shape.js';
-import { scoreShape } from './scoring.js';
-import { maskCount } from './raster.js';
-import { multiPolygonArea, multiPolygonCentroid, mainLandmassCentroid } from './utils.js';
+import { maskCount, maskIoU } from './raster.js';
+import { multiPolygonArea } from './utils.js';
 import { loadShapeMasks } from './shape-match.js';
-import { loadWorldOutlines, getCountryByCode } from './geo-data.js';
+import { loadWorldOutlines } from './geo-data.js';
 
 let _cache = null;
 
@@ -22,41 +32,26 @@ export async function scoreCeilings() {
   if (_cache) return _cache;
 
   const [masks, outlines] = await Promise.all([loadShapeMasks(), loadWorldOutlines()]);
-
-  // 251 outlines, fetched together rather than one after another — serially this took
-  // 5.5s and held up the whole board. geo-data caches each, so this is paid once.
-  const scored = outlines.filter((c) => masks.has(c.code));
-  const detailedBy = new Map();
-  const CHUNK = 24;
-  for (let i = 0; i < scored.length; i += CHUNK) {
-    const slice = scored.slice(i, i + CHUNK);
-    const got = await Promise.all(slice.map((c) => getCountryByCode(c.code).catch(() => null)));
-    slice.forEach((c, j) => detailedBy.set(c.code, got[j]));
-  }
-
   const rows = [];
-  for (const c of scored) {
+
+  for (const c of outlines) {
     const mask = masks.get(c.code);
-    const detailed = detailedBy.get(c.code);
-    if (!detailed?.polygons?.length) continue;
+    if (!mask) continue;                       // no detailed outline: not scored this way
 
-    const ref = new Shape(c.polygons, c.name, c.color);
-    ref.position = multiPolygonCentroid(c.polygons);
-    const refArea = multiPolygonArea(ref.getTransformedPolygons());
-
-    const player = new Shape(detailed.polygons, c.name, c.color);
-    const playerArea = multiPolygonArea(player.getTransformedPolygons());
-    // Sized to the real thing and centred on the landmass — a perfect round.
-    player.scale = Math.sqrt(refArea / (playerArea || 1));
-    player.position = mainLandmassCentroid(c.polygons);
-
-    const refCenter = mainLandmassCentroid(c.polygons);
-    const s = scoreShape(player, ref, { refMask: mask, refCenter });
+    const ink = maskCount(mask);
+    const shape = Math.round(maskIoU(mask, mask) * 100);
+    const size = multiPolygonArea(c.polygons) > 0 ? 100 : 0;
+    const placement = 100;
 
     rows.push({
-      code: c.code, name: c.name,
-      ink: maskCount(mask),                    // cells of 6400 there are to score against
-      shape: s.shape, size: s.size, placement: s.placement, total: s.total,
+      code: c.code,
+      name: c.name,
+      ink,
+      shape,
+      size,
+      placement,
+      // The same weighting scoreShape uses.
+      total: Math.round(shape * 0.4 + size * 0.3 + placement * 0.3),
     });
   }
 

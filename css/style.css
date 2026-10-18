@@ -1403,12 +1403,6 @@ canvas {
   box-shadow: 0 0 20px #bc8cff22;
 }
 
-#screen-rank-line {
-  padding: 12px;
-  overflow: hidden;
-  justify-content: flex-start;
-}
-
 .rank-line-container {
   width: 100%;
   max-width: 720px;
@@ -1834,12 +1828,6 @@ canvas {
 }
 
 /* ========== TOP 10 / BOTTOM 10 (TODOS #36) ========== */
-#screen-top-n {
-  padding: 12px;
-  overflow: hidden;
-  justify-content: flex-start;
-}
-
 .top-n-container {
   width: 100%;
   max-width: 720px;
@@ -2385,7 +2373,13 @@ canvas {
   box-shadow: 0 0 20px #58a6ff22;
 }
 
-#screen-explore {
+/* The list screens share one layout. Grouped rather than repeated, because Scores was
+   added without it and sat flush against the top of the window while every sibling had
+   12px (owner, 2026-10-18). */
+#screen-explore,
+#screen-rank-line,
+#screen-top-n,
+#screen-scores {
   padding: 12px;
   overflow: hidden;
   justify-content: flex-start;
@@ -2908,13 +2902,16 @@ canvas {
 }
 /* Coat of arms beside the flag (TODOS #31). Height-matched to the flag rather than
    width-matched: arms are portrait and flags landscape, so equal widths would tower. */
+/* Beside the flag, not at the far right of the header: the right is where Show on map
+   and the close button live, and an emblem pushed there overlapped them (owner,
+   2026-10-18). The two symbols of the country sitting together also reads better than
+   one at each end. */
 .cp-emblem {
   height: 72px;
   width: auto;
   max-width: 96px;
   object-fit: contain;
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .cp-name { font-size: 1.4rem; margin: 0; line-height: 1.15; }

@@ -131,8 +131,8 @@ function render(code) {
   else if (entity?.disputed) sub.push(entity.disputed);
   else if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type[0].toUpperCase() + entity.type.slice(1));
   if (sub.length) titleWrap.appendChild(el('div', 'cp-sub', sub.join(' · ')));
-  header.append(flag, titleWrap);
-  if (emblem) header.appendChild(emblem);
+  if (emblem) header.append(flag, emblem, titleWrap);
+  else header.append(flag, titleWrap);
   cardEl.appendChild(header);
 
   // Body: silhouette + facts
