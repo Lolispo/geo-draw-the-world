@@ -12,10 +12,17 @@ let _flagsRaw = null;
 let _aliases = null;
 let _aliasIndex = null;
 
+// Per-entity provenance, by the file it came from (TODOS #79). Three of our data files
+// carry a note saying where one country's figures actually came from — Taiwan's GDP is
+// IMF/DGBAS, not the World Bank — and until now nothing read them. Kept beside the data
+// as it loads, rather than re-fetched, because the files are 100-190 KB each.
+const _provenance = {};
+
 export async function loadDatasets() {
   if (_data) return _data;
   const resp = await fetch('data/datasets.json');
   _data = await resp.json();
+  _provenance['data/datasets.json'] = _data.provenance || {};
   return _data;
 }
 
@@ -29,7 +36,9 @@ export async function loadEntities() {
 export async function loadAttributes() {
   if (_attributes) return _attributes;
   const resp = await fetch('data/attributes.json');
-  _attributes = (await resp.json()).attributes;
+  const raw = await resp.json();
+  _attributes = raw.attributes;
+  _provenance['data/attributes.json'] = raw.provenance || {};
   return _attributes;
 }
 
@@ -140,7 +149,9 @@ export function getFlagColors(code) {
 export async function loadElectricity() {
   if (_electricity) return _electricity;
   const resp = await fetch('data/electricity.json');
-  _electricity = (await resp.json()).electricity;
+  const raw = await resp.json();
+  _electricity = raw.electricity;
+  _provenance['data/electricity.json'] = raw.provenance || {};
   return _electricity;
 }
 
@@ -220,6 +231,26 @@ export function canCombine(codeA, codeB) {
 export function getRawData() {
   return { datasets: _data, entities: _entities, attributes: _attributes, electricity: _electricity,
     flags: _flagsRaw || [], aliases: _aliases || {} };
+}
+
+// The entity count each data file actually holds right now, for the check that
+// data/sources.json has not fallen behind a rebuild (TODOS #79).
+export function liveCounts() {
+  return {
+    'data/datasets.json': count(_data?.countries),
+    'data/entities.json': count(_entities),
+    'data/attributes.json': count(_attributes),
+    'data/electricity.json': count(_electricity),
+  };
+}
+function count(map) {
+  return map && typeof map === 'object' ? Object.keys(map).length : null;
+}
+
+// What a specific entity's figures in a specific file actually came from, or null when
+// the file says nothing special about it and the source's own label is the whole truth.
+export function getEntityProvenance(file, code) {
+  return _provenance[file]?.[code] || null;
 }
 
 export function getKnownGap(metricId, code) {

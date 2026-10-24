@@ -9,11 +9,12 @@
 // unmatched so gaps are explicit (mirrors the datasets provenance approach).
 import { readFile, writeFile } from 'node:fs/promises';
 import { decodeEnt, makeMatcher } from './lib/names.mjs';
+import { SOURCES } from './lib/provenance.mjs';
 
 const OUT = process.argv[2] || 'data/attributes.json';
 const CONCURRENCY = 16;
-const RAW = 'https://raw.githubusercontent.com/factbook/factbook.json/master';
-const TREE = 'https://api.github.com/repos/factbook/factbook.json/git/trees/master?recursive=1';
+const RAW = SOURCES.factbook.endpoint;
+const TREE = SOURCES.factbook.tree;
 
 // ---- helpers -------------------------------------------------------------
 async function getJson(url, tries = 3) {

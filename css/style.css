@@ -2725,7 +2725,8 @@ canvas {
 .coverage-table tr.is-aggregate { background: #f8514920; }
 .coverage-table tr.is-aggregate .cov-type { color: var(--red); }
 .coverage-table .rank-flag { width: 24px; }
-.explore-list.is-coverage { overflow-x: auto; }
+.explore-list.is-coverage,
+.explore-list.is-sources { overflow-x: auto; }
 
 @media (max-width: 768px) {
   .explore-list { --explore-indent: calc(30px + 26px + 12px + 12px); }  /* smaller flag */
@@ -3220,6 +3221,68 @@ canvas {
 .cov-cell.cov-ceiling.no { font-weight: 700; }
 .cov-cell.cov-emblem { text-align: center; }
 .cov-cell.cov-emblem img { height: 34px; width: auto; max-width: 48px; object-fit: contain; vertical-align: middle; }
+
+/* ========== DATA SOURCES (TODOS #79) ========== */
+.cp-metric-source { margin-top: 5px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px; font-size: 0.68rem; }
+.cp-metric-source-label { color: var(--text-dim); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.04em; }
+.cp-metric-source a { color: var(--accent); text-decoration: none; }
+.cp-metric-source a:hover { text-decoration: underline; }
+/* A figure that did NOT come from the metric's usual source has to say so where the
+   figure is, not only in the sources table. */
+.cp-metric-source-flag {
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 4px;
+  opacity: 0.85;
+}
+
+/* Prose and URLs, not ticks: the coverage table centres its cells, which reads wrong
+   for a column of sentences. */
+.sources-table th,
+.sources-table td { text-align: left; vertical-align: top; }
+.sources-table th:nth-child(4),
+.sources-table td.src-covers { text-align: right; }
+.src-name a { color: var(--text); font-weight: 600; text-decoration: none; }
+.src-name a:hover { color: var(--accent); text-decoration: underline; }
+.src-endpoint {
+  color: var(--text-dim);
+  font-size: 0.64rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  opacity: 0.75;
+  margin-top: 2px;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.src-what { color: var(--text-dim); max-width: 340px; }
+.src-metrics { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.src-metric {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.66rem;
+  color: var(--text);
+}
+.src-license a { color: var(--accent); text-decoration: none; }
+.src-license a:hover { text-decoration: underline; }
+.src-covers { text-align: right; font-variant-numeric: tabular-nums; }
+.src-when { white-space: nowrap; color: var(--text-dim); }
+.src-when.is-stale { color: var(--warn, #f59e0b); font-weight: 600; }
+
+@media (max-width: 640px) {
+  /* The endpoint and the metric chips are the first things to go: on a phone the
+     source, its licence and its age are what the table is for. */
+  /* Five columns do not fit 390px, and the ones worth having there are which source,
+     under what licence, and how old. The prose and the endpoint are desktop detail;
+     keeping them pushed licence and age off the end of a scroll nobody would guess
+     was there. */
+  .src-endpoint,
+  .src-metrics,
+  .sources-table th:nth-child(2),
+  .sources-table td:nth-child(2) { display: none; }
+}
 
 /* ========== TRADE PARTNERS (TODOS #30) ========== */
 /* The back arrow sits in the flow above the header rather than beside the close button:

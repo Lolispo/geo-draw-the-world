@@ -10,6 +10,7 @@ import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl } from './emblems.js';
 import { loadHeritage, sitesFor, siteCard } from './heritage.js';
 import { loadRelations, hasTrade, partnerSection, reciprocalSection } from './relations.js';
+import { loadSources, sourceLineFor } from './sources.js';
 import { drawSilhouette } from './silhouette.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
@@ -44,7 +45,7 @@ let trail = [];
 
 function ensureData() {
   if (!dataPromise) {
-    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations()]);
+    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations(), loadSources()]);
   }
   return dataPromise;
 }
@@ -208,6 +209,24 @@ function render(code) {
     // Hover says what the metric measures on a desktop; tapping the tile says it on a
     // phone, which has no hover at all (TODOS #42).
     const desc = el('div', 'cp-metric-desc', ds.blurb);
+    // Where this country's figure came from (TODOS #79) — the per-entity note where
+    // there is one, so Taiwan's GDP says IMF/DGBAS rather than World Bank.
+    const src = sourceLineFor(ds, code);
+    if (src) {
+      const line = el('div', 'cp-metric-source');
+      line.appendChild(el('span', 'cp-metric-source-label', 'Source'));
+      const link = document.createElement('a');
+      link.href = src.source.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = src.text;
+      link.title = src.isOverride
+        ? `${src.text} — this entity's figures do not come from ${src.source.label}`
+        : src.source.provides;
+      line.appendChild(link);
+      if (src.isOverride) line.appendChild(el('span', 'cp-metric-source-flag', 'not ' + src.source.label));
+      desc.appendChild(line);
+    }
     desc.hidden = true;
     cell.appendChild(desc);
     cell.title = ds.blurb;

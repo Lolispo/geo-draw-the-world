@@ -15,12 +15,45 @@
 
 const rgbDist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 
-export function runDataChecks({ entities, datasets, attributes, electricity, flags, aliases }) {
+export function runDataChecks({ entities, datasets, attributes, electricity, flags, aliases, sources, counts }) {
   const out = [];
   const add = (state, what, detail, codes = []) => out.push({ state, what, detail, codes });
   const codes = Object.keys(entities);
   const V = (id) => datasets.datasets.find((d) => d.id === id)?.values || {};
   const name = (c) => entities[c]?.name ?? c;
+
+  // 0. is data/sources.json still describing the data we actually have? (TODOS #79)
+  //
+  // Regenerating the registry after a data rebuild is the step a human skips, and a
+  // stale "retrieved" date is invisible — it looks exactly like a fresh one. The entity
+  // counts are the tell: sources.json records what each file held when it was
+  // generated, so a file that has since grown or shrunk proves the registry is behind.
+  if (sources) {
+    const src = sources.sources || {};
+    const behind = [];
+    for (const [id, s] of Object.entries(src)) {
+      for (const f of s.files || []) {
+        const live = counts?.[f.path];
+        if (live == null || f.covers == null) continue;
+        if (live !== f.covers) behind.push(`${f.path}: ${live} now, ${f.covers} when ${id} was recorded`);
+      }
+    }
+    add(behind.length ? 'fail' : 'pass', 'data/sources.json is up to date',
+      behind.length
+        ? `${behind.length} file(s) have changed since the registry was generated — run `
+          + `\`node scripts/build-sources.mjs\`. ${behind.join('; ')}`
+        : 'Every file the registry describes still holds the number of entities it recorded.');
+
+    // A metric nobody declared a source for would show no provenance at all, silently.
+    const unsourced = (datasets?.datasets || [])
+      .filter((d) => !d.source || !src[d.source])
+      .map((d) => d.id);
+    add(unsourced.length ? 'fail' : 'pass', 'every metric names a source we know',
+      unsourced.length
+        ? `${unsourced.join(', ')} — add the source to scripts/lib/provenance.mjs and re-run the builds.`
+        : `All ${(datasets?.datasets || []).length} metrics resolve to an entry in data/sources.json.`,
+      []);
+  }
 
   // 1. the joins
   {

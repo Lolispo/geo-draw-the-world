@@ -29,10 +29,11 @@
 //
 // Usage: node scripts/build-heritage.mjs [outPath]
 import { readFileSync, writeFileSync } from 'node:fs';
+import { SOURCES } from './lib/provenance.mjs';
 
 const OUT = process.argv[2] || 'data/heritage.json';
 const COLS = 'id_no,name_en,iso_codes,states_names,category,transboundary,date_inscribed,danger';
-const URL = `https://data.unesco.org/api/explore/v2.1/catalog/datasets/whc001/exports/csv?select=${COLS}`;
+const URL = `${SOURCES['unesco-whc'].endpoint}?select=${COLS}`;
 
 // The list has been over 1000 sites since 2012. Anything near empty means the portal
 // changed shape or failed, and shipping that silently is the failure mode TODOS #46
@@ -48,7 +49,7 @@ const UA = 'geo-draw-the-world/1.0 (hobby project)';
 // the max sitelink count across components stands for the whole.
 async function wikidata(select, where) {
   const q = `SELECT ${select} WHERE { ?s wdt:P757 ?id . ${where} }`;
-  const r = await fetch('https://query.wikidata.org/sparql', {
+  const r = await fetch(SOURCES.wikidata.endpoint, {
     method: 'POST',
     headers: { 'User-Agent': UA, Accept: 'text/csv', 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ query: q }),

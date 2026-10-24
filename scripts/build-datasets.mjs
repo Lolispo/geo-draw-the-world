@@ -1,30 +1,18 @@
 // Build data/datasets.json from World Bank indicators + a static continent map,
 // plus datasets derived from files other build scripts own (see 'derived datasets').
 // Usage: node scripts/build-datasets.mjs [outPath]
+//
+// Run `build-entities.mjs --write` afterwards. The World Bank's own country names are
+// not the ones the app shows — it says "Congo, Dem. Rep.", "Bahamas, The" and
+// "Cote d'Ivoire" — and build-entities reconciles them to the display names. Writing
+// this file without that second step silently regresses every one of them.
 import { readFile, writeFile } from 'node:fs/promises';
+import { INDICATORS } from './lib/indicators.mjs';
+import { SOURCES } from './lib/provenance.mjs';
+
+const WB = SOURCES['world-bank'].endpoint;
 
 const OUT = process.argv[2] || 'data/datasets.json';
-
-// `summable: true` marks an EXTENSIVE quantity — one where adding two countries'
-// values produces a meaningful third (TODOS #37, which generates "is A + B bigger
-// than C?" questions). It is declared, never inferred, and defaults to false,
-// because the wrong answer is silent: summing GDP per capita, life expectancy,
-// urbanization or any percentage share is arithmetic nonsense (they need
-// population weighting), and summing independence years is nonsense of a more
-// obvious kind. Anything that consumes this flag must opt in on it.
-const INDICATORS = [
-  { id: 'gdp-nominal',     wb: 'NY.GDP.MKTP.CD', name: 'Total GDP',       blurb: 'Nominal GDP, latest year (World Bank)',         format: 'currency-short', summable: true },
-  { id: 'population',      wb: 'SP.POP.TOTL',     name: 'Population',      blurb: 'Total population, latest year (World Bank)',     format: 'number-short', summable: true },
-  { id: 'gdp-per-capita',  wb: 'NY.GDP.PCAP.CD',  name: 'GDP per capita', blurb: 'GDP per person, latest year (World Bank)',       format: 'currency-short' },
-  { id: 'land-area',       wb: 'AG.LND.TOTL.K2',  name: 'Land area',      blurb: 'Land area in km², latest year (World Bank)',     format: 'area-km2', summable: true },
-  { id: 'life-expectancy', wb: 'SP.DYN.LE00.IN',  name: 'Life expectancy',blurb: 'Life expectancy at birth, latest (World Bank)', format: 'years' },
-  { id: 'exports',         wb: 'NE.EXP.GNFS.CD',  name: 'Total exports',  blurb: 'Exports of goods & services, current US$ (World Bank)', format: 'currency-short', summable: true },
-  { id: 'urbanization',    wb: 'SP.URB.TOTL.IN.ZS', name: 'Urbanization', blurb: 'Urban population, % of total (World Bank)',       format: 'percent' },
-  // TODOS #27. Taken straight from the World Bank rather than dividing our own
-  // `exports` by `gdp-nominal`: those two resolve their latest non-null year per
-  // country independently, so the ratio could silently mix 2019 exports with 2023 GDP.
-  { id: 'export-share-gdp', wb: 'NE.EXP.GNFS.ZS', name: 'Exports % of GDP', blurb: 'Exports of goods & services as % of GDP (World Bank)', format: 'percent' },
-];
 
 // Static ISO2 -> continent (transcontinental countries use their common/REST-Countries primary).
 const CONTINENTS = {
@@ -56,7 +44,7 @@ async function getJson(url, tries = 3) {
 }
 
 // Real countries (drop aggregates) + ISO2 -> name
-const meta = (await getJson('https://api.worldbank.org/v2/country?format=json&per_page=400'))[1];
+const meta = (await getJson(`${WB}/country?format=json&per_page=400`))[1];
 const nameByIso2 = new Map();
 for (const c of meta) {
   if (!c.region || c.region.value === 'Aggregates') continue;
@@ -66,7 +54,7 @@ for (const c of meta) {
 
 // Indicator: pick most recent non-null value per country from a recent window
 async function fetchIndicator(code) {
-  const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&date=2015:2023&per_page=20000`;
+  const url = `${WB}/country/all/indicator/${code}?format=json&date=2015:2023&per_page=20000`;
   const rows = (await getJson(url))[1] || [];
   const best = new Map();
   for (const row of rows) {
@@ -173,6 +161,11 @@ for (const ind of INDICATORS) {
   }
   datasets.push({
     id: ind.id, name: ind.name, blurb: ind.blurb, format: ind.format, higherFirst: true,
+    // Which third party this came from, recorded by the build that knows rather than
+    // by a lookup table somebody has to keep in step (TODOS #79). The sources view and
+    // the ⓘ line both read it; build-sources.mjs refuses to write if it names a source
+    // the registry does not have.
+    source: 'world-bank',
     ...(ind.summable ? { summable: true } : {}),
     values, years,
   });
@@ -219,6 +212,7 @@ async function readJsonIfPresent(path) {
       blurb: 'Year the country became independent (CIA World Factbook)',
       format: 'year',
       higherFirst: false,
+      source: 'factbook',
       values,
     });
     console.log(`Independence year: ${Object.keys(values).length} countries (derived)`);
@@ -254,7 +248,7 @@ async function readJsonIfPresent(path) {
         years[code] = entry.year;
         usedCodes.add(code);
       }
-      datasets.push({ id: slice.id, name: slice.name, blurb: slice.blurb, format: 'percent', higherFirst: true, values, years });
+      datasets.push({ id: slice.id, name: slice.name, blurb: slice.blurb, format: 'percent', higherFirst: true, source: 'ember-owid', values, years });
       console.log(`${slice.name}: ${Object.keys(values).length} countries (derived)`);
     }
   }

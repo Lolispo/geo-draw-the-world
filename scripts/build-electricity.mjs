@@ -13,9 +13,11 @@
 // understates nuclear/coal/gas. "This country runs on nuclear" is a claim about
 // generation, so generation is what we show.
 import { readFile, writeFile } from 'node:fs/promises';
+// Aliased: this build already has a SOURCES — the electricity generation sources.
+import { SOURCES as REGISTRY } from './lib/provenance.mjs';
 
 const OUT = process.argv[2] || 'data/electricity.json';
-const CSV = 'https://ourworldindata.org/grapher/share-elec-by-source.csv?csvType=full&useColumnShortNames=true';
+const CSV = `${REGISTRY['ember-owid'].endpoint}?csvType=full&useColumnShortNames=true`;
 
 // Ember carries history back to 1900. Anything older than this is too stale to present
 // as "how this country makes electricity" — reported and dropped rather than shown.
@@ -102,7 +104,7 @@ function parseCsv(text) {
 const entities = JSON.parse(await readFile('data/entities.json', 'utf8')).entities;
 
 console.log('Fetching World Bank country list for ISO3 -> ISO2…');
-const wb = JSON.parse(await get('https://api.worldbank.org/v2/country?format=json&per_page=400'))[1];
+const wb = JSON.parse(await get(`${REGISTRY['world-bank'].endpoint}/country?format=json&per_page=400`))[1];
 const iso2ByIso3 = new Map();
 for (const c of wb) {
   if (!c.region || c.region.value === 'Aggregates') continue;

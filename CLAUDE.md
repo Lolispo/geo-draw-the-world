@@ -22,7 +22,7 @@ him. What is specific to this repo:
 #/top10                                   Top 10 / Bottom 10 picker
 #/rank[/<datasetId>]                      Rank the World
 #/flags  #/flag-picker                    the two flag games
-#/explore[/map|/shapes|/heritage|/coverage]?metric=<id>&continent=<name>
+#/explore[/map|/shapes|/heritage|/coverage|/sources]?metric=<id>&continent=<name>
 #/scores                                  Your Scores
 #/country/<code>                          menu with that country's panel open
 ```
@@ -37,6 +37,22 @@ off. Spell out `=0` in a link that needs one off.
 Unknown routes, views and continents fall back rather than rendering blank. The app writes its
 own URL with `history.replaceState`, which fires neither `hashchange` nor `popstate` — so there
 is no guard flag and no re-entry loop. Keep it that way.
+
+## Data builds
+
+Every third-party endpoint lives in `scripts/lib/provenance.mjs`, and the build scripts fetch
+from it — so a URL is changed there, once, not in the script that uses it.
+
+Two ordering rules the builds do not enforce for themselves:
+
+- **`npm run build:datasets` must be followed by `node scripts/build-entities.mjs --write`.**
+  The World Bank's own country names are not the ones the app shows ("Congo, Dem. Rep.",
+  "Bahamas, The", "Cote d'Ivoire"); build-entities reconciles them. Skipping it silently
+  regresses every one.
+- **`npm run build:sources` after any data build.** It regenerates `data/sources.json`, whose
+  retrieval dates and coverage counts the Sources view reads. Forgetting is caught rather than
+  silent: the Coverage health strip fails with *"data/sources.json is up to date"* as soon as a
+  file holds a different number of entities than the registry recorded.
 
 ## Verifying a change
 

@@ -6,20 +6,23 @@
 // change rarely, so cache them next to the repo instead and let the build fetch
 // its own inputs.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { SOURCES } from './provenance.mjs';
 
 const CACHE = '.cache';
 
-const NE = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson';
-const SOURCES = {
+const NE = SOURCES['natural-earth'].endpoint;
+
+// The large files the geometry builds read, by cache filename.
+const DOWNLOADS = {
   'ne50.geojson':         `${NE}/ne_50m_admin_0_countries.geojson`,
   'ne10.geojson':         `${NE}/ne_10m_admin_0_countries.geojson`,
   'ne10_units.geojson':   `${NE}/ne_10m_admin_0_map_units.geojson`,
   'ne10_disputed.geojson':`${NE}/ne_10m_admin_0_disputed_areas.geojson`,
-  'mledoze.json':         'https://raw.githubusercontent.com/mledoze/countries/master/countries.json',
+  'mledoze.json':         SOURCES['mledoze-countries'].endpoint,
 };
 
 export async function source(name) {
-  const url = SOURCES[name];
+  const url = DOWNLOADS[name];
   if (!url) throw new Error(`unknown source ${name}`);
   const path = `${CACHE}/${name}`;
   if (!existsSync(path)) {

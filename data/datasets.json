@@ -1024,6 +1024,7 @@
       "blurb": "Nominal GDP, latest year (World Bank)",
       "format": "currency-short",
       "higherFirst": true,
+      "source": "world-bank",
       "summable": true,
       "values": {
         "af": 17152234637,
@@ -1465,6 +1466,7 @@
       "blurb": "Total population, latest year (World Bank)",
       "format": "number-short",
       "higherFirst": true,
+      "source": "world-bank",
       "summable": true,
       "values": {
         "af": 41454761,
@@ -1943,6 +1945,7 @@
       "blurb": "GDP per person, latest year (World Bank)",
       "format": "currency-short",
       "higherFirst": true,
+      "source": "world-bank",
       "values": {
         "af": 414,
         "al": 9741,
@@ -2383,6 +2386,7 @@
       "blurb": "Land area in km², latest year (World Bank)",
       "format": "area-km2",
       "higherFirst": true,
+      "source": "world-bank",
       "summable": true,
       "values": {
         "af": 652230,
@@ -2863,6 +2867,7 @@
       "blurb": "Life expectancy at birth, latest (World Bank)",
       "format": "years",
       "higherFirst": true,
+      "source": "world-bank",
       "values": {
         "af": 66,
         "al": 79.6,
@@ -3309,6 +3314,7 @@
       "blurb": "Exports of goods & services, current US$ (World Bank)",
       "format": "currency-short",
       "higherFirst": true,
+      "source": "world-bank",
       "summable": true,
       "values": {
         "af": 2784713052,
@@ -3697,6 +3703,7 @@
       "blurb": "Urban population, % of total (World Bank)",
       "format": "percent",
       "higherFirst": true,
+      "source": "world-bank",
       "values": {
         "af": 25.5,
         "al": 58.2,
@@ -4142,6 +4149,7 @@
       "blurb": "Exports of goods & services as % of GDP (World Bank)",
       "format": "percent",
       "higherFirst": true,
+      "source": "world-bank",
       "values": {
         "af": 16.2,
         "al": 38.4,
@@ -4529,6 +4537,7 @@
       "blurb": "Year the country became independent (CIA World Factbook)",
       "format": "year",
       "higherFirst": false,
+      "source": "factbook",
       "values": {
         "ad": 1278,
         "ae": 1971,
@@ -4734,6 +4743,7 @@
       "blurb": "Share of electricity generated from nuclear (Ember)",
       "format": "percent",
       "higherFirst": true,
+      "source": "ember-owid",
       "values": {
         "ae": 22.9,
         "af": 0,
@@ -5172,6 +5182,7 @@
       "blurb": "Share of electricity generated from coal (Ember)",
       "format": "percent",
       "higherFirst": true,
+      "source": "ember-owid",
       "values": {
         "ae": 0,
         "af": 3,
@@ -5610,6 +5621,7 @@
       "blurb": "Share from hydro, wind, solar, bioenergy & other renewables (Ember)",
       "format": "percent",
       "higherFirst": true,
+      "source": "ember-owid",
       "values": {
         "ae": 8.8,
         "af": 86.9,

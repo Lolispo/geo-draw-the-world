@@ -13,9 +13,10 @@
 //
 // Usage: node scripts/build-emblems.mjs [outPath]
 import { readFileSync, writeFileSync } from 'node:fs';
+import { SOURCES } from './lib/provenance.mjs';
 
 const OUT = process.argv[2] || 'data/emblems.json';
-const ENDPOINT = 'https://query.wikidata.org/sparql';
+const ENDPOINT = SOURCES.wikidata.endpoint;
 const UA = 'geo-draw-the-world/1.0 (hobby project; github.com/Lolispo/geo-draw-the-world)';
 
 const QUERY = `SELECT ?iso ?coa WHERE {

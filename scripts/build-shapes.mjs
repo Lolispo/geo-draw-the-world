@@ -11,11 +11,12 @@
 // leaving every other file in data/shapes/ untouched; no args = full rebuild)
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { source } from './lib/sources.mjs';
+import { SOURCES } from './lib/provenance.mjs';
 
 const NORM = 1000, DP_EPS = 0.35, CLIP_DEG = 15, CLIP_AREA_FRAC = 0.35, MIN_RING_FRAC = 0.0008;
 const CONCURRENCY = 12;
 // github.com/.../raw resolves Git LFS (raw.githubusercontent serves only LFS pointers).
-const GB = 'https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/gbOpen';
+const GB = SOURCES.geoboundaries.endpoint;
 // geoBoundaries publishes each boundary twice, and neither variant is right on its own.
 // `_simplified` is small but pre-thinned, and for a microstate it — not our own
 // Douglas-Peucker pass — decides the outcome: San Marino arrives with 52 vertices where

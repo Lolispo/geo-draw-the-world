@@ -6,6 +6,7 @@
 //
 // Usage: node scripts/build-entities.mjs [--write]   (default: dry report)
 import { readFileSync, writeFileSync } from 'node:fs';
+import { SOURCES } from './lib/provenance.mjs';
 
 const WRITE = process.argv.includes('--write');
 const REGIONS = ['africa', 'europe', 'asia', 'north-america', 'south-america', 'oceania'];
@@ -225,7 +226,7 @@ for (const code of BUNDLED_FLAGS) if (entities[code]) entities[code].hasFlagImag
     while (i < probe.length) {
       const code = probe[i++];
       try {
-        const r = await fetch(`https://flagcdn.com/w20/${code}.png`, { method: 'HEAD' });
+        const r = await fetch(`${SOURCES.flagcdn.endpoint}w20/${code}.png`, { method: 'HEAD' });
         entities[code].hasFlagImage = r.ok;
       } catch { /* offline: leave false, degrades to colors-only */ }
     }

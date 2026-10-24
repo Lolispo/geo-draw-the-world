@@ -1,7 +1,7 @@
 // Data Explorer — browse the collected datasets as ranked country lists,
 // filterable by continent and sortable. Read-only learning view.
 
-import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap, getRawData, loadAttributes, loadElectricity, loadFlagColors as _lfc } from './datasets.js';
+import { loadDatasets, loadEntities, loadAliases, loadFlagColors, getFlagColors, getDatasetList, getDataset, getContinents, getEntries, getEntitiesList, inCountryPool, getMetricMeta, formatValue, getAliases, getRank, getEntity, getKnownGap, getRawData, liveCounts, loadAttributes, loadElectricity, loadFlagColors as _lfc } from './datasets.js';
 import { readFlagColors, missingFromImage } from './flag-colors.js';
 import { runDataChecks, runScoringChecks } from './data-health.js';
 import { scoreCeilings, ceilingByCode } from './score-health.js';
@@ -13,6 +13,7 @@ import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl, emblemFile } from './emblems.js';
 import { loadHeritage, allSites, siteCard } from './heritage.js';
 import { loadRelations, hasTrade } from './relations.js';
+import { loadSources, allSources, formatAge, isStale, STALE_DAYS, sourcesRaw } from './sources.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
 
 
@@ -39,6 +40,7 @@ const VIEWS = [
   { id: 'shapes', label: '🧩 Shapes' },
   { id: 'heritage', label: '🏛️ Heritage' },
   { id: 'coverage', label: '📋 Coverage' },
+  { id: 'sources', label: '🔗 Sources' },
 ];
 
 // One order list for every view that has rows. The table view used to own "by
@@ -98,7 +100,7 @@ export class DataExplorer {
     await loadFlagColors();
     // The Coverage health strip asks cross-file questions, so it needs the files the
     // rank views never touch.
-    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations()]);
+    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations(), loadSources()]);
     this._loaded = true;
   }
 
@@ -124,13 +126,15 @@ export class DataExplorer {
     this._mapResize?.disconnect();
     this._mapResize = null;
     c.innerHTML = '';
-    // A wall of photographs wants the screen; 720px of it is three tiles across.
-    c.classList.toggle('is-wide', this.view === 'heritage');
+    // A wall of photographs wants the screen, and so does a five-column table of
+    // sources with URLs in it.
+    c.classList.toggle('is-wide', this.view === 'heritage' || this.view === 'sources');
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
     this._listEl.className = 'explore-list'
       + (this.view === 'coverage' ? ' is-coverage' : '')
+      + (this.view === 'sources' ? ' is-sources' : '')
       + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
     this.onState?.({
@@ -147,7 +151,8 @@ export class DataExplorer {
 
   _renderBody() {
     if (this.view !== 'map') this._mapView = null;   // leaving the map forgets its zoom
-    if (this.view === 'coverage') this._renderCoverage();
+    if (this.view === 'sources') this._renderSources();
+    else if (this.view === 'coverage') this._renderCoverage();
     else if (this.view === 'heritage') this._renderHeritage();
     else if (this.view === 'shapes') this._renderShapes();
     else if (this.view === 'map') this._renderMap();
@@ -395,11 +400,14 @@ export class DataExplorer {
       ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
     }
 
-    bar.appendChild(this._select(
-      [{ id: '', label: 'All continents' }, ...getContinents().map((c) => ({ id: c, label: c }))],
-      this.continent || '',
-      (v) => { this.continent = v || null; this._renderBody(); },
-    ));
+    // A list of third parties has no continent and no territories.
+    if (this.view !== 'sources') {
+      bar.appendChild(this._select(
+        [{ id: '', label: 'All continents' }, ...getContinents().map((c) => ({ id: c, label: c }))],
+        this.continent || '',
+        (v) => { this.continent = v || null; this._renderBody(); },
+      ));
+    }
 
     if (hasRows) {
       bar.appendChild(this._select(ORDERS, this.order, (v) => {
@@ -436,9 +444,11 @@ export class DataExplorer {
         () => { this.gapsOnly = !this.gapsOnly; this._render(); }));
     }
 
-    bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
-      'Include small dependent/autonomous territories here. The games keep their own setting.',
-      () => { setExploreTerritories(!getExploreTerritories()); this._render(); }));
+    if (this.view !== 'sources') {
+      bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
+        'Include small dependent/autonomous territories here. The games keep their own setting.',
+        () => { setExploreTerritories(!getExploreTerritories()); this._render(); }));
+    }
 
     if (rankView) {
       const playBtn = document.createElement('button');
@@ -702,7 +712,7 @@ export class DataExplorer {
     wrap.className = 'cov-health';
     let checks;
     try {
-      checks = runDataChecks(getRawData());
+      checks = runDataChecks({ ...getRawData(), sources: sourcesRaw(), counts: liveCounts() });
     } catch (err) {
       wrap.textContent = `Integrity checks could not run: ${err.message}`;
       return wrap;
@@ -798,6 +808,110 @@ export class DataExplorer {
       wall.appendChild(tile);
     }
     list.appendChild(wall);
+  }
+
+  // Every third party the app takes data from (TODOS #79). This is the answer to "where
+  // did this number come from" and to "what are we obliged to attribute", in one table.
+  // Nothing here is written by hand — data/sources.json is generated from the same
+  // registry the build scripts fetch with.
+  _renderSources() {
+    const list = this._listEl;
+    const sources = allSources();
+    const built = sources.filter((s) => !s.runtime);
+    const live = sources.filter((s) => s.runtime);
+    const stale = built.filter(isStale);
+
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb';
+    blurb.textContent = `${sources.length} sources · ${built.length} built into the repo, `
+      + `${live.length} hotlinked as the page renders`
+      + (stale.length ? ` · ${stale.length} not refreshed in over a year` : '');
+    list.appendChild(blurb);
+
+    const legend = document.createElement('div');
+    legend.className = 'explore-blurb cov-legend';
+    legend.textContent = 'Retrieved = when the data file was last committed, not when the '
+      + 'source last published — the figures themselves carry their own year. '
+      + `Anything over ${Math.round(STALE_DAYS / 365)} year old is flagged. `
+      + 'Live = hotlinked by the browser as the page renders, so there is nothing to refresh.';
+    list.appendChild(legend);
+
+    const table = document.createElement('table');
+    table.className = 'coverage-table sources-table';
+    const thead = document.createElement('thead');
+    const htr = document.createElement('tr');
+    for (const h of ['Source', 'What it gives us', 'Licence', 'Covers', 'Retrieved']) {
+      const th = document.createElement('th');
+      th.textContent = h;
+      htr.appendChild(th);
+    }
+    thead.appendChild(htr);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for (const s of [...built, ...live]) {
+      const tr = document.createElement('tr');
+      if (isStale(s)) tr.classList.add('incomplete');
+
+      const nameTd = document.createElement('td');
+      nameTd.className = 'src-name';
+      const link = document.createElement('a');
+      link.href = s.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = s.label;
+      nameTd.appendChild(link);
+      // The endpoint is the fact that lets someone check a figure themselves.
+      const ep = document.createElement('div');
+      ep.className = 'src-endpoint';
+      ep.textContent = s.endpoint;
+      ep.title = s.endpoint;
+      nameTd.appendChild(ep);
+
+      const whatTd = document.createElement('td');
+      whatTd.className = 'src-what';
+      whatTd.textContent = s.provides;
+      if (s.datasets?.length) {
+        const chips = document.createElement('div');
+        chips.className = 'src-metrics';
+        for (const d of s.datasets) {
+          const chip = document.createElement('span');
+          chip.className = 'src-metric';
+          chip.textContent = d.name;
+          chips.appendChild(chip);
+        }
+        whatTd.appendChild(chips);
+      }
+
+      const licTd = document.createElement('td');
+      licTd.className = 'src-license';
+      if (s.licenseUrl) {
+        const a = document.createElement('a');
+        a.href = s.licenseUrl;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = s.license;
+        licTd.appendChild(a);
+      } else {
+        licTd.textContent = s.license;
+      }
+
+      const coversTd = document.createElement('td');
+      coversTd.className = 'src-covers';
+      coversTd.textContent = s.covers != null ? String(s.covers) : '—';
+      if (s.files?.length) coversTd.title = s.files.map((f) => `${f.path} — ${f.covers ?? '?'} entities`).join('\n');
+
+      const whenTd = document.createElement('td');
+      whenTd.className = 'src-when' + (isStale(s) ? ' is-stale' : '');
+      whenTd.textContent = formatAge(s);
+      if (s.retrieved) whenTd.title = s.retrieved.slice(0, 10);
+      else if (s.runtime) whenTd.title = `Hotlinked by ${s.usedBy} as the page renders`;
+
+      tr.append(nameTd, whatTd, licTd, coversTd, whenTd);
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    list.appendChild(table);
   }
 
   _renderCoverage() {

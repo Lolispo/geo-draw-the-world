@@ -1,0 +1,250 @@
+{
+  "generated": "scripts/build-sources.mjs — do not edit by hand; re-run after any data build",
+  "sources": {
+    "world-bank": {
+      "label": "World Bank Open Data",
+      "url": "https://data.worldbank.org",
+      "endpoint": "https://api.worldbank.org/v2",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "provides": "GDP, population, land area, life expectancy, exports and urbanization",
+      "files": [
+        {
+          "path": "data/datasets.json",
+          "retrieved": "2026-10-18T20:58:59+02:00",
+          "covers": 252
+        }
+      ],
+      "retrieved": "2026-10-18T20:58:59+02:00",
+      "covers": 252,
+      "datasets": [
+        {
+          "id": "gdp-nominal",
+          "name": "Total GDP"
+        },
+        {
+          "id": "population",
+          "name": "Population"
+        },
+        {
+          "id": "gdp-per-capita",
+          "name": "GDP per capita"
+        },
+        {
+          "id": "land-area",
+          "name": "Land area"
+        },
+        {
+          "id": "life-expectancy",
+          "name": "Life expectancy"
+        },
+        {
+          "id": "exports",
+          "name": "Total exports"
+        },
+        {
+          "id": "urbanization",
+          "name": "Urbanization"
+        },
+        {
+          "id": "export-share-gdp",
+          "name": "Exports % of GDP"
+        }
+      ]
+    },
+    "ember-owid": {
+      "label": "Ember, via Our World in Data",
+      "url": "https://ourworldindata.org/grapher/share-elec-by-source",
+      "endpoint": "https://ourworldindata.org/grapher/share-elec-by-source.csv",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "provides": "the share of electricity actually generated from each source",
+      "files": [
+        {
+          "path": "data/electricity.json",
+          "retrieved": "2026-09-06T23:20:44+02:00",
+          "covers": 213
+        }
+      ],
+      "retrieved": "2026-09-06T23:20:44+02:00",
+      "covers": 213,
+      "datasets": [
+        {
+          "id": "elec-nuclear-pct",
+          "name": "Electricity from nuclear"
+        },
+        {
+          "id": "elec-coal-pct",
+          "name": "Electricity from coal"
+        },
+        {
+          "id": "elec-renewable-pct",
+          "name": "Electricity from renewables"
+        }
+      ]
+    },
+    "factbook": {
+      "label": "CIA World Factbook",
+      "url": "https://www.cia.gov/the-world-factbook/",
+      "endpoint": "https://raw.githubusercontent.com/factbook/factbook.json/master",
+      "license": "Public domain",
+      "licenseUrl": "https://www.cia.gov/the-world-factbook/about/copyright-and-contributors/",
+      "provides": "capitals, religion, independence dates and trade partners",
+      "files": [
+        {
+          "path": "data/attributes.json",
+          "retrieved": "2026-10-11T14:49:52+02:00",
+          "covers": 250
+        },
+        {
+          "path": "data/relations.json",
+          "retrieved": "2026-10-24T15:17:27+02:00",
+          "covers": 234
+        }
+      ],
+      "retrieved": "2026-10-24T15:17:27+02:00",
+      "covers": 250,
+      "datasets": [
+        {
+          "id": "independence-year",
+          "name": "Independence year"
+        }
+      ]
+    },
+    "unesco-whc": {
+      "label": "UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/",
+      "endpoint": "https://data.unesco.org/api/explore/v2.1/catalog/datasets/whc001/exports/csv",
+      "license": "CC BY-SA 3.0 IGO",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "provides": "the World Heritage List — every site, its category and its coordinates",
+      "files": [
+        {
+          "path": "data/heritage.json",
+          "retrieved": "2026-10-18T16:02:34+02:00",
+          "covers": 251
+        }
+      ],
+      "retrieved": "2026-10-18T16:02:34+02:00",
+      "covers": 251
+    },
+    "wikidata": {
+      "label": "Wikidata",
+      "url": "https://www.wikidata.org",
+      "endpoint": "https://query.wikidata.org/sparql",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "provides": "coat-of-arms filenames, and how many languages write about a heritage site",
+      "files": [
+        {
+          "path": "data/emblems.json",
+          "retrieved": "2026-10-18T15:08:00+02:00",
+          "covers": 239
+        }
+      ],
+      "retrieved": "2026-10-18T15:08:00+02:00",
+      "covers": 239
+    },
+    "geoboundaries": {
+      "label": "geoBoundaries",
+      "url": "https://www.geoboundaries.org",
+      "endpoint": "https://github.com/wmgeolab/geoBoundaries/raw/main/releaseData/gbOpen",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "provides": "the detailed country outlines the panel and the draw modes score against",
+      "files": [
+        {
+          "path": "data/shapes",
+          "retrieved": "2026-10-10T09:48:46+02:00",
+          "covers": 251
+        }
+      ],
+      "retrieved": "2026-10-10T09:48:46+02:00",
+      "covers": 251
+    },
+    "natural-earth": {
+      "label": "Natural Earth",
+      "url": "https://www.naturalearthdata.com",
+      "endpoint": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson",
+      "license": "Public domain",
+      "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "provides": "the world map geometry, and the outlines geoBoundaries does not carry",
+      "files": [
+        {
+          "path": "data/countries-africa.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 61
+        },
+        {
+          "path": "data/countries-europe.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 54
+        },
+        {
+          "path": "data/countries-asia.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 53
+        },
+        {
+          "path": "data/countries-north-america.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 41
+        },
+        {
+          "path": "data/countries-south-america.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 15
+        },
+        {
+          "path": "data/countries-oceania.json",
+          "retrieved": "2026-09-06T23:09:00+02:00",
+          "covers": 27
+        },
+        {
+          "path": "data/entities.json",
+          "retrieved": "2026-10-18T20:58:59+02:00",
+          "covers": 252
+        }
+      ],
+      "retrieved": "2026-10-18T20:58:59+02:00",
+      "covers": 252
+    },
+    "mledoze-countries": {
+      "label": "mledoze/countries",
+      "url": "https://github.com/mledoze/countries",
+      "endpoint": "https://raw.githubusercontent.com/mledoze/countries/master/countries.json",
+      "license": "ODbL 1.0",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "provides": "common country names and the ISO codes everything else joins on",
+      "files": [
+        {
+          "path": "data/entities.json",
+          "retrieved": "2026-10-18T20:58:59+02:00",
+          "covers": 252
+        }
+      ],
+      "retrieved": "2026-10-18T20:58:59+02:00",
+      "covers": 252
+    },
+    "flagcdn": {
+      "label": "flagcdn",
+      "url": "https://flagcdn.com",
+      "endpoint": "https://flagcdn.com/",
+      "license": "Public domain",
+      "licenseUrl": "https://flagcdn.com/",
+      "provides": "every flag image, hotlinked as the page renders",
+      "runtime": true,
+      "usedBy": "js/flags.js"
+    },
+    "wikimedia-commons": {
+      "label": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org",
+      "endpoint": "https://commons.wikimedia.org/wiki/Special:FilePath/",
+      "license": "Per file — Commons hosts no non-free media",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+      "provides": "coat-of-arms and World Heritage photographs, hotlinked as the page renders",
+      "runtime": true,
+      "usedBy": "js/emblems.js"
+    }
+  }
+}
