@@ -1,0 +1,48 @@
+scripts/lib/names.mjs
+  s_054fda4f8fda88::t_3f6ee618f422cb 1-85
+data/relations.json
+  s_054fda4f8fda88::t_8cf0577d0b3e29 3306,3308,4256,4258,5080,5082,5145,5147,6855,6857,13940,13942
+  s_054fda4f8fda88::t_4350d4a98bc53a 1-3305,3307,3309-4255,4257,4259-5079,5081,5083-5144,5146,5148-6854,6856,6858-13939,13941,13943-14195
+js/country-panel.js
+  s_054fda4f8fda88::t_4b83f8d6383151 12,242
+  s_054fda4f8fda88::t_5cf1b7dc00274a 39-44,47,72,78-90
+  s_054fda4f8fda88::t_76315d188407ef 111-121,249-259
+  s_054fda4f8fda88::t_26a33dfe7781c0 91,260
+js/relations.js
+  s_054fda4f8fda88::t_69a57acbdac96f 1-67,77-109,111-118,122-244
+  s_054fda4f8fda88::t_a01e094fb54b6a 68-76,110
+  s_054fda4f8fda88::t_198c02e5e18e14 119-121
+css/style.css
+  s_054fda4f8fda88::t_198c02e5e18e14 3275
+  s_054fda4f8fda88::t_fae45a8852535e 3224-3274,3276-3328
+js/data-explorer.js
+  s_054fda4f8fda88::t_2fd2477c431c15 15,101,826-832
+TODO.md
+  s_054fda4f8fda88::t_b116b78e507f17 171,173-175,179-209,211-224,229-231
+  s_054fda4f8fda88::t_cc099012913ae5 617-665
+  s_054fda4f8fda88::t_f4ba097bb7dc10 616
+scripts/build-relations.mjs
+  s_054fda4f8fda88::t_8cf0577d0b3e29 90-94
+  s_054fda4f8fda88::t_4e74ec884d48f8 1-89,95-192
+scripts/build-attributes.mjs
+  s_054fda4f8fda88::t_654c21dae295c1 11
+  s_054fda4f8fda88::t_6a244c25219455 48-49,151-152
+package.json
+  s_054fda4f8fda88::t_256f33b0456c48 27-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a60b5329b654feac99399ab733aac5c20e671358",
+  "prompts": {},
+  "sessions": {
+    "s_054fda4f8fda88": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c36bae55-a900-4049-845c-5ce25e627ebb",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
