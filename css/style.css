@@ -3221,6 +3221,111 @@ canvas {
 .cov-cell.cov-emblem { text-align: center; }
 .cov-cell.cov-emblem img { height: 34px; width: auto; max-width: 48px; object-fit: contain; vertical-align: middle; }
 
+/* ========== TRADE PARTNERS (TODOS #30) ========== */
+/* The back arrow sits in the flow above the header rather than beside the close button:
+   the top-right corner already holds Close and Show on map, and a third absolute
+   control there collides with the flag on a phone. */
+.cp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.cp-back:hover { color: var(--text); border-color: var(--accent); }
+
+.cp-trade { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+.cp-trade-head { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; }
+.cp-trade-section { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.cp-trade-section:last-child { margin-bottom: 0; }
+.cp-trade-section > .cp-section-label { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.cp-trade-year { font-variant-numeric: tabular-nums; opacity: 0.75; }
+
+.cp-trade-row {
+  display: grid;
+  grid-template-columns: 24px 104px 1fr 42px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 2px 4px;
+  margin: 0 -4px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+.cp-trade-row.is-clickable { cursor: pointer; transition: background 0.12s, border-color 0.12s; }
+.cp-trade-row.is-clickable:hover { background: var(--surface2); border-color: var(--border); }
+.cp-trade-flag { width: 24px; height: auto; border-radius: 2px; display: block; }
+.cp-trade-name { font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* A partner list with no published shares has no bar and no share column. */
+.cp-trade-row--nameonly { grid-template-columns: 24px 1fr; }
+
+.cp-trade-reciprocal { gap: 2px; }
+.cp-trade-recip-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 4px;
+  margin: 0 -4px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+}
+.cp-trade-recip-line:hover { background: var(--surface2); }
+.cp-trade-caret { color: var(--text-dim); font-size: 0.7rem; width: 10px; }
+.cp-trade-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0 10px 16px; }
+.cp-trade-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px 3px 4px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface2);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.72rem;
+}
+.cp-trade-chip img { width: 18px; height: auto; border-radius: 2px; }
+.cp-trade-chip.is-clickable { cursor: pointer; transition: border-color 0.12s; }
+.cp-trade-chip.is-clickable:hover { border-color: var(--accent); }
+.cp-trade-more {
+  border: 1px dashed var(--border);
+  border-radius: 999px;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.72rem;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.cp-trade-more:hover { color: var(--text); border-color: var(--accent); }
+
+@media (max-width: 480px) {
+  /* The name column gives way first: the flag already identifies the partner. */
+  .cp-trade-row { grid-template-columns: 22px minmax(64px, 88px) 1fr 38px; gap: 6px; }
+}
+
 /* ========== WORLD HERITAGE SITES (TODOS #46) ========== */
 .cp-heritage { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
 .cp-heritage-head { font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; }

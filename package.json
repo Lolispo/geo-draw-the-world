@@ -24,7 +24,8 @@
     "check:masks": "node scripts/check-shape-masks.mjs",
     "build:entities": "node scripts/build-entities.mjs",
     "build:emblems": "node scripts/build-emblems.mjs",
-    "build:heritage": "node scripts/build-heritage.mjs"
+    "build:heritage": "node scripts/build-heritage.mjs",
+    "build:relations": "node scripts/build-relations.mjs"
   },
   "keywords": [
     "geography",

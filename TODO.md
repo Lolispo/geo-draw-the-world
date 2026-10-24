@@ -168,33 +168,67 @@ format(s) and whether this is standalone or folded into item 22.
 
 ---
 
-## 30. Biggest trade partner + the relations data shape (dataset expansion, wave 3)
+## 30. Trade partners, both directions + the relations data shape (dataset expansion, wave 3)
 
-**What:** "The countries this country trades with the most" — top export partners with
-percentage shares, shown in the country panel as clickable rows.
+**What:** Who a country sells to and buys from — top-five export and import partners with
+percentage shares, as clickable rows in the country panel, plus the reciprocal: how many
+countries name *this* one in their own top five.
 
 **Why:** Owner request (2026-09-06), framed as "biggest trade partner / best friend".
 
+**Decided (owner, 2026-10-24)** when the shipped shape was agreed up front:
+- **Both directions, two sections.** Exports and imports have identical coverage in the
+  source, and the pair is the interesting part — Sweden sells to Germany *and* buys from
+  Germany, 10% against 17%.
+- **Clicking a partner replaces the panel and pushes onto a trail**, with a `←` back to
+  where you came from once the trail is deeper than one. Esc closes the lot. The panel
+  stays one reused overlay — the trail is an array of codes, not stacked DOM.
+- **The reciprocal ships too**, as two lines under the sections rather than two more
+  lists: "a top export destination for N countries" / "a top import source for N", each
+  expanding to a clickable flag grid.
+- **Deliberately not touching the URL.** The panel writes no hash today from any screen;
+  making it do so is #77's territory, not this item's.
+
+**Measured before building (2026-10-24), so none of it needs re-deriving:**
+- **236 of 260 Factbook files carry `Exports - partners`**, and `Imports - partners` has
+  identical coverage. The 24 without are Antarctica, the oceans, Svalbard and uninhabited
+  US minor islands. 225 of them match an entity in our registry.
+- **227 are 2023 with exactly five partners**; the rest are 2017-2022 or shorter. The year
+  is shown on the section, as the electricity mix does, because it genuinely varies.
+- **1,177 partner rows resolve to 133 distinct countries with 8 failures** — 4 `&amp;`
+  that `decodeEnt` already fixes, 2 comma-split artifacts (`Congo, Republic of the`), and
+  the prose prefix "almost entirely United Kingdom". So effectively every row can be a
+  working link, not merely most.
+- **The reciprocal index is worth having:** China is a top-five import source for **190 of
+  225** countries, the USA a top-five export destination for 113, Germany 72 either way.
+  The median country is named 3 times and only 13 are named more than 20 — so the list is
+  short for nearly everyone, and needs a cap for the dozen where it is not.
+- **Monaco publishes names with no percentages** (`Italy, Switzerland, Germany, Belgium,
+  Spain`). That is the `pct == null` case religion already handles for San Marino (#52):
+  names, no bars, and a note saying no shares were published.
+
 **Approach / notes:**
-- Source: CIA Factbook `Economy → Exports - partners`, already downloaded. Verified
-  for Sweden: `"Germany 10%, USA 10%, Denmark 8%, Norway 6%, Netherlands 5% (2023)"`.
-  Top five **with** percentages. `Imports - partners` is available in the same shape.
-- **This introduces a new data shape**: country→country relations. New
-  `data/relations.json`, keyed by code, with an `exportPartners` array of
-  `{ code, pct }`. Named specifically (not `partners`) so `importPartners` can be a
-  sibling key later.
-- Partner names must resolve to our ISO2 codes — reuse the `strip`/`flip`/`NAME_ALIAS`
-  matcher from `build-attributes.mjs` rather than writing a third one. Report
-  unmatched partner names.
-- **Panel rows should call `openCountryPanel(code)`**, which makes the country panel
-  navigable for the first time (Sweden → Germany → its partners). Guard against the
-  panel stacking on itself — it's a single reused overlay.
+- New `data/relations.json`, keyed by code: `exportPartners` / `importPartners` arrays of
+  `{ code, name, pct }` plus `exportYear` / `importYear` and the raw source text. Named
+  specifically (not `partners`) so further relation kinds can be siblings.
+- **The reverse index is computed on load, not stored**, so it cannot drift from the
+  forward data it is derived from.
+- Partner names resolve through the shared `strip`/`flip`/`decodeEnt` matcher — extracted
+  from `build-attributes.mjs` into `scripts/lib/names.mjs` rather than copied a third time
+  — plus `data/aliases.json` (#40). A name that does not resolve keeps `{ name, pct }`
+  with no code and renders unclickable: visible, not silently dropped. The build reports
+  every one.
+- `js/relations.js` owns the load, the lookups and the section builder, mirroring
+  `heritage.js`, so `country-panel.js` gains a dozen lines rather than a hundred.
+- A `Trade` column in the Coverage view, with the uninhabited territories marked as
+  explained rather than counted as gaps (#70).
 - **"Biggest enemy" was explicitly skipped** by the owner (2026-09-06) on editorial-risk
   grounds. Do not add it without asking. This shape is deliberately general enough to
   hold `noRelationsWith` or conflict dyads later if that reverses.
 
-**Acceptance:** Panel lists top export partners with flag + name + %; clicking one
-opens that country; unmatched partner names are reported at build time, not dropped.
+**Acceptance:** The panel lists both directions with flag + name + %; clicking a partner
+walks there and `←` walks back; the reciprocal counts match the forward data by
+construction; unmatched partner names are reported at build time, not dropped.
 
 ---
 
@@ -578,6 +612,56 @@ one of three modes.
 **Approach / notes:** the repo has no test framework, which is the whole reason this is a note
 and not a test. If one ever lands, the assertion is: for each of cards / flags / typing, a round
 renders the same set of output components.
+
+---
+
+## 79. Where our data comes from, visible in the app
+
+**What:** A `🔗 Sources` view in the Data Explorer listing every third party the app pulls
+from — what it feeds, the exact series or endpoint, the licence, when it was last
+retrieved — plus a source line at the point of use, inside the metric `ⓘ` you already tap.
+
+**Why:** Owner request (2026-10-24): *"we should have a some kind of third party source
+visible for myself where we are fetching the data from where possible. so its possible to
+understand where our data is from directly in the frontend."*
+
+**The gap it closes.** Every fact needed is already in the repo and none of it reaches the
+browser. `NY.GDP.MKTP.CD` is a constant in `build-datasets.mjs`; the CC BY 4.0 obligations
+for geoBoundaries and Ember are in code comments; the frontend has only `(World Bank)`
+buried inside a blurb sentence. Worse, the per-entity overrides that *are* shipped —
+38 in `datasets.json`, more in `attributes.json` and `electricity.json` — are read by
+nothing, so Taiwan's GDP presents as World Bank when it is IMF WEO / DGBAS.
+
+**Decided (owner, 2026-10-24):** every layer, not just the metrics — the map outlines,
+flags, emblems and heritage photos are the ones with real licence obligations. Both
+surfaces: the view *and* the point-of-use line.
+
+**The maintainability contract — this is the point of the item, not a detail:**
+- **The registry is load-bearing, not documentation.** `scripts/lib/provenance.mjs`
+  exports `SOURCES`, and the build scripts fetch *from* it instead of from their own
+  string constants. A URL that goes stale breaks a build rather than lying in the UI.
+- **One table per fact, in a side-effect-free module.** The build scripts are top-level
+  `await` fetchers, so importing one runs it — which is why the metric table moves to
+  `scripts/lib/indicators.mjs` (pure data), imported by both `build-datasets.mjs` and the
+  registry generator. Adding a metric stays a one-place edit.
+- **`data/sources.json` is generated, never hand-edited.** Nothing in it is typed:
+  `retrieved` comes from `git log -1 --format=%cI` on each data file, so it is honest for
+  layers nobody rebuilt today and re-dates itself on every commit of the data; coverage
+  counts are read off the files; indicator codes and licences come from the same
+  constants the fetch used.
+- **Two guards.** The generator throws if a dataset has no source, a source names a file
+  that does not exist, or an entry has no licence. And `runDataChecks` reports
+  `sources.json older than the data file it describes` as a `fail`, on screen in the
+  health strip — because regenerate-after-rebuild is the step a human skips.
+- **The frontend only reads.** `js/sources.js` answers `sourceFor(id)`; no URL, indicator
+  code or licence string lives anywhere else in `js/`.
+- **Staleness is shown**: each row reads `retrieved <date> · N days ago`, and anything
+  past a year is marked, so "which of our data has rotted" is a glance.
+
+**Acceptance:** `#/explore/sources` lists every layer with its source, series, licence,
+coverage and retrieval age, each linking out. The metric `ⓘ` names its source, and names
+the override instead wherever one exists for that country. Regenerating after a data
+rebuild is enforced by a check that fails visibly, not by remembering.
 
 ---
 ### Related context

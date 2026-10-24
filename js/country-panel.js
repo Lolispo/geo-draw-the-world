@@ -9,6 +9,7 @@ import {
 import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl } from './emblems.js';
 import { loadHeritage, sitesFor, siteCard } from './heritage.js';
+import { loadRelations, hasTrade, partnerSection, reciprocalSection } from './relations.js';
 import { drawSilhouette } from './silhouette.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
@@ -35,9 +36,15 @@ let cardEl = null;
 let dataPromise = null;
 let escHandler = null;
 
+// Where this panel has been (TODOS #30). Trade partners make the panel navigable for the
+// first time — Sweden → Germany → China — and the way back has to exist without turning
+// one reused overlay into a stack of them. So the trail is codes, not DOM, and Escape
+// still closes the whole thing rather than unwinding it one country at a time.
+let trail = [];
+
 function ensureData() {
   if (!dataPromise) {
-    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage()]);
+    dataPromise = Promise.all([loadDatasets(), loadEntities(), loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations()]);
   }
   return dataPromise;
 }
@@ -62,9 +69,24 @@ export async function openCountryPanel(code) {
   overlay.classList.add('open');
   escHandler = (e) => { if (e.key === 'Escape') closeCountryPanel(); };
   document.addEventListener('keydown', escHandler);
+  trail = [code];
 
   await ensureData();
   render(code);
+}
+
+// Following a trade partner: a new country, and a way back to the one that named it.
+function navigateTo(code) {
+  trail.push(code);
+  render(code);
+  cardEl.scrollTop = 0;
+}
+
+function navigateBack() {
+  if (trail.length < 2) return;
+  trail.pop();
+  render(trail[trail.length - 1]);
+  cardEl.scrollTop = 0;
 }
 
 export function closeCountryPanel() {
@@ -85,6 +107,17 @@ function render(code) {
   close.setAttribute('aria-label', 'Close');
   close.addEventListener('click', closeCountryPanel);
   cardEl.appendChild(close);
+
+  // Named with where it goes, not just "back" — after three hops the arrow alone does
+  // not say whether you land on Germany or on Sweden.
+  if (trail.length > 1) {
+    const prev = trail[trail.length - 2];
+    const prevName = getEntity(prev)?.name || prev;
+    const back = el('button', 'cp-back', `← ${prevName}`);
+    back.setAttribute('aria-label', `Back to ${prevName}`);
+    back.addEventListener('click', navigateBack);
+    cardEl.appendChild(back);
+  }
 
   // Straight to this country on the map, zoomed in — the panel is where you are when
   // you want that (owner, 2026-10-11). Routing by hash keeps the panel free of any
@@ -206,12 +239,24 @@ function render(code) {
     }));
   }
 
-  if (!attr.capital && !anyMetric && !attr.religion && !elec) {
+  if (!attr.capital && !anyMetric && !attr.religion && !elec && !hasTrade(code)) {
     facts.appendChild(el('div', 'cp-empty', 'No extra data for this entity yet.'));
   }
 
   body.appendChild(facts);
   cardEl.appendChild(body);
+
+  // Trade (TODOS #30). Both directions, then who names this country back. Clicking a
+  // partner walks the trail rather than opening a second overlay.
+  const exports = partnerSection(code, 'exports', navigateTo);
+  const imports = partnerSection(code, 'imports', navigateTo);
+  const reciprocal = reciprocalSection(code, navigateTo);
+  if (exports || imports || reciprocal) {
+    const trade = el('div', 'cp-trade');
+    trade.appendChild(el('h3', 'cp-trade-head', 'Trade'));
+    for (const sec of [exports, imports, reciprocal]) if (sec) trade.appendChild(sec);
+    cardEl.appendChild(trade);
+  }
 
   // World Heritage sites (TODOS #46). Five, famous first, the rest behind one press —
   // Italy has 62 and a panel that opened on all of them would bury everything below it.

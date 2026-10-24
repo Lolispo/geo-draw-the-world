@@ -12,6 +12,7 @@ import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
 import { loadEmblems, emblemUrl, emblemFile } from './emblems.js';
 import { loadHeritage, allSites, siteCard } from './heritage.js';
+import { loadRelations, hasTrade } from './relations.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
 
 
@@ -97,7 +98,7 @@ export class DataExplorer {
     await loadFlagColors();
     // The Coverage health strip asks cross-file questions, so it needs the files the
     // rank views never touch.
-    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage()]);
+    await Promise.all([loadAttributes(), loadElectricity(), loadEmblems(), loadHeritage(), loadRelations()]);
     this._loaded = true;
   }
 
@@ -822,6 +823,13 @@ export class DataExplorer {
       },
       { key: 'hasCapital', label: 'Cap', has: (e) => e.hasCapital },
       { key: 'hasReligion', label: 'Rel', has: (e) => e.hasReligion },
+      {
+        // TODOS #30. A dependency's trade is counted in its sovereign's figures, so the
+        // Factbook publishes none of its own — that is the source being right, not a gap
+        // anyone can close.
+        key: 'hasTrade', label: 'Trade', has: (e) => hasTrade(e.code),
+        explained: (e) => (e.sovereign ? `trade is reported by ${e.sovereign}` : null),
+      },
       {
         key: 'drawCeiling', label: 'Draw',
         has: (e) => !this._ceilings || (ceilingByCode(this._ceilings, e.code)?.total ?? 100) >= 100,
