@@ -11,11 +11,11 @@
       "files": [
         {
           "path": "data/datasets.json",
-          "retrieved": "2026-10-18T20:58:59+02:00",
+          "retrieved": "2026-10-24T15:32:14+02:00",
           "covers": 252
         }
       ],
-      "retrieved": "2026-10-18T20:58:59+02:00",
+      "retrieved": "2026-10-24T15:32:14+02:00",
       "covers": 252,
       "datasets": [
         {
@@ -115,8 +115,8 @@
       "label": "UNESCO World Heritage Centre",
       "url": "https://whc.unesco.org/en/list/",
       "endpoint": "https://data.unesco.org/api/explore/v2.1/catalog/datasets/whc001/exports/csv",
-      "license": "CC BY-SA 3.0 IGO",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "provides": "the World Heritage List — every site, its category and its coordinates",
       "files": [
         {
@@ -215,7 +215,7 @@
       "endpoint": "https://raw.githubusercontent.com/mledoze/countries/master/countries.json",
       "license": "ODbL 1.0",
       "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
-      "provides": "common country names and the ISO codes everything else joins on",
+      "provides": "the ISO2 → ISO3 lookup the shape build joins on (build-time only)",
       "files": [
         {
           "path": "data/entities.json",

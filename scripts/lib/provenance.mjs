@@ -53,8 +53,12 @@ export const SOURCES = {
     label: 'UNESCO World Heritage Centre',
     url: 'https://whc.unesco.org/en/list/',
     endpoint: 'https://data.unesco.org/api/explore/v2.1/catalog/datasets/whc001/exports/csv',
-    license: 'CC BY-SA 3.0 IGO',
-    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0/igo/',
+    // Share-alike, and the one licence here with an obligation beyond credit: anything
+    // derived from the List carries it too, which is why data/heritage.json is called
+    // out separately from the MIT code in DATA-LICENSES.md. Taken from the dataset's
+    // own API metadata, not from a code comment — the comment said 3.0 IGO and was wrong.
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
     provides: 'the World Heritage List — every site, its category and its coordinates',
     writes: ['data/heritage.json'],
   },
@@ -97,7 +101,9 @@ export const SOURCES = {
     endpoint: 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json',
     license: 'ODbL 1.0',
     licenseUrl: 'https://opendatacommons.org/licenses/odbl/1-0/',
-    provides: 'common country names and the ISO codes everything else joins on',
+    // Build-time only: one ISO2 -> ISO3 lookup in build-shapes.mjs. None of their
+    // database is redistributed, which is what keeps ODbL's share-alike out of scope.
+    provides: 'the ISO2 → ISO3 lookup the shape build joins on (build-time only)',
     writes: ['data/entities.json'],
   },
 

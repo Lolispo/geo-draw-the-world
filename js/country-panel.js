@@ -81,13 +81,28 @@ function navigateTo(code) {
   trail.push(code);
   render(code);
   cardEl.scrollTop = 0;
+  syncHash(code);
 }
 
 function navigateBack() {
   if (trail.length < 2) return;
   trail.pop();
-  render(trail[trail.length - 1]);
+  const code = trail[trail.length - 1];
+  render(code);
   cardEl.scrollTop = 0;
+  syncHash(code);
+}
+
+// Keep the address bar honest while you walk the trail, but only on the route that is
+// already about a country. A panel opened from the Explorer or the Coverage table is a
+// detour from that screen, and rewriting the hash there would throw away the view the
+// reader came from. replaceState is the app's existing idiom for this: it adds no
+// history entry and fires neither hashchange nor popstate, so there is no re-entry loop
+// and the browser's Back still leaves the panel rather than unwinding it one country at
+// a time (TODOS #30, #77).
+function syncHash(code) {
+  if (!/^#\/country\//.test(window.location.hash)) return;
+  history.replaceState(null, '', `#/country/${encodeURIComponent(code)}`);
 }
 
 export function closeCountryPanel() {

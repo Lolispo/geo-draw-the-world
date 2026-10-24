@@ -61,8 +61,8 @@ export function namedBy(code, dir) {
 // ---- rendering -----------------------------------------------------------
 
 const DIRS = {
-  exports: { key: 'exportPartners', yearKey: 'exportYear', label: 'Sends exports to' },
-  imports: { key: 'importPartners', yearKey: 'importYear', label: 'Buys imports from' },
+  exports: { key: 'exportPartners', yearKey: 'exportYear', label: 'Sells to', unit: '% of exports' },
+  imports: { key: 'importPartners', yearKey: 'importYear', label: 'Buys from', unit: '% of imports' },
 };
 
 // The widest share in either direction. Both sections scale to it, so the bars compare
@@ -88,12 +88,10 @@ export function partnerSection(code, dir, onPick) {
   head.className = 'cp-section-label';
   head.textContent = spec.label;
   const year = entry[spec.yearKey];
-  if (year) {
-    const y = document.createElement('span');
-    y.className = 'cp-trade-year';
-    y.textContent = year;
-    head.appendChild(y);
-  }
+  const y = document.createElement('span');
+  y.className = 'cp-trade-year';
+  y.textContent = year ? `${spec.unit} · ${year}` : spec.unit;
+  head.appendChild(y);
   wrap.appendChild(head);
 
   // Monaco and the Crown dependencies are published as a bare list of names. There is
@@ -157,9 +155,11 @@ function partnerRow(r, max, quantified, onPick) {
   return row;
 }
 
+// Spelled "top-5" rather than leaning on the heading: this block is read on its own,
+// and "a top export destination" does not say top of what.
 const RECIPROCAL = {
-  exports: (n) => `A top export destination for ${n} ${n === 1 ? 'country' : 'countries'}`,
-  imports: (n) => `A top import source for ${n} ${n === 1 ? 'country' : 'countries'}`,
+  exports: 'a top-5 export destination',
+  imports: 'a top-5 import source',
 };
 const RECIPROCAL_TITLE = {
   exports: 'Countries that name this one among the five they sell the most to',
@@ -182,7 +182,7 @@ export function reciprocalSection(code, onPick) {
   wrap.className = 'cp-trade-section cp-trade-reciprocal';
   const head = document.createElement('div');
   head.className = 'cp-section-label';
-  head.textContent = 'In the world’s top five';
+  head.textContent = 'Named by other countries';
   wrap.appendChild(head);
 
   for (const [dir, who] of lines) {
@@ -192,9 +192,15 @@ export function reciprocalSection(code, onPick) {
     const caret = document.createElement('span');
     caret.className = 'cp-trade-caret';
     caret.textContent = '▸';
+    // The count carries the weight, so it is the part that is set apart rather than
+    // being one more word in a sentence.
+    const count = document.createElement('b');
+    count.textContent = who.length;
     const text = document.createElement('span');
-    text.textContent = RECIPROCAL[dir](who.length);
-    line.append(caret, text);
+    // Leading space: the gap on screen comes from flex, so without it the line reads
+    // "9countries" to anything that takes the text rather than the layout.
+    text.textContent = ` ${who.length === 1 ? 'country names' : 'countries name'} it as ${RECIPROCAL[dir]}`;
+    line.append(caret, count, text);
 
     const grid = document.createElement('div');
     grid.className = 'cp-trade-grid';

@@ -3337,7 +3337,16 @@ canvas {
 /* A partner list with no published shares has no bar and no share column. */
 .cp-trade-row--nameonly { grid-template-columns: 24px 1fr; }
 
-.cp-trade-reciprocal { gap: 2px; }
+/* A card, because as a plain third section it read as a footnote to the two above it
+   and was missed entirely (owner, 2026-10-24). */
+.cp-trade-reciprocal {
+  gap: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.cp-trade-reciprocal .cp-section-label { margin-bottom: 4px; }
 .cp-trade-recip-line {
   display: flex;
   align-items: center;
@@ -3354,7 +3363,9 @@ canvas {
   text-align: left;
   cursor: pointer;
 }
-.cp-trade-recip-line:hover { background: var(--surface2); }
+.cp-trade-recip-line:hover { background: var(--surface); }
+/* The count is the fact; the sentence around it is scaffolding. */
+.cp-trade-recip-line b { font-size: 0.95rem; font-variant-numeric: tabular-nums; }
 .cp-trade-caret { color: var(--text-dim); font-size: 0.7rem; width: 10px; }
 .cp-trade-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0 10px 16px; }
 .cp-trade-chip {

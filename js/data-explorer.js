@@ -834,6 +834,13 @@ export class DataExplorer {
       + 'source last published — the figures themselves carry their own year. '
       + `Anything over ${Math.round(STALE_DAYS / 365)} year old is flagged. `
       + 'Live = hotlinked by the browser as the page renders, so there is nothing to refresh.';
+    legend.appendChild(document.createTextNode(' '));
+    const note = document.createElement('a');
+    note.href = 'https://github.com/Lolispo/geo-draw-the-world/blob/main/DATA-LICENSES.md';
+    note.target = '_blank';
+    note.rel = 'noopener';
+    note.textContent = 'What each licence requires →';
+    legend.appendChild(note);
     list.appendChild(legend);
 
     const table = document.createElement('table');
