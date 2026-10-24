@@ -670,6 +670,31 @@ rebuild is enforced by a check that fails visibly, not by remembering.
 - Shared dataset loader/formatters: `js/datasets.js`
 
 ---
+## 80. Heritage wall: a throttled photo looks exactly like a missing one
+
+**What:** `_renderHeritage` (`js/data-explorer.js:793`) appends all ~1,170 tiles in one pass and
+leans entirely on `loading="lazy"` to pace the Commons requests. `siteCard`'s error handler
+(`js/heritage.js:80`) drops a failed image into `whs-shot--empty` — the same state a site with no
+photo gets. If a hard scroll ever outruns Wikimedia's rate limit, the wall degrades silently and
+is indistinguishable from missing data.
+
+**Why:** A thumbnail-size survey from this machine drew `429` from Commons at four concurrent
+requests (2026-10-24). Not reproduced in a browser — lazy loading may well keep the burst under
+the limit — so this is a check, not a confirmed defect. It earns an entry anyway because the
+failure is invisible by construction: neither the UI nor the console separates a throttled tile
+from a site that genuinely has no photograph, so nobody will rediscover it on purpose.
+
+**Approach / notes:** confirm first — scroll `#/explore/heritage` hard with the network panel
+open and look for non-200s. Only if it trips: give the error state its own appearance so it
+stops impersonating the empty one, and cap how many tiles sit in the DOM at once. Self-hosting
+the photos would also remove it, but that was weighed and declined (~75 MB at tile size, plus
+per-photo CC BY-SA attribution for 1,167 files).
+
+**Acceptance:** a hard scroll through the full wall shows no failed image requests; or, if it
+does, a throttled tile is visibly distinct from a photo-less one.
+
+---
+
 ## Shipped
 
 Completed items, removed from the queue on 2026-09-06. One line each so the
