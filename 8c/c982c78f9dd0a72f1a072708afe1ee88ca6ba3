@@ -1,0 +1,29 @@
+TODO.md
+  s_054fda4f8fda88::t_22b4ef57e6b5d5 18-136
+  s_054fda4f8fda88::t_f209e675be6b9a 695-698
+  s_92179e0562f269::t_a596e87aa40307 699-701
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8cc982c78f9dd0a72f1a072708afe1ee88ca6ba3",
+  "prompts": {},
+  "sessions": {
+    "s_054fda4f8fda88": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c36bae55-a900-4049-845c-5ce25e627ebb",
+        "model": "claude-opus-5"
+      },
+      "human_author": null
+    },
+    "s_92179e0562f269": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f7c4dc60-92b9-4b00-b271-e77ae8083b3c",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
