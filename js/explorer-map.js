@@ -33,7 +33,10 @@ const NO_DATA = '#4a5159';      // in scope, but the metric has no figure for it
 const OUT_OF_SCOPE = '#23272f'; // drawn so the world has no holes, never shaded
 const OCEAN = '#0b0e13';
 // How far in the map may be zoomed, as a multiple of the fitted view (TODOS #60).
-const MAX_ZOOM = 12;
+// At 12 a Caribbean island was still about five pixels across — zoomed in by the
+// control and no more readable for it (owner, 2026-10-25). The outlines carry the
+// detail: a small island's segments stay well under a pixel here.
+const MAX_ZOOM = 48;
 
 // A country thinner than this on screen is drawn as a dot of this size instead, and
 // can be hovered within it. Monaco is 0.1px wide at world zoom: without a floor it is
@@ -46,6 +49,10 @@ const HOVER_MARK = 11;
 const FOCUS_FILL = 0.7;
 const FOCUS_MIN_SPAN = 26;
 const BORDER = 'rgba(0,0,0,0.45)';
+// A dependency shown as itself carries a pale rim instead, so a zoomed-in Caribbean reads
+// as whose-is-whose before anything is hovered. Only then: painted as its sovereign it
+// should look like its sovereign, border included (owner, 2026-10-25).
+const DEPENDENCY_RIM = 'rgba(226,236,248,0.72)';
 
 export class ExplorerMap {
   constructor(canvas, { onPick, formatValue, sovereignOf = () => null }) {
@@ -252,6 +259,15 @@ export class ExplorerMap {
     return !this.scope || this.scope.has(code);
   }
 
+  // The registry gives a dependency its sovereign and nothing else one, so this
+  // answers both "whose is it" and "is it a dependency at all". Memoised: the
+  // render loop asks once per country per frame.
+  _ownerOf(code) {
+    if (!this._owners) this._owners = new Map();
+    if (!this._owners.has(code)) this._owners.set(code, this.sovereignOf(code));
+    return this._owners.get(code);
+  }
+
   _bandOf(value) {
     const { edges } = this._bands;
     let i = 0;
@@ -270,7 +286,18 @@ export class ExplorerMap {
   }
 
   _fillColor(code) {
-    if (!this._inScope(code)) return OUT_OF_SCOPE;
+    if (!this._inScope(code)) {
+      // The hover already reads an excluded dependency as its sovereign's land, so
+      // the fill says the same thing: Aruba wears the Netherlands' shade rather than
+      // the grey that means nobody shades this at all (owner, 2026-10-25).
+      const owner = this._ownerOf(code);
+      if (owner && this._inScope(owner.code)) return this._shadeOf(owner.code);
+      return OUT_OF_SCOPE;
+    }
+    return this._shadeOf(code);
+  }
+
+  _shadeOf(code) {
     const v = this.values[code];
     if (v == null || !this._bands.n) return NO_DATA;
     return RAMP[Math.round((this._bandOf(v) / Math.max(1, this._bands.n - 1)) * (RAMP.length - 1))];
@@ -312,6 +339,7 @@ export class ExplorerMap {
     this.countries.forEach((c, i) => {
       const b = this._boxes[i];
       const w2 = (b.maxX - b.minX) * t.scale, h2 = (b.maxY - b.minY) * t.scale;
+      const dependency = !!this._ownerOf(c.code) && this._inScope(c.code);
       ctx.fillStyle = this._fillColor(c.code);
       if (Math.max(w2, h2) < MIN_MARK) {
         // Below a few pixels an outline is a smudge or nothing at all, so the country
@@ -322,12 +350,17 @@ export class ExplorerMap {
         ctx.beginPath();
         ctx.arc(cx, cy, MIN_MARK / 2, 0, Math.PI * 2);
         ctx.fill();
+        if (dependency) {
+          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = DEPENDENCY_RIM;
+          ctx.stroke();
+        }
         return;   // inside forEach: this country is a dot, not an outline
       }
       this._path(ctx, c, t);
       ctx.fill('nonzero');
-      ctx.lineWidth = 0.5;
-      ctx.strokeStyle = BORDER;
+      ctx.lineWidth = dependency ? 0.6 : 0.5;
+      ctx.strokeStyle = dependency ? DEPENDENCY_RIM : BORDER;
       ctx.stroke();
     });
 
@@ -417,13 +450,17 @@ export class ExplorerMap {
       // A territory the filter excludes is still *somebody's* land, and the figure the
       // map is showing for it is its sovereign's. Say whose, rather than "not in this
       // filter", which tells a reader nothing (owner, 2026-10-11).
-      const owner = this.sovereignOf(code);
+      const owner = this._ownerOf(code);
       if (owner && this._inScope(owner.code)) {
         return `${owner.name} — ${say(this.values[owner.code])} · ${this.hovered.name}`;
       }
       return `${this.hovered.name} — No data`;
     }
-    return `${this.hovered.name} — ${say(this.values[code])}`;
+    // Shaded as itself, it still has an owner, and "is this French, Dutch or its own
+    // country?" is the question a reader has over the Caribbean. No suffix therefore
+    // means independent (owner, 2026-10-25).
+    const owner = this._ownerOf(code);
+    return `${this.hovered.name} — ${say(this.values[code])}${owner ? ` · ${owner.name}` : ''}`;
   }
 
   _canvasPos(ev) {

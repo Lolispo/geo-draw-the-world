@@ -277,6 +277,16 @@ export class DataExplorer {
     // Shaded = what the rankings would list: pool rules, plus the continent filter.
     const scope = new Set(getEntries(this.datasetId, { continent: this.continent })
       .filter((e) => inCountryPool(e.code, this._pool())).map((e) => e.code));
+    // Territories on means "show dependencies as themselves", and that cannot depend on
+    // whether this particular metric has a row for them: World Bank reports most series
+    // nationally only, so without this the toggle changed nothing on most metrics and
+    // Aruba went on reading as the Netherlands (owner, 2026-10-25).
+    if (getExploreTerritories()) {
+      for (const e of getEntitiesList()) {
+        if (e.sovereign && inCountryPool(e, this._pool())
+          && (!this.continent || e.continent === this.continent)) scope.add(e.code);
+      }
+    }
     // Framed by the continent filter alone, never by the territories toggle.
     const frame = this.continent
       ? new Set(getEntitiesList().filter((e) => e.continent === this.continent).map((e) => e.code))

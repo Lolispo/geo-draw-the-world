@@ -15,7 +15,62 @@ Work that has shipped but the owner has not signed off on. Each entry keeps its 
 text; the **REVIEW** line says exactly what to look at. Clear it by either deleting the
 entry (add a line to `## Shipped`) or moving it back into the queue with what's missing.
 
-*Empty — everything shipped has been signed off (2026-10-24).*
+*One item shipped 2026-10-25, waiting on sign-off.*
+
+---
+
+## 81. Explorer map: whose island is that?
+
+**REVIEW:** http://localhost:8129/#/explore/map?metric=population&focus=ms — zoom the Lesser Antilles and hover, with Territories off and on.
+
+**What:** On the Explorer map a dependency now says whose it is, three ways. Hovering one names
+its sovereign whatever the toggle says — `Aruba — 106k · Netherlands` with Territories on,
+`Netherlands — 18.0M · Aruba` with it off — so **no ` · owner` suffix means an independent
+country**. With Territories off a dependency is painted its sovereign's band colour instead of
+the out-of-scope grey, so Puerto Rico wears the United States' shade and Greenland Denmark's;
+grey goes back to meaning only "no figure". With Territories **on**, where a dependency is drawn
+as itself, it carries a pale rim in place of the dark border, so the Caribbean reads as
+whose-is-whose before anything is hovered; with it off it is bordered like its sovereign too. The
+map also zooms to 48x the fitted view rather than 12x, where a Caribbean island was still about
+five pixels across.
+
+**Why:** Owner request (2026-10-25): *"i want to be able to zoom in on central america and look
+at an island and see if it belongs to netherlands france or is its own country"*. The first half
+of #69 already named the owner, but only for a territory the filter **excluded** — with
+Territories on, the state a reader turns on to see dependencies as themselves, the label never
+mentioned the sovereign at all.
+
+**Approach / notes:**
+- The rim marks the 48 entities carrying a `sovereign` in the registry. Western Sahara, Palestine
+  and the four de-facto states have no sovereign and get no rim and no suffix — they are disputed,
+  not dependencies.
+- `scope` was built from the dataset's own entries, so a dependency the metric had no row for fell
+  out of scope *even with Territories on* — and World Bank reports most series nationally only
+  (GDP covers 19 of the 48, population 45). The toggle therefore did nothing on most metrics.
+  `js/data-explorer.js` now adds every dependency to scope when the toggle is on, so the toggle
+  means one thing regardless of which metric is showing.
+- Rim weight was tuned down from 1.2px to 0.6px after looking: a crenellated coastline carries far
+  more stroke than its area, and at world zoom the first version turned Greenland's fjords into a
+  white mass. It is then gated on scope rather than on the registry, so it appears only in the
+  state where a dependency is drawn as itself (owner, 2026-10-25: *"the border should only show
+  with territories on... takes too much focus without it"*).
+- `MAX_ZOOM` 12 → 48. The outlines can take it: a small island's segments stay well under a pixel
+  at that scale. Big crenellated coastlines cannot — see #82.
+- **Does not touch #74.** Galápagos, Madeira, the Azores and the Canaries have no ISO 3166-1 code,
+  so they are rings inside their parent's geometry and still read as Ecuador, Portugal and Spain
+  at every toggle setting. The Caribbean needed none of that work: all 16 dependencies there
+  already exist as entities with geometry.
+- Explorer map only, by request. The play pools, the quizzes and the country panel are unchanged
+  (the panel already said "Territory of Netherlands").
+
+**Open question for the review:** an independent microstate — Barbados, Grenada, St Lucia — is
+dark fill on a near-black ocean with a dark border, so "no rim" is read off something barely
+visible. Lifting every country's border would fix it and is a change to how the whole map is
+drawn, so it is not in this change.
+
+**Acceptance:** Zoomed into the Lesser Antilles, hovering any island says whether it is French,
+Dutch, British, American or its own country, at either toggle setting; with Territories off the
+dependencies wear their sovereign's colour.
 
 ---
 
@@ -577,6 +632,33 @@ per-photo CC BY-SA attribution for 1,167 files).
 
 **Acceptance:** a hard scroll through the full wall shows no failed image requests; or, if it
 does, a throttled tile is visibly distinct from a photo-less one.
+
+---
+
+---
+
+## 82. Explorer map: deep zoom outruns the world outlines
+
+**What:** The Explorer map draws `data/countries-*.json`, which is simplified hard for world-scale
+drawing — Aruba is fifteen vertices there against 1,392 in `data/shapes/aw.json`. Now that the map
+zooms to 48x (#81), that simplification is reachable: a small island arrives as a recognisable but
+visibly straight-edged polygon, and a crenellated coastline like Greenland's shows its vertices
+well before the zoom limit.
+
+**Why:** Raising the zoom limit was the right call for the owner's question — which island belongs
+to whom — and the shapes stay readable. But detail is now the ceiling rather than the zoom
+constant, so raising `MAX_ZOOM` again buys nothing without this.
+
+**Approach / notes:**
+- The detail already exists and is already fetched on demand: `getCountryByCode()` reads the
+  native per-country tier (`js/geo-data.js`, TODOS #24) for the panel, peek and compare.
+- So the fix is a swap, not new data: past some zoom threshold, draw the per-country geometry for
+  whatever is in frame and keep the simplified outlines for the rest. What needs deciding is the
+  threshold, how many files to hold at once, and what hit-testing uses while a fetch is in flight.
+- Not worth doing for its own sake. It earns its place only if deep zoom becomes something the
+  Explorer is *for*, rather than a way to pick an island out of a chain.
+
+**Acceptance:** At full zoom a small island shows a coastline, not a polygon.
 
 ---
 
