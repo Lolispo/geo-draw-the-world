@@ -1,0 +1,23 @@
+TODO.md
+  s_79812f5429ecd7::t_d13ebf7ef03a40 18-66
+js/data-explorer.js
+  s_79812f5429ecd7::t_c4ae788fb83208 280-289
+js/explorer-map.js
+  s_79812f5429ecd7::t_0779f4402edb6d 49-51,258-266,285-296,338,349-353,358-359,449,455-459
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "35fb3068d557b7380e2e541246d25186223997ed",
+  "prompts": {},
+  "sessions": {
+    "s_79812f5429ecd7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "921b5f9b-cd44-4cef-838a-767cdd207587",
+        "model": "unknown"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
