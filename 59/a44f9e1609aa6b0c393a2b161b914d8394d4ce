@@ -1,0 +1,23 @@
+js/country-panel.js
+  s_8627f5beea2ad1::t_04dbdfd1d79a29 37-46,101-105,206-208,230,257
+  s_8627f5beea2ad1::t_f044644d457ef7 212-217
+css/style.css
+  s_8627f5beea2ad1::t_29c607b69c0a0c 2966-2969
+  s_8627f5beea2ad1::t_f044644d457ef7 2946
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "59a44f9e1609aa6b0c393a2b161b914d8394d4ce",
+  "prompts": {},
+  "sessions": {
+    "s_8627f5beea2ad1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc23c316-f048-49fc-8657-68b3344f02ad",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
