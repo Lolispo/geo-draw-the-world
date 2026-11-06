@@ -1,0 +1,19 @@
+js/country-panel.js
+  s_8627f5beea2ad1::t_41691727e29cfd 259-262
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "044d0f338b7c79c0f914e03cd31ce2a6a117f9c9",
+  "prompts": {},
+  "sessions": {
+    "s_8627f5beea2ad1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc23c316-f048-49fc-8657-68b3344f02ad",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
