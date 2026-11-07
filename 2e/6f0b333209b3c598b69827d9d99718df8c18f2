@@ -1,0 +1,42 @@
+js/metric-context.js
+  s_8627f5beea2ad1::t_9e4ae02c00008e 1-87
+js/country-panel.js
+  s_8627f5beea2ad1::t_94e5fc6ea74266 288,290-311,315-316
+  s_8627f5beea2ad1::t_7d1c66088b17e7 173
+  s_8627f5beea2ad1::t_5a652992ae68c6 263-265
+  s_8627f5beea2ad1::t_2a2781beaa2838 75,80-100,106-118
+  s_8627f5beea2ad1::t_0927ae3facd350 352-354,356,363,369
+  s_8627f5beea2ad1::t_13fd93433a04a8 394-399,403-404,407-410
+  s_8627f5beea2ad1::t_091099922366fa 340-342
+  s_8627f5beea2ad1::t_2617a14dc42aac 15-16
+  s_8627f5beea2ad1::t_786c4775abe3fe 248-252
+  s_8627f5beea2ad1::t_d525ecdd277469 119
+  s_8627f5beea2ad1::t_04dbdfd1d79a29 37-46,101-105,206-208,230,257
+  s_8627f5beea2ad1::t_f044644d457ef7 212-217
+  s_8627f5beea2ad1::t_41691727e29cfd 259-262
+js/settings.js
+  s_8627f5beea2ad1::t_e92a2c72cab1f7 46-60
+css/style.css
+  s_8627f5beea2ad1::t_8b2096835520ad 3078-3080,3082-3095
+  s_8627f5beea2ad1::t_2cdf713d37ac35 2876-2881,2892-2922,2942,2973-2974,2983,2985,2994-2997,3019-3053,3069-3076,3081,3096-3098
+  s_8627f5beea2ad1::t_29c607b69c0a0c 2966-2969
+  s_8627f5beea2ad1::t_f044644d457ef7 2946
+TODO.md
+  s_8627f5beea2ad1::t_bd290164a6310d 18,617
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2e6f0b333209b3c598b69827d9d99718df8c18f2",
+  "prompts": {},
+  "sessions": {
+    "s_8627f5beea2ad1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc23c316-f048-49fc-8657-68b3344f02ad",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
