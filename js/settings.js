@@ -43,3 +43,18 @@ export function getHideAnswers() {
 export function setHideAnswers(on) {
   localStorage.setItem(KEY_HIDE_ANSWERS, on ? '1' : '0');
 }
+
+// How wide the country panel opens on a desktop (TODOS #82). A reader sets it once by
+// dragging the panel's edge; phones ignore it and use the full width they have.
+const KEY_PANEL_WIDTH = 'gdtw.panelWidth';
+export const PANEL_WIDTH_DEFAULT = 760;
+export const PANEL_WIDTH_MIN = 560;
+export const PANEL_WIDTH_MAX = 1100;
+export function getPanelWidth() {
+  const raw = parseInt(localStorage.getItem(KEY_PANEL_WIDTH), 10);
+  if (!Number.isFinite(raw)) return PANEL_WIDTH_DEFAULT;
+  return Math.min(PANEL_WIDTH_MAX, Math.max(PANEL_WIDTH_MIN, raw));
+}
+export function setPanelWidth(px) {
+  localStorage.setItem(KEY_PANEL_WIDTH, String(Math.round(px)));
+}

@@ -12,6 +12,8 @@ import { loadHeritage, sitesFor, siteCard } from './heritage.js';
 import { loadRelations, hasTrade, partnerSection, reciprocalSection } from './relations.js';
 import { loadSources, sourceLineFor } from './sources.js';
 import { drawSilhouette } from './silhouette.js';
+import { spread, percentile, trackPos, tone, band } from './metric-context.js';
+import { getPanelWidth, setPanelWidth, PANEL_WIDTH_MIN, PANEL_WIDTH_MAX, PANEL_WIDTH_DEFAULT } from './settings.js';
 
 const RELIGION_MIN_PCT = 5; // religions below this % are grouped into "Other"
 const ELECTRICITY_MIN_PCT = 3; // smaller generation sources fold into "Other"
@@ -31,6 +33,16 @@ const ELECTRICITY_COLORS = {
   'Other renewables': '#10b981',
   Other: '#6b7280',
 };
+
+// Flag, outline and arms are sized from the panel rather than fixed, so widening it
+// does not leave three stamps floating in a header built for 558px (owner, 2026-11-06).
+// Floors are the sizes they had at the old width; ceilings stop them dwarfing the name.
+const clamp = (lo, v, hi) => Math.round(Math.min(hi, Math.max(lo, v)));
+const headerSizes = (w) => ({
+  flag: clamp(128, w * 0.23, 200),
+  shape: clamp(108, w * 0.185, 162),
+  arms: clamp(72, w * 0.112, 98),
+});
 
 let overlay = null;
 let cardEl = null;
@@ -60,8 +72,49 @@ function buildShell() {
   cardEl.className = 'country-panel';
   cardEl.setAttribute('role', 'dialog');
   cardEl.setAttribute('aria-modal', 'true');
+  cardEl.style.width = `${getPanelWidth()}px`;
   overlay.appendChild(cardEl);
   document.body.appendChild(overlay);
+}
+
+// Drag the panel's edge to set how wide it opens, once, for good (TODOS #82). Phones
+// never see it — CSS hides it below the width where the choice would mean anything —
+// and the panel is centred, so the width moves at twice the pointer to keep the edge
+// under the finger that is dragging it.
+function buildResizeHandle() {
+  const handle = document.createElement('div');
+  handle.className = 'cp-resize';
+  handle.title = 'Drag to set how wide this panel opens · double-click to reset';
+  handle.setAttribute('aria-hidden', 'true');
+  handle.addEventListener('dblclick', () => applyWidth(PANEL_WIDTH_DEFAULT, true));
+  handle.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    const startX = e.clientX, startW = cardEl.getBoundingClientRect().width;
+    handle.setPointerCapture(e.pointerId);
+    cardEl.classList.add('is-resizing');
+    const move = (ev) => applyWidth(startW + (ev.clientX - startX) * 2, false);
+    const up = () => {
+      handle.removeEventListener('pointermove', move);
+      handle.removeEventListener('pointerup', up);
+      cardEl.classList.remove('is-resizing');
+      setPanelWidth(cardEl.getBoundingClientRect().width);
+      // Header sizes and the heritage strip's column count are both read off the width
+      // at render time, so the new width has to be rendered at, not just applied to.
+      const top = cardEl.scrollTop;
+      render(trail[trail.length - 1]);
+      cardEl.scrollTop = top;
+    };
+    handle.addEventListener('pointermove', move);
+    handle.addEventListener('pointerup', up);
+  });
+  return handle;
+}
+
+function applyWidth(px, persist) {
+  const roomy = Math.min(PANEL_WIDTH_MAX, window.innerWidth - 40);
+  const w = Math.min(roomy, Math.max(PANEL_WIDTH_MIN, px));
+  cardEl.style.width = `${Math.round(w)}px`;
+  if (persist) setPanelWidth(w);
 }
 
 export async function openCountryPanel(code) {
@@ -117,6 +170,7 @@ function render(code) {
   const name = entity ? entity.name : code;
 
   cardEl.innerHTML = '';
+  cardEl.appendChild(buildResizeHandle());
 
   // Close button
   const close = el('button', 'cp-close', '✕');
@@ -149,9 +203,18 @@ function render(code) {
   }
 
   // Header: flag + name + type/continent
+  // A phone has its own sizes in CSS, and an inline width would outrank them.
+  const sized = window.innerWidth >= 600 ? headerSizes(cardEl.clientWidth) : null;
+
   const header = el('div', 'cp-header');
   const flag = document.createElement('img');
   flag.className = 'cp-flag';
+  if (sized) {
+    flag.style.width = `${sized.flag}px`;
+    // Most flags are 2:3 or 5:8, but a square one — the Vatican's, Switzerland's —
+    // would otherwise be as tall as it is wide and set the height of the whole header.
+    flag.style.maxHeight = `${Math.round(sized.flag * 0.68)}px`;
+  }
   flag.src = flagUrl(code, 'w320');
   flag.alt = `Flag of ${name}`;
   flag.addEventListener('error', () => { flag.style.display = 'none'; });
@@ -164,6 +227,7 @@ function render(code) {
   if (arms) {
     emblem = document.createElement('img');
     emblem.className = 'cp-emblem';
+    if (sized) { emblem.style.height = `${sized.arms}px`; emblem.style.maxWidth = `${Math.round(sized.arms * 1.33)}px`; }
     emblem.src = arms;
     emblem.alt = `Coat of arms of ${name}`;
     emblem.loading = 'lazy';
@@ -180,22 +244,25 @@ function render(code) {
   else if (entity?.disputed) sub.push(entity.disputed);
   else if (entity?.type && entity.type !== 'sovereign') sub.push(entity.type[0].toUpperCase() + entity.type.slice(1));
   if (sub.length) titleWrap.appendChild(el('div', 'cp-sub', sub.join(' · ')));
-  if (emblem) header.append(flag, emblem, titleWrap);
-  else header.append(flag, titleWrap);
-  cardEl.appendChild(header);
 
-  // Body: silhouette + facts
-  const body = el('div', 'cp-body');
-
-  // Silhouette
+  // The outline joins the flag and the arms in the header rather than holding a column
+  // of its own. As a column it took 150px of the width for the whole length of the
+  // panel and left a gutter of nothing under itself — on a wide screen, most of the
+  // panel (TODOS #82). It stays left of the title because the top right corner belongs
+  // to Show on map and the close button.
   const shapeWrap = el('div', 'cp-shape');
   const canvas = document.createElement('canvas');
   canvas.className = 'cp-shape-canvas';
   shapeWrap.appendChild(canvas);
-  body.appendChild(shapeWrap);
-  drawSilhouette(canvas, code, entity, { size: 150 });
+  drawSilhouette(canvas, code, entity, { size: sized ? sized.shape : 108 });
 
-  // Facts column
+  // Outline first (owner, 2026-11-06): this is a game about drawing countries, so the
+  // shape is the thing worth leading with, then the flag, then the arms.
+  if (emblem) header.append(shapeWrap, flag, emblem, titleWrap);
+  else header.append(shapeWrap, flag, titleWrap);
+  cardEl.appendChild(header);
+
+  const body = el('div', 'cp-body');
   const facts = el('div', 'cp-facts');
 
   if (attr.capital) {
@@ -218,12 +285,35 @@ function render(code) {
     const name = el('span', 'cp-metric-name', ds.name);
     name.appendChild(el('span', 'cp-metric-info', 'ⓘ'));
     cell.appendChild(name);
+    const t = tone(ds.id, value);
     cell.appendChild(el('span', 'cp-metric-value', formatValue(ds.format, value)));
-    const rank = getRank(ds.id, code);
-    if (rank) cell.appendChild(el('span', 'cp-metric-rank', `#${rank.rank} of ${rank.total}`));
+
+    // Where this figure falls in the world, as a track with the median marked
+    // (TODOS #82). Only the median is labelled: spelling out the lowest and highest
+    // country too wrapped to two lines in a three-column panel, and was three figures
+    // to skim past instead of one to read against.
+    const s = spread(ds.id);
+    let word = null;
+    if (s) {
+      const track = el('div', 'cp-spread');
+      track.appendChild(el('div', 'cp-spread-rail'));
+      const med = el('div', 'cp-spread-med');
+      med.style.left = `${trackPos(ds.id, s.median) * 100}%`;
+      const dot = el('div', `cp-spread-dot${t ? ' cp-tone-' + t : ''}`);
+      dot.style.left = `${trackPos(ds.id, value) * 100}%`;
+      track.append(med, dot);
+      cell.appendChild(track);
+      cell.appendChild(el('div', 'cp-spread-foot',
+        `median ${formatValue(ds.format, s.median)}${s.log ? ' · log scale' : ''}`));
+      word = band(ds.id, percentile(ds.id, value));
+      cell.appendChild(el('div', `cp-metric-band${t ? ' cp-tone-' + t : ''}`, word));
+    }
+
     // Hover says what the metric measures on a desktop; tapping the tile says it on a
     // phone, which has no hover at all (TODOS #42).
     const desc = el('div', 'cp-metric-desc', ds.blurb);
+    const rank = getRank(ds.id, code);
+    if (rank) desc.appendChild(el('div', 'cp-metric-rank', `Ranks #${rank.rank} of ${rank.total}`));
     // Where this country's figure came from (TODOS #79) — the per-entity note where
     // there is one, so Taiwan's GDP says IMF/DGBAS rather than World Bank.
     const src = sourceLineFor(ds, code);
@@ -247,7 +337,9 @@ function render(code) {
     cell.title = ds.blurb;
     cell.tabIndex = 0;
     cell.setAttribute('role', 'button');
-    cell.setAttribute('aria-label', `${ds.name} — what this measures`);
+    cell.setAttribute('aria-label', word
+      ? `${ds.name}: ${formatValue(ds.format, value)}, ${word.toLowerCase()}, against a world median of ${formatValue(ds.format, s.median)}. Press for what this measures.`
+      : `${ds.name} — what this measures`);
     const toggle = () => { desc.hidden = !desc.hidden; };
     cell.addEventListener('click', toggle);
     cell.addEventListener('keydown', (ev) => {
@@ -257,21 +349,24 @@ function render(code) {
   }
   if (anyMetric) facts.appendChild(metrics);
 
-  // Religion
+  // Religion and the electricity mix are both short lists of labelled bars, so they
+  // sit beside each other wherever the panel is wide enough for two readable columns.
+  const breaks = el('div', 'cp-breaks');
   if (Array.isArray(attr.religion) && attr.religion.length) {
-    facts.appendChild(buildBreakdown('Religion', attr.religion, { minPct: RELIGION_MIN_PCT }));
+    breaks.appendChild(buildBreakdown('Religion', attr.religion, { minPct: RELIGION_MIN_PCT }));
   }
 
   // Electricity mix (TODOS #29). The year matters here in a way it doesn't for
   // religion — mixes move fast — so it's shown rather than buried in provenance.
   const elec = getElectricity(code);
   if (elec && elec.sources?.length) {
-    facts.appendChild(buildBreakdown('Electricity', elec.sources, {
+    breaks.appendChild(buildBreakdown('Electricity', elec.sources, {
       minPct: ELECTRICITY_MIN_PCT,
       colors: ELECTRICITY_COLORS,
       note: `Share of electricity generated, ${elec.year}`,
     }));
   }
+  if (breaks.children.length) facts.appendChild(breaks);
 
   if (!attr.capital && !anyMetric && !attr.religion && !elec && !hasTrade(code)) {
     facts.appendChild(el('div', 'cp-empty', 'No extra data for this entity yet.'));
@@ -296,14 +391,23 @@ function render(code) {
   // Italy has 62 and a panel that opened on all of them would bury everything below it.
   const sites = sitesFor(code);
   if (sites.length) {
-    const SHOWN = 5;
+    // One row of tiles where there is room for one, the old stacked rows on a phone.
+    // The count is derived from the panel's own width so the strip never wraps onto a
+    // second row and pushes everything below it off the screen (TODOS #82).
+    const inner = cardEl.clientWidth - 44;
+    const tiles = inner >= 560;
+    const SHOWN = tiles ? Math.max(3, Math.floor(inner / 150)) : 5;
     const sec = el('div', 'cp-heritage');
     sec.appendChild(el('h3', 'cp-heritage-head', `World Heritage sites (${sites.length})`));
     const list = document.createElement('ul');
-    list.className = 'whs-list';
+    list.className = tiles ? 'whs-wall' : 'whs-list';
+    if (tiles) list.style.gridTemplateColumns = `repeat(${SHOWN}, minmax(0, 1fr))`;
     const draw = (n) => {
       list.innerHTML = '';
-      for (const site of sites.slice(0, n)) list.appendChild(siteCard(site));
+      // Opened out, the tiles go back to filling the row rather than holding the
+      // single-row count, so 62 sites wrap instead of becoming 62 slivers.
+      if (tiles) list.style.gridTemplateColumns = n > SHOWN ? '' : `repeat(${SHOWN}, minmax(0, 1fr))`;
+      for (const site of sites.slice(0, n)) list.appendChild(siteCard(site, { tile: tiles }));
     };
     draw(SHOWN);
     sec.appendChild(list);

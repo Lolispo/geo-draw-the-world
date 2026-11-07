@@ -15,7 +15,7 @@ Work that has shipped but the owner has not signed off on. Each entry keeps its 
 text; the **REVIEW** line says exactly what to look at. Clear it by either deleting the
 entry (add a line to `## Shipped`) or moving it back into the queue with what's missing.
 
-*Empty — everything shipped has been signed off (2026-10-25).*
+*Empty — everything shipped has been signed off (2026-11-06).*
 
 ---
 
@@ -614,6 +614,7 @@ Completed items, removed from the queue on 2026-09-06. One line each so the
 `TODOS #N` references throughout `js/`, `scripts/` and `docs/` still resolve;
 full write-ups are in git history.
 
+- **#82** The country panel: a number you can read, and a width you choose — 2026-11-06
 - **#30** Trade partners both directions, a navigable panel, and who names you back — 2026-10-24
 - **#79** Where our data comes from, in the app — sources, licences and a registry that cannot drift — 2026-10-24
 - **#81** Explorer map: a dependency says whose it is — sovereign shading, an owner in the label, a rim, and 48x zoom — 2026-10-25
