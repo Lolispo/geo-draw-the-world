@@ -21,6 +21,8 @@
   --purple: #bc8cff;
 }
 
+html { touch-action: manipulation; }
+
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
   background: var(--bg);
@@ -3589,6 +3591,7 @@ canvas {
   overflow: hidden;
 }
 .flag-ring-container {
+  touch-action: manipulation;
   position: absolute;
   inset: 0;
   display: flex;
@@ -3613,7 +3616,8 @@ canvas {
   border-radius: 8px;
   padding: 6px 8px;
   font: inherit;
-  font-size: 14px;
+  /* iOS zooms the page into any field under 16px on focus. */
+  font-size: 16px;
 }
 .flag-ring-watch-input { width: 150px; }
 .flag-ring-check { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); cursor: pointer; }
@@ -3662,6 +3666,7 @@ canvas {
   border: none;
   border-radius: 0;
   box-shadow: none;
+  touch-action: manipulation;
 }
 .flag-ring-banner {
   position: absolute;

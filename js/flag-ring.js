@@ -13,6 +13,7 @@ const INTRO_S = 3;
 const STEP = 1 / 120;
 const SPRITE_H = 72;
 const GAP_MIN = 0.05;
+const GAP_RATE = 0.05;        // radians per second the gap may open — never in jumps
 const STORE = 'flagRing.settings';
 
 export const REGIONS = [
@@ -58,7 +59,7 @@ export function createSim(flags, { collide = false, rand = Math.random } = {}) {
   return {
     bodies, total: n, inside: n, collide,
     length: roundLength(n),
-    angle: rand() * Math.PI * 2, gap: GAP_MIN,
+    angle: rand() * Math.PI * 2, gap: GAP_MIN, spin: 0.4,
     sinceEscape: 0, time: 0,
     events: [], winner: null,
   };
@@ -66,8 +67,9 @@ export function createSim(flags, { collide = false, rand = Math.random } = {}) {
 
 const halfW = (b) => b.hh * (b.flag.aspect || 1.5);
 
-// The gap steers the round toward its length: wider while the field is behind schedule,
-// narrower while it is ahead, and wider still after a long stretch with no escape.
+// The gap steers the round toward its length: it opens while the field is behind schedule
+// or nothing has escaped for a while. It only ever opens, and slowly, so it reads as the
+// ring wearing open rather than the game reaching in.
 function pace(sim) {
   const t = Math.min(1, sim.time / sim.length);
   const target = Math.max(1, sim.total * Math.pow(1 - t, 1.3));
@@ -103,8 +105,10 @@ function collidePairs(live) {
 
 export function step(sim, dt) {
   const { gap, spin } = pace(sim);
-  sim.angle = wrap(sim.angle + spin * dt);
-  sim.gap = gap;
+  if (gap > sim.gap) sim.gap = Math.min(gap, sim.gap + GAP_RATE * dt);
+  // Spin eases toward its pace instead of stepping on each escape.
+  sim.spin += (spin - sim.spin) * Math.min(1, dt * 0.5);
+  sim.angle = wrap(sim.angle + sim.spin * dt);
   sim.time += dt;
   sim.sinceEscape += dt;
 
@@ -113,7 +117,7 @@ export function step(sim, dt) {
     if (b.gone) continue;
     b.x += b.vx * dt; b.y += b.vy * dt;
     if (b.out) {
-      if (Math.hypot(b.x, b.y) > 6) b.gone = true;
+      if (Math.hypot(b.x, b.y) > 3.5) b.gone = true;
       continue;
     }
     live.push(b);
@@ -446,7 +450,8 @@ export class FlagRing {
 
   _draw(now) {
     const { canvas, ctx, sim } = this;
-    const dpr = window.devicePixelRatio || 1;
+    // Past 2x the canvas costs more than the eye gains, and phones report 3.
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
       canvas.width = Math.round(w * dpr);
@@ -457,37 +462,42 @@ export class FlagRing {
     const R = Math.min(w, h) * 0.44;
     const cx = w / 2, cy = h / 2;
 
-    ctx.save();
-    ctx.lineWidth = Math.max(3, R * 0.018);
+    // The glow is two wider translucent strokes: shadowBlur on a moving arc is the most
+    // expensive thing a frame could do.
+    const lw = Math.max(3, R * 0.018);
     ctx.lineCap = 'round';
-    ctx.strokeStyle = '#58a6ff';
-    ctx.shadowColor = '#58a6ffaa';
-    ctx.shadowBlur = 18;
     ctx.beginPath();
-    ctx.arc(cx, cy, R + ctx.lineWidth / 2, sim.angle + sim.gap, sim.angle - sim.gap + Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
+    ctx.arc(cx, cy, R + lw / 2, sim.angle + sim.gap, sim.angle - sim.gap + Math.PI * 2);
+    for (const [width, color] of [[lw * 5, '#58a6ff14'], [lw * 2.5, '#58a6ff33'], [lw, '#58a6ff']]) {
+      ctx.lineWidth = width;
+      ctx.strokeStyle = color;
+      ctx.stroke();
+    }
 
     const watch = new Set(this.settings.watch);
     const marked = [];
+    ctx.beginPath();
     for (const b of sim.bodies) {
       if (b.gone) continue;
       if (watch.has(b.flag.code)) { marked.push(b); continue; }
       this._drawFlag(b, R, cx, cy, b.out ? 0.5 : 1);
     }
+    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
     // Watched flags go on top, outlined and named, so they can be followed in a crowd.
     const pulse = this.intro > 0 ? 1 + 0.25 * Math.abs(Math.sin(now / 180)) : 1;
     for (const b of marked) {
       const k = this.intro > 0 ? 1.8 * pulse : 1.35;
       const hw = halfW(b) * R * k, hh = b.hh * R * k;
       const x = cx + b.x * R, y = cy + b.y * R;
-      ctx.save();
-      ctx.fillStyle = b.out ? '#f85149' : '#ffd33d';
-      ctx.shadowColor = ctx.fillStyle;
-      ctx.shadowBlur = 14;
+      const glow = b.out ? '#f85149' : '#ffd33d';
+      ctx.strokeStyle = glow + '66';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(x - hw - 7, y - hh - 7, hw * 2 + 14, hh * 2 + 14);
+      ctx.fillStyle = glow;
       ctx.fillRect(x - hw - 3, y - hh - 3, hw * 2 + 6, hh * 2 + 6);
-      ctx.shadowBlur = 0;
-      ctx.restore();
+      ctx.beginPath();
       this._drawFlag(b, R, cx, cy, 1, k);
       ctx.save();
       ctx.font = '600 13px "Space Grotesk", system-ui, sans-serif';
@@ -515,9 +525,8 @@ export class FlagRing {
       ctx.fillStyle = (b.flag.colors && b.flag.colors[0]) || '#888';
       ctx.fillRect(x, y, hw * 2, hh * 2);
     }
-    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(x, y, hw * 2, hh * 2);
+    // Outlines join the caller's path and are stroked once per frame.
+    ctx.rect(x, y, hw * 2, hh * 2);
     ctx.globalAlpha = 1;
   }
 }
