@@ -20,6 +20,7 @@ import { RankLineGame } from './rank-line-game.js';
 import { TopNGame } from './top-n-game.js';
 import { DataExplorer } from './data-explorer.js';
 import { FlagPickerGame } from './flag-picker-game.js';
+import { FlagRing } from './flag-ring.js';
 import { ScoresScreen } from './scores-screen.js';
 import { openCountryPanel, closeCountryPanel } from './country-panel.js';
 import { readRoute, writeRoute } from './router.js';
@@ -79,6 +80,7 @@ const STATES = {
   COMPARE: 'compare',
   FLAG_QUIZ: 'flag-quiz',
   FLAG_PICKER: 'flag-picker',
+  FLAG_RING: 'flag-ring',
   RANK_LINE: 'rank-line',
   TOP_N: 'top-n',
   EXPLORE: 'explore',
@@ -131,6 +133,7 @@ class Game {
       compare: document.getElementById('screen-compare'),
       'flag-quiz': document.getElementById('screen-flag-quiz'),
       'flag-picker': document.getElementById('screen-flag-picker'),
+      'flag-ring': document.getElementById('screen-flag-ring'),
       'rank-line': document.getElementById('screen-rank-line'),
       'top-n': document.getElementById('screen-top-n'),
       'explore': document.getElementById('screen-explore'),
@@ -168,6 +171,10 @@ class Game {
     );
     this.flagPickerGame = new FlagPickerGame(
       document.getElementById('flag-picker-container'),
+      () => this.showScreen(STATES.MENU)
+    );
+    this.flagRing = new FlagRing(
+      document.getElementById('flag-ring-container'),
       () => this.showScreen(STATES.MENU)
     );
 
@@ -215,6 +222,7 @@ class Game {
       case 'rank': this.startRankLine(sub || null); return;
       case 'flags': this.startFlagQuiz(); return;
       case 'flag-picker': this.startFlagPicker(); return;
+      case 'flag-ring': this.startFlagRing(); return;
       case 'scores': this.openScores(); return;
       case 'explore':
         this.startExplore(params.get('metric') || 'gdp-nominal', {
@@ -403,6 +411,7 @@ class Game {
     document.getElementById('btn-activity-top-n').addEventListener('click', () => this.startTopN());
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
+    document.getElementById('btn-activity-flag-ring').addEventListener('click', () => this.startFlagRing());
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
     document.getElementById('btn-activity-scores').addEventListener('click', () => this.openScores());
     document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
@@ -564,6 +573,7 @@ class Game {
 
   showScreen(state) {
     if (state === STATES.MENU) writeRoute([]);
+    if (state !== STATES.FLAG_RING) this.flagRing.stop();
     this.state = state;
     for (const [name, el] of Object.entries(this.screens)) {
       el.classList.toggle('active', name === state);
@@ -815,6 +825,14 @@ class Game {
     await this.flagPickerGame.loadData();
     this.showScreen(STATES.FLAG_PICKER);
     this.flagPickerGame.start(10);
+  }
+
+  async startFlagRing() {
+    this._route(['flag-ring']);
+    this.gameMode = 'flag-ring';
+    await this.flagRing.loadData();
+    this.showScreen(STATES.FLAG_RING);
+    this.flagRing.start();
   }
 
   async startRankLine(datasetId = null) {
