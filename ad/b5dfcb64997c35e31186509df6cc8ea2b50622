@@ -1,0 +1,25 @@
+index.html
+  s_bc5a0d4b6b6bc5::t_aecc2c46cc4dbe 5
+js/flag-ring.js
+  s_bc5a0d4b6b6bc5::t_ce7c418320b401 495-497
+  s_bc5a0d4b6b6bc5::t_eafeed49cda5bd 62,109-111
+  s_bc5a0d4b6b6bc5::t_db463cf574eaac 16,70-72,108,120,453-454,465-467,470-475,479,485-487,494,498,500,528-529
+css/style.css
+  s_bc5a0d4b6b6bc5::t_aecc2c46cc4dbe 24-25,3594,3619-3620,3669
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "adb5dfcb64997c35e31186509df6cc8ea2b50622",
+  "prompts": {},
+  "sessions": {
+    "s_bc5a0d4b6b6bc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "196340dc-82dd-49d3-9472-6edc0f137adb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
