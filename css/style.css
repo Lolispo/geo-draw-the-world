@@ -3585,7 +3585,7 @@ canvas {
 
 /* ── Flag Ring ─────────────────────────────────────────── */
 #screen-flag-ring {
-  background: radial-gradient(circle at 50% 50%, #142033 0%, var(--bg) 70%);
+  background: radial-gradient(circle at 50% 55%, #142033 0%, var(--bg) 70%);
   overflow: hidden;
 }
 .flag-ring-container {
@@ -3596,32 +3596,94 @@ canvas {
 }
 .flag-ring-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  gap: 8px 12px;
+  padding: 10px 16px 4px;
   padding-top: max(10px, env(safe-area-inset-top));
-  font-size: 15px;
+  font-size: 14px;
   z-index: 2;
 }
 .flag-ring-bar .btn { padding: 6px 12px; font-size: 14px; }
+.flag-ring-bar select,
+.flag-ring-watch-input {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 14px;
+}
+.flag-ring-watch-input { width: 150px; }
+.flag-ring-check { display: inline-flex; align-items: center; gap: 6px; color: var(--text-dim); cursor: pointer; }
+.flag-ring-chips { display: contents; }
+.flag-ring-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffd33d22;
+  border: 1px solid #ffd33d;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 3px 10px 3px 4px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.flag-ring-chip img { height: 16px; border-radius: 2px; }
+.flag-ring-chip em { font-style: normal; color: var(--text-dim); }
+.flag-ring-chip.out { border-color: var(--red); background: #f8514922; text-decoration: none; }
+.flag-ring-chip.won { border-color: var(--green); background: #3fb95033; }
+.flag-ring-chip.absent { opacity: 0.5; }
+.flag-ring-new { margin-left: auto; }
+.flag-ring-status {
+  display: flex;
+  gap: 12px;
+  padding: 2px 16px;
+  font-size: 15px;
+  z-index: 2;
+}
 .flag-ring-count { font-weight: 600; font-variant-numeric: tabular-nums; }
 .flag-ring-last {
-  flex: 1;
   color: var(--text-dim);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.flag-ring-stage { position: relative; flex: 1; min-height: 0; }
 .flag-ring-canvas {
-  flex: 1;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  min-height: 0;
+  height: 100%;
   max-height: none;
   display: block;
   border: none;
   border-radius: 0;
   box-shadow: none;
 }
+.flag-ring-banner {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1c0d10ee;
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  padding: 8px 16px 8px 8px;
+  font-size: 18px;
+  z-index: 3;
+  animation: fadeIn 0.25s ease-out;
+  max-width: calc(100% - 32px);
+}
+.flag-ring-banner img { height: 40px; border-radius: 3px; }
+.flag-ring-banner[hidden] { display: none; }
+.flag-ring-intro { color: #ffd33d; font-weight: 600; }
+.flag-ring-intro[hidden] { display: none; }
 .flag-ring-winner {
   position: absolute;
   inset: 0;
@@ -3631,7 +3693,7 @@ canvas {
   justify-content: center;
   gap: 14px;
   background: #0d1117cc;
-  z-index: 3;
+  z-index: 4;
   animation: fadeIn 0.4s ease-out;
   padding: 0 16px;
   text-align: center;
@@ -3646,4 +3708,5 @@ canvas {
 }
 .flag-ring-winner-name { font-size: clamp(28px, 6vw, 56px); font-weight: 700; }
 .flag-ring-winner-sub { color: var(--text-dim); font-size: 18px; }
-#screen-flag-ring:fullscreen .flag-ring-bar .btn { opacity: 0.35; }
+#screen-flag-ring:fullscreen .flag-ring-bar { opacity: 0.35; }
+#screen-flag-ring:fullscreen .flag-ring-bar:hover { opacity: 1; }

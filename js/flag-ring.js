@@ -5,139 +5,177 @@
 // can be run headless; rendering scales it to whatever canvas it has.
 
 import { flagUrl } from './flags.js';
+import { loadEntities, getEntity, inCountryPool } from './datasets.js';
 
-const FILL = 0.30;            // share of the ring's area the balls cover
-const SPEED = 0.55;           // ring radii per second each ball drifts toward
+const SPEED = 0.6;            // ring radii per second
 const WIN_HOLD_MS = 5500;
+const INTRO_S = 3;
 const STEP = 1 / 120;
-const SPRITE = 128;
+const SPRITE_H = 72;
+const GAP_MIN = 0.05;
+const STORE = 'flagRing.settings';
 
-function shuffle(a) {
+export const REGIONS = [
+  ['all', 'Whole world'],
+  ['Africa', 'Africa'],
+  ['Asia', 'Asia'],
+  ['Europe', 'Europe'],
+  ['North America', 'North America'],
+  ['Oceania', 'Oceania'],
+  ['South America', 'South America'],
+];
+
+function shuffle(a, rand = Math.random) {
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rand() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
-const radiusFor = (n) => Math.min(0.22, Math.sqrt(FILL / Math.max(n, 1)));
+const wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));
 
-export function createSim(flags, rand = Math.random) {
+// A round aims at a length that grows with the field, so a continent is not a four-minute
+// wait and the whole world is not over in one.
+const roundLength = (n) => Math.min(210, 50 + 0.65 * n);
+
+export function createSim(flags, { collide = false, rand = Math.random } = {}) {
   const n = flags.length;
-  const r = radiusFor(n);
+  const fill = collide ? 0.3 : 0.22;
+  const h = Math.min(0.17, Math.sqrt((fill * Math.PI) / Math.max(n, 1) / 1.5));
   const golden = Math.PI * (3 - Math.sqrt(5));
-  const balls = flags.map((flag, i) => {
-    const d = Math.sqrt((i + 0.5) / n) * (0.97 - r);
+  const bodies = shuffle([...flags], rand).map((flag, i) => {
+    const d = Math.sqrt((i + 0.5) / n) * (0.92 - h);
     const a = i * golden;
     const dir = rand() * Math.PI * 2;
     return {
-      flag, r,
+      flag, hh: h / 2,
       x: Math.cos(a) * d, y: Math.sin(a) * d,
       vx: Math.cos(dir) * SPEED, vy: Math.sin(dir) * SPEED,
-      out: false, gone: false,
+      out: false, gone: false, place: 0,
     };
   });
   return {
-    balls, total: n, inside: n,
-    angle: rand() * Math.PI * 2,
+    bodies, total: n, inside: n, collide,
+    length: roundLength(n),
+    angle: rand() * Math.PI * 2, gap: GAP_MIN,
     sinceEscape: 0, time: 0,
-    lastOut: null, winner: null,
+    events: [], winner: null,
   };
 }
 
-// Pacing. The ring spins faster and the gap widens as the field thins, and a long stretch
-// with no escape widens it further, so the last handful does not stall the round.
+const halfW = (b) => b.hh * (b.flag.aspect || 1.5);
+
+// The gap steers the round toward its length: wider while the field is behind schedule,
+// narrower while it is ahead, and wider still after a long stretch with no escape.
 function pace(sim) {
-  const thin = 1 - sim.inside / sim.total;
-  const spin = 0.35 + 1.1 * thin;
-  const stall = Math.max(0, sim.sinceEscape - 6) * 0.03;
-  const gap = Math.min(1.1, 0.09 + 0.5 * thin * thin + stall);
-  return { spin, gap };
+  const t = Math.min(1, sim.time / sim.length);
+  const target = Math.max(1, sim.total * Math.pow(1 - t, 1.3));
+  const behind = (sim.inside - target) / sim.total;
+  const stall = Math.max(0, sim.sinceEscape - 3) * 0.12;
+  const gap = Math.min(1.3, Math.max(GAP_MIN, GAP_MIN + 6 * behind + stall));
+  const spin = 0.4 + 0.9 * (1 - sim.inside / sim.total);
+  return { gap, spin };
 }
 
-const wrap = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+function collidePairs(live) {
+  for (let i = 0; i < live.length; i++) {
+    const a = live[i];
+    const aw = halfW(a);
+    for (let j = i + 1; j < live.length; j++) {
+      const b = live[j];
+      const ox = aw + halfW(b) - Math.abs(b.x - a.x);
+      if (ox <= 0) continue;
+      const oy = a.hh + b.hh - Math.abs(b.y - a.y);
+      if (oy <= 0) continue;
+      if (ox < oy) {
+        const s = Math.sign(b.x - a.x) || 1;
+        a.x -= s * ox / 2; b.x += s * ox / 2;
+        if ((b.vx - a.vx) * s < 0) [a.vx, b.vx] = [b.vx, a.vx];
+      } else {
+        const s = Math.sign(b.y - a.y) || 1;
+        a.y -= s * oy / 2; b.y += s * oy / 2;
+        if ((b.vy - a.vy) * s < 0) [a.vy, b.vy] = [b.vy, a.vy];
+      }
+    }
+  }
+}
 
 export function step(sim, dt) {
-  const { spin, gap } = pace(sim);
+  const { gap, spin } = pace(sim);
   sim.angle = wrap(sim.angle + spin * dt);
+  sim.gap = gap;
   sim.time += dt;
   sim.sinceEscape += dt;
-  sim.gap = gap;
 
-  const target = radiusFor(sim.inside);
   const live = [];
-  for (const b of sim.balls) {
+  for (const b of sim.bodies) {
     if (b.gone) continue;
+    b.x += b.vx * dt; b.y += b.vy * dt;
     if (b.out) {
-      b.vy += 2.2 * dt;
-      b.x += b.vx * dt; b.y += b.vy * dt;
-      if (b.y > 3 || Math.abs(b.x) > 3) b.gone = true;
+      if (Math.hypot(b.x, b.y) > 6) b.gone = true;
       continue;
     }
-    b.r += (target - b.r) * Math.min(1, dt * 1.5);
-    // Hold every ball near the same speed: elastic bounces alone drift, and a screensaver
-    // that slowly comes to rest is not one.
-    const s = Math.hypot(b.vx, b.vy) || 1e-6;
-    const k = 1 + (SPEED / s - 1) * Math.min(1, dt * 2);
-    b.vx *= k; b.vy *= k;
-    b.x += b.vx * dt; b.y += b.vy * dt;
     live.push(b);
   }
 
-  for (let i = 0; i < live.length; i++) {
-    const a = live[i];
-    for (let j = i + 1; j < live.length; j++) {
-      const b = live[j];
-      const dx = b.x - a.x, dy = b.y - a.y;
-      const min = a.r + b.r;
-      const d2 = dx * dx + dy * dy;
-      if (d2 >= min * min || d2 === 0) continue;
-      const d = Math.sqrt(d2);
-      const nx = dx / d, ny = dy / d;
-      const push = (min - d) / 2;
-      a.x -= nx * push; a.y -= ny * push;
-      b.x += nx * push; b.y += ny * push;
-      const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-      if (rel < 0) {
-        a.vx += rel * nx; a.vy += rel * ny;
-        b.vx -= rel * nx; b.vy -= rel * ny;
-      }
+  if (sim.collide) {
+    collidePairs(live);
+    // Swapping velocities keeps energy, but a pile can still lock up against the wall;
+    // a gentle pull toward the cruising speed keeps it a screensaver.
+    for (const b of live) {
+      const s = Math.hypot(b.vx, b.vy) || 1e-6;
+      const k = 1 + (SPEED / s - 1) * Math.min(1, dt * 2);
+      b.vx *= k; b.vy *= k;
     }
   }
 
   for (const b of live) {
     const d = Math.hypot(b.x, b.y);
     if (d > 1) {
-      // Centre past the wall: it only gets here through the gap, so it is out.
+      // The centre only gets past the wall through the gap. It keeps going the way it was.
       b.out = true;
+      b.place = sim.inside;
       sim.inside--;
       sim.sinceEscape = 0;
-      sim.lastOut = b;
+      sim.events.push(b);
       continue;
     }
-    if (d + b.r <= 1) continue;
-    const off = Math.abs(wrap(Math.atan2(b.y, b.x) - sim.angle));
-    const fits = off < gap - Math.asin(Math.min(1, b.r));
-    if (fits) continue;
     const nx = b.x / d, ny = b.y / d;
+    const hw = halfW(b);
+    const radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
+    if (d + radial <= 1) continue;
+    const tangential = hw * Math.abs(ny) + b.hh * Math.abs(nx);
+    const off = Math.abs(wrap(Math.atan2(b.y, b.x) - sim.angle));
+    if (off < gap - Math.asin(Math.min(1, tangential))) continue;
     const vn = b.vx * nx + b.vy * ny;
     if (vn > 0) { b.vx -= 2 * vn * nx; b.vy -= 2 * vn * ny; }
-    const pull = d - (1 - b.r);
+    const pull = d + radial - 1;
     b.x -= nx * pull; b.y -= ny * pull;
   }
 
   if (sim.inside <= 1 && !sim.winner) {
-    sim.winner = sim.balls.find((b) => !b.out) || sim.lastOut;
+    sim.winner = sim.bodies.find((b) => !b.out) || sim.events[sim.events.length - 1];
+    sim.winner.place = 1;
   }
 }
 
+function readStore() {
+  try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch { return {}; }
+}
+function writeStore(s) {
+  try { localStorage.setItem(STORE, JSON.stringify(s)); } catch { /* private mode */ }
+}
+
 export class FlagRing {
-  constructor(container, onExit) {
+  constructor(container, onExit, onRoute = () => {}) {
     this.container = container;
     this.onExit = onExit;
+    this.onRoute = onRoute;
     this.flags = null;
     this.sprites = new Map();
     this.running = false;
+    this.settings = { region: 'all', territories: false, collide: false, watch: [] };
     this._raf = 0;
     this._onKey = (e) => this._key(e);
     this._build();
@@ -147,56 +185,104 @@ export class FlagRing {
     this.container.innerHTML = `
       <div class="flag-ring-bar">
         <button class="btn flag-ring-back" type="button">← Menu</button>
-        <span class="flag-ring-count"></span>
-        <span class="flag-ring-last"></span>
+        <select class="flag-ring-region" aria-label="Region">
+          ${REGIONS.map(([v, l]) => `<option value="${v}">${l}</option>`).join('')}
+        </select>
+        <label class="flag-ring-check"><input type="checkbox" class="flag-ring-territories"> Territories</label>
+        <label class="flag-ring-check"><input type="checkbox" class="flag-ring-collide"> Flags collide</label>
+        <span class="flag-ring-watch">
+          <input class="flag-ring-watch-input" list="flag-ring-names" placeholder="Watch a flag…" autocomplete="off">
+          <datalist id="flag-ring-names"></datalist>
+        </span>
+        <span class="flag-ring-chips"></span>
+        <button class="btn flag-ring-new" type="button" title="New round">↻</button>
         <button class="btn flag-ring-fs" type="button" title="Fullscreen (f)">⛶</button>
       </div>
-      <canvas class="flag-ring-canvas"></canvas>
-      <div class="flag-ring-winner" hidden>
-        <img alt="">
-        <div class="flag-ring-winner-name"></div>
-        <div class="flag-ring-winner-sub">is the last flag standing</div>
+      <div class="flag-ring-status">
+        <span class="flag-ring-count"></span>
+        <span class="flag-ring-last"></span>
+        <span class="flag-ring-intro" hidden></span>
+      </div>
+      <div class="flag-ring-stage">
+        <canvas class="flag-ring-canvas"></canvas>
+        <div class="flag-ring-banner" hidden></div>
+        <div class="flag-ring-winner" hidden>
+          <img alt="">
+          <div class="flag-ring-winner-name"></div>
+          <div class="flag-ring-winner-sub">is the last flag standing</div>
+        </div>
       </div>`;
-    this.canvas = this.container.querySelector('canvas');
+    const $ = (s) => this.container.querySelector(s);
+    this.canvas = $('canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.countEl = this.container.querySelector('.flag-ring-count');
-    this.lastEl = this.container.querySelector('.flag-ring-last');
-    this.winnerEl = this.container.querySelector('.flag-ring-winner');
-    this.container.querySelector('.flag-ring-back').addEventListener('click', () => this.onExit());
-    this.container.querySelector('.flag-ring-fs').addEventListener('click', () => this._fullscreen());
+    this.countEl = $('.flag-ring-count');
+    this.lastEl = $('.flag-ring-last');
+    this.chipsEl = $('.flag-ring-chips');
+    this.bannerEl = $('.flag-ring-banner');
+    this.introEl = $('.flag-ring-intro');
+    this.winnerEl = $('.flag-ring-winner');
+    this.regionEl = $('.flag-ring-region');
+    this.territoriesEl = $('.flag-ring-territories');
+    this.collideEl = $('.flag-ring-collide');
+    this.watchInput = $('.flag-ring-watch-input');
+    this.namesEl = $('#flag-ring-names');
+
+    $('.flag-ring-back').addEventListener('click', () => this.onExit());
+    $('.flag-ring-fs').addEventListener('click', () => this._fullscreen());
+    $('.flag-ring-new').addEventListener('click', () => this._newRound());
+    this.regionEl.addEventListener('change', () => this._set({ region: this.regionEl.value }, true));
+    this.territoriesEl.addEventListener('change', () => this._set({ territories: this.territoriesEl.checked }, true));
+    this.collideEl.addEventListener('change', () => this._set({ collide: this.collideEl.checked }, true));
+    this.watchInput.addEventListener('change', () => this._addWatch(this.watchInput.value));
+    this.watchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this._addWatch(this.watchInput.value);
+    });
+    this.chipsEl.addEventListener('click', (e) => {
+      const code = e.target.closest('[data-code]')?.dataset.code;
+      if (code) this._set({ watch: this.settings.watch.filter((c) => c !== code) }, false);
+    });
   }
 
   async loadData() {
     if (this.flags) return;
-    const resp = await fetch('data/flags.json');
+    const [resp] = await Promise.all([fetch('data/flags.json'), loadEntities()]);
     this.flags = (await resp.json()).flags;
+    this.byCode = new Map(this.flags.map((f) => [f.code, f]));
+    this.namesEl.innerHTML = this.flags
+      .map((f) => `<option value="${f.name.replace(/"/g, '&quot;')}">`).join('');
     for (const f of this.flags) this._sprite(f);
   }
 
-  // Each flag is cropped into a round sprite once, so a frame is one drawImage per ball
-  // rather than a clip per ball.
+  // Each flag is drawn once into a sprite at its own aspect, so a frame is one drawImage
+  // per flag.
   _sprite(flag) {
-    const c = document.createElement('canvas');
-    c.width = c.height = SPRITE;
-    const g = c.getContext('2d');
-    g.beginPath();
-    g.arc(SPRITE / 2, SPRITE / 2, SPRITE / 2, 0, Math.PI * 2);
-    g.fillStyle = (flag.colors && flag.colors[0]) || '#888';
-    g.fill();
-    this.sprites.set(flag.code, c);
     const img = new Image();
     img.onload = () => {
-      const s = Math.min(img.width, img.height);
-      g.save();
-      g.clip();
-      g.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, SPRITE, SPRITE);
-      g.restore();
+      flag.aspect = img.width / img.height;
+      const c = document.createElement('canvas');
+      c.height = SPRITE_H;
+      c.width = Math.round(SPRITE_H * flag.aspect);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      this.sprites.set(flag.code, c);
     };
     img.src = flagUrl(flag.code, 'w160');
   }
 
-  start() {
+  // `params` comes from the URL; anything it leaves out falls back to what was last used.
+  start(params = new URLSearchParams()) {
     this.stop();
+    const saved = readStore();
+    const s = { ...this.settings, ...saved };
+    if (params.has('region')) s.region = params.get('region');
+    if (params.has('territories')) s.territories = params.get('territories') === '1';
+    if (params.has('collide')) s.collide = params.get('collide') === '1';
+    if (params.has('watch')) s.watch = params.get('watch').split(',').filter(Boolean);
+    if (!REGIONS.some(([v]) => v === s.region)) s.region = 'all';
+    s.watch = s.watch.filter((c) => this.byCode.has(c));
+    this.settings = s;
+    this._syncControls();
+    this._publish();
+
     this.running = true;
     document.addEventListener('keydown', this._onKey);
     this._newRound();
@@ -204,15 +290,26 @@ export class FlagRing {
     let acc = 0;
     const frame = (now) => {
       if (!this.running) return;
-      acc += Math.min(0.1, (now - last) / 1000);
+      const dt = Math.min(0.1, (now - last) / 1000);
       last = now;
-      if (!this.sim.winner) {
+      if (this.intro > 0) {
+        this.intro -= dt;
+        this._showIntro();
+      } else if (!this.sim.winner) {
+        if (!this.introEl.hidden) this.introEl.hidden = true;
+        acc += dt;
         while (acc >= STEP) { step(this.sim, STEP); acc -= STEP; }
+        this._drainEvents(now);
       } else {
         acc = 0;
-        this._win(now);
+        this._drainEvents(now);
+        this._win();
       }
-      this._draw();
+      if (this._bannerUntil && now > this._bannerUntil) {
+        this.bannerEl.hidden = true;
+        this._bannerUntil = 0;
+      }
+      this._draw(now);
       this._raf = requestAnimationFrame(frame);
     };
     this._raf = requestAnimationFrame(frame);
@@ -224,30 +321,120 @@ export class FlagRing {
     document.removeEventListener('keydown', this._onKey);
     clearTimeout(this._winTimer);
     if (this.winnerEl) this.winnerEl.hidden = true;
-    if (document.fullscreenElement && this.container.contains(document.fullscreenElement)) {
+    if (document.fullscreenElement && this.container.closest('.screen')?.contains(document.fullscreenElement)) {
       document.exitFullscreen().catch(() => {});
     }
   }
 
+  _pool() {
+    const { region, territories } = this.settings;
+    return this.flags.filter((f) => {
+      if (!inCountryPool(f.code, { territories })) return false;
+      return region === 'all' || getEntity(f.code)?.continent === region;
+    });
+  }
+
+  _set(patch, restart) {
+    this.settings = { ...this.settings, ...patch };
+    this._syncControls();
+    this._publish();
+    if (restart) this._newRound();
+    else this._renderChips();
+  }
+
+  _publish() {
+    const { region, territories, collide, watch } = this.settings;
+    writeStore(this.settings);
+    this.onRoute({
+      region: region === 'all' ? null : region,
+      territories: territories ? '1' : null,
+      collide: collide ? '1' : null,
+      watch: watch.length ? watch.join(',') : null,
+    });
+  }
+
+  _syncControls() {
+    this.regionEl.value = this.settings.region;
+    this.territoriesEl.checked = this.settings.territories;
+    this.collideEl.checked = this.settings.collide;
+  }
+
+  _addWatch(raw) {
+    const q = raw.trim().toLowerCase();
+    this.watchInput.value = '';
+    if (!q) return;
+    const f = this.flags.find((x) => x.name.toLowerCase() === q || x.code === q)
+      || this.flags.find((x) => x.name.toLowerCase().startsWith(q));
+    if (!f || this.settings.watch.includes(f.code)) return;
+    this._set({ watch: [...this.settings.watch, f.code] }, false);
+  }
+
+  _renderChips() {
+    const sim = this.sim;
+    this.chipsEl.innerHTML = this.settings.watch.map((code) => {
+      const f = this.byCode.get(code);
+      const b = sim?.bodies.find((x) => x.flag.code === code);
+      let state = '';
+      if (!b) state = 'not in this round';
+      else if (b.place === 1) state = 'winner';
+      else if (b.out) state = `out · ${ordinal(b.place)}`;
+      const cls = !b ? 'absent' : b.out ? 'out' : b.place === 1 ? 'won' : 'alive';
+      return `<button type="button" class="flag-ring-chip ${cls}" data-code="${code}" title="Stop watching">
+        <img src="${flagUrl(code, 'w40')}" alt="">${f.name}${state ? ` <em>${state}</em>` : ''} ×</button>`;
+    }).join('');
+  }
+
   _newRound() {
-    this.sim = createSim(shuffle([...this.flags]));
+    clearTimeout(this._winTimer);
+    this.sim = createSim(this._pool(), { collide: this.settings.collide });
+    this.intro = INTRO_S;
     this._winShown = false;
     this.winnerEl.hidden = true;
+    this.bannerEl.hidden = true;
     this.lastEl.textContent = '';
+    this._renderChips();
+  }
+
+  _showIntro() {
+    const watched = this.settings.watch
+      .filter((c) => this.sim.bodies.some((b) => b.flag.code === c))
+      .map((c) => this.byCode.get(c).name);
+    const n = Math.ceil(this.intro);
+    const text = `Starting in ${Math.max(n, 1)}${watched.length ? ` · watching ${watched.join(', ')}` : ''}`;
+    this.introEl.hidden = this.intro <= 0;
+    if (this.introEl.textContent !== text) this.introEl.textContent = text;
+  }
+
+  _drainEvents(now) {
+    const events = this.sim.events.splice(0);
+    if (!events.length) return;
+    const last = events[events.length - 1];
+    this.lastEl.textContent = `out: ${last.flag.name}`;
+    const watched = events.filter((b) => this.settings.watch.includes(b.flag.code));
+    if (watched.length) {
+      const b = watched[watched.length - 1];
+      this.bannerEl.innerHTML = `<img src="${flagUrl(b.flag.code, 'w160')}" alt="">
+        <span><b>${b.flag.name}</b> is out — ${ordinal(b.place)} of ${this.sim.total}</span>`;
+      this.bannerEl.hidden = false;
+      this._bannerUntil = now + 3500;
+      this._renderChips();
+    }
   }
 
   _win() {
     if (this._winShown) return;
     this._winShown = true;
+    this.introEl.hidden = true;
     const f = this.sim.winner.flag;
     this.winnerEl.querySelector('img').src = flagUrl(f.code, 'w640');
     this.winnerEl.querySelector('.flag-ring-winner-name').textContent = f.name;
     this.winnerEl.hidden = false;
+    this._renderChips();
     this._winTimer = setTimeout(() => { if (this.running) this._newRound(); }, WIN_HOLD_MS);
   }
 
   _key(e) {
-    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
     if (e.key === 'f' || e.key === 'F') this._fullscreen();
   }
 
@@ -257,7 +444,7 @@ export class FlagRing {
     else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
   }
 
-  _draw() {
+  _draw(now) {
     const { canvas, ctx, sim } = this;
     const dpr = window.devicePixelRatio || 1;
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -270,7 +457,6 @@ export class FlagRing {
     const R = Math.min(w, h) * 0.44;
     const cx = w / 2, cy = h / 2;
 
-    const gap = sim.gap ?? 0.09;
     ctx.save();
     ctx.lineWidth = Math.max(3, R * 0.018);
     ctx.lineCap = 'round';
@@ -278,22 +464,66 @@ export class FlagRing {
     ctx.shadowColor = '#58a6ffaa';
     ctx.shadowBlur = 18;
     ctx.beginPath();
-    ctx.arc(cx, cy, R + ctx.lineWidth / 2, sim.angle + gap, sim.angle - gap + Math.PI * 2);
+    ctx.arc(cx, cy, R + ctx.lineWidth / 2, sim.angle + sim.gap, sim.angle - sim.gap + Math.PI * 2);
     ctx.stroke();
     ctx.restore();
 
-    for (const b of sim.balls) {
+    const watch = new Set(this.settings.watch);
+    const marked = [];
+    for (const b of sim.bodies) {
       if (b.gone) continue;
-      const sprite = this.sprites.get(b.flag.code);
-      const rr = b.r * R;
-      ctx.globalAlpha = b.out ? 0.55 : 1;
-      ctx.drawImage(sprite, cx + b.x * R - rr, cy + b.y * R - rr, rr * 2, rr * 2);
+      if (watch.has(b.flag.code)) { marked.push(b); continue; }
+      this._drawFlag(b, R, cx, cy, b.out ? 0.5 : 1);
     }
-    ctx.globalAlpha = 1;
+    // Watched flags go on top, outlined and named, so they can be followed in a crowd.
+    const pulse = this.intro > 0 ? 1 + 0.25 * Math.abs(Math.sin(now / 180)) : 1;
+    for (const b of marked) {
+      const k = this.intro > 0 ? 1.8 * pulse : 1.35;
+      const hw = halfW(b) * R * k, hh = b.hh * R * k;
+      const x = cx + b.x * R, y = cy + b.y * R;
+      ctx.save();
+      ctx.fillStyle = b.out ? '#f85149' : '#ffd33d';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = 14;
+      ctx.fillRect(x - hw - 3, y - hh - 3, hw * 2 + 6, hh * 2 + 6);
+      ctx.shadowBlur = 0;
+      ctx.restore();
+      this._drawFlag(b, R, cx, cy, 1, k);
+      ctx.save();
+      ctx.font = '600 13px "Space Grotesk", system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#0d1117';
+      ctx.fillStyle = '#fff';
+      ctx.strokeText(b.flag.name, x, y - hh - 8);
+      ctx.fillText(b.flag.name, x, y - hh - 8);
+      ctx.restore();
+    }
 
     const left = `${sim.inside} of ${sim.total} left`;
     if (this.countEl.textContent !== left) this.countEl.textContent = left;
-    const last = sim.lastOut ? `out: ${sim.lastOut.flag.name}` : '';
-    if (this.lastEl.textContent !== last) this.lastEl.textContent = last;
   }
+
+  _drawFlag(b, R, cx, cy, alpha, scale = 1) {
+    const { ctx } = this;
+    const hw = halfW(b) * R * scale, hh = b.hh * R * scale;
+    const x = cx + b.x * R - hw, y = cy + b.y * R - hh;
+    ctx.globalAlpha = alpha;
+    const sprite = this.sprites.get(b.flag.code);
+    if (sprite) ctx.drawImage(sprite, x, y, hw * 2, hh * 2);
+    else {
+      ctx.fillStyle = (b.flag.colors && b.flag.colors[0]) || '#888';
+      ctx.fillRect(x, y, hw * 2, hh * 2);
+    }
+    ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x, y, hw * 2, hh * 2);
+    ctx.globalAlpha = 1;
+  }
+}
+
+function ordinal(n) {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }

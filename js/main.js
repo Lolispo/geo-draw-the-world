@@ -175,7 +175,8 @@ class Game {
     );
     this.flagRing = new FlagRing(
       document.getElementById('flag-ring-container'),
-      () => this.showScreen(STATES.MENU)
+      () => this.showScreen(STATES.MENU),
+      (params) => this._route(['flag-ring'], params)
     );
 
     this._bindEvents();
@@ -222,7 +223,7 @@ class Game {
       case 'rank': this.startRankLine(sub || null); return;
       case 'flags': this.startFlagQuiz(); return;
       case 'flag-picker': this.startFlagPicker(); return;
-      case 'flag-ring': this.startFlagRing(); return;
+      case 'flag-ring': this.startFlagRing(params); return;
       case 'scores': this.openScores(); return;
       case 'explore':
         this.startExplore(params.get('metric') || 'gdp-nominal', {
@@ -827,12 +828,11 @@ class Game {
     this.flagPickerGame.start(10);
   }
 
-  async startFlagRing() {
-    this._route(['flag-ring']);
+  async startFlagRing(params) {
     this.gameMode = 'flag-ring';
     await this.flagRing.loadData();
     this.showScreen(STATES.FLAG_RING);
-    this.flagRing.start();
+    this.flagRing.start(params);
   }
 
   async startRankLine(datasetId = null) {

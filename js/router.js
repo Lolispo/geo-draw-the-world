@@ -23,7 +23,7 @@ const encodeSegment = (s) => encodeURIComponent(s).replace(/%2C/g, ',');
 export function formatRoute(segments, params = {}) {
   const q = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v != null && v !== ''),
-  ).toString();
+  ).toString().replace(/%2C/g, ',');
   return `#/${segments.filter(Boolean).map(encodeSegment).join('/')}${q ? `?${q}` : ''}`;
 }
 
