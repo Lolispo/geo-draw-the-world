@@ -145,16 +145,33 @@ export function step(sim, dt) {
       sim.events.push(b);
       continue;
     }
-    const nx = b.x / d, ny = b.y / d;
     const hw = halfW(b);
-    const radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
+    let nx = b.x / d, ny = b.y / d;
+    let radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
     if (d + radial <= 1) continue;
-    const tangential = hw * Math.abs(ny) + b.hh * Math.abs(nx);
+    // The ends of the wall are corners: a flag that catches one is knocked off it at an angle
+    // instead of bouncing as if the wall carried on across the gap.
+    for (const side of [1, -1]) {
+      const a = sim.angle + side * sim.gap;
+      const px = Math.cos(a) - b.x, py = Math.sin(a) - b.y;
+      if (Math.abs(px) >= hw || Math.abs(py) >= b.hh) continue;
+      const len = Math.hypot(px, py) || 1e-6;
+      const cx = -px / len, cy = -py / len;
+      const vn = b.vx * cx + b.vy * cy;
+      if (vn < 0) { b.vx -= 2 * vn * cx; b.vy -= 2 * vn * cy; }
+      const f = Math.min(hw / (Math.abs(px) || 1e-9), b.hh / (Math.abs(py) || 1e-9));
+      const push = len * (f - 1);
+      b.x += cx * push; b.y += cy * push;
+    }
+    const d2 = Math.hypot(b.x, b.y);
+    nx = b.x / d2; ny = b.y / d2;
+    radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
+    if (d2 + radial <= 1) continue;
     const off = Math.abs(wrap(Math.atan2(b.y, b.x) - sim.angle));
-    if (off < gap - Math.asin(Math.min(1, tangential))) continue;
+    if (off < sim.gap) continue;
     const vn = b.vx * nx + b.vy * ny;
     if (vn > 0) { b.vx -= 2 * vn * nx; b.vy -= 2 * vn * ny; }
-    const pull = d + radial - 1;
+    const pull = d2 + radial - 1;
     b.x -= nx * pull; b.y -= ny * pull;
   }
 
