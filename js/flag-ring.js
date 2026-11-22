@@ -146,9 +146,7 @@ export function step(sim, dt) {
       continue;
     }
     const hw = halfW(b);
-    let nx = b.x / d, ny = b.y / d;
-    let radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
-    if (d + radial <= 1) continue;
+    if (d + Math.hypot(hw, b.hh) <= 1) continue;
     // The ends of the wall are corners: a flag that catches one is knocked off it at an angle
     // instead of bouncing as if the wall carried on across the gap.
     for (const side of [1, -1]) {
@@ -163,16 +161,20 @@ export function step(sim, dt) {
       const push = len * (f - 1);
       b.x += cx * push; b.y += cy * push;
     }
-    const d2 = Math.hypot(b.x, b.y);
-    nx = b.x / d2; ny = b.y / d2;
-    radial = hw * Math.abs(nx) + b.hh * Math.abs(ny);
-    if (d2 + radial <= 1) continue;
-    const off = Math.abs(wrap(Math.atan2(b.y, b.x) - sim.angle));
-    if (off < sim.gap) continue;
-    const vn = b.vx * nx + b.vy * ny;
-    if (vn > 0) { b.vx -= 2 * vn * nx; b.vy -= 2 * vn * ny; }
-    const pull = d2 + radial - 1;
-    b.x -= nx * pull; b.y -= ny * pull;
+    // Only a corner can reach past the circle first, and it hits the wall only where there is
+    // wall at its own angle — a corner poking through the gap touches nothing.
+    let deepest = 0, wx = 0, wy = 0;
+    for (const [sx, sy] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+      const kx = b.x + sx * hw, ky = b.y + sy * b.hh;
+      const r = Math.hypot(kx, ky);
+      if (r <= 1 + deepest) continue;
+      if (Math.abs(wrap(Math.atan2(ky, kx) - sim.angle)) < sim.gap) continue;
+      deepest = r - 1; wx = kx / r; wy = ky / r;
+    }
+    if (!deepest) continue;
+    const vn = b.vx * wx + b.vy * wy;
+    if (vn > 0) { b.vx -= 2 * vn * wx; b.vy -= 2 * vn * wy; }
+    b.x -= wx * deepest; b.y -= wy * deepest;
   }
 
   if (sim.inside <= 1 && !sim.winner) {
