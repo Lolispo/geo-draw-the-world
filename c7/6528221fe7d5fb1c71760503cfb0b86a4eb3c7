@@ -1,0 +1,32 @@
+css/style.css
+  s_bc5a0d4b6b6bc5::t_6e45daf4f57749 3717-3771
+  s_bc5a0d4b6b6bc5::t_ea98eb21317d67 3772-3773
+js/flag-ring-board.js
+  s_bc5a0d4b6b6bc5::t_c4dbcfd58d41d0 1-72,74-211,213-214,216-217
+  s_bc5a0d4b6b6bc5::t_5dd35e10393510 215
+  s_bc5a0d4b6b6bc5::t_765786525d2f6e 73
+  s_bc5a0d4b6b6bc5::t_ea98eb21317d67 212
+js/flag-ring.js
+  s_bc5a0d4b6b6bc5::t_f2f8533cd3ae7e 9,11-12,31,263-264,281,297-309,427,434-509,512-523,528-535,559-563,578-590,607-608,622-623,632-633,645-663,669,672-677
+  s_bc5a0d4b6b6bc5::t_ea98eb21317d67 510-511,524-527
+  s_bc5a0d4b6b6bc5::t_de332dca1ed3e6 88-91,101-102,183,199-203
+  s_bc5a0d4b6b6bc5::t_33dda1e8367558 10,314-317,720
+CLAUDE.md
+  s_bc5a0d4b6b6bc5::t_dd8911426e1eba 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c76528221fe7d5fb1c71760503cfb0b86a4eb3c7",
+  "prompts": {},
+  "sessions": {
+    "s_bc5a0d4b6b6bc5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "196340dc-82dd-49d3-9472-6edc0f137adb",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
