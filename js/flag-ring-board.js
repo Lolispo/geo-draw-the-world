@@ -31,19 +31,36 @@ export function modeLabel({ region, territories, collide }, regionName) {
   return parts.join(' · ');
 }
 
-export function runsFor(key) {
-  return read(RUNS, {})[key] || [];
+// A session is this browser tab: it survives a reload and ends when the tab is closed.
+export const SESSION = (() => {
+  try {
+    let id = sessionStorage.getItem('flagRing.session');
+    if (!id) {
+      id = Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem('flagRing.session', id);
+    }
+    return id;
+  } catch {
+    return Math.random().toString(36).slice(2, 10);
+  }
+})();
+
+export function runsFor(key, sessionOnly = false) {
+  const runs = read(RUNS, {})[key] || [];
+  return sessionOnly ? runs.filter((r) => r.s === SESSION) : runs;
 }
 
 export function saveRun(key, run) {
   const all = read(RUNS, {});
-  all[key] = [run, ...(all[key] || [])].slice(0, KEEP);
+  all[key] = [{ ...run, s: SESSION }, ...(all[key] || [])].slice(0, KEEP);
   write(RUNS, all);
 }
 
-export function clearRuns(key) {
+// Clears what the board is showing: this session's rounds, or all of them.
+export function clearRuns(key, sessionOnly = false) {
   const all = read(RUNS, {});
-  delete all[key];
+  if (sessionOnly) all[key] = (all[key] || []).filter((r) => r.s !== SESSION);
+  else delete all[key];
   write(RUNS, all);
 }
 
@@ -103,8 +120,8 @@ function ago(t) {
 
 const img = (code, cls = '') => `<img class="${cls}" src="${flagUrl(code, 'w40')}" alt="">`;
 
-export function renderScores(el, { key, label, openRun }) {
-  const runs = runsFor(key);
+export function renderScores(el, { key, label, openRun, sessionOnly }) {
+  const runs = runsFor(key, sessionOnly);
   const medals = new Map();
   const kills = new Map();
   for (const r of runs) {
@@ -125,6 +142,10 @@ export function renderScores(el, { key, label, openRun }) {
 
   el.innerHTML = `
     <div class="frp-head"><h3>Scores</h3><button type="button" class="frp-close" aria-label="Close">×</button></div>
+    <div class="frp-scope" role="group" aria-label="Which rounds">
+      <button type="button" data-scope="session" aria-pressed="${!!sessionOnly}">This session</button>
+      <button type="button" data-scope="all" aria-pressed="${!sessionOnly}">All time</button>
+    </div>
     <div class="frp-mode">${esc(label)} · ${runs.length} round${runs.length === 1 ? '' : 's'}</div>
     ${runs.length ? `
       <h4>Most medals</h4>
@@ -138,8 +159,8 @@ export function renderScores(el, { key, label, openRun }) {
           <span class="frp-when">${ago(r.t)}</span>
           <span class="frp-podium">${r.top.map((f) => img(f.code)).join('')}</span>
         </button>${openRun === i ? runDetail(r) : ''}</li>`).join('')}</ul>
-      <button type="button" class="btn frp-clear">Clear this board</button>`
-    : '<p class="frp-empty">No finished rounds in this mode yet. Results land here when a round ends.</p>'}`;
+      <button type="button" class="btn frp-clear">${sessionOnly ? "Clear this session's rounds" : 'Clear this board'}</button>`
+    : `<p class="frp-empty">${sessionOnly ? 'No finished rounds in this mode since this tab was opened.' : 'No finished rounds in this mode yet.'} Results land here when a round ends.</p>`}`;
 }
 
 function runDetail(r) {

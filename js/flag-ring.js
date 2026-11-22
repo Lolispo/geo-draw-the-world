@@ -461,6 +461,7 @@ export class FlagRing {
         key: modeKey(this.settings),
         label: modeLabel(this.settings, regionName),
         openRun: this.openRun,
+        sessionOnly: this.settings.sessionScores,
       });
     } else if (this.panel === 'teams') {
       renderTeams(this.panelEl, this.teams, this.byCode);
@@ -470,6 +471,12 @@ export class FlagRing {
   _panelClick(e) {
     const t = e.target;
     if (t.closest('.frp-close')) { this.panel = null; this._renderPanel(); return; }
+    const scope = t.closest('[data-scope]');
+    if (scope) {
+      this.openRun = null;
+      this._set({ sessionScores: scope.dataset.scope === 'session' }, false);
+      return;
+    }
     const run = t.closest('[data-run]');
     if (run) {
       const i = Number(run.dataset.run);
@@ -480,7 +487,7 @@ export class FlagRing {
     const clear = t.closest('.frp-clear');
     if (clear) {
       // Two presses, so one stray tap cannot wipe a board.
-      if (clear.dataset.armed) { clearRuns(modeKey(this.settings)); this._renderPanel(); }
+      if (clear.dataset.armed) { clearRuns(modeKey(this.settings), this.settings.sessionScores); this._renderPanel(); }
       else { clear.dataset.armed = '1'; clear.textContent = 'Press again to clear'; }
       return;
     }
