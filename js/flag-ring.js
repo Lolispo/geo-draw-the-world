@@ -6,6 +6,10 @@
 
 import { flagUrl } from './flags.js';
 import { loadEntities, getEntity, inCountryPool } from './datasets.js';
+import {
+  modeKey, modeLabel, saveRun, clearRuns, roundResult,
+  loadTeams, saveTeams, splitEntries, renderScores, renderTeams,
+} from './flag-ring-board.js';
 
 const SPEED = 0.6;            // ring radii per second
 const WIN_HOLD_MS = 5500;
@@ -24,6 +28,7 @@ export const REGIONS = [
   ['North America', 'North America'],
   ['Oceania', 'Oceania'],
   ['South America', 'South America'],
+  ['teams', 'Team draw'],
 ];
 
 function shuffle(a, rand = Math.random) {
@@ -80,7 +85,10 @@ function pace(sim) {
   return { gap, spin };
 }
 
-function collidePairs(live) {
+// A flag that goes out within this long of being bumped was knocked out by whoever bumped it.
+export const KILL_WINDOW = 3;
+
+function collidePairs(live, time) {
   for (let i = 0; i < live.length; i++) {
     const a = live[i];
     const aw = halfW(a);
@@ -90,6 +98,8 @@ function collidePairs(live) {
       if (ox <= 0) continue;
       const oy = a.hh + b.hh - Math.abs(b.y - a.y);
       if (oy <= 0) continue;
+      a.touch = b; a.touchT = time;
+      b.touch = a; b.touchT = time;
       if (ox < oy) {
         const s = Math.sign(b.x - a.x) || 1;
         a.x -= s * ox / 2; b.x += s * ox / 2;
@@ -170,7 +180,7 @@ export function step(sim, dt) {
   }
 
   if (sim.collide) {
-    collidePairs(live);
+    collidePairs(live, sim.time);
     // Swapping velocities keeps energy, but a pile can still lock up against the wall;
     // a gentle pull toward the cruising speed keeps it a screensaver.
     for (const b of live) {
@@ -186,6 +196,11 @@ export function step(sim, dt) {
       b.out = true;
       b.place = sim.inside;
       sim.inside--;
+      // Bumping a teammate out is not a kill.
+      if (b.touch && sim.time - b.touchT <= KILL_WINDOW && b.touch.flag.code !== b.flag.code) {
+        b.killer = b.touch;
+        b.touch.kills = (b.touch.kills || 0) + 1;
+      }
       sim.sinceEscape = 0;
       sim.events.push(b);
     }
@@ -245,6 +260,8 @@ export class FlagRing {
           <datalist id="flag-ring-names"></datalist>
         </span>
         <span class="flag-ring-chips"></span>
+        <button class="btn flag-ring-teams-btn" type="button" hidden>Teams</button>
+        <button class="btn flag-ring-scores-btn" type="button" title="Scores">🏆</button>
         <button class="btn flag-ring-new" type="button" title="New round">↻</button>
         <button class="btn flag-ring-fs" type="button" title="Fullscreen (f)">⛶</button>
       </div>
@@ -261,6 +278,7 @@ export class FlagRing {
           <div class="flag-ring-winner-name"></div>
           <div class="flag-ring-winner-sub">is the last flag standing</div>
         </div>
+        <aside class="flag-ring-panel" hidden></aside>
       </div>`;
     const $ = (s) => this.container.querySelector(s);
     this.canvas = $('canvas');
@@ -276,11 +294,27 @@ export class FlagRing {
     this.collideEl = $('.flag-ring-collide');
     this.watchInput = $('.flag-ring-watch-input');
     this.namesEl = $('#flag-ring-names');
+    this.panelEl = $('.flag-ring-panel');
+    this.teamsBtn = $('.flag-ring-teams-btn');
+    this.territoriesLabel = this.territoriesEl.closest('label');
+    this.watchWrap = $('.flag-ring-watch');
+    this.panel = null;
+    this.openRun = null;
+    this.teams = loadTeams();
+
+    $('.flag-ring-scores-btn').addEventListener('click', () => this._togglePanel('scores'));
+    this.teamsBtn.addEventListener('click', () => this._togglePanel('teams'));
+    this.panelEl.addEventListener('click', (e) => this._panelClick(e));
+    this.panelEl.addEventListener('change', (e) => this._teamEdit(e, true));
+    this.panelEl.addEventListener('input', (e) => this._teamEdit(e, false));
 
     $('.flag-ring-back').addEventListener('click', () => this.onExit());
     $('.flag-ring-fs').addEventListener('click', () => this._fullscreen());
     $('.flag-ring-new').addEventListener('click', () => this._newRound());
-    this.regionEl.addEventListener('change', () => this._set({ region: this.regionEl.value }, true));
+    this.regionEl.addEventListener('change', () => {
+      if (this.regionEl.value === 'teams') this.panel = 'teams';
+      this._set({ region: this.regionEl.value }, true);
+    });
     this.territoriesEl.addEventListener('change', () => this._set({ territories: this.territoriesEl.checked }, true));
     this.collideEl.addEventListener('change', () => this._set({ collide: this.collideEl.checked }, true));
     this.watchInput.addEventListener('change', () => this._addWatch(this.watchInput.value));
@@ -390,9 +424,112 @@ export class FlagRing {
 
   _pool() {
     const { region, territories } = this.settings;
+    if (region === 'teams') return this._entries();
     return this.flags.filter((f) => {
       if (!inCountryPool(f.code, { territories })) return false;
       return region === 'all' || getEntity(f.code)?.continent === region;
+    });
+  }
+
+  // Each team gets its share of the entries as copies of its flag. A copy inherits from the
+  // real flag, so it picks up the flag's shape once its image has loaded.
+  _entries() {
+    const counts = splitEntries(this.teams);
+    const out = [];
+    this.teams.forEach((t, i) => {
+      const base = this.byCode.get(t.code);
+      if (!base) return;
+      const team = Object.assign(Object.create(base), { name: t.name, team: i });
+      for (let k = 0; k < counts[i]; k++) out.push(team);
+    });
+    return out;
+  }
+
+  get _teamMode() { return this.settings.region === 'teams'; }
+
+  _togglePanel(kind) {
+    this.panel = this.panel === kind ? null : kind;
+    this.openRun = null;
+    this._renderPanel();
+  }
+
+  _renderPanel() {
+    this.panelEl.hidden = !this.panel;
+    if (this.panel === 'scores') {
+      const regionName = REGIONS.find(([v]) => v === this.settings.region)?.[1] || '';
+      renderScores(this.panelEl, {
+        key: modeKey(this.settings),
+        label: modeLabel(this.settings, regionName),
+        openRun: this.openRun,
+      });
+    } else if (this.panel === 'teams') {
+      renderTeams(this.panelEl, this.teams, this.byCode);
+    }
+  }
+
+  _panelClick(e) {
+    const t = e.target;
+    if (t.closest('.frp-close')) { this.panel = null; this._renderPanel(); return; }
+    const run = t.closest('[data-run]');
+    if (run) {
+      const i = Number(run.dataset.run);
+      this.openRun = this.openRun === i ? null : i;
+      this._renderPanel();
+      return;
+    }
+    const clear = t.closest('.frp-clear');
+    if (clear) {
+      // Two presses, so one stray tap cannot wipe a board.
+      if (clear.dataset.armed) { clearRuns(modeKey(this.settings)); this._renderPanel(); }
+      else { clear.dataset.armed = '1'; clear.textContent = 'Press again to clear'; }
+      return;
+    }
+    if (t.closest('.frp-add')) {
+      const used = new Set(this.teams.map((x) => x.code));
+      const code = this.flags.find((f) => !used.has(f.code) && inCountryPool(f.code, {}))?.code || 'un';
+      this.teams.push({ name: `Team ${this.teams.length + 1}`, code, points: 10 });
+      saveTeams(this.teams);
+      this._renderPanel();
+      return;
+    }
+    const remove = t.closest('.frp-remove');
+    if (remove && this.teams.length > 2) {
+      this.teams.splice(Number(remove.closest('[data-i]').dataset.i), 1);
+      saveTeams(this.teams);
+      this._renderPanel();
+      return;
+    }
+    if (t.closest('.frp-go')) {
+      this.panel = null;
+      this._renderPanel();
+      if (this._teamMode) this._newRound();
+      else this._set({ region: 'teams' }, true);
+    }
+  }
+
+  // Edits update the panel in place rather than re-rendering it: a re-render on blur would
+  // replace the field the next tap just focused.
+  _teamEdit(e, committed) {
+    const row = e.target.closest('[data-i]');
+    if (!row) return;
+    const team = this.teams[Number(row.dataset.i)];
+    if (e.target.matches('.frp-name')) team.name = e.target.value.trim() || team.name;
+    if (e.target.matches('.frp-points')) team.points = Math.max(0, Number(e.target.value) || 0);
+    if (e.target.matches('.frp-flag')) {
+      if (!committed) return;
+      const q = e.target.value.trim().toLowerCase();
+      const f = this.flags.find((x) => x.name.toLowerCase() === q || x.code === q)
+        || this.flags.find((x) => x.name.toLowerCase().startsWith(q));
+      if (f) team.code = f.code;
+      e.target.value = this.byCode.get(team.code)?.name || team.code;
+      row.querySelector('.frp-team-flag').src = flagUrl(team.code, 'w40');
+      const codes = this.teams.map((t) => t.code);
+      this.panelEl.querySelector('.frp-warn').hidden = !codes.some((c, i) => codes.indexOf(c) !== i);
+    }
+    saveTeams(this.teams);
+    const counts = splitEntries(this.teams);
+    this.panelEl.querySelectorAll('.frp-team').forEach((r, i) => {
+      r.querySelector('.frp-share').innerHTML = `${counts[i]}<small>%</small>`;
     });
   }
 
@@ -419,6 +556,11 @@ export class FlagRing {
     this.regionEl.value = this.settings.region;
     this.territoriesEl.checked = this.settings.territories;
     this.collideEl.checked = this.settings.collide;
+    const teams = this._teamMode;
+    this.territoriesLabel.hidden = teams;
+    this.watchWrap.hidden = teams;
+    this.teamsBtn.hidden = !teams;
+    if (this.panel) this._renderPanel();
   }
 
   _addWatch(raw) {
@@ -433,6 +575,19 @@ export class FlagRing {
 
   _renderChips() {
     const sim = this.sim;
+    if (this._teamMode) {
+      this.chipsEl.innerHTML = this.teams.map((t, i) => {
+        const mine = sim?.bodies.filter((b) => b.flag.team === i) || [];
+        if (!mine.length) return '';
+        const left = mine.filter((b) => !b.out).length;
+        const place = this.teamPlace?.get(i);
+        const cls = place === 1 ? 'won' : left ? 'alive' : 'out';
+        const state = place === 1 ? 'winner' : left ? `${left} left` : `out · ${ordinal(place)}`;
+        return `<span class="flag-ring-chip ${cls}">
+          <img src="${flagUrl(t.code, 'w40')}" alt="">${t.name} <em>${state}</em></span>`;
+      }).join('');
+      return;
+    }
     this.chipsEl.innerHTML = this.settings.watch.map((code) => {
       const f = this.byCode.get(code);
       const b = sim?.bodies.find((x) => x.flag.code === code);
@@ -449,6 +604,8 @@ export class FlagRing {
   _newRound() {
     clearTimeout(this._winTimer);
     this.sim = createSim(this._pool(), { collide: this.settings.collide });
+    this.teamPlace = new Map();
+    this.teamsLeft = new Set(this.sim.bodies.map((b) => b.flag.team)).size;
     this.intro = INTRO_S;
     this._winShown = false;
     this.winnerEl.hidden = true;
@@ -462,7 +619,8 @@ export class FlagRing {
       .filter((c) => this.sim.bodies.some((b) => b.flag.code === c))
       .map((c) => this.byCode.get(c).name);
     const n = Math.ceil(this.intro);
-    const text = `Starting in ${Math.max(n, 1)}${watched.length ? ` · watching ${watched.join(', ')}` : ''}`;
+    const who = this._teamMode ? ` · ${this.teams.length} teams` : watched.length ? ` · watching ${watched.join(', ')}` : '';
+    const text = `Starting in ${Math.max(n, 1)}${who}`;
     this.introEl.hidden = this.intro <= 0;
     if (this.introEl.textContent !== text) this.introEl.textContent = text;
   }
@@ -471,7 +629,8 @@ export class FlagRing {
     const events = this.sim.events.splice(0);
     if (!events.length) return;
     const last = events[events.length - 1];
-    this.lastEl.textContent = `out: ${last.flag.name}`;
+    this.lastEl.textContent = `out: ${last.flag.name}${last.killer ? ` · knocked out by ${last.killer.flag.name}` : ''}`;
+    if (this._teamMode) { this._teamEvents(events, now); return; }
     const watched = events.filter((b) => this.settings.watch.includes(b.flag.code));
     if (watched.length) {
       const b = watched[watched.length - 1];
@@ -483,13 +642,39 @@ export class FlagRing {
     }
   }
 
+  // A team is out when its last entry is, and places by how many teams were still in.
+  _teamEvents(events, now) {
+    let shown = null;
+    for (const b of events) {
+      const i = b.flag.team;
+      if (this.teamPlace.has(i)) continue;
+      if (this.sim.bodies.some((x) => x.flag.team === i && !x.out)) continue;
+      this.teamPlace.set(i, this.teamsLeft--);
+      shown = b;
+    }
+    if (shown) {
+      this.bannerEl.innerHTML = `<img src="${flagUrl(shown.flag.code, 'w160')}" alt="">
+        <span><b>${shown.flag.name}</b> is out — ${ordinal(this.teamPlace.get(shown.flag.team))}</span>`;
+      this.bannerEl.hidden = false;
+      this._bannerUntil = now + 3500;
+    }
+    this._renderChips();
+  }
+
   _win() {
     if (this._winShown) return;
     this._winShown = true;
     this.introEl.hidden = true;
     const f = this.sim.winner.flag;
+    if (this._teamMode) this.teamPlace.set(f.team, 1);
     this.winnerEl.querySelector('img').src = flagUrl(f.code, 'w640');
     this.winnerEl.querySelector('.flag-ring-winner-name').textContent = f.name;
+    this.winnerEl.querySelector('.flag-ring-winner-sub').textContent =
+      this._teamMode ? 'wins the draw' : 'is the last flag standing';
+    saveRun(modeKey(this.settings), roundResult(this.sim, {
+      watch: this.settings.watch, teams: this._teamMode,
+    }));
+    if (this.panel === 'scores') this._renderPanel();
     this.winnerEl.hidden = false;
     this._renderChips();
     this._winTimer = setTimeout(() => { if (this.running) this._newRound(); }, WIN_HOLD_MS);
@@ -532,7 +717,7 @@ export class FlagRing {
       ctx.stroke();
     }
 
-    const watch = new Set(this.settings.watch);
+    const watch = new Set(this._teamMode ? [] : this.settings.watch);
     const marked = [];
     ctx.beginPath();
     for (const b of sim.bodies) {

@@ -3714,3 +3714,60 @@ canvas {
 .flag-ring-winner-sub { color: var(--text-dim); font-size: 18px; }
 #screen-flag-ring:fullscreen .flag-ring-bar { opacity: 0.35; }
 #screen-flag-ring:fullscreen .flag-ring-bar:hover { opacity: 1; }
+
+/* Flag Ring side panel: scores and the team draw. */
+.flag-ring-panel {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(380px, 100%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border-left: 1px solid var(--border);
+  padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 3;
+  font-size: 14px;
+}
+.flag-ring-panel[hidden] { display: none; }
+.flag-ring-panel h3 { margin: 0; font-size: 18px; }
+.flag-ring-panel h4 { margin: 16px 0 6px; font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
+.flag-ring-panel h5 { margin: 10px 0 4px; font-size: 12px; color: var(--text-dim); }
+.frp-head { display: flex; justify-content: space-between; align-items: center; }
+.frp-close { background: none; border: none; color: var(--text-dim); font-size: 24px; cursor: pointer; padding: 0 4px; }
+.frp-mode, .frp-help, .frp-empty, .frp-meta { color: var(--text-dim); margin: 4px 0 0; line-height: 1.4; }
+.frp-meta { font-size: 12px; margin-top: 8px; }
+.frp-table { list-style: none; margin: 0; padding: 0; }
+.frp-table li { display: flex; align-items: center; gap: 8px; padding: 3px 0; }
+.frp-table li span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.frp-table li em { font-style: normal; color: var(--text-dim); white-space: nowrap; }
+.frp-table img, .frp-podium img { height: 16px; border-radius: 2px; }
+.frp-runs { list-style: none; margin: 0; padding: 0; }
+.frp-runs > li { border-top: 1px solid var(--border); }
+.frp-run {
+  display: flex; width: 100%; justify-content: space-between; align-items: center;
+  background: none; border: none; color: var(--text); font: inherit; padding: 8px 2px; cursor: pointer; text-align: left;
+}
+.frp-run:hover, .frp-run.open { color: var(--accent); }
+.frp-when { color: inherit; }
+.frp-podium { display: inline-flex; gap: 4px; }
+.frp-detail { padding: 0 2px 10px; }
+.frp-clear { margin-top: 16px; }
+.frp-teams { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.frp-team { display: grid; grid-template-columns: 28px 1fr 64px 44px 28px; grid-template-areas: "flag name points share x" ". pick pick pick ."; gap: 4px 6px; align-items: center; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.frp-team-flag { grid-area: flag; height: 18px; border-radius: 2px; }
+.frp-name { grid-area: name; }
+.frp-flag { grid-area: pick; }
+.frp-points { grid-area: points; }
+.frp-share { grid-area: share; text-align: right; font-variant-numeric: tabular-nums; }
+.frp-share small { color: var(--text-dim); }
+.frp-remove { grid-area: x; background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer; }
+.frp-remove:disabled { opacity: 0.3; cursor: default; }
+.frp-team input {
+  min-width: 0; background: var(--surface2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 6px; padding: 5px 7px; font: inherit;
+  font-size: 16px; /* iOS zooms into anything smaller on focus */
+}
+.frp-warn { color: var(--orange); margin: 8px 0 0; }
+.frp-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
+.flag-ring-bar [hidden], .flag-ring-panel [hidden] { display: none; }
+.flag-ring-panel .btn { padding: 8px 14px; font-size: 14px; }

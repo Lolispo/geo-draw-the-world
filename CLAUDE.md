@@ -23,6 +23,7 @@ him. What is specific to this repo:
 #/rank[/<datasetId>]                      Rank the World
 #/flags  #/flag-picker                    the two flag games
 #/flag-ring?region=Europe&territories=1&collide=1&watch=se,cn   Flag Ring screensaver
+#/flag-ring?region=teams[&collide=1]       Flag Ring team draw (teams set up in its panel)
 #/explore[/map|/shapes|/heritage|/coverage|/sources]?metric=<id>&continent=<name>
 #/scores                                  Your Scores
 #/country/<code>                          menu with that country's panel open
