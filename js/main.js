@@ -87,6 +87,15 @@ const STATES = {
   SCORES: 'scores'
 };
 
+const viewport = document.querySelector('meta[name="viewport"]');
+const viewportBase = viewport?.content;
+
+function lockZoom(on) {
+  if (!viewport) return;
+  const next = on ? `${viewportBase}, maximum-scale=1.0` : viewportBase;
+  if (viewport.content !== next) viewport.content = next;
+}
+
 class Game {
   constructor() {
     this.state = STATES.MENU;
@@ -575,6 +584,7 @@ class Game {
   showScreen(state) {
     if (state === STATES.MENU) writeRoute([]);
     if (state !== STATES.FLAG_RING) this.flagRing.stop();
+    lockZoom(state === STATES.FLAG_RING);
     this.state = state;
     for (const [name, el] of Object.entries(this.screens)) {
       el.classList.toggle('active', name === state);

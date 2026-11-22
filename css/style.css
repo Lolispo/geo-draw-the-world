@@ -21,7 +21,6 @@
   --purple: #bc8cff;
 }
 
-html { touch-action: manipulation; }
 
 body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
