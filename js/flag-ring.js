@@ -103,6 +103,52 @@ function collidePairs(live) {
   }
 }
 
+const CORNERS = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
+// How hard an end of the wall throws a flag that catches it, on top of the bounce.
+const KICK = 1.2;
+
+// The ends of the wall are corners. A flag that catches one is bounced off the line from the
+// corner to its centre and thrown along it, so a clip sends it hard to the side.
+function hitEdges(sim, b, hw) {
+  for (const side of [1, -1]) {
+    const a = sim.angle + side * sim.gap;
+    const px = Math.cos(a) - b.x, py = Math.sin(a) - b.y;
+    if (Math.abs(px) >= hw || Math.abs(py) >= b.hh) continue;
+    const len = Math.hypot(px, py) || 1e-6;
+    const nx = -px / len, ny = -py / len;
+    const vn = b.vx * nx + b.vy * ny;
+    if (vn < 0) {
+      const speed = Math.hypot(b.vx, b.vy);
+      const rx = b.vx - 2 * vn * nx + KICK * speed * nx;
+      const ry = b.vy - 2 * vn * ny + KICK * speed * ny;
+      const k = speed / (Math.hypot(rx, ry) || 1e-6);
+      b.vx = rx * k; b.vy = ry * k;
+    }
+    const f = Math.min(hw / (Math.abs(px) || 1e-9), b.hh / (Math.abs(py) || 1e-9));
+    const push = len * (f - 1);
+    b.x += nx * push; b.y += ny * push;
+  }
+}
+
+// Only a corner can cross the circle first, and it hits the wall only where there is wall at
+// its own angle; a corner poking through the gap touches nothing. `face` is 1 from inside the
+// ring and -1 from outside.
+function hitWall(sim, b, hw, face) {
+  let deepest = 0, wx = 0, wy = 0;
+  for (const [sx, sy] of CORNERS) {
+    const kx = b.x + sx * hw, ky = b.y + sy * b.hh;
+    const r = Math.hypot(kx, ky);
+    const depth = face * (r - 1);
+    if (depth <= deepest) continue;
+    if (Math.abs(wrap(Math.atan2(ky, kx) - sim.angle)) < sim.gap) continue;
+    deepest = depth; wx = face * kx / r; wy = face * ky / r;
+  }
+  if (!deepest) return;
+  const vn = b.vx * wx + b.vy * wy;
+  if (vn > 0) { b.vx -= 2 * vn * wx; b.vy -= 2 * vn * wy; }
+  b.x -= wx * deepest; b.y -= wy * deepest;
+}
+
 export function step(sim, dt) {
   const { gap, spin } = pace(sim);
   if (gap > sim.gap) sim.gap = Math.min(gap, sim.gap + GAP_RATE * dt);
@@ -135,46 +181,26 @@ export function step(sim, dt) {
   }
 
   for (const b of live) {
-    const d = Math.hypot(b.x, b.y);
-    if (d > 1) {
-      // The centre only gets past the wall through the gap. It keeps going the way it was.
+    if (Math.hypot(b.x, b.y) > 1) {
+      // The centre only gets past the wall through the gap.
       b.out = true;
       b.place = sim.inside;
       sim.inside--;
       sim.sinceEscape = 0;
       sim.events.push(b);
-      continue;
     }
-    const hw = halfW(b);
-    if (d + Math.hypot(hw, b.hh) <= 1) continue;
-    // The ends of the wall are corners: a flag that catches one is knocked off it at an angle
-    // instead of bouncing as if the wall carried on across the gap.
-    for (const side of [1, -1]) {
-      const a = sim.angle + side * sim.gap;
-      const px = Math.cos(a) - b.x, py = Math.sin(a) - b.y;
-      if (Math.abs(px) >= hw || Math.abs(py) >= b.hh) continue;
-      const len = Math.hypot(px, py) || 1e-6;
-      const cx = -px / len, cy = -py / len;
-      const vn = b.vx * cx + b.vy * cy;
-      if (vn < 0) { b.vx -= 2 * vn * cx; b.vy -= 2 * vn * cy; }
-      const f = Math.min(hw / (Math.abs(px) || 1e-9), b.hh / (Math.abs(py) || 1e-9));
-      const push = len * (f - 1);
-      b.x += cx * push; b.y += cy * push;
-    }
-    // Only a corner can reach past the circle first, and it hits the wall only where there is
-    // wall at its own angle — a corner poking through the gap touches nothing.
-    let deepest = 0, wx = 0, wy = 0;
-    for (const [sx, sy] of [[1, 1], [1, -1], [-1, 1], [-1, -1]]) {
-      const kx = b.x + sx * hw, ky = b.y + sy * b.hh;
-      const r = Math.hypot(kx, ky);
-      if (r <= 1 + deepest) continue;
-      if (Math.abs(wrap(Math.atan2(ky, kx) - sim.angle)) < sim.gap) continue;
-      deepest = r - 1; wx = kx / r; wy = ky / r;
-    }
-    if (!deepest) continue;
-    const vn = b.vx * wx + b.vy * wy;
-    if (vn > 0) { b.vx -= 2 * vn * wx; b.vy -= 2 * vn * wy; }
-    b.x -= wx * deepest; b.y -= wy * deepest;
+  }
+
+  for (const b of sim.bodies) {
+    if (b.gone) continue;
+    const d = Math.hypot(b.x, b.y);
+    // An eliminated flag keeps hitting the ring from outside until it is clear of it; one
+    // that has been thrown back in through the gap just passes on through.
+    if (b.out && d <= 1) continue;
+    const hw = halfW(b), reach = Math.hypot(hw, b.hh);
+    if (Math.abs(d - 1) >= reach) continue;
+    hitEdges(sim, b, hw);
+    hitWall(sim, b, hw, b.out ? -1 : 1);
   }
 
   if (sim.inside <= 1 && !sim.winner) {
@@ -197,6 +223,7 @@ export class FlagRing {
     this.onRoute = onRoute;
     this.flags = null;
     this.sprites = new Map();
+    this.graySprites = new Map();
     this.running = false;
     this.settings = { region: 'all', territories: false, collide: false, watch: [] };
     this._raf = 0;
@@ -287,6 +314,18 @@ export class FlagRing {
       c.width = Math.round(SPRITE_H * flag.aspect);
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
       this.sprites.set(flag.code, c);
+      // A gray copy for eliminated flags, made by compositing rather than reading pixels,
+      // which a cross-origin image would refuse.
+      const g = document.createElement('canvas');
+      g.width = c.width; g.height = c.height;
+      const gx = g.getContext('2d');
+      gx.drawImage(c, 0, 0);
+      gx.globalCompositeOperation = 'saturation';
+      gx.fillStyle = '#808080';
+      gx.fillRect(0, 0, g.width, g.height);
+      gx.globalCompositeOperation = 'destination-in';
+      gx.drawImage(c, 0, 0);
+      this.graySprites.set(flag.code, g);
     };
     img.src = flagUrl(flag.code, 'w160');
   }
@@ -499,7 +538,7 @@ export class FlagRing {
     for (const b of sim.bodies) {
       if (b.gone) continue;
       if (watch.has(b.flag.code)) { marked.push(b); continue; }
-      this._drawFlag(b, R, cx, cy, b.out ? 0.5 : 1);
+      this._drawFlag(b, R, cx, cy, 1);
     }
     ctx.strokeStyle = 'rgba(0,0,0,0.45)';
     ctx.lineWidth = 1;
@@ -537,9 +576,17 @@ export class FlagRing {
     const { ctx } = this;
     const hw = halfW(b) * R * scale, hh = b.hh * R * scale;
     const x = cx + b.x * R - hw, y = cy + b.y * R - hh;
-    ctx.globalAlpha = alpha;
     const sprite = this.sprites.get(b.flag.code);
-    if (sprite) ctx.drawImage(sprite, x, y, hw * 2, hh * 2);
+    // Out of the ring a flag drains to gray over a short distance, then fades as it leaves.
+    const past = b.out ? Math.max(0, Math.hypot(b.x, b.y) - 1) : 0;
+    const gray = Math.min(1, past / 0.35);
+    ctx.globalAlpha = alpha * (1 - 0.6 * Math.min(1, past / 2.5));
+    if (sprite && gray > 0) {
+      const g = this.graySprites.get(b.flag.code);
+      if (gray < 1) ctx.drawImage(sprite, x, y, hw * 2, hh * 2);
+      ctx.globalAlpha *= gray;
+      ctx.drawImage(g, x, y, hw * 2, hh * 2);
+    } else if (sprite) ctx.drawImage(sprite, x, y, hw * 2, hh * 2);
     else {
       ctx.fillStyle = (b.flag.colors && b.flag.colors[0]) || '#888';
       ctx.fillRect(x, y, hw * 2, hh * 2);
