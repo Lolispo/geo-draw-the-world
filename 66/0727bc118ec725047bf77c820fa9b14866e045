@@ -1,0 +1,29 @@
+css/style.css
+  s_9316d6c2fe33a1::t_03a1b3365ac459 1089-1095,3776-3779,3782
+index.html
+  s_9316d6c2fe33a1::t_d0242493ebe06b 62
+js/flag-game.js
+  s_9316d6c2fe33a1::t_8497e95d62f31e 28-39,350-354,366,458,460,481-483
+js/flag-ring-board.js
+  s_9316d6c2fe33a1::t_ab17bf2bbca129 10-13,219-220,225,227-232,239
+js/flag-ring.js
+  s_9316d6c2fe33a1::t_8aaad73d543762 11,248,383,445,475,511-515,534-537,555-566,568
+js/main.js
+  s_9316d6c2fe33a1::t_521462e56c4129 422-425
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "660727bc118ec725047bf77c820fa9b14866e045",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "unknown"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
