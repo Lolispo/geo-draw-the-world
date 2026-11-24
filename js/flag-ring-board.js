@@ -7,6 +7,10 @@ const RUNS = 'flagRing.runs';
 const TEAMS = 'flagRing.teams';
 const KEEP = 50;
 export const ENTRIES = 100;
+export const ENTRIES_MIN = 10;
+export const ENTRIES_MAX = 300;
+export const clampEntries = (n) =>
+  Math.min(ENTRIES_MAX, Math.max(ENTRIES_MIN, Math.round(Number(n) || ENTRIES)));
 
 const MEDALS = ['🥇', '🥈', '🥉'];
 
@@ -212,21 +216,27 @@ export function splitEntries(teams, total = ENTRIES) {
   return out;
 }
 
-export function renderTeams(el, teams, byCode) {
-  const counts = splitEntries(teams);
+export function renderTeams(el, teams, byCode, total = ENTRIES) {
+  const counts = splitEntries(teams, total);
   const codes = teams.map((t) => t.code);
   const shared = codes.some((c, i) => codes.indexOf(c) !== i);
   el.innerHTML = `
     <div class="frp-head"><h3>Team draw</h3><button type="button" class="frp-close" aria-label="Close">×</button></div>
-    <p class="frp-help">Points become a share of ${ENTRIES} entries, each one a copy of the team's flag.
+    <p class="frp-help">Points become a share of the entries, each one a copy of the team's flag.
       The team whose flag is last inside wins.</p>
+    <div class="frp-total">
+      <span>Entries in the ring</span>
+      <button type="button" class="btn frp-step" data-step="-10" aria-label="Fewer entries">−</button>
+      <input class="frp-entries" type="number" min="${ENTRIES_MIN}" max="${ENTRIES_MAX}" step="10" inputmode="numeric" value="${total}" aria-label="Entries in the ring">
+      <button type="button" class="btn frp-step" data-step="10" aria-label="More entries">+</button>
+    </div>
     <div class="frp-teams">${teams.map((t, i) => `
       <div class="frp-team" data-i="${i}">
         ${img(t.code, 'frp-team-flag')}
         <input class="frp-name" value="${esc(t.name)}" aria-label="Team name" maxlength="30">
         <input class="frp-flag" value="${esc(byCode.get(t.code)?.name || t.code)}" list="flag-ring-names" aria-label="Flag" autocomplete="off">
         <input class="frp-points" type="number" min="0" step="1" inputmode="numeric" value="${t.points}" aria-label="Points">
-        <span class="frp-share">${counts[i]}<small>%</small></span>
+        <span class="frp-share">${counts[i]}</span>
         <button type="button" class="frp-remove" aria-label="Remove team"${teams.length <= 2 ? ' disabled' : ''}>×</button>
       </div>`).join('')}
     </div>

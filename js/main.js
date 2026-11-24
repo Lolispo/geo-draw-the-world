@@ -419,6 +419,10 @@ class Game {
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
     document.getElementById('btn-activity-top-n').addEventListener('click', () => this.startTopN());
+    // Windows 10's emoji font has no 🪜.
+    if (/win/i.test(navigator.userAgentData?.platform || navigator.platform || '')) {
+      document.getElementById('top-n-icon').textContent = '🔝';
+    }
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-flag-ring').addEventListener('click', () => this.startFlagRing());

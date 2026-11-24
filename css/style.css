@@ -1026,9 +1026,15 @@ canvas {
   border-radius: 8px;
   padding: 6px 12px;
 }
-.flag-timer-bar {
+.flag-timer-track {
   flex: 1;
   height: 8px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+.flag-timer-bar {
+  height: 100%;
   border-radius: 4px;
   background: var(--green);
   transition: width 0.05s linear, background 0.3s ease;
@@ -1080,6 +1086,13 @@ canvas {
   box-shadow: 0 0 20px var(--accent-glow);
   transform: translateY(-3px);
 }
+.flag-option-card { position: relative; }
+.flag-option-key {
+  position: absolute; top: 6px; left: 8px;
+  font: 600 0.75rem/1 inherit; color: var(--text-dim); background: var(--surface); z-index: 1;
+  border: 1px solid var(--border); border-radius: 4px; padding: 2px 5px;
+}
+@media (hover: none) { .flag-option-key { display: none; } }
 .flag-option-card.disabled {
   cursor: default;
   opacity: 0.85;
@@ -3760,9 +3773,13 @@ canvas {
 .frp-points { grid-area: points; }
 .frp-share { grid-area: share; text-align: right; font-variant-numeric: tabular-nums; }
 .frp-share small { color: var(--text-dim); }
+.frp-total { display: flex; align-items: center; gap: 6px; margin: 10px 0 4px; }
+.frp-total span { flex: 1; color: var(--text-dim); }
+.frp-total .btn.frp-step { width: 32px; height: 32px; padding: 0; }
+.frp-total input { width: 64px; text-align: center; }
 .frp-remove { grid-area: x; background: none; border: none; color: var(--text-dim); font-size: 20px; cursor: pointer; }
 .frp-remove:disabled { opacity: 0.3; cursor: default; }
-.frp-team input {
+.frp-team input, .frp-total input {
   min-width: 0; background: var(--surface2); color: var(--text);
   border: 1px solid var(--border); border-radius: 6px; padding: 5px 7px; font: inherit;
   font-size: 16px; /* iOS zooms into anything smaller on focus */

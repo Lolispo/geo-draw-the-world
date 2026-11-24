@@ -25,6 +25,18 @@ export class FlagGame {
     this._timerInterval = null;
     this._timerEl = null;
     this.maxTime = 10;          // seconds per round
+    this.graceTime = 1;         // an answer this fast still scores full points
+    this._optionEls = [];
+    document.addEventListener('keydown', (e) => this._key(e));
+  }
+
+  _key(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || !this.container.getClientRects().length) return;
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    const card = this._optionEls[Number(e.key) - 1];
+    if (!card || !this.container.contains(card) || card.classList.contains('disabled')) return;
+    e.preventDefault();
+    card.click();
   }
 
   async loadData() {
@@ -298,12 +310,15 @@ export class FlagGame {
     // Timer bar
     const timerWrap = document.createElement('div');
     timerWrap.className = 'flag-timer-wrap';
+    const timerTrack = document.createElement('div');
+    timerTrack.className = 'flag-timer-track';
     const timerBar = document.createElement('div');
     timerBar.className = 'flag-timer-bar';
+    timerTrack.append(timerBar);
     const timerLabel = document.createElement('span');
     timerLabel.className = 'flag-timer-label';
     timerLabel.textContent = this.maxTime.toFixed(1) + 's';
-    timerWrap.append(timerBar, timerLabel);
+    timerWrap.append(timerTrack, timerLabel);
     this._timerEl = { bar: timerBar, label: timerLabel };
 
     mainFlagEl.append(canvas);
@@ -332,7 +347,11 @@ export class FlagGame {
       name.textContent = opt.name;
       if (this.hideNames) name.style.visibility = 'hidden';
 
-      card.append(img, name);
+      const key = document.createElement('kbd');
+      key.className = 'flag-option-key';
+      key.textContent = i + 1;
+
+      card.append(key, img, name);
       optionsWrap.appendChild(card);
       optionEls.push(card);
 
@@ -344,6 +363,7 @@ export class FlagGame {
       });
     }
 
+    this._optionEls = optionEls;
     questionArea.appendChild(optionsWrap);
     c.appendChild(questionArea);
 
@@ -435,8 +455,9 @@ export class FlagGame {
     if (!this._timerEl) return;
     const elapsed = (performance.now() - this._roundStart) / 1000;
     const remaining = Math.max(0, this.maxTime - elapsed);
-    const pct = (remaining / this.maxTime) * 100;
+    const pct = this._getTimeScore();
 
+    // The bar is the points on offer, so it holds full through the grace second.
     this._timerEl.bar.style.width = pct + '%';
     this._timerEl.label.textContent = remaining.toFixed(1) + 's';
 
@@ -456,10 +477,10 @@ export class FlagGame {
   }
 
   _getTimeScore() {
-    // Points based on speed: 100 at instant, 0 at maxTime
     const elapsed = (performance.now() - this._roundStart) / 1000;
-    const remaining = Math.max(0, this.maxTime - elapsed);
-    return Math.round((remaining / this.maxTime) * 100);
+    const late = Math.max(0, elapsed - this.graceTime);
+    const span = this.maxTime - this.graceTime;
+    return Math.round((Math.max(0, span - late) / span) * 100);
   }
 
   _handleAnswer(chosen, correct, optionEls, mainFlag, removedColor, chosenFlag) {

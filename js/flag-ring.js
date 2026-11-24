@@ -8,7 +8,7 @@ import { flagUrl } from './flags.js';
 import { loadEntities, getEntity, inCountryPool } from './datasets.js';
 import {
   modeKey, modeLabel, saveRun, clearRuns, roundResult,
-  loadTeams, saveTeams, splitEntries, renderScores, renderTeams,
+  loadTeams, saveTeams, splitEntries, clampEntries, ENTRIES, renderScores, renderTeams,
 } from './flag-ring-board.js';
 
 const SPEED = 0.6;            // ring radii per second
@@ -196,8 +196,8 @@ export function step(sim, dt) {
       b.out = true;
       b.place = sim.inside;
       sim.inside--;
-      // Bumping a teammate out is not a kill.
-      if (b.touch && sim.time - b.touchT <= KILL_WINDOW && b.touch.flag.code !== b.flag.code) {
+      // Bumping a teammate out is not a kill. A team's entries share one flag object.
+      if (b.touch && sim.time - b.touchT <= KILL_WINDOW && b.touch.flag !== b.flag) {
         b.killer = b.touch;
         b.touch.kills = (b.touch.kills || 0) + 1;
       }
@@ -218,9 +218,14 @@ export function step(sim, dt) {
     hitWall(sim, b, hw, b.out ? -1 : 1);
   }
 
-  if (sim.inside <= 1 && !sim.winner) {
-    sim.winner = sim.bodies.find((b) => !b.out) || sim.events[sim.events.length - 1];
-    sim.winner.place = 1;
+  // The round is over once everything still inside is on one side: a single flag, or a
+  // single team's entries.
+  if (!sim.winner) {
+    const live = sim.bodies.filter((b) => !b.out);
+    if (new Set(live.map((b) => b.flag.team ?? b)).size <= 1) {
+      sim.winner = live[0] || sim.events[sim.events.length - 1];
+      for (const b of live.length ? live : [sim.winner]) b.place = 1;
+    }
   }
 }
 
@@ -240,7 +245,7 @@ export class FlagRing {
     this.sprites = new Map();
     this.graySprites = new Map();
     this.running = false;
-    this.settings = { region: 'all', territories: false, collide: false, watch: [] };
+    this.settings = { region: 'all', territories: false, collide: false, watch: [], entries: ENTRIES };
     this._raf = 0;
     this._onKey = (e) => this._key(e);
     this._build();
@@ -373,11 +378,14 @@ export class FlagRing {
     if (params.has('territories')) s.territories = params.get('territories') === '1';
     if (params.has('collide')) s.collide = params.get('collide') === '1';
     if (params.has('watch')) s.watch = params.get('watch').split(',').filter(Boolean);
+    const panel = params.get('panel');
     if (!REGIONS.some(([v]) => v === s.region)) s.region = 'all';
+    s.entries = clampEntries(s.entries);
     s.watch = s.watch.filter((c) => this.byCode.has(c));
     this.settings = s;
+    this.panel = panel === 'scores' || (panel === 'teams' && s.region === 'teams') ? panel : null;
     this._syncControls();
-    this._publish();
+    this._renderPanel();
 
     this.running = true;
     document.addEventListener('keydown', this._onKey);
@@ -434,7 +442,7 @@ export class FlagRing {
   // Each team gets its share of the entries as copies of its flag. A copy inherits from the
   // real flag, so it picks up the flag's shape once its image has loaded.
   _entries() {
-    const counts = splitEntries(this.teams);
+    const counts = splitEntries(this.teams, this.settings.entries);
     const out = [];
     this.teams.forEach((t, i) => {
       const base = this.byCode.get(t.code);
@@ -464,8 +472,9 @@ export class FlagRing {
         sessionOnly: this.settings.sessionScores,
       });
     } else if (this.panel === 'teams') {
-      renderTeams(this.panelEl, this.teams, this.byCode);
+      renderTeams(this.panelEl, this.teams, this.byCode, this.settings.entries);
     }
+    this._publish();
   }
 
   _panelClick(e) {
@@ -499,6 +508,11 @@ export class FlagRing {
       this._renderPanel();
       return;
     }
+    const stepBtn = t.closest('.frp-step');
+    if (stepBtn) {
+      this._setEntries(this.settings.entries + Number(stepBtn.dataset.step));
+      return;
+    }
     const remove = t.closest('.frp-remove');
     if (remove && this.teams.length > 2) {
       this.teams.splice(Number(remove.closest('[data-i]').dataset.i), 1);
@@ -517,6 +531,10 @@ export class FlagRing {
   // Edits update the panel in place rather than re-rendering it: a re-render on blur would
   // replace the field the next tap just focused.
   _teamEdit(e, committed) {
+    if (e.target.matches('.frp-entries')) {
+      if (committed) this._setEntries(e.target.value);
+      return;
+    }
     const row = e.target.closest('[data-i]');
     if (!row) return;
     const team = this.teams[Number(row.dataset.i)];
@@ -534,9 +552,20 @@ export class FlagRing {
       this.panelEl.querySelector('.frp-warn').hidden = !codes.some((c, i) => codes.indexOf(c) !== i);
     }
     saveTeams(this.teams);
-    const counts = splitEntries(this.teams);
+    this._showShares();
+  }
+
+  _setEntries(n) {
+    this.settings.entries = clampEntries(n);
+    writeStore(this.settings);
+    this.panelEl.querySelector('.frp-entries').value = this.settings.entries;
+    this._showShares();
+  }
+
+  _showShares() {
+    const counts = splitEntries(this.teams, this.settings.entries);
     this.panelEl.querySelectorAll('.frp-team').forEach((r, i) => {
-      r.querySelector('.frp-share').innerHTML = `${counts[i]}<small>%</small>`;
+      r.querySelector('.frp-share').textContent = counts[i];
     });
   }
 
@@ -556,6 +585,7 @@ export class FlagRing {
       territories: territories ? '1' : null,
       collide: collide ? '1' : null,
       watch: watch.length ? watch.join(',') : null,
+      panel: this.panel,
     });
   }
 
@@ -590,8 +620,9 @@ export class FlagRing {
         const place = this.teamPlace?.get(i);
         const cls = place === 1 ? 'won' : left ? 'alive' : 'out';
         const state = place === 1 ? 'winner' : left ? `${left} left` : `out · ${ordinal(place)}`;
+        const kills = mine.reduce((n, b) => n + (b.kills || 0), 0);
         return `<span class="flag-ring-chip ${cls}">
-          <img src="${flagUrl(t.code, 'w40')}" alt="">${t.name} <em>${state}</em></span>`;
+          <img src="${flagUrl(t.code, 'w40')}" alt="">${t.name} <em>${state}${kills ? ` · ☠ ${kills}` : ''}</em></span>`;
       }).join('');
       return;
     }
