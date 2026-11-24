@@ -11,7 +11,7 @@ import { WorldCanvas } from './world-canvas.js';
 import { Shape } from './shape.js';
 import { multiPolygonCentroid, multiPolygonBoundingBox, mainLandmassCentroid, hidpiReset } from './utils.js';
 import { scoreShape } from './scoring.js';
-import { getHighScore, saveScore } from './high-scores.js';
+import { getHighScore, saveScore, getAllHighScores } from './high-scores.js';
 import { getIncludeTerritories, setIncludeTerritories, getGhosts, setGhosts } from './settings.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
@@ -198,6 +198,7 @@ class Game {
     this.devMode = getGhosts() || new URLSearchParams(window.location.search).has('dev');
     this._applyGhosts();
     this._sizeCanvases();
+    this._syncScoresButton();
     this._updateHighScoreDisplay();
     // A typed or pasted hash, and Back/Forward, both re-enter the route. The app's own
     // writes go through history.replaceState, which fires neither — so no guard needed.
@@ -419,9 +420,10 @@ class Game {
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
     document.getElementById('btn-activity-top-n').addEventListener('click', () => this.startTopN());
-    // Windows 10's emoji font has no 🪜.
+    // Windows' emoji font has no 🪜 and draws flag emoji as letters.
     if (/win/i.test(navigator.userAgentData?.platform || navigator.platform || '')) {
-      document.getElementById('top-n-icon').textContent = '🔝';
+      document.getElementById('top-n-icon').textContent = '🌍🔝';
+      document.getElementById('flag-ring-icon').textContent = '🏳️🏆';
     }
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
@@ -606,11 +608,16 @@ class Game {
 
     // Reset transient mode state when returning to the hub
     if (state === STATES.MENU) {
+      this._syncScoresButton();
       this._stopTimer();
       this._hideStreakCounter();
       this._speedActive = false;
       this._streakActive = false;
     }
+  }
+
+  _syncScoresButton() {
+    document.getElementById('btn-activity-scores').hidden = !Object.keys(getAllHighScores()).length;
   }
 
   async startContinents() {

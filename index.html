@@ -33,50 +33,49 @@
 
   <!-- MENU -->
   <div id="screen-menu" class="screen active">
+    <button id="btn-activity-scores" class="btn menu-scores-btn" type="button" aria-label="Your scores" hidden>🏅<span>Scores</span></button>
     <div class="menu-content">
       <h1 class="title-glow">Know<br><span>the World</span></h1>
       <p class="subtitle">Learn world geography — flags, data, and every country.</p>
 
       <div class="menu-hub">
-        <button id="btn-activity-flags" class="btn hub-card hub-flags">
-          <span class="hub-icon">🏳️</span>
-          <span class="hub-label">Flag Color Quiz</span>
-          <span class="hub-desc">Guess the missing flag color</span>
-        </button>
-        <button id="btn-activity-flag-picker" class="btn hub-card hub-flags">
-          <span class="hub-icon">🎨</span>
-          <span class="hub-label">Flag Color Picker</span>
-          <span class="hub-desc">Match the missing flag color as precisely as you can</span>
-        </button>
-        <button id="btn-activity-flag-ring" class="btn hub-card hub-flags">
-          <span class="hub-icon">🌀</span>
-          <span class="hub-label">Flag Ring</span>
-          <span class="hub-desc">Every flag in a spinning ring. Last one inside wins</span>
-        </button>
         <button id="btn-activity-rank" class="btn hub-card hub-rank">
-          <span class="hub-icon">🏦</span>
+          <span class="hub-icon">🌍🏦</span>
           <span class="hub-label">Rank the World</span>
           <span class="hub-desc">Place countries on a line by the numbers</span>
         </button>
         <button id="btn-activity-top-n" class="btn hub-card hub-rank">
-          <span class="hub-icon" id="top-n-icon">🪜</span>
+          <span class="hub-icon" id="top-n-icon">🌍🪜</span>
           <span class="hub-label">Top 10 / Bottom 10</span>
           <span class="hub-desc">Pick the countries at the top — or the bottom — of a ranking</span>
         </button>
-        <button id="btn-activity-explore" class="btn hub-card hub-explore">
-          <span class="hub-icon">📊</span>
-          <span class="hub-label">Data Explorer</span>
-          <span class="hub-desc">Browse countries ranked by any dataset</span>
-        </button>
-        <button id="btn-activity-scores" class="btn hub-card hub-scores">
-          <span class="hub-icon">🏅</span>
-          <span class="hub-label">Your Scores</span>
-          <span class="hub-desc">Every preset you have played, and your best on it</span>
-        </button>
-        <button id="btn-activity-draw" class="btn hub-card hub-draw hub-wide">
-          <span class="hub-icon">✏️</span>
+        <button id="btn-activity-draw" class="btn hub-card hub-draw">
+          <span class="hub-icon">🌍✏️</span>
           <span class="hub-label">Draw the World</span>
-          <span class="hub-desc">Draw shapes from memory & place them on the map</span>
+          <span class="hub-desc">Draw shapes from memory &amp; place them on the map</span>
+        </button>
+        <button id="btn-activity-flag-picker" class="btn hub-card hub-flags">
+          <span class="hub-icon">🏳️🎨</span>
+          <span class="hub-label">Flag Color Picker</span>
+          <span class="hub-desc">Match the missing flag color as precisely as you can</span>
+        </button>
+        <button id="btn-activity-flag-ring" class="btn hub-card hub-flags">
+          <span class="hub-icon" id="flag-ring-icon">🇸🇪🏆</span>
+          <span class="hub-label">Flag Ring</span>
+          <span class="hub-desc">Every flag in a spinning ring. Last one inside wins</span>
+        </button>
+        <button id="btn-activity-flags" class="btn hub-card hub-flags">
+          <span class="hub-icon">🏳️❓</span>
+          <span class="hub-label">Flag Color Quiz</span>
+          <span class="hub-desc">Guess the missing flag color</span>
+        </button>
+        <button id="btn-activity-explore" class="btn hub-card hub-explore hub-wide hub-feature">
+          <span class="hub-icon">🌍📊</span>
+          <span class="hub-text">
+            <span class="hub-label">Data Explorer</span>
+            <span class="hub-desc">Every country, ranked by any dataset</span>
+          </span>
+          <span class="hub-go">Explore →</span>
         </button>
       </div>
 
