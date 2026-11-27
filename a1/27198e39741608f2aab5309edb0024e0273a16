@@ -1,0 +1,49 @@
+css/style.css
+  s_9316d6c2fe33a1::t_bf34317c97d204 3930,3935-3948,3998-3999
+js/data-explorer.js
+  s_9316d6c2fe33a1::t_ee4cc391f15ed9 848-859,862-863
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_f765f24be5c49b 9-12,43-45,47-51,156-169,174-175,178-186,191-255,278-283,286-293,325-326,368-369,375-376,378-381,387-388,433
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_7a1f5d4993e15a 12-13,95-126,148,150
+js/quiz/flag-colours.js
+  s_9316d6c2fe33a1::t_9fd27e80e90de4 1-37
+js/quiz/generators/combo.js
+  s_9316d6c2fe33a1::t_a1235029167a16 38-39
+js/quiz/generators/continent.js
+  s_9316d6c2fe33a1::t_06083079cce80a 1-25
+js/quiz/generators/emblem.js
+  s_9316d6c2fe33a1::t_d7d7ca979f4c9e 1-29
+js/quiz/generators/flag.js
+  s_9316d6c2fe33a1::t_f5d2ad91aafad6 1-35
+js/quiz/generators/index.js
+  s_9316d6c2fe33a1::t_031ab451f1348d 11-15,28-32
+js/quiz/generators/north.js
+  s_9316d6c2fe33a1::t_4c6de2bfd6b652 1-35
+js/quiz/generators/where.js
+  s_9316d6c2fe33a1::t_838768817c9564 1-35
+js/quiz/geo.js
+  s_9316d6c2fe33a1::t_06c1d4b0e97226 1-24
+tests/quiz/fixtures.mjs
+  s_9316d6c2fe33a1::t_718869e1d852c9 3,16-17,19-20
+tests/quiz/round2.test.mjs
+  s_9316d6c2fe33a1::t_8f94096c3b32b2 35
+tests/quiz/round3.test.mjs
+  s_9316d6c2fe33a1::t_123083c86292e0 1-100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a127198e39741608f2aab5309edb0024e0273a16",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
