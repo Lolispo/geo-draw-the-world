@@ -1,0 +1,45 @@
+css/style.css
+  s_9316d6c2fe33a1::t_0c25dbaff85062 4006-4067
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_91141e5ac46995 15-17,173-177,179-181,191-195,197-199,282,295-302,327-354,407-411,426,460-473,504
+js/quiz/controls/dom.js
+  s_9316d6c2fe33a1::t_a6968dd721d32e 1-23
+js/quiz/controls/gaps.js
+  s_9316d6c2fe33a1::t_91b9c94455982e 1-54
+js/quiz/controls/index.js
+  s_9316d6c2fe33a1::t_f2f0cd5d0a98a3 1-6
+js/quiz/controls/multi.js
+  s_9316d6c2fe33a1::t_d46684e9101c47 1-42
+js/quiz/controls/order.js
+  s_9316d6c2fe33a1::t_a2c4595f7422d3 1-47
+js/quiz/controls/picker.js
+  s_9316d6c2fe33a1::t_452a355995a831 1-39
+js/quiz/generators/common.js
+  s_9316d6c2fe33a1::t_aa2768cc51ba17 47-49
+js/quiz/generators/flag-missing.js
+  s_9316d6c2fe33a1::t_9ae190726ea471 1,31,35
+js/quiz/generators/flag.js
+  s_9316d6c2fe33a1::t_59463fc20ed622 1,32
+js/quiz/generators/mix.js
+  s_9316d6c2fe33a1::t_e72b1393fcba33 1,25
+js/quiz/generators/slider.js
+  s_9316d6c2fe33a1::t_4be80ab7af5ed0 2,7-11
+js/quiz/generators/trade.js
+  s_9316d6c2fe33a1::t_079ff30640bade 1,31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5fd60925c3d918d6f59dc2b7912f3a77e0fa6dc0",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "unknown"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
