@@ -1,0 +1,174 @@
+js/quiz/data.js
+  s_9316d6c2fe33a1::t_05502e451c4f61 1-49
+js/quiz/rng.js
+  s_9316d6c2fe33a1::t_d433d3ef929cc8 1-38
+package.json
+  s_9316d6c2fe33a1::t_8ac199f9f6d028 29-30
+scripts/build-static.sh
+  s_9316d6c2fe33a1::t_e2d6982eb78e9f 20
+tests/quiz/data.test.mjs
+  s_9316d6c2fe33a1::t_34916616a7c924 1-34
+tests/quiz/fixtures.mjs
+  s_9316d6c2fe33a1::t_6dac30c7ed4839 1-2,4-15,18,21-23
+  s_9316d6c2fe33a1::t_718869e1d852c9 3,16-17,19-20
+tests/quiz/rng.test.mjs
+  s_9316d6c2fe33a1::t_c2ab46d0ebd8d9 1-22
+js/quiz/bands.js
+  s_9316d6c2fe33a1::t_13869657f17bdf 1-12,16-27,29
+  s_9316d6c2fe33a1::t_03691813b1cb65 13-15,28
+js/quiz/generators/best-in-group.js
+  s_9316d6c2fe33a1::t_f6af9d8965230c 1-4,6-36,38-43
+  s_9316d6c2fe33a1::t_b54909cf66513c 5,37
+js/quiz/generators/bigger.js
+  s_9316d6c2fe33a1::t_cbc022d4dd2a22 1-2,4-21,23-28
+  s_9316d6c2fe33a1::t_f9b92cc3d09a52 3,22
+js/quiz/generators/combo.js
+  s_9316d6c2fe33a1::t_45277a976921bc 1-29,30-32,34-36,39-43
+  s_9316d6c2fe33a1::t_a1235029167a16 37-38
+  s_9316d6c2fe33a1::t_b2268cdd472c75 33
+js/quiz/generators/common.js
+  s_9316d6c2fe33a1::t_23ab431064f84e 1-7,9-25
+  s_9316d6c2fe33a1::t_3eed74379cc5ef 26
+  s_9316d6c2fe33a1::t_8833eb2e25c88a 8
+js/quiz/generators/index.js
+  s_9316d6c2fe33a1::t_62dfe4fbb04897 1-4,16-21,33
+  s_9316d6c2fe33a1::t_d4e98af8df9a89 5-9,22-26
+  s_9316d6c2fe33a1::t_a994823d45f5c4 10,27
+  s_9316d6c2fe33a1::t_031ab451f1348d 11-15,28-32
+js/quiz/generators/odd-one.js
+  s_9316d6c2fe33a1::t_41740d78a59c58 1-2,4-29,31-36
+  s_9316d6c2fe33a1::t_8f12dfe14871b4 3,30
+js/quiz/groups.js
+  s_9316d6c2fe33a1::t_38db2e1e50b07b 1-12
+js/quiz/phrases.js
+  s_9316d6c2fe33a1::t_43585e9bd27308 1-3,5-6,9,11,13-18
+  s_9316d6c2fe33a1::t_c7cb704e11a0c5 4,7-8,10,12
+tests/quiz/comparisons.test.mjs
+  s_9316d6c2fe33a1::t_cf164bd6bdf5ba 1-73
+tests/quiz/helpers.mjs
+  s_9316d6c2fe33a1::t_8c610cf4b2f783 1-27
+js/quiz/generators/fam.js
+  s_9316d6c2fe33a1::t_c0c64e8495fc0a 1-5
+js/quiz/generators/first.js
+  s_9316d6c2fe33a1::t_e438b205de42e0 1-2,4-6,7-8,11-27,29-35
+  s_9316d6c2fe33a1::t_24def32d4c1ceb 3,9-10
+  s_9316d6c2fe33a1::t_635446257f23c8 28
+js/quiz/generators/religion.js
+  s_9316d6c2fe33a1::t_a5744412220773 1-4,10-15,18-20,22-35,37-42
+  s_9316d6c2fe33a1::t_afe205a5a0f44d 5-9,16-17,21
+  s_9316d6c2fe33a1::t_e8bb27074e931a 36
+js/quiz/generators/shape.js
+  s_9316d6c2fe33a1::t_20eb854ec2babc 1-5,7-26
+  s_9316d6c2fe33a1::t_ce8f9574069067 6
+js/quiz/generators/slider.js
+  s_9316d6c2fe33a1::t_7b96a71735cf3b 1-4,6-11,13-14,16-18,21-29,31-36
+  s_9316d6c2fe33a1::t_e4d7d49a0c25bf 5,12,15,19-20,30
+js/quiz/generators/trade.js
+  s_9316d6c2fe33a1::t_299cdc746e2c95 1-32,36-41
+  s_9316d6c2fe33a1::t_84e5e58ee0ef66 33-35
+js/quiz/religion-families.js
+  s_9316d6c2fe33a1::t_27dea76584f083 1-40
+tests/quiz/others.test.mjs
+  s_9316d6c2fe33a1::t_3f84d8c286094b 1-92
+js/quiz/daily.js
+  s_9316d6c2fe33a1::t_0d5c36367756d3 1-23,29,32-37,43-78,80-81
+  s_9316d6c2fe33a1::t_fbb014e7e9515e 24-28,30-31,38-42,79
+js/quiz/round.js
+  s_9316d6c2fe33a1::t_7c46301ed572f8 1-6,11-34,35-36,38-40,43,45-60,62-66
+  s_9316d6c2fe33a1::t_98db1ec8b3789a 41-42
+  s_9316d6c2fe33a1::t_aecbb54caafe29 7-10,37,44,61
+js/quiz/score.js
+  s_9316d6c2fe33a1::t_afbc94546b703f 1-2,5-14
+  s_9316d6c2fe33a1::t_b2b4a3f2a62f4a 3-4
+tests/quiz/daily.test.mjs
+  s_9316d6c2fe33a1::t_d368bc00ca950d 1-58
+tests/quiz/round.test.mjs
+  s_9316d6c2fe33a1::t_c5b7dc1c46488e 1-10,12-14,16-70
+  s_9316d6c2fe33a1::t_10124634b790b4 11,15
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_f839d3335fe991 1-8,13-42,46,52-92,95-153,168,170-173,176-177,187-190,256-266,268-270,291-312,314-319,324-340,348-358,364,367-371,382,387-391,394-409,410,413-437,439-469
+  s_9316d6c2fe33a1::t_b4eebe2d94beb1 313,341-347,411-412
+  s_9316d6c2fe33a1::t_c07df88f6e52d4 93-94,154,267,271-277,281-282,320-321,359-363
+  s_9316d6c2fe33a1::t_f765f24be5c49b 9-12,43-45,47-51,156-169,174-175,178-186,191-255,283-290,322-323,365-366,380-381,383-386,392-393,438
+  s_9316d6c2fe33a1::t_2d37a4400ff960 278-280,372-379
+css/style.css
+  s_9316d6c2fe33a1::t_80538afb956db6 3844-3893,3914-3929,3931-3934,3955-3994,3996-3998
+  s_9316d6c2fe33a1::t_66d09cf22dd9ca 1759-1763,1832-1842,3999-4002
+  s_9316d6c2fe33a1::t_7e154b10fd5ae8 3894-3913,3995,4003
+  s_9316d6c2fe33a1::t_bf34317c97d204 3930,3935-3936,3944-3954,4004-4005
+  s_9316d6c2fe33a1::t_59a36f57de52c6 3937-3943
+index.html
+  s_9316d6c2fe33a1::t_555e3de1354a78 350-353
+  s_9316d6c2fe33a1::t_13c14e0f93808c 41-49
+js/main.js
+  s_9316d6c2fe33a1::t_d68d3cbc33fd84 19,89-90,152-153,165-169,244,617,875-888
+  s_9316d6c2fe33a1::t_1ac914847292ff 20,211,443-449,630,638-650
+js/scores-screen.js
+  s_9316d6c2fe33a1::t_eed0f9349a04ed 13,15-17,69
+  s_9316d6c2fe33a1::t_a2ccbc9f96f612 96
+js/data-explorer.js
+  s_9316d6c2fe33a1::t_4396a3b8bfae46 46,134,140,158,417-420,463,829-833,840-846,847-850,863-864,867-872,874-878
+  s_9316d6c2fe33a1::t_c4f894ab69fdc1 879-882
+  s_9316d6c2fe33a1::t_689047976fe495 18,873
+  s_9316d6c2fe33a1::t_ee4cc391f15ed9 851-858,860-862,865-866
+  s_9316d6c2fe33a1::t_ff25f3dd361761 19,834-839
+  s_9316d6c2fe33a1::t_8f949f695ec83d 859
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_b49551c65ef61a 1-9,14-59,62-81,84-94,133-143,154-170
+  s_9316d6c2fe33a1::t_c12b78258a4f91 10-11,60-61,82-83
+  s_9316d6c2fe33a1::t_39e5b0c3d349ab 127-132,144-147,149,151-153
+  s_9316d6c2fe33a1::t_7a1f5d4993e15a 12-13,95-98,100-126,148,150
+  s_9316d6c2fe33a1::t_2703b0ac0ac2fb 99
+tests/quiz/audit.test.mjs
+  s_9316d6c2fe33a1::t_2afbbdde12923d 1-35
+js/quiz/independence.js
+  s_9316d6c2fe33a1::t_ddbf117375c880 1-11
+tests/quiz/review-fixes.test.mjs
+  s_9316d6c2fe33a1::t_d42dd8e1c9e418 1-82
+js/quiz/generators/outline.js
+  s_9316d6c2fe33a1::t_33d10c0ce56228 1-28
+js/silhouette.js
+  s_9316d6c2fe33a1::t_41359b6c02ed7e 12,53
+tests/quiz/round2.test.mjs
+  s_9316d6c2fe33a1::t_2ec72cd5cde5b7 1-34,36-67
+  s_9316d6c2fe33a1::t_8f94096c3b32b2 35
+js/quiz/flag-colours.js
+  s_9316d6c2fe33a1::t_9fd27e80e90de4 1-37
+js/quiz/generators/continent.js
+  s_9316d6c2fe33a1::t_06083079cce80a 1-25
+js/quiz/generators/emblem.js
+  s_9316d6c2fe33a1::t_d7d7ca979f4c9e 1-10,12-21,24-31
+  s_9316d6c2fe33a1::t_58261db5389d6d 11,22-23
+js/quiz/generators/flag.js
+  s_9316d6c2fe33a1::t_f5d2ad91aafad6 1-24,27-36
+  s_9316d6c2fe33a1::t_20982b9086b1a8 25-26
+js/quiz/generators/north.js
+  s_9316d6c2fe33a1::t_4c6de2bfd6b652 1-17,19-25,27,29,31-32,34-35
+  s_9316d6c2fe33a1::t_346d1e7600fe13 18,26,28,30,33
+js/quiz/generators/where.js
+  s_9316d6c2fe33a1::t_838768817c9564 1-35
+js/quiz/geo.js
+  s_9316d6c2fe33a1::t_06c1d4b0e97226 1-24
+tests/quiz/round3.test.mjs
+  s_9316d6c2fe33a1::t_123083c86292e0 1-48,50-100
+  s_9316d6c2fe33a1::t_57e60f6389ed7c 49
+tests/quiz/round4.test.mjs
+  s_9316d6c2fe33a1::t_ed983f061fc06b 1-33
+  s_9316d6c2fe33a1::t_d95b17a214128c 34-39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "01ab73b9eddd0f00eaa882304b4f94fd6b1f7bed",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
