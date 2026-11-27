@@ -1,0 +1,44 @@
+js/pixel-shape.js
+  s_9316d6c2fe33a1::t_4657ef0ce54dca 1-95
+  s_9316d6c2fe33a1::t_366d93694277b2 96-127
+js/quiz/generators/shape.js
+  s_9316d6c2fe33a1::t_8d7c2914c111a9 3-4,6-13,27-77
+tests/quiz/pixel-shape.test.mjs
+  s_9316d6c2fe33a1::t_9f94a24a5ce2c0 1-76
+css/style.css
+  s_9316d6c2fe33a1::t_21c8aa9ab97049 4085-4102
+index.html
+  s_9316d6c2fe33a1::t_a42b04bd47485c 67-71
+js/data-explorer.js
+  s_9316d6c2fe33a1::t_aa2ef08edf1e0e 9,18-19,835-837,840-841,879-919
+js/main.js
+  s_9316d6c2fe33a1::t_fa0dc79ed0918c 436
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_d41378f56b0756 8-9,48,51,55,112,129-157,216-217,268-280,516,605-609
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_611b069a287359 16-17,142-146,211,246-260,263-276
+js/quiz/data.js
+  s_9316d6c2fe33a1::t_44e7162da8e80b 43-44
+js/quiz/packs.js
+  s_9316d6c2fe33a1::t_448ff99cadd6e1 14-18
+js/silhouette.js
+  s_9316d6c2fe33a1::t_5b337d279135f2 12,56-57,112-134
+tests/quiz/fixtures.mjs
+  s_9316d6c2fe33a1::t_82055797e2f0a6 20-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "45daf3f6964b1d5984c3a851745e01f2af4f796b",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
