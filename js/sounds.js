@@ -2,12 +2,23 @@
 
 let audioCtx = null;
 
+const MUTE_KEY = 'geo-sound-muted';
+let muted = false;
+try { muted = localStorage.getItem(MUTE_KEY) === '1'; } catch { /* storage blocked: sound stays on */ }
+
+export const isMuted = () => muted;
+export function setMuted(on) {
+  muted = on;
+  try { localStorage.setItem(MUTE_KEY, on ? '1' : '0'); } catch { /* not remembered, still applies */ }
+}
+
 function getCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
 }
 
 function playTone(freq, duration, type = 'sine', volume = 0.15) {
+  if (muted) return;
   const ctx = getCtx();
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();

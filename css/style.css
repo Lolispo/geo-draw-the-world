@@ -1778,6 +1778,13 @@ a.hub-go:hover { text-decoration: underline; }
   font-size: 1.1rem;
 }
 .menu-scores-btn span { font-size: 0.95rem; font-weight: 600; }
+.menu-sound-btn {
+  position: absolute; top: 20px; left: 24px; z-index: 2;
+  width: 44px; min-height: 44px; padding: 0; display: flex; align-items: center; justify-content: center;
+  border-radius: 22px; background: transparent; border: 1px solid transparent; color: var(--text-dim); opacity: 0.7;
+}
+.menu-sound-btn:hover { opacity: 1; border-color: var(--border); background: var(--surface); transform: none; }
+.menu-sound-btn svg { width: 20px; height: 20px; }
 .menu-scores-btn[hidden] { display: none; }
 .hub-card {
   display: flex;
@@ -1840,6 +1847,7 @@ a.hub-go:hover { text-decoration: underline; }
   .hub-daily .hub-label { white-space: nowrap; }
   .hub-daily .hub-streak { grid-area: streak; }
   .hub-daily a.hub-go { grid-area: go; justify-self: start; display: inline; font-size: 0.85rem; padding: 4px 0 0; white-space: nowrap; }
+  .menu-sound-btn { top: 14px; left: 12px; }
   .menu-scores-btn { top: 14px; right: 12px; width: 44px; padding: 0; justify-content: center; }
   .menu-scores-btn span { display: none; }
 }
@@ -1973,6 +1981,8 @@ a.hub-go:hover { text-decoration: underline; }
   background: var(--surface2);
   border-color: var(--accent);
 }
+.topn-lock:not(.is-locked) { filter: grayscale(1); opacity: 0.55; }
+.topn-lock:not(.is-locked):hover:not(:disabled) { opacity: 0.9; }
 .topn-lock:disabled { opacity: 0.35; cursor: default; }
 .topn-roll-hint {
   text-align: center;

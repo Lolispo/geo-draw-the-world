@@ -289,10 +289,10 @@ export class TopNGame {
       (!this.locks.end || c.higherFirst === this.higherFirst));
   }
 
-  startRandom() {
+  rollFields() {
     // Territories and Force 10 decide which combinations are playable at all, so
     // they are rolled before the combo list is built. If the flip leaves nothing
-    // playable under the other locks they go back: a roll that never starts a round
+    // playable under the other locks they go back: a roll that finds no round
     // must not strand a changed setting — least of all the global territories one.
     const before = { territories: getIncludeTerritories(), force10: this.force10 };
     if (!this.locks.territories) setIncludeTerritories(Math.random() < 0.5);
@@ -313,7 +313,10 @@ export class TopNGame {
     }
     if (!this.locks.difficulty) this.hard = Math.random() < 0.5;
     playNav();
-    this.start(pick.datasetId, pick.scope, pick.higherFirst);
+    this.datasetId = pick.datasetId;
+    this.scope = pick.scope;
+    this.higherFirst = pick.higherFirst;
+    this.showPicker();
   }
 
   // ---- labels -------------------------------------------------------------
@@ -463,11 +466,11 @@ export class TopNGame {
     startBtn.addEventListener('click', () => this.start());
     const rollBtn = document.createElement('button');
     rollBtn.className = 'btn btn-tool topn-roll';
-    rollBtn.textContent = '🎲 Random roll';
+    rollBtn.textContent = '🎲 Roll the unlocked fields';
     const open = LOCKABLE.filter((f) => !this.locks[f.key]);
     const rollable = this._rollCombos().length > 0;
     rollBtn.disabled = !rollable;
-    rollBtn.addEventListener('click', () => this.startRandom());
+    rollBtn.addEventListener('click', () => this.rollFields());
     actions.append(startBtn, rollBtn);
     panel.appendChild(actions);
 
@@ -478,7 +481,7 @@ export class TopNGame {
     rollHint.textContent = !rollable
       ? 'No round matches the locked fields — unlock one to roll.'
       : open.length
-        ? `Roll changes: ${open.map((f) => f.label.toLowerCase()).join(', ')}. Tap 🔒 to lock a field.`
+        ? `Roll changes: ${open.map((f) => f.label.toLowerCase()).join(', ')}. Tap 🔓 to keep a field.`
         : 'Everything is locked — the roll would change nothing. Tap 🔒 to free a field.';
     rollBtn.title = rollHint.textContent;
 
@@ -547,14 +550,13 @@ export class TopNGame {
     return g;
   }
 
-  // 🔒 = the roll keeps this, 🎲 = the roll may change it. The dice face is the
-  // point: it says what happens next, where an open padlock only says "unlocked".
+  // 🔒 = the roll keeps this, 🔓 = the roll may change it.
   _lockBtn(key, disabled = false) {
     const locked = this.locks[key];
     const label = LOCKABLE.find((f) => f.key === key).label;
     const b = document.createElement('button');
     b.className = 'btn topn-lock' + (locked ? ' is-locked' : '');
-    b.textContent = locked ? '🔒' : '🎲';
+    b.textContent = locked ? '🔒' : '🔓';
     b.disabled = disabled;
     b.title = locked ? `${label} is locked — the roll keeps it` : `${label} is free — the roll may change it`;
     b.setAttribute('aria-pressed', String(locked));
