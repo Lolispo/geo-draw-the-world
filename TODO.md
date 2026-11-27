@@ -102,40 +102,6 @@ appear; the choice persists across reloads.
 
 ---
 
-## 22. New game: Random Geography Quiz (drill-down)
-
-**What:** A quiz game that generates **random questions from the datasets** and lets
-the player **drill down** (progressively narrower / follow-up questions). Uses every
-data axis: metrics (GDP, exports, urbanization, population…), attributes (capital,
-religion), flags, and continents.
-
-**Why:** Owner wants a flexible knowledge game that recycles all the data the other
-features add — high replay value, and it makes items 16–17 pull double duty.
-
-**Decided (owner, 2026-07-21):** Concept only — **"we can flesh this out later."**
-This item is a placeholder to hold the idea; it needs its own brainstorming pass
-before implementation.
-
-**Open questions to resolve when scoping (do NOT build yet):**
-- Question formats: multiple-choice? "which is bigger/smaller?" (reuse rank-line
-  logic)? "what's the capital of X?" "which religion is majority in X?" flag→country?
-  Category/attribute question types (grouping, attribute-filtered superlatives) are
-  explored in **item 23** — decide here whether they fold in as question types.
-- What does "drill down" mean concretely — a branching quiz that narrows by
-  continent → country, or increasing difficulty, or follow-ups on the same country?
-- Rounds/scoring/high-score structure (mirror the flag/rank games?).
-- Data dependencies: best built **after** items 16–17 so the question pool is rich.
-
-**Approach / notes:**
-- New module + hub card + high-score key, mirroring existing game structure
-  (`js/flag-game.js` / `js/rank-line-game.js`). Data-driven question generator over
-  `entities.json` + `datasets.json` + attributes.
-
-**Acceptance (placeholder):** Deferred — first output is a fleshed-out design from a
-dedicated brainstorming session, not code.
-
----
-
 ## 23. Explore: category / attribute-based game modes (religion first)
 
 **What:** A game family built on **categorical / compositional** data (religion to
@@ -576,6 +542,17 @@ does, a throttled tile is visibly distinct from a photo-less one.
 
 ---
 
+## 83. Quiz: known defects
+
+- A data rebuild mid-day re-scores a half-played daily's stored answers against the new
+  questions, so its marks and "you said" labels can disagree with the stored score
+  (`js/quiz-game.js` `start()`). Fix: store a prompt fingerprint per answer.
+- "Which flag has no <colour>" trusts `data/flags.json` colour lists, which can omit a
+  small emblem colour on a flag (`js/quiz/flag-colours.js`).
+- Hard shape / outline / where questions can pick microstates that draw as a few dots.
+
+---
+
 ## 82. Explorer map: deep zoom outruns the world outlines
 
 **What:** The Explorer map draws `data/countries-*.json`, which is simplified hard for world-scale
@@ -614,6 +591,7 @@ Completed items, removed from the queue on 2026-09-06. One line each so the
 `TODOS #N` references throughout `js/`, `scripts/` and `docs/` still resolve;
 full write-ups are in git history.
 
+- **#22** Random Geography Quiz + Daily Quiz, fifteen generated question types — 2026-11-27
 - **#82** The country panel: a number you can read, and a width you choose — 2026-11-06
 - **#30** Trade partners both directions, a navigable panel, and who names you back — 2026-10-24
 - **#79** Where our data comes from, in the app — sources, licences and a registry that cannot drift — 2026-10-24
