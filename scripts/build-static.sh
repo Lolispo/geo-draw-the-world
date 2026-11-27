@@ -17,7 +17,7 @@ rsync -a \
   --exclude '.omc' --exclude '.gstack' --exclude '.claude' --exclude '.DS_Store' \
   --exclude '.cache' \
   --exclude 'node_modules' --exclude 'dist' \
-  --exclude 'scripts' --exclude 'docs' \
+  --exclude 'scripts' --exclude 'docs' --exclude 'tests' \
   --exclude '.gitignore' \
   --exclude 'package.json' --exclude 'package-lock.json' \
   --exclude 'TODO.md' --exclude 'TODO.local.md' --exclude 'README.md' --exclude 'LICENSE' \

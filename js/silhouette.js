@@ -9,7 +9,7 @@ import { GRID, normalizeMultiPolygon } from './raster.js';
 // Normalizing to the bounding box means the canvas shows the *outline*, not the size:
 // Russia and Monaco both fill their box. Anything comparing countries by area has to
 // say so itself.
-export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 14 } = {}) {
+export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 14, color = null } = {}) {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   canvas.width = size * dpr;
@@ -50,7 +50,7 @@ export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 1
     ctx.moveTo(cx + MIN_ISLAND_PX / 2, cy);
     ctx.arc(cx, cy, MIN_ISLAND_PX / 2, 0, Math.PI * 2);
   }
-  ctx.fillStyle = country.color || '#7EA6E0';
+  ctx.fillStyle = color || country.color || '#7EA6E0';
   ctx.fill('nonzero');
   ctx.lineJoin = 'round';
   ctx.lineWidth = 1;

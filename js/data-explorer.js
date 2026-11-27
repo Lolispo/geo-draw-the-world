@@ -15,6 +15,8 @@ import { loadHeritage, allSites, siteCard } from './heritage.js';
 import { loadRelations, hasTrade } from './relations.js';
 import { loadSources, allSources, formatAge, isStale, STALE_DAYS, sourcesRaw } from './sources.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
+import { auditRows, measureLabel } from './quiz/audit.js';
+import { geoSummary } from './quiz/geo.js';
 
 
 // Big enough to tell Chile from Italy, small enough that 250 of them scroll. The grid
@@ -41,6 +43,7 @@ const VIEWS = [
   { id: 'heritage', label: '🏛️ Heritage' },
   { id: 'coverage', label: '📋 Coverage' },
   { id: 'sources', label: '🔗 Sources' },
+  { id: 'quiz', label: '❓ Quiz audit' },
 ];
 
 // One order list for every view that has rows. The table view used to own "by
@@ -128,13 +131,13 @@ export class DataExplorer {
     c.innerHTML = '';
     // A wall of photographs wants the screen, and so does a five-column table of
     // sources with URLs in it.
-    c.classList.toggle('is-wide', this.view === 'heritage' || this.view === 'sources');
+    c.classList.toggle('is-wide', this.view === 'heritage' || this.view === 'sources' || this.view === 'quiz');
     c.appendChild(this._renderHeader());
     c.appendChild(this._renderControls());
     this._listEl = document.createElement('div');
     this._listEl.className = 'explore-list'
       + (this.view === 'coverage' ? ' is-coverage' : '')
-      + (this.view === 'sources' ? ' is-sources' : '')
+      + (this.view === 'sources' || this.view === 'quiz' ? ' is-sources' : '')
       + (this.view === 'map' ? ' is-map' : '');
     c.appendChild(this._listEl);
     this.onState?.({
@@ -152,6 +155,7 @@ export class DataExplorer {
   _renderBody() {
     if (this.view !== 'map') this._mapView = null;   // leaving the map forgets its zoom
     if (this.view === 'sources') this._renderSources();
+    else if (this.view === 'quiz') this._renderQuizAudit();
     else if (this.view === 'coverage') this._renderCoverage();
     else if (this.view === 'heritage') this._renderHeritage();
     else if (this.view === 'shapes') this._renderShapes();
@@ -410,8 +414,10 @@ export class DataExplorer {
       ], this.bandScale, (v) => { this.bandScale = v; this._renderBody(); }));
     }
 
-    // A list of third parties has no continent and no territories.
-    if (this.view !== 'sources') {
+    // A list of third parties has no continent and no territories; nor does the quiz
+    // audit, which checks the playing pool with territories off.
+    const pooled = this.view !== 'sources' && this.view !== 'quiz';
+    if (pooled) {
       bar.appendChild(this._select(
         [{ id: '', label: 'All continents' }, ...getContinents().map((c) => ({ id: c, label: c }))],
         this.continent || '',
@@ -454,7 +460,7 @@ export class DataExplorer {
         () => { this.gapsOnly = !this.gapsOnly; this._render(); }));
     }
 
-    if (this.view !== 'sources') {
+    if (pooled) {
       bar.appendChild(this._pill('🏝️ Territories', getExploreTerritories(),
         'Include small dependent/autonomous territories here. The games keep their own setting.',
         () => { setExploreTerritories(!getExploreTerritories()); this._render(); }));
@@ -818,6 +824,56 @@ export class DataExplorer {
       wall.appendChild(tile);
     }
     list.appendChild(wall);
+  }
+
+  // Generated quiz questions, re-checked against their rules from the raw data
+  // (js/quiz/audit.js). Rows that break a rule sort first; zero of them is the normal
+  // state, so the count in the blurb is the thing to read.
+  async _renderQuizAudit() {
+    const list = this._listEl;
+    const [{ relations }, emblems, outlines] = await Promise.all([loadRelations(), loadEmblems(), loadWorldOutlines()]);
+    const { datasets, entities, attributes, flags } = getRawData();
+    if (this._listEl !== list) return;   // re-rendered while those loaded
+    const rows = auditRows({
+      datasets, entities, attributes, relations: relations || {}, emblems, flags, geo: geoSummary(outlines),
+    }, { seeds: 12 });
+    const bad = rows.filter((r) => r.violation).length;
+
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb quiz-audit-summary';
+    blurb.textContent = `${rows.length} generated questions checked · ${bad} break a rule`;
+    blurb.classList.toggle('has-violations', bad > 0);
+    list.appendChild(blurb);
+
+    const table = document.createElement('table');
+    table.className = 'coverage-table sources-table quiz-audit-table';
+    const htr = table.createTHead().insertRow();
+    const HEADS = [
+      ['Type', 'Which kind of question generated it'],
+      ['Band', 'The difficulty it was asked for: gentle, easy, medium or hard'],
+      ['Question', 'What the player reads'],
+      ['Answer', 'The right answer'],
+      ['Figures', 'The real numbers behind it'],
+      ['Difficulty', 'What put it in its band. "2.35× apart": right answer vs the closest wrong one. '
+        + '"57 yrs apart": the two earliest. "leads by 12 pts": top trade partner over the next. '
+        + '"12° apart": northernmost points. "fame #34": how well known the country is (#1 = most).'],
+      ['Rule broken', 'Empty when the question is fine; otherwise the rule it breaks'],
+    ];
+    for (const [h, tip] of HEADS) {
+      const th = document.createElement('th');
+      th.textContent = h;
+      th.title = tip;
+      th.className = 'has-tip';
+      htr.appendChild(th);
+    }
+    const tbody = table.createTBody();
+    for (const r of rows) {
+      const tr = tbody.insertRow();
+      if (r.violation) tr.classList.add('incomplete');
+      const m = measureLabel(r.type, r.measure);
+      for (const v of [r.type, r.band, r.prompt, r.answer, r.reveal, m, r.violation || '']) tr.insertCell().textContent = v ?? '';
+    }
+    list.appendChild(table);
   }
 
   // Every third party the app takes data from (TODOS #79). This is the answer to "where

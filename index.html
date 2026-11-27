@@ -38,6 +38,15 @@
       <h1 class="title-glow">Know<br><span>the World</span></h1>
       <p class="subtitle">Learn world geography — flags, data, and every country.</p>
 
+      <div id="btn-daily-quiz" class="btn hub-card hub-feature hub-daily" role="button" tabindex="0">
+        <span class="hub-icon">🌍❓</span>
+        <span class="hub-text">
+          <span class="hub-label" id="daily-quiz-title">Daily Quiz</span>
+          <span class="hub-desc" id="daily-quiz-state">ready</span>
+        </span>
+        <span class="hub-streak" id="daily-quiz-streak" hidden></span>
+        <a class="hub-go" id="btn-random-quiz" href="#/quiz">Random quiz →</a>
+      </div>
       <div class="menu-hub">
         <button id="btn-activity-rank" class="btn hub-card hub-rank">
           <span class="hub-icon">🌍🏦</span>
@@ -336,6 +345,10 @@
 
   <div id="screen-flag-ring" class="screen">
     <div id="flag-ring-container" class="flag-ring-container"></div>
+  </div>
+
+  <div id="screen-quiz" class="screen">
+    <div id="quiz-game-container" class="quiz-container"></div>
   </div>
 
   <div id="screen-flag-quiz" class="screen">

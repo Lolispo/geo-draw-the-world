@@ -16,6 +16,8 @@ import { getIncludeTerritories, setIncludeTerritories, getGhosts, setGhosts } fr
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
+import { QuizGame } from './quiz-game.js';
+import { localDateKey, loadDaily, streak, dailyNumber } from './quiz/daily.js';
 import { RankLineGame } from './rank-line-game.js';
 import { TopNGame } from './top-n-game.js';
 import { DataExplorer } from './data-explorer.js';
@@ -84,7 +86,8 @@ const STATES = {
   RANK_LINE: 'rank-line',
   TOP_N: 'top-n',
   EXPLORE: 'explore',
-  SCORES: 'scores'
+  SCORES: 'scores',
+  QUIZ: 'quiz'
 };
 
 const viewport = document.querySelector('meta[name="viewport"]');
@@ -146,7 +149,8 @@ class Game {
       'rank-line': document.getElementById('screen-rank-line'),
       'top-n': document.getElementById('screen-top-n'),
       'explore': document.getElementById('screen-explore'),
-      'scores': document.getElementById('screen-scores')
+      'scores': document.getElementById('screen-scores'),
+      quiz: document.getElementById('screen-quiz')
     };
 
     this.drawingCanvas = new DrawingCanvas(document.getElementById('canvas-drawing'));
@@ -157,6 +161,11 @@ class Game {
     this.flagGame = new FlagGame(
       document.getElementById('flag-game-container'),
       () => this.showScreen(STATES.MENU)
+    );
+    this.quizGame = new QuizGame(
+      document.getElementById('quiz-game-container'),
+      () => this.showScreen(STATES.MENU),
+      (segments, params) => this._route(segments, params)
     );
     this.rankLineGame = new RankLineGame(
       document.getElementById('rank-line-container'),
@@ -199,6 +208,7 @@ class Game {
     this._applyGhosts();
     this._sizeCanvases();
     this._syncScoresButton();
+    this._syncDailyCard();
     this._updateHighScoreDisplay();
     // A typed or pasted hash, and Back/Forward, both re-enter the route. The app's own
     // writes go through history.replaceState, which fires neither — so no guard needed.
@@ -231,6 +241,7 @@ class Game {
         return;
       case 'top10': this.startTopN(); return;
       case 'rank': this.startRankLine(sub || null); return;
+      case 'quiz': this.startQuiz(sub || null, params.get('seed')); return;
       case 'flags': this.startFlagQuiz(); return;
       case 'flag-picker': this.startFlagPicker(); return;
       case 'flag-ring': this.startFlagRing(params); return;
@@ -429,6 +440,13 @@ class Game {
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-flag-ring').addEventListener('click', () => this.startFlagRing());
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
+    const daily = document.getElementById('btn-daily-quiz');
+    daily.addEventListener('click', () => this.startQuiz('daily'));
+    daily.addEventListener('keydown', (e) => {
+      if (e.target === daily && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); this.startQuiz('daily'); }
+    });
+    // The link sits inside the daily card; it navigates by its own href.
+    document.getElementById('btn-random-quiz').addEventListener('click', (e) => e.stopPropagation());
     document.getElementById('btn-activity-scores').addEventListener('click', () => this.openScores());
     document.getElementById('btn-draw-back').addEventListener('click', () => this.showScreen(STATES.MENU));
     document.getElementById('btn-ghosts-placing').addEventListener('click', () => this._toggleGhosts());
@@ -596,7 +614,7 @@ class Game {
       el.classList.toggle('active', name === state);
     }
     // Globe background on menu-like screens; off during gameplay
-    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER, STATES.SCORES];
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER, STATES.SCORES, STATES.QUIZ];
     const bg = document.getElementById('app-bg');
     if (globeStates.includes(state)) {
       if (bg) bg.classList.remove('hidden');
@@ -609,11 +627,25 @@ class Game {
     // Reset transient mode state when returning to the hub
     if (state === STATES.MENU) {
       this._syncScoresButton();
+      this._syncDailyCard();
       this._stopTimer();
       this._hideStreakCounter();
       this._speedActive = false;
       this._streakActive = false;
     }
+  }
+
+  _syncDailyCard() {
+    const key = localDateKey();
+    const entry = loadDaily(key);
+    const n = streak(key);
+    document.getElementById('daily-quiz-title').textContent = `Daily Quiz #${dailyNumber(key)}`;
+    document.getElementById('daily-quiz-state').textContent = entry?.done
+      ? `done · ${entry.score}/500`
+      : entry ? `in progress · ${entry.answers.length}/5` : 'ready';
+    const st = document.getElementById('daily-quiz-streak');
+    st.hidden = !n;
+    st.textContent = `🔥${n}`;
   }
 
   _syncScoresButton() {
@@ -838,6 +870,20 @@ class Game {
     await this.flagGame.loadData();
     this.showScreen(STATES.FLAG_QUIZ);
     this.flagGame.start(10);
+  }
+
+  // #/quiz is the quiz home; #/quiz/daily|easy|hard plays. ?seed= replays a random round.
+  async startQuiz(mode = null, seed = null) {
+    this.gameMode = 'quiz';
+    this._currentRegion = 'quiz';
+    await this.quizGame.loadData();
+    this.showScreen(STATES.QUIZ);
+    if (['daily', 'easy', 'hard'].includes(mode)) {
+      const n = Number(seed);
+      this.quizGame.start(mode, { seed: seed != null && Number.isFinite(n) ? n : undefined });
+    } else {
+      this.quizGame.showHome();
+    }
   }
 
   async startFlagPicker() {

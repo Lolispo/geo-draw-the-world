@@ -26,7 +26,8 @@
     "build:emblems": "node scripts/build-emblems.mjs",
     "build:heritage": "node scripts/build-heritage.mjs",
     "build:relations": "node scripts/build-relations.mjs",
-    "build:sources": "node scripts/build-sources.mjs"
+    "build:sources": "node scripts/build-sources.mjs",
+    "test": "node --test \"tests/**/*.test.mjs\""
   },
   "keywords": [
     "geography",

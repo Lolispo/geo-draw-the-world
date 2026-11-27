@@ -10,8 +10,11 @@ const DRAW = 'Draw the World';
 const RANK = 'Rank the World';
 const TOPN = 'Top 10 / Bottom 10';
 const FLAGS = 'Flags';
+const QUIZ = 'Quiz';
 const OLDER = 'Older rounds';
-const GROUP_ORDER = [DRAW, RANK, TOPN, FLAGS, OLDER];
+const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, FLAGS, OLDER];
+
+const QUIZ_LABELS = { 'quiz-daily': 'Daily Quiz', 'quiz-easy': 'Random Quiz · Easy', 'quiz-hard': 'Random Quiz · Hard' };
 
 const DRAW_LABELS = {
   daily: 'Daily Challenge',
@@ -63,6 +66,7 @@ function resolveTopN(key) {
 // mode mints — a renamed or retired round. Those are kept, not hidden: the score was
 // earned.
 function resolveKey(key) {
+  if (QUIZ_LABELS[key]) return { group: QUIZ, label: QUIZ_LABELS[key] };
   if (DRAW_LABELS[key]) return { group: DRAW, label: DRAW_LABELS[key] };
   if (key.startsWith('countries-')) {
     return { group: DRAW, label: titleFromSlug(key.slice('countries-'.length)), detail: 'region' };
@@ -89,6 +93,7 @@ function formatBest(group, key, rec) {
   if (group === RANK) return `run of ${rec.score}`;
   if (group === TOPN) return `${rec.score}/${rec.total}`;
   if (group === FLAGS) return `${rec.score} pts`;
+  if (group === QUIZ) return `${rec.score}/500`;
   return String(rec.score);
 }
 
