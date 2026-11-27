@@ -1,0 +1,48 @@
+js/quiz/generators/flag-pie.js
+  s_9316d6c2fe33a1::t_46a4e7976f041f 1-114
+  s_9316d6c2fe33a1::t_689a1199312052 115-122
+CLAUDE.md
+  s_9316d6c2fe33a1::t_1be0eaa9c69a58 25
+css/style.css
+  s_9316d6c2fe33a1::t_b75107fdee8293 4085-4091
+index.html
+  s_9316d6c2fe33a1::t_edd38b8b97c14c 82-86
+js/main.js
+  s_9316d6c2fe33a1::t_64285cbdef80a0 402,443,647
+js/pie.js
+  s_9316d6c2fe33a1::t_7ab09ef994496d 1-68
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_02a741a2cd87fc 19,204-208,339,474
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_b1e04b58c1d227 13,194-207,219
+js/quiz/flag-match.js
+  s_9316d6c2fe33a1::t_fecc828b57fcd4 15-17,42-43
+js/quiz/generators/index.js
+  s_9316d6c2fe33a1::t_3d1e92b43bd598 21,44
+js/quiz/packs.js
+  s_9316d6c2fe33a1::t_0f57f0cd14076d 17-23
+js/quiz/round.js
+  s_9316d6c2fe33a1::t_0e9376ed2f20f7 11,15-18,71
+js/scores-screen.js
+  s_9316d6c2fe33a1::t_667bc8174cde1b 77
+tests/pie.test.mjs
+  s_9316d6c2fe33a1::t_cb5926681c477a 1-36
+tests/quiz/flag-pie.test.mjs
+  s_9316d6c2fe33a1::t_c5746f2b74656a 1-112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "feb2bf14054d4ba88584df54d9cd9623ff4a4657",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
