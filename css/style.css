@@ -4031,14 +4031,21 @@ a.hub-go:hover { text-decoration: underline; }
 }
 .quiz-gaps-subject { border-color: var(--accent); margin-bottom: 4px; font-weight: 600; }
 .quiz-gaps-rank { color: var(--text-dim); font-variant-numeric: tabular-nums; width: 1.2em; }
-.quiz-gap {
-  position: relative; min-height: 34px; padding: 4px 12px 4px 38px; border: 2px dashed var(--border); border-radius: 10px;
-  background: transparent; color: var(--text-dim); font: inherit; font-size: 0.85rem; cursor: pointer;
-}
-.quiz-gap:hover:not(.disabled) { border-color: var(--accent); color: var(--text); }
-.quiz-gap.disabled { cursor: default; }
-.quiz-gap.correct { border-style: solid; border-color: var(--green); color: var(--green); }
-.quiz-gap.wrong { border-style: solid; border-color: var(--red); color: var(--red); }
+.quiz-ins-holder { border-radius: 12px; }
+.quiz-ins-holder.is-empty { border: 2px dashed var(--border); }
+.quiz-ins-holder.is-done { border-color: transparent; }
+.quiz-ins-list { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.quiz-ins-spacer { visibility: hidden; }
+.quiz-gaps-subject { cursor: grab; touch-action: none; user-select: none; position: relative; }
+.quiz-gaps-subject.is-dragging { cursor: grabbing; z-index: 5; box-shadow: 0 8px 24px rgba(0,0,0,.45); }
+.quiz-ins-list .quiz-gaps-subject { margin-bottom: 0; }
+.quiz-gaps-subject.correct, .quiz-gaps-subject.wrong { cursor: default; }
+.quiz-gaps-subject.correct { border-color: var(--green); }
+.quiz-gaps-subject.wrong { border-color: var(--red); }
+.quiz-ins-grip { margin-left: 4px; color: var(--text-dim); font-size: 1.1rem; }
+.quiz-ins-you { color: var(--red); font-weight: 400; font-size: 0.85rem; }
+.quiz-ins-marker { position: absolute; left: 0; right: 0; height: 4px; border-radius: 2px; background: var(--accent); opacity: 0; pointer-events: none; }
+.quiz-ins-marker.is-on { opacity: 1; }
 .quiz-choices.quiz-multi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .quiz-multi .quiz-choice { min-height: 48px; padding-top: 8px; padding-bottom: 8px; }
 @media (max-width: 600px) {
