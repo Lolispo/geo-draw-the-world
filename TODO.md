@@ -542,6 +542,16 @@ does, a throttled tile is visibly distinct from a photo-less one.
 
 ---
 
+## 85. Quiz: draw and place questions (batch 2 of the game-modes work)
+
+Owner asked for every game as a quiz question; batch 1 (mix, flag-missing, order, insert,
+top-pick) shipped 2026-11-27. Still to build: `draw` ("Draw Italy", DrawingCanvas + Done,
+scored on the raw shape term against `data/shape-masks.json`) and `place` (real shape on
+WorldCanvas, raw placement term 0–100). Add both to `GAME_TYPES` in `js/quiz/round.js`
+with a per-type daily start date. Design: `~/HobbyProjects/.plans/geo-draw-the-world/quiz-game-modes-design.md`.
+
+---
+
 ## 84. Flag Ring seeded by the daily quiz (owner idea, 2026-11-27)
 
 A Flag Ring that starts from today's daily result: the better your daily, the more of the
