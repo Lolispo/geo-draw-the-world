@@ -1,0 +1,35 @@
+css/style.css
+  s_9316d6c2fe33a1::t_59a36f57de52c6 3937-3943
+js/data-explorer.js
+  s_9316d6c2fe33a1::t_8f949f695ec83d 859
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_2d37a4400ff960 278-280,372-379
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_2703b0ac0ac2fb 99
+js/quiz/generators/emblem.js
+  s_9316d6c2fe33a1::t_58261db5389d6d 11,22-23
+js/quiz/generators/flag.js
+  s_9316d6c2fe33a1::t_20982b9086b1a8 25-26
+js/quiz/generators/north.js
+  s_9316d6c2fe33a1::t_346d1e7600fe13 18,26,28,30,33
+tests/quiz/round3.test.mjs
+  s_9316d6c2fe33a1::t_57e60f6389ed7c 49
+tests/quiz/round4.test.mjs
+  s_9316d6c2fe33a1::t_ed983f061fc06b 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "dbe487aa6707d147916e3b91d0bb54d1c8827730",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
