@@ -542,6 +542,14 @@ does, a throttled tile is visibly distinct from a photo-less one.
 
 ---
 
+## 84. Flag Ring seeded by the daily quiz (owner idea, 2026-11-27)
+
+A Flag Ring that starts from today's daily result: the better your daily, the more of the
+ring's flags are yours, then watch whether one of yours wins. A follow-up for Flag Ring
+improvements, not a quiz question (`js/flag-ring*.js`, daily result in `geo-quiz-daily`).
+
+---
+
 ## 83. Quiz: known defects
 
 - A data rebuild mid-day re-scores a half-played daily's stored answers against the new

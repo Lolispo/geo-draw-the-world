@@ -1,3 +1,4 @@
+import { poss } from './common.js';
 import { pick, sample, shuffle } from '../rng.js';
 import { bandForLead } from '../bands.js';
 
@@ -27,7 +28,7 @@ export function generate(rng, band, qd, { maxFam } = {}) {
   const codes = shuffle(rng, [top.code, ...sample(rng, wrong, 3)]);
   return {
     type: 'trade',
-    prompt: `Who buys most of ${qd.name(c)}'s exports?`,
+    prompt: `Who buys most of ${poss(qd.name(c))} exports?`,
     choices: codes.map((x) => ({ label: qd.name(x), code: x })),
     answer: codes.indexOf(top.code),
     // Each option's share of this country's exports; a buyer outside the listed top

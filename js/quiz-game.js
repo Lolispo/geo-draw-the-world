@@ -12,6 +12,9 @@ import { flagUrl } from './flags.js';
 import { geoSummary } from './quiz/geo.js';
 import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { buildRound } from './quiz/round.js';
+import { CONTROLS } from './quiz/controls/index.js';
+import { gapLabel } from './quiz/audit.js';
+import { paintBlanked } from './flag-blank.js';
 import { scoreAnswer, markFor } from './quiz/score.js';
 import {
   localDateKey, dailyNumber, dailySeed, loadDaily, recordAnswer, finishDaily, streak, resultLine,
@@ -105,7 +108,7 @@ export class QuizGame {
     this.dayKey = mode === 'daily' ? localDateKey() : null;
     this.seed = mode === 'daily' ? dailySeed(this.dayKey) : (seed ?? Math.floor(Math.random() * 2 ** 31));
     this.onRoute(['quiz', mode], mode === 'daily' || seed == null ? {} : { seed });
-    this.questions = buildRound({ seed: this.seed, mode }, this.raw, { territories: getIncludeTerritories() });
+    this.questions = buildRound({ seed: this.seed, mode, day: this.dayKey }, this.raw, { territories: getIncludeTerritories() });
     this.answers = [];
     this.points = [];
     this.index = 0;
@@ -167,8 +170,15 @@ export class QuizGame {
       requestAnimationFrame(() => this._drawMap(q));
     }
     if (q.combo) card.append(this._comboRow(q));
+    if (q.blank) {
+      const canvas = el('canvas', 'quiz-blank-flag');
+      card.append(canvas);
+      paintBlanked(canvas, q.flag, q.blank, { name: this.raw.entities[q.flag]?.name, colors: this.raw.flags.find((f) => f.code === q.flag)?.colors });
+    }
 
-    if (q.type === 'slider') card.append(this._sliderControl(q));
+    this._control = null;
+    if (q.control) card.append(this._gameControl(q));
+    else if (q.type === 'slider') card.append(this._sliderControl(q));
     else card.append(this._choiceControl(q));
 
     // The verdict line and the button keep their space before the answer too, so
@@ -178,11 +188,15 @@ export class QuizGame {
     const last = this.index + 1 >= this.questions.length;
     this._nextLabel = last ? 'See results' : 'Next →';
     this._nextBtn = el('button', 'btn btn-accent quiz-next');
-    if (q.type === 'slider') this._nextBtn.textContent = 'Lock in';
-    else { this._nextBtn.textContent = this._nextLabel; this._nextBtn.classList.add('is-waiting'); }
+    const locks = q.type === 'slider' || (this._control && !this._control.instant);
+    if (locks) this._nextBtn.textContent = 'Lock in';
+    else this._nextBtn.textContent = this._nextLabel;
+    // A control that needs a complete answer keeps Lock in hidden until it has one.
+    if (!locks || (this._control && this._control.value() == null)) this._nextBtn.classList.add('is-waiting');
     this._nextBtn.addEventListener('click', () => {
-      if (!this._answered && q.type === 'slider') this._answer(Number(this._slider.input.value));
-      else this._next();
+      if (this._answered) this._next();
+      else if (q.type === 'slider') this._answer(Number(this._slider.input.value));
+      else if (this._control) this._lockIn();
     });
     card.append(this._nextBtn);
     c.append(card);
@@ -265,6 +279,7 @@ export class QuizGame {
   _choiceControl(q) {
     const wrap = el('div', `quiz-choices quiz-choices-${q.choices.length}`);
     if (q.outlines) wrap.classList.add('quiz-choices-outlines');
+    if (q.flagsShown) wrap.classList.add('quiz-choices-flags');
     this._choiceEls = q.choices.map((ch, i) => {
       const b = el('button', 'btn quiz-choice');
       b.append(el('kbd', 'quiz-key', String(i + 1)));
@@ -277,7 +292,14 @@ export class QuizGame {
       } else {
         // A picture slot (flag or coat of arms) is held from the start and filled on
         // answering, so the picture can't give the answer away or move anything.
-        if (q.pictures) b.append(el('span', `quiz-choice-pic is-${q.pictures} is-pending`));
+        if (q.flagsShown) {
+          const pic = el('span', 'quiz-choice-pic is-flag-big');
+          const img = el('img');
+          img.alt = '';
+          img.src = flagUrl(ch.code, 'w160');
+          pic.append(img);
+          b.append(pic);
+        } else if (q.pictures) b.append(el('span', `quiz-choice-pic is-${q.pictures} is-pending`));
         b.append(el('span', 'quiz-choice-label', ch.label));
       }
       // The figure's slot is there from the start, as wide as the widest figure, so
@@ -300,6 +322,36 @@ export class QuizGame {
       } else if (e.key === 'Enter') { e.preventDefault(); this._next(); }
     };
     return wrap;
+  }
+
+  _gameControl(q) {
+    const ctl = CONTROLS[q.control](q, {
+      raw: this.raw,
+      onPick: ({ now } = {}) => {
+        if (this._answered) return;
+        if (now) { this._lockIn(); return; }
+        this._nextBtn?.classList.toggle('is-waiting', ctl.value() == null);
+      },
+    });
+    this._control = ctl;
+    this._keyHandler = (e) => {
+      if (e.target.closest && e.target.closest('input, textarea, select')) return;
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // A held Enter advancing through reveals must not lock in the next question.
+        if (e.repeat) return;
+        if (this._answered) this._next(); else this._lockIn();
+        return;
+      }
+      if (!this._answered && ctl.key(e)) e.preventDefault();
+    };
+    return ctl.el;
+  }
+
+  _lockIn() {
+    const v = this._control?.value();
+    if (v == null) return;
+    this._answer(v);
   }
 
   _sliderControl(q) {
@@ -354,7 +406,11 @@ export class QuizGame {
     this._scoreEl.textContent = `${this.score}`;
     if (pts >= 50) playPlace(); else playSkip();
 
-    if (q.type === 'slider') {
+    if (q.control) {
+      this._control.reveal(given, pts);
+      const word = q.control === 'gaps' ? (pts ? 'Right' : 'Wrong') : pts >= 100 ? 'Spot on' : `+${pts}`;
+      this._revealEl.innerHTML = `<span class="quiz-reveal-verdict ${pts >= 50 ? 'good' : 'bad'}">${word}</span>`;
+    } else if (q.type === 'slider') {
       this._slider.input.disabled = true;
       const { min, max } = q.slider;
       const truth = el('div', 'quiz-slider-truth');
@@ -369,7 +425,7 @@ export class QuizGame {
         b.classList.add('disabled');
         if (i === q.answer) b.classList.add('correct');
         else if (i === given) b.classList.add('wrong');
-        const pic = b.querySelector('.quiz-choice-pic');
+        const pic = b.querySelector('.quiz-choice-pic.is-pending');
         if (pic) {
           const img = el('img');
           img.alt = '';
@@ -403,6 +459,20 @@ export class QuizGame {
 
   // ---------- results ----------
 
+  _youSaid(q, a) {
+    const name = (c) => this.raw.entities[c]?.name || c;
+    const label = (k) => q.choices[k]?.label ?? '—';
+    switch (q.control) {
+      case 'picker': return `You mixed ${a}`;
+      case 'order': return `You ordered ${(a || []).map(label).join(' > ')}`;
+      case 'multi': return `You picked ${(a || []).map(label).join(', ')}`;
+      case 'gaps': return `You put it ${gapLabel(q, a, name)}`;
+      default: break;
+    }
+    if (q.type === 'slider') return `You said ${a}${q.slider.unit}`;
+    return `You said ${q.figures?.[a] && q.type === 'where' ? q.figures[a] : label(a)}`;
+  }
+
   _finish() {
     this._keyHandler = null;
     const correct = this.points.filter((p) => p >= 100).length;
@@ -433,9 +503,7 @@ export class QuizGame {
     this.questions.forEach((q, i) => {
       const row = el('div', `quiz-result-row ${this.points[i] >= 50 ? 'good' : 'bad'}`);
       row.style.animationDelay = `${i * 0.05}s`;
-      const yours = q.type === 'slider'
-        ? `You said ${this.answers[i]}${q.slider.unit}`
-        : `You said ${q.figures?.[this.answers[i]] && q.type === 'where' ? q.figures[this.answers[i]] : q.choices[this.answers[i]]?.label ?? '—'}`;
+      const yours = this._youSaid(q, this.answers[i]);
       row.innerHTML = `
         <div class="quiz-result-top"><span class="quiz-result-q">${esc(q.prompt)}</span><span class="quiz-result-pts">+${this.points[i]}</span></div>
         <div class="quiz-result-detail">${esc(yours)} · ${esc(q.reveal)}</div>`;

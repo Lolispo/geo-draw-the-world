@@ -13,6 +13,11 @@ import * as flag from './flag.js';
 import * as where from './where.js';
 import * as emblem from './emblem.js';
 import * as continent from './continent.js';
+import * as order from './order.js';
+import * as mix from './mix.js';
+import * as flagMissing from './flag-missing.js';
+import * as insert from './insert.js';
+import * as topPick from './top-pick.js';
 
 export const GENERATORS = {
   bigger: bigger.generate,
@@ -30,4 +35,9 @@ export const GENERATORS = {
   where: where.generate,
   emblem: emblem.generate,
   continent: continent.generate,
+  mix: mix.generate,
+  'flag-missing': flagMissing.generate,
+  order: order.generate,
+  insert: insert.generate,
+  'top-pick': topPick.generate,
 };

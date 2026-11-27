@@ -11,6 +11,8 @@ import { independentFrom } from './independence.js';
 import { MAJORITY, MINORITY } from './generators/religion.js';
 import { bandForDegrees } from './generators/north.js';
 import { colourFamilies } from './flag-colours.js';
+import { nearWhite, nearBlack } from './flag-match.js';
+import { deltaE } from '../color.js';
 
 const val = (qd, id, c) => qd.dataset(id)?.values[c];
 
@@ -31,7 +33,8 @@ export function checkQuestion(q, qd) {
   if (!codes.length) return 'no codes';
   for (const c of codes) if (!qd.inPool(c)) return `${c} not in pool`;
   if (q.choices) {
-    if (!(q.answer >= 0 && q.answer < q.choices.length)) return 'answer index out of range';
+    const ix = Array.isArray(q.answer) ? q.answer : [q.answer];
+    if (!ix.every((i) => i >= 0 && i < q.choices.length)) return 'answer index out of range';
     if (new Set(q.choices.map((c) => c.label)).size !== q.choices.length) return 'duplicate choices';
   }
   const ans = q.choices?.[q.answer]?.code;
@@ -136,6 +139,57 @@ export function checkQuestion(q, qd) {
       if (bandForFam(qd.famRank(q.shape)) !== q.band) return 'familiarity band mismatch';
       return null;
     }
+    case 'order': {
+      const vs = q.answer.map((i) => val(qd, q.dataset, q.choices[i].code));
+      if (vs.some((v) => !(v > 0))) return 'zero or missing value';
+      if (new Set(q.answer).size !== q.choices.length) return 'answer is not a full order';
+      for (let i = 1; i < vs.length; i++) if (!(vs[i - 1] > vs[i])) return 'answer is not highest first';
+      const r = Math.min(...vs.slice(1).map((v, i) => vs[i] / v));
+      if (bandForRatio(r) !== q.band) return `band ${q.band} but closest pair ${r.toFixed(2)}`;
+      return null;
+    }
+    case 'insert': {
+      const line = q.line.slice();
+      if (!(q.answer >= 0 && q.answer <= line.length)) return 'gap out of range';
+      line.splice(q.answer, 0, q.subject);
+      const vs = line.map((c) => val(qd, q.dataset, c));
+      if (vs.some((v) => !(v > 0))) return 'zero or missing value';
+      for (let i = 1; i < vs.length; i++) if (!(vs[i - 1] > vs[i])) return 'subject does not fit its gap';
+      const s = vs[q.answer];
+      const near = [vs[q.answer - 1], vs[q.answer + 1]].filter((v) => v != null).map((v) => Math.max(v, s) / Math.min(v, s));
+      const r = Math.min(...near);
+      if (bandForRatio(r) !== q.band) return `band ${q.band} but nearest ${r.toFixed(2)}`;
+      return null;
+    }
+    case 'top-pick': {
+      const vs = q.choices.map((c) => val(qd, q.dataset, c.code));
+      if (vs.some((v) => !(v > 0))) return 'zero or missing value';
+      const idx = vs.map((_, i) => i).sort((a, b) => (q.least ? vs[a] - vs[b] : vs[b] - vs[a]));
+      const top = idx.slice(0, 3).sort((a, b) => a - b);
+      if (top.join() !== q.answer.join()) return `answer is not the ${q.least ? 'bottom' : 'top'} 3`;
+      const [v3, v4] = [vs[idx[2]], vs[idx[3]]];
+      const r = q.least ? v4 / v3 : v3 / v4;
+      if (bandForRatio(r) !== q.band) return `band ${q.band} but 3rd/4th ${r.toFixed(2)}`;
+      return null;
+    }
+    case 'mix': {
+      const f = (qd.raw.flags || []).find((x) => x.code === q.flag);
+      if (!f) return 'no flag colours';
+      if (!f.colors.includes(q.answer)) return 'answer is not a colour of this flag';
+      if (nearWhite(q.answer) || nearBlack(q.answer)) return 'asks for white or black';
+      if (bandForFam(qd.famRank(q.flag)) !== q.band) return 'familiarity band mismatch';
+      return null;
+    }
+    case 'flag-missing': {
+      const colours = (c) => (qd.raw.flags || []).find((x) => x.code === c)?.colors || [];
+      if (!colours(q.flag).includes(q.blank)) return 'blanked colour is not in the flag';
+      if (codes.slice(1).includes(q.flag) && q.choices.some((c) => c.code === q.flag)) return 'main flag offered as an option';
+      if (!colours(ans).some((c) => deltaE(c, q.blank) < 10)) return `${qd.name(ans)} has no close match`;
+      const has = others.find((c) => colours(c).some((x) => deltaE(x, q.blank) < 25));
+      if (has) return `decoy ${qd.name(has)} has a near match`;
+      if (bandForFam(qd.famRank(q.flag)) !== q.band) return 'familiarity band mismatch';
+      return null;
+    }
     default:
       return `unknown type ${q.type}`;
   }
@@ -147,11 +201,26 @@ export function measureLabel(type, m) {
   if (type === 'first') return `${m} yrs apart`;
   if (type === 'north') return `${m}° apart`;
   if (type === 'trade') return `leads by ${m} pts`;
-  if (['slider', 'shape', 'outline', 'religion', 'flag', 'where', 'emblem', 'continent'].includes(type)) return `fame #${m}`;
+  if (['slider', 'shape', 'outline', 'religion', 'flag', 'where', 'emblem', 'continent', 'mix', 'flag-missing'].includes(type)) return `fame #${m}`;
   return `${m.toFixed(2)}× apart`;
 }
 
-const describe = (q) => (q.type === 'slider' ? `${q.answer}${q.slider.unit}` : q.choices[q.answer]?.label);
+const describe = (q, qd) => {
+  if (q.type === 'slider') return `${q.answer}${q.slider.unit}`;
+  if (q.control === 'picker') return q.answer;
+  if (q.control === 'order') return q.answer.map((i) => q.choices[i].label).join(' > ');
+  if (q.control === 'multi') return q.answer.map((i) => q.choices[i].label).join(', ');
+  if (q.control === 'gaps') return gapLabel(q, q.answer, qd.name);
+  return q.choices[q.answer]?.label;
+};
+
+// Where a gap answer puts the subject, in words.
+export function gapLabel(q, gap, name) {
+  const n = q.line.length;
+  if (gap === 0) return `above ${name(q.line[0])}`;
+  if (gap === n) return `below ${name(q.line[n - 1])}`;
+  return `between ${name(q.line[gap - 1])} and ${name(q.line[gap])}`;
+}
 
 export function auditRows(raw, { seeds = 40 } = {}) {
   const qd = makeQuizData(raw, { territories: false });
@@ -162,7 +231,7 @@ export function auditRows(raw, { seeds = 40 } = {}) {
       for (let s = 1; s <= seeds; s++) {
         const q = gen(makeRng(s * 104729 + BANDS.indexOf(band)), band, qd, { maxFam });
         if (!q) continue;
-        rows.push({ type, band, prompt: q.prompt, answer: describe(q), reveal: q.reveal, measure: q.measure, violation: checkQuestion(q, qd) });
+        rows.push({ type, band, prompt: q.prompt, answer: describe(q, qd), reveal: q.reveal, measure: q.measure, violation: checkQuestion(q, qd) });
       }
     }
   }

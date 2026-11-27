@@ -3,9 +3,10 @@
 
 import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { getHighScore, saveScore } from './high-scores.js';
-import { deltaE } from './color.js';
 import { loadEntities, inCountryPool } from './datasets.js';
 import { flagUrl } from './flags.js';
+import { paintBlanked } from './flag-blank.js';
+import { interestingColours, findWithColour, findDecoys } from './quiz/flag-match.js';
 
 
 export class FlagGame {
@@ -20,7 +21,6 @@ export class FlagGame {
     this.results = []; // per-round results
     this.hideNames = false;
     this._loaded = false;
-    this._imageCache = {};
     this._roundStart = 0;       // timestamp when round options become clickable
     this._timerInterval = null;
     this._timerEl = null;
@@ -100,21 +100,13 @@ export class FlagGame {
       mainFlag = this._pickUnused();
 
       // Pick a color to remove (skip white/black — boring and hard to distinguish)
-      const interestingColors = mainFlag.colors.filter(c =>
-        !this._isNearWhite(c) && !this._isNearBlack(c)
-      );
-      const removableColors = interestingColors.length > 0 ? interestingColors : mainFlag.colors;
+      const removableColors = interestingColours(mainFlag.colors);
       removedColor = removableColors[Math.floor(Math.random() * removableColors.length)];
-
       const remainingColors = mainFlag.colors.filter(c => c !== removedColor);
 
-      // Find correct answer: flag with a tight color match to the removed color
-      correct = this._findFlagWithColor(removedColor, mainFlag.code);
+      correct = findWithColour(Math.random, this.pool, removedColor, [mainFlag.code]);
       if (!correct) continue;
-
-      // Find wrong answers: must NOT have the removed color,
-      // but SHOULD share colors with the remaining visible colors (to be plausible decoys)
-      wrongs = this._findDecoyFlags(removedColor, remainingColors, [mainFlag.code, correct.code], 2);
+      wrongs = findDecoys(Math.random, this.pool, removedColor, remainingColors, [mainFlag.code, correct.code], 2);
       if (wrongs.length === 2) break;
     }
 
@@ -131,116 +123,8 @@ export class FlagGame {
     this._renderRound(mainFlag, removedColor, options, correctIndex);
   }
 
-  _isNearWhite(hex) {
-    const { r, g, b } = this._hexToRgb(hex);
-    return r > 220 && g > 220 && b > 220;
-  }
-
-  _isNearBlack(hex) {
-    const { r, g, b } = this._hexToRgb(hex);
-    return r < 35 && g < 35 && b < 35;
-  }
-
-  _hexToRgb(hex) {
-    const h = hex.replace('#', '');
-    return {
-      r: parseInt(h.substring(0, 2), 16),
-      g: parseInt(h.substring(2, 4), 16),
-      b: parseInt(h.substring(4, 6), 16)
-    };
-  }
-
-  _colorDistance(hex1, hex2) {
-    // Perceptual ΔE (CIEDE2000): ~0 identical, <10 similar, >30 clearly different
-    return deltaE(hex1, hex2);
-  }
-
-  _closestColorDist(flag, targetColor) {
-    // Smallest distance between any flag color and the target
-    return Math.min(...flag.colors.map(c => this._colorDistance(c, targetColor)));
-  }
-
-  _flagHasColor(flag, targetColor, threshold = 12) {
-    return flag.colors.some(c => this._colorDistance(c, targetColor) < threshold);
-  }
-
-  _findFlagWithColor(color, excludeCode) {
-    // Find flags with a close match, sorted by best match first
-    const scored = this.pool
-      .filter(f => f.code !== excludeCode)
-      .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
-      .filter(s => s.dist < 10) // tight ΔE threshold for correct answer
-      .sort((a, b) => a.dist - b.dist);
-
-    if (scored.length === 0) {
-      // Relax slightly
-      const relaxed = this.pool
-        .filter(f => f.code !== excludeCode)
-        .map(f => ({ flag: f, dist: this._closestColorDist(f, color) }))
-        .filter(s => s.dist < 20)
-        .sort((a, b) => a.dist - b.dist);
-      if (relaxed.length === 0) return null;
-      // Pick from top 5 for variety
-      return relaxed[Math.floor(Math.random() * Math.min(5, relaxed.length))].flag;
-    }
-
-    // Pick from top 5 closest for variety
-    return scored[Math.floor(Math.random() * Math.min(5, scored.length))].flag;
-  }
-
-  _findDecoyFlags(removedColor, remainingColors, excludeCodes, count) {
-    // Decoys must:
-    // 1. NOT contain the removed color (wide threshold — clearly no match)
-    // 2. Ideally SHARE at least one color with the remaining visible colors
-    //    (so they look plausible / you can't eliminate them by color alone)
-    const REMOVED_THRESHOLD = 25; // ΔE — decoy must be clearly far from the removed color
-    const SHARED_THRESHOLD = 12;  // ΔE — close enough to count as a shared visible color
-
-    const candidates = this.pool.filter(f => {
-      if (excludeCodes.includes(f.code)) return false;
-      // Must not have the removed color
-      if (this._flagHasColor(f, removedColor, REMOVED_THRESHOLD)) return false;
-      return true;
-    });
-
-    // Score by how many remaining colors they share (more shared = better decoy)
-    const scored = candidates.map(f => {
-      const sharedCount = remainingColors.filter(rc =>
-        f.colors.some(fc => this._colorDistance(fc, rc) < SHARED_THRESHOLD)
-      ).length;
-      return { flag: f, shared: sharedCount };
-    });
-
-    // Prefer flags that share at least one color with the visible part
-    scored.sort((a, b) => b.shared - a.shared);
-
-    // Take top pool that share colors, shuffle for variety
-    const withShared = scored.filter(s => s.shared > 0);
-    if (withShared.length >= count) {
-      const pool = withShared.slice(0, Math.max(count * 4, 12));
-      return this._shuffle(pool).slice(0, count).map(s => s.flag);
-    }
-
-    // Fallback: just use whatever doesn't have the removed color
-    return this._shuffle(candidates).slice(0, count);
-  }
-
   _getFlagUrl(code) {
     return flagUrl(code, 'w640');
-  }
-
-  _loadImage(url) {
-    if (this._imageCache[url]) return Promise.resolve(this._imageCache[url]);
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => {
-        this._imageCache[url] = img;
-        resolve(img);
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
   }
 
   async _renderRound(mainFlag, removedColor, options, correctIndex) {
@@ -367,83 +251,12 @@ export class FlagGame {
     questionArea.appendChild(optionsWrap);
     c.appendChild(questionArea);
 
-    // Load and render modified flag
-    try {
-      const img = await this._loadImage(this._getFlagUrl(mainFlag.code));
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-
-      // Remove the color from the flag
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const target = this._hexToRgb(removedColor);
-      const threshold = 80;
-      const data = imageData.data;
-
-      for (let p = 0; p < data.length; p += 4) {
-        const dist = Math.sqrt(
-          (data[p] - target.r) ** 2 +
-          (data[p + 1] - target.g) ** 2 +
-          (data[p + 2] - target.b) ** 2
-        );
-        if (dist < threshold) {
-          // Replace with a neutral gray pattern
-          data[p] = 200;
-          data[p + 1] = 200;
-          data[p + 2] = 200;
-          data[p + 3] = 255;
-        }
-      }
-      ctx.putImageData(imageData, 0, 0);
-
-      // Draw diagonal stripes over removed areas to make it obvious
-      this._drawMissingPattern(ctx, imageData, target, threshold, canvas.width, canvas.height);
-
-      // Start the round timer now that the flag is visible
-      this._startRoundTimer();
-    } catch (e) {
-      // If image fails to load, show placeholder
-      canvas.width = 640;
-      canvas.height = 400;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#333';
-      ctx.fillRect(0, 0, 640, 400);
-      ctx.fillStyle = '#888';
-      ctx.font = '24px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${mainFlag.name} flag`, 320, 200);
-      this._startRoundTimer();
-    }
+    // Load and render modified flag; the round timer starts once it is visible.
+    await paintBlanked(canvas, mainFlag.code, removedColor, { name: mainFlag.name, colors: mainFlag.colors });
+    this._startRoundTimer();
   }
 
-  _drawMissingPattern(ctx, imageData, target, threshold, w, h) {
-    // Draw subtle diagonal lines over the removed color regions
-    ctx.save();
-    ctx.strokeStyle = '#bbb';
-    ctx.lineWidth = 2;
-    const step = 12;
-    const data = imageData.data;
 
-    // Create a path through removed-color areas
-    ctx.beginPath();
-    for (let y = 0; y < h; y += step) {
-      for (let x = 0; x < w; x += step) {
-        const p = (y * w + x) * 4;
-        const dist = Math.sqrt(
-          (data[p] - target.r) ** 2 +
-          (data[p + 1] - target.g) ** 2 +
-          (data[p + 2] - target.b) ** 2
-        );
-        if (dist < threshold) {
-          ctx.moveTo(x, y);
-          ctx.lineTo(x + step * 0.7, y + step * 0.7);
-        }
-      }
-    }
-    ctx.stroke();
-    ctx.restore();
-  }
 
   _startRoundTimer() {
     this._roundStart = performance.now();

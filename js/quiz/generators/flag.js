@@ -1,3 +1,4 @@
+import { poss } from './common.js';
 import { pick, sample, shuffle } from '../rng.js';
 import { ASKED_COLOURS, colourFamilies } from '../flag-colours.js';
 import { inFamBand } from './fam.js';
@@ -28,7 +29,7 @@ export function generate(rng, band, qd, { maxFam } = {}) {
     choices: codes.map((c) => ({ label: qd.name(c), code: c })),
     figures: codes.map((c) => (c === ans ? `no ${colour}` : `has ${colour}`)),
     answer: codes.indexOf(ans),
-    reveal: `${qd.name(ans)}'s flag has no ${colour}`,
+    reveal: `${poss(qd.name(ans))} flag has no ${colour}`,
     codes,
     band,
     measure: qd.famRank(ans),

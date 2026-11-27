@@ -1,14 +1,14 @@
 import { pick } from '../rng.js';
-import { fmt } from './common.js';
+import { fmt, poss } from './common.js';
 import { inFamBand } from './fam.js';
 
 const PCT = { min: 0, max: 100, unit: '%', tolerance: 25, step: 1 };
 const SLIDERS = {
-  urbanization: { ...PCT, prompt: (n) => `What share of ${n}'s people live in cities?` },
-  'export-share-gdp': { ...PCT, prompt: (n) => `How big are ${n}'s exports, as a share of its GDP?` },
-  'elec-nuclear-pct': { ...PCT, prompt: (n) => `What share of ${n}'s electricity comes from nuclear?` },
-  'elec-coal-pct': { ...PCT, prompt: (n) => `What share of ${n}'s electricity comes from coal?` },
-  'elec-renewable-pct': { ...PCT, prompt: (n) => `What share of ${n}'s electricity comes from renewables?` },
+  urbanization: { ...PCT, prompt: (n) => `What share of ${poss(n)} people live in cities?` },
+  'export-share-gdp': { ...PCT, prompt: (n) => `How big are ${poss(n)} exports, as a share of its GDP?` },
+  'elec-nuclear-pct': { ...PCT, prompt: (n) => `What share of ${poss(n)} electricity comes from nuclear?` },
+  'elec-coal-pct': { ...PCT, prompt: (n) => `What share of ${poss(n)} electricity comes from coal?` },
+  'elec-renewable-pct': { ...PCT, prompt: (n) => `What share of ${poss(n)} electricity comes from renewables?` },
   'life-expectancy': { min: 40, max: 90, unit: ' yrs', tolerance: 10, step: 0.5, prompt: (n) => `What is life expectancy in ${n}?` },
 };
 

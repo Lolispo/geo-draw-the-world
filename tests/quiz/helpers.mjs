@@ -21,7 +21,7 @@ export function assertShape(assert, q, qd) {
   for (const c of q.codes) assert.ok(qd.inPool(c), `in pool: ${c}`);
   assert.ok(typeof q.reveal === 'string' && q.reveal.length > 0, 'reveal');
   if (q.choices) {
-    assert.ok(q.answer >= 0 && q.answer < q.choices.length, 'answer index');
+    for (const i of [].concat(q.answer)) assert.ok(i >= 0 && i < q.choices.length, 'answer index');
     assert.equal(new Set(q.choices.map((c) => c.label)).size, q.choices.length, 'distinct choices');
   }
 }

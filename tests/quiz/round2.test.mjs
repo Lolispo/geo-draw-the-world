@@ -32,7 +32,7 @@ test('shape and outline never share a round', () => {
 
 test('choice questions carry one figure per option, except shape/combo', () => {
   for (const [type, gen] of Object.entries(GENERATORS)) {
-    if (['slider', 'combo', 'shape', 'emblem', 'continent'].includes(type)) continue;
+    if (['slider', 'combo', 'shape', 'emblem', 'continent', 'insert', 'mix'].includes(type)) continue;
     const { out } = sweep(gen, qd, { seeds: 10 });
     for (const { q } of out) {
       assert.equal(q.figures?.length, q.choices.length, `${type}: ${q.prompt}`);
