@@ -1,0 +1,29 @@
+.superpowers/day.mjs
+  s_9316d6c2fe33a1::t_17e4cd9a526eb7 1-8
+js/quiz/daily.js
+  s_9316d6c2fe33a1::t_0d5c36367756d3 1-69
+js/quiz/round.js
+  s_9316d6c2fe33a1::t_7c46301ed572f8 1-63
+js/quiz/score.js
+  s_9316d6c2fe33a1::t_afbc94546b703f 1-13
+tests/quiz/daily.test.mjs
+  s_9316d6c2fe33a1::t_d368bc00ca950d 1-58
+tests/quiz/round.test.mjs
+  s_9316d6c2fe33a1::t_c5b7dc1c46488e 1-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9d4918ecc79d4930c4a1cc8106b0c0429498c029",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
