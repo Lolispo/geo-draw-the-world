@@ -20,6 +20,7 @@ import { gapLabel } from './quiz/audit.js';
 import { paintBlanked } from './flag-blank.js';
 import { paintPie } from './pie.js';
 import { scoreAnswer, markFor } from './quiz/score.js';
+import { timeScore, timedPoints } from './quiz/timer.js';
 import {
   localDateKey, dailyNumber, dailySeed, loadDaily, recordAnswer, finishDaily, streak, resultLine,
 } from './quiz/daily.js';
@@ -253,6 +254,8 @@ export class QuizGame {
     const c = this.container;
     c.innerHTML = '';
     this._answered = false;
+    this._stopTimer();
+    const timer = this._timer();
 
     const head = el('div', 'quiz-header');
     const h2 = el('h2', null, this.mode === 'pack' && this.pack.levels ? this.pack.title : this._title());
@@ -304,6 +307,8 @@ export class QuizGame {
       paintBlanked(canvas, q.flag, q.blank, { name: this.raw.entities[q.flag]?.name, colors: this.raw.flags.find((f) => f.code === q.flag)?.colors });
     }
 
+    if (timer) card.append(this._timerBar(timer));
+
     this._control = null;
     if (q.control) card.append(this._gameControl(q));
     else if (q.type === 'slider') card.append(this._sliderControl(q));
@@ -328,6 +333,7 @@ export class QuizGame {
     });
     card.append(this._nextBtn);
     c.append(card);
+    if (timer) this._startTimer(timer);
   }
 
   // The outline is drawn up front, hidden, so revealing it is only a fade.
@@ -540,7 +546,10 @@ export class QuizGame {
       }
     }
     this._answered = true;
-    const pts = scoreAnswer(q, given);
+    const timer = this._timer();
+    const elapsed = this._stopTimer();
+    const pts = timedPoints(scoreAnswer(q, given), elapsed, timer);
+    if (timer) this._paintTimer(timer, elapsed, pts);
     this.answers.push(given);
     this.points.push(pts);
     this.score += pts;
@@ -581,7 +590,9 @@ export class QuizGame {
       this.container.querySelector('.quiz-pixel')?.classList.add('is-revealed');
       if (q.map) this._drawMap(q, given);
       // Every figure lives in its option or in the question; this line is the verdict.
-      this._revealEl.innerHTML = `<span class="quiz-reveal-verdict ${pts ? 'good' : 'bad'}">${pts ? 'Right' : 'Wrong'}</span>`;
+      const right = scoreAnswer(q, given) > 0;
+      const word = right ? (timer ? `Right +${pts}` : 'Right') : 'Wrong';
+      this._revealEl.innerHTML = `<span class="quiz-reveal-verdict ${right ? 'good' : 'bad'}">${word}</span>`;
     }
     if (this.mode === 'daily') {
       const strip = this.container.querySelector('.quiz-marks');
@@ -590,6 +601,53 @@ export class QuizGame {
     this._nextBtn.textContent = this._nextLabel;
     this._nextBtn.classList.remove('is-waiting');
     this._nextBtn.focus({ preventScroll: true });
+  }
+
+  // ---------- timer (packs with `timer`, js/quiz/timer.js) ----------
+
+  _timer() {
+    return this.mode === 'pack' ? this.pack.timer || null : null;
+  }
+
+  // The bar is the points on offer: it holds full through the grace period.
+  _timerBar(timer) {
+    const wrap = el('div', 'quiz-timer');
+    const track = el('div', 'quiz-timer-track');
+    const bar = el('div', 'quiz-timer-bar');
+    track.append(bar);
+    const label = el('span', 'quiz-timer-label', `${timer.max.toFixed(1)}s`);
+    wrap.append(track, label);
+    this._timerEls = { bar, label };
+    return wrap;
+  }
+
+  _startTimer(timer) {
+    this._timerStart = performance.now();
+    this._timerTick = setInterval(() => {
+      if (!this.container.isConnected || !this._timerEls?.bar.isConnected) { this._stopTimer(); return; }
+      this._paintTimer(timer, (performance.now() - this._timerStart) / 1000);
+    }, 50);
+  }
+
+  // Returns the seconds the question was open, or 0 when no clock was running.
+  _stopTimer() {
+    clearInterval(this._timerTick);
+    this._timerTick = null;
+    const elapsed = this._timerStart ? (performance.now() - this._timerStart) / 1000 : 0;
+    this._timerStart = null;
+    return elapsed;
+  }
+
+  _paintTimer(timer, elapsed, earned = null) {
+    const { bar, label } = this._timerEls;
+    const pct = timeScore(elapsed, timer);
+    bar.style.width = `${pct}%`;
+    bar.dataset.level = pct > 50 ? 'high' : pct > 25 ? 'mid' : 'low';
+    if (earned == null) label.textContent = `${Math.max(0, timer.max - elapsed).toFixed(1)}s`;
+    else {
+      label.textContent = `+${earned}`;
+      label.classList.add(earned > 0 ? 'good' : 'bad');
+    }
   }
 
   _next() {

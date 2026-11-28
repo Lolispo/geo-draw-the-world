@@ -9,6 +9,8 @@
 // up. A pool supplies the mix, the level only its opts. The default pool keeps the
 // plain `<id>-<level>` key, so scores from before pools existed stay where they were.
 //
+// `timer: { max, grace }` puts a points bar on each question (js/quiz/timer.js).
+//
 // `scoreKey` overrides the key of a pack without levels, for a game that kept scores
 // under another name before it became a pack. Keys are permanent.
 export const PACKS = {
@@ -45,6 +47,9 @@ export const PACKS = {
     size: 10,
     mix: { gentle: 10, easy: 40, medium: 35, hard: 15 },
     scoreKey: 'flag-quiz-10',
+    // Three options and a familiar flag are quick to reason out; the clock is what
+    // makes it a game.
+    timer: { max: 10, grace: 2 },
   },
 };
 

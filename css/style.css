@@ -4171,3 +4171,13 @@ a.hub-go:hover { text-decoration: underline; }
 .names-hint[aria-pressed="true"] { color: var(--text); border-color: var(--accent); }
 .names-cont { display: none; flex-basis: 100%; font-size: 0.72rem; color: var(--text-dim); line-height: 1.1; }
 .names-board.show-continents .names-cont { display: block; }
+
+/* Timed packs: the points bar under the question */
+.quiz-timer { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 420px; margin: 2px auto 0; }
+.quiz-timer-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+.quiz-timer-bar { height: 100%; width: 100%; border-radius: 999px; background: var(--green); transition: width 0.05s linear; }
+.quiz-timer-bar[data-level="mid"] { background: var(--orange); }
+.quiz-timer-bar[data-level="low"] { background: var(--red); }
+.quiz-timer-label { min-width: 3.2em; text-align: right; font-size: 0.85rem; font-variant-numeric: tabular-nums; color: var(--text-dim); }
+.quiz-timer-label.good { color: var(--green); font-weight: 600; }
+.quiz-timer-label.bad { color: var(--red); font-weight: 600; }
