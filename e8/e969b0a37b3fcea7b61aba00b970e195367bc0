@@ -1,0 +1,80 @@
+js/main.js
+  s_9316d6c2fe33a1::t_df16c178f8a227 701-703,705-711,716-718,720-721,725-732,734-735,739-743,750,752,823,830,834,836,1133-1141,1146,1156,1395,1424
+  s_9316d6c2fe33a1::t_8c14c7dc5a3450 404,447,639
+  s_9316d6c2fe33a1::t_e12c6b71897c57 7,21,683,704,751,835
+  s_9316d6c2fe33a1::t_2e82c988ddb599 18,485-486,625
+  s_9316d6c2fe33a1::t_6770848c6d0e64 633-634
+  s_9316d6c2fe33a1::t_5de0c31cfe6118 7,21,683,701-711,716-718,720-721,725-732,734-735,739-743,750-752,823,830,834-836,1133-1141,1146,1156,1395,1424
+js/datasets.js
+  s_9316d6c2fe33a1::t_46cf55471dce4e 5,24,31,37,58,130,139-144,153
+  s_9316d6c2fe33a1::t_3417b46204324e 5,24,31,37,58,130,139-144,153
+js/emblems.js
+  s_9316d6c2fe33a1::t_5856f97bce659a 10-11,19
+  s_9316d6c2fe33a1::t_5303cd60d63dd5 10-11,19
+js/flag-picker-game.js
+  s_9316d6c2fe33a1::t_7f664a963cf8c7 11,39
+  s_9316d6c2fe33a1::t_77d745d51c67fe 10,51,57
+  s_9316d6c2fe33a1::t_3187ae8c98f7b5 10-11,39,51,57
+js/flag-ring.js
+  s_9316d6c2fe33a1::t_2745090dad6112 8,337-339
+  s_9316d6c2fe33a1::t_40e01c688363bc 8,337-339
+js/heritage.js
+  s_9316d6c2fe33a1::t_afc298ea111dfa 13-14,22
+  s_9316d6c2fe33a1::t_f482a6e40c47fc 13-14,22
+js/load-json.js
+  s_9316d6c2fe33a1::t_49be1064d96233 1-14
+  s_9316d6c2fe33a1::t_6d4a1bfbab0caf 1-14
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_4d8b1a17ea5c25 4,65
+  s_9316d6c2fe33a1::t_cfb79405060f8f 7,210,656-663
+  s_9316d6c2fe33a1::t_f8bed9e7efd7ca 4,65
+js/relations.js
+  s_9316d6c2fe33a1::t_bb2f80289beca3 11,19
+  s_9316d6c2fe33a1::t_7fb4ebd5259c76 11,19
+css/style.css
+  s_9316d6c2fe33a1::t_8ca50b3410ae53 1208,3793-3797
+  s_9316d6c2fe33a1::t_13bb8f18293e1f 272-273,275-291,4008,4022
+  s_9316d6c2fe33a1::t_03247fe20730bf 274
+data-map.html
+  s_9316d6c2fe33a1::t_033a9b3c87d554 327
+js/quiz/packs.js
+  s_9316d6c2fe33a1::t_ff5a97275effc9 11-13,41-48,54
+tests/quiz/packs.test.mjs
+  s_9316d6c2fe33a1::t_e4e9be2909d36d 41-43
+js/rank-line-game.js
+  s_9316d6c2fe33a1::t_3047eacf26b1ec 11,117
+  s_9316d6c2fe33a1::t_dbd66e98d3195e 10,81
+  s_9316d6c2fe33a1::t_8a1b5ba4e70b6e 11,117
+js/top-n-game.js
+  s_9316d6c2fe33a1::t_daeba5581de038 24,247
+  s_9316d6c2fe33a1::t_13e6137cfa3b43 26,483
+  s_9316d6c2fe33a1::t_1062313fc90e87 24,247
+js/territories-toggle.js
+  s_9316d6c2fe33a1::t_787fa00952bf68 1-29
+index.html
+  s_9316d6c2fe33a1::t_3ab21f7e33e0fb 148
+js/names-game.js
+  s_9316d6c2fe33a1::t_ef0a50e71b59a5 4-5,114
+js/score-labels.js
+  s_9316d6c2fe33a1::t_17e581e5dc1a1f 1-173
+tests/score-labels.test.mjs
+  s_9316d6c2fe33a1::t_67574f94af1f06 1-53
+js/scores-screen.js
+  s_9316d6c2fe33a1::t_3ede70ce398824 6,8,61,86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e8e969b0a37b3fcea7b61aba00b970e195367bc0",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
