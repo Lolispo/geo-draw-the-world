@@ -13,7 +13,7 @@ import { flagUrl } from './flags.js';
 import { geoSummary } from './quiz/geo.js';
 import { playPlace, playSkip, playScoreReveal } from './sounds.js';
 import { buildRound, buildTypeRound } from './quiz/round.js';
-import { PACKS, packLevel, packScoreKey, packTitle } from './quiz/packs.js';
+import { PACKS, packLevel, packPool, packScoreKey, packTitle, packLevelLabel, packRoundCfg } from './quiz/packs.js';
 import { CONTROLS } from './quiz/controls/index.js';
 import { gapLabel } from './quiz/audit.js';
 import { paintBlanked } from './flag-blank.js';
@@ -32,6 +32,19 @@ function el(tag, cls, text) {
   if (cls) e.className = cls;
   if (text != null) e.textContent = text;
   return e;
+}
+
+// The last level and pool picked for a pack, so the chooser opens where you left it.
+const PACK_CHOICE_KEY = 'geo-pack-choice';
+function recallPackChoice(id) {
+  try { return JSON.parse(localStorage.getItem(PACK_CHOICE_KEY) || '{}')[id] || {}; } catch { return {}; }
+}
+function rememberPackChoice(id, level, pool) {
+  try {
+    const all = JSON.parse(localStorage.getItem(PACK_CHOICE_KEY) || '{}');
+    all[id] = { level, pool };
+    localStorage.setItem(PACK_CHOICE_KEY, JSON.stringify(all));
+  } catch { /* private mode: the chooser just opens on the defaults */ }
 }
 
 export class QuizGame {
@@ -108,16 +121,20 @@ export class QuizGame {
   // ---------- round ----------
 
   // A menu game from packs.js: ten questions of one type, played on this screen.
-  startPack(id, level, { seed } = {}) {
+  startPack(id, level, pool, { seed } = {}) {
     const pack = PACKS[id];
     if (pack.levels && !pack.levels[level]) { this.showPackLevels(pack); return; }
     this.mode = 'pack';
     this.pack = pack;
     this.level = packLevel(pack, level);
+    this.pool = packPool(pack, pool);
+    if (pack.pools) rememberPackChoice(pack.id, this.level, this.pool);
     this.dayKey = null;
     this.seed = seed ?? Math.floor(Math.random() * 2 ** 31);
-    this.onRoute([id, this.level], seed == null ? {} : { seed });
-    const cfg = pack.levels ? pack.levels[this.level] : pack;
+    const route = [id, this.level];
+    if (this.pool && this.pool !== pack.defaultPool) route.push(this.pool);
+    this.onRoute(route, seed == null ? {} : { seed });
+    const cfg = packRoundCfg(pack, this.level, this.pool);
     this.questions = buildTypeRound({ seed: this.seed, type: pack.type, size: pack.size, mix: cfg.mix, opts: cfg.opts },
       this.raw, { territories: getIncludeTerritories() });
     this.answers = [];
@@ -127,7 +144,8 @@ export class QuizGame {
     this._renderQuestion();
   }
 
-  // #/<pack> with no level: one button per level, each with its best score.
+  // #/<pack> with no level: one button per level, each with its best score. A pack
+  // with pools asks for both choices, then plays on one button.
   showPackLevels(pack) {
     this.onRoute([pack.id]);
     this._keyHandler = null;
@@ -141,6 +159,7 @@ export class QuizGame {
     back.addEventListener('click', () => this.onFinish());
     head.append(back);
     c.append(head);
+    if (pack.pools) { this._packChooser(pack); return; }
     const row = el('div', 'quiz-home-random quiz-pack-levels');
     for (const [key, lv] of Object.entries(pack.levels)) {
       const best = getHighScore(packScoreKey(pack, key));
@@ -156,8 +175,44 @@ export class QuizGame {
     c.append(row);
   }
 
+  _packChooser(pack) {
+    const last = recallPackChoice(pack.id);
+    const pick = { level: packLevel(pack, last.level), pool: packPool(pack, last.pool) };
+    const wrap = el('div', 'quiz-pack-chooser');
+    const play = el('button', 'btn btn-accent quiz-pack-play');
+    const paint = () => {
+      for (const b of wrap.querySelectorAll('.quiz-pack-opt')) {
+        b.setAttribute('aria-pressed', String(pick[b.dataset.axis] === b.dataset.key));
+      }
+      const best = getHighScore(packScoreKey(pack, pick.level, pick.pool));
+      play.innerHTML = `Play <span class="quiz-pack-play-sub">${esc(packLevelLabel(pack, pick.level, pick.pool))}${
+        best ? ` · best ${best.score}/${pack.size * 100}` : ''}</span>`;
+    };
+    for (const [axis, label, items] of [['level', pack.levelsLabel || 'Level', pack.levels], ['pool', pack.poolsLabel || 'Pool', pack.pools]]) {
+      const group = el('div', 'quiz-pack-axis');
+      group.append(el('div', 'quiz-pack-axis-label', label));
+      const opts = el('div', 'quiz-pack-opts');
+      opts.setAttribute('role', 'group');
+      opts.setAttribute('aria-label', label);
+      for (const [key, it] of Object.entries(items)) {
+        const b = el('button', 'btn quiz-pack-opt');
+        b.dataset.axis = axis;
+        b.dataset.key = key;
+        b.innerHTML = `<span class="quiz-pack-opt-title">${esc(it.label)}</span><span class="quiz-pack-opt-sub">${esc(it.sub || '')}</span>`;
+        b.addEventListener('click', () => { pick[axis] = key; paint(); });
+        opts.append(b);
+      }
+      group.append(opts);
+      wrap.append(group);
+    }
+    play.addEventListener('click', () => this.startPack(pack.id, pick.level, pick.pool));
+    wrap.append(play);
+    this.container.append(wrap);
+    paint();
+  }
+
   _title() {
-    if (this.mode === 'pack') return packTitle(this.pack, this.level);
+    if (this.mode === 'pack') return packTitle(this.pack, this.level, this.pool);
     return this.mode === 'daily' ? `Daily Quiz #${dailyNumber(this.dayKey)}` : MODE_LABEL[this.mode];
   }
 
@@ -201,7 +256,7 @@ export class QuizGame {
     const head = el('div', 'quiz-header');
     const h2 = el('h2', null, this.mode === 'pack' && this.pack.levels ? this.pack.title : this._title());
     // The level goes on as a quieter tag that never wraps the header onto a second line.
-    if (this.mode === 'pack' && this.pack.levels) h2.append(' ', el('span', 'quiz-header-level', this.pack.levels[this.level].label));
+    if (this.mode === 'pack' && this.pack.levels) h2.append(' ', el('span', 'quiz-header-level', packLevelLabel(this.pack, this.level, this.pool)));
     head.append(h2);
     head.append(el('span', 'quiz-progress', `${this.index + 1} / ${this.questions.length}`));
     this._scoreEl = el('span', 'quiz-score', `${this.score}`);
@@ -567,7 +622,7 @@ export class QuizGame {
       isNew = !!this._dailyIsNew;
       this._dailyIsNew = false;
     } else {
-      const key = this.mode === 'pack' ? packScoreKey(this.pack, this.level) : `quiz-${this.mode}`;
+      const key = this.mode === 'pack' ? packScoreKey(this.pack, this.level, this.pool) : `quiz-${this.mode}`;
       isNew = saveScore(key, this.score, correct, this.questions.length);
     }
     playScoreReveal();
@@ -609,10 +664,10 @@ export class QuizGame {
       actions.append(copy, rnd);
     } else {
       const again = el('button', 'btn btn-accent', 'Play again');
-      again.addEventListener('click', () => (this.mode === 'pack' ? this.startPack(this.pack.id, this.level) : this.start(this.mode)));
+      again.addEventListener('click', () => (this.mode === 'pack' ? this.startPack(this.pack.id, this.level, this.pool) : this.start(this.mode)));
       actions.append(again);
       if (this.mode === 'pack' && this.pack.levels) {
-        const levels = el('button', 'btn btn-tool', 'Levels');
+        const levels = el('button', 'btn btn-tool', this.pack.pools ? 'Change' : 'Levels');
         levels.addEventListener('click', () => this.showPackLevels(this.pack));
         actions.append(levels);
       }

@@ -4285,3 +4285,24 @@ a.hub-go:hover { text-decoration: underline; }
   .names-cell { height: 22px; font-size: 0.85rem; }
   .names-entry { padding: 3px 5px 4px; }
 }
+/* Guess the Shape: two choices (shape, countries) and one Play button */
+.quiz-pack-chooser { display: flex; flex-direction: column; gap: 18px; max-width: 640px; margin: 0 auto; width: 100%; }
+.quiz-pack-axis-label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+.quiz-pack-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.quiz-pack-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 64px; padding: 10px 12px; text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text); }
+.quiz-pack-opt[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.quiz-pack-opt-title { font-weight: 600; font-size: 1rem; }
+.quiz-pack-opt-sub { font-size: 0.78rem; color: var(--text-dim); line-height: 1.25; }
+.quiz-pack-play { min-height: 56px; font-size: 1.1rem; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.quiz-pack-play-sub { font-size: 0.8rem; font-weight: 500; opacity: 0.85; }
+@media (max-width: 480px) {
+  .quiz-pack-opt { padding: 8px; min-height: 60px; }
+  .quiz-pack-opt-title { font-size: 0.9rem; }
+  .quiz-pack-opt-sub { font-size: 0.72rem; }
+}
+/* Name Them All: the continent hint, a line under each entry once switched on */
+.names-stats { align-items: center; gap: 8px; }
+.names-hint { min-height: 36px; padding: 4px 12px; font-size: 0.85rem; }
+.names-hint[aria-pressed="true"] { color: var(--text); border-color: var(--accent); }
+.names-cont { display: none; flex-basis: 100%; font-size: 0.72rem; color: var(--text-dim); line-height: 1.1; }
+.names-board.show-continents .names-cont { display: block; }

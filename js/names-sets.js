@@ -156,3 +156,11 @@ export function formatElapsed(ms) {
   const s = Math.floor(ms / 1000);
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 }
+
+const CONTINENT_SHORT = { 'North America': 'N. America', 'South America': 'S. America' };
+
+// The hint shown under an entry: its continent, or each one for a name two places share.
+export function entryContinents(entry, entities) {
+  const names = [...new Set(entry.codes.map((c) => entities[c]?.continent).filter(Boolean))];
+  return names.map((n) => CONTINENT_SHORT[n] || n).join(' / ');
+}

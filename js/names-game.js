@@ -6,7 +6,7 @@ import { getHighScore, saveScore } from './high-scores.js';
 import { playClick, playPlace, playSkip, playScoreReveal } from './sounds.js';
 import {
   LETTERS, MIN_PLAYABLE, buildCountrySet, buildCapitalSet, letterCounts, board,
-  slotPattern, matchTyped, formatElapsed,
+  slotPattern, matchTyped, formatElapsed, entryContinents,
 } from './names-sets.js';
 
 // A set only has to say what it is called and how to build its entries; a new one is a
@@ -178,7 +178,7 @@ export class NamesGame {
     this.setId = setId;
     this.onRoute(['names', setId, L.toLowerCase()]);
     this.round = {
-      set, letter: L, entries, found: new Set(), startedAt: Date.now(), endedAt: null, gaveUp: false,
+      set, letter: L, entries, found: new Set(), startedAt: Date.now(), endedAt: null, gaveUp: false, hinted: false,
     };
     this._renderRound();
     this._timer = setInterval(() => this._tick(), 500);
@@ -202,7 +202,14 @@ export class NamesGame {
     this._countEl.className = 'names-count';
     this._clockEl = document.createElement('span');
     this._clockEl.className = 'names-clock';
-    stats.append(this._countEl, this._clockEl);
+    // Off by default; turning it on costs the round its high score, so it asks first.
+    const hint = document.createElement('button');
+    hint.className = 'btn btn-tool names-hint';
+    hint.setAttribute('aria-pressed', 'false');
+    hint.textContent = '🌍 Continents';
+    hint.addEventListener('click', () => this._toggleContinents());
+    this._hintBtn = hint;
+    stats.append(this._countEl, hint, this._clockEl);
 
     const input = document.createElement('input');
     input.className = 'names-input';
@@ -280,13 +287,31 @@ export class NamesGame {
         if (cell.kind !== 'blank') s.textContent = cell.ch;
         word.appendChild(s);
       }
+      const cont = document.createElement('span');
+      cont.className = 'names-cont';
+      cont.textContent = entryContinents(e, this._entities);
+      li.appendChild(cont);
       list.appendChild(li);
       this._slots.set(e.name, li);
     }
+    this._board = list;
     wrap.appendChild(list);
     c.appendChild(wrap);
     this._paintStats();
     input.focus();
+  }
+
+  _toggleContinents() {
+    const r = this.round;
+    const on = !this._board.classList.contains('show-continents');
+    if (on && !r.hinted && !r.endedAt) {
+      if (!window.confirm('Show each one\'s continent? This round won\'t count towards your best score.')) return;
+      r.hinted = true;
+    }
+    playClick();
+    this._board.classList.toggle('show-continents', on);
+    this._hintBtn.setAttribute('aria-pressed', String(on));
+    if (!r.endedAt) this._input.focus();
   }
 
   _paintStats() {
@@ -342,15 +367,17 @@ export class NamesGame {
     const total = r.entries.length;
     const key = scoreKey(r.set.id, r.letter);
     const prev = getHighScore(key);
-    const best = saveScore(key, r.found.size, r.found.size, total, { ms });
+    const best = r.hinted ? false : saveScore(key, r.found.size, r.found.size, total, { ms });
     if (gaveUp) playSkip(); else playScoreReveal();
 
     this._input.disabled = true;
     this._input.value = '';
     this._input.blur();
-    const bestText = best
-      ? (prev ? 'New best!' : 'First score on this letter.')
-      : `Best ${prev.score}/${prev.total}${prev.ms != null ? ` in ${formatElapsed(prev.ms)}` : ''}.`;
+    const bestText = r.hinted
+      ? 'With continents shown, so not counted.'
+      : best
+        ? (prev ? 'New best!' : 'First score on this letter.')
+        : `Best ${prev.score}/${prev.total}${prev.ms != null ? ` in ${formatElapsed(prev.ms)}` : ''}.`;
     this._msgEl.textContent = r.found.size === total
       ? `All ${total}! ${bestText}`
       : `${total - r.found.size} missed, shown in orange. ${bestText}`;

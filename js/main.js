@@ -234,7 +234,7 @@ class Game {
     // A hash change is not a reload, so a panel opened on the old route would hang
     // around over the new screen.
     if (head !== 'country') closeCountryPanel();
-    if (PACKS[head]) { this.startPack(head, sub || null, params.get('seed')); return; }
+    if (PACKS[head]) { this.startPack(head, sub || null, segments[2] || null, params.get('seed')); return; }
     switch (head) {
       case 'draw':
         if (!sub) { this.openDrawMenu(); return; }
@@ -901,13 +901,13 @@ class Game {
   }
 
   // #/<pack>[/<level>] — a menu game played on the quiz screen (js/quiz/packs.js).
-  async startPack(id, level = null, seed = null) {
+  async startPack(id, level = null, pool = null, seed = null) {
     this.gameMode = 'quiz';
     this._currentRegion = 'quiz';
     await this.quizGame.loadData();
     this.showScreen(STATES.QUIZ);
     const n = Number(seed);
-    this.quizGame.startPack(id, level, { seed: seed != null && Number.isFinite(n) ? n : undefined });
+    this.quizGame.startPack(id, level, pool, { seed: seed != null && Number.isFinite(n) ? n : undefined });
   }
 
   // #/quiz is the quiz home; #/quiz/daily|easy|hard plays. ?seed= replays a random round.

@@ -138,3 +138,12 @@ test('elapsed formatting', () => {
   assert.equal(formatElapsed(0), '0:00');
   assert.equal(formatElapsed(65_400), '1:05');
 });
+
+test('continent hint: one continent, short names, shared names list both', async () => {
+  const { entryContinents } = await import('../js/names-sets.js');
+  const ents = { se: { continent: 'Europe' }, jm: { continent: 'North America' }, nf: { continent: 'Oceania' } };
+  assert.equal(entryContinents({ codes: ['se'] }, ents), 'Europe');
+  assert.equal(entryContinents({ codes: ['jm'] }, ents), 'N. America');
+  assert.equal(entryContinents({ codes: ['jm', 'nf'] }, ents), 'N. America / Oceania');
+  assert.equal(entryContinents({ codes: ['xx'] }, ents), '');
+});

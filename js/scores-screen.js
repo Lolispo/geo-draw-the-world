@@ -6,6 +6,7 @@ import { getAllHighScores, clearScores } from './high-scores.js';
 import { loadDatasets, getDataset, getDatasetList } from './datasets.js';
 import { playClick } from './sounds.js';
 import { formatElapsed } from './names-sets.js';
+import { PACKS, packLevelLabel } from './quiz/packs.js';
 
 const DRAW = 'Draw the World';
 const RANK = 'Rank the World';
@@ -13,8 +14,9 @@ const TOPN = 'Top 10 / Bottom 10';
 const FLAGS = 'Flags';
 const QUIZ = 'Quiz';
 const NAMES = 'Name Them All';
+const SHAPE = 'Guess the Shape';
 const OLDER = 'Older rounds';
-const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, NAMES, FLAGS, OLDER];
+const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, NAMES, SHAPE, FLAGS, OLDER];
 
 const QUIZ_LABELS = { 'quiz-daily': 'Daily Quiz', 'quiz-easy': 'Random Quiz · Easy', 'quiz-hard': 'Random Quiz · Hard' };
 
@@ -77,6 +79,10 @@ function resolveKey(key) {
     return { group: RANK, label: datasetName(key.slice('rank-line-'.length)) };
   }
   if (key === 'flag-pie') return { group: FLAGS, label: 'Flag Pie' };
+  const shape = key.match(/^shape-([a-z]+)(?:-([a-z]+))?$/);
+  if (shape && PACKS.shape.levels[shape[1]] && (!shape[2] || PACKS.shape.pools[shape[2]])) {
+    return { group: SHAPE, label: packLevelLabel(PACKS.shape, shape[1], shape[2]) };
+  }
   if (key.startsWith('flag-quiz-')) {
     return { group: FLAGS, label: 'Flag Color Quiz', detail: `${key.slice('flag-quiz-'.length)} rounds` };
   }
@@ -99,6 +105,7 @@ function formatBest(group, key, rec) {
   if (group === TOPN) return `${rec.score}/${rec.total}`;
   if (group === NAMES) return `${rec.score}/${rec.total}${rec.ms == null ? '' : ` in ${formatElapsed(rec.ms)}`}`;
   if (group === FLAGS) return `${rec.score} pts`;
+  if (group === SHAPE) return `${rec.score}/1000`;
   if (group === QUIZ) return `${rec.score}/500`;
   return String(rec.score);
 }

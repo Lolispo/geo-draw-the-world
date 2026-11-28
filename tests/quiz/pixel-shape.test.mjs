@@ -4,7 +4,7 @@ import { GRID, MASK_WORDS } from '../../js/raster.js';
 import { pixelGrid, pixelGridCached, maskBounds, hamming } from '../../js/pixel-shape.js';
 import { buildTypeRound } from '../../js/quiz/round.js';
 import { makeQuizData } from '../../js/quiz/data.js';
-import { PACKS } from '../../js/quiz/packs.js';
+import { PACKS, packRoundCfg } from '../../js/quiz/packs.js';
 import { pixelAudit } from '../../js/quiz/audit.js';
 import { loadRaw } from './fixtures.mjs';
 
@@ -53,8 +53,8 @@ test('real countries: Italy is plain, Chile needs the fallback, most of the worl
 
 test('pixel levels: every question carries its country\'s grid, decoys are nameable and look different', () => {
   const qd = makeQuizData(raw);
-  for (const level of ['medium', 'hard']) {
-    const cfg = PACKS.shape.levels[level];
+  for (const level of ['medium', 'hard']) for (const pool of Object.keys(PACKS.shape.pools)) {
+    const cfg = packRoundCfg(PACKS.shape, level, pool);
     for (let seed = 1; seed <= 15; seed++) {
       for (const q of buildTypeRound({ seed, type: 'shape', size: 10, mix: cfg.mix, opts: cfg.opts }, raw)) {
         assert.equal(q.res, cfg.opts.res);
@@ -62,7 +62,7 @@ test('pixel levels: every question carries its country\'s grid, decoys are namea
         assert.equal(q.pixels, g.cells);
         assert.equal(g.degenerate, false);
         for (const c of q.codes.filter((x) => x !== q.shape)) {
-          assert.ok(qd.familiar(c, Math.max(140, qd.famRank(q.shape))), `${level}: decoy ${c} for ${q.shape}`);
+          assert.ok(qd.familiar(c, Math.max(140, qd.famRank(q.shape))), `${level}/${pool}: decoy ${c} for ${q.shape}`);
           assert.ok(hamming(pixelGridCached(qd.mask(c), q.res).cells, q.pixels) > 1, `${c} looks like ${q.shape}`);
         }
       }
