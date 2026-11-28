@@ -605,7 +605,11 @@
       ],
       "religionRaw": "Christian 93.9% (Roman Catholic 58.6%, Protestant 35.3% [includes Adventist 2.7% and other Protestant religions 32.6%]), Muslim 3.4%, other 1.3%, none 1.3% (2016-17 est.)",
       "independenceYear": 1962,
-      "independenceRaw": "1 July 1962 (from UN trusteeship under Belgian administration)"
+      "independenceRaw": "1 July 1962 (from UN trusteeship under Belgian administration)",
+      "capitals": [
+        "Gitega",
+        "Bujumbura"
+      ]
     },
     "bj": {
       "capital": "Porto-Novo",
@@ -646,7 +650,11 @@
       ],
       "religionRaw": "Muslim 27.7%, Roman Catholic 25.5%, Protestant 13.5% (Celestial 6.7%, Methodist 3.4%, other Protestant 3.4%), Vodoun 11.6%, other Christian 9.5%, other traditional religions 2.6%, other 2.6%, none 5.8% (2013 est.)",
       "independenceYear": 1960,
-      "independenceRaw": "1 August 1960 (from France)"
+      "independenceRaw": "1 August 1960 (from France)",
+      "capitals": [
+        "Porto-Novo",
+        "Cotonou"
+      ]
     },
     "bl": {
       "capital": "Gustavia",
@@ -754,7 +762,11 @@
       ],
       "religionRaw": "Roman Catholic 65%, Protestant 19.6% (Evangelical (non-specific) 11.9%, Evangelical Baptist 2.1%, Evangelical Pentecostal 1.8%, Evangelical Methodist 0.7%, Adventist 2.8%, Protestant (non-specific) 0.3%), Believer (not belonging to the church) 0.9%, other 4.8%, atheist 1.7%, agnostic 0.6%, none 6.1%, unspecified 1.3% (2023 est.)",
       "independenceYear": 1825,
-      "independenceRaw": "6 August 1825 (from Spain)"
+      "independenceRaw": "6 August 1825 (from Spain)",
+      "capitals": [
+        "La Paz",
+        "Sucre"
+      ]
     },
     "bq": {
       "capital": "Kralendijk",
@@ -1186,7 +1198,11 @@
       ],
       "religionRaw": "Muslim 42.9%, Catholic 17.2%, Evangelical 11.8%, Methodist 1.7%, other Christian 3.2%, animist 3.6%, other religion 0.5%, none 19.1% (2014 est.)",
       "independenceYear": 1960,
-      "independenceRaw": "7 August 1960 (from France)"
+      "independenceRaw": "7 August 1960 (from France)",
+      "capitals": [
+        "Yamoussoukro",
+        "Abidjan"
+      ]
     },
     "ck": {
       "capital": "Avarua",
@@ -3535,7 +3551,11 @@
       ],
       "religionRaw": "Buddhist (official) 70.2%, Hindu 12.6%, Muslim 9.7%, Roman Catholic 6.1%, other Christian 1.3%, other 0.05% (2012 est.)",
       "independenceYear": 1948,
-      "independenceRaw": "4 February 1948 (from the UK)"
+      "independenceRaw": "4 February 1948 (from the UK)",
+      "capitals": [
+        "Colombo",
+        "Sri Jayawardenepura Kotte"
+      ]
     },
     "lr": {
       "capital": "Monrovia",
@@ -5725,7 +5745,11 @@
       ],
       "religionRaw": "Christian 90% (Zionist - a blend of Christianity and traditional African religions - 40%, Roman Catholic 20%, other Christian 30% - includes Anglican, Methodist, Church of Jesus Christ, Jehovah's Witness), Muslim 2%, other 8% (includes Baha'i, Buddhist, Hindu, indigenous, Jewish) (2015 est.)",
       "independenceYear": 1968,
-      "independenceRaw": "6 September 1968 (from the UK)"
+      "independenceRaw": "6 September 1968 (from the UK)",
+      "capitals": [
+        "Mbabane",
+        "Lobamba"
+      ]
     },
     "tc": {
       "capital": "Grand Turk",
@@ -6657,7 +6681,12 @@
       ],
       "religionRaw": "Christian 86%, ancestral, tribal, animist, or other traditional African religions 5.4%, Muslim 1.9%, other 1.5%, nothing in particular 5.2% (2015 est.)",
       "independenceYear": 1910,
-      "independenceRaw": "31 May 1910 (Union of South Africa formed from four British colonies: Cape Colony, Natal, Transvaal, and Orange Free State); 22 August 1934 (Status of the Union Act); 31 May 1961 (republic declared); 27 April 1994 (majority rule)"
+      "independenceRaw": "31 May 1910 (Union of South Africa formed from four British colonies: Cape Colony, Natal, Transvaal, and Orange Free State); 22 August 1934 (Status of the Union Act); 31 May 1961 (republic declared); 27 April 1994 (majority rule)",
+      "capitals": [
+        "Pretoria",
+        "Cape Town",
+        "Bloemfontein"
+      ]
     },
     "zm": {
       "capital": "Lusaka",

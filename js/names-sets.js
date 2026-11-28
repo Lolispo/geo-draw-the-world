@@ -75,6 +75,7 @@ const CAPITAL_ALIASES = {
   Astana: ['Nur-Sultan'],
   Bern: ['Berne'],
   Hagatna: ['Agana'],
+  'Sri Jayawardenepura Kotte': ['Sri Jayewardenepura Kotte', 'Kotte'],
 };
 
 // The source writes split capitals as "Gitega , Bujumbura" and adds language notes
@@ -88,11 +89,13 @@ export function buildCapitalSet(entities, attributes, { territories = false } = 
   const items = [];
   for (const [code, e] of Object.entries(entities)) {
     if (!inCountryPool(e, { territories })) continue;
-    const name = cleanCapital(attributes[code]?.capital);
-    if (!name) continue;
-    const extra = [...(CAPITAL_ALIASES[name] || [])];
-    if (/ City$/.test(name)) extra.push(name.replace(/ City$/, ''));
-    items.push({ name, aliases: extra, codes: [code] });
+    const a = attributes[code];
+    const cities = a?.capitals || [cleanCapital(a?.capital)].filter(Boolean);
+    for (const name of cities) {
+      const extra = [...(CAPITAL_ALIASES[name] || [])];
+      if (/ City$/.test(name)) extra.push(name.replace(/ City$/, ''));
+      items.push({ name, aliases: extra, codes: [code] });
+    }
   }
   return fromList(items);
 }

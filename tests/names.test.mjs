@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  firstLetter, displayName, cleanCapital, buildCountrySet, buildCapitalSet, capitalsSkipped,
+  canon, firstLetter, displayName, cleanCapital, buildCountrySet, buildCapitalSet, capitalsSkipped,
   letterCounts, playableLetters, board, slotPattern, matchTyped, fromList, formatElapsed,
 } from '../js/names-sets.js';
 
@@ -146,4 +146,22 @@ test('continent hint: one continent, short names, shared names list both', async
   assert.equal(entryContinents({ codes: ['jm'] }, ents), 'N. America');
   assert.equal(entryContinents({ codes: ['jm', 'nf'] }, ents), 'N. America / Oceania');
   assert.equal(entryContinents({ codes: ['xx'] }, ents), '');
+});
+
+test('countries with several capitals: each one is its own slot under its own letter', () => {
+  const set = buildCapitalSet(entities, attributes, { territories: false });
+  const byName = Object.fromEntries(set.map((e) => [e.name, e]));
+  const want = {
+    za: ['Pretoria', 'Cape Town', 'Bloemfontein'], bo: ['La Paz', 'Sucre'],
+    lk: ['Colombo', 'Sri Jayawardenepura Kotte'], bj: ['Porto-Novo', 'Cotonou'],
+    sz: ['Mbabane', 'Lobamba'], ci: ['Yamoussoukro', 'Abidjan'], bi: ['Gitega', 'Bujumbura'],
+  };
+  for (const [code, cities] of Object.entries(want)) {
+    assert.deepEqual(attributes[code].capitals, cities, code);
+    for (const c of cities) assert.ok(byName[c]?.codes.includes(code), `${c} on the board for ${code}`);
+  }
+  assert.equal(attributes[Object.keys(want)[0]].capital, 'Pretoria', 'the single capital the quiz uses is unchanged');
+  assert.ok(byName['Sri Jayawardenepura Kotte'].forms.includes(canon('Sri Jayewardenepura Kotte')), 'Factbook spelling accepted');
+  const src = readFileSync(new URL('../scripts/build-attributes.mjs', import.meta.url), 'utf8');
+  assert.match(src, /lk: \['Colombo', 'Sri Jayawardenepura Kotte'\]/, 'the build script carries the list, not just the JSON');
 });

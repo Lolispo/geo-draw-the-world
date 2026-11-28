@@ -282,6 +282,22 @@ for (const [code, o] of Object.entries(CAPITAL_OVERRIDE)) {
   provenance[code] = provenance[code] ? `${provenance[code]}; ${o.src}` : o.src;
 }
 
+// Countries with more than one official capital, as the Factbook's note lists them.
+// `capital` stays the first (the one the quiz asks for); Name Them All gives each city
+// its own slot (owner decision).
+const CAPITALS = {
+  za: ['Pretoria', 'Cape Town', 'Bloemfontein'],
+  bo: ['La Paz', 'Sucre'],
+  lk: ['Colombo', 'Sri Jayawardenepura Kotte'],
+  bj: ['Porto-Novo', 'Cotonou'],
+  sz: ['Mbabane', 'Lobamba'],
+  ci: ['Yamoussoukro', 'Abidjan'],
+  bi: ['Gitega', 'Bujumbura'],
+};
+for (const [code, cities] of Object.entries(CAPITALS)) {
+  if (attributes[code]) attributes[code].capitals = cities;
+}
+
 // ---- write + report ------------------------------------------------------
 const sorted = {};
 for (const code of Object.keys(attributes).sort()) sorted[code] = attributes[code];
