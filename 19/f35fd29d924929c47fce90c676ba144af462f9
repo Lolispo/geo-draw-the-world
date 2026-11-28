@@ -1,0 +1,57 @@
+CLAUDE.md
+  s_9316d6c2fe33a1::t_e99a6b4f5fce53 25
+css/style.css
+  s_9316d6c2fe33a1::t_2552f595fa3080 4107-4108
+data/flags.json
+  s_9316d6c2fe33a1::t_670dfa4d69671e 3-253
+index.html
+  s_9316d6c2fe33a1::t_2a1086110c2fd2 87-91
+js/data-health.js
+  s_9316d6c2fe33a1::t_38a8793f1be2ef 16-17,92-111
+js/flag-colors.js
+  s_9316d6c2fe33a1::t_3d434402bc9d64 18-19,81-104
+js/main.js
+  s_9316d6c2fe33a1::t_e29f8b78876685 402,444,648
+js/pie.js
+  s_9316d6c2fe33a1::t_677ede53758737 1-68
+js/quiz-game.js
+  s_9316d6c2fe33a1::t_3b2f742ccd3529 20,240-244
+js/quiz/audit.js
+  s_9316d6c2fe33a1::t_05a10324e1a6de 13,201-214,227
+js/quiz/flag-match.js
+  s_9316d6c2fe33a1::t_83c656cf4062ea 15-17,42-43
+js/quiz/generators/flag-pie.js
+  s_9316d6c2fe33a1::t_f6bf5431fe7cb8 1-131
+js/quiz/generators/index.js
+  s_9316d6c2fe33a1::t_4b0c00786a8e46 21,44
+js/quiz/packs.js
+  s_9316d6c2fe33a1::t_ac8172b9230b1e 21-27
+js/quiz/round.js
+  s_9316d6c2fe33a1::t_5376931f195e29 11,15-18,71
+js/scores-screen.js
+  s_9316d6c2fe33a1::t_ce3eac4b522b0e 77
+package.json
+  s_9316d6c2fe33a1::t_9de327fe4376e6 30
+scripts/build-flag-shares.mjs
+  s_9316d6c2fe33a1::t_5f6971e32e5d3a 1-110
+tests/pie.test.mjs
+  s_9316d6c2fe33a1::t_5f8f3d2cdc975e 1-36
+tests/quiz/flag-pie.test.mjs
+  s_9316d6c2fe33a1::t_11a1a52cf4bba8 1-120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19f35fd29d924929c47fce90c676ba144af462f9",
+  "prompts": {},
+  "sessions": {
+    "s_9316d6c2fe33a1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aad73f5b-ec23-4476-8e72-cfdc1185949f",
+        "model": "unknown"
+      },
+      "human_author": "Petter Andersson <12279747+Lolispo@users.noreply.github.com>"
+    }
+  }
+}
