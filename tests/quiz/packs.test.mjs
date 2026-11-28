@@ -38,6 +38,9 @@ test('pack keys and titles', () => {
   assert.equal(packPool(PACKS.shape, 'nonsense'), 'mixed');
   assert.equal(packTitle(PACKS.shape, 'easy'), 'Guess the Shape · Outline · Mixed');
   assert.equal(packTitle(PACKS.shape, 'hard', 'any'), 'Guess the Shape · 12 × 12 · Anywhere');
+  // Flag Color Quiz kept its scores under this key before it became a pack.
+  assert.equal(packScoreKey(PACKS.flags), 'flag-quiz-10');
+  assert.equal(packTitle(PACKS.flags), 'Flag Color Quiz');
   const flat = { id: 'x', title: 'X' };
   assert.equal(packScoreKey(flat), 'x');
   assert.equal(packTitle(flat), 'X');

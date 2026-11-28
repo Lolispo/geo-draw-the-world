@@ -269,6 +269,26 @@ body {
   border-color: var(--text-dim);
 }
 
+/* The shared Territories button (js/territories-toggle.js), the same on every screen. */
+.territories-toggle {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-dim);
+}
+.territories-toggle:hover { color: var(--text); border-color: var(--text-dim); }
+.territories-toggle[aria-pressed="true"] {
+  color: var(--text);
+  border-color: var(--green);
+  background: #3fb9501a;
+}
+.quiz-pack-settings { display: flex; justify-content: center; }
+.quiz-pack-chooser .territories-toggle, .rank-picker > .territories-toggle { align-self: center; }
+
 .btn-accent {
   padding: 10px 28px;
   font-size: 0.95rem;
@@ -837,7 +857,6 @@ canvas {
   box-shadow: 0 0 20px #3fb95022;
 }
 
-#screen-flag-quiz,
 #screen-flag-picker {
   padding: 16px 12px;
   overflow-y: auto;
@@ -1002,137 +1021,6 @@ canvas {
   text-align: center;
 }
 
-.flag-missing-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 14px;
-}
-
-/* Timer bar */
-.flag-timer-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 6px 12px;
-}
-.flag-timer-track {
-  flex: 1;
-  height: 8px;
-  border-radius: 4px;
-  background: var(--border);
-  overflow: hidden;
-}
-.flag-timer-bar {
-  height: 100%;
-  border-radius: 4px;
-  background: var(--green);
-  transition: width 0.05s linear, background 0.3s ease;
-  width: 100%;
-}
-.flag-timer-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  min-width: 40px;
-  text-align: right;
-  color: var(--text);
-  transition: color 0.2s ease;
-}
-
-.flag-color-swatch {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  border: 2px solid var(--border);
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-}
-
-.flag-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-  max-width: 750px;
-}
-
-.flag-option-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: inherit;
-  color: var(--text);
-}
-.flag-option-card:hover:not(.disabled) {
-  border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent-glow);
-  transform: translateY(-3px);
-}
-.flag-option-card { position: relative; }
-.flag-option-key {
-  position: absolute; top: 6px; left: 8px;
-  font: 600 0.75rem/1 inherit; color: var(--text-dim); background: var(--surface); z-index: 1;
-  border: 1px solid var(--border); border-radius: 4px; padding: 2px 5px;
-}
-@media (hover: none) { .flag-option-key { display: none; } }
-.flag-option-card.disabled {
-  cursor: default;
-  opacity: 0.85;
-}
-.flag-option-card.correct {
-  border-color: var(--green);
-  box-shadow: 0 0 20px #3fb95044;
-  opacity: 1;
-  animation: correctPop 0.4s ease-out;
-}
-.flag-option-card.wrong {
-  border-color: var(--red);
-  box-shadow: 0 0 20px #f8514944;
-  opacity: 0.6;
-}
-
-@keyframes correctPop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.flag-option-img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-}
-
-.flag-option-name {
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-.flag-name-toggle {
-  font-size: 0.78rem;
-}
-
 /* Flag results */
 .flag-results-panel {
   max-width: 500px;
@@ -1173,15 +1061,6 @@ canvas {
 .flag-result-row.wrong {
   background: #f8514912;
 }
-.flag-result-icon {
-  font-weight: 700;
-  font-size: 1rem;
-  width: 20px;
-  text-align: center;
-}
-.flag-result-row.correct .flag-result-icon { color: var(--green); }
-.flag-result-row.wrong .flag-result-icon { color: var(--red); }
-
 .flag-result-name {
   flex: 1;
   font-weight: 500;
@@ -1196,14 +1075,6 @@ canvas {
 }
 .flag-result-row.correct .flag-result-points { color: var(--green); }
 .flag-result-row.wrong .flag-result-points { color: var(--text-dim); }
-
-.flag-color-swatch-small {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 1px solid var(--border);
-}
 
 /* ========== MOBILE RESPONSIVE ========== */
 @media (max-width: 768px) {
@@ -1334,7 +1205,7 @@ canvas {
     display: none;
   }
 
-  /* Flag quiz mobile */
+  /* Flag Color Picker mobile */
   .flag-game-header h2 {
     font-size: 0.95rem;
     width: 100%;
@@ -1342,16 +1213,6 @@ canvas {
   .flag-main-canvas {
     max-width: 280px;
     max-height: 180px;
-  }
-  .flag-options {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .flag-option-card {
-    padding: 8px;
-  }
-  .flag-option-name {
-    font-size: 0.75rem;
   }
   .flag-question-label {
     font-size: 0.95rem;
@@ -3929,6 +3790,11 @@ a.hub-go:hover { text-decoration: underline; }
 @media (hover: none) { .quiz-key { display: none; } .quiz-choice { padding-left: 14px; } }
 .quiz-choice.disabled { cursor: default; }
 .quiz-choice.correct { border-color: var(--green); box-shadow: 0 0 16px #3fb95044; animation: correctPop 0.4s ease-out; }
+@keyframes correctPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
 .quiz-choice.wrong { border-color: var(--red); opacity: 0.7; }
 
 .quiz-slider { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -4139,7 +4005,7 @@ a.hub-go:hover { text-decoration: underline; }
 .names-intro, .names-note { color: var(--text-dim); font-size: 0.9rem; line-height: 1.4; }
 .names-note { font-size: 0.8rem; }
 .names-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-.names-tab, .names-terr {
+.names-tab {
   min-height: 44px;
   padding: 8px 16px;
   font-size: 0.9rem;
@@ -4153,8 +4019,7 @@ a.hub-go:hover { text-decoration: underline; }
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent) inset;
 }
-.names-terr { margin-left: auto; }
-.names-terr[aria-pressed="true"] { color: var(--text); border-color: var(--green); }
+.names-tabs .territories-toggle { margin-left: auto; }
 .names-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));

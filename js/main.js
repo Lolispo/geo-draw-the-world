@@ -4,7 +4,7 @@ import {
   loadContinentData, loadCountryData, loadAllCountries, loadWorldOutlines, getDailyCountry,
   getContinentOrder, getContinentByName, getContinentPolygons,
   createReferenceShape, createAllReferenceShapes, createCountryReferenceShapes,
-  getCountryRegions, shuffleArray, getLargestCountries
+  getCountryRegions, getLargestCountries
 } from './geo-data.js';
 import { DrawingCanvas } from './drawing-canvas.js';
 import { WorldCanvas } from './world-canvas.js';
@@ -15,9 +15,10 @@ import { getHighScore, saveScore, getAllHighScores } from './high-scores.js';
 import { getIncludeTerritories, setIncludeTerritories, getGhosts, setGhosts } from './settings.js';
 import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUndo, isMuted, setMuted } from './sounds.js';
 import { MenuGlobe } from './menu-globe.js';
-import { FlagGame } from './flag-game.js';
+import { territoriesToggle } from './territories-toggle.js';
 import { QuizGame } from './quiz-game.js';
 import { PACKS } from './quiz/packs.js';
+import { shuffle } from './quiz/rng.js';
 import { localDateKey, loadDaily, streak, dailyNumber } from './quiz/daily.js';
 import { RankLineGame } from './rank-line-game.js';
 import { TopNGame } from './top-n-game.js';
@@ -82,7 +83,6 @@ const STATES = {
   RESULTS: 'results',
   FREESTYLE: 'freestyle',
   COMPARE: 'compare',
-  FLAG_QUIZ: 'flag-quiz',
   FLAG_PICKER: 'flag-picker',
   FLAG_RING: 'flag-ring',
   RANK_LINE: 'rank-line',
@@ -146,7 +146,6 @@ class Game {
       results: document.getElementById('screen-results'),
       freestyle: document.getElementById('screen-freestyle'),
       compare: document.getElementById('screen-compare'),
-      'flag-quiz': document.getElementById('screen-flag-quiz'),
       'flag-picker': document.getElementById('screen-flag-picker'),
       'flag-ring': document.getElementById('screen-flag-ring'),
       'rank-line': document.getElementById('screen-rank-line'),
@@ -162,10 +161,6 @@ class Game {
     this.worldCanvas.panEnabled = true;   // drag off the shape to move the view
     this.resultsWorldCanvas = new WorldCanvas(document.getElementById('canvas-results'));
     this.menuGlobe = new MenuGlobe(document.getElementById('menu-globe-canvas'));
-    this.flagGame = new FlagGame(
-      document.getElementById('flag-game-container'),
-      () => this.showScreen(STATES.MENU)
-    );
     this.quizGame = new QuizGame(
       document.getElementById('quiz-game-container'),
       () => this.showScreen(STATES.MENU),
@@ -253,7 +248,6 @@ class Game {
       case 'names': this.startNames(sub || null, segments[2] || null); return;
       case 'rank': this.startRankLine(sub || null); return;
       case 'quiz': this.startQuiz(sub || null, params.get('seed')); return;
-      case 'flags': this.startFlagQuiz(); return;
       case 'flag-picker': this.startFlagPicker(); return;
       case 'flag-ring': this.startFlagRing(params); return;
       case 'scores': this.openScores(); return;
@@ -407,7 +401,7 @@ class Game {
       { id: 'btn-freestyle', key: 'freestyle' },
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
-      { id: 'btn-flag-quiz', key: 'flag-quiz-10' },
+      { id: 'btn-activity-flags', key: 'flag-quiz-10' },
       { id: 'btn-activity-flag-pie', key: 'flag-pie' },
     ];
     for (const { id, key, label } of specialModes) {
@@ -450,7 +444,7 @@ class Game {
       document.getElementById('top-n-icon').textContent = '🌍🔝';
       document.getElementById('flag-ring-icon').textContent = '🏳️🏆';
     }
-    document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
+    document.getElementById('btn-activity-flags').addEventListener('click', () => this.startPack('flags'));
     document.getElementById('btn-activity-flag-pie').addEventListener('click', () => this.startPack('flag-pie'));
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-flag-ring').addEventListener('click', () => this.startFlagRing());
@@ -488,7 +482,8 @@ class Game {
       const btn = document.getElementById(`btn-${key}-toggle`);
       if (btn) btn.addEventListener('click', () => this._setDrawToggle(key, !this._drawToggle(key)));
     }
-    this._updateTerritoriesBadge();
+    this._territoriesToggle = territoriesToggle();
+    document.getElementById('territories-toggle-slot').replaceWith(this._territoriesToggle);
 
     // Drawing
     document.getElementById('btn-undo').addEventListener('click', () => {
@@ -627,9 +622,7 @@ class Game {
   }
 
   _updateTerritoriesBadge() {
-    const on = getIncludeTerritories();
-    document.getElementById('territories-badge').style.display = on ? 'inline-block' : 'none';
-    document.getElementById('btn-territories-toggle').classList.toggle('active', on);
+    this._territoriesToggle.sync();
   }
 
   showScreen(state) {
@@ -637,11 +630,13 @@ class Game {
     if (state !== STATES.FLAG_RING) this.flagRing.stop();
     lockZoom(state === STATES.FLAG_RING);
     this.state = state;
+    // Other screens change the same setting.
+    if (state === STATES.DRAW_MENU) this._territoriesToggle.sync();
     for (const [name, el] of Object.entries(this.screens)) {
       el.classList.toggle('active', name === state);
     }
     // Globe background on menu-like screens; off during gameplay
-    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.NAMES, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER, STATES.SCORES, STATES.QUIZ];
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.NAMES, STATES.EXPLORE, STATES.FLAG_PICKER, STATES.SCORES, STATES.QUIZ];
     const bg = document.getElementById('app-bg');
     if (globeStates.includes(state)) {
       if (bg) bg.classList.remove('hidden');
@@ -685,7 +680,7 @@ class Game {
     this.gameMode = 'continents';
     this._currentRegion = null;
     this.itemOrder = getContinentOrder();
-    this.itemData = shuffleArray(this.itemOrder.map(name => getContinentByName(name)));
+    this.itemData = shuffle(Math.random, this.itemOrder.map(name => getContinentByName(name)));
     this.itemOrder = this.itemData.map(c => c.name);
     this._allRefShapes = createAllReferenceShapes();
     // Continents span more latitude (incl. Antarctica) than the country world, so fit
@@ -703,72 +698,58 @@ class Game {
     this._startGame();
   }
 
-  async startCountries(regionFile) {
-    this._route(['draw', regionFile]);
-    this.gameMode = `countries-${regionFile}`;
-    this._currentRegion = regionFile;
+  async _startDrawRun(name, {
+    mode = name,
+    load = loadAllCountries,
+    pick = (data) => shuffle(Math.random, data.countries),
+    refs = (data) => data.countries.map(c => createReferenceShape(c)),
+    bounds = () => null,
+    beforeStart,
+  } = {}) {
+    this._route(['draw', name]);
+    this.gameMode = mode;
+    this._currentRegion = name;
 
     document.getElementById('prompt-name').textContent = 'Loading...';
     this.showScreen(STATES.PROMPT);
 
-    const data = await loadCountryData(regionFile);
-    this._regionBounds = data.regionBounds || null;
-    this.itemData = shuffleArray(data.countries);
+    const data = await load();
+    this._regionBounds = bounds(data);
+    this.itemData = pick(data);
     this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = createCountryReferenceShapes(data);
+    this._allRefShapes = refs(data);
+    beforeStart?.();
     this._startGame();
+  }
+
+  async startCountries(regionFile) {
+    await this._startDrawRun(regionFile, {
+      mode: `countries-${regionFile}`,
+      load: () => loadCountryData(regionFile),
+      bounds: (data) => data.regionBounds || null,
+      refs: (data) => createCountryReferenceShapes(data),
+    });
   }
 
   async startWorld() {
-    this._route(['draw', 'world']);
-    this.gameMode = 'world';
-    this._currentRegion = 'world';
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const data = await loadAllCountries();
-    this._regionBounds = null;
-    this.itemData = shuffleArray(data.countries);
-    this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = data.countries.map(c => createReferenceShape(c));
-    this._startGame();
+    await this._startDrawRun('world');
   }
 
   async startDaily() {
-    this._route(['draw', 'daily']);
-    this.gameMode = 'daily';
-    this._currentRegion = 'daily';
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const { country, allCountries } = await getDailyCountry();
-    this._regionBounds = null;
-    this.itemData = [country];
-    this.itemOrder = [country.name];
-    this._allRefShapes = allCountries.map(c => createReferenceShape(c));
-    this._startGame();
+    await this._startDrawRun('daily', {
+      load: getDailyCountry,
+      pick: (data) => [data.country],
+      refs: (data) => data.allCountries.map(c => createReferenceShape(c)),
+    });
   }
 
   // Three, not ten (TODOS #9). Each item here is draw -> size -> place, so ten of
   // them is a long sitting; Rank the World keeps its ten because the cost per item
   // there is a single tap.
   async startQuick3() {
-    this._route(['draw', 'quick3']);
-    this.gameMode = 'quick3';
-    this._currentRegion = 'quick3';
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const data = await loadAllCountries();
-    this._regionBounds = null;
-    const shuffled = shuffleArray(data.countries);
-    this.itemData = shuffled.slice(0, 3);
-    this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = data.countries.map(c => createReferenceShape(c));
-    this._startGame();
+    await this._startDrawRun('quick3', {
+      pick: (data) => shuffle(Math.random, data.countries).slice(0, 3),
+    });
   }
 
   // Freestyle (TODOS #72): no country to draw, so no prompt, no map and no placement —
@@ -837,67 +818,22 @@ class Game {
   }
 
   async startSpeedRound() {
-    this._route(['draw', 'speed']);
-    this.gameMode = 'speed';
-    this._currentRegion = 'speed';
     this._speedActive = true;
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const data = await loadAllCountries();
-    this._regionBounds = null;
     // Lots of countries — player does as many as they can in 3 minutes
-    this.itemData = shuffleArray(data.countries);
-    this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = data.countries.map(c => createReferenceShape(c));
-    this._startGame();
+    await this._startDrawRun('speed');
     this._startTimer(180); // 3 minutes
   }
 
   async startStreak() {
-    this._route(['draw', 'streak']);
-    this.gameMode = 'streak';
-    this._currentRegion = 'streak';
     this._streakActive = true;
     this._streakCount = 0;
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const data = await loadAllCountries();
-    this._regionBounds = null;
-    this.itemData = shuffleArray(data.countries);
-    this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = data.countries.map(c => createReferenceShape(c));
-    this._showStreakCounter();
-    this._startGame();
+    await this._startDrawRun('streak', { beforeStart: () => this._showStreakCounter() });
   }
 
   async startFamous5() {
-    this._route(['draw', 'famous5']);
-    this.gameMode = 'famous5';
-    this._currentRegion = 'famous5';
-
-    document.getElementById('prompt-name').textContent = 'Loading...';
-    this.showScreen(STATES.PROMPT);
-
-    const data = await loadAllCountries();
-    this._regionBounds = null;
-    const biggest = getLargestCountries(data.countries, 5);
-    this.itemData = shuffleArray(biggest);
-    this.itemOrder = this.itemData.map(c => c.name);
-    this._allRefShapes = data.countries.map(c => createReferenceShape(c));
-    this._startGame();
-  }
-
-  async startFlagQuiz() {
-    this._route(['flags']);
-    this.gameMode = 'flag-quiz';
-    this._currentRegion = 'flag-quiz';
-    await this.flagGame.loadData();
-    this.showScreen(STATES.FLAG_QUIZ);
-    this.flagGame.start(10);
+    await this._startDrawRun('famous5', {
+      pick: (data) => shuffle(Math.random, getLargestCountries(data.countries, 5)),
+    });
   }
 
   // #/<pack>[/<level>] — a menu game played on the quiz screen (js/quiz/packs.js).
@@ -999,7 +935,6 @@ class Game {
     else if (this.gameMode === 'country-list') this.startCountryList(this._countryList);
     else if (this.gameMode === 'speed') this.startSpeedRound();
     else if (this.gameMode === 'streak') this.startStreak();
-    else if (this.gameMode === 'flag-quiz') this.startFlagQuiz();
     else if (this.gameMode === 'flag-picker') this.startFlagPicker();
     else if (this.gameMode === 'rank-line') this.startRankLine();
     else if (this.gameMode === 'top-n') this.startTopN();
@@ -1195,16 +1130,20 @@ class Game {
     this.drawingCanvas.activate();
   }
 
+  _abortStage() {
+    if (this.state === STATES.PEEK && this._peekCountdown) {
+      clearInterval(this._peekCountdown);
+      this._peekCountdown = null;
+    }
+    if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
+    if (this.state === STATES.PLACING) this._leavePlacing();
+  }
+
   onSkip() {
     // In streak mode, skipping ends the streak
     if (this._streakActive) {
       this.scores.push({ name: this.itemData[this.currentIndex]?.name || '?', code: this.itemData[this.currentIndex]?.code || null, shape: 0, size: 0, placement: 0, total: 0, skipped: true });
-      if (this.state === STATES.PEEK && this._peekCountdown) {
-        clearInterval(this._peekCountdown);
-        this._peekCountdown = null;
-      }
-      if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-      if (this.state === STATES.PLACING) this._leavePlacing();
+      this._abortStage();
       this._onStreakEnd();
       return;
     }
@@ -1214,12 +1153,7 @@ class Game {
     this.referenceShapes.push(refShape);
     this.scores.push({ name: entry.name, code: entry.code, shape: 0, size: 0, placement: 0, total: 0, skipped: true });
 
-    if (this.state === STATES.PEEK && this._peekCountdown) {
-      clearInterval(this._peekCountdown);
-      this._peekCountdown = null;
-    }
-    if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.PLACING) this._leavePlacing();
+    this._abortStage();
 
     playSkip();
     this.currentIndex++;
@@ -1458,13 +1392,7 @@ class Game {
     this._speedActive = false;
     this._stopTimer();
 
-    // Clean up active screens
-    if (this.state === STATES.PEEK && this._peekCountdown) {
-      clearInterval(this._peekCountdown);
-      this._peekCountdown = null;
-    }
-    if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.PLACING) this._leavePlacing();
+    this._abortStage();
 
     this._showToast("Time's up!");
     this.showResults();
@@ -1493,13 +1421,7 @@ class Game {
     this._streakActive = false;
     this._hideStreakCounter();
 
-    // Clean up active screens
-    if (this.state === STATES.PEEK && this._peekCountdown) {
-      clearInterval(this._peekCountdown);
-      this._peekCountdown = null;
-    }
-    if (this.state === STATES.DRAWING) this.drawingCanvas.deactivate();
-    if (this.state === STATES.PLACING) this._leavePlacing();
+    this._abortStage();
 
     const lastScore = this.scores[this.scores.length - 1];
     this._showToast(`Streak over! Scored ${lastScore?.total || 0} (need 25+)`);

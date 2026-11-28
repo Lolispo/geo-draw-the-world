@@ -8,6 +8,7 @@
 
 import { getEntity } from './datasets.js';
 import { flagUrl } from './flags.js';
+import { loadJson } from './load-json.js';
 
 let _data = null;
 let _reverse = null;   // { exports: { code: [owner codes] }, imports: {...} }
@@ -15,8 +16,7 @@ let _reverse = null;   // { exports: { code: [owner codes] }, imports: {...} }
 export async function loadRelations() {
   if (_data) return _data;
   try {
-    const resp = await fetch('data/relations.json');
-    _data = await resp.json();
+    _data = await loadJson('data/relations.json');
   } catch {
     _data = { relations: {} };
   }

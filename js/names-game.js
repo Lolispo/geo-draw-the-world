@@ -1,7 +1,8 @@
 // Name Them All: type every country (or capital) that starts with one letter.
 
 import { loadEntities, loadAttributes, loadAliases, getAliases } from './datasets.js';
-import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
+import { getIncludeTerritories } from './settings.js';
+import { territoriesToggle } from './territories-toggle.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { playClick, playPlace, playSkip, playScoreReveal } from './sounds.js';
 import {
@@ -110,16 +111,7 @@ export class NamesGame {
       b.addEventListener('click', () => { if (s.id !== this.setId) { playClick(); this.showPicker(s.id); } });
       tabs.appendChild(b);
     }
-    const terr = document.createElement('button');
-    terr.className = 'btn names-terr';
-    terr.setAttribute('aria-pressed', String(getIncludeTerritories()));
-    terr.textContent = getIncludeTerritories() ? 'Territories: on' : 'Territories: off';
-    terr.addEventListener('click', () => {
-      playClick();
-      setIncludeTerritories(!getIncludeTerritories());
-      this.showPicker(this.setId);
-    });
-    tabs.appendChild(terr);
+    tabs.appendChild(territoriesToggle({ onChange: () => this.showPicker(this.setId) }));
     wrap.appendChild(tabs);
 
     const grid = document.createElement('div');

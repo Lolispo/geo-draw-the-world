@@ -7,6 +7,8 @@
 // Special:FilePath redirects to the real thumbnail and rasterises SVG on the way, so one
 // URL shape works for every file whatever it is stored as.
 
+import { loadJson } from './load-json.js';
+
 const COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
 
 let _emblems = null;
@@ -14,8 +16,7 @@ let _emblems = null;
 export async function loadEmblems() {
   if (_emblems) return _emblems;
   try {
-    const resp = await fetch('data/emblems.json');
-    _emblems = (await resp.json()).emblems;
+    _emblems = (await loadJson('data/emblems.json')).emblems;
   } catch {
     // A country without an emblem renders nothing, so a failed fetch costs the feature
     // and not the panel it sits in.

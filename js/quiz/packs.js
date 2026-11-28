@@ -8,6 +8,9 @@
 // `pools` is an optional second choice, picked alongside the level: which answers come
 // up. A pool supplies the mix, the level only its opts. The default pool keeps the
 // plain `<id>-<level>` key, so scores from before pools existed stay where they were.
+//
+// `scoreKey` overrides the key of a pack without levels, for a game that kept scores
+// under another name before it became a pack. Keys are permanent.
 export const PACKS = {
   shape: {
     id: 'shape',
@@ -35,12 +38,20 @@ export const PACKS = {
     size: 10,
     mix: { gentle: 10, easy: 40, medium: 35, hard: 15 },
   },
+  flags: {
+    id: 'flags',
+    title: 'Flag Color Quiz',
+    type: 'flag-missing',
+    size: 10,
+    mix: { gentle: 10, easy: 40, medium: 35, hard: 15 },
+    scoreKey: 'flag-quiz-10',
+  },
 };
 
 export const packLevel = (pack, level) => (pack.levels ? (pack.levels[level] ? level : Object.keys(pack.levels)[0]) : null);
 export const packPool = (pack, pool) => (pack.pools ? (pack.pools[pool] ? pool : pack.defaultPool) : null);
 export const packScoreKey = (pack, level, pool) => {
-  if (!pack.levels) return pack.id;
+  if (!pack.levels) return pack.scoreKey || pack.id;
   const base = `${pack.id}-${packLevel(pack, level)}`;
   const p = packPool(pack, pool);
   return p && p !== pack.defaultPool ? `${base}-${p}` : base;

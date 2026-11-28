@@ -2,6 +2,7 @@
 // Single source consumed by the Data Explorer, Rank line game and the flag quizzes.
 
 import { getIncludeTerritories } from './settings.js';
+import { loadJson } from './load-json.js';
 
 let _data = null;
 let _entities = null;
@@ -20,23 +21,20 @@ const _provenance = {};
 
 export async function loadDatasets() {
   if (_data) return _data;
-  const resp = await fetch('data/datasets.json');
-  _data = await resp.json();
+  _data = await loadJson('data/datasets.json');
   _provenance['data/datasets.json'] = _data.provenance || {};
   return _data;
 }
 
 export async function loadEntities() {
   if (_entities) return _entities;
-  const resp = await fetch('data/entities.json');
-  _entities = (await resp.json()).entities;
+  _entities = (await loadJson('data/entities.json')).entities;
   return _entities;
 }
 
 export async function loadAttributes() {
   if (_attributes) return _attributes;
-  const resp = await fetch('data/attributes.json');
-  const raw = await resp.json();
+  const raw = await loadJson('data/attributes.json');
   _attributes = raw.attributes;
   _provenance['data/attributes.json'] = raw.provenance || {};
   return _attributes;
@@ -57,8 +55,7 @@ export function normalizeName(s) {
 export async function loadAliases() {
   if (_aliases) return _aliases;
   try {
-    const resp = await fetch('data/aliases.json');
-    _aliases = (await resp.json()).aliases;
+    _aliases = (await loadJson('data/aliases.json')).aliases;
   } catch {
     _aliases = {};
   }
@@ -130,14 +127,19 @@ export function getAttributes(code) {
 export async function loadFlagColors() {
   if (_flagColors) return _flagColors;
   try {
-    const resp = await fetch('data/flags.json');
-    _flagsRaw = (await resp.json()).flags;
+    _flagsRaw = await loadFlags();
     _flagColors = new Map(_flagsRaw.map((f) => [f.code, f.colors]));
   } catch {
     _flagsRaw = [];
     _flagColors = new Map();
   }
   return _flagColors;
+}
+
+// Every flag in data/flags.json, shared by every caller. Rejects when the file cannot
+// be read; each caller decides what that costs it.
+export async function loadFlags() {
+  return (await loadJson('data/flags.json')).flags;
 }
 
 export function getFlagColors(code) {
@@ -148,8 +150,7 @@ export function getFlagColors(code) {
 // it — a failing Ember fetch must not be able to blank out capitals and religions.
 export async function loadElectricity() {
   if (_electricity) return _electricity;
-  const resp = await fetch('data/electricity.json');
-  const raw = await resp.json();
+  const raw = await loadJson('data/electricity.json');
   _electricity = raw.electricity;
   _provenance['data/electricity.json'] = raw.provenance || {};
   return _electricity;

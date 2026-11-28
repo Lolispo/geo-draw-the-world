@@ -7,7 +7,8 @@ import { getHighScore, saveScore } from './high-scores.js';
 import { loadDatasets, loadEntities, inCountryPool, getDataset, getDatasetList, getEntries, formatValue } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
-import { getIncludeTerritories, setIncludeTerritories } from './settings.js';
+import { territoriesToggle } from './territories-toggle.js';
+import { shuffle } from './quiz/rng.js';
 
 const START_LIVES = 3;
 
@@ -77,14 +78,7 @@ export class RankLineGame {
     sub.textContent = 'Pick a dataset, then place each country on the line by its value. 3 lives.';
     panel.append(h, sub);
 
-    // Territories toggle (shared setting) — include small dependent territories.
-    const terrOn = getIncludeTerritories();
-    const terrBtn = document.createElement('button');
-    terrBtn.className = 'btn btn-tool' + (terrOn ? ' active' : '');
-    terrBtn.textContent = terrOn ? '🏝️ Territories: On' : '🏝️ Territories: Off';
-    terrBtn.title = 'Include small dependent/autonomous territories in the pool';
-    terrBtn.addEventListener('click', () => { setIncludeTerritories(!getIncludeTerritories()); this.showPicker(); });
-    panel.appendChild(terrBtn);
+    panel.appendChild(territoriesToggle({ onChange: () => this.showPicker() }));
 
     const listWrap = document.createElement('div');
     listWrap.className = 'rank-picker-list';
@@ -114,21 +108,13 @@ export class RankLineGame {
     this._loaded = true;
   }
 
-  _shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
   start(datasetId = 'gdp-nominal') {
     this._picking = false;
     this.dataset = getDataset(datasetId);
     // Fresh entry objects each run (we mutate `.revealed` on them).
     // Aggregates out always, dependent territories out unless the toggle is on.
     const entries = getEntries(datasetId).filter((e) => inCountryPool(e.code));
-    this.deck = this._shuffle(entries);
+    this.deck = shuffle(Math.random, entries);
     this._poolSize = this.deck.length;
     this.placed = [];
     this.lives = START_LIVES;

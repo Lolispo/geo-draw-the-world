@@ -5,7 +5,7 @@
 // can be run headless; rendering scales it to whatever canvas it has.
 
 import { flagUrl } from './flags.js';
-import { loadEntities, getEntity, inCountryPool } from './datasets.js';
+import { loadEntities, loadFlags, getEntity, inCountryPool } from './datasets.js';
 import {
   modeKey, modeLabel, saveRun, clearRuns, roundResult,
   loadTeams, saveTeams, splitEntries, clampEntries, ENTRIES, renderScores, renderTeams,
@@ -334,8 +334,9 @@ export class FlagRing {
 
   async loadData() {
     if (this.flags) return;
-    const [resp] = await Promise.all([fetch('data/flags.json'), loadEntities()]);
-    this.flags = (await resp.json()).flags;
+    const [flags] = await Promise.all([loadFlags(), loadEntities()]);
+    // Copies, because a sprite writes its aspect onto the flag.
+    this.flags = flags.map((f) => ({ ...f }));
     this.byCode = new Map(this.flags.map((f) => [f.code, f]));
     this.namesEl.innerHTML = this.flags
       .map((f) => `<option value="${f.name.replace(/"/g, '&quot;')}">`).join('');

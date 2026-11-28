@@ -3,112 +3,9 @@
 // high-score store: no new write path, so nothing here can cost you a score.
 
 import { getAllHighScores, clearScores } from './high-scores.js';
-import { loadDatasets, getDataset, getDatasetList } from './datasets.js';
+import { loadDatasets } from './datasets.js';
 import { playClick } from './sounds.js';
-import { formatElapsed } from './names-sets.js';
-import { PACKS, packLevelLabel } from './quiz/packs.js';
-
-const DRAW = 'Draw the World';
-const RANK = 'Rank the World';
-const TOPN = 'Top 10 / Bottom 10';
-const FLAGS = 'Flags';
-const QUIZ = 'Quiz';
-const NAMES = 'Name Them All';
-const SHAPE = 'Guess the Shape';
-const OLDER = 'Older rounds';
-const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, NAMES, SHAPE, FLAGS, OLDER];
-
-const QUIZ_LABELS = { 'quiz-daily': 'Daily Quiz', 'quiz-easy': 'Random Quiz · Easy', 'quiz-hard': 'Random Quiz · Hard' };
-
-const DRAW_LABELS = {
-  daily: 'Daily Challenge',
-  quick3: 'Quick 3',
-  quick: 'Quick 10',
-  famous5: 'Famous 5',
-  speed: 'Speed Round',
-  streak: 'Streak',
-  continents: 'Continents',
-  world: 'World',
-};
-
-const STYLE_LABELS = { cards: 'cards', flags: 'flags only', type: 'typing' };
-
-function titleFromSlug(slug) {
-  return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-}
-
-function datasetName(id) {
-  return getDataset(id)?.name || id;
-}
-
-// topn2-<datasetId>-<scope>-<hi|lo>-<n>-<style>[-easy|-hard]. Both the dataset id and
-// the scope can hold dashes, so it is read from the right, and the dataset is then
-// matched against the live registry rather than guessed at.
-function resolveTopN(key) {
-  const parts = key.slice('topn2-'.length).split('-');
-  const diff = (parts[parts.length - 1] === 'easy' || parts[parts.length - 1] === 'hard')
-    ? parts.pop() : null;
-  const style = parts.pop();
-  const n = parts.pop();
-  const dir = parts.pop();
-  const rest = parts.join('-');
-  const ds = getDatasetList().find((d) => rest === d.id || rest.startsWith(`${d.id}-`));
-  const scope = ds ? rest.slice(ds.id.length + 1) : '';
-  const detail = [
-    scope === 'world' || !scope ? 'World' : titleFromSlug(scope),
-    STYLE_LABELS[style] || style,
-    diff,
-  ].filter(Boolean).join(' · ');
-  return {
-    group: TOPN,
-    label: `${dir === 'lo' ? 'Bottom' : 'Top'} ${n} · ${ds ? ds.name : rest}`,
-    detail,
-  };
-}
-
-// A stored key back into something a person can read, or null for a key no current
-// mode mints — a renamed or retired round. Those are kept, not hidden: the score was
-// earned.
-function resolveKey(key) {
-  if (QUIZ_LABELS[key]) return { group: QUIZ, label: QUIZ_LABELS[key] };
-  if (DRAW_LABELS[key]) return { group: DRAW, label: DRAW_LABELS[key] };
-  if (key.startsWith('countries-')) {
-    return { group: DRAW, label: titleFromSlug(key.slice('countries-'.length)), detail: 'region' };
-  }
-  if (key.startsWith('rank-line-')) {
-    return { group: RANK, label: datasetName(key.slice('rank-line-'.length)) };
-  }
-  if (key === 'flag-pie') return { group: FLAGS, label: 'Flag Pie' };
-  const shape = key.match(/^shape-([a-z]+)(?:-([a-z]+))?$/);
-  if (shape && PACKS.shape.levels[shape[1]] && (!shape[2] || PACKS.shape.pools[shape[2]])) {
-    return { group: SHAPE, label: packLevelLabel(PACKS.shape, shape[1], shape[2]) };
-  }
-  if (key.startsWith('flag-quiz-')) {
-    return { group: FLAGS, label: 'Flag Color Quiz', detail: `${key.slice('flag-quiz-'.length)} rounds` };
-  }
-  if (key.startsWith('flag-picker-')) {
-    return { group: FLAGS, label: 'Flag Color Picker', detail: `${key.slice('flag-picker-'.length)} rounds` };
-  }
-  if (key.startsWith('topn2-')) return resolveTopN(key);
-  const names = key.match(/^names-(.+)-([a-z])$/);
-  if (names) return { group: NAMES, label: `${titleFromSlug(names[1])} · ${names[2].toUpperCase()}` };
-  return { group: OLDER, label: key, detail: 'from an earlier version' };
-}
-
-// What the number in a record means depends on the mode that wrote it: an average out
-// of 100 for a drawing round, a streak length, a count of hits. Say the right thing or
-// say nothing — never dress one up as the other.
-function formatBest(group, key, rec) {
-  if (key === 'streak') return `${rec.score} in a row`;
-  if (group === DRAW) return `${rec.score}/100`;
-  if (group === RANK) return `run of ${rec.score}`;
-  if (group === TOPN) return `${rec.score}/${rec.total}`;
-  if (group === NAMES) return `${rec.score}/${rec.total}${rec.ms == null ? '' : ` in ${formatElapsed(rec.ms)}`}`;
-  if (group === FLAGS) return `${rec.score} pts`;
-  if (group === SHAPE) return `${rec.score}/1000`;
-  if (group === QUIZ) return `${rec.score}/500`;
-  return String(rec.score);
-}
+import { GROUP_ORDER, describeScore, formatScore } from './score-labels.js';
 
 function formatWhen(ts) {
   if (!ts) return '';
@@ -161,7 +58,7 @@ export class ScoresScreen {
       return;
     }
 
-    const rows = all.map(([key, rec]) => ({ key, rec, ...resolveKey(key) }));
+    const rows = all.map(([key, rec]) => ({ key, rec, ...describeScore(key) }));
     const list = document.createElement('div');
     list.className = 'scores-list';
 
@@ -186,7 +83,7 @@ export class ScoresScreen {
         detail.textContent = r.detail || '';
         const best = document.createElement('span');
         best.className = 'scores-best';
-        best.textContent = formatBest(group, r.key, r.rec);
+        best.textContent = formatScore(r.key, r.rec);
         const when = document.createElement('span');
         when.className = 'scores-when';
         when.textContent = formatWhen(r.rec.date);

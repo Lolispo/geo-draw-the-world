@@ -1,9 +1,10 @@
 // Random Geography Quiz and the Daily Quiz — the screen. Questions come from js/quiz/,
 // which is pure; this file renders them, takes answers, and keeps score.
 
-import { loadDatasets, loadEntities, loadAttributes, formatValue } from './datasets.js';
+import { loadDatasets, loadEntities, loadAttributes, loadFlags, formatValue } from './datasets.js';
 import { loadRelations } from './relations.js';
 import { getIncludeTerritories } from './settings.js';
+import { territoriesToggle } from './territories-toggle.js';
 import { getHighScore, saveScore } from './high-scores.js';
 import { drawSilhouette, drawPixelGrid } from './silhouette.js';
 import { loadShapeMasks } from './shape-match.js';
@@ -61,7 +62,7 @@ export class QuizGame {
     if (this.raw) return;
     const [datasets, entities, attributes, relations, emblems, outlines, flags, masks] = await Promise.all([
       loadDatasets(), loadEntities(), loadAttributes(), loadRelations(), loadEmblems(), loadWorldOutlines(),
-      fetch('data/flags.json').then((r) => r.json()).then((d) => d.flags).catch(() => []),
+      loadFlags().catch(() => []),
       loadShapeMasks().catch(() => null),
     ]);
     this.outlines = outlines;
@@ -206,7 +207,7 @@ export class QuizGame {
       wrap.append(group);
     }
     play.addEventListener('click', () => this.startPack(pack.id, pick.level, pick.pool));
-    wrap.append(play);
+    wrap.append(territoriesToggle(), play);
     this.container.append(wrap);
     paint();
   }
@@ -651,6 +652,14 @@ export class QuizGame {
       list.append(row);
     });
     panel.append(list);
+
+    // A pack goes straight into its questions, so the pool is set here, for the next
+    // round. Play again picks it up.
+    if (this.mode === 'pack') {
+      const row = el('div', 'quiz-pack-settings');
+      row.append(territoriesToggle());
+      panel.append(row);
+    }
 
     const actions = el('div', 'results-actions');
     if (this.mode === 'daily') {

@@ -21,7 +21,9 @@ import {
 } from './datasets.js';
 import { openCountryPanel } from './country-panel.js';
 import { flagUrl } from './flags.js';
+import { shuffle } from './quiz/rng.js';
 import { getIncludeTerritories, setIncludeTerritories, getHideAnswers, setHideAnswers } from './settings.js';
+import { territoriesToggle } from './territories-toggle.js';
 
 // Rule 1 — N adapts to how many countries the filter actually has.
 //
@@ -214,15 +216,6 @@ export class TopNGame {
     return out;
   }
 
-  _shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
   // Every combination that is currently playable, for the random roll.
   _validCombos() {
     const out = [];
@@ -251,7 +244,7 @@ export class TopNGame {
     if (this.inputStyle !== 'type') {
       const tail = plan.sorted.slice(plan.n);
       const distractors = this._pickDistractors(tail, Math.min(plan.poolSize - plan.n, tail.length));
-      options = this._shuffle([...answers, ...distractors]);
+      options = shuffle(Math.random, [...answers, ...distractors]);
     }
 
     this.datasetId = datasetId;
@@ -487,12 +480,7 @@ export class TopNGame {
 
     const opts = document.createElement('div');
     opts.className = 'topn-options';
-    const terrOn = getIncludeTerritories();
-    const terr = document.createElement('button');
-    terr.className = 'btn btn-tool' + (terrOn ? ' active' : '');
-    terr.textContent = terrOn ? '🏝️ Territories: On' : '🏝️ Territories: Off';
-    terr.title = 'Include small dependent/autonomous territories in the pool';
-    terr.addEventListener('click', () => { setIncludeTerritories(!getIncludeTerritories()); this.showPicker(); });
+    const terr = territoriesToggle({ onChange: () => this.showPicker() });
     const force = document.createElement('button');
     force.className = 'btn btn-tool' + (this.force10 ? ' active' : '');
     force.textContent = this.force10 ? '🔟 Force 10: On' : '🔟 Force 10: Off';

@@ -10,6 +10,8 @@
 // flags and emblems use — UNESCO's own images are on a host that answers 403 to
 // everything, so they are not an option.
 
+import { loadJson } from './load-json.js';
+
 const COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
 
 let _data = null;
@@ -17,8 +19,7 @@ let _data = null;
 export async function loadHeritage() {
   if (_data) return _data;
   try {
-    const resp = await fetch('data/heritage.json');
-    _data = await resp.json();
+    _data = await loadJson('data/heritage.json');
   } catch {
     _data = { heritage: {} };
   }

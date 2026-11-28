@@ -7,7 +7,8 @@ import { deltaE } from './color.js';
 import { createHsvPicker } from './hsv-picker.js';
 import { paintBlanked, paintFull, paintFilled } from './flag-blank.js';
 import { interestingColours } from './quiz/flag-match.js';
-import { loadEntities, inCountryPool } from './datasets.js';
+import { shuffle } from './quiz/rng.js';
+import { loadEntities, loadFlags, inCountryPool } from './datasets.js';
 import { flagUrl } from './flags.js';
 
 
@@ -35,8 +36,7 @@ export class FlagPickerGame {
 
   async loadData() {
     if (this._loaded) return;
-    const resp = await fetch('data/flags.json');
-    this.flags = (await resp.json()).flags;
+    this.flags = await loadFlags();
     await loadEntities(); // needed to gate territories/aggregates (TODOS #20)
     this._loaded = true;
   }
@@ -48,21 +48,13 @@ export class FlagPickerGame {
     this.results = [];
     // Refreshed each run so flipping the territories toggle takes effect (TODOS #20).
     this.pool = this.flags.filter((f) => inCountryPool(f.code));
-    this._deck = this._shuffle([...this.pool]);
+    this._deck = shuffle(Math.random, this.pool);
     this._idx = 0;
     this._nextRound();
   }
 
-  _shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
   _pickFlag() {
-    if (this._idx >= this._deck.length) { this._deck = this._shuffle([...this.pool]); this._idx = 0; }
+    if (this._idx >= this._deck.length) { this._deck = shuffle(Math.random, this.pool); this._idx = 0; }
     return this._deck[this._idx++];
   }
 
