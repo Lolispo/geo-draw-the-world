@@ -24,7 +24,7 @@ him. What is specific to this repo:
 #/names[/<countries|capitals>[/<letter>]]  Name Them All (letter picker, or that letter's board)
 #/flags  #/flag-picker                    the two flag games
 #/flag-pie[?seed=N]                       Flag Pie (a quiz pack, js/quiz/packs.js)
-#/shape[/easy|medium|hard][?seed=N]      Guess the Shape (level picker, or that level; a quiz pack)
+#/shape[/easy|medium|hard[/known|any]]   Guess the Shape (chooser; outline/24/12, then countries — mixed is the default)
 #/flag-ring?region=Europe&territories=1&collide=1&watch=se,cn   Flag Ring screensaver
 #/flag-ring?region=teams[&collide=1]       Flag Ring team draw (teams set up in its panel)
 #/explore[/map|/shapes|/heritage|/coverage|/sources]?metric=<id>&continent=<name>
