@@ -10,9 +10,12 @@ import { familyShares } from './religion-families.js';
 import { independentFrom } from './independence.js';
 import { MAJORITY, MINORITY } from './generators/religion.js';
 import { bandForDegrees } from './generators/north.js';
+import { pieDistance, pieBand, pieTrusted, NEAR_IDENTICAL } from './generators/flag-pie.js';
 import { colourFamilies } from './flag-colours.js';
 import { nearWhite, nearBlack } from './flag-match.js';
 import { deltaE } from '../color.js';
+import { pixelGridCached } from '../pixel-shape.js';
+import { PACKS } from './packs.js';
 
 const val = (qd, id, c) => qd.dataset(id)?.values[c];
 
@@ -137,6 +140,11 @@ export function checkQuestion(q, qd) {
       if (!qd.entity(q.shape)?.hasGeometry) return 'no geometry';
       if (ans !== q.shape) return 'answer is not the shape';
       if (bandForFam(qd.famRank(q.shape)) !== q.band) return 'familiarity band mismatch';
+      if (q.res) {
+        const g = qd.mask(q.shape) && pixelGridCached(qd.mask(q.shape), q.res);
+        if (!g || g.cells !== q.pixels) return 'pixels are not the country\'s grid';
+        if (g.degenerate) return `too few cells at ${q.res}×${q.res}`;
+      }
       return null;
     }
     case 'order': {
@@ -190,6 +198,20 @@ export function checkQuestion(q, qd) {
       if (bandForFam(qd.famRank(q.flag)) !== q.band) return 'familiarity band mismatch';
       return null;
     }
+    case 'flag-pie': {
+      const flag = (c) => (qd.raw.flags || []).find((x) => x.code === c);
+      const main = flag(q.flag);
+      if (!main) return 'no flag colours';
+      if (ans !== q.flag) return 'answer is not the pie\'s flag';
+      if (q.pie.colors.join() !== main.colors.join() || q.pie.shares.join() !== main.shares?.join()) return 'pie differs from data';
+      const bad = codes.find((c) => !pieTrusted(flag(c)));
+      if (bad) return `${qd.name(bad)}'s pie does not match its flag`;
+      const ds = others.map((c) => pieDistance(main, flag(c)));
+      const nearI = ds.findIndex((d) => d < NEAR_IDENTICAL);
+      if (nearI >= 0) return `decoy ${qd.name(others[nearI])} has the same pie`;
+      if (pieBand(qd.famRank(q.flag), Math.min(...ds)) !== q.band) return 'band mismatch';
+      return null;
+    }
     default:
       return `unknown type ${q.type}`;
   }
@@ -201,7 +223,8 @@ export function measureLabel(type, m) {
   if (type === 'first') return `${m} yrs apart`;
   if (type === 'north') return `${m}° apart`;
   if (type === 'trade') return `leads by ${m} pts`;
-  if (['slider', 'shape', 'outline', 'religion', 'flag', 'where', 'emblem', 'continent', 'mix', 'flag-missing'].includes(type)) return `fame #${m}`;
+  if (type.startsWith('shape ·')) return `fame #${m}`;
+  if (['slider', 'shape', 'outline', 'religion', 'flag', 'where', 'emblem', 'continent', 'mix', 'flag-missing', 'flag-pie'].includes(type)) return `fame #${m}`;
   return `${m.toFixed(2)}× apart`;
 }
 
@@ -235,5 +258,34 @@ export function auditRows(raw, { seeds = 40 } = {}) {
       }
     }
   }
+  // The menu games' own levels, where they hand the generator options the quiz does not.
+  if (raw.masks) {
+    for (const pack of Object.values(PACKS)) {
+      for (const [level, cfg] of Object.entries(pack.levels || {})) {
+        if (!Object.keys(cfg.opts || {}).length) continue;
+        for (const band of BANDS) {
+          for (let s = 1; s <= seeds; s++) {
+            const q = GENERATORS[pack.type](makeRng(s * 7919 + BANDS.indexOf(band)), band, qd, { ...cfg.opts });
+            if (!q) continue;
+            rows.push({ type: `${pack.type} · ${level}`, band, prompt: q.prompt, answer: describe(q, qd), reveal: q.reveal, measure: q.measure, violation: checkQuestion(q, qd) });
+          }
+        }
+      }
+    }
+  }
   return rows.sort((a, b) => (b.violation ? 1 : 0) - (a.violation ? 1 : 0));
+}
+
+// Every country's Guess the Shape grids, for the audit view: which needed a looser fill
+// threshold, and which are too small to play at a level. Worst first, then by fame.
+export function pixelAudit(raw, sizes = [24, 12]) {
+  const qd = makeQuizData(raw, { territories: false });
+  return qd.pool
+    .filter((c) => qd.entity(c)?.hasGeometry && qd.mask(c))
+    .map((code) => {
+      const grids = Object.fromEntries(sizes.map((n) => [n, pixelGridCached(qd.mask(code), n)]));
+      const worst = Math.max(...sizes.map((n) => (grids[n].degenerate ? 2 : grids[n].fallback ? 1 : 0)));
+      return { code, name: qd.name(code), fame: qd.famRank(code), grids, worst };
+    })
+    .sort((a, b) => b.worst - a.worst || a.fame - b.fame);
 }

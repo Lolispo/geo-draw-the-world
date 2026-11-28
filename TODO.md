@@ -312,90 +312,6 @@ Playable at 390px wide.
 
 ---
 
-## 38. Letter filter: "countries starting with A-Z"
-
-**What:** A cross-cutting **letter filter** alongside the existing continent/region
-filter: play only the countries whose name starts with a chosen letter — *"Draw every
-country starting with S"*, *"Rank the B countries by GDP"*, *"Flag quiz: M"*. Manual
-pick from an A-Z grid, plus a "random letter" roll.
-
-**Why:** Owner request (2026-09-08). It slices the same 197 countries a completely
-different way from continents, and the alphabet is a natural, memorable challenge unit
-("all 27 S countries") that maps well to daily/streak framing.
-
-**The letter distribution is measured, not assumed** (2026-09-08, against
-`data/entities.json`; sovereign countries only, territories off). Every sovereign
-entity has both geometry and a flag image, so the counts are identical for draw, flag
-and rank modes — only the dataset-backed modes drop below these numbers, and only where
-a metric has gaps:
-
-| letter | n | letter | n | letter | n |
-|---|---|---|---|---|---|
-| A | 11 | J | 3 | S | **27** |
-| B | 17 | K | 6 | T | 12 |
-| C | 16 | L | 9 | U | 7 |
-| D | 5 | M | **18** | V | 4 |
-| E | 8 | N | 11 | W | **0** |
-| F | 3 | O | **1** | X | **0** |
-| G | 11 | P | 9 | Y | **1** |
-| H | 3 | Q | **1** | Z | 2 |
-| I | 9 | R | 3 | | |
-
-Total 197. The distribution is the whole design problem:
-
-- **W and X have zero sovereign countries.** W only becomes non-empty with the
-  territories toggle on (Western Sahara, Wallis and Futuna, West Bank and Gaza — see
-  #20). X is empty under every setting.
-- **O, Q and Y are one country each** (Oman, Qatar, Yemen) and Z is two. A "quiz" of one
-  is not a quiz — but it *is* a legitimate one-country draw round.
-- **S (27), M (18), B (17), C (16)** are longer than any existing draw mode. Ten freehand
-  countries is already called a slog in #9, so a 27-country draw round needs a cap.
-
-**Decided (owner, 2026-09-08):** concept accepted, details open — see the questions
-below before building.
-
-**Open questions to resolve when scoping:**
-- **Which modes get it.** Cheapest useful set is Draw the World country modes + Rank the
-  World + the flag quizzes. Is it a filter on *every* mode (like the continent filter),
-  or its own hub entry ("A-Z Challenge")?
-- **Empty and tiny letters.** Grey out a letter with 0 eligible, or hide it? Minimum
-  playable n per mode — draw can honestly play n=1, rank-line needs ~5, Top 10 (#36)
-  needs ≥12 by its own table, so under the adaptive rule only A, B, C, G, I, L, M, N, P,
-  S, T (and U at Top 5) would offer it. The grid must be filtered **per mode**, not
-  globally.
-- **Cap on the long letters.** Sample k of the 27 S countries, or play all of them?
-  Sampling breaks the "all the S countries" completionist appeal, which is most of the
-  charm; a cap is probably right for draw and wrong for flags.
-- **Does it combine with the continent filter?** "African countries starting with M" is
-  4-ish and mostly empty combos; likely they should be mutually exclusive.
-
-**Approach / notes:**
-- **Normalize the first letter.** Territories include `Åland Islands`; bucket by
-  `name.normalize('NFD').replace(/\p{Diacritic}/gu,'')[0].toUpperCase()` so Å lands under
-  A rather than creating a 27th bucket. Verify nothing else non-ASCII sneaks in when the
-  territories toggle is on.
-- **Sort by the displayed name**, and remember `The Gambia` / `The Bahamas` style names
-  are already stored as `Gambia` / `Bahamas` in `entities.json` — check the few
-  article-prefixed and "Saint …" names read the way a player expects before shipping.
-- Eligibility goes through `inCountryPool()` (`js/datasets.js`) like every other mode, so
-  aggregates and (by default) territories stay out — do not re-filter by hand (#5, #20).
-- Draw modes select their pool via `getCountryRegions()` / `startCountries(regionFile)`
-  (`js/geo-data.js:119`, `js/main.js:470`), which loads one `data/countries-<region>.json`
-  per region. A letter set spans all six files, so it needs the `loadAllCountries()` path
-  (`js/geo-data.js:38`) plus world region bounds (`this._regionBounds = null`), not the
-  per-region loader.
-- High-score keys: mirror the region pattern — `countries-letter-s`, `rank-letter-s`, etc.
-  Keys are permanent once shipped; pick the shape deliberately.
-- The A-Z grid is 26 buttons; at 390px that is a 5- or 6-column grid of ≥44px targets.
-  Disabled states must be visibly distinct, not just non-clickable.
-
-**Acceptance:** Pick a letter in at least one mode and play only those countries, with
-the count shown up front ("S — 27 countries"). Letters with too few countries for the
-chosen mode are visibly unavailable and unreachable. Random-letter roll never lands on an
-unplayable letter. Works at 390px wide.
-
----
-
 ## 49. Civilization leaders by country
 
 **What:** The leaders from Civilization IV, V and VI mapped to the modern countries that
@@ -609,6 +525,7 @@ Completed items, removed from the queue on 2026-09-06. One line each so the
 `TODOS #N` references throughout `js/`, `scripts/` and `docs/` still resolve;
 full write-ups are in git history.
 
+- **#38** Replaced by the Name Them All game (type every country or capital for a letter); the letter filter on other games was dropped — 2026-11-27
 - **#22** Random Geography Quiz + Daily Quiz, fifteen generated question types — 2026-11-27
 - **#82** The country panel: a number you can read, and a width you choose — 2026-11-06
 - **#30** Trade partners both directions, a navigable panel, and who names you back — 2026-10-24

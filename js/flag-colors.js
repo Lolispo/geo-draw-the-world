@@ -15,7 +15,8 @@
 //    #002395 renders as #002654, 65 apart; Norway 61; Indonesia 64. It still sits below
 //    the distance between two genuinely different colours inside one flag, which across
 //    the curated set is almost never under 68.
-const MERGE = 56, MIN_SHARE_SEEN = 0.0025, MIN_SHARE_DRAFT = 0.015, MATCH = 75;
+const MERGE = 56, MIN_SHARE_DRAFT = 0.015;
+export const MIN_SHARE_SEEN = 0.0025, MATCH = 75;
 
 const hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
 const rgb = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
@@ -76,4 +77,28 @@ export function missingFromImage(curated, found) {
 // A short, dominant proposal for an entity that has no curated colours yet.
 export function draftColors(found, max = 5) {
   return found.filter((g) => g.share >= MIN_SHARE_DRAFT).slice(0, max).map((g) => g.hex);
+}
+
+// Each curated colour's share of the flag's area, lined up with `curated`. A pixel goes
+// to the nearest curated colour within MATCH; anything further from all of them
+// (anti-aliased edges, emblem detail in a colour nobody curated) is left out of the
+// total rather than forced onto a colour it is not. `unmatched` is that left-out part
+// of the flag, and a large one means the list is missing a colour.
+export function measureShares(rgba, curated) {
+  const targets = curated.map(rgb);
+  const counts = new Array(curated.length).fill(0);
+  let opaque = 0;
+  for (let i = 0; i < rgba.length; i += 4) {
+    if (rgba[i + 3] < 128) continue;
+    opaque++;
+    const px = [rgba[i], rgba[i + 1], rgba[i + 2]];
+    let best = -1, bestD = MATCH;
+    for (let k = 0; k < targets.length; k++) {
+      const d = dist(px, targets[k]);
+      if (d < bestD) { bestD = d; best = k; }
+    }
+    if (best >= 0) counts[best]++;
+  }
+  const total = counts.reduce((a, b) => a + b, 0);
+  return { shares: total ? counts.map((n) => n / total) : counts, unmatched: opaque ? 1 - total / opaque : 0 };
 }

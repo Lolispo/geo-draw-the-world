@@ -8,10 +8,14 @@ export const ROUND_SIZE = 5;
 // Types that would feel like the same question twice in one round.
 const FAMILY = { outline: 'shape', insert: 'order' };
 // One question per round comes from these: a single round of one of the app's games.
-export const GAME_TYPES = ['mix', 'flag-missing', 'order', 'insert', 'top-pick'];
+export const GAME_TYPES = ['mix', 'flag-missing', 'order', 'insert', 'top-pick', 'flag-pie'];
 // The first daily with a game question. Earlier dailies must build exactly as they did
 // when they were played, so a deploy never rewrites a day someone is half-way through.
 export const GAMES_FROM = '2026-11-28';
+// A game type added after GAMES_FROM joins the daily from its own date, for the same
+// reason: adding it must not change a daily that is already scheduled.
+export const GAME_TYPE_FROM = { 'flag-pie': '2026-11-29' };
+export const gameTypesOn = (day) => GAME_TYPES.filter((t) => !GAME_TYPE_FROM[t] || (day != null && day >= GAME_TYPE_FROM[t]));
 const family = (t) => FAMILY[t] || t;
 const MIX = {
   easy: { gentle: 25, easy: 35, medium: 25, hard: 15 },
@@ -64,7 +68,7 @@ export function buildRound({ seed, mode, day }, raw, { territories = false } = {
   for (const [i, band] of slots.entries()) {
     let q = null;
     // The game slot falls back to an ordinary question rather than leave a gap.
-    const lists = i === gameSlot ? [GAME_TYPES, plainTypes] : [plainTypes];
+    const lists = i === gameSlot ? [daily ? gameTypesOn(day) : GAME_TYPES, plainTypes] : [plainTypes];
     for (const types of lists) {
       for (const b of fallbackBands(band)) {
         q = tryBand(b, types);
@@ -75,6 +79,32 @@ export function buildRound({ seed, mode, day }, raw, { territories = false } = {
     if (!q) continue;
     used[family(q.type)] = true;
     seen.add(q.prompt + q.reveal);
+    out.push(q);
+  }
+  return out;
+}
+
+// A round of one question type, for the menu games in packs.js. No two questions share
+// an answer, which is what makes ten of one type feel like a game rather than a rerun.
+export function buildTypeRound({ seed, type, size, mix, opts = {} }, raw, { territories = false } = {}) {
+  const qd = makeQuizData(raw, { territories });
+  const rng = makeRng(seed);
+  const gen = GENERATORS[type];
+  const bands = Array.from({ length: size }, () => drawBand(rng, mix))
+    .sort((a, b) => BANDS.indexOf(a) - BANDS.indexOf(b));
+  const seen = new Set();
+  const out = [];
+  for (const band of bands) {
+    let q = null;
+    for (const b of fallbackBands(band)) {
+      for (let i = 0; i < ATTEMPTS && !q; i++) {
+        const c = gen(rng, b, qd, { ...opts });
+        if (c && !seen.has(c.reveal)) q = c;
+      }
+      if (q) break;
+    }
+    if (!q) continue;
+    seen.add(q.reveal);
     out.push(q);
   }
   return out;

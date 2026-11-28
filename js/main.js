@@ -17,9 +17,11 @@ import { playShapeClose, playPlace, playSkip, playScoreReveal, playClick, playUn
 import { MenuGlobe } from './menu-globe.js';
 import { FlagGame } from './flag-game.js';
 import { QuizGame } from './quiz-game.js';
+import { PACKS } from './quiz/packs.js';
 import { localDateKey, loadDaily, streak, dailyNumber } from './quiz/daily.js';
 import { RankLineGame } from './rank-line-game.js';
 import { TopNGame } from './top-n-game.js';
+import { NamesGame } from './names-game.js';
 import { DataExplorer } from './data-explorer.js';
 import { FlagPickerGame } from './flag-picker-game.js';
 import { FlagRing } from './flag-ring.js';
@@ -85,6 +87,7 @@ const STATES = {
   FLAG_RING: 'flag-ring',
   RANK_LINE: 'rank-line',
   TOP_N: 'top-n',
+  NAMES: 'names',
   EXPLORE: 'explore',
   SCORES: 'scores',
   QUIZ: 'quiz'
@@ -148,6 +151,7 @@ class Game {
       'flag-ring': document.getElementById('screen-flag-ring'),
       'rank-line': document.getElementById('screen-rank-line'),
       'top-n': document.getElementById('screen-top-n'),
+      names: document.getElementById('screen-names'),
       'explore': document.getElementById('screen-explore'),
       'scores': document.getElementById('screen-scores'),
       quiz: document.getElementById('screen-quiz')
@@ -174,6 +178,11 @@ class Game {
     this.topNGame = new TopNGame(
       document.getElementById('top-n-container'),
       () => this.showScreen(STATES.MENU)
+    );
+    this.namesGame = new NamesGame(
+      document.getElementById('names-container'),
+      () => this.showScreen(STATES.MENU),
+      (segments) => this._route(segments)
     );
     this.dataExplorer = new DataExplorer(
       document.getElementById('explore-container'),
@@ -225,6 +234,7 @@ class Game {
     // A hash change is not a reload, so a panel opened on the old route would hang
     // around over the new screen.
     if (head !== 'country') closeCountryPanel();
+    if (PACKS[head]) { this.startPack(head, sub || null, params.get('seed')); return; }
     switch (head) {
       case 'draw':
         if (!sub) { this.openDrawMenu(); return; }
@@ -240,6 +250,7 @@ class Game {
         this.openDrawMenu();
         return;
       case 'top10': this.startTopN(); return;
+      case 'names': this.startNames(sub || null, segments[2] || null); return;
       case 'rank': this.startRankLine(sub || null); return;
       case 'quiz': this.startQuiz(sub || null, params.get('seed')); return;
       case 'flags': this.startFlagQuiz(); return;
@@ -397,6 +408,7 @@ class Game {
       { id: 'btn-speed', key: 'speed', label: 'Best' },
       { id: 'btn-streak', key: 'streak', label: 'Best' },
       { id: 'btn-flag-quiz', key: 'flag-quiz-10' },
+      { id: 'btn-activity-flag-pie', key: 'flag-pie' },
     ];
     for (const { id, key, label } of specialModes) {
       const btn = document.getElementById(id);
@@ -431,12 +443,15 @@ class Game {
     document.getElementById('btn-activity-draw').addEventListener('click', () => this.openDrawMenu());
     document.getElementById('btn-activity-rank').addEventListener('click', () => this.startRankLine());
     document.getElementById('btn-activity-top-n').addEventListener('click', () => this.startTopN());
+    document.getElementById('btn-activity-shape').addEventListener('click', () => this.startPack('shape'));
+    document.getElementById('btn-activity-names').addEventListener('click', () => this.startNames());
     // Windows' emoji font has no 🪜 and draws flag emoji as letters.
     if (/win/i.test(navigator.userAgentData?.platform || navigator.platform || '')) {
       document.getElementById('top-n-icon').textContent = '🌍🔝';
       document.getElementById('flag-ring-icon').textContent = '🏳️🏆';
     }
     document.getElementById('btn-activity-flags').addEventListener('click', () => this.startFlagQuiz());
+    document.getElementById('btn-activity-flag-pie').addEventListener('click', () => this.startPack('flag-pie'));
     document.getElementById('btn-activity-flag-picker').addEventListener('click', () => this.startFlagPicker());
     document.getElementById('btn-activity-flag-ring').addEventListener('click', () => this.startFlagRing());
     document.getElementById('btn-activity-explore').addEventListener('click', () => this.startExplore());
@@ -626,7 +641,7 @@ class Game {
       el.classList.toggle('active', name === state);
     }
     // Globe background on menu-like screens; off during gameplay
-    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER, STATES.SCORES, STATES.QUIZ];
+    const globeStates = [STATES.MENU, STATES.DRAW_MENU, STATES.RANK_LINE, STATES.TOP_N, STATES.NAMES, STATES.EXPLORE, STATES.FLAG_QUIZ, STATES.FLAG_PICKER, STATES.SCORES, STATES.QUIZ];
     const bg = document.getElementById('app-bg');
     if (globeStates.includes(state)) {
       if (bg) bg.classList.remove('hidden');
@@ -640,6 +655,7 @@ class Game {
     if (state === STATES.MENU) {
       this._syncScoresButton();
       this._syncDailyCard();
+      this._updateHighScoreDisplay();
       this._stopTimer();
       this._hideStreakCounter();
       this._speedActive = false;
@@ -884,6 +900,16 @@ class Game {
     this.flagGame.start(10);
   }
 
+  // #/<pack>[/<level>] — a menu game played on the quiz screen (js/quiz/packs.js).
+  async startPack(id, level = null, seed = null) {
+    this.gameMode = 'quiz';
+    this._currentRegion = 'quiz';
+    await this.quizGame.loadData();
+    this.showScreen(STATES.QUIZ);
+    const n = Number(seed);
+    this.quizGame.startPack(id, level, { seed: seed != null && Number.isFinite(n) ? n : undefined });
+  }
+
   // #/quiz is the quiz home; #/quiz/daily|easy|hard plays. ?seed= replays a random round.
   async startQuiz(mode = null, seed = null) {
     this.gameMode = 'quiz';
@@ -931,6 +957,15 @@ class Game {
     await this.topNGame.loadData();
     this.showScreen(STATES.TOP_N);
     this.topNGame.showPicker();
+  }
+
+  async startNames(setId = null, letter = null) {
+    this.gameMode = 'names';
+    this._currentRegion = 'names';
+    await this.namesGame.loadData();
+    this.showScreen(STATES.NAMES);
+    if (letter) this.namesGame.start(setId, letter);
+    else this.namesGame.showPicker(setId || undefined);
   }
 
   openDrawMenu() {

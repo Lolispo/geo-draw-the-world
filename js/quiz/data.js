@@ -40,6 +40,8 @@ export function makeQuizData(raw, { territories = false } = {}) {
     name: (code) => entities[code]?.name || code,
     continent: (code) => entities[code]?.continent || null,
     entity: (code) => entities[code] || null,
+    // 80×80 outline masks (js/raster.js), when the caller loaded them.
+    mask: (code) => raw.masks?.get(code) || null,
     dataset: (id) => byId.get(id) || null,
     datasets: () => raw.datasets.datasets,
     values,

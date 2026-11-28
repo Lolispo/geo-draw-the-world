@@ -12,6 +12,9 @@ export function interestingColours(hexes) {
   return out.length ? out : hexes.slice();
 }
 
+// How many of `hexes` the flag has a close match for — what makes two flags look alike.
+export const sharedColours = (flag, hexes) => hexes.filter((v) => flag.colors.some((c) => deltaE(c, v) < 12)).length;
+
 const closest = (flag, hex) => Math.min(...flag.colors.map((c) => deltaE(c, hex)));
 
 // A flag with a close match to the colour: one of the five closest under ΔE 10, or
@@ -36,9 +39,8 @@ export function findDecoys(rng, flags, removedHex, visibleHexes, excludeCodes, c
     for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
     return out;
   };
-  const scored = cands.map((f) => ({
-    f, shared: visibleHexes.filter((v) => f.colors.some((c) => deltaE(c, v) < 12)).length,
-  })).sort((a, b) => b.shared - a.shared);
+  const scored = cands.map((f) => ({ f, shared: sharedColours(f, visibleHexes) }))
+    .sort((a, b) => b.shared - a.shared);
   const withShared = scored.filter((s) => s.shared > 0);
   if (withShared.length >= count) {
     return shuffle(withShared.slice(0, Math.max(count * 4, 12))).slice(0, count).map((s) => s.f);

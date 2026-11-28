@@ -9,7 +9,7 @@ import { GRID, normalizeMultiPolygon } from './raster.js';
 // Normalizing to the bounding box means the canvas shows the *outline*, not the size:
 // Russia and Monaco both fill their box. Anything comparing countries by area has to
 // say so itself.
-export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 14, color = null } = {}) {
+export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 14, color = null, stroke = 'rgba(0,0,0,0.35)', lineWidth = 1 } = {}) {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   canvas.width = size * dpr;
@@ -53,8 +53,8 @@ export async function drawSilhouette(canvas, code, entity, { size = 150, pad = 1
   ctx.fillStyle = color || country.color || '#7EA6E0';
   ctx.fill('nonzero');
   ctx.lineJoin = 'round';
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = 'rgba(0,0,0,0.35)';
+  ctx.lineWidth = lineWidth;
+  ctx.strokeStyle = stroke;
   ctx.stroke();
   return true;
 }
@@ -108,4 +108,27 @@ export function drawShapeOverlay(canvas, playerPolygons, countryPolygons, { size
   ctx.lineWidth = 1.5;
   ctx.strokeStyle = '#e6edf3';
   ctx.stroke();
+}
+
+// A pixel grid from js/pixel-shape.js, in whole device pixels per cell so every edge is
+// crisp. Returns the padding it used, so an outline drawn over it can be framed the same.
+export function drawPixelGrid(canvas, cells, n, { size = 180, color = '#7EA6E0' } = {}) {
+  const dpr = window.devicePixelRatio || 1;
+  const cellCss = Math.floor((size * 0.8) / n);
+  const pad = (size - cellCss * n) / 2;
+  canvas.width = Math.round(size * dpr);
+  canvas.height = Math.round(size * dpr);
+  canvas.style.width = canvas.style.height = `${size}px`;
+  const ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cell = Math.max(1, Math.round(cellCss * dpr));
+  const off = Math.round((canvas.width - cell * n) / 2);
+  ctx.fillStyle = color;
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      if (cells[y * n + x] === '1') ctx.fillRect(off + x * cell, off + y * cell, cell, cell);
+    }
+  }
+  return pad;
 }

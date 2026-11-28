@@ -13,6 +13,9 @@
 // `look` is deliberately not `fail`: the World Bank disagreeing with itself about Cyprus
 // is real and is not ours to fix, and crying wolf about it trains people to ignore the lot.
 
+import { MIN_SHARE_SEEN } from './flag-colors.js';
+import { buildCountrySet, buildCapitalSet, capitalsSkipped, letterCounts, LETTERS, MIN_PLAYABLE } from './names-sets.js';
+
 const rgbDist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 
 export function runDataChecks({ entities, datasets, attributes, electricity, flags, aliases, sources, counts }) {
@@ -85,6 +88,26 @@ export function runDataChecks({ entities, datasets, attributes, electricity, fla
       drift.length
         ? `${drift.length} disagree between files. build-entities.mjs reconciles these, so this means it has not been re-run.`
         : 'Names and continents in flags.json and datasets.json match entities.json exactly.', drift);
+  }
+
+  // 2b. flag colour shares, measured off the images by scripts/build-flag-shares.mjs.
+  // A curated colour the image barely contains, or a flag mostly in colours its list
+  // lacks, is what a wrong colour list looks like from the outside (TODO #83).
+  {
+    const broken = flags.filter((f) => f.shares?.length !== f.colors.length
+      || Math.abs(f.shares.reduce((a, b) => a + b, 0) - 1) > 1e-6).map((f) => f.code);
+    add(broken.length ? 'fail' : 'pass', 'Flag colour shares line up with the colours',
+      broken.length
+        ? `${broken.length} flag(s) have no shares, or shares that do not match their colour list — run \`npm run build:flag-shares\`.`
+        : 'Every flag has one share per curated colour, summing to 1.', broken);
+    const odd = [
+      ...flags.flatMap((f) => (f.shares || []).map((s, i) => (s < MIN_SHARE_SEEN ? `${f.code} ${name(f.code)}: ${f.colors[i]} covers ${(s * 100).toFixed(2)}%` : null)).filter(Boolean)),
+      ...flags.filter((f) => f.unmatched).map((f) => `${f.code} ${name(f.code)}: ${Math.round(f.unmatched * 100)}% of the flag is none of its colours`),
+    ];
+    add(odd.length ? 'look' : 'pass', 'Every curated flag colour is on the flag, and the flag is its colours',
+      odd.length
+        ? `${odd.length} look off: a colour the image barely has, or a flag in colours its list lacks. A tiny emblem explains some; the rest are colour-list mistakes. Flag Pie leaves the worst out.`
+        : 'Each curated colour shows on its flag image, and each image is covered by its colours.', odd);
   }
 
   // 3 & 4. religion breakdowns
@@ -202,6 +225,21 @@ export function runDataChecks({ entities, datasets, attributes, electricity, fla
         ? `${noColors.length} have a flag image but no colours, so they are absent from both colour quizzes.`
         : 'Every entity with a flag image has colours. Whether they are the right colours is checked per row in the Colors column.',
       noColors.map((c) => `${c} ${name(c)}`));
+  }
+
+  // 12. Name Them All boards: how many answers each letter has, and who has no capital
+  {
+    const line = (entries) => {
+      const n = letterCounts(entries);
+      return LETTERS.map((l) => (n[l] >= MIN_PLAYABLE ? `${l} ${n[l]}` : `${l} ${n[l]}✕`)).join(' · ');
+    };
+    const countries = buildCountrySet(entities, aliases || {});
+    const capitals = buildCapitalSet(entities, attributes || {});
+    const skipped = capitalsSkipped(entities, attributes || {});
+    add('pass', 'Name Them All letter counts (✕ = greyed out)',
+      `Countries (${countries.length}): ${line(countries)}. Capitals (${capitals.length}): ${line(capitals)}.`
+        + (skipped.length ? ` No playable capital, so not on the capitals board: ${skipped.map((c) => `${c} ${name(c)}`).join(', ')}.` : ''),
+      skipped.map((c) => `${c} ${name(c)}`));
   }
 
   return out;

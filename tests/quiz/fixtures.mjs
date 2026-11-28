@@ -17,6 +17,11 @@ export function loadRaw() {
       emblems: read('emblems.json').emblems,
     };
     const regions = ['africa', 'asia', 'europe', 'north-america', 'oceania', 'south-america'];
+    const masks = read('shape-masks.json').masks;
+    cached.masks = new Map(Object.entries(masks).map(([code, b64]) => {
+      const buf = Buffer.from(b64, 'base64');
+      return [code, new Uint32Array(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length))];
+    }));
     cached.geo = geoSummary(regions.flatMap((r) => read(`countries-${r}.json`).countries));
   }
   return cached;

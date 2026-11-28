@@ -6,7 +6,7 @@ import { readFlagColors, missingFromImage } from './flag-colors.js';
 import { runDataChecks, runScoringChecks } from './data-health.js';
 import { scoreCeilings, ceilingByCode } from './score-health.js';
 import { openCountryPanel } from './country-panel.js';
-import { drawSilhouette } from './silhouette.js';
+import { drawSilhouette, drawPixelGrid } from './silhouette.js';
 import { ExplorerMap } from './explorer-map.js';
 import { loadWorldOutlines } from './geo-data.js';
 import { flagUrl } from './flags.js';
@@ -15,7 +15,8 @@ import { loadHeritage, allSites, siteCard } from './heritage.js';
 import { loadRelations, hasTrade } from './relations.js';
 import { loadSources, allSources, formatAge, isStale, STALE_DAYS, sourcesRaw } from './sources.js';
 import { getExploreTerritories, setExploreTerritories } from './settings.js';
-import { auditRows, measureLabel } from './quiz/audit.js';
+import { auditRows, measureLabel, pixelAudit } from './quiz/audit.js';
+import { loadShapeMasks } from './shape-match.js';
 import { geoSummary } from './quiz/geo.js';
 
 
@@ -831,12 +832,13 @@ export class DataExplorer {
   // state, so the count in the blurb is the thing to read.
   async _renderQuizAudit() {
     const list = this._listEl;
-    const [{ relations }, emblems, outlines] = await Promise.all([loadRelations(), loadEmblems(), loadWorldOutlines()]);
+    const [{ relations }, emblems, outlines, masks] = await Promise.all([
+      loadRelations(), loadEmblems(), loadWorldOutlines(), loadShapeMasks().catch(() => null),
+    ]);
     const { datasets, entities, attributes, flags } = getRawData();
     if (this._listEl !== list) return;   // re-rendered while those loaded
-    const rows = auditRows({
-      datasets, entities, attributes, relations: relations || {}, emblems, flags, geo: geoSummary(outlines),
-    }, { seeds: 12 });
+    const raw = { datasets, entities, attributes, relations: relations || {}, emblems, flags, masks, geo: geoSummary(outlines) };
+    const rows = auditRows(raw, { seeds: 12 });
     const bad = rows.filter((r) => r.violation).length;
 
     const blurb = document.createElement('div');
@@ -874,6 +876,47 @@ export class DataExplorer {
       for (const v of [r.type, r.band, r.prompt, r.answer, r.reveal, m, r.violation || '']) tr.insertCell().textContent = v ?? '';
     }
     list.appendChild(table);
+    if (masks) this._renderPixelAudit(list, raw);
+  }
+
+  // Guess the Shape's pixel grids, every country at both sizes. Red: too few cells to
+  // play at that size, so the level leaves it out. Amber: half-covered cells lost the
+  // shape, so a looser threshold drew it. Those sort first.
+  _renderPixelAudit(list, raw) {
+    const rows = pixelAudit(raw);
+    const out = rows.filter((r) => r.worst === 2).length;
+    const loose = rows.filter((r) => r.worst === 1).length;
+    const blurb = document.createElement('div');
+    blurb.className = 'explore-blurb quiz-audit-summary pixel-audit-summary';
+    blurb.id = 'pixel-audit';
+    blurb.textContent = `Guess the Shape pixels · ${rows.length} countries · ${loose} drawn with a looser fill · ${out} too small for a level`;
+    list.appendChild(blurb);
+    const grid = document.createElement('div');
+    grid.className = 'pixel-audit';
+    for (const r of rows) {
+      const tile = document.createElement('div');
+      tile.className = 'pixel-audit-tile' + (r.worst === 2 ? ' is-out' : r.worst === 1 ? ' is-fallback' : '');
+      tile.dataset.code = r.code;
+      const name = document.createElement('span');
+      name.className = 'pixel-audit-name';
+      name.textContent = `${r.name} · #${r.fame}`;
+      const pair = document.createElement('div');
+      pair.className = 'pixel-audit-pair';
+      const notes = [];
+      for (const [n, g] of Object.entries(r.grids).sort((a, b) => b[0] - a[0])) {
+        const cv = document.createElement('canvas');
+        drawPixelGrid(cv, g.cells, Number(n), { size: 64 });
+        pair.appendChild(cv);
+        if (g.degenerate) notes.push(`${n}: out (${g.filled} cells)`);
+        else if (g.fallback) notes.push(`${n}: fill ≥ ${g.threshold < 0.1 ? 'any' : g.threshold}`);
+      }
+      const note = document.createElement('span');
+      note.className = 'pixel-audit-note';
+      note.textContent = notes.join(' · ') || '\u00a0';
+      tile.append(name, pair, note);
+      grid.appendChild(tile);
+    }
+    list.appendChild(grid);
   }
 
   // Every third party the app takes data from (TODOS #79). This is the answer to "where

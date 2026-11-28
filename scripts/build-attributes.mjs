@@ -266,6 +266,22 @@ for (const [code, m] of Object.entries(MANUAL_ATTR)) {
   if (isNew) matched++;
 }
 
+// Corrections that replace what the Factbook says, unlike MANUAL_ATTR above, which only
+// fills gaps. The Factbook's own wording stays in capitalNote.
+const CAPITAL_OVERRIDE = {
+  // The Factbook follows the US Government in naming Rangoon; Naypyidaw has been the
+  // seat of government since 2005 and is the answer a player expects.
+  mm: { capital: 'Naypyidaw', src: 'capital corrected to Naypyidaw (owner decision)' },
+  // "No official capital"; Yaren is where the government sits and what atlases print.
+  nr: { capital: 'Yaren', src: 'capital set to Yaren, the seat of government (owner decision)' },
+};
+for (const [code, o] of Object.entries(CAPITAL_OVERRIDE)) {
+  if (!entities[code]) continue;
+  const entry = attributes[code] || (attributes[code] = {});
+  entry.capital = o.capital;
+  provenance[code] = provenance[code] ? `${provenance[code]}; ${o.src}` : o.src;
+}
+
 // ---- write + report ------------------------------------------------------
 const sorted = {};
 for (const code of Object.keys(attributes).sort()) sorted[code] = attributes[code];

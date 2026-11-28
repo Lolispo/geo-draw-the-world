@@ -18,6 +18,7 @@ import * as mix from './mix.js';
 import * as flagMissing from './flag-missing.js';
 import * as insert from './insert.js';
 import * as topPick from './top-pick.js';
+import * as flagPie from './flag-pie.js';
 
 export const GENERATORS = {
   bigger: bigger.generate,
@@ -40,4 +41,5 @@ export const GENERATORS = {
   order: order.generate,
   insert: insert.generate,
   'top-pick': topPick.generate,
+  'flag-pie': flagPie.generate,
 };

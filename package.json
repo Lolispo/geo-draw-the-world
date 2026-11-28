@@ -27,6 +27,7 @@
     "build:heritage": "node scripts/build-heritage.mjs",
     "build:relations": "node scripts/build-relations.mjs",
     "build:sources": "node scripts/build-sources.mjs",
+    "build:flag-shares": "node scripts/build-flag-shares.mjs",
     "test": "node --test \"tests/**/*.test.mjs\""
   },
   "keywords": [

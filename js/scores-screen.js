@@ -5,14 +5,16 @@
 import { getAllHighScores, clearScores } from './high-scores.js';
 import { loadDatasets, getDataset, getDatasetList } from './datasets.js';
 import { playClick } from './sounds.js';
+import { formatElapsed } from './names-sets.js';
 
 const DRAW = 'Draw the World';
 const RANK = 'Rank the World';
 const TOPN = 'Top 10 / Bottom 10';
 const FLAGS = 'Flags';
 const QUIZ = 'Quiz';
+const NAMES = 'Name Them All';
 const OLDER = 'Older rounds';
-const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, FLAGS, OLDER];
+const GROUP_ORDER = [QUIZ, DRAW, RANK, TOPN, NAMES, FLAGS, OLDER];
 
 const QUIZ_LABELS = { 'quiz-daily': 'Daily Quiz', 'quiz-easy': 'Random Quiz · Easy', 'quiz-hard': 'Random Quiz · Hard' };
 
@@ -74,6 +76,7 @@ function resolveKey(key) {
   if (key.startsWith('rank-line-')) {
     return { group: RANK, label: datasetName(key.slice('rank-line-'.length)) };
   }
+  if (key === 'flag-pie') return { group: FLAGS, label: 'Flag Pie' };
   if (key.startsWith('flag-quiz-')) {
     return { group: FLAGS, label: 'Flag Color Quiz', detail: `${key.slice('flag-quiz-'.length)} rounds` };
   }
@@ -81,6 +84,8 @@ function resolveKey(key) {
     return { group: FLAGS, label: 'Flag Color Picker', detail: `${key.slice('flag-picker-'.length)} rounds` };
   }
   if (key.startsWith('topn2-')) return resolveTopN(key);
+  const names = key.match(/^names-(.+)-([a-z])$/);
+  if (names) return { group: NAMES, label: `${titleFromSlug(names[1])} · ${names[2].toUpperCase()}` };
   return { group: OLDER, label: key, detail: 'from an earlier version' };
 }
 
@@ -92,6 +97,7 @@ function formatBest(group, key, rec) {
   if (group === DRAW) return `${rec.score}/100`;
   if (group === RANK) return `run of ${rec.score}`;
   if (group === TOPN) return `${rec.score}/${rec.total}`;
+  if (group === NAMES) return `${rec.score}/${rec.total}${rec.ms == null ? '' : ` in ${formatElapsed(rec.ms)}`}`;
   if (group === FLAGS) return `${rec.score} pts`;
   if (group === QUIZ) return `${rec.score}/500`;
   return String(rec.score);

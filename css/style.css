@@ -4082,3 +4082,206 @@ a.hub-go:hover { text-decoration: underline; }
   .quiz-multi .quiz-choice-label { overflow-wrap: normal; min-width: 0; flex: 1 1 100%; }
   .quiz-multi .quiz-choice.is-picked:not(.disabled) { background: color-mix(in srgb, var(--accent) 18%, var(--surface2)); }
 }
+
+/* Guess the Shape: pixel levels and the pack level picker */
+.quiz-pixel { position: relative; width: 180px; height: 180px; flex: none; }
+.quiz-pixel canvas { position: absolute; inset: 0; }
+.quiz-pixel-cells { image-rendering: pixelated; }
+.quiz-pixel-cells { transition: opacity 0.6s ease; }
+.quiz-pixel-outline { opacity: 0; transition: opacity 0.6s ease; }
+.quiz-pixel.is-revealed .quiz-pixel-cells { opacity: 0.55; }
+.quiz-pixel.is-revealed .quiz-pixel-outline { opacity: 1; }
+.quiz-pack-levels { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.pixel-audit { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 18px; }
+.pixel-audit-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; }
+.pixel-audit-tile.is-out { border-color: var(--red); }
+.pixel-audit-tile.is-fallback { border-color: #c9a227; }
+.pixel-audit-pair { display: flex; gap: 6px; }
+.pixel-audit-pair canvas { background: var(--surface2); border-radius: 6px; }
+.pixel-audit-name { font-weight: 600; }
+.pixel-audit-note { color: var(--text-dim); }
+.quiz-header-level { font-size: 0.8rem; font-weight: 500; color: var(--text-dim); border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; margin-left: 4px; vertical-align: 2px; }
+@media (max-width: 480px) {
+  .quiz-header h2:has(.quiz-header-level) { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+/* Flag Pie: the pie in the question */
+.quiz-pie { display: block; margin: 4px auto; flex: none; border: 0; border-radius: 50%; box-shadow: none; touch-action: auto; }
+/* ========== NAME THEM ALL ========== */
+#screen-names {
+  padding: 12px;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+.names-container {
+  width: 100%;
+  max-width: 1220px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.names-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.names-head .btn-tool { min-height: 44px; flex-shrink: 0; }
+.names-head h2 { font-size: 1.2rem; font-weight: 600; flex: 1; }
+
+/* --- picker --- */
+.names-picker {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+.names-intro, .names-note { color: var(--text-dim); font-size: 0.9rem; line-height: 1.4; }
+.names-note { font-size: 0.8rem; }
+.names-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.names-tab, .names-terr {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+}
+.names-tab[aria-selected="true"] {
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+.names-terr { margin-left: auto; }
+.names-terr[aria-pressed="true"] { color: var(--text); border-color: var(--green); }
+.names-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 8px;
+}
+.names-letter {
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+}
+.names-letter:hover:not(:disabled) { border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+.names-letter-l { font-size: 1.3rem; font-weight: 700; line-height: 1; }
+.names-letter-n { font-size: 0.75rem; color: var(--text-dim); }
+.names-letter.is-complete { border-color: var(--green); }
+.names-letter.is-complete .names-letter-n { color: var(--green); }
+.names-letter:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+  background: transparent;
+  border-style: dashed;
+}
+.names-roll { min-height: 48px; font-size: 1rem; }
+
+/* --- round --- */
+.names-round { display: flex; flex-direction: column; gap: 10px; }
+/* Pinned so the input stays in view, above a phone keyboard, while the board scrolls. */
+.names-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg);
+  padding: 6px 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.names-stats { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.names-count { font-weight: 600; }
+.names-clock { color: var(--text-dim); }
+.names-msg {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.names-msg.is-result { color: var(--text); font-weight: 600; }
+.names-controls { min-height: 44px; }
+.names-actions { display: none; gap: 8px; }
+.names-actions .btn { min-height: 44px; padding: 8px 18px; }
+.names-controls.is-done .names-input-row { display: none; }
+.names-controls.is-done .names-actions { display: flex; }
+.names-input-row { display: flex; gap: 8px; align-items: flex-start; }
+.names-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.names-input:focus { outline: none; border-color: var(--accent); }
+.names-giveup { min-height: 44px; flex-shrink: 0; }
+/* Newspaper columns: alphabetical down one column, then the next. Every character is
+   one fixed-width cell, so a longer name is a longer row and lengths compare down the
+   column. --names-len is the longest name on the board, set by the game. */
+.names-board {
+  --cell: 15px;
+  list-style: none;
+  column-width: calc(var(--names-len, 12) * (var(--cell) + 2px) + 20px);
+  column-gap: 24px;
+  padding: 4px 0 24px;
+}
+.names-entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px calc(var(--cell) + 4px);
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 6px;
+  padding: 4px 6px 5px;
+  break-inside: avoid;
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: background-color 0.4s ease-out;
+}
+.names-entry.is-found { border-color: color-mix(in srgb, var(--green) 50%, var(--border)); }
+.names-entry.is-missed { border-color: color-mix(in srgb, var(--orange) 50%, var(--border)); }
+.names-entry.just-found { background: color-mix(in srgb, var(--green) 22%, var(--surface)); transition: none; }
+.names-word { display: inline-flex; gap: 2px; }
+.names-cell {
+  width: var(--cell);
+  height: 24px;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  padding-bottom: 3px;
+  color: var(--text);
+}
+.names-cell.is-first, .names-cell.is-blank { border-bottom: 2px solid var(--text-dim); }
+.names-cell.is-first { color: var(--accent); }
+.names-cell.is-mark { color: var(--text-dim); }
+.names-entry.is-found .names-cell { color: var(--green); border-bottom-color: var(--green); }
+.names-entry.is-missed .names-cell { color: var(--orange); border-bottom-color: var(--orange); }
+@media (max-width: 480px) {
+  .names-grid { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .names-letter { min-height: 52px; }
+  .names-board { --cell: 13px; column-gap: 14px; }
+  .names-cell { height: 22px; font-size: 0.85rem; }
+  .names-entry { padding: 3px 5px 4px; }
+}
